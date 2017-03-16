@@ -162,6 +162,20 @@
 			白送
 		</button>
 		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		 mui.init();
+		window.onload=function(){
+			 mui.plusReady(function(){
+                var self = plus.webview.currentWebview();
+                var tagertid = self.tagertid;
+                //alert(tagertid);
+                //关闭等待框
+                plus.nativeUI.closeWaiting();
+                //显示当前页面
+                mui.currentWebview.show();
+            });
+		};
+		</script>
 	</body>
 
 </html>
