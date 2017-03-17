@@ -18,6 +18,22 @@
 		if (loginInfo.password.length < 6) {
 			return callback('密码最短为 6 个字符');
 		}
+		
+		mui.ajax('http://server-name/login.php',{
+			data:{
+				username: loginInfo.account,
+				password: hex_md5(loginInfo.password)
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				//根据服务器返回的响应信息判断是否登录成功
+			},
+			error:function(xhr,type,errorThrown){
+				console.log(type);
+			}
+		});
 		var users = JSON.parse(localStorage.getItem('$users') || '[]');
 		var authed = users.some(function(user) {
 			return loginInfo.account == user.account && loginInfo.password == user.password;
@@ -34,6 +50,22 @@
 		state.account = name;
 		state.token = "token123456789";
 		owner.setState(state);
+		mui.ajax('http://server-name/createState.php',{
+			data:{
+				account: state.account,
+				token: state.token
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				//根据服务器返回的响应信息做相应处理
+				return callback();
+			},
+			error:function(xhr,type,errorThrown){
+				console.log(type);
+			}
+		});
 		return callback();
 	};
 
@@ -54,6 +86,25 @@
 		if (!checkEmail(regInfo.email)) {
 			return callback('邮箱地址不合法');
 		}
+		
+		// 新用户注册
+		mui.ajax('http://server-name/reg.php',{
+			data:{
+				username: regInfo.account,
+				password: hex_md5(regInfo.password),
+				email: regInfo.email
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				//根据服务器返回的响应结果判断是否注册成功。
+				return callback();
+			},
+			error:function(xhr,type,errorThrown){
+				console.log(type);
+			}
+		});
 		var users = JSON.parse(localStorage.getItem('$users') || '[]');
 		users.push(regInfo);
 		localStorage.setItem('$users', JSON.stringify(users));
@@ -92,6 +143,21 @@
 		if (!checkEmail(email)) {
 			return callback('邮箱地址不合法');
 		}
+		mui.ajax('http://server-name/forgetPassword.php',{
+			data:{
+				email: email
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				//根据服务器返回的响应信息做相应的处理
+				return callback();
+			},
+			error:function(xhr,type,errorThrown){
+				console.log(type);
+			}
+		});
 		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
 	};
 
