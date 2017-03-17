@@ -96,6 +96,7 @@
 								return;
 							}
 							plus.nativeUI.toast('注册成功');
+							plus.storage.setItem('loginFlag', 'isLogin');
 							/*
 							 * 注意：
 							 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；

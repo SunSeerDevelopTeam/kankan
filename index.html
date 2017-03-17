@@ -536,8 +536,17 @@
 					//关闭splash页面；
 					plus.navigator.closeSplashscreen();
 					plus.navigator.setFullscreen(false);
-					//预加载
-					preload();
+					//读取本地存储，检查是否已经登录
+					var isLogin = plus.storage.getItem("loginFlag");
+					if (isLogin) {
+						//预加载
+						preload();
+					} else {
+						mui.openWindow({
+							id: 'login',
+							url: 'login/login.html'
+						});
+					}
 				} else {
 					//显示启动导航
 					mui.openWindow({

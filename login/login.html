@@ -147,6 +147,7 @@
 						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
 						var id = setInterval(function () {
 							if(main_loaded_flag){
+								plus.storage.setItem('loginFlag', 'isLogin');
 								clearInterval(id);
 								$.fire(mainPage, 'show', null);
 								mainPage.show("pop-in");
