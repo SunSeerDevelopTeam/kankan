@@ -64,7 +64,7 @@
 		"Uploader": {},
 		"Share":{},
 		"NativeObj": {},
-		"Invocation":{}
+		"Invocation":{},"OAuth":{}
 	},
 	"plus": {
 		"launchwebview": {
