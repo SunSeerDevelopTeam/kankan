@@ -11,7 +11,11 @@
 		"72": "icon.png"
 	},
 	"fullscreen":true,
+<<<<<<< HEAD
 	"launch_path": "app/index.html",/*必选，应用的入口页面，默认为根目录下的index.html；也可以是网络地址，网络地址必须以http://或https://开头*/
+=======
+	"launch_path": "app/main.html",/*必选，应用的入口页面，默认为根目录下的index.html；也可以是网络地址，网络地址必须以http://或https://开头*/
+>>>>>>> lx/13553
 	"developer": {
 		"email": "",/*可选，开发者名称*/
 		"name": "",/*可选，开发者邮箱地址*/
@@ -62,7 +66,13 @@
 		},
 		"Payment":{},
 		"Uploader": {},
+<<<<<<< HEAD
 		"Share":{}
+=======
+		"Share":{},
+		"NativeObj": {},
+		"Invocation":{},"OAuth":{}
+>>>>>>> lx/13553
 	},
 	"plus": {
 		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，none为无侧滑返回功能，hide为侧滑隐藏Webview窗口。参考ask.dcloud.net.cn/article/102*/

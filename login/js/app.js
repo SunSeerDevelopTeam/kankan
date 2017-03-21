@@ -19,10 +19,10 @@
 			return callback('密码最短为 6 个字符');
 		}
 		
-		mui.ajax('http://server-name/login.php',{
+		/*mui.ajax('http://server-name/login.php',{
 			data:{
 				username: loginInfo.account,
-				password: hex_md5(loginInfo.password)
+				password: md5(loginInfo.password)
 			},
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
@@ -33,7 +33,7 @@
 			error:function(xhr,type,errorThrown){
 				console.log(type);
 			}
-		});
+		});*/
 		var users = JSON.parse(localStorage.getItem('$users') || '[]');
 		var authed = users.some(function(user) {
 			return loginInfo.account == user.account && loginInfo.password == user.password;
@@ -50,7 +50,7 @@
 		state.account = name;
 		state.token = "token123456789";
 		owner.setState(state);
-		mui.ajax('http://server-name/createState.php',{
+		/*mui.ajax('http://server-name/createState.php',{
 			data:{
 				account: state.account,
 				token: state.token
@@ -65,7 +65,7 @@
 			error:function(xhr,type,errorThrown){
 				console.log(type);
 			}
-		});
+		});*/
 		return callback();
 	};
 
@@ -88,10 +88,10 @@
 		}
 		
 		// 新用户注册
-		mui.ajax('http://server-name/reg.php',{
+		/*mui.ajax('http://server-name/reg.php',{
 			data:{
 				username: regInfo.account,
-				password: hex_md5(regInfo.password),
+				password: md5(regInfo.password),
 				email: regInfo.email
 			},
 			dataType:'json',//服务器返回json格式数据
@@ -104,7 +104,7 @@
 			error:function(xhr,type,errorThrown){
 				console.log(type);
 			}
-		});
+		});*/
 		var users = JSON.parse(localStorage.getItem('$users') || '[]');
 		users.push(regInfo);
 		localStorage.setItem('$users', JSON.stringify(users));
@@ -143,7 +143,7 @@
 		if (!checkEmail(email)) {
 			return callback('邮箱地址不合法');
 		}
-		mui.ajax('http://server-name/forgetPassword.php',{
+		/*mui.ajax('http://server-name/forgetPassword.php',{
 			data:{
 				email: email
 			},
@@ -157,7 +157,7 @@
 			error:function(xhr,type,errorThrown){
 				console.log(type);
 			}
-		});
+		});*/
 		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
 	};
 
