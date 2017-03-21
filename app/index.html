@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="../css/mui.min.css">
 		<style>
 			h5 {
 				padding-top: 8px;
@@ -29,8 +29,8 @@
 			<a  class="mui-icon mui-icon-contact mui-pull-right" id="yonghu" style="color: #999;"></a>
 			<h1 class="mui-title">商品列表</h1>
 		</header>
-		<script src="js/mui.min.js"></script>
-		<script src="js/update.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/update.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			var menu = null,
 				main = null;
@@ -42,8 +42,8 @@
 					doubletap: true
 				},
 				subpages: [{
-					id: 'list',
-					url: 'list.html',
+					id: 'main',
+					url: 'main.html',
 					styles: {
 						top: '45px',
 						bottom: 0,
@@ -177,24 +177,24 @@
 					//获取共用父窗体
 					template = plus.webview.getWebviewById("default-main");
 				}
-				if (template) {
+				/*if (template) {
 					subWebview = template.children()[0];
-					subWebview.loadURL('examples/info.html');
+					subWebview.loadURL('user.html');
 					//修改共用父模板的标题
 					mui.fire(template, 'updateHeader', {
-						title: '关于',
+						title: '张三',
 						showMenu: false
 					});
 					template.show('slide-in-right', 150);
-				}
-				//				mui.openWindow({
-				//					url:"examples/info.html",
-				//					id:"info",
-				//					show:{
-				//						aniShow:'zoom-fade-out',
-				//						duration:300
-				//					}
-				//				});
+				}*/
+								mui.openWindow({
+									url:"user.html",
+									id:"info",
+									show:{
+										aniShow:'zoom-fade-out',
+										duration:300
+									}
+								});
 			});
 			//首页返回键处理
 			//1、若侧滑菜单显示，则关闭侧滑菜单
