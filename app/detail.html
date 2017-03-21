@@ -10,6 +10,7 @@
 
 		<!--标准mui.css-->
 		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
 		<!--App自定义的css-->
 		<link rel="stylesheet" type="text/css" href="../css/app.css" />
 	</head>
@@ -29,8 +30,8 @@
 					</div>
 				</div>
 				<div class="mui-card-footer">
-					<a class="mui-card-link">Like</a>
-					<a class="mui-card-link">Read more</a>
+					<a class="mui-card-link" id="zanhou" style="display:none;" onclick="dianzan(this.id)"><img src="../images/goodafter.png" width="21px" height="21px" ></a>
+					<a class="mui-card-link" id="zanqian" onclick="dianzan(this.id)"><img src="../images/goodbefor.png" width="21px" height="21px" ></a>
 				</div>
 			</div>
 		</div>
@@ -175,6 +176,17 @@
                 mui.currentWebview.show();
             });
 		};
+		function dianzan(aid){
+			if(aid=="zanqian"){
+				document.getElementById(aid).style.display="none";
+				document.getElementById("zanhou").style.display="block";
+				
+			}else{
+				//alert(aid);
+				document.getElementById(aid).style.display="none";
+				document.getElementById("zanqian").style.display="block";
+			}
+		}
 		</script>
 	</body>
 
