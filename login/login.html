@@ -136,8 +136,8 @@
 					var settings = app.getSettings();
 					var state = app.getState();
 					var mainPage = $.preload({
-						"id": 'main',
-						"url": 'main.html'
+						"id": 'index',
+						"url": '../app/index.html'
 					});
 					var main_loaded_flag = false;
 					mainPage.addEventListener("loaded",function () {
@@ -147,11 +147,14 @@
 						//使用定时器的原因：
 						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
 						var id = setInterval(function () {
+							console.log("toMain function main_loaded_flag is " + main_loaded_flag);
 							if(main_loaded_flag){
 								plus.storage.setItem('loginFlag', 'isLogin');
 								clearInterval(id);
 								$.fire(mainPage, 'show', null);
 								mainPage.show("pop-in");
+								console.log("main page show...");
+								plus.webview.currentWebview().close();
 							}
 						},20);
 					};
@@ -238,10 +241,13 @@
 							password: passwordBox.value
 						};
 						app.login(loginInfo, function(err) {
+							console.log("add by lixin a ");
 							if (err) {
+								console.log("add by lixin b");
 								plus.nativeUI.toast(err);
 								return;
 							}
+							console.log("add by lixin c");
 							toMain();
 						});
 					});

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
@@ -15,15 +14,14 @@
 			}
 		</style>
 	</head>
-
 	<body>
 		<div class="mui-content">
 			<ul id="list" class="mui-table-view mui-grid-view">
-				<li class="mui-table-view-cell mui-media mui-col-xs-6"  >
-								<a href="detail.html?id=4">
-									<img class="mui-media-object" src="../images/shuijiao.jpg">
-									<div class="mui-media-body">幸福就是可以一起睡觉</div>
-								</a>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6">
+					<a href="detail.html?id=4">
+						<img class="mui-media-object" src="../images/shuijiao.jpg">
+						<div class="mui-media-body">幸福就是可以一起睡觉</div>
+					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-6">
 					<a href="detail.html?id=3">
@@ -31,7 +29,7 @@
 						<div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6" id="3" >
+				<li class="mui-table-view-cell mui-media mui-col-xs-6" id="3">
 					<a href="detail.html?id=2"><img class="mui-media-object" src="../images/cbd.jpg">
 						<div class="mui-media-body">Color of SIP CBD</div>
 					</a>
@@ -66,81 +64,69 @@
 		<script src="../js/mui.min.js"></script>
 		<script>
 			mui.plusReady(function() {
-			//读取本地存储，检查是否为首次启动
-			var showGuide = plus.storage.getItem("lauchFlag");
-			//仅支持竖屏显示
-			plus.screen.lockOrientation("portrait-primary");
-			if(showGuide) {
-				//有值，说明已经显示过了，无需显示；
-				//关闭splash页面；
-				plus.navigator.closeSplashscreen();
-				plus.navigator.setFullscreen(false);
-				//读取本地存储，检查是否已经登录
-				var isLogin = plus.storage.getItem("loginFlag");
-				if(isLogin) {
-					//预加载
-					//preload();
-				} else {
-					mui.openWindow({
-						id: 'login',
-						url: 'login/login.html'
-					});
-				}
-			} else {
-				//显示启动导航
-				mui.openWindow({
-					id: 'guide',
-					url: 'guide.html',
-					styles: {
-						popGesture: "none"
-					},
-					show: {
-						aniShow: 'none'
-					},
-					waiting: {
-						autoShow: false
+				//读取本地存储，检查是否为首次启动
+				var showGuide = plus.storage.getItem("lauchFlag");
+				if(showGuide) {
+					//有值，说明已经显示过了，无需显示；
+					//关闭splash页面；
+					plus.navigator.closeSplashscreen();
+					plus.navigator.setFullscreen(false);
+					var isLogin = plus.storage.getItem("loginFlag");
+					console.log("value of isLogin is " + isLogin);
+					if (!isLogin) {
+						mui.openWindow('../login/login.html','login',{});
+					} else {
+						initTemplates();
+						preload();
 					}
-				});
-				//延迟的原因：优先打开启动导航页面，避免资源争夺
-				setTimeout(function() {
-					//预加载
-					//preload();
-				}, 200);
-			}
-		});
+				} else {
+					//显示启动导航
+					mui.openWindow({
+						id: 'guide',
+						url: 'guide.html',
+						show: {
+							aniShow: 'none'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					//延迟的原因：优先打开启动导航页面，避免资源争夺
+					setTimeout(function() {
+						//初始化模板
+						initTemplates();
+						//预加载
+						preload();
+					}, 200);
+				}
+			});
 			var aniShow = "pop-in";
-			 //只有ios支持的功能需要在Android平台隐藏；
-			if (mui.os.android) {
+			//只有ios支持的功能需要在Android平台隐藏；
+			if(mui.os.android) {
 				var list = document.querySelectorAll('.ios-only');
-				if (list) {
-					for (var i = 0; i < list.length; i++) {
+				if(list) {
+					for(var i = 0; i < list.length; i++) {
 						list[i].style.display = 'none';
 					}
 				}
 				//Android平台暂时使用slide-in-right动画
-				if(parseFloat(mui.os.version)<4.4){
+				if(parseFloat(mui.os.version) < 4.4) {
 					aniShow = "slide-in-right";
 				}
 			}
-			//初始化，并预加载webview模式的选项卡			
-			function preload () {
+			//初始化，并预加载webview模式的选项卡	
+			function preload() {
 				mui.preload({
-					url:'tab-webview-main.html',
+					url: 'tab-webview-main.html',
 					styles: {
 						popGesture: 'hide'
 					}
 				});
-				/*mui.preload({
-					url:"pullrefresh_main.html",
-					styles:{
-						popGesture:'hide'
-					}
-				});*/
 			}
 			var templates = {};
 			var getTemplate = function(name, header, content) {
 				var template = templates[name];
-				if (!template) {
+				if(!template) {
 					//预加载共用父模板；
 					var headerWebview = mui.preload({
 						url: header,
@@ -172,7 +158,7 @@
 					subWebview.hide();
 					headerWebview.append(subWebview);
 					//iOS平台支持侧滑关闭，父窗体侧滑隐藏后，同时需要隐藏子窗体；
-					if (mui.os.ios) { //5+父窗体隐藏，子窗体还可以看到？不符合逻辑吧？
+					if(mui.os.ios) { //5+父窗体隐藏，子窗体还可以看到？不符合逻辑吧？
 						headerWebview.addEventListener('hide', function() {
 							subWebview.hide("none");
 						});
@@ -188,56 +174,23 @@
 			var initTemplates = function() {
 				getTemplate('default', 'template.html');
 			};
-			mui.plusReady(function() {
-				//读取本地存储，检查是否为首次启动
-				var showGuide = plus.storage.getItem("lauchFlag");
-				if(showGuide){
-					//有值，说明已经显示过了，无需显示；
-					//关闭splash页面；
-					plus.navigator.closeSplashscreen();
-					plus.navigator.setFullscreen(false);
-					//初始化模板
-					initTemplates(); 
-					//预加载
-					preload();
-				}else{
-					//显示启动导航
-					mui.openWindow({
-						id:'guide',
-						url:'guide.html',
-						show:{
-							aniShow:'none'
-						},
-						waiting:{
-							autoShow:false
-						}
-					});
-					//延迟的原因：优先打开启动导航页面，避免资源争夺
-					setTimeout(function () {
-						//初始化模板
-						initTemplates(); 
-						//预加载
-						preload();
-					},200);
-				}
-			});
-			 //主列表点击事件
+			//主列表点击事件
 			mui('#list').on('tap', 'a', function() {
 				var id = this.getAttribute('href');
 				var href = this.href;
 				var type = this.getAttribute("open-type");
 				//不使用父子模板方案的页面
-				if (type == "common") {
+				if(type == "common") {
 					var webview_style = {
 						popGesture: "close"
 					};
 					//侧滑菜单需动态控制一下zindex值；
-					if (~id.indexOf('offcanvas-')) {
+					if(~id.indexOf('offcanvas-')) {
 						webview_style.zindex = 9998;
 						webview_style.popGesture = ~id.indexOf('offcanvas-with-right') ? "close" : "none";
 					}
 					//图标界面需要启动硬件加速
-					if(~id.indexOf('icons.html')){
+					if(~id.indexOf('icons.html')) {
 						webview_style.hardwareAccelerated = true;
 					}
 					mui.openWindow({
@@ -251,8 +204,8 @@
 							autoShow: false
 						}
 					});
-				} else if (id && ~id.indexOf('.html')) {
-					if (!mui.os.plus || (!~id.indexOf('popovers.html')&&mui.os.ios)) {
+				} else if(id && ~id.indexOf('.html')) {
+					if(!mui.os.plus || (!~id.indexOf('popovers.html') && mui.os.ios)) {
 						mui.openWindow({
 							id: id,
 							url: this.href,
@@ -282,14 +235,14 @@
 						mui.fire(headerWebview, 'updateHeader', {
 							title: title,
 							showMenu: showMenu,
-							target:href,
+							target: href,
 							aniShow: aniShow
 						});
-						
-						if(mui.os.ios||(mui.os.android&&parseFloat(mui.os.version)<4.4)){
+
+						if(mui.os.ios || (mui.os.android && parseFloat(mui.os.version) < 4.4)) {
 							var reload = true;
-							if (!template.loaded) {
-								if (contentWebview.getURL() != this.href) {
+							if(!template.loaded) {
+								if(contentWebview.getURL() != this.href) {
 									contentWebview.loadURL(this.href);
 								} else {
 									reload = false;
@@ -298,7 +251,7 @@
 								reload = false;
 							}
 							(!reload) && contentWebview.show();
-							
+
 							headerWebview.show(aniShow, 150);
 						}
 					}
@@ -315,93 +268,49 @@
 				mui.gestures.touch.startDirection = e.detail.direction;
 			});
 			window.addEventListener('dragright', function(e) {
-				if (!mui.isScrolling) {
+				if(!mui.isScrolling) {
 					e.detail.gesture.preventDefault();
 				}
 			});
-			 //监听右滑事件，若侧滑菜单未显示，右滑要显示菜单；
+			//监听右滑事件，若侧滑菜单未显示，右滑要显示菜单；
 			window.addEventListener("swiperight", function(e) {
 				//默认滑动角度在-45度到45度之间，都会触发右滑菜单，为避免误操作，可自定义限制滑动角度；
-				if (Math.abs(e.detail.angle) < 4) {
+				if(Math.abs(e.detail.angle) < 4) {
 					openMenu();
 				}
 			});
 			//首页
-		mui.plusReady(function() {
-			//读取本地存储，检查是否为首次启动
-			var showGuide = plus.storage.getItem("lauchFlag");
-			//仅支持竖屏显示
-			plus.screen.lockOrientation("portrait-primary");
-			if(showGuide) {
-				//有值，说明已经显示过了，无需显示；
-				//关闭splash页面；
-				plus.navigator.closeSplashscreen();
-				plus.navigator.setFullscreen(false);
-				//读取本地存储，检查是否已经登录
-				var isLogin = plus.storage.getItem("loginFlag");
-				if(isLogin) {
-					//预加载
-					//preload();
-				} else {
-					mui.openWindow({
-						id: 'login',
-						url: 'login/login.html'
-					});
-				}
-			} else {
-				//显示启动导航
+			document.getElementById('home').addEventListener('tap', function() {
+				//打开关于页面
 				mui.openWindow({
-					id: 'guide',
-					url: '../examples/guide.html',
-					styles: {
-						popGesture: "none"
-					},
-					show: {
-						aniShow: 'none'
-					},
-					waiting: {
-						autoShow: false
-					}
+					url: 'main.html',
+					id: 'main',
 				});
-				//延迟的原因：优先打开启动导航页面，避免资源争夺
-				setTimeout(function() {
-					//预加载
-					//preload();
-				}, 200);
-			}
-		});
-		//首页
-		document.getElementById('home').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'main.html',
-		    id:'main',
-		  });
-		});
-		//商品登陆
-		document.getElementById('gdslogin').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'exhibit.html',
-		    id:'exhibit',
-		  });
-		});
-		//聊天
-		document.getElementById('chats').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'chatView.html',
-		    id:'chatView',
-		  });
-		});
-		//商品状态
-		document.getElementById('gdszhuangtai').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'request.html',
-		    id:'request',
-		  });
-		});
+			});
+			//商品登陆
+			document.getElementById('gdslogin').addEventListener('tap', function() {
+				//打开关于页面
+				mui.openWindow({
+					url: 'exhibit.html',
+					id: 'exhibit',
+				});
+			});
+			//聊天
+			document.getElementById('chats').addEventListener('tap', function() {
+				//打开关于页面
+				mui.openWindow({
+					url: 'chatView.html',
+					id: 'chatView',
+				});
+			});
+			//商品状态
+			document.getElementById('gdszhuangtai').addEventListener('tap', function() {
+				//打开关于页面
+				mui.openWindow({
+					url: 'request.html',
+					id: 'request',
+				});
+			});
 		</script>
 	</body>
 
