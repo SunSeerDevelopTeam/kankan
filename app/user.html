@@ -89,8 +89,8 @@
 				</div>		
 		</div>
 		<!--底部导航条-->
-		<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" href="#tabbar" id="home">
+		<!--<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" href="#tabbar" id="home">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
@@ -106,44 +106,44 @@
 				<span class="mui-icon mui-icon-eye"></span>
 				<span class="mui-tab-label">商品状态</span>
 			</a>
-		</nav>
+		</nav>-->
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: true //启用右滑关闭功能
 			});
 			//首页
-		document.getElementById('home').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'main.html',
-		    id:'main',
-		  });
-		});
-		//商品登陆
-		document.getElementById('gdslogin').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'exhibit.html',
-		    id:'exhibit',
-		  });
-		});
-		//聊天
-		document.getElementById('chats').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'chatView.html',
-		    id:'chatView',
-		  });
-		});
-		//商品状态
-		document.getElementById('gdszhuangtai').addEventListener('tap',function(){
-			//打开关于页面
-		  mui.openWindow({
-		    url: 'request.html',
-		    id:'request',
-		  });
-		});
+//		document.getElementById('home').addEventListener('tap',function(){
+//			//打开关于页面
+//		  mui.openWindow({
+//		    url: 'index.html',
+//		    id:'index',
+//		  });
+//		});
+//		//商品登陆
+//		document.getElementById('gdslogin').addEventListener('tap',function(){
+//			//打开关于页面
+//		  mui.openWindow({
+//		    url: 'exhibit.html',
+//		    id:'exhibit',
+//		  });
+//		});
+//		//聊天
+//		document.getElementById('chats').addEventListener('tap',function(){
+//			//打开关于页面
+//		  mui.openWindow({
+//		    url: 'chatView.html',
+//		    id:'chatView',
+//		  });
+//		});
+//		//商品状态
+//		document.getElementById('gdszhuangtai').addEventListener('tap',function(){
+//			//打开关于页面
+//		  mui.openWindow({
+//		    url: 'request.html',
+//		    id:'request',
+//		  });
+//		});
 		//设置页面
 		document.getElementById('setting').addEventListener('tap',function(){
 			//打开关于页面
