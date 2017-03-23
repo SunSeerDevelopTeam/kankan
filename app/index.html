@@ -4,10 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
 		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css"/>-->
 		<style>
 			h5 {
 				padding-top: 8px;
@@ -20,194 +24,242 @@
 				margin-top: 8px;
 				color: #333;
 			}
+			/*侧滑的式样*/
+			p {
+				text-indent: 22px;
+			}
+			.mui-off-canvas-left {
+				color: #fff;
+			}
+			.title {
+				margin: 35px 15px 10px;
+			}
+			.title+.content {
+				margin: 10px 15px 35px;
+				color: #bbb;
+				text-indent: 1em;
+				font-size: 14px;
+				line-height: 24px;
+			}
 		</style>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-icon mui-icon-bars mui-pull-left mui-plus-visible"></a>
-			<a  class="mui-icon mui-icon-contact mui-pull-right" id="yonghu" style="color: #999;"></a>
-			<h1 class="mui-title">商品列表</h1>
-		</header>
-		<script src="../js/mui.min.js"></script>
-		<script src="../js/update.js" type="text/javascript" charset="utf-8"></script>
-		<script>
-			var menu = null,
-				main = null;
-			var showMenu = false;
-			mui.init({
-				swipeBack: false,
-				statusBarBackground: '#f7f7f7',
-				gestureConfig: {
-					doubletap: true
-				},
-				subpages: [{
-					id: 'main',
-					url: 'main.html',
-					styles: {
-						top: '45px',
-						bottom: 0,
-						bounce: 'vertical'
-					}
-				}]
-			});
-			mui.plusReady(function() {
-				//仅支持竖屏显示
-				plus.screen.lockOrientation("portrait-primary");
-				main = plus.webview.currentWebview();
-				main.addEventListener('maskClick', closeMenu);
-				//处理侧滑导航，为了避免和子页面初始化等竞争资源，延迟加载侧滑页面；
-				setTimeout(function() {
-					menu = mui.preload({
-						id: 'index-menu',
-						url: 'index-menu.html',
-						styles: {
-							left: 0,
-							width: '70%',
-							zindex: -1
-						},
-						show: {
-							aniShow: 'none'
-						}
-					});
-				}, 200);
-			});
-			var isInTransition = false;
-			/**
-			 * 显示侧滑菜单
-			 */
-			function openMenu() {
-				if (isInTransition) {
-					return;
-				}
-				if (!showMenu) {
-					//侧滑菜单处于隐藏状态，则立即显示出来；
-					isInTransition = true;
-					menu.setStyle({
-						mask: 'rgba(0,0,0,0)'
-					}); //menu设置透明遮罩防止点击
-					menu.show('none', 0, function() {
-						//主窗体开始侧滑并显示遮罩
-						main.setStyle({
-							mask: 'rgba(0,0,0,0.4)',
-							left: '70%',
-							transition: {
-								duration: 150
-							}
-						});
-						mui.later(function() {
-							isInTransition = false;
-							menu.setStyle({
-								mask: "none"
-							}); //移除menu的mask
-						}, 160);
-						showMenu = true;
-					});
-				}
-			};
-			/**
-			 * 关闭菜单
-			 */
-			function closeMenu() {
-				if (isInTransition) {
-					return;
-				}
-				if (showMenu) {
-					//关闭遮罩；
-					//主窗体开始侧滑；
-					isInTransition = true;
-					main.setStyle({
-						mask: 'none',
-						left: '0',
-						transition: {
-							duration: 200
-						}
-					});
-					showMenu = false;
-					//等动画结束后，隐藏菜单webview，节省资源；
-					mui.later(function() {
-						isInTransition = false;
-						menu.hide();
-					}, 300);
-				}
-			};
-			//点击左上角侧滑图标，打开侧滑菜单；
-			document.querySelector('.mui-icon-bars').addEventListener('tap', function(e) {
-				if (showMenu) {
-					closeMenu();
-				} else {
-					openMenu();
-				}
-			});
-			//敲击顶部导航，内容区回到顶部
-			document.querySelector('header').addEventListener('doubletap', function() {
-				main.children()[0].evalJS('mui.scrollTo(0, 100)');
-			});
-			//主界面向右滑动，若菜单未显示，则显示菜单；否则不做任何操作
-			window.addEventListener("swiperight", openMenu);
-			//主界面向左滑动，若菜单已显示，则关闭菜单；否则，不做任何操作；
-			window.addEventListener("swipeleft", closeMenu);
-			//侧滑菜单触发关闭菜单命令
-			window.addEventListener("menu:close", closeMenu);
-			window.addEventListener("menu:open", openMenu);
-			//重写mui.menu方法，Android版本menu按键按下可自动打开、关闭侧滑菜单；
-			mui.menu = function() {
-					if (showMenu) {
-						closeMenu();
-					} else {
-						openMenu();
-					}
-				}
-				//处理右上角关于图标的点击事件；
-			var subWebview = null,
-				template = null;
-			document.getElementById('yonghu').addEventListener('tap', function() {
-				if (!mui.os.plus) {
-					mui.openWindow({
-						url: "user.html",
-						id: "user",
-						show: {
-							aniShow: 'zoom-fade-out',
-							duration: 300
-						}
-					});
-					return;
-				}
-				if (subWebview == null) {
-					//获取共用父窗体
-					template = plus.webview.getWebviewById("default-main");
-				}
-				/*if (template) {
-					subWebview = template.children()[0];
-					subWebview.loadURL('user.html');
-					//修改共用父模板的标题
-					mui.fire(template, 'updateHeader', {
-						title: '张三',
-						showMenu: false
-					});
-					template.show('slide-in-right', 150);
-				}*/
-								mui.openWindow({
-									url:"user.html",
-									id:"info",
-									show:{
-										aniShow:'zoom-fade-out',
-										duration:300
-									}
-								});
-			});
-			//首页返回键处理
-			//1、若侧滑菜单显示，则关闭侧滑菜单
-			//2、否则，执行mui框架默认的关闭首页功能
-			var _back = mui.back;
-			mui.back = function() {
-				if (showMenu) {
-					closeMenu();
-				} else {
-					_back();
-				}
-			};
-		</script>
+<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--侧滑菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-left">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="title">侧滑导航</div>
+						<div class="content">
+							这是可拖动式侧滑菜单示例，你可以在这里放置任何内容；关闭侧滑菜单有多种方式： 1.在手机屏幕任意位置向左拖动(drag)；2.点击本侧滑菜单页之外的任意位置; 3.点击如下红色按钮
+							<span class="android-only">；4.Android手机按back键；5.Android手机按menu键
+							</span>。
+							<p style="margin: 10px 15px;">
+								<button id="offCanvasHide" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">关闭侧滑菜单</button>
+							</p>
+
+						</div>
+						<div class="title" style="margin-bottom: 25px;">侧滑列表示例</div>
+						<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">
+									Item 1
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">
+									Item 2
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">
+									Item 3
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+	<div class="mui-inner-wrap">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-bars mui-pull-left" id="offCanvasShow"></a>
+				<h1 class="mui-title">商品列表</h1>
+				<a class="mui-icon mui-icon-contact mui-pull-right" id="yonghu"></a>
+			</header>
+		<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+			<div class="mui-content" style="background-color:#fff">
+				<h5 style="background-color:#efeff4">慢生活</h5>
+	
+				<div id="slider" class="mui-slider">
+					<div class="mui-slider-group">
+						<div class="mui-slider-item mui-slider-item-duplicate">
+	
+							<ul class="mui-table-view mui-grid-view">
+								<li class="mui-table-view-cell mui-media mui-col-xs-6"  >
+									<a href="javascript:;" id="xiangqing">
+										<img class="mui-media-object" src="../images/shuijiao.jpg">
+										<div class="mui-media-body">幸福就是可以一起睡觉</div>
+									</a>
+								</li>
+								<li class="mui-table-view-cell mui-media mui-col-xs-6" id="2" onclick="detail(this.id)">
+									<a href="javascript:;">
+										<img class="mui-media-object" src="../images/muwu.jpg">
+										<div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
+									</a>
+								</li>
+								<li class="mui-table-view-cell mui-media mui-col-xs-6" id="3" onclick="detail(this.id)">
+									<a href="javascript:;"><img class="mui-media-object" src="../images/cbd.jpg">
+										<div class="mui-media-body">Color of SIP CBD</div>
+									</a>
+								</li>
+								<li class="mui-table-view-cell mui-media mui-col-xs-6" id="4" onclick="detail(this.id)">
+									<a href="javascript:;">
+										<img class="mui-media-object" src="../images/yuantiao.jpg">
+										<div class="mui-media-body">静静看这世界</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<!--底部导航条-->
+			<nav class="mui-bar mui-bar-tab">
+				<a class="mui-tab-item mui-active" href="#tabbar" id="home">
+					<span class="mui-icon mui-icon-home"></span>
+					<span class="mui-tab-label">首页</span>
+				</a>
+				<a class="mui-tab-item" href="#tabbar-with-chat" id="gdslogin">
+					<span class="mui-icon mui-icon-paperplane"></span>
+					<span class="mui-tab-label">商品登陆</span>
+				</a>
+				<a class="mui-tab-item" href="#tabbar-with-contact" id="chats">
+					<span class="mui-icon mui-icon-chatbubble"><span class="mui-badge">9</span></span>
+					<span class="mui-tab-label">聊天</span>
+				</a>
+				<a class="mui-tab-item" href="#tabbar-with-map" id="gdszhuangtai">
+					<span class="mui-icon mui-icon-eye"></span>
+					<span class="mui-tab-label">商品状态</span>
+				</a>
+			</nav>
+		</div>
+		<div class="mui-off-canvas-backdrop"></div>
+	</div>
+</div>
 	</body>
+	<script src="../js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		//首页
+		document.getElementById('home').addEventListener('tap',function(){
+			//打开关于页面
+		  mui.openWindow({
+		    url: 'index.html',
+		    id:'index',
+		  });
+		});
+		//商品登陆
+		document.getElementById('gdslogin').addEventListener('tap',function(){
+			//打开关于页面
+		  mui.openWindow({
+		    url: 'exhibit.html',
+		    id:'exhibit',
+		  });
+		});
+		//聊天
+		document.getElementById('chats').addEventListener('tap',function(){
+			//打开关于页面
+		  mui.openWindow({
+		    url: 'chatView.html',
+		    id:'chatView',
+		  });
+		});
+		//商品状态
+		document.getElementById('gdszhuangtai').addEventListener('tap',function(){
+			//打开关于页面
+		  mui.openWindow({
+		    url: 'request.html',
+		    id:'request',
+		  });
+		});
+		//详情页面
+		/*function detail(did){
+			//alert(did);
+			mui.openWindow({
+		    url: 'detail.html',
+		    id:'detail',
+		    show: {
+                    autoShow: false
+                },
+		    extras:{
+		      tagertid:did//自定义扩展参数，可以用来处理页面间传值
+		    }
+		  });
+		}*/
+		document.getElementById('xiangqing').addEventListener('tap',function(){
+			//打开关于页面
+		  mui.openWindow({
+		    url: 'detail.html',
+		    id:'detail',
+		    show: {
+                    autoShow: false
+                },
+		    extras:{
+		      tagertid:"1"//自定义扩展参数，可以用来处理页面间传值
+		    }
+		  });
+		});
+		//用户页面
+		document.getElementById('yonghu').addEventListener('tap',function(){
+			//打开关于页面
+		  mui.openWindow({
+		    url: 'user.html',
+		    id:'user'
+		  });
+		});
+		/////////////////////////////////侧面滑动/////////////////////////////////////
+		 //侧滑容器父节点
+			var offCanvasWrapper = mui('#offCanvasWrapper');
+			 //主界面容器
+			var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+			 //菜单容器
+			var offCanvasSide = document.getElementById("offCanvasSide");
+			 //移动效果是否为整体移动
+			var moveTogether = false;
+			 //侧滑容器的class列表，增加.mui-slide-in即可实现菜单移动、主界面不动的效果；
+			var classList = offCanvasWrapper[0].classList;
+			 //变换侧滑动画移动效果；
+			 offCanvasSide.classList.remove('mui-transitioning');
+			offCanvasSide.setAttribute('style', '');
+			classList.remove('mui-slide-in');
+			classList.remove('mui-scalable');
+			//<-----此处可切换滑动效果
+			classList.add('mui-slide-in');
+			//------>
+			offCanvasWrapper.offCanvas().refresh();
+			 //主界面‘显示侧滑菜单’按钮的点击事件
+			document.getElementById('offCanvasShow').addEventListener('tap', function() {
+				offCanvasWrapper.offCanvas('show');
+			});
+			 //菜单界面，‘关闭侧滑菜单’按钮的点击事件
+			document.getElementById('offCanvasHide').addEventListener('tap', function() {
+				offCanvasWrapper.offCanvas('close');
+			});
+			 //主界面和侧滑菜单界面均支持区域滚动；
+			mui('#offCanvasSideScroll').scroll();
+			mui('#offCanvasContentScroll').scroll();
+			 //实现ios平台原生侧滑关闭页面；
+			if (mui.os.plus && mui.os.ios) {
+				mui.plusReady(function() { //5+ iOS暂时无法屏蔽popGesture时传递touch事件，故该demo直接屏蔽popGesture功能
+					plus.webview.currentWebview().setStyle({
+						'popGesture': 'none'
+					});
+				});
+			}
+	</script>
 
 </html>
