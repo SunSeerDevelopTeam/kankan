@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 id="title" class="mui-title">首页</h1>
+			<a class="mui-action-menu mui-icon mui-icon-bars mui-pull-right"></a>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="tab-webview-subpage-about.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="tab-webview-subpage-chat.html">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">商品登陆</span>
+			</a>
+			<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
+				<span class="mui-icon mui-icon-chatbubble"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">聊天</span>
+			</a>
+			<a class="mui-tab-item" href="tab-webview-subpage-setting.html">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">商品状态</span>
+			</a>
+		</nav>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var main, menu, mask = mui.createMask(_closeMenu);
+			var showMenu = false;
+			
+			/**
+			 * 关闭侧滑菜单
+			 */
+			function closeMenu(){
+				_closeMenu();
+				mask.close();
+			}
+			/**
+			 * 关闭侧滑菜单（业务部分）
+			 */
+			function _closeMenu() {
+				if (showMenu) {
+					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					if (mui.os.android && parseFloat(mui.os.version) < 4.4) {
+						document.querySelector("header.mui-bar").style.position = "fixed";
+						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "44px";
+					}
+					menu.setStyle({
+						left: '100%',
+						transition: {
+							duration: 150
+						}
+					});
+					setTimeout(function(){
+						menu.hide();
+					}, 300);
+					showMenu = false;
+				}
+			}
+			
+			if (!mui.os.android) {
+				//整体滑动暂不支持android手机，因为两个页面的移动动画，无法保证同步性；
+				document.getElementById("move-togger").classList.remove('mui-hidden');
+				var spans = document.querySelectorAll('.android-only');
+				for (var i=0,len=spans.length;i<len;i++) {
+					spans[i].style.display = "none";
+				}
+			}
+			 //mui初始化
+			mui.init({
+				swipeBack: false,
+				beforeback: back
+			});
+			
+			function back() {
+				if (showMenu) {
+					//菜单处于显示状态，返回键应该先关闭菜单,阻止主窗口执行mui.back逻辑；
+					closeMenu();
+					return false;
+				} else {
+					//菜单处于隐藏状态，执行返回时，要先close菜单页面，然后继续执行mui.back逻辑关闭主窗口；
+					menu.close('none');
+					return true;
+				}
+			}
+			var subpages = ['tab-webview-subpage-about.html', 'tab-webview-subpage-chat.html', 'tab-webview-subpage-contact.html', 'tab-webview-subpage-setting.html'];
+			var subpage_style = {
+				top: '45px',
+				bottom: '51px'
+			};
+			
+			var aniShow = {};
+			
+			 //创建子页面，首个选项卡页面显示，其它均隐藏；
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				for (var i = 0; i < 4; i++) {
+					var temp = {};
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if (i > 0) {
+						sub.hide();
+					}else{
+						temp[subpages[i]] = "true";
+						mui.extend(aniShow,temp);
+					}
+					self.append(sub);
+				}
+				
+				main = plus.webview.currentWebview();
+				setTimeout(function(){
+					menu = mui.preload({
+						id: 'offcanvas-drag-left-plus-menu',
+						url: 'offcanvas-drag-left-plus-menu.html',
+						styles: {
+							left: '30%',
+							width: '70%',
+							zindex: 9997
+						}
+					});
+				}, 300);
+			});
+			
+			/**
+			 * 显示菜单
+			 */
+			function openMenu() {
+				if (!showMenu) {
+					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					if (mui.os.android && parseFloat(mui.os.version) < 4.4) {
+						document.querySelector("header.mui-bar").style.position = "static";
+						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "0px";
+					}
+					menu.show('none', 0, function() {
+						menu.setStyle({
+							left: '30%',
+							transition: {
+								duration: 150
+							}
+						});
+						mask.show();
+						showMenu = true;
+					});
+				}
+			}
+			
+			document.querySelector(".mui-icon-bars").addEventListener("tap", openMenu);
+			window.addEventListener("dragright", function(e){
+				e.detail.gesture.preventDefault();
+			});
+			window.addEventListener("dragleft", function(e){
+				e.detail.gesture.preventDefault();
+			});
+			window.addEventListener("swiperight", openMenu);
+			window.addEventListener("swipeleft", closeMenu);
+			window.addEventListener("menu:swiperight", closeMenu);
+			mui.menu = function() {
+				if (showMenu) {
+					closeMenu();
+				} else{
+					openMenu();
+				}
+			}
+			
+			var backFirst = null;
+			mui.back = function() {
+				if (showMenu) {
+					closeMenu();
+					return;
+				}
+				if (!backFirst) {
+					backFirst = new Date().getTime();
+					mui.toast('再按一次退出应用程序');
+					setTimeout(function(){
+						backFirst = null;
+					}, 1000);
+				} else{
+					if ((new Date()).getTime() - backFirst < 1000) {
+						plus.runtime.quit();
+					}
+				}
+			}
+			 //当前激活选项
+			var activeTab = subpages[0];
+			var title = document.getElementById("title");
+			 //选项卡点击事件
+			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				var targetTab = this.getAttribute('href');
+				if (targetTab == activeTab) {
+					return;
+				}
+				//更换标题
+				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+				//显示目标选项卡
+				//若为iOS平台或非首次显示，则直接显示
+				if(mui.os.ios||aniShow[targetTab]){
+					plus.webview.show(targetTab);
+				}else{
+					//否则，使用fade-in动画，且保存变量
+					var temp = {};
+					temp[targetTab] = "true";
+					mui.extend(aniShow,temp);
+					plus.webview.show(targetTab,"fade-in",300);
+				}
+				//隐藏当前;
+				plus.webview.hide(activeTab);
+				//更改当前活跃的选项卡
+				activeTab = targetTab;
+			});
+			 //自定义事件，模拟点击“首页选项卡”
+			document.addEventListener('gohome', function() {
+				var defaultTab = document.getElementById("defaultTab");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if (defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+			});
+		</script>
+	</body>
+
+</html>

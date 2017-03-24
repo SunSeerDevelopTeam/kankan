@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+	<div class="mui-content">
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div id="slider" class="mui-scroll mui-slider">
+				<div class="mui-slider-group">
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<ul class="mui-table-view mui-grid-view">
+							<li class="mui-table-view-cell mui-media mui-col-xs-4">
+								<a>
+									<img class="" src="images/shuijiao.jpg">
+									<div class="mui-media-body">
+										能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？
+									</div>
+								</a>
+								<div class="mui-pull-left" style="margin-top: 1em;">
+									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
+								</div>
+								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
+									河童
+								</div>
+								<div class="mui-pull-right" style="margin-top: 0.8em;">
+									<span class="mui-badge">
+										<a><span class="mui-icon-extra mui-icon-extra-like" style="font-size: 12px;"></span></a>
+									</span>
+									<span style="font-size: 11px;">1</span>
+								</div>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4">
+								<a>
+									<img class="mui-media-object" src="images/muwu.jpg">
+									<div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
+								</a>
+								<div class="mui-pull-left" style="margin-top: 1em;">
+									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
+								</div>
+								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
+									河童
+								</div>
+								<div class="mui-pull-right" style="margin-top: 0.8em;">
+									<span class="mui-badge">
+										<a><span class="mui-icon-extra mui-icon-extra-like" style="font-size: 12px;"></span></a>
+									</span>
+									<span style="font-size: 11px;">1</span>
+								</div>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4">
+								<a>
+									<img class="mui-media-object" src="images/cbd.jpg">
+									<div class="mui-media-body">Color of SIP CBD</div>
+								</a>
+								<div class="mui-pull-left" style="margin-top: 1em;">
+									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
+								</div>
+								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
+									河童
+								</div>
+								<div class="mui-pull-right" style="margin-top: 0.8em;">
+									<span class="mui-badge">
+										<a><span class="mui-icon-extra mui-icon-extra-like" style="font-size: 12px;"></span></a>
+									</span>
+									<span style="font-size: 11px;">1</span>
+								</div>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4">
+								<a href="javascript:;" id="4" onclick="detail(this.id)">
+									<img class="mui-media-object" src="images/yuantiao.jpg">
+									<div class="mui-media-body">静静看这世界</div>
+								</a>
+								<div class="mui-pull-left" style="margin-top: 1em;">
+									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
+								</div>
+								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
+									河童
+								</div>
+								<div class="mui-pull-right" style="margin-top: 0.8em;">
+									<span class="mui-badge">
+										<a><span class="mui-icon-extra mui-icon-extra-like" style="font-size: 12px;"></span></a>
+									</span>
+									<span style="font-size: 11px;">1</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script src="js/Common.js"></script>
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			var imageArray = new Array(
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350520244&di=afd33b5fa7e5844a5c6407c6a0798562&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F1f178a82b9014a90e7eb9d17ac773912b21bee47.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350547725&di=f327ba0fe11d1cd4a07e66a3b6326863&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F060828381f30e9240ff2cd434c086e061d95f76a.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350594153&di=bd1c8ad6be41d60ab1d97f3962c7c21f&imgtype=0&src=http%3A%2F%2Fpic1.cxtuku.com%2F00%2F03%2F29%2Fb126c64685bc.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350610312&di=49909be3148e0ba2a82ff61926191d19&imgtype=0&src=http%3A%2F%2Fpic5.qiyipic.com%2Fcommon%2F20130524%2F7dc5679567cd4243a0a41e5bf626ad77.jpg%3Fsrc%3Dfocustat_4_20130527_7',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350625776&di=9854dd8f379c986f93a6aacabbeedfae&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F960a304e251f95cab9a1ed00cf177f3e6709522b.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490945381&di=5ba5f94a3b0b26ebcd5875ed6bd602b8&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1603%2F18%2Fc63%2F19365090_1458313871651_mthumb.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350665468&di=a997345beb625ec5da6d4955b43b0a5e&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fblog%2F201401%2F13%2F20140113142644_S3RPP.jpeg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701381&di=93d03d314ed73fdffa6e0514ed43d0a1&imgtype=0&src=http%3A%2F%2Fimg0.ph.126.net%2FU7alAUQUvhZrtPNGHKEEgw%3D%3D%2F6631997952536987988.jpeg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701380&di=7f718b2b502cac253795bc3ee2630e30&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Ftj%2Fpics%2Fhv1%2F35%2F36%2F1887%2F122711390.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701379&di=c914c412c0bdcd93b72dc81213d78590&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201501%2F21%2F20150121114739_GNNj2.jpeg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701378&di=fb540a9dedd93524dc85edf310975726&imgtype=0&src=http%3A%2F%2Fwww.meyhos.com%2Fimages%2Fmqydkltsmvzs43lfnfwgs43iovxs43tfoq%2Fpic%2F_o%2Fe6%2Fbd%2F681b12e771bbeb4d9f7684c30c85_731_732.c1.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701377&di=e449e80af4df597a845f103ae27f196c&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20151015%2Fmp35744395_1444877700371_1_th.png',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701373&di=5fd08a71112abe143f185ed029c42b7b&imgtype=0&src=http%3A%2F%2Fpic91.huitu.com%2Fres%2F20161125%2F662536_20161125225900130020_1.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701373&di=ebbf12a71833a64458f27a83e4e5ae2e&imgtype=0&src=http%3A%2F%2Ffd.topitme.com%2Fd%2Fbf%2Fa5%2F1127520279863a5bfdo.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701372&di=0ab2af0313e83a7018dac9cc55ea2186&imgtype=0&src=http%3A%2F%2Fwww.zohy.cc%2Fuploadfile%2Fimage%2F2016032116532413.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701365&di=78ce1a7fb5b37a0ceb22416d63f63977&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160525%2Fa91202052a904ec3951b5ecc81c8dedd_th.jpg'
+			);
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for(var i = cells.length, len = i + 3; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
+						var htmlStr = new Util.StringBuilder();
+						htmlStr.append('<a href="javascript:;" id="4" onclick="detail(this.id)">');
+						htmlStr.appendFormat('<img class="mui-media-object" src="{0}">', imageArray[Util.getRandom(0, 15)]);
+						htmlStr.append('<div class="mui-media-body">静静看这世界</div>');
+						htmlStr.append('</a>');
+						htmlStr.append('<div class="mui-pull-left" style="margin-top: 1em;">');
+						htmlStr.append('<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">');
+						htmlStr.append('</div>');
+						htmlStr.append('<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">');
+						htmlStr.append('河童');
+						htmlStr.append('</div>');
+						htmlStr.append('<div class="mui-pull-right" style="margin-top: 0.8em;">');
+						htmlStr.append('<span class="mui-badge">');
+						htmlStr.append('<a><span class="mui-icon-extra mui-icon-extra-like" style="font-size: 12px;"></span></a>');
+						htmlStr.append('</span>');
+						htmlStr.append('<span style="font-size: 11px;">1</span>');
+						htmlStr.append('</div>');
+						li.innerHTML = htmlStr.toString();
+						//下拉刷新，新纪录插到最前面；
+						table.insertBefore(li, table.firstChild);
+					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for(var i = cells.length, len = i + 5; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
+						var htmlStr = new Util.StringBuilder();
+						htmlStr.append('<a href="javascript:;" id="4" onclick="detail(this.id)">');
+						htmlStr.appendFormat('<img class="mui-media-object" src="{0}">', imageArray[Util.getRandom(0, 15)]);
+						htmlStr.append('<div class="mui-media-body">静静看这世界</div>');
+						htmlStr.append('</a>');
+						htmlStr.append('<div class="mui-pull-left" style="margin-top: 1em;">');
+						htmlStr.append('<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">');
+						htmlStr.append('</div>');
+						htmlStr.append('<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">');
+						htmlStr.append('河童');
+						htmlStr.append('</div>');
+						htmlStr.append('<div class="mui-pull-right" style="margin-top: 0.8em;">');
+						htmlStr.append('<span class="mui-badge">');
+						htmlStr.append('<a><span class="mui-icon-extra mui-icon-extra-like" style="font-size: 12px;"></span></a>');
+						htmlStr.append('</span>');
+						htmlStr.append('<span style="font-size: 11px;">1</span>');
+						htmlStr.append('</div>');
+						li.innerHTML = htmlStr.toString();
+						table.appendChild(li);
+					}
+				}, 1500);
+			}
+		</script>
+	</body>
+
+</html>
