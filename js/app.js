@@ -1,11 +1,11 @@
 /**
- * 演示程序当前的 “注册/登录” 等操作，是基于 “本地存储” 完成的
- * 当您要参考这个演示程序进行相关 app 的开发时，
- * 请注意将相关方法调整成 “基于服务端Service” 的实现。
- **/
+  * Presentation of the current "registration / login" and other operations, is based on "local storage" to complete
+  * When you want to refer to this demo program for the development of the relevant app,
+  * Please note that the relevant method is adjusted to "server-based service" implementation.
+  **/
 (function($, owner) {
 	/**
-	 * 用户登录
+	 * User login
 	 **/
 	owner.login = function(loginInfo, callback) {
 		callback = callback || $.noop;
@@ -13,10 +13,10 @@
 		loginInfo.account = loginInfo.account || '';
 		loginInfo.password = loginInfo.password || '';
 		if (loginInfo.account.length < 5) {
-			return callback('账号最短为 5 个字符');
+			return callback('Account is a minimum of 5 characters');
 		}
 		if (loginInfo.password.length < 6) {
-			return callback('密码最短为 6 个字符');
+			return callback('The password is a minimum of 6 characters');
 		}
 		var users = JSON.parse(localStorage.getItem('$users') || '[]');
 		var authed = users.some(function(user) {
@@ -25,7 +25,7 @@
 		if (authed) {
 			return owner.createState(loginInfo.account, callback);
 		} else {
-			return callback('用户名或密码错误');
+			return callback('wrong user name or password');
 		}
 	};
 
@@ -38,7 +38,7 @@
 	};
 
 	/**
-	 * 新用户注册
+	 * New User Registration
 	 **/
 	owner.reg = function(regInfo, callback) {
 		callback = callback || $.noop;
@@ -46,13 +46,13 @@
 		regInfo.account = regInfo.account || '';
 		regInfo.password = regInfo.password || '';
 		if (regInfo.account.length < 5) {
-			return callback('用户名最短需要 5 个字符');
+			return callback('The user name requires a minimum of 5 characters');
 		}
 		if (regInfo.password.length < 6) {
-			return callback('密码最短需要 6 个字符');
+			return callback('The minimum password requires 6 characters');
 		}
 		if (!checkEmail(regInfo.email)) {
-			return callback('邮箱地址不合法');
+			return callback('E-mail address is not legal');
 		}
 		var users = JSON.parse(localStorage.getItem('$users') || '[]');
 		users.push(regInfo);
@@ -61,7 +61,7 @@
 	};
 
 	/**
-	 * 获取当前状态
+	 * Get the current status
 	 **/
 	owner.getState = function() {
 		var stateText = localStorage.getItem('$state') || "{}";
@@ -69,7 +69,7 @@
 	};
 
 	/**
-	 * 设置当前状态
+	 * Set the current state
 	 **/
 	owner.setState = function(state) {
 		state = state || {};
@@ -85,18 +85,18 @@
 	};
 
 	/**
-	 * 找回密码
+	 * Retrieve the password
 	 **/
 	owner.forgetPassword = function(email, callback) {
 		callback = callback || $.noop;
 		if (!checkEmail(email)) {
-			return callback('邮箱地址不合法');
+			return callback('E-mail address is not legal');
 		}
-		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
+		return callback(null, 'The new random password has been sent to your mailbox, please check the mail.');
 	};
 
 	/**
-	 * 获取应用本地配置
+	 * Get the application local configuration
 	 **/
 	owner.setSettings = function(settings) {
 		settings = settings || {};
@@ -104,14 +104,14 @@
 	}
 
 	/**
-	 * 设置应用本地配置
+	 * Set the application local configuration
 	 **/
 	owner.getSettings = function() {
 			var settingsText = localStorage.getItem('$settings') || "{}";
 			return JSON.parse(settingsText);
 		}
 		/**
-		 * 获取本地是否安装客户端
+		 *Gets whether or not to install the client locally
 		 **/
 	owner.isInstalled = function(id) {
 		if (id === 'qihoo' && mui.os.plus) {

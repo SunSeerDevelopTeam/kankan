@@ -22,26 +22,26 @@
 			<a class="mui-icon mui-pull-left" id="yonghu">
 						<img src="images/muwu.jpg" style="width: 35px; height: 35px;border-radius: 50%;margin-top: -0.2em;"  />
 			</a>
-			<h1 id="title" class="mui-title">首页</h1>
+			<h1 id="title" class="mui-title">Home</h1>
 			<a class="mui-icon-extra mui-icon-extra-notice mui-pull-right" style="margin-top: 0.4em;" id="offCanvasShow"></a>
 			<a class="mui-icon mui-icon-search mui-pull-right" ></a>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
 			<a id="defaultTab" class="mui-tab-item mui-active" href="subpage_home.html">
 				<span class="mui-icon mui-icon-home"></span>
-				<span class="mui-tab-label">首页</span>
+				<span class="mui-tab-label">Home</span>
 			</a>
 			<a class="mui-tab-item" href="subpage_product_login.html">
 				<span class="mui-icon mui-icon-paperplane"></span>
-				<span class="mui-tab-label">商品登陆</span>
+				<span class="mui-tab-label">Merchandise landing</span>
 			</a>
 			<a class="mui-tab-item" href="subpage_chat.html" style="display: none;">
 				<span class="mui-icon mui-icon-chatbubble"><span class="mui-badge">9</span></span>
-				<span class="mui-tab-label">聊天</span>
+				<span class="mui-tab-label">Chating</span>
 			</a>
 			<a class="mui-tab-item" href="subpage_request.html">
-				<span class="mui-icon mui-icon-gear"></span>
-				<span class="mui-tab-label">商品状态</span>
+				<span class="mui-icon mui-icon-eye"></span>
+				<span class="mui-tab-label">Commodity status</span>
 			</a>
 		</nav>
 		<script src="js/mui.min.js"></script>
@@ -50,21 +50,21 @@
 			var showMenu = false;
 			
 			/**
-			 * 关闭侧滑菜单
+			 * Close the skid menu
 			 */
 			function closeMenu(){
 				_closeMenu();
 				mask.close();
 			}
 			/**
-			 * 关闭侧滑菜单（业务部分）
+			 * Close the skid menu (business section)
 			 */
 			function _closeMenu() {
 				if (showMenu) {
-					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					//Resolve android 4.4 The following versions of webview are moved, resulting in fixed positioning elements of the bug;
 					if (mui.os.android && parseFloat(mui.os.version) < 4.4) {
 						document.querySelector("header.mui-bar").style.position = "fixed";
-						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						//Also need to modify the following padding-top of .mui-contnt，Otherwise it will be more blank;
 						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "44px";
 					}
 					menu.setStyle({
@@ -81,14 +81,14 @@
 			}
 			
 			if (!mui.os.android) {
-				//整体滑动暂不支持android手机，因为两个页面的移动动画，无法保证同步性；
+				//The overall slide temporarily support android phone, because the two pages of mobile animation, can not guarantee synchronization;
 				document.getElementById("move-togger").classList.remove('mui-hidden');
 				var spans = document.querySelectorAll('.android-only');
 				for (var i=0,len=spans.length;i<len;i++) {
 					spans[i].style.display = "none";
 				}
 			}
-			 //mui初始化
+			 //mui initialization
 			mui.init({
 				swipeBack: false,
 				beforeback: back
@@ -96,11 +96,11 @@
 			
 			function back() {
 				if (showMenu) {
-					//菜单处于显示状态，返回键应该先关闭菜单,阻止主窗口执行mui.back逻辑；
+					//The menu is in the display state, the return key should first close the menu, prevent the main window to perform mui.back logic;
 					closeMenu();
 					return false;
 				} else {
-					//菜单处于隐藏状态，执行返回时，要先close菜单页面，然后继续执行mui.back逻辑关闭主窗口；
+					//The menu is in the hidden state, the implementation of the return, the first close the menu page, and then continue to perform mui.back logic to close the main window;
 					menu.close('none');
 					return true;
 				}
@@ -113,7 +113,7 @@
 			
 			var aniShow = {};
 			
-			 //创建子页面，首个选项卡页面显示，其它均隐藏；
+			 //Create subpage, first tab page display, others are hidden;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < 4; i++) {
@@ -143,14 +143,14 @@
 			});
 			
 			/**
-			 * 显示菜单
+			 * display menu
 			 */
 			function openMenu() {
 				if (!showMenu) {
-					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					//Resolve android 4.4 The following versions of webview are moved, resulting in fixed positioning elements of the bug;
 					if (mui.os.android && parseFloat(mui.os.version) < 4.4) {
 						document.querySelector("header.mui-bar").style.position = "static";
-						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						//Also need to modify the following. Mui-content padding-top, otherwise it will be more blank;
 						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "0px";
 					}
 					menu.show('none', 0, function() {
@@ -192,7 +192,7 @@
 				}
 				if (!backFirst) {
 					backFirst = new Date().getTime();
-					mui.toast('再按一次退出应用程序');
+					mui.toast('Press again to exit the application');
 					setTimeout(function(){
 						backFirst = null;
 					}, 1000);
@@ -202,48 +202,48 @@
 					}
 				}
 			}
-			 //当前激活选项
+			 //Current activation option
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
-			 //选项卡点击事件
+			 //Tab click event
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
 				if (targetTab == activeTab) {
 					return;
 				}
-				//更换标题
+				//Replace the title
 				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
-				//显示目标选项卡
-				//若为iOS平台或非首次显示，则直接显示
+				//The Target tab is displayed
+				//If the iOS platform or non-first display, it is displayed directly
 				if(mui.os.ios||aniShow[targetTab]){
 					plus.webview.show(targetTab);
 				}else{
-					//否则，使用fade-in动画，且保存变量
+					//Otherwise, use the fade-in animation and save the variable
 					var temp = {};
 					temp[targetTab] = "true";
 					mui.extend(aniShow,temp);
 					plus.webview.show(targetTab,"fade-in",300);
 				}
-				//隐藏当前;
+				//Hide the current
 				plus.webview.hide(activeTab);
-				//更改当前活跃的选项卡
+				//Change the currently active tab
 				activeTab = targetTab;
 			});
-			 //自定义事件，模拟点击“首页选项卡”
+			 //Custom Events, Simulation Click "Home Tab"
 			document.addEventListener('gohome', function() {
 				var defaultTab = document.getElementById("defaultTab");
-				//模拟首页点击
+				//Simulation home page click
 				mui.trigger(defaultTab, 'tap');
-				//切换选项卡高亮
+				//The Toggle tab is highlighted
 				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
 				if (defaultTab !== current) {
 					current.classList.remove('mui-active');
 					defaultTab.classList.add('mui-active');
 				}
 			});
-			//用户页面
+			//User page
 		document.getElementById('yonghu').addEventListener('tap', function() {
-			//打开关于页面
+			//Open about the page
 			mui.openWindow({
 				url: 'user.html',
 				id: 'user'

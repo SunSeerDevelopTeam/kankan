@@ -30,10 +30,10 @@
 			<div id="slider" class="mui-slider mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<a class="mui-control-item" href="#item1mobile">
-						可交换物品
+						Exchangeable items
 					</a>
 					<a class="mui-control-item" href="#item2mobile">
-						请求交换物品
+						Request to exchange items
 					</a>
 			</div>
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
@@ -45,11 +45,11 @@
 				<li class="mui-table-view-cell">
 										<a class="mui-icon mui-pull-left" id="yonghu">
 											<img src="images/muwu.jpg" style="width: 30px; height: 30px;border-radius: 50%;" />
-											<div style="color: #777777;font-size: 12px;margin-top: -2em;margin-left: 3em;">用户名</div>
+											<div style="color: #777777;font-size: 12px;margin-top: -2em;margin-left: 3em;">username</div>
 					</a>
 										<span class="mui-pull-right mui-badge">
 												<img src="images/whitejiantou.png" style="width: 20px; height: 20px;" />
-												<div style="margin-top: -1.5em; margin-left: 2em;color: #ffffff;">交换</div>
+												<div style="margin-top: -1.5em; margin-left: 2em;color: #ffffff;">exchange</div>
 											</span>
 				</li>
 				<li class="mui-table-view-cell">
@@ -61,24 +61,24 @@
 				</li>
 				<li class="mui-table-view-cell">
 										<div style="text-align: center;">
-											<button type="button" class="mui-btn mui-btn-grey">取消交换</button>
-											<button type="button" class="mui-btn mui-btn-red">确认交换</button>
-											<button type="button" class="mui-btn mui-btn-yellow">发送信息</button>
+											<button type="button" class="mui-btn mui-btn-grey">Cancel</button>
+											<button type="button" class="mui-btn mui-btn-red">Confirm</button>
+											<button type="button" class="mui-btn mui-btn-yellow">send message</button>
 										</div>
 				</li>
 									<li class="mui-table-view-cell">
-										<h5>信息列表：</h5>
+										<h5>Information List：</h5>
 									</li>
 				<li class="mui-table-view-cell">
 										<a class="mui-pull-left">
 											<img src="images/muwu.jpg" style="width: 30px; height: 30px;border-radius: 50%;" />
-											<div style="color: #777777;font-size: 12px;margin-top: -2em;margin-left: 3em;">交流信息1</div>
+											<div style="color: #777777;font-size: 12px;margin-top: -2em;margin-left: 3em;">Exchange information 1</div>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 										<a class="mui-pull-left">
 											<img src="images/yuantiao.jpg" style="width: 30px; height: 30px;border-radius: 50%;" />
-											<div style="color: #777777;font-size: 12px;margin-top: -2em;margin-left: 3em;">回复信息1</div>
+											<div style="color: #777777;font-size: 12px;margin-top: -2em;margin-left: 3em;">Reply message 1</div>
 					</a>
 				</li>
 									<li class="mui-table-view-cell"></li>
@@ -105,23 +105,23 @@
 		mui.init({
 				swipeBack: false
 		});
-			/////////////////////////左右滑动////////////////////////////////
+			/////////////////////////Swipe left and right////////////////////////////////
 			(function($) {
 				$('.mui-scroll-wrapper').scroll({
-					indicators: true //是否显示滚动条
+					indicators: true //Whether to display a scroll bar
 				});
 				var html2 = '<ul class="mui-table-view">';
 				html2 += '<li class="mui-table-view-cell mui-media">';
 				html2 += '<a href="javascript:;">';
 				html2 += '<img class="mui-media-object mui-pull-left" src="images/cbd.jpg">';
 				html2 += '<div class="mui-media-body">';
-				html2 += '幸福';
-				html2 += '<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>';
+				html2 += 'happy';
+				html2 += '<p class="mui-ellipsis">Can be with the beloved people to sleep together, is a happy thing; but, how to do snoring?</p>';
 				html2 += '<div class="mui-ellipsis" style="margin-top: 0.5em;">';
 				html2 += '<img src="images/muwu.jpg" style="width: 20px;height: 20px;border-radius: 50%;">';
 				html2 += '</div>';
-				html2 += '<div style="font-size: 12px; color:#555555;margin-left:2em; margin-top: -2em;">姓名</div>';
-				html2 += '<div class="mui-ellipsis mui-pull-right" style="font-size: 12px; color:red;margin-left:em; margin-top: -2em;">未确认</div>';
+				html2 += '<div style="font-size: 12px; color:#555555;margin-left:2em; margin-top: -2em;">Name</div>';
+				html2 += '<div class="mui-ellipsis mui-pull-right" style="font-size: 12px; color:red;margin-left:em; margin-top: -2em;">unconfirmed</div>';
 				html2 += '</div>';
 				html2 += '</a>';
 				html2 += '</li>';
@@ -129,13 +129,13 @@
 				html2 += '<a href="javascript:;">';
 				html2 += '<img class="mui-media-object mui-pull-left" src="images/cbd.jpg">';
 				html2 += '<div class="mui-media-body">';
-				html2 += '木屋';
-				html2 += '<p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>';
+				html2 += 'Chalet';
+				html2 += '<p class="mui-ellipsis">Want to such a small hut, summer ice-eating melon, winter furnace heating.</p>';
 				html2 += '<div class="mui-ellipsis" style="margin-top: 0.5em;">';
 				html2 += '<img src="images/muwu.jpg" style="width: 20px;height: 20px;border-radius: 50%;">';
 				html2 += '</div>';
-				html2 += '<div style="font-size: 12px; color:#555555;margin-left:2em; margin-top: -2em;">姓名</div>';
-				html2 += '<div class="mui-ellipsis mui-pull-right" style="font-size: 12px; color:red;margin-left:em; margin-top: -2em;">未确认</div>';
+				html2 += '<div style="font-size: 12px; color:#555555;margin-left:2em; margin-top: -2em;">name</div>';
+				html2 += '<div class="mui-ellipsis mui-pull-right" style="font-size: 12px; color:red;margin-left:em; margin-top: -2em;">unconfirmed</div>';
 				html2 += '</div>';
 				html2 += '</a>';
 				html2 += '</li>';
@@ -144,12 +144,12 @@
 				html2 += '<img class="mui-media-object mui-pull-left" src="images/cbd.jpg">';
 				html2 += '<div class="mui-media-body">';
 				html2 += 'CBD';
-				html2 += '<p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>';
+				html2 += '<p class="mui-ellipsis">Oven mode of the city, to the evening, as the tipping of the palette in general.</p>';
 				html2 += '<div class="mui-ellipsis" style="margin-top: 0.5em;">';
 				html2 += '<img src="images/muwu.jpg" style="width: 20px;height: 20px;border-radius: 50%;">';
 				html2 += '</div>';
-				html2 += '<div style="font-size: 12px; color:#555555;margin-left:2em; margin-top: -2em;">姓名</div>';
-				html2 += '<div class="mui-ellipsis mui-pull-right" style="font-size: 12px; color:red;margin-left:em; margin-top: -2em;">未确认</div>';
+				html2 += '<div style="font-size: 12px; color:#555555;margin-left:2em; margin-top: -2em;">name</div>';
+				html2 += '<div class="mui-ellipsis mui-pull-right" style="font-size: 12px; color:red;margin-left:em; margin-top: -2em;">unconfirmed</div>';
 				html2 += '</div>';
 				html2 += '</a>';
 				html2 += '</li>';

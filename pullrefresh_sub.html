@@ -12,7 +12,7 @@
 	</head>
 
 	<body>
-		<!--下拉刷新容器-->
+		<!--Pull down the container-->
 		<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
 	<div class="mui-content">
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
@@ -24,14 +24,14 @@
 								<a  id="1" href="#" onclick="detail(this.id)" >
 									<img class="" src="images/shuijiao.jpg">
 									<div class="mui-media-body">
-										能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？
+										Can be with the beloved people to sleep together, is a happy thing; but, how to do snoring?
 									</div>
 								</a>
 								<div class="mui-pull-left" style="margin-top: 1em;">
 									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
 								</div>
 								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
-									河童
+									Kappa
 								</div>
 								<div class="mui-pull-right" style="margin-top: 0.8em;">
 									<span class="mui-badge">
@@ -43,13 +43,13 @@
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
 								<a id="2" href="#" onclick="detail(this.id)">
 									<img class="mui-media-object" src="images/muwu.jpg">
-									<div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
+									<div class="mui-media-body">Want a kind of such a wooden house, quietly drink coffee</div>
 								</a>
 								<div class="mui-pull-left" style="margin-top: 1em;">
 									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
 								</div>
 								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
-									河童
+									Kappa
 								</div>
 								<div class="mui-pull-right" style="margin-top: 0.8em;">
 									<span class="mui-badge">
@@ -67,7 +67,7 @@
 									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
 								</div>
 								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
-									河童
+									Kappa
 								</div>
 								<div class="mui-pull-right" style="margin-top: 0.8em;">
 									<span class="mui-badge">
@@ -79,13 +79,13 @@
 							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
 								<a href="javascript:;" id="5" onclick="detail(this.id)">
 									<img class="mui-media-object" src="images/yuantiao.jpg">
-									<div class="mui-media-body">静静看这世界</div>
+									<div class="mui-media-body">Look at the world quietly</div>
 								</a>
 								<div class="mui-pull-left" style="margin-top: 1em;">
 									<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
 								</div>
 								<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">
-									河童
+									Kappa
 								</div>
 								<div class="mui-pull-right" style="margin-top: 0.8em;">
 									<span class="mui-badge">
@@ -112,7 +112,7 @@
 						callback: pulldownRefresh
 					},
 					up: {
-						contentrefresh: '正在加载...',
+						contentrefresh: 'loading...',
 						callback: pullupRefresh
 					}
 				}
@@ -128,7 +128,7 @@
 		                    autoShow: false
 		                },
 				    extras:{
-				      tagertid:did//自定义扩展参数，可以用来处理页面间传值
+				      tagertid:did//Custom extension parameters that can be used to process page-to-page values
 				    }
 				  });
 			});*/
@@ -141,7 +141,7 @@
 		                    autoShow: false
 		                },
 				    extras:{
-				      tagertid:did//自定义扩展参数，可以用来处理页面间传值
+				      tagertid:did//Custom extension parameters that can be used to process page-to-page values
 				    }
 				  });
 				}
@@ -165,7 +165,7 @@
 			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350701365&di=78ce1a7fb5b37a0ceb22416d63f63977&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160525%2Fa91202052a904ec3951b5ecc81c8dedd_th.jpg'
 			);
 			/**
-			 * 下拉刷新具体业务实现
+			 * Pull down to refresh the specific business implementation
 			 */
 			function pulldownRefresh() {
 				setTimeout(function() {
@@ -177,13 +177,13 @@
 						var htmlStr = new Util.StringBuilder();
 						htmlStr.append('<a href="javascript:;" id="4" onclick="detail(this.id)">');
 						htmlStr.appendFormat('<img class="mui-media-object" src="{0}">', imageArray[Util.getRandom(0, 15)]);
-						htmlStr.append('<div class="mui-media-body">静静看这世界</div>');
+						htmlStr.append('<div class="mui-media-body">Look at the world quietly</div>');
 						htmlStr.append('</a>');
 						htmlStr.append('<div class="mui-pull-left" style="margin-top: 1em;">');
 						htmlStr.append('<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">');
 						htmlStr.append('</div>');
 						htmlStr.append('<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">');
-						htmlStr.append('河童');
+						htmlStr.append('Kappa');
 						htmlStr.append('</div>');
 						htmlStr.append('<div class="mui-pull-right" style="margin-top: 0.8em;">');
 						htmlStr.append('<span class="mui-badge">');
@@ -192,7 +192,7 @@
 						htmlStr.append('<span style="font-size: 11px;">1</span>');
 						htmlStr.append('</div>');
 						li.innerHTML = htmlStr.toString();
-						//下拉刷新，新纪录插到最前面；
+						//Pull down the new record into the front;
 						table.insertBefore(li, table.firstChild);
 					}
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -200,11 +200,11 @@
 			}
 			var count = 0;
 			/**
-			 * 上拉加载具体业务实现
+			 * Pull-ups to load specific business implementations
 			 */
 			function pullupRefresh() {
 				setTimeout(function() {
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //The parameter is true to represent no more data.
 					var table = document.body.querySelector('.mui-table-view');
 					var cells = document.body.querySelectorAll('.mui-table-view-cell');
 					for(var i = cells.length, len = i + 5; i < len; i++) {
@@ -213,13 +213,13 @@
 						var htmlStr = new Util.StringBuilder();
 						htmlStr.append('<a href="javascript:;" id="4" onclick="detail(this.id)">');
 						htmlStr.appendFormat('<img class="mui-media-object" src="{0}">', imageArray[Util.getRandom(0, 15)]);
-						htmlStr.append('<div class="mui-media-body">静静看这世界</div>');
+						htmlStr.append('<div class="mui-media-body">Look at the world quietly</div>');
 						htmlStr.append('</a>');
 						htmlStr.append('<div class="mui-pull-left" style="margin-top: 1em;">');
 						htmlStr.append('<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">');
 						htmlStr.append('</div>');
 						htmlStr.append('<div class="mui-pull-left" style="font-size: 8px; color: #888888;margin-top: 1.5em; margin-left: 0.5em;">');
-						htmlStr.append('河童');
+						htmlStr.append('Kappa');
 						htmlStr.append('</div>');
 						htmlStr.append('<div class="mui-pull-right" style="margin-top: 0.8em;">');
 						htmlStr.append('<span class="mui-badge">');

@@ -38,21 +38,22 @@
 
 	<body>
 		<div class="mui-content">
-			<div class="title">侧滑导航</div>
+			<div class="title">Sliding navigation</div>
 				<div class="content">
-					这是侧滑菜单示例，你可以在这里放置任何内容；关闭侧滑菜单有多种方式：
-					1.在手机屏幕任意位置快速向右滑动(swipe)；
-					2.点击本侧滑菜单页之外的任意位置;
-					3.点击如下红色按钮；
+					This is an example of a slippery menu where you can place any content; there are many ways to close the skid menu:<br/>
+						1. Swipe quickly at any position on the phone screen;<br/>
+						2. Click anywhere outside the skid menu page;<br/>
+						3. Click the red button below;<br/>
 					<span class="android-only">
-						4.Android手机按back键；5.Android手机按menu键
+						4.Android phone press the back button;<br/>
+						5.Android phone Press the menu button
 					</span>。
 					<p style="margin: 10px 15px;">
-						<button id="close-btn" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">关闭侧滑菜单</button>
+						<button id="close-btn" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">Close the skid menu</button>
 					</p>
 					
 				</div>
-				<div class="title" style="margin-bottom: 25px;">侧滑列表示例</div>
+				<div class="title" style="margin-bottom: 25px;">Example of a rollover list</div>
 				<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
 					<li class="mui-table-view-cell">
 						<a class="mui-navigate-right">Item 1</a>
@@ -76,7 +77,7 @@
 		</div>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
-		//关闭back、menu按键监听，这样侧滑主界面会自动获得back和memu的按键事件，仅在主界面处理按键逻辑即可；
+		//Close the back, menu button to monitor, so that the main interface will automatically get back and memu key events, only in the main interface to deal with key logic can be;
 		mui.init({
 			keyEventBind: {
 				backbutton: false,
@@ -92,7 +93,7 @@
 			mui.fire(main,"menu:swiperight");
 		}
 		
-		//左滑显示出来的菜单，只需监听右滑，然后将菜单关闭即可；在该菜单上左滑，不做任何操作；
+		//Left slide shows the menu, just listen to the right slide, and then the menu can be closed; in the menu on the left slide, do not do any operation;
 		window.addEventListener("swiperight",closeMenu);
 		
 		document.getElementById("close-btn").addEventListener('tap',closeMenu);

@@ -7,11 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-		<!--标准mui.css-->
 		<link rel="stylesheet" href="css/mui.min.css">
-		<!--App自定义的css-->
-		<!--<link rel="stylesheet" type="text/css" href="../css/app.css"/>-->
 		<style>
 			h5 {
 				padding-top: 8px;
@@ -28,22 +24,22 @@
 	</head>
 
 	<body>
-		<!--说明图片-->
+		
 		<img class="mui-media-object" src="images/shuijiao.jpg" style="width: 100%; height: 100%;">
-		<!--出品商品相片一览-->
+		<!--List of merchandise photos-->
 		<div class="mui-content" style="background-color:#fff;margin-bottom: 3.5em;">
-			<h5 style="background-color:#efeff4">慢生活</h5>
+			
 			<ul class="mui-table-view mui-grid-view">
 				<li class="mui-table-view-cell mui-media mui-col-xs-6">
 					<a href="detail.html">
 						<img class="mui-media-object" src="images/shuijiao.jpg">
-						<div class="mui-media-body">幸福就是可以一起睡觉</div>
+						<div class="mui-media-body">Happiness is to sleep together</div>
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-6">
 					<a href="">
 						<a><span class="mui-icon mui-icon-camera" id="head"></span></a>
-						<div class="mui-media-body">为你的商品照相</div>
+						<div class="mui-media-body">Photograph for your product</div>
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-6">
@@ -51,26 +47,26 @@
 				</li>
 			</ul>
 			<button type="button" class="mui-btn mui-btn-danger">
-					次へ進む
+					Proceed to the next
 			</button>
 		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script>
 		mui.init({
-			swipeBack: true //启用右滑关闭功能
+			swipeBack: true //Enable the right slide off function
 		});
-		//更换头像
+		//Replace the picture
 		mui(".mui-table-view-cell").on("tap", "#head", function(e) {
 			if(mui.os.plus) {
 				var a = [{
-					title: "拍照"
+					title: "Take pictures"
 				}, {
-					title: "从手机相册选择"
+					title: "Choose from the phone album"
 				}];
 				plus.nativeUI.actionSheet({
-					title: "为商品拍照",
-					cancel: "取消",
+					title: "Take pictures for the goods",
+					cancel: "cancel",
 					buttons: a
 				}, function(b) {
 					switch(b.index) {
@@ -98,11 +94,11 @@
 					console.log(s);
 					//document.getElementById("head-img").src = s;
 					document.getElementById("head-img2").src = s;
-					//变更大图预览的src
-					//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+					//Change the preview of the src
+					//At present there is only one picture, for the time being so, the follow-up needs to be achieved through the standard components
 					document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
 				}, function(e) {
-					console.log("读取拍照文件错误：" + e.message);
+					console.log("Read photo file error：" + e.message);
 				});
 			}, function(s) {
 				console.log("error" + s);
@@ -116,15 +112,15 @@
 				plus.io.resolveLocalFileSystemURL(a, function(entry) {
 					plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
 						root.getFile("head.jpg", {}, function(file) {
-							//文件已存在
+							//The file already exists
 							file.remove(function() {
 								console.log("file remove success");
 								entry.copyTo(root, 'head.jpg', function(e) {
 										var e = e.fullPath + "?version=" + new Date().getTime();
 										//document.getElementById("head-img").src = e;
 										document.getElementById("head-img2").src = e;
-										//变更大图预览的src
-										//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+										//Change the preview of the src
+										//At present there is only one picture, for the time being so, the follow-up needs to be achieved through the standard components
 										document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
 									},
 									function(e) {
@@ -134,13 +130,13 @@
 								console.log("delete image fail:" + e.message);
 							});
 						}, function() {
-							//文件不存在
+							//file does not exist
 							entry.copyTo(root, 'head.jpg', function(e) {
 									var path = e.fullPath + "?version=" + new Date().getTime();
 									//document.getElementById("head-img").src = path;
 									document.getElementById("head-img2").src = path;
-									//变更大图预览的src
-									//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+									//Change the preview of the src
+									// present there is only one picture, so for the time being, the follow-up needs to be achieved through standard components
 									document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
 								},
 								function(e) {
@@ -151,7 +147,7 @@
 						console.log("get _www folder fail");
 					})
 				}, function(e) {
-					console.log("读取拍照文件错误：" + e.message);
+					console.log("Read photo file error：" + e.message);
 				});
 			}, function(a) {}, {
 				filter: "image"
@@ -166,11 +162,11 @@
 					document.getElementById("head-img2").src = s;
 				}, function(e) {
 					//document.getElementById("head-img").src = '../images/logo.png';
-					document.getElementById("head-img2").src = '../images/logo.png';
+					document.getElementById("head-img2").src = './images/logo.png';
 				})
 			} else {
 				//document.getElementById("head-img").src = '../images/logo.png';
-				document.getElementById("head-img2").src = '../images/logo.png';
+				document.getElementById("head-img2").src = './images/logo.png';
 			}
 
 		}
@@ -197,7 +193,7 @@
 				slider_group.setAttribute("id", "__mui-imageview__group");
 				slider_group.classList.add("mui-slider-group");
 				imgs.forEach(function(value, index, array) {
-					//给图片添加点击事件，触发预览显示；
+					//Add a click event to the picture to trigger the preview display;
 					value.addEventListener('tap', function() {
 						slider.style.display = "block";
 						_slider.refresh();

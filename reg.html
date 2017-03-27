@@ -39,32 +39,32 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">注册</h1>
+			<h1 class="mui-title">registered</h1>
 		</header>
 		<div class="mui-content">
 			<form class="mui-input-group">
 				<div class="mui-input-row">
-					<label>账号</label>
-					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
+					<label>account</label>
+					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="   Please input Username">
 				</div>
 				<div class="mui-input-row">
-					<label>密码</label>
-					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+					<label>password</label>
+					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="     Please enter your password">
 				</div>
 				<div class="mui-input-row">
-					<label>确认</label>
-					<input id='password_confirm' type="password" class="mui-input-clear mui-input" placeholder="请确认密码">
+					<label>confirm</label>
+					<input id='password_confirm' type="password" class="mui-input-clear mui-input" placeholder="  Please confirm your password">
 				</div>
 				<div class="mui-input-row">
-					<label>邮箱</label>
-					<input id='email' type="email" class="mui-input-clear mui-input" placeholder="请输入邮箱">
+					<label>mailbox</label>
+					<input id='email' type="email" class="mui-input-clear mui-input" placeholder="  please input your email">
 				</div>
 			</form>
 			<div class="mui-content-padded">
-				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">注册</button>
+				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">registered</button>
 			</div>
 			<div class="mui-content-padded">
-				<p>注册真实可用，注册成功后的用户可用于登录，但是示例程序并未和服务端交互，用户相关数据仅存储于本地。</p>
+				<p>Registration is real and can be used for login after successful registration, but the sample program does not interact with the server. User-related data is stored only locally.</p>
 			</div>
 		</div>
 		<script src="js/mui.min.js"></script>
@@ -87,7 +87,7 @@
 						};
 						var passwordConfirm = passwordConfirmBox.value;
 						if (passwordConfirm != regInfo.password) {
-							plus.nativeUI.toast('密码两次输入不一致');
+							plus.nativeUI.toast('Password input is inconsistent twice');
 							return;
 						}
 						app.reg(regInfo, function(err) {
@@ -95,16 +95,16 @@
 								plus.nativeUI.toast(err);
 								return;
 							}
-							plus.nativeUI.toast('注册成功');
+							plus.nativeUI.toast('registration success');
 							/*
-							 * 注意：
-							 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
-							 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
+							 * note:
+								* 1, because the application application page is the login page, so the registration is successful, you can directly display the login page;
+								* 2, if the real case, the startup page is not a login page, you need to modify, use mui.openWindow open the real login page
 							 */
 							plus.webview.getLaunchWebview().show("pop-in",200,function () {
 								plus.webview.currentWebview().close("none");
 							});
-							//若启动页不是登录页，则需通过如下方式打开登录页
+							//If the startup page is not a login page, you need to open the login page as follows
 //							$.openWindow({
 //								url: 'login.html',
 //								id: 'login',
