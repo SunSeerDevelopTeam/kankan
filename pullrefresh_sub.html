@@ -109,10 +109,16 @@
 				pullRefresh: {
 					container: '#pullrefresh',
 					down: {
-						callback: pulldownRefresh
+						callback: pulldownRefresh,
+						contentdown : "Drop down can be refreshed",
+					    contentover : "Release immediately refresh",
+					    contentrefresh : "loading...",
 					},
 					up: {
 						contentrefresh: 'loading...',
+						contentdown:'Pull up show more',
+						contentover : "Release immediately refresh",
+      					contentnomore:'No more data',
 						callback: pullupRefresh
 					}
 				}
