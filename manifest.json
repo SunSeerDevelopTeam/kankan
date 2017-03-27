@@ -82,7 +82,11 @@
 		"Webview": {},
 		"NativeUI": {},
 		"Navigator": {},
-		"NativeObj": {},"Share":{},"OAuth":{},"Device":{}
+		"NativeObj": {},
+		"Share": {},
+		"OAuth": {},
+		"Device": {},
+		"Camera": {}
 	},
 	"plus": {
 		"splashscreen": {
@@ -105,7 +109,18 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>"]
+				"permissions": [
+					"<uses-feature android:name=\"android.hardware.camera\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"/>"
+				]
 			},
 			"orientation": [
 				"portrait-primary",
@@ -194,7 +209,8 @@
 					"css/mui.min.css",
 					"fonts/mui.ttf",
 					"css/feedback-page.css",
-					"images/iconfont-tianjia.png"
+					"images/iconfont-tianjia.png",
+					"css/feedback.css"
 				],
 				"refer": [
 					"login.html"
@@ -207,10 +223,19 @@
 					"css/mui.min.css",
 					"fonts/mui.ttf",
 					"js/mui.min.js",
-					"js/app.js"
+					"js/app.js",
+					"subpage_home.html",
+					"images/muwu.jpg",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [
-					"setting.html"
+					"setting.html",
+					"offcanvas-drag-left-plus-menu.html",
+					"subpage_product_login.html",
+					"subpage_request.html",
+					"subpage_chat.html",
+					"user.html"
 				],
 				"priority": 1
 			},
@@ -324,6 +349,89 @@
 					"js/stringbuilder.js",
 					"js/Common.js"
 				],
+				"refer": [
+					"detail.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-subpage-setting.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"images/MacPro.jpg",
+					"images/yuantiao.jpg",
+					"images/muwu.jpg",
+					"images/xinhuan.png",
+					"images/whitejiantou.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-subpage-chat.html": {
+				"resources": [
+					"images/logo.png",
+					"images/shuijiao.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"subpage_home.html": {
+				"resources": [
+					"pullrefresh_sub.html",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/icons-extra.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"subpage_product_login.html": {
+				"resources": [
+					"images/logo.png",
+					"images/shuijiao.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"subpage_request.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"images/MacPro.jpg",
+					"images/yuantiao.jpg",
+					"images/muwu.jpg",
+					"images/xinhuan.png",
+					"images/whitejiantou.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"user.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"images/muwu.jpg",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"setting.html"
+				],
+				"priority": 0
+			},
+			"detail.html": {
+				"resources": [
+					"images/goodbefor.png",
+					"images/goodafter.png",
+					"images/location.png",
+					"images/cbd.jpg",
+					"images/logo.png",
+					"images/muwu.jpg",
+					"images/yuantiao.jpg",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/shuijiao.jpg",
+					"css/icons-extra.css"
+				],
 				"refer": [],
 				"priority": 0
 			}
@@ -337,7 +445,7 @@
 			]
 		}
 	},
-	"unpackage":[
-	  "README.md"
+	"unpackage": [
+		"README.md"
 	]
 }

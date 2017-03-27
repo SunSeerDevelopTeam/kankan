@@ -8,7 +8,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
-		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<link rel="stylesheet" href="css/icons-extra.css">
 	</head>
 
 	<body>
@@ -20,8 +20,8 @@
 				<div class="mui-slider-group">
 					<div class="mui-slider-item mui-slider-item-duplicate">
 						<ul class="mui-table-view mui-grid-view">
-							<li class="mui-table-view-cell mui-media mui-col-xs-4">
-								<a>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail" >
+								<a  id="1" href="#" onclick="detail(this.id)" >
 									<img class="" src="images/shuijiao.jpg">
 									<div class="mui-media-body">
 										能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？
@@ -40,8 +40,8 @@
 									<span style="font-size: 11px;">1</span>
 								</div>
 							</li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-4">
-								<a>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a id="2" href="#" onclick="detail(this.id)">
 									<img class="mui-media-object" src="images/muwu.jpg">
 									<div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
 								</a>
@@ -58,8 +58,8 @@
 									<span style="font-size: 11px;">1</span>
 								</div>
 							</li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-4">
-								<a>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a id="3" href="#" onclick="detail(this.id)">
 									<img class="mui-media-object" src="images/cbd.jpg">
 									<div class="mui-media-body">Color of SIP CBD</div>
 								</a>
@@ -76,8 +76,8 @@
 									<span style="font-size: 11px;">1</span>
 								</div>
 							</li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-4">
-								<a href="javascript:;" id="4" onclick="detail(this.id)">
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
 									<img class="mui-media-object" src="images/yuantiao.jpg">
 									<div class="mui-media-body">静静看这世界</div>
 								</a>
@@ -117,6 +117,34 @@
 					}
 				}
 			});
+			//detail message page
+			/*mui('.detail').on('tap', 'a', function(e) {
+				var did=this.getAttribute("id");
+				//alert(did);
+				mui.openWindow({
+				    url: 'detail.html',
+				    id:'detail',
+				    show: {
+		                    autoShow: false
+		                },
+				    extras:{
+				      tagertid:did//自定义扩展参数，可以用来处理页面间传值
+				    }
+				  });
+			});*/
+			function detail(did){
+					//alert(did);
+					mui.openWindow({
+				    url: 'detail.html',
+				    id:'detail',
+				    show: {
+		                    autoShow: false
+		                },
+				    extras:{
+				      tagertid:did//自定义扩展参数，可以用来处理页面间传值
+				    }
+				  });
+				}
 			
 			var imageArray = new Array(
 			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490350520244&di=afd33b5fa7e5844a5c6407c6a0798562&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F1f178a82b9014a90e7eb9d17ac773912b21bee47.jpg',

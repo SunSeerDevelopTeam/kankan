@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">商品名称</h1>
+			<a class="mui-icon mui-icon-more mui-icon-right-nav mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider" >
+			<div class="mui-slider-group mui-slider-loop">
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="images/yuantiao.jpg">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/shuijiao.jpg">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/muwu.jpg">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="./images/cbd.jpg">
+					</a>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="./images/yuantiao.jpg">
+					</a>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="./images/shuijiao.jpg">
+					</a>
+				</div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+		<ul class="mui-table-view">
+		        <li class="mui-table-view-cell">
+		            <p>商品名称 商品名称商品名称商品名称商品名称商品名称 </p>
+		            <div style="float: right; margin-top: -1em;">
+		            	<div  id="zanhou" style="display:none;margin-right: 1em;" onclick="dianzan(this.id)">
+		            		<img src="./images/goodafter.png" width="21px" height="21px" >
+		            	</div>
+						<div  id="zanqian" onclick="dianzan(this.id)" style="margin-right: 1em;">
+							<img src="./images/goodbefor.png" width="21px" height="21px" >
+						</div>
+		            </div>
+		            <span style="color: #000000; float: right;margin-right: -2em;margin-top: -0.8em;" id="zanshu">2</span>
+		            <div style="margin-top: 1em;line-height: 1.5em;">内容内容内容内容内容内容内容内容内容</div>
+		        </li>
+		   </ul>
+		</div>
+		<div style="padding-left: 1em; margin-top: 1em;">
+		<!--分类按钮-->
+		<button type="button" class="mui-btn mui-btn-outlined mui-btn-grey" style="color: grey; width:6em;font-size: 0.7em;">
+			分类
+		</button>
+		<button type="button" class="mui-btn mui-btn-outlined mui-btn-grey" style="color: grey; width:6em;font-size: 0.7em;">
+			关键字
+		</button>
+		<button type="button" class="mui-btn mui-btn-outlined mui-btn-grey" style="color: grey; width:6em;font-size: 0.7em;">
+			关键字2
+		</button>
+		</div>
+		<!--comment list-->
+		<h5>评论列表</h5>
+		<ul class="mui-table-view">
+		    <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-left" src="./images/logo.png" style="border-radius: 50%;">
+		            <div class="mui-ellipsis">
+		            	<span style="font-size: 12px;">小紫</span>
+		            	<div style="font-size: 12px;margin-top: -1.7em;margin-left: 5em;">2017-03-24</div>
+		            </div>
+		            <div class="mui-media-body">
+		                <p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+		            </div>
+		        </a>
+		    </li>
+		    <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-left" src="./images/shuijiao.jpg" style="border-radius: 50%;">
+		            <div class="mui-ellipsis">
+		            	<span style="font-size: 12px;">小花</span>
+		            	<div style="font-size: 12px;margin-top: -1.7em;margin-left: 5em;">2017-03-24</div>
+		            </div>
+		            <div class="mui-media-body">
+		                <p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+		            </div>
+		        </a>
+		    </li>
+		    <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-left" src="./images/muwu.jpg" style="border-radius: 50%;">
+		            <div class="mui-ellipsis">
+		            	<span style="font-size: 12px;">小绿</span>
+		            	<div style="font-size: 12px;margin-top: -1.7em;margin-left: 5em;">2017-03-24</div>
+		            </div>
+		            <div class="mui-media-body">
+		                <p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+		            </div>
+		        </a>
+		    </li>
+		</ul>
+		<!--评论-->
+		<h5>评论</h5>
+		<div class="mui-input-row" style="margin: 1em 1em;">
+			<textarea placeholder="comment"></textarea>
+			<button type="button" class="mui-btn mui-btn-red mui-btn-block" style=" font-size: 14px; width: 27em;">提交</button>
+		</div>
+		<div style="border: 0.1em solid #CCCCCC;margin: 1em 1em ; "></div>
+		<!--分享-->
+			<h5 style="background-color:#efeff4;">分享</h5>
+				<ul class="mui-table-view">
+				        <li class="mui-table-view-cell">
+				            <a class="">
+				                <span class="mui-icon mui-icon-weixin" style="font-size: 2em;"></span>
+								<span class="mui-icon mui-icon-pengyouquan" style="font-size: 2em;"></span>
+								<span class="mui-icon mui-icon-chat" style="font-size: 2em;"></span>
+								<span class="mui-icon mui-icon-qq" style="font-size: 2em;"></span>
+				            </a>
+				        </li>
+				  </ul>
+		<!--出品人信息-->
+		<div style="">
+			<h5 style="background-color:#efeff4">出品人信息</h5>
+			<ul class="mui-table-view">
+			        <li class="mui-table-view-cell">
+			            <a class="">
+			                <div><img src="./images/logo.png" width="40" height="40"></div>
+			                <div style="margin-top: -2em;float: left;margin-left: 3em;color: grey;">河童</div>
+			                <div style="float: right;margin-top: -2em;">
+			                	<img src="./images/location.png" width="25" height="25" style="margin-left: -1.5em;"><p style="color: #333333;font-size: 12px;margin-top: -2em;">大阪府</p></div>
+			            </a>
+			        </li>
+			        <li class="mui-table-view-cell">
+			            <a class="mui-navigate-right">
+			                 <h5>打分</h5>
+			                 <div style="font-size: 12px;">
+			                 <sapn class="mui-icon mui-icon-star"></sapn>
+			                 <sapn class="mui-icon mui-icon-star"></sapn>
+			                 <sapn class="mui-icon mui-icon-starhalf"></sapn>
+			                 <span>0(0.00)</span>
+			                 </div>
+			            </a>
+			        </li>
+			   </ul>
+		</div>
+		<!--出品人关心的商品-->
+		<h5 style="background-color:#efeff4">出品者注目的商品一览</h5>
+		<ul class="mui-table-view mui-grid-view">
+		        <li class="mui-table-view-cell mui-media mui-col-xs-3">
+		            <a href="#">
+		                <img class="mui-media-object" src="./images/shuijiao.jpg">
+		               </a></li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-3">
+		            <a href="#">
+		                <img class="mui-media-object" src="./images/muwu.jpg">
+		                </a></li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-3">
+		            <a href="#"><img class="mui-media-object" src="./images/cbd.jpg">
+		                </a></li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-3">
+		            <a href="#">
+		                <img class="mui-media-object" src="./images/yuantiao.jpg">
+		                </a></li>
+		    </ul> 
+		<!--推荐商品-->
+		<h5 style="background-color:#efeff4">推荐商品</h5>
+		<div class="mui-slider">
+		        <div class="mui-slider-group mui-slider-loop">
+		        	<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一个图文表格) -->
+		            <div class="mui-slider-item mui-slider-item-duplicate">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#"><img class="mui-media-object" src="./images/cbd.jpg">
+		                            <div class="mui-media-body">Color of SIP CBD</div>
+		                            <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#"><img class="mui-media-object" src="./images/yuantiao.jpg">
+		                            <div class="mui-media-body">静静看这世界</div>
+		                            <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                </ul>
+		            </div>
+		            <div class="mui-slider-item">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#"><img class="mui-media-object" src="./images/shuijiao.jpg">
+		                            <div class="mui-media-body">幸福就是可以一起睡觉</div>
+		                             <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#"><img class="mui-media-object" src="./images/muwu.jpg">
+		                            <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
+		                            <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                </ul>
+		            </div>
+		            <div class="mui-slider-item">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#"><img class="mui-media-object" src="./images/cbd.jpg">
+		                            <div class="mui-media-body">Color of SIP CBD</div>
+		                            <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#"><img class="mui-media-object" src="./images/yuantiao.jpg">
+		                            <div class="mui-media-body">静静看这世界</div>
+		                            <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                </ul>
+		            </div>
+		            <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一个图文表格) -->
+		            <div class="mui-slider-item mui-slider-item-duplicate">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#">
+		                    		<img class="mui-media-object" src="./images/shuijiao.jpg">
+		                            <div class="mui-media-body">幸福就是可以一起睡觉</div>
+		                            <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                    	<a href="#"><img class="mui-media-object" src="./images/muwu.jpg">
+		                            <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
+		                            <div class="mui-media-body" style="color: #777777;font-size: 12px;">幸福</div>
+		                    	</a>
+		                    </li>
+		                </ul>
+		            </div>
+		        </div>
+		        <div class="mui-slider-indicator" style="position: static;background-color: #fff;">
+		            <span class="mui-action mui-action-previous mui-icon mui-icon-back"></span>
+		            <div class="mui-number">
+		                <span>1</span> / 2
+		            </div>
+		            <span class="mui-action mui-action-next mui-icon mui-icon-forward"></span>
+		        </div>
+		    </div>
+		    
+		<!--商品交换，白送，点数交换信息按钮-->
+		<div style="margin: 1em 0;">
+		<button type="button" class="mui-btn mui-btn-danger">
+			点数交换
+		</button>
+		<button type="button" class="mui-btn mui-btn-danger">
+			物物交换
+		</button>
+		<button type="button" class="mui-btn mui-btn-danger">
+			白送
+		</button>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		 mui.init();
+		window.onload=function(){
+			 mui.plusReady(function(){
+                var self = plus.webview.currentWebview();
+                var tagertid = self.tagertid;
+                //alert(tagertid);
+                //关闭等待框
+                plus.nativeUI.closeWaiting();
+                //显示当前页面
+                mui.currentWebview.show();
+            });
+		};
+		function dianzan(aid){
+			if(aid=="zanqian"){
+				document.getElementById(aid).style.display="none";
+				document.getElementById("zanhou").style.display="block";
+				var goodbefor=document.getElementById("zanshu").innerHTML*1;
+				var gooafter=goodbefor+1*1;
+				document.getElementById("zanshu").innerHTML=gooafter;
+				//mui("#zanshu").Style("color: #000000;margin-right: 0.1em;");
+				//alert(gooafter);
+			}else{
+				//alert(aid);
+				document.getElementById(aid).style.display="none";
+				document.getElementById("zanqian").style.display="block";
+				var goodbefor=document.getElementById("zanshu").innerHTML*1;
+				var gooafter=goodbefor-1*1;
+				document.getElementById("zanshu").innerHTML=gooafter;
+				//alert(gooafter);
+			}
+		}
+		//
+		var slider = mui("#slider");
+			//document.getElementById("switch").addEventListener('toggle', function(e) {
+				//if (e.detail.isActive) {
+					slider.slider({
+						interval: 1000
+					});
+				/*} else {
+					slider.slider({
+						interval: 0
+					});
+				}
+			});*/
+		</script>
+	</body>
+
+</html>
