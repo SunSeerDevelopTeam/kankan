@@ -145,12 +145,17 @@
 						//The reason for using the timer：
 						var id = setInterval(function () {
 							if(main_loaded_flag){
+								plus.storage.setItem("loginFlag", "isLogin");
 								clearInterval(id);
 								$.fire(mainPage, 'show', null);
 								mainPage.show("pop-in");
 							}
 						},20);
 					};
+					var isLogin = plus.storage.getItem("loginFlag");
+					if (isLogin) {
+						toMain();
+					}
 					//Check "Login Status / Lock Screen Status" to start
 					if (settings.autoLogin && state.token && settings.gestures) {
 						$.openWindow({
