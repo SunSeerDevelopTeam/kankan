@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">zhang san</h1>
+			<a class="mui-icon mui-icon-gear mui-pull-right" id="setting"></a>
+		</header>
+		<div class="mui-content" style="margin-bottom: 3em;">
+			<ul class="mui-table-view" style="margin-top: -3em;;">
+			        <li class="mui-table-view-cell" style="height: 13em;text-align: center;">
+			            <div style="margin-top: 4em;"><img src="images/muwu.jpg" width="100" height="100" style=" border-radius:50%"></div>
+			            <div style="margin-top: 0.2em;">
+			            <button type="button" class="mui-btn mui-btn-grey mui-btn-block" style="width: 150px;height: 30px;font-size: 14px;padding-top: 7px;margin-left: 7em;">Edit</button>
+			            </div>
+			        </li>
+			    </ul>
+			    
+				<div class="mui-slider-group">
+					<ul class="mui-table-view mui-grid-view">
+					        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+					            <a >
+					               <font color="#AAAAAA" size="2"> Metropolis is not set</font>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+					            <a class="mui-navigate-right">
+					            	<font color="#AAAAAA" size="2">
+					            	SNS
+					               <span class="mui-icon mui-icon-weibo"></span>
+					               <span class="mui-icon mui-icon-pengyouquan" style="font-size: 16px;"></span>
+					              </font>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+					            <a class="mui-navigate-right">
+					                <font color="#AAAAAA" >
+					                	<span class="mui-icon mui-icon-star" style="font-size: 16px;"></span>
+					                	<span class="mui-icon mui-icon-star" style="font-size: 16px;"></span>
+					                	<span class="mui-icon mui-icon-starhalf" style="font-size: 16px;">
+					                	<span style="font-size: 14px;">0.0</span>
+					                </font>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+					            <a class="mui-navigate-right">
+					                <font color="#AAAAAA" size="2">
+					                	Take history
+					                </font>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+					            <a class="">
+					                <font color="#AAAAAA" size="2">
+					                	Today's number of failures
+					                	<span style="float: right;"><font color="red"><b>0</b></font>pieces</span>
+					                </font>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+					            <a >
+					                <font color="#AAAAAA" size="2">
+					                	The number of holdings
+					                	<span style="float: right;"><font color="red"><b>4</b></font> pieces</span>
+					                </font>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell mui-media mui-col-xs-12" style="height: 3em;">
+					            <div>
+					            <button type="button" class="mui-btn mui-btn-red" style="width: 8em;">Produced</button>
+					             <button type="button" class="mui-btn mui-btn-red" style="width: 8em;">Button</button>
+					            </div>
+					        </li>
+					    </ul>
+					 <div style="margin-top: 0.2em; padding-left: 0.2em; padding-right: 0.2em;">
+					 	<img src="images/cbd.jpg" width="132" height="100">
+					 	<img src="images/cbd.jpg" width="132" height="100">
+					 	<img src="images/cbd.jpg" width="132" height="100">
+					 	<img src="images/cbd.jpg" width="132" height="100">
+					 </div>
+				</div>		
+		</div>
+		<!--Bottom navigation bar-->
+		<!--<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" href="#tabbar" id="home">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-chat" id="gdslogin">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">商品登陆</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-contact" id="chats">
+				<span class="mui-icon mui-icon-chatbubble"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">聊天</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-map" id="gdszhuangtai">
+				<span class="mui-icon mui-icon-eye"></span>
+				<span class="mui-tab-label">商品状态</span>
+			</a>
+		</nav>-->
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true //Enable the right slide off function
+			});
+			//Home
+//		document.getElementById('home').addEventListener('tap',function(){
+//			//Open about the page
+//		  mui.openWindow({
+//		    url: 'index.html',
+//		    id:'index',
+//		  });
+//		});
+//		//Merchandise landing
+//		document.getElementById('gdslogin').addEventListener('tap',function(){
+//			//Open about the page
+//		  mui.openWindow({
+//		    url: 'exhibit.html',
+//		    id:'exhibit',
+//		  });
+//		});
+//		//to chat with
+//		document.getElementById('chats').addEventListener('tap',function(){
+//			//Open about the page
+//		  mui.openWindow({
+//		    url: 'chatView.html',
+//		    id:'chatView',
+//		  });
+//		});
+//		//Commodity status
+//		document.getElementById('gdszhuangtai').addEventListener('tap',function(){
+//			//Open about the page
+//		  mui.openWindow({
+//		    url: 'request.html',
+//		    id:'request',
+//		  });
+//		});
+		//Set the page
+		document.getElementById('setting').addEventListener('tap',function(){
+			//Open about the page
+		  mui.openWindow({
+		    url: 'setting.html',
+		    id:'setting',
+		  });
+		});
+		</script>
+	</body>
+
+</html>
