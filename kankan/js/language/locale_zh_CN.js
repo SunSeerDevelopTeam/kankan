@@ -9,13 +9,38 @@ var JSLocale = {
 	"facebook_login": "Facebook授权登录",
 	"twitter_login": "Twitter授权登录",
 	"email_login": "邮箱登录",
-	"protocol agreement": "接受使用条款"
+	"protocol_agreement": "接受使用条款",
 	/*login page message end*/
+	
+	/*user login page message begin*/
+	"user-login": "用户登录",
+	"email":"邮箱",
+	"username":"用户名",
+	"password":"密码",
+	"password-confirm":"确认密码",
+	"address":"地址",
+	"address-details":"未设定",
+	"introduction-code":"介绍码",
+	"verification-code":"验证码",
+	"register":"注册",
+	"register-tips":"注册真实可用，注册成功后的用户可用于登录。",
+	"please-input-email":"请输入邮箱",
+	"please-input-username":"请输入用户名",
+	"please-input-password":"请输入密码",
+	"please-confirm-password":"请再次输入密码",
+	"please-input-introduction-code":"请输入介绍码",
+	"please-input-verification-code":"请输入验证码"
+	/*user login page message end*/
 }
 
 $(function(){
-	$(".lang").each(function(e){
-		var msg_key = $(this).attr("data-locale");
+	$('.lang').not('input').each(function(e){
+		var msg_key = $(this).attr('data-locale');
 		$(this).text(JSLocale[msg_key]);
+	});
+	
+	$('input.lang').each(function(e){
+		var msg_key = $(this).attr('data-locale');
+		$(this).attr('placeholder',JSLocale[msg_key]);
 	});
 });
