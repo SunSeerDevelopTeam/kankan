@@ -54,6 +54,17 @@
 				display: inline-block;
 				margin-right: 10px;
 			}
+			
+			#email {
+				width: 40%;
+			}
+			
+			#send-verification-code {
+				width: 100px;
+				margin-right: 10px;
+				margin-top: 2px;
+				text-align: center;
+			}
 		</style>
 	</head>
 
@@ -72,24 +83,26 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="email"></label>
-						<input id='account' type="text" class="mui-input-clear mui-input lang" data-locale="please-input-email">
+						<button id="send-verification-code" type="button" class="mui-btn mui-btn-primary lang" data-locale="send-verification-code"></button>
+						<input id='email' type="text" class="mui-input lang" data-locale="please-input-email">
+						
 					</div>
 					<div class="mui-input-row">
 						<label class="lang" data-locale="username"></label>
-						<input id='password' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-username">
+						<input id='username' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-username">
 					</div>
 					<div class="mui-input-row">
 						<label class="lang" data-locale="password"></label>
-						<input id='password_confirm' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
+						<input id='password' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
 					</div>
 					<div class="mui-input-row">
 						<label class="lang" data-locale="password-confirm"></label>
-						<input id='email' type="email" class="mui-input-clear mui-input lang" data-locale="please-confirm-password">
+						<input id='password-confirm' type="email" class="mui-input-clear mui-input lang" data-locale="please-confirm-password">
 					</div>
 					<div class="mui-input-row">
 						<label class="lang" data-locale="address"></label>
 						<label class="lang" data-locale="address-details"></label>
-						<input id='email' type="email" class="mui-input-clear mui-input">
+						<input id='address' type="email" class="mui-input-clear mui-input">
 						<a class="mui-navigate-right"></a>
 					</div>
 				</div>
@@ -97,11 +110,11 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="introduction-code"></label>
-						<input id='email' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
+						<input id='introduction-code' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
 					</div>
 					<div class="mui-input-row">
 						<label class="lang" data-locale="verification-code"></label>
-						<input id='email' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+						<input id='verification-code' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
 					</div>
 				</div>
 			</form>

@@ -29,7 +29,8 @@ var JSLocale = {
 	"please-input-password":"请输入密码",
 	"please-confirm-password":"请再次输入密码",
 	"please-input-introduction-code":"请输入介绍码",
-	"please-input-verification-code":"请输入验证码"
+	"please-input-verification-code":"请输入验证码",
+	"send-verification-code":"发送验证码"
 	/*user login page message end*/
 }
 
