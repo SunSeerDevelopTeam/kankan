@@ -9,7 +9,7 @@ var JSLocale = {
 	"facebook_login": "Facebookで登録する",
 	"twitter_login": "Twitterで登録する",
 	"email_login": "メールアドレスで登録する",
-	"protocol agreement": "利用規約に同意する",
+	"forget_password": "",
 	/*login page message end*/
 	
 	/*user login page message begin*/

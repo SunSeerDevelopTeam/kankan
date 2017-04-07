@@ -9,7 +9,7 @@ var JSLocale = {
 	"facebook_login": "Facebook授权登录",
 	"twitter_login": "Twitter授权登录",
 	"email_login": "邮箱登录",
-	"protocol_agreement": "接受使用条款",
+	"forget_password": "忘记密码了",
 	/*login page message end*/
 	
 	/*user login page message begin*/
