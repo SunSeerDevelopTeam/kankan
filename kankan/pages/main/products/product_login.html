@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link rel="stylesheet" href="../../../css/kankan_home.css">
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<style>
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">商品登录</h1>
+		</header>
+		<div class="mui-content kankan_jyimgbox">
+			 <h5 class="ka_proloh5" style="margin-bottom: -3em;">商品拍照</h5>
+			<div class="ka_prologbox0 z_photo">
+				<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);">
+					<input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+				</div>
+				<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
+            	 
+			</div>
+			<!--遮罩层-->
+	        <div class="z_mask">
+	            <!--弹出框-->
+	            <div class="z_alert">
+	                <p>确定要删除这张图片吗？</p>
+	                <p>
+	                    <span class="z_cancel">取消</span>
+	                    <span class="z_sure">确定</span>
+	                </p>
+	            </div>
+	        </div>
+			     <br />
+			     <div class="ka_prologbox">
+				    <h5 class="ka_proloh5">商品名和说明</h5>
+				    <ul class="mui-table-view">
+			            <li class="mui-table-view-cell">
+		                    <input type="text" placeholder="商品名（40字以内）" id="productname" maxlength="40">
+			            </li>
+			            <li class="mui-table-view-cell">
+			                <textarea placeholder="商品说明（1000字以内）" class="ka_noborder" maxlength="10"></textarea>
+			            </li>
+			        </ul>
+			     </div>
+			     <br />
+			     <div class="ka_prologbox">
+				    <h5 class="ka_proloh5">商品详情</h5>
+				    <ul class="mui-table-view">
+			            <li class="mui-table-view-cell">
+			                <a class="mui-navigate-right"  href="productsort.html" id="prosort">
+			                    	<span class="ka_proinfo">商品种类</span>
+			                    	<div class="mui-pull-right ka_bitian" >必填</div>
+			                </a>
+			            </li>
+			            <li class="mui-table-view-cell">
+			                <a class="mui-navigate-right" href="productstuat.html" id="prostuat">
+			                     	<span class="ka_proinfo">商品状态</span>
+			                     	<div class="mui-pull-right ka_bitian">必填</div>
+			                </a>
+			            </li>
+			        </ul>
+			    </div><br />
+			    <div class="ka_prologbox">
+			    	 <h5 class="ka_proloh5">交换手段</h5>
+			    	 <ul class="mui-table-view">
+			    	         <li class="mui-table-view-cell">
+			    	             <div style="text-align: center;">
+			    	            <div class="mui-pull-left ka_exchangered">交 换</div>
+			    	             <div class="mui-pull-left ka_exchangegrey" >白 送</div>
+			    	              <div class="mui-pull-left ka_exchangegrey">交 易</div>
+			    	            </div>
+			    	         </li>
+			    	     </ul>
+			    </div>
+		</div><br/>
+		<div class="ka_description">
+		说明禁止就开机就ijijjkj啊实打实打算看大家是打算京东卡升级带宽啊京东卡死机了打开啊就是打卡时间的啊世界的坷拉三季稻就卡死了的
+			就是卡号登机口是放假咯卡拉回复
+		</div>
+		<div class="ka_userbox">
+			<button type="button" class="mui-btn mui-btn-red ka_prologsure" onclick="return confirm('确认出品？')">确&nbsp;&nbsp;认</button>
+		</div>
+		<br/>
+		        <div class="showimg">
+		
+        </div>
+	</body>
+	<script src="../../../js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack: false //Enable the right slide off function
+		});
+		//sort value
+		function foundsort(param){
+			var sort=param;
+			console.log("parmr:"+sort);
+			$("#prosort .ka_bitian").html(sort);
+			$("#prosort div").removeClass("ka_bitian");
+			$("#prosort div").addClass("ka_sortname");
+		}
+		//stuat value
+		function foundstuat(param){
+			var stuat=param;
+			console.log("parmr:"+stuat);
+			$("#prostuat .ka_bitian").html(stuat);
+			$("#prostuat div").removeClass("ka_bitian");
+			$("#prostuat div").addClass("ka_sortname");
+		}
+		//sort page
+		document.getElementById('prosort').addEventListener('tap', function() {
+			//Open about the page
+			mui.openWindow({
+				url: 'productsort.html',
+				id: 'productsort',
+				styles:{
+					top:'0px',
+					bottom:'0px',
+					width:'100%',
+					height:'100%',
+				},
+				 createNew:true
+			});
+		});
+		//stuat page
+		document.getElementById('prostuat').addEventListener('tap', function() {
+			//Open about the page
+			mui.openWindow({
+				url: 'productstuat.html',
+				id: 'productstuat',
+				styles:{
+					top:'0px',
+					bottom:'0px',
+					width:'100%',
+					height:'100%',
+				},
+				 createNew:true
+			});
+		});
+		///////////////take picture/////////////////
+		function imglength(){
+			var imglength=$(".z_addImg").length;
+			    if(imglength>=3){
+			    	$(".z_file").hide();
+			    	$("#takepic").hide();
+			    }
+		}
+			 //px转换为rem
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 640) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+
+        function imgChange(obj1, obj2) {
+        	if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {  //判断iPhone|iPad|iPod|iOS
+			    alert("iphone");  
+			    //window.location.href ="iPhone.html";
+			} else{
+			    //alert("andrior"); 
+			    imglength();
+			    
+			} 
+            //获取点击的文本框
+            var file = document.getElementById("file");
+            //存放图片的父级元素
+            var imgContainer = document.getElementsByClassName(obj1)[0];
+            //获取的图片文件
+            var fileList = file.files;
+            //文本框的父级元素
+            var input = document.getElementsByClassName(obj2)[0];
+            var imgArr = [];
+            //遍历获取到得图片文件
+            for (var i = 0; i < fileList.length; i++) {
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                imgContainer.appendChild(imgAdd);
+            };
+            imgRemove();
+        };
+
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("z_addImg");
+            var mask = document.getElementsByClassName("z_mask")[0];
+            var cancel = document.getElementsByClassName("z_cancel")[0];
+            var sure = document.getElementsByClassName("z_sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                        var picdisp=$(".z_file").css("display");
+                        if(picdisp=="none"){
+                        	$(".z_file").show();
+                        }
+                        var takpic=$("#takepic").css("display");
+                        if(takpic=="none"){
+                        	$("#takepic").show();
+                        }
+                    };
+
+                } 
+            };
+             
+        };
+        mui(".ka_prologbox0").on("tap", "#takepic",function(e) {
+				if(mui.os.plus){
+					var a = [{
+						title: "拍照"
+					}/*, {
+						title: "从手机相册选择"
+					}*/];
+					plus.nativeUI.actionSheet({
+						title: "为商品拍照",
+						cancel: "取消",
+						buttons: a
+					}, function(b) {
+						switch (b.index) {
+							case 0:
+								break;
+							case 1:
+								getImage();
+								break;
+//							case 2:
+//								galleryImg();
+//								break;
+							default:
+								break
+						}
+					})	
+				}
+				
+			});
+			function getImage() {
+				var c = plus.camera.getCamera();
+				c.captureImage(function(e) {
+					plus.io.resolveLocalFileSystemURL(e, function(entry) {
+						var s = entry.toLocalURL() + "?version=" + new Date().getTime();
+						
+						var img = document.createElement("img");
+		                img.setAttribute("src",s);
+		                var imgAdd = document.createElement("div");
+		                imgAdd.setAttribute("class", "z_addImg");
+		                imgAdd.appendChild(img);
+		                $(".z_photo").append(imgAdd);
+		                 imglength();
+		                 imgRemove();
+						//document.getElementById("head-img").src = s;
+						//document.getElementById("head-img2").src = s;
+						//变更大图预览的src
+						//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+						//document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
+					}, function(e) {
+						console.log("读取拍照文件错误：" + e.message);
+					});
+				}, function(s) {
+					console.log("error" + s);
+				}, {
+					filename: "_doc/head.jpg"
+				})
+			}
+	</script>
+
+</html>

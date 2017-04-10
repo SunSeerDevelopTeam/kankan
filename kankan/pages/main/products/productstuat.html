@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css">
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">商品状态</h1>
+		</header>
+		<div class="mui-content ka_mainbox">
+			<ul class="mui-table-view">
+			        <li class="mui-table-view-cell">
+			            <a class="mui-navigate-right" href="subpage_product_login.html" id="520">
+			              	<span class="ka_sortfont" >全新</span>
+			            </a>
+			        </li>
+			        <li class="mui-table-view-cell">
+			            <a class="mui-navigate-right">
+			            	   <span class="ka_sortfont">用了一年</span>
+			            </a>
+			        </li>
+			        <li class="mui-table-view-cell">
+			            <a class="mui-navigate-right">
+			             	  <span class="ka_sortfont">用了三年</span>
+			            </a>
+			        </li>
+			    </ul>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			var ws = null;
+		    mui.plusReady(function () {
+		        ws = plus.webview.create("subpage_product_login.html","subpage_product_login");
+		    });
+		    mui('li').on('tap','a',function (e) {
+		        //var targetid = this.getAttribute("id");
+		        var targetval= $(this).children("span").html();
+		        alert(targetval);
+		        ws.evalJS('foundstuat("'+targetval+'")');
+		        ws.show();
+		    });
+		</script>
+	</body>
+
+</html>

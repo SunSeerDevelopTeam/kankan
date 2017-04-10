@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">商品列表</h1>
+			<a class="mui-icon mui-icon-more mui-icon-right-nav mui-pull-right"></a>
+		</header>
+		<div class="mui-content ka_mainbox">
+			<ul class="mui-table-view">
+			        <li class="mui-table-view-cell">
+			        	<div class="ka_userbox">
+			        		<img src="../../../images/logo.png" class="ka_touxiangimg" width="50" height="50"/>
+			        		<div><b>Kappa</b></div>
+			        		<font color="#808080" size="2">评价:<font color="#007AFF">5050</font>&nbsp;&nbsp;&nbsp;出品数:<font color="#007AFF">5089</font></font>
+			        	</div>
+			        </li>
+			        <li class="mui-table-view-cell commentlist">
+			        	<a href="commentlist.html">
+			            <div class="mui-navigate-right ka_userbox">
+			            	<div class="mui-pull-right ka_commentlevelbox">
+			                <img src="../../../images/Good.PNG" width="30" height="30">
+			                <div class="ka_comlevnumber">500</div>
+			               </div>
+			               <div class="mui-pull-right ka_commentlevelbox">
+			                	<img src="../../../images/Normal.PNG" width="30" height="30">
+			                	<div class="ka_comlevnumber">1000</div>
+			                </div>
+			                <div class="mui-pull-right ka_commentlevelbox">
+			                <img src="../../../images/Bad.PNG" width="30" height="30">
+			                <div class="ka_comlevnumber">1000</div>
+			                </div>
+			            </div>
+			            </a>
+			        </li>
+			    </ul>
+			    <!---author say---->
+			    <ul class="mui-table-view" style="margin:1em 0.5em;">
+			            <li class="mui-table-view-cell">
+			                <p>
+			                    Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1
+			                </p>
+			            </li>
+		       </ul>
+		       <!--product list-->
+		       <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+		                    	<a href="detail.html?targetid=10" id="2">
+		                    		<img class="mui-media-object ka_imgoption" src="../../../images/cbd.jpg">
+		                    	</a>
+		                    	<div class="kankan_area2">1300 P</div>
+		                    </li>
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+		                    	<a href="detail.html?targetid=10"  id="1">
+		                    		<img class="mui-media-object" src="./../../../images/shuijiao.jpg">
+		                    	</a>
+		                    	<div class="kankan_area2">1300 P</div>
+		                    </li>
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+		                    	<a href="detail.html" id="3" >
+		                    		<img class="mui-media-object" src="./../../../images/shuijiao.jpg">
+		                    	</a>
+		                    	<div class="kankan_area2">800 P</div>
+		                    </li>
+		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+		                    	<a href="detail.html" id="4" >
+		                    		<img class="mui-media-object" src="../../../images/MacPro.jpg">
+		                    	</a>
+		                    	<div class="kankan_area2">800 P</div>
+		                    </li>
+		                </ul>
+			   
+			   
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			var ws = null;
+		    mui.plusReady(function () {
+		        ws = plus.webview.create("detail.html","detail");
+		    })
+		    mui.init({
+			swipeBack: true //启用右滑关闭功能
+			});
+		    mui('.detail').on('tap','a',function (e) {
+		        var targetId = this.getAttribute("id");
+		        ws.evalJS('send('+targetId+')');
+		        ws.show();
+		    })
+		//comment list			
+		mui('.commentlist').on('tap', 'a', function(e){
+			mui.openWindow({
+			    url: 'commentlist.html',
+			    id:'commentlist'
+			  });
+		});
+		</script>
+	</body>
+
+</html>
