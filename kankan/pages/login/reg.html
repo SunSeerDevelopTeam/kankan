@@ -17,13 +17,13 @@
 			}
 			
 			.mui-input-group label {
-				width: 30%;
+				width: 41%;
 			}
 			
 			.mui-input-row label~input,
 			.mui-input-row label~select,
 			.mui-input-row label~textarea {
-				width: 70%;
+				width: 59%;
 			}
 			
 			.mui-checkbox input[type=checkbox],
@@ -54,17 +54,6 @@
 				display: inline-block;
 				margin-right: 10px;
 			}
-			
-			#email {
-				width: 40%;
-			}
-			
-			#send-verification-code {
-				width: 100px;
-				margin-right: 10px;
-				margin-top: 2px;
-				text-align: center;
-			}
 		</style>
 	</head>
 
@@ -79,13 +68,11 @@
 			<div id="avatar">
 				<img src="../../images/user-photo.png">
 			</div>
-			<form>
+			<form id="regForm" method="post">
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="email"></label>
-						<button id="send-verification-code" type="button" class="mui-btn mui-btn-primary lang" data-locale="send-verification-code"></button>
-						<input id='email' type="text" class="mui-input lang" data-locale="please-input-email">
-						
+						<input id='email' type="text" class="mui-input lang" data-locale="please-input-email" required>
 					</div>
 					<div class="mui-input-row">
 						<label class="lang" data-locale="username"></label>
@@ -105,6 +92,14 @@
 						<input id='address' type="email" class="mui-input-clear mui-input">
 						<a class="mui-navigate-right"></a>
 					</div>
+					<div class="mui-input-row">
+						<label class="lang" data-locale="verification-code"></label>
+						<input id='verification-code' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+					</div>
+				</div>
+
+				<div class="mui-content-padded">
+					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
 				</div>
 
 				<div class="mui-input-group">
@@ -112,14 +107,11 @@
 						<label class="lang" data-locale="introduction-code"></label>
 						<input id='introduction-code' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
 					</div>
-					<div class="mui-input-row">
-						<label class="lang" data-locale="verification-code"></label>
-						<input id='verification-code' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
-					</div>
 				</div>
 			</form>
+
 			<div class="mui-content-padded">
-				<button id='reg' class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
+				<button id='reg' type="submit" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
 			</div>
 			<div class="mui-content-padded">
 				<p class="lang" data-locale="register-tips"></p>
@@ -129,51 +121,31 @@
 		<script src="../../js/app.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../js/language.js"></script>
+		<script src="../../js/validation/jquery.js"></script>
+		<script src="../../js/validation/jquery.validate.js"></script>
 		<script>
+			$().ready(function(){
+				$("#regForm").validate({
+					submitHandler: function(form){
+						alert("submitted!");
+						form.submit();
+					}
+				});
+				console.log("reg form ....");
+			});
 			(function($, doc) {
 				$.init();
 				$.plusReady(function() {
 					var settings = app.getSettings();
-					var regButton = doc.getElementById('reg');
-					var accountBox = doc.getElementById('account');
+					var emailBox = doc.getElementById('email');
+					var usernameBox = document.getElementById("username");
 					var passwordBox = doc.getElementById('password');
 					var passwordConfirmBox = doc.getElementById('password_confirm');
-					var emailBox = doc.getElementById('email');
-					regButton.addEventListener('tap', function(event) {
-						var regInfo = {
-							account: accountBox.value,
-							password: passwordBox.value,
-							email: emailBox.value
-						};
-						var passwordConfirm = passwordConfirmBox.value;
-						if(passwordConfirm != regInfo.password) {
-							plus.nativeUI.toast('密码两次输入不一致');
-							return;
-						}
-						app.reg(regInfo, function(err) {
-							if(err) {
-								plus.nativeUI.toast(err);
-								return;
-							}
-							plus.nativeUI.toast('注册成功');
-							/*
-							 * 注意：
-							 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
-							 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
-							 */
-							plus.webview.getLaunchWebview().show("pop-in", 200, function() {
-								plus.webview.currentWebview().close("none");
-							});
-							//若启动页不是登录页，则需通过如下方式打开登录页
-							//							$.openWindow({
-							//								url: 'login.html',
-							//								id: 'login',
-							//								show: {
-							//									aniShow: 'pop-in'
-							//								}
-							//							});
-						});
-					});
+					var addressBox = document.getElementById("address");
+					var vCodeBox = document.getElementById("verification-code");
+					var sendVCodeButton = document.getElementById("send-verification-code");
+					var introductionCodeBox = document.getElementById("introduction-code");
+					var regButton = doc.getElementById('reg');
 				});
 			}(mui, document));
 		</script>
