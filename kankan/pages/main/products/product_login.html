@@ -14,137 +14,238 @@
 		</style>
 	</head>
 
-	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">商品登录</h1>
-		</header>
-		<div class="mui-content kankan_jyimgbox">
-			 <h5 class="ka_proloh5" style="margin-bottom: -3em;">商品拍照</h5>
-			<div class="ka_prologbox0 z_photo">
-				<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);">
-					<input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+	<body class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
 				</div>
-				<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
-            	 
+				<div class="mui-pages">
+				</div>
 			</div>
-			<!--遮罩层-->
-	        <div class="z_mask">
-	            <!--弹出框-->
-	            <div class="z_alert">
-	                <p>确定要删除这张图片吗？</p>
-	                <p>
-	                    <span class="z_cancel">取消</span>
-	                    <span class="z_sure">确定</span>
-	                </p>
-	            </div>
-	        </div>
-			     <br />
-			     <div class="ka_prologbox">
-				    <h5 class="ka_proloh5">商品名和说明</h5>
-				    <ul class="mui-table-view">
-			            <li class="mui-table-view-cell">
-		                    <input type="text" placeholder="商品名（40字以内）" id="productname" maxlength="40">
-			            </li>
-			            <li class="mui-table-view-cell">
-			                <textarea placeholder="商品说明（1000字以内）" class="ka_noborder" maxlength="10"></textarea>
-			            </li>
-			        </ul>
-			     </div>
-			     <br />
-			     <div class="ka_prologbox">
-				    <h5 class="ka_proloh5">商品详情</h5>
-				    <ul class="mui-table-view">
-			            <li class="mui-table-view-cell">
-			                <a class="mui-navigate-right"  href="productsort.html" id="prosort">
-			                    	<span class="ka_proinfo">商品种类</span>
-			                    	<div class="mui-pull-right ka_bitian" >必填</div>
-			                </a>
-			            </li>
-			            <li class="mui-table-view-cell">
-			                <a class="mui-navigate-right" href="productstuat.html" id="prostuat">
-			                     	<span class="ka_proinfo">商品状态</span>
-			                     	<div class="mui-pull-right ka_bitian">必填</div>
-			                </a>
-			            </li>
-			        </ul>
-			    </div><br />
-			    <div class="ka_prologbox">
-			    	 <h5 class="ka_proloh5">交换手段</h5>
-			    	 <ul class="mui-table-view">
-			    	         <li class="mui-table-view-cell">
-			    	             <div style="text-align: center;">
-			    	            <div class="mui-pull-left ka_exchangered">交 换</div>
-			    	             <div class="mui-pull-left ka_exchangegrey" >白 送</div>
-			    	              <div class="mui-pull-left ka_exchangegrey">交 易</div>
-			    	            </div>
-			    	         </li>
-			    	     </ul>
-			    </div>
-		</div><br/>
-		<div class="ka_description">
-		说明禁止就开机就ijijjkj啊实打实打算看大家是打算京东卡升级带宽啊京东卡死机了打开啊就是打卡时间的啊世界的坷拉三季稻就卡死了的
-			就是卡号登机口是放假咯卡拉回复
 		</div>
-		<div class="ka_userbox">
-			<button type="button" class="mui-btn mui-btn-red ka_prologsure" onclick="return confirm('确认出品？')">确&nbsp;&nbsp;认</button>
+		<!--页面主结构结束-->
+	<div id="productlogin" class="mui-page">
+		<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">商品登录</h1>
+			</div>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-content kankan_jyimgbox">
+							 <h5 class="ka_proloh5 ka_propicfonts">商品拍照</h5>
+							<div class="ka_prologbox0 z_photo">
+								<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);">
+									<input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+								</div>
+								<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
+				            	 
+							</div>
+							<!--遮罩层-->
+					        <div class="z_mask">
+					            <!--弹出框-->
+					            <div class="z_alert">
+					                <p>确定要删除这张图片吗？</p>
+					                <p>
+					                    <span class="z_cancel">取消</span>
+					                    <span class="z_sure">确定</span>
+					                </p>
+					            </div>
+					        </div>
+							     <br />
+							     <div class="ka_prologbox">
+								    <h5 class="ka_proloh5">商品名和说明</h5>
+								    <ul class="mui-table-view">
+							            <li class="mui-table-view-cell">
+						                    <input type="text" placeholder="商品名（40字以内）" id="productname" maxlength="40">
+							            </li>
+							            <li class="mui-table-view-cell">
+							                <textarea placeholder="商品说明（1000字以内）" class="ka_noborder" maxlength="10"></textarea>
+							            </li>
+							        </ul>
+							     </div>
+							     <br />
+							     <div class="ka_prologbox">
+								    <h5 class="ka_proloh5">商品详情</h5>
+								    <ul class="mui-table-view">
+							            <li class="mui-table-view-cell">
+							                <a class="mui-navigate-right"  href="#productsort" id="prosort">
+							                    	<span class="ka_proinfo">商品种类</span>
+							                    	<div class="mui-pull-right ka_bitian" >必填</div>
+							                </a>
+							            </li>
+							            <li class="mui-table-view-cell">
+							                <a class="mui-navigate-right" href="#productstaute" id="prostuat">
+							                     	<span class="ka_proinfo">商品状态</span>
+							                     	<div class="mui-pull-right ka_bitian">必填</div>
+							                </a>
+							            </li>
+							        </ul>
+							    </div><br />
+							    <div class="ka_prologbox">
+							    	 <h5 class="ka_proloh5">交换手段</h5>
+							    	 <ul class="mui-table-view">
+							    	         <li class="mui-table-view-cell">
+							    	             <div style="text-align: center;">
+							    	            <div class="mui-pull-left ka_exchangered">交 换</div>
+							    	             <div class="mui-pull-left ka_exchangegrey" >白 送</div>
+							    	              <div class="mui-pull-left ka_exchangegrey">交 易</div>
+							    	            </div>
+							    	         </li>
+							    	     </ul>
+							    </div>
+						</div><br/>
+						<div class="ka_description">
+						说明禁止就开机就ijijjkj啊实打实打算看大家是打算京东卡升级带宽啊京东卡死机了打开啊就是打卡时间的啊世界的坷拉三季稻就卡死了的
+							就是卡号登机口是放假咯卡拉回复
+						</div>
+						<div class="ka_userbox">
+							<button type="button" class="mui-btn mui-btn-red ka_prologsure" onclick="return confirm('确认出品？')">确&nbsp;&nbsp;认</button>
+						</div>
+						<br/>
+						        <div class="showimg">
+						
+				        </div>
+				        
+				    </div>    
+				</div>
+			</div>
+    </div>
+    <!--productsort page-->
+		<div id="productsort" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">商品种类</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+					        <li class="mui-table-view-cell">
+					            <a class="mui-navigate-right"  onclick="foundsort(this)">
+					              	<span class="ka_sortfont">日用品</span>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell">
+					            <a class="mui-navigate-right" onclick="foundsort(this)">
+					            	   <span class="ka_sortfont"> 电子产品</span>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell">
+					            <a class="mui-navigate-right" onclick="foundsort(this)">
+					             	  <span class="ka_sortfont">家具</span>
+					            </a>
+					        </li>
+					   </ul>	
+					</div>
+				</div>
+			</div>
 		</div>
-		<br/>
-		        <div class="showimg">
-		
-        </div>
+	 <!--productsataute page-->
+	 	<div id="productstaute" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">商品状态</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+					        <li class="mui-table-view-cell">
+					            <a class="mui-navigate-right" onclick="foundstuat(this)">
+					              	<span class="ka_sortfont" >全新</span>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell">
+					            <a class="mui-navigate-right" onclick="foundstuat(this)">
+					            	   <span class="ka_sortfont">用了一年</span>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell">
+					            <a class="mui-navigate-right" onclick="foundstuat(this)">
+					             	  <span class="ka_sortfont">用了三年</span>
+					            </a>
+					        </li>
+					    </ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 	<script src="../../../js/mui.min.js"></script>
+	<script src="../../../js/mui.view.js "></script>
+	<script src='../../../js/feedback.js'></script>
 	<script>
-		mui.init({
-			swipeBack: false //Enable the right slide off function
+		mui.init();
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#productlogin'
 		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+			view.addEventListener('pageBeforeShow', function(e) {
+				//				console.log(e.detail.page.id + ' beforeShow');
+			});
+			view.addEventListener('pageShow', function(e) {
+				//				console.log(e.detail.page.id + ' show');
+			});
+			view.addEventListener('pageBeforeBack', function(e) {
+				//				console.log(e.detail.page.id + ' beforeBack');
+			});
+			view.addEventListener('pageBack', function(e) {
+				//				console.log(e.detail.page.id + ' back');
+			});
+		})(mui);
 		//sort value
-		function foundsort(param){
-			var sort=param;
-			console.log("parmr:"+sort);
-			$("#prosort .ka_bitian").html(sort);
+		function foundsort(e){
+			var sort=$(e).children("span").html();
+			$("#prosort div").html(sort);
 			$("#prosort div").removeClass("ka_bitian");
 			$("#prosort div").addClass("ka_sortname");
+			$("#productsort .ka_gaoliang").each(function(){
+				$(this).removeClass("ka_gaoliang");
+				$(this).addClass("ka_sortfont");
+			});
+			$(e).children("span").removeClass("ka_sortfont");
+			$(e).children("span").addClass("ka_gaoliang");
 		}
 		//stuat value
-		function foundstuat(param){
-			var stuat=param;
-			console.log("parmr:"+stuat);
-			$("#prostuat .ka_bitian").html(stuat);
+		function foundstuat(e){
+			var stuat=$(e).children("span").html();
+			$("#prostuat div").html(stuat);
 			$("#prostuat div").removeClass("ka_bitian");
 			$("#prostuat div").addClass("ka_sortname");
+			$("#productstaute .ka_gaoliang").each(function(){
+				$(this).removeClass("ka_gaoliang");
+				$(this).addClass("ka_sortfont");
+			});
+			$(e).children("span").removeClass("ka_sortfont");
+			$(e).children("span").addClass("ka_gaoliang");
+			
 		}
-		//sort page
-		document.getElementById('prosort').addEventListener('tap', function() {
-			//Open about the page
-			mui.openWindow({
-				url: 'productsort.html',
-				id: 'productsort',
-				styles:{
-					top:'0px',
-					bottom:'0px',
-					width:'100%',
-					height:'100%',
-				},
-				 createNew:true
-			});
-		});
-		//stuat page
-		document.getElementById('prostuat').addEventListener('tap', function() {
-			//Open about the page
-			mui.openWindow({
-				url: 'productstuat.html',
-				id: 'productstuat',
-				styles:{
-					top:'0px',
-					bottom:'0px',
-					width:'100%',
-					height:'100%',
-				},
-				 createNew:true
-			});
-		});
 		///////////////take picture/////////////////
 		function imglength(){
 			var imglength=$(".z_addImg").length;
