@@ -17,19 +17,20 @@ var JSLocale = {
 	"email":"メールアドレス",
 	"username":"ユーザー名",
 	"password":"パスワード",
-	"password-confirm":"",
-	"address":"",
-	"address-details":"",
-	"introduction-code":"",
-	"verification-code":"",
-	"register":"",
-	"register-tips":"",
-	"please-input-email":"",
-	"please-input-username":"",
-	"please-input-password":"",
-	"please-confirm-password":"",
-	"please-input-introduction-code":"",
-	"please-input-verification-code":""
+	"password-confirm":"パスワード再入力",
+	"address":"都通府県",
+	"address-details":"未設定",
+	"introduction-code":"招待コード(任意)",
+	"verification-code":"確認コード",
+	"register":"確定",
+	"register-tips":"あとからプロフィールは変更可能です",
+	"please-input-email":"メールアドレス",
+	"please-input-username":"アプリ内に表示されます",
+	"please-input-password":"半角英数字3文字以上20字以内",
+	"please-confirm-password":"パスワード確認",
+	"please-input-introduction-code":"半角英数字6位",
+	"please-input-verification-code":"コードを入力",
+	"send-verification-code":"認証コードを発信"
 	/*user login page message end*/
 }
 

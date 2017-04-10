@@ -13,7 +13,7 @@ var JSLocale = {
 	/*login page message end*/
 	
 	/*user login page message begin*/
-	"user-login": "用户登录",
+	"user-login": "用户注册",
 	"email":"邮箱",
 	"username":"用户名",
 	"password":"密码",
@@ -22,7 +22,7 @@ var JSLocale = {
 	"address-details":"未设定",
 	"introduction-code":"介绍码",
 	"verification-code":"验证码",
-	"register":"注册",
+	"register":"确定",
 	"register-tips":"注册真实可用，注册成功后的用户可用于登录。",
 	"please-input-email":"请输入邮箱",
 	"please-input-username":"请输入用户名",
