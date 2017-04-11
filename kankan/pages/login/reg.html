@@ -13,11 +13,16 @@
 			}
 			
 			.mui-input-group {
-				margin-top: 20px;
+				margin-top: 40px;
 			}
 			
 			.mui-input-group label {
 				width: 41%;
+				
+			}
+			
+			.mui-input-row {
+				overflow:inherit;
 			}
 			
 			.mui-input-row label~input,
@@ -54,6 +59,13 @@
 				display: inline-block;
 				margin-right: 10px;
 			}
+			
+			label.error {
+				display:block;
+				float: right;
+				width: 100%;
+				color: red;
+			}
 		</style>
 	</head>
 
@@ -70,31 +82,37 @@
 			</div>
 			<form id="regForm" method="post">
 				<div class="mui-input-group">
+					<!-- email -->
 					<div class="mui-input-row">
-						<label class="lang" data-locale="email"></label>
-						<input id='email' type="text" class="mui-input lang" data-locale="please-input-email" required>
+						<label for="email" class="lang" data-locale="email"></label>
+						<input id='email' type="email" class="mui-input lang" data-locale="please-input-email" required>
 					</div>
+					<!-- username -->
 					<div class="mui-input-row">
-						<label class="lang" data-locale="username"></label>
-						<input id='username' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-username">
+						<label for="username" class="lang" data-locale="username"></label>
+						<input id='username' type="text" class="mui-input-clear mui-input lang" data-locale="please-input-username" required minlength="4" maxlength="28">
 					</div>
+					<!-- password -->
 					<div class="mui-input-row">
 						<label class="lang" data-locale="password"></label>
-						<input id='password' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
+						<input id='password' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password" required minlength="3" maxlength="20">
 					</div>
+					<!-- password-confirm -->
 					<div class="mui-input-row">
 						<label class="lang" data-locale="password-confirm"></label>
-						<input id='password-confirm' type="email" class="mui-input-clear mui-input lang" data-locale="please-confirm-password">
+						<input id='password-confirm' type="password" class="mui-input-clear mui-input lang" data-locale="please-confirm-password" equalTo="#password" required>
 					</div>
+					<!-- address -->
 					<div class="mui-input-row">
 						<label class="lang" data-locale="address"></label>
 						<label class="lang" data-locale="address-details"></label>
-						<input id='address' type="email" class="mui-input-clear mui-input">
+						<input id='address' type="text" class="mui-input-clear mui-input">
 						<a class="mui-navigate-right"></a>
 					</div>
+					<!-- verification code -->
 					<div class="mui-input-row">
 						<label class="lang" data-locale="verification-code"></label>
-						<input id='verification-code' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+						<input id='verification-code' type="number" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
 					</div>
 				</div>
 
@@ -102,17 +120,20 @@
 					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
 				</div>
 
+				<!-- introduction code -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="introduction-code"></label>
-						<input id='introduction-code' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
+						<input id='introduction-code' type="number" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
 					</div>
 				</div>
+
+				<div class="mui-content-padded">
+					<button id='reg' type="submit" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
+				</div>
+
 			</form>
 
-			<div class="mui-content-padded">
-				<button id='reg' type="submit" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
-			</div>
 			<div class="mui-content-padded">
 				<p class="lang" data-locale="register-tips"></p>
 			</div>
@@ -124,18 +145,17 @@
 		<script src="../../js/validation/jquery.js"></script>
 		<script src="../../js/validation/jquery.validate.js"></script>
 		<script>
-			$().ready(function(){
+			$().ready(function() {
 				$("#regForm").validate({
-					submitHandler: function(form){
-						alert("submitted!");
+					submitHandler: function(form) {
 						form.submit();
 					}
 				});
 				console.log("reg form ....");
 			});
-			(function($, doc) {
-				$.init();
-				$.plusReady(function() {
+			(function(mui, doc) {
+				mui.init();
+				mui.plusReady(function() {
 					var settings = app.getSettings();
 					var emailBox = doc.getElementById('email');
 					var usernameBox = document.getElementById("username");
