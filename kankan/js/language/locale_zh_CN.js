@@ -30,8 +30,29 @@ var JSLocale = {
 	"please-confirm-password":"请再次输入密码",
 	"please-input-introduction-code":"请输入介绍码",
 	"please-input-verification-code":"请输入验证码",
-	"send-verification-code":"发送验证码"
+	"send-verification-code":"发送验证码",
 	/*user login page message end*/
+	/*detail page*/
+	"det_spdescription":"商品说明",
+	"det_spahare":"分享至",
+	"det_goodconcel":"取消",
+	"det_goods":"赞",
+	"det_comment":"留言",
+	"det_coments":"评论",
+	"det_producednum":"出品数",
+	"det_concerneds":"出品者关注商品",
+	"det_recommends":"推荐商品",
+	"det_pointexch":"点数交易",
+	"det_exchange":"交换",
+	"det_send":"白送",
+	"detli_title":"商品列表",
+	"det_procoment":"商品评论",
+	"det_pcercomment":"出品者评论",
+	"det_goodcomments":"好评",
+	"det_normalcomments":"中评",
+	"det_badcomments":"差评",
+	"det_all":"全部"
+	
 }
 
 $(function(){

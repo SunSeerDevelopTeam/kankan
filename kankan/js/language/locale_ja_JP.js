@@ -30,8 +30,29 @@ var JSLocale = {
 	"please-confirm-password":"パスワード確認",
 	"please-input-introduction-code":"半角英数字6位",
 	"please-input-verification-code":"コードを入力",
-	"send-verification-code":"認証コードを発信"
+	"send-verification-code":"認証コードを発信",
 	/*user login page message end*/
+	/*detail page*/
+	"det_spdescription":"商品説明 ",
+	"det_spahare":"シェア",
+	"det_goodconcel":"キャンセル",
+	"det_goods":"いいね!",
+	"det_comment":"コメント",
+	"det_coments":"コメント",
+	"det_producednum":"出品数",
+	"det_concerneds":"さんが気になってる商品",
+	"det_recommends":"お勧めの商品",
+	"det_pointexch":"ポイント",
+	"det_exchange":"交換",
+	"det_send":"あげる",
+	"detli_title":"商品リスト",
+	"det_procoment":"商品評価",
+	"det_pcercomment":"評価",
+	"det_goodcomments":"良い",
+	"det_normalcomments":"普通",
+	"det_badcomments":"悪い",
+	"det_all":"全て"
+	
 }
 
 $(function(){

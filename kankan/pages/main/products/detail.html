@@ -10,7 +10,6 @@
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
-		<script src="../../../js/jquery-3.2.0.min.js"></script>
 	</head>
 
 	<body>
@@ -71,22 +70,22 @@
 		            <p class="kankan_productname">Product Name Product Name Product Name Product Name Product Name </p>
 		            <div class="mui-pull-left kankan_zanbox">
 		            	<div  id="zanhou" style="display:none;" onclick="dianzan(this.id)" class="kankan_goods">
-		            		<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartred" ></span><p class="kankan_goodsfonts">取消</P>
+		            		<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartred" ></span><p class="kankan_goodsfonts lang" data-locale="det_goodconcel">取消</P>
 		            	</div>
 						<div  id="zanqian" onclick="dianzan(this.id)" class="kankan_goods">
-							<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey" ></span><p class="kankan_goodsfonts">赞</P>
+							<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey" ></span><p class="kankan_goodsfonts lang" data-locale="det_goods">赞</P>
 						</div>
 		            </div>
 		            <div class="mui-pull-right kankan_det_comment" onclick="location.href='pro_commentslist.html'">
 		            	<span class="mui-icon mui-icon-chatboxes"></span>
-		            	<p>评论&nbsp;&nbsp;<font color="#000000" size="3">3</font></P>
+		            	<p><span class="lang" data-locale="det_comment" >评论</span>&nbsp;&nbsp;<font color="#000000" size="3">3</font></P>
 		            	
 		            </div>
 		           
 		            <div class="kankan_det_goodsnum" id="zanshu">2</div>
 		        </li>
 		        <li class="mui-table-view-cell kankan_det_description">
-		        	<div class="mui-pull-left">商品描述</div>
+		        	<div class="mui-pull-left lang"  data-locale="det_spdescription"></div>
 		        </li>
 		        <li class="mui-table-view-cell">
 		        	<div class="kankan_det_information">Content Content Contents Content Contents Content Contents Content</div>
@@ -95,7 +94,7 @@
 		<!--share-->
 		<ul class="mui-table-view">
 		        <li class="mui-table-view-cell kankan_det_description">
-		        	分享至：
+		        	<span class="lang" data-locale="det_spahare" ></span>
 		                <img src="../../../images/weixin.png" width="30" height="30">
 						<img src="../../../images/facebook.png" width="40" height="30">
 						<img src="../../../images/line.png" width="30" height="30">
@@ -122,7 +121,7 @@
 			               			 <img src="../../../images/hk.png" width="20" height="20">
 			               			 <img src="../../../images/us.png" width="20" height="20">
 			               		 </div>
-		               		 	<font color="#808080" size="2">评价:<font color="#007AFF">5050</font> 出品数:<font color="#007AFF">5089</font></font>
+		               		 	<font color="#808080" size="2"><span class="lang" data-locale="det_coments">评价</span>:<font color="#007AFF">5050</font> <span class="lang" data-locale="det_producednum">出品数</span>:<font color="#007AFF">5089</font></font>
 		               		 	
 			               	</div>
 			              </a> 
@@ -141,7 +140,7 @@
 			   </ul>
 		</div>
 		<!--Produce goods of concern-->
-		<h5 class="ka_h5backcolor">出品者关注商品</h5>
+		<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
 		<div class="mui-slider">
 		        <div class="mui-slider-group mui-slider-loop">
 		        	<!--3-->
@@ -263,7 +262,7 @@
 		        </div>
 		    </div>
 		<!--Recommended products-->
-		<h5 class="ka_h5backcolor">推荐商品</h5>
+		<h5 class="ka_h5backcolor lang" data-locale="det_recommends"></h5>
 		<div class="mui-slider">
 		        <div class="mui-slider-group mui-slider-loop">
 		        	<!--3-->
@@ -413,18 +412,20 @@
 		<!--Commodity exchange, white send, point exchange information button-->
 		<div style="margin: 1em 0;">
 		<button type="button" class="mui-btn mui-btn-danger">
-			Point exchange
+			<span class="lang" data-locale="det_pointexch"></span>
 		</button>
 		<button type="button" class="mui-btn mui-btn-danger">
-			barter
+			<span class="lang" data-locale="det_exchange"></span>
 		</button>
 		<button type="button" class="mui-btn mui-btn-danger">
-			To send
+			<span class="lang" data-locale="det_send"></span>
 		</button>
 		</div>
-		 <div id="text">ddd</div>
+		<div id="text">null</div>
 	</div>
 		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
 				swipeBack: true //启用右滑关闭功能
