@@ -328,7 +328,16 @@
 					"images/facebook.png",
 					"images/shuijiao.jpg",
 					"images/weixin.png",
-					"images/china.png"
+					"images/china.png",
+					"fonts/mui-icons-extra.ttf",
+					"fonts/mui.ttf",
+					"images/muwu.jpg",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"images/logo.png",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -369,10 +378,18 @@
 				"resources": [
 					"js/mui.pullToRefresh.js",
 					"fonts/mui-icons-extra.ttf",
-					"js/mui.pullToRefresh.material.js"
+					"js/mui.pullToRefresh.material.js",
+					"images/MacPro.jpg",
+					"images/muwu.jpg",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"pages/main/products/detail.html"
 				],
 				"refer": [
-					"pages/main/products/detail.html"
+					"pages/login/reg.html"
 				],
 				"priority": 0
 			},

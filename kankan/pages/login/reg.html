@@ -97,42 +97,42 @@
 		</header>
 		<div class="mui-content">
 			<div id="avatar">
-				<img src="../../images/userPhoto.png"/>
+				<img src="../../images/userPhoto.png" />
 			</div>
 			<form id="regForm" method="post">
 				<!-- email -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label for="email" class="lang" data-locale="email"></label>
-						<input id='email' type="email" class="mui-input lang" data-locale="please-input-email" required>
+						<input id='email' name="email" type="email" class="mui-input lang" data-locale="please-input-email">
 					</div>
 				</div>
 				<!-- username -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label for="username" class="lang" data-locale="username"></label>
-						<input id='username' type="text" class="mui-input-clear mui-input lang" data-locale="please-input-username" required minlength="3" maxlength="20">
+						<input id='username' name="username" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-username">
 					</div>
 				</div>
 				<!-- password -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="password"></label>
-						<input id='password' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password" required minlength="3" maxlength="20">
+						<input id='password' name="password" type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
 					</div>
 				</div>
 				<!-- password confirm -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="password-confirm"></label>
-						<input id='password-confirm' type="password" class="mui-input-clear mui-input lang" data-locale="please-confirm-password" equalTo="#password">
+						<input id='passwordConfirm' name="passwordConfirm" type="password" class="mui-input-clear mui-input lang" data-locale="please-confirm-password">
 					</div>
 				</div>
 				<!-- address -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="address"></label>
-						<input id="city" type="text" class="mui-input-clear mui-input lang" data-locale="address-details">
+						<input id="city" name="city" type="text" class="mui-input-clear mui-input lang" data-locale="address-details">
 						<a id="showCityPicker" class="mui-navigate-right"></a>
 					</div>
 				</div>
@@ -140,7 +140,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="verification-code"></label>
-						<input id='verification-code' type="text" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+						<input id='verificationCode' name="verificationCode" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
 					</div>
 				</div>
 				<!-- send verification code button -->
@@ -151,7 +151,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="introduction-code"></label>
-						<input id='introduction-code' type="text" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
+						<input id='introduction-code' name="introduction-code" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
 					</div>
 				</div>
 				<!-- submit button -->
@@ -177,90 +177,140 @@
 		<script src="../../js/common.js"></script>
 		<script>
 			$().ready(function() {
+				/**
 				$("#regForm").validate({
-					submitHandler: function(form) {
-						form.submit();
-					},
 					rules: {
 						email: {
 							required: true,
 							email: true
+						},
+						username: {
+							required: true,
+							minlength: 3,
+							maxlength: 20
 						}
 					}
 				});
-				Repository.User.getProvinceList({
-					data: {
+				**/
+				/**
+					Repository.User.getProvinceList({
+						data: {
 
-					},
-					success: function(d) {
-						if(d.result.status == "OK") {
-							//cityData = d.result.data;
-						} else {
+						},
+						success: function(d) {
+							if(d.result.status == "OK") {
+								
+							} else {
 
+							}
 						}
-					}
-				});
+					});
+					**/
 			});
 			(function(mui, doc) {
-				mui.init();
-				mui.plusReady(function() {
-					var settings = app.getSettings();
-					var emailBox = doc.getElementById('email');
-					var usernameBox = doc.getElementById("username");
-					var passwordBox = doc.getElementById('password');
-					var passwordConfirmBox = doc.getElementById('password_confirm');
-					var addressBox = doc.getElementById("address");
-					var vCodeBox = doc.getElementById("verification-code");
-					var sendVCodeButton = doc.getElementById("send-verification-code");
-					var showCityPickerButton = doc.getElementById('showCityPicker');
-					var introductionCodeBox = doc.getElementById("introduction-code");
-					var regButton = doc.getElementById('reg');
-					var cityPicker = new mui.PopPicker({
-						layer: 2
-					});
-					cityPicker.setData(cityData);
-					showCityPickerButton.addEventListener('tap', function(event) {
-						cityPicker.show(function(items) {
-							$('#city').val(items[0].text + " " + items[1].text);
+					mui.init();
+					mui.plusReady(function() {
+						console.log("reg.html plus ready");
+						var settings = app.getSettings();
+						var emailBox = doc.getElementById('email');
+						var usernameBox = doc.getElementById("username");
+						var passwordBox = doc.getElementById('password');
+						var passwordConfirmBox = doc.getElementById('passwordConfirm');
+						var addressBox = doc.getElementById("address");
+						var vCodeBox = doc.getElementById("verificationCode");
+						var sendVCodeButton = doc.getElementById("send-verification-code");
+						var showCityPickerButton = doc.getElementById('showCityPicker');
+						var introductionCodeBox = doc.getElementById("introduction-code");
+						var regButton = doc.getElementById('reg');
+						var cityPicker = new mui.PopPicker({
+							layer: 2
 						});
-					}, false);
+						cityPicker.setData(cityData);
+						showCityPickerButton.addEventListener('tap', function(event) {
+							cityPicker.show(function(items) {
+								$('#city').val(items[0].text + " " + items[1].text);
+							});
+						}, false);
 
-					var validemail = function() {
-						return $('#regForm').validate({
-							rules: {
-								email: {
-									required: true,
-									email: true
+						var validform = function() {
+							console.log("开始表单验证");
+							return $('#regForm').validate({
+								rules: {
+									email: {
+										required: true,
+										email: true
+									},
+									username: {
+										required: true,
+										minlength: 3,
+										maxlength: 20
+									},
+									password: {
+										required: true,
+										minlength: 3,
+										maxlength: 20
+									},
+									passwordConfirm: {
+										required: true,
+										minlength: 3,
+										maxlength: 20,
+										equalTo: "#password"
+									},
+									city: "required",
+									verificationCode: "required"
 								}
-							}
-						});
-					};
+							});
+						};
 
-					sendVCodeButton.addEventListener('tap', function(event) {
-						if(!validemail().form()) {
-							return false;
-						}
-						Repository.User.checkEmail({
-							data: {
-								email: emailBox.value
-							},
-							success: function(d) {
-								console.log("checkEmail success...");
-								console.dir(d);
-								if(d.result.status == "OK") {
-									console.log("check email ok");
-								} else {
-									console.log("check email ng");
-								}
+						sendVCodeButton.addEventListener('tap', function(event) {
+							if(!validform().form()) {
+								console.log("表单验证未通过。");
+								return false;
+							} else {
+								console.log("表单验证通过。");
+								Repository.User.checkEmail({
+									data: {
+										email: emailBox.value
+									},
+									success: function(d) {
+										console.log("checkEmail success...");
+										console.dir(d);
+										if(d.result.status == "OK") {
+											console.log("check email ok");
+										} else {
+											console.log("check email ng");
+										}
+									}
+								});
 							}
-						});
-					}, false);
+						}, false);
 
-					regButton.addEventListener('tap', function(event) {
-						console.log("reg.........");
-					}, false);
-				});
-			}(mui, document));
+						regButton.addEventListener('tap', function(event) {
+							if(!validform().form()) {
+								console.log("表单验证未通过。");
+								return false;
+							} else {
+								console.log("表单验证通过。");
+								Repository.User.register({
+										data: {
+											email: emailBox.value,
+											username: usernameBox.value,
+											password: passwordBox.value,
+											address: addressBox.value,
+										},
+										success: function(d) {
+											console.log("register success...");
+											console.dir(d);
+											if(d.result.status == "OK") {
+												console.log("check email ok");
+											} else {
+												console.log("check email ng");
+											}
+										}
+									}
+								}, false);
+						});
+					}(mui, document));
 		</script>
 	</body>
 

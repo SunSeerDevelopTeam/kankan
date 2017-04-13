@@ -14,7 +14,7 @@
 	</head>
 
 	<body>
-	<div class="mui-content">
+		<div class="mui-content">
 			<div id="slider" class="mui-scroll mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
@@ -45,11 +45,11 @@
 							<div class="mui-scroll">
 								<div class="mui-slider-item mui-slider-item-duplicate">
 									<ul class="mui-table-view mui-grid-view">
-										<li class="mui-table-view-cell mui-media mui-col-xs-6 detail" >	
-											<a  id="1" href="./products/detail.html?targetid=2">
+										<li class="mui-table-view-cell mui-media mui-col-xs-6 detail">
+											<a id="1" href="./products/detail.html?targetid=2">
 												<img class="mui-media-object ka_imgoption" src="../../images/MacPro.jpg">
 												<div class="mui-media-body">
-													Can be with 
+													Can be with
 												</div>
 											</a>
 											<div class="kankan_area">sss</div>
@@ -57,18 +57,20 @@
 												<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
 											</div>-->
 											<div class="mui-pull-left ka_mony">
-												<div>800<font color="#000000"> P</font></div>
+												<div>800
+													<font color="#000000"> P</font>
+												</div>
 											</div>
 											<div class="mui-pull-right ka_heartlocation">
-												<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"  onclick="good(this)"></span>
+												<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey" onclick="good(this)"></span>
 												<div class="ka_heartnum">1</div>
 											</div>
 										</li>
-										<li class="mui-table-view-cell mui-media mui-col-xs-6 detail" >	
-											<a  id="2" href="./products/detail.html?targetid=1">
+										<li class="mui-table-view-cell mui-media mui-col-xs-6 detail">
+											<a id="2" href="./products/detail.html?targetid=1">
 												<img class="mui-media-object ka_imgoption" src="../../images/muwu.jpg">
 												<div class="mui-media-body">
-													Can be with Can be with 
+													Can be with Can be with
 												</div>
 											</a>
 											<div class="kankan_area">sss</div>
@@ -76,10 +78,12 @@
 												<img src="images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
 											</div>-->
 											<div class="mui-pull-left ka_mony">
-												<div>800<font color="#000000"> P</font></div>
+												<div>800
+													<font color="#000000"> P</font>
+												</div>
 											</div>
 											<div class="mui-pull-right ka_heartlocation">
-												<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"  onclick="good(this)"></span>
+												<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey" onclick="good(this)"></span>
 												<div class="ka_heartnum" id="91num">2</div>
 											</div>
 										</li>
@@ -433,58 +437,66 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script>
 			///////////////////detail page///////////////////////////
 			var ws = null;
-		    mui.plusReady(function () {
-		        ws = plus.webview.create("./products/detail.html","detail");
-		    })
-		    mui.init({
-			swipeBack: true //启用右滑关闭功能
-			});
-		    mui('.detail').on('tap','a',function (e) {
-		        var targetId = this.getAttribute("id");
-		        ws.evalJS('send('+targetId+')');
-		        ws.show();
-		    })
-			//good
-			function good(obj){
+			var regPage = null;
+			mui.plusReady(function() {
+				console.log("plus.webview.create");
+				ws = plus.webview.create("./products/detail.html", "detail");
 				var isLogin = plus.storage.getItem("LoginFlag");
-				if (!isLogin) {
-					mui.openWindow({
-						id:"reg",
-						url:"../login/reg.html"
+				if(!isLogin) {
+					regPage = mui.preload({
+						url: "../login/reg.html",
+						id: "reg",
+						styles: {},
+						extras: {}
 					});
-					return;
 				}
-				var heartclass=$(obj).attr("class");
-				if(heartclass=="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"){
-					$(obj).removeClass("ka_heartgrey");
-					$(obj).addClass("ka_heartred");
-					var goodnum=$(obj).next().html()*1+1;
-					$(obj).next().html(goodnum);
-					//alert(goodnum);
+			});
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui('.detail').on('tap', 'a', function(e) {
+				var targetId = this.getAttribute("id");
+				ws.evalJS('send(' + targetId + ')');
+				ws.show();
+			})
+			//good
+			function good(obj) {
+				console.log("good function celled")
+				var isLogin = plus.storage.getItem("LoginFlag");
+				if(!isLogin) {
+					mui.openWindow(regPage);
+				} else {
+					var heartclass = $(obj).attr("class");
+					if(heartclass == "mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey") {
+						$(obj).removeClass("ka_heartgrey");
+						$(obj).addClass("ka_heartred");
+						var goodnum = $(obj).next().html() * 1 + 1;
+						$(obj).next().html(goodnum);
+						//alert(goodnum);
+					}
+					if(heartclass == "mui-icon-extra mui-icon-extra-heart-filled ka_heartred") {
+						$(obj).removeClass("ka_heartred");
+						$(obj).addClass("ka_heartgrey");
+						var goodnum = $(obj).next().html() * 1 - 1;
+						$(obj).next().html(goodnum);
+					}
 				}
-				if(heartclass=="mui-icon-extra mui-icon-extra-heart-filled ka_heartred"){
-					$(obj).removeClass("ka_heartred");
-					$(obj).addClass("ka_heartgrey");
-					var goodnum=$(obj).next().html()*1-1;
-					$(obj).next().html(goodnum);
-				}
-				
 			}
 			///////////////////////loading/////////////////////////
 			(function($) {
 				//Damping coefficient
-				var deceleration = mui.os.ios?0.003:0.0009;
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
 				$('.mui-scroll-wrapper').scroll({
 					bounce: false,
 					indicators: true, //Whether to display a scroll bar
-					deceleration:deceleration
+					deceleration: deceleration
 				});
 				$.ready(function() {
 					//Loop initialization all pull-down refresh, pull-up load.
@@ -516,28 +528,28 @@
 						var length = ul.querySelectorAll('li').length;
 						var fragment = document.createDocumentFragment();
 						var li;
-						for (var i = 0; i < count; i++) {
+						for(var i = 0; i < count; i++) {
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell mui-media mui-col-xs-6 detail';
 							//var html=;
 							//alert(count);
-							if(index==0){
-								var li0='<a  id="1" href="./products/detail.html"  onclick="location.href='+"'detail.html?targetid=90'"+'">';
-								li0+='<img class="mui-media-object ka_imgoption" src="../../images/shuijiao.jpg">';
-								li0+='<div class="mui-media-body">';
-								li0+='Can be with ';
-								li0+='</div>';
-								li0+='</a>';
-								li0+='<div class="kankan_area">sss</div>';
-								li0+='<div class="mui-pull-left ka_mony">';
-								li0+='<div>800<font color="#000000"> P</font></div>';
-								li0+='</div>';
-								li0+='<div class="mui-pull-right ka_heartlocation">';
-								li0+='<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"  onclick="good(this)"></span>';
-								li0+='<div class="ka_heartnum">1</div>';
-								li0+='</div>';
-								li.innerHTML=li0;
-							}else{
+							if(index == 0) {
+								var li0 = '<a  id="1" href="./products/detail.html"  onclick="location.href=' + "'detail.html?targetid=90'" + '">';
+								li0 += '<img class="mui-media-object ka_imgoption" src="../../images/shuijiao.jpg">';
+								li0 += '<div class="mui-media-body">';
+								li0 += 'Can be with ';
+								li0 += '</div>';
+								li0 += '</a>';
+								li0 += '<div class="kankan_area">sss</div>';
+								li0 += '<div class="mui-pull-left ka_mony">';
+								li0 += '<div>800<font color="#000000"> P</font></div>';
+								li0 += '</div>';
+								li0 += '<div class="mui-pull-right ka_heartlocation">';
+								li0 += '<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"  onclick="good(this)"></span>';
+								li0 += '<div class="ka_heartnum">1</div>';
+								li0 += '</div>';
+								li.innerHTML = li0;
+							} else {
 								li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
 							}
 							fragment.appendChild(li);
@@ -546,7 +558,6 @@
 					};
 				});
 			})(mui);
-			
 		</script>
 	</body>
 
