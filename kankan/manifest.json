@@ -355,7 +355,13 @@
 			},
 			"pages/main/home.html": {
 				"resources": [
-					"pages/main/pullrefresh_sub.html"
+					"pages/main/pullrefresh_sub.html",
+					"fonts/mui-icons-extra.ttf",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"images/userPhoto.png"
 				],
 				"refer": [],
 				"priority": 0

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
@@ -9,33 +10,89 @@
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link rel="stylesheet" href="../../css/icons-extra.css">
 		<style>
-			html,body {
+			html,
+			body {
 				background-color: #efeff4;
 			}
-			.title{
+			
+			.title {
 				margin: 20px 15px 10px;
 				color: #6d6d72;
 				font-size: 15px;
 			}
+			
+			a#user img {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				margin-top: -0.2em;
+			}
+			
+			header a.mui-icon-extra-notice {
+				margin-top: 0.5em;
+				margin-right: 0.25em;
+			}
+			
+			header a.mui-icon-search {
+				width: 60px;
+			}
 		</style>
 	</head>
+
 	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-pull-left" id="user">
+				<img src="../../images/userPhoto.png" />
+			</a>
+			<h1 id="title" class="mui-title">Home</h1>
+			<a class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right"></a>
+		</header>
 		<div class="mui-content"></div>
 	</body>
 	<script src="../../js/mui.min.js"></script>
-	<script>
-		mui.init({
-			gestureConfig: {
-				doubletap:true
-			},
-			subpages: [{
-				url: 'pullrefresh_sub.html',
-				id: 'pullrefresh_sub',
-				styles: {
-					top: '0px',
-					bottom: '0px'
-				}
-			}]
-		});
+	<script type="text/javascript" charset="UTF-8">
+		(function(mui, doc) {
+			mui.init({
+				gestureConfig: {
+					doubletap: true
+				},
+				subpages: [{
+					url: 'pullrefresh_sub.html',
+					id: 'pullrefresh_sub',
+					styles: {
+						top: '45px',
+						bottom: '0px'
+					}
+				}]
+			});
+
+			mui.plusReady(function() {
+				var userPhoto = document.getElementById("user");
+				var isLogin = plus.storage.getItem("LoginFlag");
+				userPhoto.addEventListener('click', function(event) {
+					console.log("userPhoto clicked.");
+					if(!isLogin) {
+						var btnArray = ['新しいはじめる方はこちら', '登録済みの方はこちら', 'スキップ'];
+						mui.confirm('1', '0', btnArray, function(e) {
+							switch(e.index) {
+								case 0:
+									console.log("新しいはじめる方はこちら");
+									break;
+								case 1:
+									console.log("登録済みの方はこちら");
+									break;
+								default:
+									console.log("スキップ");
+									break;
+							}
+						})
+					} else {
+
+					}
+				});
+			});
+		})(mui, document);
 	</script>
+
 </html>
