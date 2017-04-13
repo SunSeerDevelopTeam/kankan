@@ -42,40 +42,6 @@
 		</nav>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			//			var main, menu, mask = mui.createMask(_closeMenu);
-			//			var showMenu = false;
-
-			/**
-			 * Close the skid menu
-			 */
-			//			function closeMenu(){
-			//				_closeMenu();
-			//				mask.close();
-			//			}
-			/**
-			 * Close the skid menu (business section)
-			 */
-			//			function _closeMenu() {
-			//				if (showMenu) {
-			//					//Resolve android 4.4 The following versions of webview are moved, resulting in fixed positioning elements of the bug;
-			//					if (mui.os.android && parseFloat(mui.os.version) < 4.4) {
-			//						document.querySelector("header.mui-bar").style.position = "fixed";
-			//						//Also need to modify the following padding-top of .mui-contnt，Otherwise it will be more blank;
-			//						//document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "44px";
-			//					}
-			//					menu.setStyle({
-			//						left: '100%',
-			//						transition: {
-			//							duration: 150
-			//						}
-			//					});
-			//					setTimeout(function(){
-			//						menu.hide();
-			//					}, 300);
-			//					showMenu = false;
-			//				}
-			//			}
-
 			if(!mui.os.android) {
 				//The overall slide temporarily support android phone, because the two pages of mobile animation, can not guarantee synchronization;
 				document.getElementById("move-togger").classList.remove('mui-hidden');
@@ -90,17 +56,6 @@
 				//beforeback: back
 			});
 
-			//			function back() {
-			//				if (showMenu) {
-			//					//The menu is in the display state, the return key should first close the menu, prevent the main window to perform mui.back logic;
-			//					closeMenu();
-			//					return false;
-			//				} else {
-			//					//The menu is in the hidden state, the implementation of the return, the first close the menu page, and then continue to perform mui.back logic to close the main window;
-			//					menu.close('none');
-			//					return true;
-			//				}
-			//			}
 			var subpages = ['home.html', 'products/product_login.html', 'products/request.html'];
 			var subpage_style = {
 				top: '0px',
@@ -126,66 +81,6 @@
 				main = plus.webview.currentWebview();
 			});
 
-			/**
-			 * display menu
-			 */
-			//			function openMenu() {
-			//				if (!showMenu) {
-			//					//Resolve android 4.4 The following versions of webview are moved, resulting in fixed positioning elements of the bug;
-			//					if (mui.os.android && parseFloat(mui.os.version) < 4.4) {
-			//						document.querySelector("header.mui-bar").style.position = "static";
-			//						//Also need to modify the following. Mui-content padding-top, otherwise it will be more blank;
-			//						//document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "0px";
-			//					}
-			//					menu.show('none', 0, function() {
-			//						menu.setStyle({
-			//							left: '30%',
-			//							transition: {
-			//								duration: 150
-			//							}
-			//						});
-			//						mask.show();
-			//						showMenu = true;
-			//					});
-			//				}
-			//			}
-			//			
-			//			document.querySelector(".mui-icon-extra-notice").addEventListener("tap", openMenu);
-			//			window.addEventListener("dragright", function(e){
-			//				e.detail.gesture.preventDefault();
-			//			});
-			//			window.addEventListener("dragleft", function(e){
-			//				e.detail.gesture.preventDefault();
-			//			});
-			//			window.addEventListener("swiperight", openMenu);
-			//			window.addEventListener("swipeleft", closeMenu);
-			//			window.addEventListener("menu:swiperight", closeMenu);
-			//			mui.menu = function() {
-			//				if (showMenu) {
-			//					closeMenu();
-			//				} else{
-			//					openMenu();
-			//				}
-			//			}
-			//			
-			//			var backFirst = null;
-			//			mui.back = function() {
-			//				if (showMenu) {
-			//					closeMenu();
-			//					return;
-			//				}
-			//				if (!backFirst) {
-			//					backFirst = new Date().getTime();
-			//					mui.toast('Press again to exit the application');
-			//					setTimeout(function(){
-			//						backFirst = null;
-			//					}, 1000);
-			//				} else{
-			//					if ((new Date()).getTime() - backFirst < 1000) {
-			//						plus.runtime.quit();
-			//					}
-			//				}
-			//			}
 			//Current activation option
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
@@ -225,14 +120,6 @@
 					defaultTab.classList.add('mui-active');
 				}
 			});
-			//User page
-			//		document.getElementById('yonghu').addEventListener('tap', function() {
-			//			//Open about the page
-			//			mui.openWindow({
-			//				url: './user/user.html',
-			//				id: 'user'
-			//			});
-			//		});
 		</script>
 	</body>
 
