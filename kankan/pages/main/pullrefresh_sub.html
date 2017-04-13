@@ -453,6 +453,14 @@
 		    })
 			//good
 			function good(obj){
+				var isLogin = plus.storage.getItem("LoginFlag");
+				if (!isLogin) {
+					mui.openWindow({
+						id:"reg",
+						url:"../login/reg.html"
+					});
+					return;
+				}
 				var heartclass=$(obj).attr("class");
 				if(heartclass=="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"){
 					$(obj).removeClass("ka_heartgrey");
