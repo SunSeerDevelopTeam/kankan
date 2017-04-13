@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "pages/login/login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "pages/main/main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -145,7 +145,7 @@
 					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
 					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
 					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": "unpackage/res/icons/144x144.png"
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
@@ -286,18 +286,118 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"pages/login/reg.html": {
+				"resources": [
+					"js/picker/mui.poppicker.js",
+					"js/app.js",
+					"js/picker/mui.picker.js",
+					"js/validation/localization/messages_zh.js",
+					"fonts/mui.ttf",
+					"js/language/locale_zh_CN.js",
+					"css/style.css",
+					"js/validation/jquery.js",
+					"css/mui.picker.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/validation/jquery.validate.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"css/mui.min.css",
+					"js/language.js",
+					"css/mui.poppicker.css",
+					"js/picker/city.data.js",
+					"images/user-photo.png",
+					"images/line.png",
+					"images/Good.PNG",
+					"images/userPhoto.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/detail.html": {
+				"resources": [
+					"images/hk.png",
+					"images/twitter.png",
+					"images/cbd.jpg",
+					"images/jp.png",
+					"images/yuantiao.jpg",
+					"images/us.png",
+					"js/language.js",
+					"images/line.png",
+					"images/facebook.png",
+					"images/shuijiao.jpg",
+					"images/weixin.png",
+					"images/china.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/product_login.html": {
+				"resources": [
+					"js/jquery-3.2.0.min.js",
+					"css/kankan_home.css",
+					"js/feedback.js",
+					"images/iconfont-tianjia.png",
+					"js/mui.view.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/home.html": {
+				"resources": [
+					"pages/main/pullrefresh_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/main.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"pages/main/home.html",
+					"css/icons-extra.css"
+				],
+				"refer": [
+					"pages/main/products/product_login.html",
+					"pages/main/products/request.html"
+				],
+				"priority": 0
+			},
+			"pages/main/pullrefresh_sub.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"fonts/mui-icons-extra.ttf",
+					"js/mui.pullToRefresh.material.js"
+				],
+				"refer": [
+					"pages/main/products/detail.html"
+				],
+				"priority": 0
+			},
+			"pages/main/products/request.html": {
+				"resources": [
+					"images/MacPro.jpg",
+					"images/logo.png",
+					"images/muwu.jpg",
+					"images/jiantou.png"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
 			"resources": [
 				"js/service.js",
 				"libs/easymob-webim-sdk/quickstart.md",
-				"images/user-photo.png",
 				"README.md"
 			]
 		}
 	},
 	"unpackage":[
-	  "README.md"
+	  "README.md",
+	  "images/user-photo.png",
+	  "libs/easymob-webim-sdk/quickstart.md"
 	]
 }
