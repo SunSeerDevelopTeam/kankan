@@ -1,17 +1,32 @@
 (function(mui, doc) {
+
+	function isInclude(filepath) {
+		var  js =  /js$/i.test(filepath);
+		var es = doc.getElementsByTagName(js ? 'script' : 'link');
+		for(var i = 0; i < es.length; i++) {
+			if(es[i][js ? 'src' : 'href'].indexOf(filepath) != -1) {
+				return true;
+			}
+			return false;
+		}
+	}
+	
+	function appendJS (filepath) {
+		if (!isInclude(filepath)) {
+			var dynamic = doc.createElement("script");
+			dynamic.src = filepath;
+			doc.head.appendChild(dynamic);
+		}
+	}
+
 	mui.plusReady(function() {
 		var language = plus.os.language;
-		console.log("current language is " + language);
-		var dynamic1 = document.createElement("script");
-		var dynamic2 = document.createElement("script");
 		if(!language || language == "ja_JP") {
-			dynamic1.src="../../js/language/locale_ja_JP.js";
-			dynamic2.src="../../js/validation/localization/messages_ja.js";
+			appendJS("../../js/language/locale_ja_JP.js");
+			appendJS("../../js/validation/localization/messages_ja.js");
 		} else {
-			dynamic1.src="../../js/language/locale_zh_CN.js";
-			dynamic2.src="../../js/validation/localization/messages_zh.js";
+			appendJS("../../js/language/locale_zh_CN.js");
+			appendJS("../../js/validation/localization/messages_zh.js");
 		}
-		document.head.appendChild(dynamic1);
-		document.head.appendChild(dynamic2);
 	});
 })(mui, document);
