@@ -60,14 +60,14 @@
 		self.beginAngle = 0;
 		self.beginExceed = self.beginAngle - MAX_EXCEED;
 		self.list.angle = self.beginAngle;
-		if (isIos) {
+		if(isIos) {
 			self.list.style.webkitTransformOrigin = "center center " + self.r + "px";
 		}
 	};
 
 	Picker.prototype.calcElementItemPostion = function(andGenerateItms) {
 		var self = this;
-		if (andGenerateItms) {
+		if(andGenerateItms) {
 			self.items = [];
 		}
 		self.elementItems.forEach(function(item) {
@@ -76,7 +76,7 @@
 			item.angle = self.endAngle;
 			item.style.webkitTransformOrigin = "center center -" + self.r + "px";
 			item.style.webkitTransform = "translateZ(" + self.r + "px) rotateX(" + (-self.endAngle) + "deg)";
-			if (andGenerateItms) {
+			if(andGenerateItms) {
 				var dataItem = {};
 				dataItem.text = item.innerHTML || '';
 				dataItem.value = item.getAttribute('data-value') || dataItem.text;
@@ -104,9 +104,9 @@
 		var self = this;
 		self.elementItems.forEach(function(item) {
 			var difference = Math.abs(item.angle - angle);
-			if (difference < self.hightlightRange) {
+			if(difference < self.hightlightRange) {
 				item.classList.add('highlight');
-			} else if (difference < self.visibleRange) {
+			} else if(difference < self.visibleRange) {
 				item.classList.add('visible');
 				item.classList.remove('highlight');
 			} else {
@@ -147,7 +147,7 @@
 			self.startInertiaScroll(event);
 		}, false);
 		self.holder.addEventListener($.EVENT_MOVE, function(event) {
-			if (!isPicking) {
+			if(!isPicking) {
 				return;
 			}
 			event.preventDefault();
@@ -155,10 +155,10 @@
 			var dragRange = endY - startY;
 			var dragAngle = self.calcAngle(dragRange);
 			var newAngle = dragRange > 0 ? lastAngle - dragAngle : lastAngle + dragAngle;
-			if (newAngle > self.endExceed) {
+			if(newAngle > self.endExceed) {
 				newAngle = self.endExceed
 			}
-			if (newAngle < self.beginExceed) {
+			if(newAngle < self.beginExceed) {
 				newAngle = self.beginExceed
 			}
 			self.setAngle(newAngle);
@@ -167,7 +167,7 @@
 		//--
 		self.list.addEventListener('tap', function(event) {
 			elementItem = event.target;
-			if (elementItem.tagName == 'LI') {
+			if(elementItem.tagName == 'LI') {
 				self.setSelectedIndex(self.elementItems.indexOf(elementItem), 200);
 			}
 		}, false);
@@ -183,13 +183,13 @@
 	Picker.prototype.updateInertiaParams = function(event, isStart) {
 		var self = this;
 		var point = event.changedTouches ? event.changedTouches[0] : event;
-		if (isStart) {
+		if(isStart) {
 			self.lastMoveStart = point.pageY;
 			self.lastMoveTime = event.timeStamp || Date.now();
 			self.startAngle = self.list.angle;
 		} else {
 			var nowTime = event.timeStamp || Date.now();
-			if (nowTime - self.lastMoveTime > 300) {
+			if(nowTime - self.lastMoveTime > 300) {
 				self.lastMoveTime = nowTime;
 				self.lastMoveStart = point.pageY;
 			}
@@ -213,16 +213,16 @@
 		var distAngle = self.calcAngle(dist) * dir;
 		//----
 		var srcDistAngle = distAngle;
-		if (startAngle + distAngle < self.beginExceed) {
+		if(startAngle + distAngle < self.beginExceed) {
 			distAngle = self.beginExceed - startAngle;
 			duration = duration * (distAngle / srcDistAngle) * 0.6;
 		}
-		if (startAngle + distAngle > self.endExceed) {
+		if(startAngle + distAngle > self.endExceed) {
 			distAngle = self.endExceed - startAngle;
 			duration = duration * (distAngle / srcDistAngle) * 0.6;
 		}
 		//----
-		if (distAngle == 0) {
+		if(distAngle == 0) {
 			self.endScroll();
 			return;
 		}
@@ -237,11 +237,11 @@
 			var stepCount = duration / frameInterval;
 			var stepIndex = 0;
 			(function inertiaMove() {
-				if (self.stopInertiaMove) return;
+				if(self.stopInertiaMove) return;
 				var newAngle = self.quartEaseOut(stepIndex, startAngle, distAngle, stepCount);
 				self.setAngle(newAngle);
 				stepIndex++;
-				if (stepIndex > stepCount - 1 || newAngle < self.beginExceed || newAngle > self.endExceed) {
+				if(stepIndex > stepCount - 1 || newAngle < self.beginExceed || newAngle > self.endExceed) {
 					self.endScroll();
 					return;
 				}
@@ -256,10 +256,10 @@
 
 	Picker.prototype.endScroll = function() {
 		var self = this;
-		if (self.list.angle < self.beginAngle) {
+		if(self.list.angle < self.beginAngle) {
 			self.list.style.webkitTransition = "150ms ease-out";
 			self.setAngle(self.beginAngle);
-		} else if (self.list.angle > self.endAngle) {
+		} else if(self.list.angle > self.endAngle) {
 			self.list.style.webkitTransition = "150ms ease-out";
 			self.setAngle(self.endAngle);
 		} else {
@@ -275,7 +275,7 @@
 		setTimeout(function() {
 			var index = self.getSelectedIndex();
 			var item = self.items[index];
-			if ($.trigger && (index != self.lastIndex || force === true)) {
+			if($.trigger && (index != self.lastIndex || force === true)) {
 				$.trigger(self.holder, 'change', {
 					"index": index,
 					"item": item
@@ -289,9 +289,9 @@
 
 	Picker.prototype.correctAngle = function(angle) {
 		var self = this;
-		if (angle < self.beginAngle) {
+		if(angle < self.beginAngle) {
 			return self.beginAngle;
-		} else if (angle > self.endAngle) {
+		} else if(angle > self.endAngle) {
 			return self.endAngle;
 		} else {
 			return angle;
@@ -303,8 +303,8 @@
 		self.items = items || [];
 		var buffer = [];
 		self.items.forEach(function(item) {
-			if (item !== null && item !== undefined) {
-				buffer.push('<li>' + (item.text || item) + '</li>');
+			if(item !== null && item !== undefined) {
+				buffer.push('<li data-val=' + item.value + '>' + (item.text || item) + '</li>');
 			}
 		});
 		self.list.innerHTML = buffer.join('');
@@ -328,7 +328,7 @@
 		var self = this;
 		self.list.style.webkitTransition = '';
 		var angle = self.correctAngle(self.itemAngle * index);
-		if (duration && duration > 0) {
+		if(duration && duration > 0) {
 			var distAngle = angle - self.list.angle;
 			self.scrollDistAngle(Date.now(), self.list.angle, distAngle, duration);
 		} else {
@@ -344,31 +344,31 @@
 
 	Picker.prototype.getSelectedValue = function() {
 		var self = this;
-		return (self.items[self.getSelectedIndex()] || {}).value;
+		return(self.items[self.getSelectedIndex()] || {}).value;
 	};
 
 	Picker.prototype.getSelectedText = function() {
 		var self = this;
-		return (self.items[self.getSelectedIndex()] || {}).text;
+		return(self.items[self.getSelectedIndex()] || {}).text;
 	};
 
 	Picker.prototype.setSelectedValue = function(value, duration, callback) {
 		var self = this;
-		for (var index in self.items) {
+		for(var index in self.items) {
 			var item = self.items[index];
-			if (item.value == value) {
+			if(item.value == value) {
 				self.setSelectedIndex(index, duration, callback);
 				return;
 			}
 		}
 	};
 
-	if ($.fn) {
+	if($.fn) {
 		$.fn.picker = function(options) {
 			//遍历选择的元素
 			this.each(function(i, element) {
-				if (element.picker) return;
-				if (options) {
+				if(element.picker) return;
+				if(options) {
 					element.picker = new Picker(element, options);
 				} else {
 					var optionsText = element.getAttribute('data-picker-options');
