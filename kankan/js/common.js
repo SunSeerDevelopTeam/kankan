@@ -450,81 +450,29 @@ var Util;
 var Api;
 (function(Api) {
 	var baseUrl = 'http://192.168.1.8:7998';
-	Api.success = 200,
-		Api.url = {
-			user: {
-				getProvinceList: "/user/Register/getProvinceList",
-				getCityList: "/user/Register/getCityList",
-				checkEmail: "/user/Register/checkEmail",
-				register: "/user/Register/register"
-			}
-		},
-		Api.params = {
-			token: "tokencheck",
-			sign: "signcheck",
-			email: "email",
-			pwd: "user_pwd",
-			openID: "openid",
-			nickname: "nickname",
-			prefID: "pref_id",
-			loginType: "enroll_type"
-		};
-	var AjaxQueue = (function() {
-		function AjaxQueue() {
-			this.tail = $.Deferred().resolve();
-			if(null != window.ajaxQueue)
-				throw 'Please use current method.';
-		}
-		AjaxQueue.prototype.enqueue = function(request) {
-			var next = $.Deferred();
-			var client = $.Deferred();
-			this.tail.always(function() {
-				try {
-					request()
-						.done(client.resolve, next.resolve)
-						.fail(client.reject, next.resolve);
-				} catch(e) {
-					client.reject(e);
-					next.resolve();
-				}
-			});
-			this.tail = next;
-			return client;
-		};
-		AjaxQueue.current = function() {
-			if(null == window.ajaxQueue) {
-				window.ajaxQueue = new AjaxQueue();
-			}
-			return window.ajaxQueue;
-		};
-		return AjaxQueue;
-	}());
-	Api.AjaxQueue = AjaxQueue;
+	var url = {
+		"getProvinceList": "/user/Register/getProvinceList",
+		"getCityList": "/user/Register/getCityList",
+		"checkEmail": "/user/Register/checkEmail",
+		"register": "/user/Register/register"
+	}
 
-	function call(url, settings) {
-		return AjaxQueue.current().enqueue(function() {
-			var $deferred = $.Deferred();
-			var fnerror = function(jqXHR, textStatus, errorThrown) {
-				console.log("fnerror textStatus is" + textStatus);
-				if(Validator.isFunc(settings.error))
-					settings.error(jqXHR, textStatus, errorThrown);
-				$deferred.reject();
-			};
-			var data = settings.data || {};
-			$.ajax({
-				url: baseUrl + url,
-				crossDomain: true,
-				async: settings.async,
-				type: 'POST',
-				data: data,
-				success: function(d) {
-					if(Validator.isFunc(settings.success))
-						settings.success(d);
-					$deferred.resolve();
-				},
-				error: fnerror
-			});
-			return $deferred.promise();
+	function call(url, params, callback) {
+		mui.ajax(baseUrl + url, {
+			data: params,
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				if(Validator.isFunc(callback.success)) {
+					callback.success(data);
+				}
+			},
+			error: function(xhr, type, errorThrown) {
+				if(Validator.isFunc(callback.error)) {
+					callback.error(xhr, type, errorThrown);
+				}
+			}
 		});
 	}
 	Api.call = call;
@@ -539,33 +487,23 @@ var Api;
 	Api.createSignInfo = createSignInfo;
 })(Api || (Api = {}));
 var Repository;
-(function(Repository){
+(function(Repository) {
 	var User;
-	(function(User){
-		function getProvinceList(options){
-			options.data = {
-				"signcheck": Api.createSignInfo(),
-				"tokencheck":"",
-			};
-			return Api.call(Api.url.user.getProvinceList, options);
+	(function(User) {
+		function getProvinceList(params, callback) {
+			return Api.call(Api.url.getProvinceList, params, callback);
 		}
 		User.getProvinceList = getProvinceList;
-		
-		function checkEmail(options){
-			options.data = {
-				"signcheck": Api.createSignInfo(),
-				"tokencheck":"",
-			};
-			return Api.call(Api.url.user.checkEmail, options);
+
+		function checkEmail(params, callback) {
+			var url = "/user/Register/checkEmail";
+			return Api.call(url, params, callback);
 		}
 		User.checkEmail = checkEmail;
-		
-		function register(options){
-			options.data = {
-				"signcheck": Api.createSignInfo(),
-				"tokencheck":"",
-			};
-			return Api.call(Api.url.user.register, options);
+
+		function register(params, callback) {
+			var url = "/user/Register/register";
+			return Api.call(url, params, callback);
 		}
 		User.register = register;
 	})(User = Repository.User || (Repository.User = {}));
