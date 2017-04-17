@@ -62,8 +62,8 @@
 		</header>
 		<div class="mui-content">
 			<div class="login-panel">
-				<li class="mui-table-view-cell" id="weixin-oauth">
-					<div>
+				<li class="mui-table-view-cell" id="weixin-oauth" class="oauth-area">
+					<div class="oauth-btn">
 						<div class="app-icons"><img src="../../images/weixin.png" /></div>
 						<div class="app-msg"><span class="lang" data-locale="wechat_login"></span></div>
 						<a class="mui-navigate-right"></a>
@@ -74,15 +74,15 @@
 						<div class="mui-input-group">
 							<div class="mui-input-row">
 								<label class="lang" data-locale="email"></label>
-								<input id='account' type="text" class="mui-input-clear mui-input lang" data-locale="please-input-email">
+								<input id='email' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-email">
 							</div>
 							<div class="mui-input-row">
 								<label class="lang" data-locale="password"></label>
-								<input id='password_confirm' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
+								<input id='password' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
 							</div>
 						</div>
 						<div class="mui-content-padded">
-							<button id='reg' class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="login"></button>
+							<div id='login' class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="login"></div>
 						</div>
 					</form>
 				</li>
@@ -95,6 +95,9 @@
 		<script src="../../js/knockout-3.4.2.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../js/language.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/sha256.js"></script>
+		<script src="../../js/common.js"></script>
 		<script>
 			(function($, doc) {
 				$.init({
@@ -104,68 +107,122 @@
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
-					//检查 "登录状态/锁屏状态" 开始
-					if(settings.autoLogin && state.token && settings.gestures) {
-						$.openWindow({
-							url: 'unlock.html',
-							id: 'unlock',
-							show: {
-								aniShow: 'pop-in'
-							},
-							waiting: {
-								autoShow: false
+					app.setState(null);
+					//第三方登录
+					var authBtns = ['weixin']; //配置业务支持的第三方登录
+					var auths = {};
+					var oauthArea = doc.getElementById('weixin-oauth');
+					console.log("oauthArea is ");
+					console.dir(oauthArea);
+					var mainPage = $.preload({
+						"id": 'main',
+						"url": '../main/main.html'
+					});
+					var main_loaded_flag = false;
+					mainPage.addEventListener("loaded",function () {
+						main_loaded_flag = true;
+					});
+					var toMain = function() {
+						//使用定时器的原因：
+						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
+						var id = setInterval(function () {
+							if(main_loaded_flag){
+								clearInterval(id);
+								$.fire(mainPage, 'show', null);
+								mainPage.show("pop-in");
 							}
-						});
-					} else if(settings.autoLogin && state.token) {
-						toMain();
-					} else {
-						app.setState(null);
-						//第三方登录
-						var authBtns = ['qihoo', 'weixin', 'sinaweibo', 'qq']; //配置业务支持的第三方登录
-						var auths = {};
-						var oauthArea = doc.querySelector('.oauth-area');
-						plus.oauth.getServices(function(services) {
-							for(var i in services) {
-								var service = services[i];
-								auths[service.id] = service;
-								if(~authBtns.indexOf(service.id)) {
-									var isInstalled = app.isInstalled(service.id);
-								}
+						},20);
+					};
+					plus.oauth.getServices(function(services) {
+						for(var i in services) {
+							var service = services[i];
+							auths[service.id] = service;
+							if(~authBtns.indexOf(service.id)) {
+								var isInstalled = app.isInstalled(service.id);
 							}
-							$(oauthArea).on('tap', '.oauth-btn', function() {
-								if(this.classList.contains('disabled')) {
-									plus.nativeUI.toast('您尚未安装微信客户端');
-									return;
-								}
-								var auth = auths[this.authId];
-								var waiting = plus.nativeUI.showWaiting();
-								auth.login(function() {
-									waiting.close();
-									plus.nativeUI.toast("登录认证成功");
-									auth.getUserInfo(function() {
-										plus.nativeUI.toast("获取用户信息成功");
-										var name = auth.userInfo.nickname || auth.userInfo.name;
-										app.createState(name, function() {
-											toMain();
-										});
-									}, function(e) {
-										plus.nativeUI.toast("获取用户信息失败：" + e.message);
+						}
+						$(oauthArea).on('click', '.oauth-btn', function() {
+							if(this.classList.contains('disabled')) {
+								plus.nativeUI.toast('您尚未安装微信客户端');
+								return;
+							}
+							var auth = auths['weixin'];
+							var waiting = plus.nativeUI.showWaiting();
+							auth.login(function() {
+								waiting.close();
+								plus.nativeUI.toast("登录认证成功");
+								auth.getUserInfo(function() {
+									plus.nativeUI.toast("获取用户信息成功");
+									var name = auth.userInfo.nickname || auth.userInfo.name;
+									console.log("auth userinfo is ");
+									console.dir(auth.userInfo);
+									var params = {
+										"tokencheck": "",
+										"signcheck": Api.createSignInfo(),
+										"enroll_type": 1,
+										"nickname": auth.userInfo.nickname,
+										"openid": auth.userInfo.openid,
+										"headimgurl": auth.userInfo.headimgurl,
+									};
+									Repository.User.login(params, {
+										success: function(data) {
+											console.dir(data);
+											if(data.result.status == 'OK') {
+												console.log("1授权登录成功");
+												app.createState(name, function() {
+													toMain();
+												});
+											} else {
+												console.log("2授权登录失败");
+											}
+										},
+										error: function(xhr, type, errorThrown) {
+											mui.alert('发生未知错误，请稍后重试。', 'Error', function() {});
+										}
 									});
 								}, function(e) {
-									waiting.close();
-									plus.nativeUI.toast("登录认证失败：" + e.message);
+									plus.nativeUI.toast("获取用户信息失败：" + e.message);
 								});
+							}, function(e) {
+								waiting.close();
+								plus.nativeUI.toast("登录认证失败：" + e.message);
 							});
-						}, function(e) {
-							oauthArea.style.display = 'none';
-							plus.nativeUI.toast("获取登录认证失败：" + e.message);
 						});
-					}
+					}, function(e) {
+						oauthArea.style.display = 'none';
+						plus.nativeUI.toast("获取登录认证失败：" + e.message);
+					});
 					// close splash
 					setTimeout(function() {
 						//关闭 splash
 						plus.navigator.closeSplashscreen();
 					}, 600);
+
+					var loginBtn = doc.getElementById('login');
+					loginBtn.addEventListener('tap', function(event) {
+						console.log("click login btn");
+						var params = {
+							"tokencheck": "",
+							"signcheck": Api.createSignInfo(),
+							"enroll_type": 0,
+							"email": doc.getElementById('email').value,
+							"user_pwd": hex_md5(doc.getElementById('password').value)
+						};
+						Repository.User.login(params, {
+							success: function(data) {
+								console.dir(data);
+								if(data.result.status == 'OK') {
+									console.log("登录成功");
+									toMain();
+								} else {
+									console.log("登录失败");
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								mui.alert('发生未知错误，请稍后重试。', 'Error', function() {});
+							}
+						});
+					});
 				});
 			}(mui, document));
 		</script>

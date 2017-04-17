@@ -496,13 +496,13 @@ var Repository;
 		User.getProvinceList = getProvinceList;
 
 		function checkEmail(params, callback) {
-			var url = "/user/Register/checkEmail";
+			var url = "/user/emailCode";
 			return Api.call(url, params, callback);
 		}
 		User.checkEmail = checkEmail;
 
 		function register(params, callback) {
-			var url = "/user/Register/register";
+			var url = "/user/Register";
 			return Api.call(url, params, callback);
 		}
 		User.register = register;
