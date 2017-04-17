@@ -282,9 +282,13 @@
 					"js/app.js",
 					"js/mui.enterfocus.js",
 					"css/mui.min.css",
-					"css/style.css"
+					"css/style.css",
+					"js/knockout-3.4.2.js",
+					"js/md5.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/main/main.html"
+				],
 				"priority": 0
 			},
 			"pages/login/reg.html": {
@@ -348,7 +352,12 @@
 					"css/kankan_home.css",
 					"js/feedback.js",
 					"images/iconfont-tianjia.png",
-					"js/mui.view.js"
+					"js/mui.view.js",
+					"js/mui.picker.js",
+					"js/pro_loginsort.js",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -363,7 +372,9 @@
 					"css/icons-extra.css",
 					"images/userPhoto.png"
 				],
-				"refer": [],
+				"refer": [
+					"pages/login/login.html"
+				],
 				"priority": 0
 			},
 			"pages/main/main.html": {
