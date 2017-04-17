@@ -449,7 +449,7 @@ var Util;
 })(Util || (Util = {}));
 var Api;
 (function(Api) {
-	var baseUrl = 'http://192.168.1.8:7998';
+	var baseUrl = 'http://124.114.150.138:7998';
 	var url = {
 		"getProvinceList": "/user/Register/getProvinceList",
 		"getCityList": "/user/Register/getCityList",
@@ -506,6 +506,12 @@ var Repository;
 			return Api.call(url, params, callback);
 		}
 		User.register = register;
+		
+		function login(params, callback) {
+			var url = "/user/login/login";
+			return Api.call(url, params, callback);
+		}
+		User.login = login;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 })(Repository || (Repository = {}));
