@@ -445,8 +445,7 @@
 			var ws = null;
 			var regPage = null;
 			mui.plusReady(function() {
-				console.log("plus.webview.create");
-				ws = plus.webview.create("./products/detail.html", "detail");
+				//ws = plus.webview.create("./products/detail.html", "detail");
 				var isLogin = plus.storage.getItem("LoginFlag");
 				if(!isLogin) {
 					regPage = mui.preload({

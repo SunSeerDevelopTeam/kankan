@@ -469,6 +469,7 @@ var Api;
 				}
 			},
 			error: function(xhr, type, errorThrown) {
+				plus.ui.alert(type);
 				if(Validator.isFunc(callback.error)) {
 					callback.error(xhr, type, errorThrown);
 				}

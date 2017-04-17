@@ -431,14 +431,16 @@
 				swipeBack: true //启用右滑关闭功能
 			});
 			//lunbo
+			/**
 			var slider = mui("#slider");
 			slider.slider({
 				interval: 5000
 			});
+			**/
 			//send param
 		 	var ws = null;
 		    mui.plusReady(function () {
-		        ws = plus.webview.create("detail.html","detail");
+		        //ws = plus.webview.create("detail.html","detail");
 		    });
 		    mui('.detail').on('tap','a',function (e) {
 		        var targetId = this.getAttribute("id");

@@ -176,16 +176,29 @@
 		<script src="../../js/sha256.js"></script>
 		<script src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			(function(mui, doc){
+			(function(mui, doc) {
 				mui.init();
-				mui.plusReady(function(){
+				mui.plusReady(function() {
 					console.log("reg page plus ready...");
 					var sendVCodeBtn = doc.getElementById('send-verification-code');
-					sendVCodeBtn.addEventListener('tap', function(event){
+					sendVCodeBtn.addEventListener('tap', function(event) {
 						console.log("click sendVCodeBtn");
+						var params = {
+							"tokencheck": "",
+							"signcheck": Api.createSignInfo(),
+							"email": doc.getElementById('email').value
+						};
+						Repository.User.checkEmail(params, {
+							success: function(data) {
+								if(data.result.status == 'OK')
+									plus.UI.alert("验证码已发送至邮箱，请查收。")
+								else
+									plus.UI.alert("发送验证码失败，请重试。")
+							}
+						});
 					});
 					var regBtn = doc.getElementById('reg');
-					regBtn.addEventListener('tap', function(event){
+					regBtn.addEventListener('tap', function(event) {
 						console.log("click regBtn");
 					});
 				});

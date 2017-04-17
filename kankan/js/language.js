@@ -10,9 +10,9 @@
 			return false;
 		}
 	}
-	
-	function appendJS (filepath) {
-		if (!isInclude(filepath)) {
+
+	function appendJS(filepath) {
+		if(!isInclude(filepath)) {
 			var dynamic = doc.createElement("script");
 			dynamic.src = filepath;
 			doc.head.appendChild(dynamic);
@@ -23,10 +23,9 @@
 		var language = plus.os.language;
 		if(!language || language == "ja_JP") {
 			appendJS("../../js/language/locale_ja_JP.js");
-			appendJS("../../js/validation/localization/messages_ja.js");
 		} else {
 			appendJS("../../js/language/locale_zh_CN.js");
-			appendJS("../../js/validation/localization/messages_zh.js");
 		}
 	});
+
 })(mui, document);

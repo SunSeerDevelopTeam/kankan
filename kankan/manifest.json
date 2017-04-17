@@ -284,7 +284,14 @@
 					"css/mui.min.css",
 					"css/style.css",
 					"js/knockout-3.4.2.js",
-					"js/md5.js"
+					"js/md5.js",
+					"js/common.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"images/weixin.png",
+					"js/language/locale_zh_CN.js"
 				],
 				"refer": [
 					"pages/main/main.html"
