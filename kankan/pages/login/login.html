@@ -98,11 +98,13 @@
 		<script src="../../js/sha256.js"></script>
 		<script src="../../js/common.js"></script>
 		<script>
+			"use strict";
 			(function($, doc) {
 				$.init({
 					statusBarBackground: '#FFFFFF'
 				});
 				$.plusReady(function() {
+					Log.level = Log._level.DEBUG;
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
@@ -116,19 +118,19 @@
 						"url": '../main/main.html'
 					});
 					var main_loaded_flag = false;
-					mainPage.addEventListener("loaded",function () {
+					mainPage.addEventListener("loaded", function() {
 						main_loaded_flag = true;
 					});
 					var toMain = function() {
 						//使用定时器的原因：
 						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
-						var id = setInterval(function () {
-							if(main_loaded_flag){
+						var id = setInterval(function() {
+							if(main_loaded_flag) {
 								clearInterval(id);
 								$.fire(mainPage, 'show', null);
 								mainPage.show("pop-in");
 							}
-						},20);
+						}, 20);
 					};
 					plus.oauth.getServices(function(services) {
 						for(var i in services) {
@@ -153,28 +155,20 @@
 									var name = auth.userInfo.nickname || auth.userInfo.name;
 									console.log("auth userinfo is ");
 									console.dir(auth.userInfo);
-									var params = {
-										"tokencheck": "",
-										"signcheck": Api.createSignInfo(),
-										"enroll_type": 1,
-										"nickname": auth.userInfo.nickname,
-										"openid": auth.userInfo.openid,
-										"headimgurl": auth.userInfo.headimgurl,
-									};
+									let params = [];
+									params[Api.Params.loginType] = LOGIN_TYPE.OAUTH;
+									params[Api.Params.nickName] = auth.userInfo.nickname;
+									params[Api.Params.openId] = auth.userinfo.openid;
+									params[Api.Params.headimgUrl] = auth.userInfo.headimgurl;
 									Repository.User.login(params, {
-										success: function(data) {
-											console.dir(data);
-											if(data.result.status == 'OK') {
-												console.log("1授权登录成功");
-												app.createState(name, function() {
-													toMain();
-												});
-											} else {
-												console.log("2授权登录失败");
-											}
+										ok: function(data) {
+											Log.d("授权登录成功")
+											app.createState(name, function() {
+												toMain();
+											});
 										},
-										error: function(xhr, type, errorThrown) {
-											mui.alert('发生未知错误，请稍后重试。', 'Error', function() {});
+										ng: function(data) {
+											Log.d("授权登录失败")
 										}
 									});
 								}, function(e) {
@@ -198,25 +192,18 @@
 					var loginBtn = doc.getElementById('login');
 					loginBtn.addEventListener('tap', function(event) {
 						console.log("click login btn");
-						var params = {
-							"tokencheck": "",
-							"signcheck": Api.createSignInfo(),
-							"enroll_type": 0,
-							"email": doc.getElementById('email').value,
-							"user_pwd": hex_md5(doc.getElementById('password').value)
-						};
+						let params = [];
+						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
+						params[Api.Params.email] = doc.getElementById('email').value.trim();
+						params[Api.Params.password] = hex_md5(doc.getElementById('password').value.trim());
 						Repository.User.login(params, {
-							success: function(data) {
-								console.dir(data);
-								if(data.result.status == 'OK') {
-									console.log("登录成功");
-									toMain();
-								} else {
-									console.log("登录失败");
-								}
+							ok: function(data) {
+								// TODO OK logic
+								Log.d("email login ok");
 							},
-							error: function(xhr, type, errorThrown) {
-								mui.alert('发生未知错误，请稍后重试。', 'Error', function() {});
+							ng: function(data) {
+								// TODO NG logic
+								Log.d("email login ng");
 							}
 						});
 					});

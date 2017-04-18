@@ -1,11 +1,10 @@
-﻿var emailLogin = 0;
-var weixinLogin = 1;
-var secretKey = "justfortest00001xxxxOOOX";
-var STATUS = {
+﻿"use strict";
+const secretKey = "justfortest00001xxxxOOOX";
+const STATUS = {
 	OK: "OK",
 	NG: "NG"
 };
-var LOGIN_TYPE = {
+const LOGIN_TYPE = {
 	EMAIL: "0",
 	OAUTH: "1"
 }
@@ -474,21 +473,27 @@ var Api;
 		password: 'user_pwd',
 		token: 'tokencheck',
 		sign: 'signcheck',
-		loginType: 'enroll_type'
+		loginType: 'enroll_type',
+		nickName: 'nickname',
+		openId: 'openid',
+		headimgUrl: 'headimgurl',
+		addressId:'address_id',
+		vCode:'verificationCode',
+		rCode:'recom_code'
 	};
 
 	function call(url, params, callback) {
 		params[Api.Params.token] = getToken();
 		params[Api.Params.sign] = createSignInfo();
 		mui.ajax(url, {
-			data:params,
+			data: params,
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
 			timeout: 10000, //超时时间设置为10秒；
 			success: function(data) {
-				if(data.result.status == STATUS.OK && Validator.isFunc(callback.success))
+				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data)
-				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.error))
+				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng))
 					callback.ng(data)
 			},
 			error: function(xhr, type, errorThrown) {
@@ -539,9 +544,9 @@ var Repository;
 		User.login = login;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
-	
+
 	var Commodity;
-	(function(Commodity){
+	(function(Commodity) {
 		function commoditydetail(params, callback) {
 			return Api.call(Api.url.Commodity.commoditydetail, params, callback);
 		}
