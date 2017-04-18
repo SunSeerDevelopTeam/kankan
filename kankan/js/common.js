@@ -1,6 +1,14 @@
 ﻿var emailLogin = 0;
 var weixinLogin = 1;
 var secretKey = "justfortest00001xxxxOOOX";
+var STATUS = {
+	OK: "OK",
+	NG: "NG"
+};
+var LOGIN_TYPE = {
+	EMAIL: "0",
+	OAUTH: "1"
+}
 var Validator;
 (function(Validator) {
 	Validator.types = {
@@ -451,34 +459,48 @@ var Api;
 (function(Api) {
 	var baseUrl = 'http://124.114.150.138:7998';
 	Api.url = {
-		User : {
+		User: {
 			checkEmail: baseUrl + '/user/emailCode',
-			register:　baseUrl + '/user/Register',
+			register: 　baseUrl + '/user/Register',
 			login: baseUrl + '/user/login/login'
+		},
+		Commodity: {
+			commoditydetail: baseUrl + '/commodity/commoditydetail'
 		}
+	};
+	Api.Params = {
+		email: 'email',
+		username: 'username',
+		password: 'user_pwd',
+		token: 'tokencheck',
+		sign: 'signcheck',
+		loginType: 'enroll_type'
 	};
 
 	function call(url, params, callback) {
-		mui.ajax(baseUrl + url, {
-			data: params,
+		params[Api.Params.token] = getToken();
+		params[Api.Params.sign] = createSignInfo();
+		mui.ajax(url, {
+			data:params,
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
 			timeout: 10000, //超时时间设置为10秒；
 			success: function(data) {
-				if(Validator.isFunc(callback.success)) {
-					callback.success(data);
-				}
+				if(data.result.status == STATUS.OK && Validator.isFunc(callback.success))
+					callback.ok(data)
+				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.error))
+					callback.ng(data)
 			},
 			error: function(xhr, type, errorThrown) {
 				plus.ui.alert(type);
-				if(Validator.isFunc(callback.error)) {
-					callback.error(xhr, type, errorThrown);
-				}
 			}
 		});
 	}
 	Api.call = call;
 
+	/**
+	 * create sign info
+	 */
 	function createSignInfo() {
 		var timestamp = (new Date()).valueOf().toString();
 		var sub_timestamp = timestamp.substring(timestamp.length - 8, timestamp.length - 1);
@@ -487,33 +509,78 @@ var Api;
 		return timestamp + "_" + signQ + "_" + signA;
 	}
 	Api.createSignInfo = createSignInfo;
+
+	/**
+	 * return token info
+	 */
+	function getToken() {
+		// TODO return token info
+		return "";
+	}
+	Api.getToken = getToken;
 })(Api || (Api = {}));
 var Repository;
 (function(Repository) {
 	var User;
 	(function(User) {
-		function getProvinceList(params, callback) {
-			return Api.call(Api.url.getProvinceList, params, callback);
-		}
-		User.getProvinceList = getProvinceList;
-
 		function checkEmail(params, callback) {
-			var url = "/user/emailCode";
-			return Api.call(url, params, callback);
+			return Api.call(Api.url.User.checkEmail, params, callback);
 		}
 		User.checkEmail = checkEmail;
 
 		function register(params, callback) {
-			var url = "/user/Register";
-			return Api.call(url, params, callback);
+			return Api.call(Api.url.User.register, params, callback);
 		}
 		User.register = register;
-		
+
 		function login(params, callback) {
-			var url = "/user/login/login";
-			return Api.call(url, params, callback);
+			return Api.call(Api.url.User.login, params, callback);
 		}
 		User.login = login;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
+	
+	var Commodity;
+	(function(Commodity){
+		function commoditydetail(params, callback) {
+			return Api.call(Api.url.Commodity.commoditydetail, params, callback);
+		}
+		Commodity.commoditydetail = commoditydetail;
+	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
+	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
+var Log;
+(function(Log) {
+	var level = 4;
+	Log._level = {
+		NONE: 0,
+		ERROR: 1,
+		WARN: 2,
+		INFO: 3,
+		DEBUG: 4
+	};
+
+	function e(data) {
+		if(level >= Log._level.ERROR)
+			console.error(data)
+	}
+	Log.e = e;
+
+	function w(data) {
+		if(level >= Log._level.WARN)
+			console.warn(data)
+	}
+	Log.w = w;
+
+	function i(data) {
+		if(level >= Log._level.INFO)
+			console.info(data)
+	}
+	Log.i = i;
+
+	function d(data) {
+		if(level >= Log._level.DEBUG)
+			console.debug(data)
+	}
+	Log.d = d;
+})(Log || (Log = {}));
