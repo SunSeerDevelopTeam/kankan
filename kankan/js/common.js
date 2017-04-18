@@ -450,12 +450,13 @@ var Util;
 var Api;
 (function(Api) {
 	var baseUrl = 'http://124.114.150.138:7998';
-	var url = {
-		"getProvinceList": "/user/Register/getProvinceList",
-		"getCityList": "/user/Register/getCityList",
-		"checkEmail": "/user/Register/checkEmail",
-		"register": "/user/Register/register"
-	}
+	Api.url = {
+		User : {
+			checkEmail: baseUrl + '/user/emailCode',
+			register:　baseUrl + '/user/Register',
+			login: baseUrl + '/user/login/login'
+		}
+	};
 
 	function call(url, params, callback) {
 		mui.ajax(baseUrl + url, {
