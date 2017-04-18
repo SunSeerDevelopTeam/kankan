@@ -464,7 +464,8 @@ var Api;
 			login: baseUrl + '/user/login/login'
 		},
 		Commodity: {
-			commoditydetail: baseUrl + '/commodity/commoditydetail'
+			commodityDetail: baseUrl + '/commodity/commoditydetail',
+			commodityList:baseUrl + '/index/index/'
 		}
 	};
 	Api.Params = {
@@ -477,13 +478,13 @@ var Api;
 		nickName: 'nickname',
 		openId: 'openid',
 		headimgUrl: 'headimgurl',
-		addressId:'address_id',
-		vCode:'verificationCode',
-		rCode:'recom_code'
+		addressId: 'address_id',
+		vCode: 'verificationCode',
+		rCode: 'recom_code'
 	};
 
 	function call(url, params, callback) {
-		params[Api.Params.token] = getToken();
+		params[Api.Params.token] = getToken() ? getToken() : "";
 		params[Api.Params.sign] = createSignInfo();
 		mui.ajax(url, {
 			data: params,
@@ -547,10 +548,15 @@ var Repository;
 
 	var Commodity;
 	(function(Commodity) {
-		function commoditydetail(params, callback) {
-			return Api.call(Api.url.Commodity.commoditydetail, params, callback);
+		function commodityDetail(params, callback) {
+			return Api.call(Api.url.Commodity.commodityDetail, params, callback);
 		}
-		Commodity.commoditydetail = commoditydetail;
+		Commodity.commodityDetail = commodityDetail;
+		
+		function commodityList(params, callback){
+			return Api.call(Api.url.Commodity.commodityList, params, callback);
+		}
+		Commodity.commodityList = commodityList;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
@@ -589,3 +595,9 @@ var Log;
 	}
 	Log.d = d;
 })(Log || (Log = {}));
+var TextMessage;
+(function(TextMessage) {
+	var language = "";
+	TextMessage.back = language == "ja_JP" ? "戻る" : "返回";
+	TextMessage.skip = language == "ja_JP" ? "スキップ" : "跳过";
+})(TextMessage || (TextMessage = {}));

@@ -44,13 +44,16 @@
 			<a class="mui-icon mui-pull-left" id="user">
 				<img src="../../images/userPhoto.png" />
 			</a>
-			<h1 id="title" class="mui-title">Home</h1>
+			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
 			<a class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow"></a>
 			<a class="mui-icon mui-icon-search mui-pull-right"></a>
 		</header>
 		<div class="mui-content"></div>
 	</body>
 	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../js/language.js"></script>
+	<script src="../../js/common.js"></script>
 	<script type="text/javascript" charset="UTF-8">
 		(function(mui, doc) {
 			mui.init({
@@ -58,8 +61,8 @@
 					doubletap: true
 				},
 				subpages: [{
-					url: 'pullrefresh_sub.html',
-					id: 'pullrefresh_sub',
+					url: 'pullrefresh_with_tab.html',
+					id: 'pullrefresh_with_tab',
 					styles: {
 						top: '45px',
 						bottom: '0px'
@@ -68,12 +71,13 @@
 			});
 
 			mui.plusReady(function() {
+				TextMessage.language = plus.os.language;
 				var userPhoto = document.getElementById("user");
 				var isLogin = plus.storage.getItem("LoginFlag");
 				userPhoto.addEventListener('click', function(event) {
 					console.log("userPhoto clicked.");
 					if(!isLogin) {
-						var btnArray = ['新しいはじめる方はこちら', '登録済みの方はこちら', 'スキップ'];
+						var btnArray = ['新しいはじめる方はこちら', '登録済みの方はこちら', TextMessage.skip];
 						mui.confirm('1', '0', btnArray, function(e) {
 							switch(e.index) {
 								case 0:

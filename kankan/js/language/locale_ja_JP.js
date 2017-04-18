@@ -51,8 +51,10 @@ var JSLocale = {
 	"det_goodcomments":"良い",
 	"det_normalcomments":"普通",
 	"det_badcomments":"悪い",
-	"det_all":"全て"
+	"det_all":"全て",
 	
+	// Home Page
+	"app_name":"カンカン"
 }
 
 $(function(){

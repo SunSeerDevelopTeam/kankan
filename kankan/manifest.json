@@ -377,7 +377,12 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"css/icons-extra.css",
-					"images/userPhoto.png"
+					"images/userPhoto.png",
+					"js/common.js",
+					"js/language.js",
+					"js/language/locale_zh_CN.js",
+					"js/jquery-3.2.0.min.js",
+					"pages/main/pullrefresh_with_tab.html"
 				],
 				"refer": [
 					"pages/login/login.html"
@@ -410,7 +415,8 @@
 					"css/mui.min.css",
 					"css/kankan_home.css",
 					"css/icons-extra.css",
-					"pages/main/products/detail.html"
+					"pages/main/products/detail.html",
+					"images/shuijiao.jpg"
 				],
 				"refer": [
 					"pages/login/reg.html"
@@ -423,6 +429,18 @@
 					"images/logo.png",
 					"images/muwu.jpg",
 					"images/jiantou.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/pullrefresh_with_tab.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/common.js",
+					"js/sha256.js"
 				],
 				"refer": [],
 				"priority": 0

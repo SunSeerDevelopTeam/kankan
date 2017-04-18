@@ -51,7 +51,10 @@ var JSLocale = {
 	"det_goodcomments":"好评",
 	"det_normalcomments":"中评",
 	"det_badcomments":"差评",
-	"det_all":"全部"
+	"det_all":"全部",
+	
+	// Home Page
+	"app_name":"kankan",
 	
 }
 
