@@ -73,7 +73,7 @@
 			</ul>
 			<!--share-->
 			<ul class="mui-table-view">
-				<li class="mui-table-view-cell kankan_det_description">
+				<li class="mui-table-view-cell kankan_det_description" id="share">
 					<span class="lang" data-locale="det_spahare"></span>
 					<img src="../../../images/weixin.png" width="30" height="30">
 					<img src="../../../images/facebook.png" width="40" height="30">
@@ -113,8 +113,23 @@
 		</div>
 		<!--Produce goods of concern-->
 		<h5 class="ka_h5backcolor lang" data-locale="det_concerneds">出品者关注商品</h5>
-		
-		
+		<div class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop">
+				<!--last-->
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一个图文表格) -->
+				<div class="mui-slider-item mui-slider-item-duplicate" id="lastconcenered">
+					<ul class="mui-table-view mui-grid-view" id="lastconcerul">
+						
+					</ul>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一个图文表格) -->
+				<!--first-->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<ul class="mui-table-view mui-grid-view" id="firstconcerul">
+					</ul>
+				</div>
+			</div>
+		</div>
 		<!--Recommended products-->
 		<h5 class="ka_h5backcolor lang" data-locale="det_recommends">推荐商品</h5>
 		<div class="mui-slider">
@@ -122,20 +137,13 @@
 				<!--last-->
 				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一个图文表格) -->
 				<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
-					<ul class="mui-table-view mui-grid-view" id="lastremmondul">
-						
+					<ul class="mui-table-view mui-grid-view" id="lastremmondul">	
 					</ul>
 				</div>
 				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一个图文表格) -->
 				<!--first-->
 				<div class="mui-slider-item mui-slider-item-duplicate">
 					<ul class="mui-table-view mui-grid-view" id="firstremmondul">
-						<!--<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">
-							<a href="#">
-								<img class="mui-media-object" src="../../../images/muwu.jpg">
-				
-							</a>
-						</li>-->
 					</ul>
 				</div>
 			</div>
@@ -144,7 +152,7 @@
 		<!--Commodity exchange, white send, point exchange information button-->
 		<div style="margin: 1em 0;">
 		<button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;">
-			<span class="lang" data-locale="det_pointexch"><b>point(<span class="comdprice">10</span>)</b></span>
+			<span class="lang" data-locale="det_pointexch"><b>point(<span class="comdprice"></span>)</b></span>
 		</button>
 			<button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;">
 			<span class="lang" data-locale="det_exchange"><b>交换</b></span>
@@ -166,18 +174,113 @@
 				swipeBack: true //启用右滑关闭功能
 			});
 			//send param
-			var ws = null;
-			mui.plusReady(function() {
-				ws = plus.webview.create("detail.html", "detail");
+//			var ws = null;
+//			mui.plusReady(function() {
+//				ws = plus.webview.create("detail.html", "detail");
+//			});
+//			mui('.detail').on('tap', 'a', function(e) {
+//				var targetId = this.getAttribute("id");
+//				ws.evalJS('send(' + targetId + ')');
+//				ws.show();
+//			});
+//*********************share start
+		var shares = {};
+		mui.plusReady(function() {
+			plus.share.getServices(function(s) {
+				if (s && s.length > 0) {
+					for (var i = 0; i < s.length; i++) {
+						var t = s[i];
+						shares[t.id] = t;
+					}
+				}
+			}, function() {
+				console.log("获取分享服务列表失败");
 			});
-			mui('.detail').on('tap', 'a', function(e) {
-				var targetId = this.getAttribute("id");
-				ws.evalJS('send(' + targetId + ')');
-				ws.show();
-			})
-			// get id show product detail
-			function send(param) {
-				var proid = param;
+		});
+		
+//		setTimeout(function () {
+//			defaultImg();
+//			setTimeout(function() {
+//				initImgPreview();
+//			}, 300);
+//		},500);
+		
+		//分享链接点击事件
+		document.getElementById("share").addEventListener('tap', function() {
+			var ids = [{
+					id: "weixin",
+					ex: "WXSceneSession"
+				}, {
+					id: "weixin",
+					ex: "WXSceneTimeline"
+				}
+//				, {
+//					id: "sinaweibo"
+//				}, {
+//					id: "tencentweibo"
+//				}, {
+//					id: "qq"
+//				}
+				],
+				bts = [{
+					title: "发送给微信好友"
+				}, {
+					title: "分享到微信朋友圈"
+			}
+//	, {
+//					title: "分享到新浪微博"
+//				}, {
+//					title: "分享到腾讯微博"
+//				}, {
+//					title: "分享到QQ"
+//				}
+				];
+			plus.nativeUI.actionSheet({
+				cancel: "取消",
+				buttons: bts
+			}, function(e) {
+				var i = e.index;
+				if (i > 0) {
+					var s_id = ids[i - 1].id;
+					var share = shares[s_id];
+					if (share) {
+						if (share.authenticated) {
+							shareMessage(share, ids[i - 1].ex);
+						} else {
+							share.authorize(function() {
+								shareMessage(share, ids[i - 1].ex);
+							}, function(e) {
+								console.log("认证授权失败：" + e.code + " - " + e.message);
+							});
+						}
+					} else {
+						mui.toast("无法获取分享服务，请检查manifest.json中分享插件参数配置，并重新打包")
+					}
+				}
+			});
+		});
+
+		function shareMessage(share, ex) {
+			var msg = {
+				extra: {
+					scene: ex
+				}
+			};
+			msg.href = "http://www.baidu.com";
+			msg.title = "你几道不几道";
+			msg.content = "我是小鲜肉~";
+			if (~share.id.indexOf('weibo')) {
+				msg.content += "；体验地址：http://www.dcloud.io/hellomui/";
+			}
+			msg.thumbs = ["../../../images/muwu.jpg"];
+			share.send(msg, function() {
+				console.log("分享到\"" + share.description + "\"成功！ ");
+			}, function(e) {
+				console.log("分享到\"" + share.description + "\"失败: " + e.code + " - " + e.message);
+			});
+		}
+		//share end***********/
+			$(function(){
 				var params = {
 					"tokencheck": "",
 					"signcheck":Api.createSignInfo(),
@@ -200,8 +303,12 @@
 						mui.alert('发生未知错误，请稍后重试。', 'Error', function() {});
 					}
 				});
-
-			}
+			});
+//			// get id show product detail
+//			function send(param) {
+//				var proid = param;
+//
+//			}
 			//message show
 			function messageshow(results) {
 				var commodity = results.result.data;
@@ -218,17 +325,20 @@
 				slider.slider({
 					interval: 1000
 				});
-				var comdimgs=commodity.commodity_imgs[0];
-				var imgsarr=comdimgs.split(',');
+				var imgsarr=commodity.commodity_imgs;
+				var htmlimg="";
+				//console.log(imgsarr.length);
 				for(i=0;i<imgsarr.length;i++){
 					var la=imgsarr.length-1*1;
 					$(".firstimage img").attr("src",imgsarr[0]);
 					$(".lastimage img").attr("src",imgsarr[la]);
-					var htmlimg='<div class="mui-slider-item">';
+					htmlimg+='<div class="mui-slider-item">';
 			        htmlimg+='<img src="'+imgsarr[i]+'">';
 			        htmlimg+='</div>';
-					//console.log(imgsarr[la]);
+					//console.log(imgsarr[i]);
 				}
+				//console.log(htmlimg);
+				$(".firstimage").after(htmlimg);
 				var goodcount=commodity.commodity_praise.praise_count;
 				$("#zanshu").html(goodcount);
 				var comentnum=commodity.commodity_levave_mess.leave_mess_count;
@@ -261,7 +371,7 @@
 				var business=commodity.commodity_buy_way.business;
 				var gratis=commodity.commodity_buy_way.gratis;
 				var price=comdbasic[0].price;
-				console.log("exchange:"+exchange+" business:"+business+" gratis:"+gratis+" price:"+price);
+				//console.log("exchange:"+exchange+" business:"+business+" gratis:"+gratis+" price:"+price);
 				if(exchange=="1"){
 					$("#switchex").show();
 				}
@@ -272,41 +382,43 @@
 				if(gratis=="1"){
 					$("#switchsend").show();
 				}
-				//recommend
+				//*************************************recommend
+				var recomendhtml2="";
 				var recomendhtml='<div class="mui-slider-item">';
 					recomendhtml+='<ul class="mui-table-view mui-grid-view">';
 				var recomendsarrs=commodity.commodity_recommend;
 				var recomdlenght=recomendsarrs.length;
-				alert(recomdlenght);
+				//alert(recomdlenght);
 				var recomendsobj={};
 				var recomendaddhtml="";//add dom
-				//var k=0;
+				var c=0;
 				for(var j=0;j<recomdlenght;j++){
 					var k=j+1*1;
-					console.log("j:"+j+" k:"+k);
 					var recomendsobj1=JSON.stringify(recomendsarrs[j]);
 					recomendsobj=$.parseJSON(recomendsobj1); 
 					//console.log(recomendsobj1);
 					var recomdimg=recomendsobj.commodity_photo_url;
 					var recomdid=recomendsobj.commodity_id;
 					var advflag=recomendsobj.is_ad;
-					console.log("recomdimg:"+recomdimg);
+					//console.log("recomdid:"+recomdid);
 					recomendhtml+='<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					recomendhtml+='<a href="#" id="20">';
+					recomendhtml+='<a href="#" id="'+recomdid+'">';
 					recomendhtml+='<img class="mui-media-object" src="'+recomdimg+'">';	
+					//recomendhtml+='<div>'+j+'content</div>';
 					recomendhtml+='</a></li>';
 					var vall=k%4;
-					if(vall==0 || j==recomdlenght){
+					if(vall==0 || j==recomdlenght-1){
 						recomendhtml+='</ul></div>';
 					}	
 					if(vall==0 && j < recomdlenght){
 						recomendhtml+='<div class="mui-slider-item">';
 						recomendhtml+='<ul class="mui-table-view mui-grid-view">';
 					}
-					$("lastrecommend").append(recomendhtml);
+					
 					recomendaddhtml+='<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					recomendaddhtml+='<a href="#" id="20">';
-					recomendaddhtml+='<img class="mui-media-object" src="../../../images/muwu.jpg">';	
+					recomendaddhtml+='<a href="#" id="'+recomdid+'">';
+					recomendaddhtml+='<img class="mui-media-object" src="'+recomdimg+'">';
+					//recomendaddhtml+='<div>'+j+'add</div>';
 					recomendaddhtml+='</a></li>';
 					if(j<4){
 						$("#firstremmondul").html(recomendaddhtml);
@@ -314,9 +426,60 @@
 					if(j>recomdlenght-4){
 						$("#lastremmondul").html(recomendaddhtml);
 					}
+				}
+				recomendhtml2+=recomendhtml;
+				$("#lastrecommend").after(recomendhtml2);
+				//*************************************************/
+				//*************************************concenered
+				var concernhtml2="";
+				var concernhtml='<div class="mui-slider-item">';
+					concernhtml+='<ul class="mui-table-view mui-grid-view">';
+				var concernarrs=commodity.user_praise_commoditys;
+				var concernlenght=concernarrs.length;
+				//alert(concernlenght);
+				var concernsobj={};
+				var concernaddhtml="";//add dom
+				//var k=0;
+				for(var l=0;l<concernlenght;l++){
+					var m=l+1*1;
+					//console.log("l:"+l+" m:"+m);
+					var concernobj1=JSON.stringify(concernarrs[l]);
+					concernsobj=$.parseJSON(concernobj1); 
+					//console.log(recomendsobj1);
+					var concernimg=concernsobj.commodity_photo_url;
+					var concernid=concernsobj.commodity_id;
+					//console.log("concernid:"+concernid);
+					concernhtml+='<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+					concernhtml+='<a href="#" id="'+concernid+'">';
+					concernhtml+='<img class="mui-media-object" src="'+concernimg+'">';	
+					//concernhtml+='<div>'+l+'content</div>';
+					concernhtml+='</a></li>';
+					var vallm=m%4;
+					if(vallm==0 || l==concernlenght-1){
+						concernhtml+='</ul></div>';
+					}	
+					if(vallm==0 && l < concernlenght){
+						concernhtml+='<div class="mui-slider-item">';
+						concernhtml+='<ul class="mui-table-view mui-grid-view">';
+					}
+					
+					concernaddhtml+='<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+					concernaddhtml+='<a href="#" id="'+concernid+'">';
+					concernaddhtml+='<img class="mui-media-object" src="'+concernimg+'">';
+					//concernaddhtml+='<div>'+l+'add</div>';
+					concernaddhtml+='</a></li>';
+					if(l<4){
+						$("#firstconcerul").html(concernaddhtml);
+					}
+					if(l>concernlenght-4){
+						$("#lastconcerul").html(concernaddhtml);
+					}
 					
 				}
-				//k=j+1;
+				//console.log(concernaddhtml);
+				concernhtml2+=concernhtml;
+				$("#lastconcenered").after(concernhtml2);
+				//*************************************************/
 			}
 			//go back
 			mui.back = function() {
