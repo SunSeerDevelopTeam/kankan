@@ -444,7 +444,10 @@
 					"js/sha256.js",
 					"js/knockout-3.4.2.js",
 					"js/jquery-3.2.0.min.js",
-					"css/kankan_home.css"
+					"css/kankan_home.css",
+					"css/home.css",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [],
 				"priority": 0
