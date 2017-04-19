@@ -465,7 +465,8 @@ var Api;
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
 			commodityList: baseUrl + '/index/index/',
-			catalog: baseUrl + '/commodity/catalog/'
+			category: baseUrl + '/commodity/catalog/',
+			praise:baseUrl + '/commodity/praise/'
 		}
 	};
 	Api.Params = {
@@ -496,11 +497,11 @@ var Api;
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng))
-					callback.ng(data.statuscode)
+					callback.ng(data.result.statuscode)
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
-				plus.ui.alert(type);
+				plus.ui.alert(errorThrown);
 				$d.reject();
 			}
 		});
@@ -562,10 +563,15 @@ var Repository;
 		}
 		Commodity.commodityList = commodityList;
 
-		function catalog(params, callback) {
-			return Api.call(Api.url.Commodity.catalog, params, callback);
+		function category(params, callback) {
+			return Api.call(Api.url.Commodity.category, params, callback);
 		}
-		Commodity.catalog = catalog;
+		Commodity.category = category;
+		
+		function praise(params,callback){
+			return Api.call(Api.url.Commodity.praise, params, callback);
+		}
+		Commodity.praise = praise;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
@@ -609,6 +615,7 @@ var TextMessage;
 	var language = "";
 	TextMessage.back = language == "ja_JP" ? "戻る" : "返回";
 	TextMessage.skip = language == "ja_JP" ? "スキップ" : "跳过";
+	TextMessage.test = language == "ja_JP" ? "请求登录!" : "请先登录!";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
