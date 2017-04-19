@@ -382,7 +382,8 @@
 					"js/language.js",
 					"js/language/locale_zh_CN.js",
 					"js/jquery-3.2.0.min.js",
-					"pages/main/pullrefresh_with_tab.html"
+					"pages/main/pullrefresh_with_tab.html",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
 					"pages/login/login.html"
@@ -440,7 +441,10 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/common.js",
-					"js/sha256.js"
+					"js/sha256.js",
+					"js/knockout-3.4.2.js",
+					"js/jquery-3.2.0.min.js",
+					"css/kankan_home.css"
 				],
 				"refer": [],
 				"priority": 0

@@ -1,10 +1,9 @@
-﻿"use strict";
-const secretKey = "justfortest00001xxxxOOOX";
-const STATUS = {
+﻿var secretKey = "justfortest00001xxxxOOOX";
+var STATUS = {
 	OK: "OK",
 	NG: "NG"
 };
-const LOGIN_TYPE = {
+var LOGIN_TYPE = {
 	EMAIL: "0",
 	OAUTH: "1"
 }
@@ -465,7 +464,8 @@ var Api;
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
-			commodityList:baseUrl + '/index/index/'
+			commodityList: baseUrl + '/index/index/',
+			catalog: baseUrl + '/commodity/catalog/'
 		}
 	};
 	Api.Params = {
@@ -484,7 +484,8 @@ var Api;
 	};
 
 	function call(url, params, callback) {
-		params[Api.Params.token] = getToken() ? getToken() : "";
+		var $d = $.Deferred();
+		params[Api.Params.token] = getToken();
 		params[Api.Params.sign] = createSignInfo();
 		mui.ajax(url, {
 			data: params,
@@ -493,14 +494,17 @@ var Api;
 			timeout: 10000, //超时时间设置为10秒；
 			success: function(data) {
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
-					callback.ok(data)
+					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng))
-					callback.ng(data)
+					callback.ng(data.statuscode)
+				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
 				plus.ui.alert(type);
+				$d.reject();
 			}
 		});
+		return $d.promise();
 	}
 	Api.call = call;
 
@@ -552,11 +556,16 @@ var Repository;
 			return Api.call(Api.url.Commodity.commodityDetail, params, callback);
 		}
 		Commodity.commodityDetail = commodityDetail;
-		
-		function commodityList(params, callback){
+
+		function commodityList(params, callback) {
 			return Api.call(Api.url.Commodity.commodityList, params, callback);
 		}
 		Commodity.commodityList = commodityList;
+
+		function catalog(params, callback) {
+			return Api.call(Api.url.Commodity.catalog, params, callback);
+		}
+		Commodity.catalog = catalog;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
@@ -601,3 +610,36 @@ var TextMessage;
 	TextMessage.back = language == "ja_JP" ? "戻る" : "返回";
 	TextMessage.skip = language == "ja_JP" ? "スキップ" : "跳过";
 })(TextMessage || (TextMessage = {}));
+var Entity;
+(function(Entity) {
+	var Commodity = (function() {
+		function Commodity() {
+			var self = this;
+			this.classes = null;
+			this.commName = null;
+			this.commodityId = null;
+			this.imgs = null;
+			this.praise = null;
+			this.price = null;
+		}
+		Commodity.prototype.fromJson = function(json) {
+			if(Validator.isNull(json)) return;
+			this.classes = json.classes;
+			this.commName = json.comm_name;
+			this.commodityId = json.commodity_id;
+			this.imgs = json.imgs;
+			this.praise = json.praise;
+			this.price = json.price;
+		};
+		Commodity.prototype.reset = function() {
+			this.classes(null);
+			this.commName(null);
+			this.commodityId(null);
+			this.imgs(null);
+			this.praise(null);
+			this.price(null);
+		};
+		return Commodity;
+	}());
+	Entity.Commodity = Commodity;
+})(Entity || (Entity = {}));

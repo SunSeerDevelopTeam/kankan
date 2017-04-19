@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<style>
 			html,
@@ -538,30 +537,28 @@
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script src="../../js/sha256.js"></script>
+		<script src="../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../js/knockout-3.4.2.js"></script>
 		<script src="../../js/common.js"></script>
 		<script>
-			"use strict";
 			mui.init();
-			(function($) {
+			(function(mui) {
 				//阻尼系数
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
-				$('.mui-scroll-wrapper').scroll({
+				mui('.mui-scroll-wrapper').scroll({
 					bounce: false,
 					indicators: true, //是否显示滚动条
 					deceleration: deceleration
 				});
-				$.ready(function() {
+				mui.ready(function() {
 					//循环初始化所有下拉刷新，上拉加载。
-					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
-						$(pullRefreshEl).pullToRefresh({
+					mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+						mui(pullRefreshEl).pullToRefresh({
 							down: {
 								callback: function() {
 									var self = this;
-									getCommodityList();
 									setTimeout(function() {
-										var ul = self.element.querySelector('.mui-table-view');
-										ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
-										self.endPullDownToRefresh();
+										createFragment(self);
 									}, 1000);
 								}
 							},
@@ -577,32 +574,67 @@
 							}
 						});
 					});
-					var createFragment = function(ul, index, count, reverse) {
-						var length = ul.querySelectorAll('li').length;
-						var fragment = document.createDocumentFragment();
-						var li;
-						for(var i = 0; i < count; i++) {
-							li = document.createElement('li');
-							li.className = 'mui-table-view-cell';
-							li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
-							fragment.appendChild(li);
-						}
-						return fragment;
-					};
-					
-					var getCommodityList = function(){
-						let params = [];
-						
+					//ul, index, count, reverse
+					var createFragment = function(self, isDown) {
+						// get commodity list data
+						var params = {};
+						var commodityArray = [];
 						Repository.Commodity.commodityList(params, {
+							ok: function(result) {
+								for(var i = 0; i < result.data.length; i++) {
+									var commodity = new Entity.Commodity();
+									commodity.fromJson(result.data[i]);
+									commodityArray.push(commodity);
+								}
+							},
+							ng: function(data) {
+								Log.e(data);
+							}
+						}).then(function() {
+							var ul = self.element.querySelector('.mui-table-view');
+							var length = ul.querySelectorAll('li').length;
+							var fragment = document.createDocumentFragment();
+							var li;
+							for(var i = 0; i < commodityArray.length; i++) {
+								li = document.createElement('li');
+								li.className = 'mui-table-view-cell';
+								var html = new Util.StringBuilder();
+								html.append('<a>')
+									.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', commodityArray[i].imgs)
+									.appendFormat('<div class="mui-media-body">{0}</div>', commodityArray[i].commName)
+									.append('</a>')
+									.appendFormat('<div class="kankan_area">{0}</div>', commodityArray[i].classes)
+									.append('<div class="mui-pull-left ka_mony">')
+									.appendFormat('<div>{0}<font color="#000000"> P</font></div>', commodityArray[i].price)
+									.append('</div>')
+									.append('<div class="mui-pull-right ka_heartlocation">')
+									.append('<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey" onclick="good(this)"></span>')
+									.appendFormat('<div class="ka_heartnum">{0}</div>', commodityArray[i].praise)
+									.append('</div>');
+								li.innerHTML = html.toString();
+								fragment.appendChild(li);
+							}
+							if(isDown)
+								ul.insertBefore(fragment, ul.firstChild);
+							self.endPullDownToRefresh();
+						});
+					};
+
+					/**
+					var getCateory = function() {
+						Log.i("getCateory")
+						var params = {};
+						Repository.Commodity.catalog(params, {
 							ok:function(data){
-								Log.i("get commodity list ok");
+								Log.i(data);
 							},
 							ng:function(data){
 								Log.e(data);
 							}
 						});
 					};
-					getCommodityList();
+					getCateory();
+					**/
 				});
 			})(mui);
 		</script>
