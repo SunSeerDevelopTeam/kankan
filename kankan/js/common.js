@@ -466,7 +466,10 @@ var Api;
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
 			commodityList: baseUrl + '/index/index/',
 			category: baseUrl + '/commodity/catalog/',
-			praise:baseUrl + '/commodity/praise/'
+			praise:baseUrl + '/commodity/praise/',
+			commodityulist:baseUrl+'/commodity/Commodityusers/',
+			Usercomment:baseUrl+'/user/Usercomment/',
+			Commoditycomment:baseUrl+'/commodity/Commoditycomment/'
 		}
 	};
 	Api.Params = {
@@ -490,9 +493,9 @@ var Api;
 		params[Api.Params.sign] = createSignInfo();
 		mui.ajax(url, {
 			data: params,
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			timeout: 10000, //超时时间设置为10秒；
+			dataType: 'json',
+			type: 'post',
+			timeout: 10000,
 			success: function(data) {
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
@@ -567,11 +570,23 @@ var Repository;
 			return Api.call(Api.url.Commodity.category, params, callback);
 		}
 		Commodity.category = category;
-		
-		function praise(params,callback){
+
+		function praise(params, callback) {
 			return Api.call(Api.url.Commodity.praise, params, callback);
 		}
 		Commodity.praise = praise;
+		function commodityulist(params,callback){
+			return Api.call(Api.url.Commodity.commodityulist, params, callback);
+		}
+		Commodity.commodityulist = commodityulist;
+		function Usercomment(params,callback){
+			return Api.call(Api.url.Commodity.Usercomment, params, callback);
+		}
+		Commodity.Usercomment = Usercomment;
+		function Commoditycomment(params,callback){
+			return Api.call(Api.url.Commodity.Commoditycomment, params, callback);
+		}
+		Commodity.Commoditycomment = Commoditycomment;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
@@ -612,15 +627,18 @@ var Log;
 })(Log || (Log = {}));
 var TextMessage;
 (function(TextMessage) {
-	var language = "";
-	TextMessage.back = language == "ja_JP" ? "戻る" : "返回";
-	TextMessage.skip = language == "ja_JP" ? "スキップ" : "跳过";
-	TextMessage.test = language == "ja_JP" ? "请求登录!" : "请先登录!";
-	TextMessage.share= language == "ja_JP" ? "分化到着" : "分享到";
-	TextMessage.success= language == "ja_JP" ? "成功!" : "成功!";
-	TextMessage.faile= language == "ja_JP" ? "失業:" : "失败:";
-	TextMessage.sharecontent= language == "ja_JP" ? "给你分享一個商品~" : "给你分享了一个商品~";
-	TextMessage.sharetitle= language == "ja_JP" ? "カンカン" : "kankan";
+	var language = navigator.language;
+	TextMessage.back = language == "ja-JP" ? "戻る" : "返回";
+	TextMessage.skip = language == "ja-JP" ? "スキップ" : "跳过";
+	TextMessage.test = language == "ja-JP" ? "まずはログインしてください。" : "请先登录!";
+	TextMessage.share = language == "ja-JP" ? "共有" : "分享到";
+	TextMessage.success = language == "ja-JP" ? "成功!" : "成功!";
+	TextMessage.faile = language == "ja-JP" ? "失敗:" : "失败:";
+	TextMessage.sharecontent = language == "ja-JP" ? "カンカンからの共有" : "看看的分享";
+	TextMessage.sharetitle = language == "ja-JP" ? "カンカン" : "看看";
+	TextMessage.login = language == "ja-JP" ? "登録済みの方はこちら" : "登录";
+	TextMessage.register = language == "ja-JP" ? "新しいはじめる方はこちら" : "注册";
+	TextMessage.cancel = language == "ja-JP" ? "キャンセル" : "取消";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
