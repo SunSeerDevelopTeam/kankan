@@ -396,11 +396,15 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"pages/main/home.html",
-					"css/icons-extra.css"
+					"css/icons-extra.css",
+					"js/language.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
-					"pages/main/products/request.html"
+					"pages/main/products/request.html",
+					"pages/main/products/product_want_to_buy.html"
 				],
 				"priority": 0
 			},

@@ -54,7 +54,11 @@ var JSLocale = {
 	"det_all":"全て",
 	
 	// Home Page
-	"app_name":"カンカン"
+	"app_name":"カンカン",
+	"tab_1":"ホーム",
+	"tab_2":"登録",
+	"tab_3":"質問",
+	"tab_4":"リクエスト"
 }
 
 $(function(){

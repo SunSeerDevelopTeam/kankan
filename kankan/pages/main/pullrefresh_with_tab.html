@@ -161,13 +161,18 @@
 										callback: function() {
 											var self = this;
 											createFragment(self, true);
-										}
+										},
+										contentdown: "下拉可以刷新",
+										contentover: "释放立即刷新",
+										contentrefresh: "正在刷新..."
 									},
 									up: {
 										callback: function() {
 											var self = this;
 											createFragment(self, false);
-										}
+										},
+										contentrefresh: "正在加载...",
+										contentnomore: "没有更多数据了"
 									}
 								});
 							});

@@ -54,8 +54,11 @@ var JSLocale = {
 	"det_all":"全部",
 	
 	// Home Page
-	"app_name":"kankan",
-	
+	"app_name":"看看",
+	"tab_1":"首页",
+	"tab_2":"发布",
+	"tab_3":"求购",
+	"tab_4":"请求",
 }
 
 $(function(){
