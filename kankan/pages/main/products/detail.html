@@ -56,10 +56,10 @@
 					</div>
 					<div class="mui-pull-right kankan_det_comment">
 						<a href="pro_commentslist.html">
-						<span class="mui-icon mui-icon-chatboxes"></span>
-						<p><span class="lang" data-locale="det_comment">评论</span>&nbsp;&nbsp;
-							<font color="#000000" size="3" id="commentsnum">0</font>
-						</P>
+							<span class="mui-icon mui-icon-chatboxes"></span>
+							<p><span class="lang" data-locale="det_comment">评论</span>&nbsp;&nbsp;
+								<font color="#000000" size="3" id="commentsnum">0</font>
+							</P>
 						</a>
 
 					</div>
@@ -167,23 +167,30 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
 				swipeBack: true,
-				preloadPages:[{
-				    id:'pro_commentslist.html',
-				    url:'pro_commentslist.html'           
-			 	},
-				{
-					id:'productslist.html',
-					url:'productslist.html'
-				},
-				{
-					id:'detail.html',
-					url:'detail.html'
-				}]
+				preloadPages: [{
+						id: 'pro_commentslist.html',
+						url: 'pro_commentslist.html'
+					},
+					{
+						id: 'productslist.html',
+						url: 'productslist.html'
+					},
+					{
+						id: 'detail.html',
+						url: 'detail.html'
+					}
+				]
 			});
-			window.addEventListener('cid',function(event){
-			  var id = event.detail.id;
-			 // alert(id);
+			window.addEventListener('cid', function(event) {
+				var id = event.detail.id;
+				// var id="100006";
+				getinfo(id);
+				// alert(id);
 			});
+			//			$(function(){
+			//				var id2="100006";
+			//				getinfo(id2);
+			//			});
 
 			//*********************share start
 			var shares = {};
@@ -272,24 +279,24 @@
 				msg.href = "http://www.baidu.com";
 				msg.title = TextMessage.sharetitle;
 				msg.content = TextMessage.sharecontent;
-//				if(~share.id.indexOf('weibo')) {
-//					msg.content += "；体验地址：http://www.dcloud.io/hellomui/";
-//				}
+				//				if(~share.id.indexOf('weibo')) {
+				//					msg.content += "；体验地址：http://www.dcloud.io/hellomui/";
+				//				}
 				msg.thumbs = ["../../../images/muwu.jpg"];
 				share.send(msg, function() {
-					console.log(TextMessage.share+"\"" + share.description + "\""+TextMessage.success);
+					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 				}, function(e) {
-					console.log(TextMessage.share+"\"" + share.description + "\""+TextMessage.faile + e.code + " - " + e.message);
+					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
 				});
 			}
 			//share end***********/
-			$(function() {
+			function getinfo(pid) {
 				var params = {
 					//"nickname": auth.userInfo.nickname,
 					//"headimgurl": auth.userInfo.headimgurl,
 					//"tokencheck":"",
 					//"signcheck":"1492595038170_6076769b79e6c90e57f2b1f95b2fc605c3e9231e31a9f215773ff2263f4af43b_2bfd58a24210902eb67948f568aaa9ecf314e34a35ddb4ea7fd553908b0e0f4e",
-					"commodity_id": "100001"
+					"commodity_id": pid
 				};
 				Repository.Commodity.commodityDetail(params, {
 					ok: function(data) {
@@ -300,7 +307,7 @@
 						Log.d('error');
 					}
 				});
-			});
+			}
 			//			// get id show product detail
 			//			function send(param) {
 			//				var proid = param;
@@ -313,7 +320,7 @@
 				//var comdinfo=JSON.stringify(comdbasic[0]);
 				var comdname = comdbasic[0].comm_name;
 				var comdmesage = comdbasic[0].comm_detail;
-				var comdityid=comdbasic[0].commodity_id;
+				var comdityid = comdbasic[0].commodity_id;
 				//console.log("comdityid:"+comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
@@ -373,13 +380,19 @@
 				//console.log("exchange:"+exchange+" business:"+business+" gratis:"+gratis+" price:"+price);
 				if(exchange == "1") {
 					$("#switchex").show();
+				} else {
+					$("#switchex").hide();
 				}
 				if(business == "1") {
 					$("#switchp").show();
 					$(".comdprice").html(price);
+				} else {
+					$("#switchp").hide();
 				}
 				if(gratis == "1") {
 					$("#switchsend").show();
+				} else {
+					$("#switchsend").hide();
 				}
 				//*************************************recommend
 				var recomendhtml2 = "";
@@ -498,46 +511,46 @@
 				//products list
 				var prolistpage = null;
 				mui('.productlist').on('tap', 'a', function(e) {
-				  var id = commodity.user_basic.user_id;;
-				  alert(id);
-				  if(!prolistpage){
-				    prolistpage = plus.webview.getWebviewById('productslist.html');
-				  }
-				  mui.fire(prolistpage,'prolid',{
-				    id:userid
-				  });       
-				  mui.openWindow({
-				    id:'productslist.html'
-				  });
-				});  
+					var id = commodity.user_basic.user_id;;
+					// alert(id);
+					if(!prolistpage) {
+						prolistpage = plus.webview.getWebviewById('productslist.html');
+					}
+					mui.fire(prolistpage, 'prolid', {
+						id: userid
+					});
+					mui.openWindow({
+						id: 'productslist.html'
+					});
+				});
 				//commodity comments list
-			var comdcommentpage = null;
+				var comdcommentpage = null;
 				mui('.kankan_det_comment').on('tap', 'a', function(e) {
-				  var id = comdbasic[0].commodity_id;
-				  if(!comdcommentpage){
-				    comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
-				  }
-				  mui.fire(comdcommentpage,'comid',{
-				    id:id
-				  });       
-				  mui.openWindow({
-				    id:'pro_commentslist.html'
-				  });
+					var id = comdbasic[0].commodity_id;
+					if(!comdcommentpage) {
+						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
+					}
+					mui.fire(comdcommentpage, 'comid', {
+						id: id
+					});
+					mui.openWindow({
+						id: 'pro_commentslist.html'
+					});
 				});
 				//detail page
 				var detailPage = null;
 				mui('.detail').on('tap', 'a', function(e) {
-				  var id = this.getAttribute('id');
-				  if(!detailPage){
-				    detailPage = plus.webview.getWebviewById('detail.html');
-				  }
-				  mui.fire(detailPage,'cid',{
-				    id:id
-				  });          
-				  mui.openWindow({
-				    id:'detail.html'
-				  });
-				});  
+					var id = this.getAttribute('id');
+					if(!detailPage) {
+						detailPage = plus.webview.getWebviewById('detail.html');
+					}
+					mui.fire(detailPage, 'cid', {
+						id: id
+					});
+					mui.openWindow({
+						id: 'detail.html'
+					});
+				});
 			}
 			//goods
 			function dianzan(bid) {
