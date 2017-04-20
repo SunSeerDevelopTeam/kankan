@@ -17,102 +17,139 @@
 		</header>
 		<div class="mui-content ka_mainbox">
 			<ul class="mui-table-view">
-			        <li class="mui-table-view-cell">
-			        	<div class="ka_userbox">
-			        		<img src="../../../images/logo.png" class="ka_touxiangimg" width="50" height="50"/>
-			        		<div><b>Kappa</b></div>
-			        		<font color="#808080" size="2"><span class="lang" date-locale="det_coments">评论</span>:<font color="#007AFF">5050</font>&nbsp;&nbsp;&nbsp;<span class="lang" data-locale="det_producednum">出品数</span>:<font color="#007AFF">5089</font></font>
-			        	</div>
-			        </li>
-			        <li class="mui-table-view-cell commentlist">
-			        	<a href="commentlist.html">
-			            <div class="mui-navigate-right ka_userbox">
-			            	<div class="mui-pull-right ka_commentlevelbox">
-			                <img src="../../../images/Good.PNG" width="30" height="30">
-			                <div class="ka_comlevnumber">500</div>
-			               </div>
-			               <div class="mui-pull-right ka_commentlevelbox">
-			                	<img src="../../../images/Normal.PNG" width="30" height="30">
-			                	<div class="ka_comlevnumber">1000</div>
-			                </div>
-			                <div class="mui-pull-right ka_commentlevelbox">
-			                <img src="../../../images/Bad.PNG" width="30" height="30">
-			                <div class="ka_comlevnumber">1000</div>
-			                </div>
-			            </div>
-			            </a>
-			        </li>
-			    </ul>
-			    <!---author say---->
-			    <ul class="mui-table-view" style="margin:1em 0.5em;">
+				<li class="mui-table-view-cell">
+					<div class="ka_userbox">
+						<img src="" class="ka_touxiangimg" width="50" height="50" />
+						<div><b class="uname"></b></div>
+						<font color="#808080" size="2"><span class="lang" date-locale="det_coments"></span>:
+							<font color="#007AFF" class="ucomment"></font>&nbsp;&nbsp;&nbsp;
+							<span class="lang" data-locale="det_producednum"></span>:
+							<font color="#007AFF" class="uproducts"></font>
+						</font>
+					</div>
+				</li>
+				<li class="mui-table-view-cell commentlist">
+					<a href="commentlist.html">
+						<div class="mui-navigate-right ka_userbox">
+							<div class="mui-pull-right ka_commentlevelbox">
+								<img src="../../../images/Good.PNG" width="30" height="30">
+								<div class="ka_comlevnumber goodnum"></div>
+							</div>
+							<div class="mui-pull-right ka_commentlevelbox">
+								<img src="../../../images/Normal.PNG" width="30" height="30">
+								<div class="ka_comlevnumber normalnum"></div>
+							</div>
+							<div class="mui-pull-right ka_commentlevelbox">
+								<img src="../../../images/Bad.PNG" width="30" height="30">
+								<div class="ka_comlevnumber badnum"></div>
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<!---author say---->
+			<!--<ul class="mui-table-view" style="margin:1em 0.5em;">
 			            <li class="mui-table-view-cell">
 			                <p>
 			                    Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1
 			                </p>
 			            </li>
-		       </ul>
-		       <!--product list-->
-		       <ul class="mui-table-view mui-grid-view">
-		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+		       </ul>-->
+			<!--product list-->
+			<ul class="mui-table-view mui-grid-view comditylists">
+				<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
 		                    	<a href="detail.html?targetid=10" id="2">
 		                    		<img class="mui-media-object ka_imgoption" src="../../../images/cbd.jpg">
 		                    	</a>
 		                    	<div class="kankan_area2">1300 P</div>
-		                    </li>
-		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-		                    	<a href="detail.html?targetid=10"  id="1">
-		                    		<img class="mui-media-object" src="./../../../images/shuijiao.jpg">
-		                    	</a>
-		                    	<div class="kankan_area2">1300 P</div>
-		                    </li>
-		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-		                    	<a href="detail.html" id="3" >
-		                    		<img class="mui-media-object" src="./../../../images/shuijiao.jpg">
-		                    	</a>
-		                    	<div class="kankan_area2">800 P</div>
-		                    </li>
-		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-		                    	<a href="detail.html" id="4" >
-		                    		<img class="mui-media-object" src="../../../images/MacPro.jpg">
-		                    	</a>
-		                    	<div class="kankan_area2">800 P</div>
-		                    </li>
-		                </ul>
-			   
-			   
+		                    </li>-->
+			</ul>
+
 		</div>
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
-		    mui.init({
-			swipeBack: true 
+			mui.init({
+				swipeBack: false
 			});
-			window.addEventListener('prolid',function(event){
-			  var id = event.detail.id;
-			  alert(id);
+			window.addEventListener('prolid', function(event) {
+				var uid = event.detail.id;
+				getmessage(uid);
+				//alert(id);
 			});
-		    //go detail page
-		    var detailPage = null;
-				mui('.detail').on('tap', 'a', function(e) {
-				  var id = this.getAttribute('id');
-				  if(!detailPage){
-				    detailPage = plus.webview.getWebviewById('detail.html');
-				  }
-				  mui.fire(detailPage,'cid',{
-				    id:id
-				  });          
-				  mui.openWindow({
-				    id:'detail.html'
-				  });
-				}); 
 			//comment list			
-			mui('.commentlist').on('tap', 'a', function(e){
+			mui('.commentlist').on('tap', 'a', function(e) {
 				mui.openWindow({
-				    url: 'commentlist.html',
-				    id:'commentlist'
-				  });
+					url: 'commentlist.html',
+					id: 'commentlist'
+				});
 			});
+			//get message
+			function getmessage(uid) {
+				var params = {
+					"user_id": uid
+				};
+				Repository.Commodity.commodityulist(params, {
+					ok: function(data) {
+						Log.d("success");
+						messageshow(data);
+					},
+					ng: function(data) {
+						Log.d('error');
+					}
+				});
+			}
+
+			function messageshow(results) {
+				var commodity = results.data;
+				var uname = commodity.user_name;
+				var uimage = commodity.user_photo;
+				var userid = commodity.user_id;
+				var ucomentnum = commodity.user_comment_count;
+				var ucomeditynum = commodity.user_commodity_count;
+				var goodcoment = commodity.user_opinion_h_count;
+				var normalcoment = commodity.user_opinion_m_count;
+				var badcoment = commodity.user_opinion_l_count;
+				$(".uname").html(uname);
+				$(".ka_userbox img").attr("src", uimage);
+				$(".ucomment").html(ucomentnum);
+				$(".uproducts").html(ucomeditynum);
+				$(".goodnum").html(goodcoment);
+				$(".normalnum").html(normalcoment);
+				$(".badnum").html(badcoment);
+				var commodityarr = commodity.commoditys;
+				var commoditylength = commodityarr.length;
+				for(i = 0; i < commoditylength; i++) {
+					var ucommodityobj = JSON.stringify(commodityarr[i]);
+					var ucommodityinfo = $.parseJSON(ucommodityobj);
+					var commodityid = ucommodityinfo.commodity_id;
+					var comdityimage = ucommodityinfo.commodity_photo_url;
+					var html = new Util.StringBuilder();
+					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">')
+						.appendFormat('<a href="detail.html" id="{0}">', commodityid)
+						.appendFormat('<img class="mui-media-object" src="{0}">', comdityimage)
+						.append('</a>')
+						.append('</li>');
+					$(".comditylists").append(html.toString());
+				}
+				//go detail page
+				var detailPage = null;
+				mui('.detail').on('tap', 'a', function(e) {
+					var id = this.getAttribute('id');
+					if(!detailPage) {
+						detailPage = plus.webview.getWebviewById('detail.html');
+					}
+					mui.fire(detailPage, 'cid', {
+						id: id
+					});
+					mui.openWindow({
+						id: 'detail.html'
+					});
+				});
+			}
 		</script>
 	</body>
 

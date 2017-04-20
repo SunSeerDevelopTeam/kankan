@@ -273,7 +273,7 @@
 /***productlist page***/
 
 .ka_comlevnumber {
-	float: right;
+	text-align: center;
 	margin-top: 0.3em;
 }
 
