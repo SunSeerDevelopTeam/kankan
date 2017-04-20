@@ -51,6 +51,11 @@
 		<script src="../../../js/language.js"></script>
 		<script type="text/javascript">
 			mui.init();
+			//添加newId自定义事件监听
+			window.addEventListener('comid',function(event){
+			  var id = event.detail.id;
+			  alert(id);
+			});
 		</script>
 	</body>
 

@@ -15,7 +15,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">商品名称</h1>
+			<h1 class="mui-title"></h1>
 			<a class="mui-icon  mui-icon-reload mui-icon-right-nav mui-pull-right"></a>
 		</header>
 		<div class="mui-content">
@@ -54,11 +54,13 @@
 							<p class="kankan_goodsfonts lang" data-locale="det_goods">赞</P>
 						</div>
 					</div>
-					<div class="mui-pull-right kankan_det_comment" onclick="location.href='pro_commentslist.html'">
+					<div class="mui-pull-right kankan_det_comment">
+						<a href="pro_commentslist.html">
 						<span class="mui-icon mui-icon-chatboxes"></span>
 						<p><span class="lang" data-locale="det_comment">评论</span>&nbsp;&nbsp;
 							<font color="#000000" size="3" id="commentsnum">0</font>
 						</P>
+						</a>
 
 					</div>
 
@@ -89,7 +91,6 @@
 						<a href="productslist.html">
 							<div class="mui-pull-right">
 								<span class="mui-icon-extra mui-icon-extra-find kankan_det_aulocation"></span>
-								<!--<img src="./images/location.png" width="25" height="25" style="margin-left: -1.5em;">-->
 								<p class="kankan_det_locationinfo"></p>
 							</div>
 							<div class="mui-pull-left">
@@ -112,17 +113,15 @@
 			</ul>
 		</div>
 		<!--Produce goods of concern-->
-		<h5 class="ka_h5backcolor lang" data-locale="det_concerneds">出品者关注商品</h5>
+		<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
 		<div class="mui-slider">
 			<div class="mui-slider-group mui-slider-loop">
 				<!--last-->
-				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一个图文表格) -->
 				<div class="mui-slider-item mui-slider-item-duplicate" id="lastconcenered">
 					<ul class="mui-table-view mui-grid-view" id="lastconcerul">
 
 					</ul>
 				</div>
-				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一个图文表格) -->
 				<!--first-->
 				<div class="mui-slider-item mui-slider-item-duplicate">
 					<ul class="mui-table-view mui-grid-view" id="firstconcerul">
@@ -131,16 +130,14 @@
 			</div>
 		</div>
 		<!--Recommended products-->
-		<h5 class="ka_h5backcolor lang" data-locale="det_recommends">推荐商品</h5>
+		<h5 class="ka_h5backcolor lang" data-locale="det_recommends"></h5>
 		<div class="mui-slider">
 			<div class="mui-slider-group mui-slider-loop">
 				<!--last-->
-				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一个图文表格) -->
 				<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
 					<ul class="mui-table-view mui-grid-view" id="lastremmondul">
 					</ul>
 				</div>
-				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一个图文表格) -->
 				<!--first-->
 				<div class="mui-slider-item mui-slider-item-duplicate">
 					<ul class="mui-table-view mui-grid-view" id="firstremmondul">
@@ -152,7 +149,7 @@
 		<!--Commodity exchange, white send, point exchange information button-->
 		<div class="ka_buyway">
 			<button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;">
-			<span class="lang" data-locale="det_pointexch"><b>point(<span class="comdprice"></span>)</b></span>
+			<b><span class="lang" data-locale="det_pointexch">point</span>(<span class="comdprice"></span>)</b>
 		</button>
 			<button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;">
 			<span class="lang" data-locale="det_exchange"><b>交换</b></span>
@@ -161,16 +158,31 @@
 			<span class="lang" data-locale="det_send"><b>白送</b></span>
 		</button>
 		</div>
-		<div id="text">null</div>
 		</div>
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
-		<!--<script src="../../../js/language.js"></script>-->
+		<script src="../../../js/language.js"></script>
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
-				swipeBack: true //启用右滑关闭功能
+				swipeBack: true,
+				preloadPages:[{
+				    id:'pro_commentslist.html',
+				    url:'pro_commentslist.html'           
+			 	},
+				{
+					id:'productslist.html',
+					url:'productslist.html'
+				},
+				{
+					id:'detail.html',
+					url:'detail.html'
+				}]
+			});
+			window.addEventListener('cid',function(event){
+			  var id = event.detail.id;
+			 // alert(id);
 			});
 
 			//*********************share start
@@ -258,16 +270,16 @@
 					}
 				};
 				msg.href = "http://www.baidu.com";
-				msg.title = "你几道不几道";
-				msg.content = "我是小鲜肉~";
-				if(~share.id.indexOf('weibo')) {
-					msg.content += "；体验地址：http://www.dcloud.io/hellomui/";
-				}
+				msg.title = TextMessage.sharetitle;
+				msg.content = TextMessage.sharecontent;
+//				if(~share.id.indexOf('weibo')) {
+//					msg.content += "；体验地址：http://www.dcloud.io/hellomui/";
+//				}
 				msg.thumbs = ["../../../images/muwu.jpg"];
 				share.send(msg, function() {
-					console.log("分享到\"" + share.description + "\"成功！ ");
+					console.log(TextMessage.share+"\"" + share.description + "\""+TextMessage.success);
 				}, function(e) {
-					console.log("分享到\"" + share.description + "\"失败: " + e.code + " - " + e.message);
+					console.log(TextMessage.share+"\"" + share.description + "\""+TextMessage.faile + e.code + " - " + e.message);
 				});
 			}
 			//share end***********/
@@ -299,9 +311,10 @@
 				var commodity = results.data;
 				var comdbasic = commodity.commodity_basic;
 				//var comdinfo=JSON.stringify(comdbasic[0]);
-				//console.log(comdinfo);
 				var comdname = comdbasic[0].comm_name;
 				var comdmesage = comdbasic[0].comm_detail;
+				var comdityid=comdbasic[0].commodity_id;
+				//console.log("comdityid:"+comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
@@ -330,6 +343,7 @@
 				$("#commentsnum").html(comentnum); //product comment count
 				var uname = commodity.user_basic.user_name;
 				var uimage = commodity.user_basic.user_photo;
+				var userid = commodity.user_basic.user_id;
 				var ucomentnum = commodity.user_basic.user_comment_count;
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
@@ -387,7 +401,7 @@
 					var advflag = recomendsobj.is_ad;
 					//console.log("recomdid:"+recomdid);
 					recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					recomendhtml += '<a href="#" id="' + recomdid + '">';
+					recomendhtml += '<a href="detail.html" id="' + recomdid + '">';
 					recomendhtml += '<img class="mui-media-object" src="' + recomdimg + '">';
 					//recomendhtml+='<div>'+j+'content</div>';
 					recomendhtml += '</a></li>';
@@ -401,7 +415,7 @@
 					}
 
 					recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					recomendaddhtml += '<a href="#" id="' + recomdid + '">';
+					recomendaddhtml += '<a href="detail.html" id="' + recomdid + '">';
 					recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '">';
 					//recomendaddhtml+='<div>'+j+'add</div>';
 					recomendaddhtml += '</a></li>';
@@ -435,7 +449,7 @@
 					var concernid = concernsobj.commodity_id;
 					//console.log("concernid:"+concernid);
 					concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					concernhtml += '<a href="#" id="' + concernid + '">';
+					concernhtml += '<a href="detail.html" id="' + concernid + '">';
 					concernhtml += '<img class="mui-media-object" src="' + concernimg + '">';
 					//concernhtml+='<div>'+l+'content</div>';
 					concernhtml += '</a></li>';
@@ -449,7 +463,7 @@
 					}
 
 					concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					concernaddhtml += '<a href="#" id="' + concernid + '">';
+					concernaddhtml += '<a href="detail.html" id="' + concernid + '">';
 					concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '">';
 					//concernaddhtml+='<div>'+l+'add</div>';
 					concernaddhtml += '</a></li>';
@@ -481,12 +495,50 @@
 					$("#zanqian").hide();
 					$("#zanhou").show();
 				}
+				//products list
+				var prolistpage = null;
+				mui('.productlist').on('tap', 'a', function(e) {
+				  var id = commodity.user_basic.user_id;;
+				  alert(id);
+				  if(!prolistpage){
+				    prolistpage = plus.webview.getWebviewById('productslist.html');
+				  }
+				  mui.fire(prolistpage,'prolid',{
+				    id:userid
+				  });       
+				  mui.openWindow({
+				    id:'productslist.html'
+				  });
+				});  
+				//commodity comments list
+			var comdcommentpage = null;
+				mui('.kankan_det_comment').on('tap', 'a', function(e) {
+				  var id = comdbasic[0].commodity_id;
+				  if(!comdcommentpage){
+				    comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
+				  }
+				  mui.fire(comdcommentpage,'comid',{
+				    id:id
+				  });       
+				  mui.openWindow({
+				    id:'pro_commentslist.html'
+				  });
+				});
+				//detail page
+				var detailPage = null;
+				mui('.detail').on('tap', 'a', function(e) {
+				  var id = this.getAttribute('id');
+				  if(!detailPage){
+				    detailPage = plus.webview.getWebviewById('detail.html');
+				  }
+				  mui.fire(detailPage,'cid',{
+				    id:id
+				  });          
+				  mui.openWindow({
+				    id:'detail.html'
+				  });
+				});  
 			}
-			//			//go back
-			//			mui.back = function() {
-			//				var self = plus.webview.currentWebview();
-			//				self.hide();
-			//			}
 			//goods
 			function dianzan(bid) {
 				function praise(aid) {
@@ -529,12 +581,6 @@
 					}
 				});
 			}
-			mui(".productlist").on("tap", "a", function() {
-				mui.openWindow({
-					url: 'productslist.html',
-					id: 'productslist'
-				});
-			});
 		</script>
 	</body>
 

@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>kankan</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
@@ -85,25 +85,34 @@
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
 		<script type="text/javascript">
-			var ws = null;
-		    mui.plusReady(function () {
-		        ws = plus.webview.create("detail.html","detail");
-		    })
 		    mui.init({
-			swipeBack: true //启用右滑关闭功能
+			swipeBack: true 
 			});
-		    mui('.detail').on('tap','a',function (e) {
-		        var targetId = this.getAttribute("id");
-		        ws.evalJS('send('+targetId+')');
-		        ws.show();
-		    })
-		//comment list			
-		mui('.commentlist').on('tap', 'a', function(e){
-			mui.openWindow({
-			    url: 'commentlist.html',
-			    id:'commentlist'
-			  });
-		});
+			window.addEventListener('prolid',function(event){
+			  var id = event.detail.id;
+			  alert(id);
+			});
+		    //go detail page
+		    var detailPage = null;
+				mui('.detail').on('tap', 'a', function(e) {
+				  var id = this.getAttribute('id');
+				  if(!detailPage){
+				    detailPage = plus.webview.getWebviewById('detail.html');
+				  }
+				  mui.fire(detailPage,'cid',{
+				    id:id
+				  });          
+				  mui.openWindow({
+				    id:'detail.html'
+				  });
+				}); 
+			//comment list			
+			mui('.commentlist').on('tap', 'a', function(e){
+				mui.openWindow({
+				    url: 'commentlist.html',
+				    id:'commentlist'
+				  });
+			});
 		</script>
 	</body>
 
