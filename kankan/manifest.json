@@ -291,7 +291,8 @@
 					"fonts/mui.ttf",
 					"js/language.js",
 					"images/weixin.png",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
 					"pages/main/main.html"
@@ -321,7 +322,8 @@
 					"images/user-photo.png",
 					"images/line.png",
 					"images/Good.PNG",
-					"images/userPhoto.png"
+					"images/userPhoto.png",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -348,9 +350,15 @@
 					"images/logo.png",
 					"js/mui.min.js",
 					"js/jquery-3.2.0.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/common.js",
+					"js/sha256.js",
+					"js/language/locale_ja_JP.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/main/products/pro_commentslist.html",
+					"pages/main/products/productslist.html"
+				],
 				"priority": 0
 			},
 			"pages/main/products/product_login.html": {
@@ -364,7 +372,10 @@
 					"js/pro_loginsort.js",
 					"js/mui.poppicker.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.css"
+					"css/mui.picker.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -386,7 +397,8 @@
 					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
-					"pages/login/login.html"
+					"pages/login/login.html",
+					"pages/login/reg.html"
 				],
 				"priority": 0
 			},
@@ -452,6 +464,19 @@
 					"css/home.css",
 					"css/icons-extra.css",
 					"fonts/mui-icons-extra.ttf"
+				],
+				"refer": [
+					"pages/main/products/detail.html"
+				],
+				"priority": 0
+			},
+			"pages/main/products/productslist.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"images/Bad.PNG",
+					"images/Normal.PNG",
+					"images/Good.PNG",
+					"images/shuijiao.jpg"
 				],
 				"refer": [],
 				"priority": 0
