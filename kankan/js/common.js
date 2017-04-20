@@ -616,6 +616,11 @@ var TextMessage;
 	TextMessage.back = language == "ja_JP" ? "戻る" : "返回";
 	TextMessage.skip = language == "ja_JP" ? "スキップ" : "跳过";
 	TextMessage.test = language == "ja_JP" ? "请求登录!" : "请先登录!";
+	TextMessage.share= language == "ja_JP" ? "分化到着" : "分享到";
+	TextMessage.success= language == "ja_JP" ? "成功!" : "成功!";
+	TextMessage.faile= language == "ja_JP" ? "失業:" : "失败:";
+	TextMessage.sharecontent= language == "ja_JP" ? "给你分享一個商品~" : "给你分享了一个商品~";
+	TextMessage.sharetitle= language == "ja_JP" ? "カンカン" : "kankan";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
