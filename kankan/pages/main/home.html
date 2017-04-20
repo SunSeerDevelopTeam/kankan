@@ -71,27 +71,26 @@
 			});
 
 			mui.plusReady(function() {
-				TextMessage.language = plus.os.language;
 				var userPhoto = document.getElementById("user");
 				var isLogin = plus.storage.getItem("LoginFlag");
 				userPhoto.addEventListener('click', function(event) {
 					console.log("userPhoto clicked.");
 					if(!isLogin) {
-						var btnArray = ['新しいはじめる方はこちら', '登録済みの方はこちら', TextMessage.skip];
+						var btnArray = [TextMessage.register, TextMessage.login, TextMessage.skip];
 						mui.confirm('1', '0', btnArray, function(e) {
 							switch(e.index) {
 								case 0:
 									console.log("新しいはじめる方はこちら");
 									mui.openWindow({
 										id: 'reg',
-										url:'../login/reg.html'
+										url: '../login/reg.html'
 									});
 									break;
 								case 1:
 									console.log("登録済みの方はこちら");
 									mui.openWindow({
 										id: 'login',
-										url:'../login/login.html'
+										url: '../login/login.html'
 									});
 									break;
 								default:

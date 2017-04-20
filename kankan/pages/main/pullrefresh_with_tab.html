@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -119,16 +119,18 @@
 		<script>
 			mui.init();
 			(function(mui) {
-				//阻尼系数
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
 				mui('.mui-scroll-wrapper').scroll({
 					bounce: false,
-					indicators: true, //是否显示滚动条
+					indicators: true,
 					deceleration: deceleration
 				});
 
-				mui.ready(function() {
-
+				mui.plusReady(function() {
+					mui.preload({
+						id: 'detail',
+						url: '../main/products/detail.html'
+					});
 					(function() {
 						var params = {};
 						Repository.Commodity.category(params, {
@@ -153,26 +155,19 @@
 								Log.e("category ng");
 							}
 						}).then(function() {
-							//循环初始化所有下拉刷新，上拉加载。
-							Log.i(document.querySelectorAll('.mui-slider-group .mui-scroll').length);
 							mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
 								mui(pullRefreshEl).pullToRefresh({
 									down: {
 										callback: function() {
 											var self = this;
 											createFragment(self, true);
-										},
-										contentdown: "下拉可以刷新",
-										contentover: "释放立即刷新",
-										contentrefresh: "正在刷新..."
+										}
 									},
 									up: {
 										callback: function() {
 											var self = this;
 											createFragment(self, false);
-										},
-										contentrefresh: "正在加载...",
-										contentnomore: "没有更多数据了"
+										}
 									}
 								});
 							});
@@ -204,7 +199,7 @@
 								li = document.createElement('li');
 								li.className = 'mui-table-view-cell mui-media mui-col-xs-6';
 								var html = new Util.StringBuilder();
-								html.append('<a>')
+								html.appendFormat('<a id="{0}">', commodityArray[i].commodityId)
 									//.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', commodityArray[i].imgs)
 									.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', "../../images/muwu.jpg")
 									.appendFormat('<div class="mui-media-body">{0}</div>', commodityArray[i].commName)
@@ -227,6 +222,21 @@
 								ul.appendChild(fragment);
 								self.endPullUpToRefresh();
 							}
+
+							var detailPage = null;
+
+							mui(".mui-table-view").on('tap', 'a', function() {
+								var id = this.getAttribute("id");
+								Log.i(id);
+								if(!detailPage)
+									detailPage = plus.webview.getWebviewById('detail');
+								mui.fire(detailPage, 'cid', {
+									id: id
+								});
+								mui.openWindow({
+									id: 'detail'
+								});
+							})
 						});
 					};
 				});

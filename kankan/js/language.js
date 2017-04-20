@@ -23,8 +23,10 @@
 		var language = plus.os.language;
 		if(!language || language == "ja_JP") {
 			appendJS("../../js/language/locale_ja_JP.js");
+			appendJS("../../../js/language/locale_ja_JP.js");
 		} else {
 			appendJS("../../js/language/locale_zh_CN.js");
+			appendJS("../../../js/language/locale_zh_CN.js");
 		}
 	});
 
