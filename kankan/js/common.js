@@ -639,6 +639,8 @@ var TextMessage;
 	TextMessage.login = language == "ja-JP" ? "登録済みの方はこちら" : "登录";
 	TextMessage.register = language == "ja-JP" ? "新しいはじめる方はこちら" : "注册";
 	TextMessage.cancel = language == "ja-JP" ? "キャンセル" : "取消";
+	TextMessage.towchatfrind = language == "ja-JP" ? "微信の友を送る" : "发送给微信好友";
+	TextMessage.towchatcircle = language == "ja-JP" ? "友達の輪に分けて、友達の" : "分享到微信朋友圈";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

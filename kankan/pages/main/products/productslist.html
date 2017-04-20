@@ -57,12 +57,6 @@
 		       </ul>-->
 			<!--product list-->
 			<ul class="mui-table-view mui-grid-view comditylists">
-				<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-		                    	<a href="detail.html?targetid=10" id="2">
-		                    		<img class="mui-media-object ka_imgoption" src="../../../images/cbd.jpg">
-		                    	</a>
-		                    	<div class="kankan_area2">1300 P</div>
-		                    </li>-->
 			</ul>
 
 		</div>
@@ -73,19 +67,15 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
 			mui.init({
-				swipeBack: false
+				swipeBack: false,
+				preloadPages: [{
+						id: 'commentlist.html',
+						url: 'commentlist.html'
+					}]
 			});
 			window.addEventListener('prolid', function(event) {
 				var uid = event.detail.id;
 				getmessage(uid);
-				//alert(id);
-			});
-			//comment list			
-			mui('.commentlist').on('tap', 'a', function(e) {
-				mui.openWindow({
-					url: 'commentlist.html',
-					id: 'commentlist'
-				});
 			});
 			//get message
 			function getmessage(uid) {
@@ -114,7 +104,7 @@
 				var normalcoment = commodity.user_opinion_m_count;
 				var badcoment = commodity.user_opinion_l_count;
 				$(".uname").html(uname);
-				$(".ka_userbox img").attr("src", uimage);
+				$(".ka_touxiangimg").attr("src", uimage);
 				$(".ucomment").html(ucomentnum);
 				$(".uproducts").html(ucomeditynum);
 				$(".goodnum").html(goodcoment);
@@ -147,6 +137,20 @@
 					});
 					mui.openWindow({
 						id: 'detail.html'
+					});
+				});
+				var commentPage = null;
+				//go comment list			
+				mui('.commentlist').on('tap', 'a', function(e) {
+					var id = commodity.user_id;
+					if(!commentPage) {
+						commentPage = plus.webview.getWebviewById('commentlist.html');
+					}
+					mui.fire(commentPage, 'ucid', {
+						id: id
+					});
+					mui.openWindow({
+						id: 'commentlist.html'
 					});
 				});
 			}

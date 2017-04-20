@@ -21,15 +21,14 @@
 		<div class="mui-content">
 			<div id="slider" class="mui-slider">
 				<div class="mui-slider-group mui-slider-loop">
-					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					<!-- last -->
 					<div class="mui-slider-item mui-slider-item-duplicate firstimage">
 						<img src="">
 					</div>
-					<!-- 第一张 -->
 					<!--<div class="mui-slider-item">
-			        <img src="http://placehold.it/400x300"> 
-			    </div>-->
-					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+			        	<img src="http://placehold.it/400x300"> 
+			   		 </div>-->
+					<!-- first -->
 					<div class="mui-slider-item mui-slider-item-duplicate lastimage">
 						<img src="">
 					</div>
@@ -47,24 +46,26 @@
 					<div class="mui-pull-left kankan_zanbox">
 						<div id="zanhou" style="display:none;" onclick="dianzan(this.id)" class="kankan_goods">
 							<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartred"></span>
-							<p class="kankan_goodsfonts lang" data-locale="det_goodconcel">取消</P>
+							<p class="kankan_goodsfonts lang" data-locale="det_goodconcel">
+							</P>
 						</div>
 						<div id="zanqian" onclick="dianzan(this.id)" class="kankan_goods">
 							<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"></span>
-							<p class="kankan_goodsfonts lang" data-locale="det_goods">赞</P>
+							<p class="kankan_goodsfonts lang" data-locale="det_goods">
+							</P>
 						</div>
 					</div>
 					<div class="mui-pull-right kankan_det_comment">
 						<a href="pro_commentslist.html">
 							<span class="mui-icon mui-icon-chatboxes"></span>
-							<p><span class="lang" data-locale="det_comment">评论</span>&nbsp;&nbsp;
-								<font color="#000000" size="3" id="commentsnum">0</font>
+							<p><span class="lang" data-locale="det_comment"></span>&nbsp;&nbsp;
+								<font color="#000000" size="3" id="commentsnum"></font>
 							</P>
 						</a>
 
 					</div>
 
-					<div class="kankan_det_goodsnum" id="zanshu">0</div>
+					<div class="kankan_det_goodsnum" id="zanshu"></div>
 				</li>
 				<li class="mui-table-view-cell kankan_det_description">
 					<div class="mui-pull-left lang" data-locale="det_spdescription"></div>
@@ -94,7 +95,7 @@
 								<p class="kankan_det_locationinfo"></p>
 							</div>
 							<div class="mui-pull-left">
-								<img src="../../../images/logo.png" width="40" height="40" class="ka_touxiangimg"></div>
+								<img src="" width="40" height="40" class="ka_touxiangimg"></div>
 							<div class="ka_authorname"><b></b></div>
 							<div>
 								<img src="../../../images/china.png" width="20" height="20" class="lanch" style="display: none;">
@@ -102,8 +103,8 @@
 								<img src="../../../images/hk.png" width="20" height="20" class="lanhk" style="display: none;">
 								<img src="../../../images/us.png" width="20" height="20" class="lanen" style="display: none;">
 							</div>
-							<font color="#808080" size="2"><span class="lang" data-locale="det_coments">评价</span>:
-								<font color="#007AFF" class="authcom"></font> <span class="lang" data-locale="det_producednum">出品数</span>:
+							<font color="#808080" size="2"><span class="lang" data-locale="det_coments"></span>:
+								<font color="#007AFF" class="authcom"></font> <span class="lang" data-locale="det_producednum"></span>:
 								<font color="#007AFF" class="authcomdnum"></font>
 							</font>
 
@@ -149,13 +150,13 @@
 		<!--Commodity exchange, white send, point exchange information button-->
 		<div class="ka_buyway">
 			<button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;">
-			<b><span class="lang" data-locale="det_pointexch">point</span>(<span class="comdprice"></span>)</b>
+			<b><span class="lang" data-locale="det_pointexch"></span>(<span class="comdprice"></span>)</b>
 		</button>
 			<button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;">
-			<span class="lang" data-locale="det_exchange"><b>交换</b></span>
+			<span class="lang" data-locale="det_exchange"><b></b></span>
 		</button>
 			<button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;">
-			<span class="lang" data-locale="det_send"><b>白送</b></span>
+			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
 		</div>
 		</div>
@@ -185,10 +186,10 @@
 				var id = event.detail.id;
 				getinfo(id);
 			});
-						$(function(){
-							var id2="100006";
-							getinfo(id2);
-						});
+//			$(function() {
+//				var id2 = "100006";
+//				getinfo(id2);
+//			});
 
 			//*********************share start
 			var shares = {};
@@ -209,21 +210,19 @@
 			//onclick share
 			document.getElementById("share").addEventListener('tap', function() {
 				var ids = [{
-							id: "weixin",
-							ex: "WXSceneSession"
-						}, {
-							id: "weixin",
-							ex: "WXSceneTimeline"
-						}
-					],
+						id: "weixin",
+						ex: "WXSceneSession"
+					}, {
+						id: "weixin",
+						ex: "WXSceneTimeline"
+					}],
 					bts = [{
-							title: "发送给微信好友"
-						}, {
-							title: "分享到微信朋友圈"
-						}
-					];
+						title: TextMessage.towchatfrind
+					}, {
+						title: TextMessage.towchatcircle
+					}];
 				plus.nativeUI.actionSheet({
-					cancel: "取消",
+					cancel: TextMessage.cancel,
 					buttons: bts
 				}, function(e) {
 					var i = e.index;
@@ -288,6 +287,7 @@
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
+				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
 				//lunbo
 				var slider = mui("#slider");
 				slider.slider({
@@ -495,11 +495,13 @@
 					});
 				});
 			}
+			//messageshow end************/
 			//goods
 			function dianzan(bid) {
+				var codid = $(".kankan_zanbox").attr("id");
 				//ajax post 
 				var params1 = {
-					"commid": "10"
+					"commid": codid
 				};
 				Repository.Commodity.praise(params1, {
 					ok: function(data) {
@@ -514,24 +516,24 @@
 						}
 					}
 				});
-				
+
 			}
 			//praise css controll
 			function praise(aid) {
-					if(aid == "zanqian") {
-						document.getElementById(aid).style.display = "none";
-						document.getElementById("zanhou").style.display = "block";
-						var goodbefor = document.getElementById("zanshu").innerHTML * 1;
-						var gooafter = goodbefor + 1 * 1;
-						document.getElementById("zanshu").innerHTML = gooafter;
-					} else {
-						document.getElementById(aid).style.display = "none";
-						document.getElementById("zanqian").style.display = "block";
-						var goodbefor = document.getElementById("zanshu").innerHTML * 1;
-						var gooafter = goodbefor - 1 * 1;
-						document.getElementById("zanshu").innerHTML = gooafter;
-					}
+				if(aid == "zanqian") {
+					document.getElementById(aid).style.display = "none";
+					document.getElementById("zanhou").style.display = "block";
+					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
+					var gooafter = goodbefor + 1 * 1;
+					document.getElementById("zanshu").innerHTML = gooafter;
+				} else {
+					document.getElementById(aid).style.display = "none";
+					document.getElementById("zanqian").style.display = "block";
+					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
+					var gooafter = goodbefor - 1 * 1;
+					document.getElementById("zanshu").innerHTML = gooafter;
 				}
+			}
 		</script>
 	</body>
 
