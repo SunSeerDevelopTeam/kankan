@@ -200,8 +200,7 @@
 								li.className = 'mui-table-view-cell mui-media mui-col-xs-6';
 								var html = new Util.StringBuilder();
 								html.appendFormat('<a id="{0}">', commodityArray[i].commodityId)
-									//.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', commodityArray[i].imgs)
-									.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', "../../images/muwu.jpg")
+									.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', commodityArray[i].imgs)
 									.appendFormat('<div class="mui-media-body">{0}</div>', commodityArray[i].commName)
 									.append('</a>')
 									.appendFormat('<div class="kankan_area">{0}</div>', commodityArray[i].classes)
