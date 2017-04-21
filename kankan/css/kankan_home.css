@@ -298,8 +298,13 @@
 .ka_userbox {
 	text-align: center;
 }
-
-
+.ka_userboxtext{
+	word-wrap:break-word;
+	width:4em;
+}
+.commentlists{
+	margin-right: 4em;
+}
 /***comment list*****/
 
 .ka_commentsort {
@@ -331,7 +336,7 @@
 
 .ka_commentinfobox {
 	border: 1px #666666 solid;
-	width: 80%;
+	width: 70%;
 	margin-left: 1em;
 	border-radius: 2px;
 	text-indent: 25px;

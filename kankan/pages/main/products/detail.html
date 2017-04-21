@@ -273,7 +273,7 @@
 						messageshow(data);
 					},
 					ng: function(data) {
-						Log.d('error');
+						Log.d(data);
 					}
 				});
 			}
@@ -315,7 +315,7 @@
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
 				$(".ka_authorname b").html(uname);
-				$(".ka_touxiangimg").attr("src", "uimage");
+				$(".ka_touxiangimg").attr("src", uimage);
 				$(".authcom").html(ucomentnum);
 				$(".authcomdnum").html(ucomeditynum);
 				$(".kankan_det_locationinfo").html(uadress);
@@ -509,8 +509,7 @@
 						praise(bid);
 					},
 					ng: function(data) {
-						Log.d('error');
-						console.log(data);
+						Log.d(data);
 						if(data == "1000") {
 							alert(TextMessage.test);
 						}
