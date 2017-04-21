@@ -17,15 +17,15 @@
 		</header>
 		<div class="mui-content ka_mainbox">
 			<ul class="mui-table-view">
-			         <li class="mui-table-view-cell" id="allcommentlist">
+			         <li class="mui-table-view-cell ka_userbox" id="allcommentlist">
 			             <div class="mui-pull-left">
 			           	<img src="../../../images/muwu.jpg" width="40" height="40" class="ka_touxiangimg" />
-			           	<div class="ka_userbox"><b>muiu</b></div>
+			           	<div class="ka_userbox ka_userboxtext"><b>muiu</b></div>
 			           </div>
 			           <div class="mui-pull-left ka_commentinfobox">
 			           	shdfjshfjskdhfkjd ahsdjkahsdjk ashjkdhasjkd asdkhasjkdhasjkd sadhjkashdjk ashjkdhkasdj 
 			           	ashdjkasdh ashjkdhasd 中文的大小好像太大了dfj sdjfklsdjf jksdlfj jsdklfj jklsdfjsdklfjsdfjs jsdklfj
-				           	<div class="ka_commenttime">
+				           	<div class="ka_commenttime mui-pull-left">
 				           		<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span> 
 				           		1 天前
 				           	</div>
@@ -33,12 +33,12 @@
 			           	<!-----first end----->
 			           	<div class="mui-pull-left">
 			           	<img src="../../../images/muwu.jpg" width="40" height="40" class="ka_touxiangimg" />
-			           	<div class="ka_userbox"><b>muiu</b></div>
+			           	<div class="ka_userbox ka_userboxtext"><b>muiu</b></div>
 			           </div>
 			           <div class="mui-pull-left ka_commentinfobox">
 			           	shdfjshfjskdhfkjd ahsdjkahsdjk ashjkdhasjkd asdkhasjkdhasjkd sadhjkashdjk ashjkdhkasdj 
 			           	ashdjkasdh ashjkdhasd 中文的大小好像太大了dfj sdjfklsdjf jksdlfj jsdklfj jklsdfjsdklfjsdfjs jsdklfj
-				           	<div class="ka_commenttime">
+				           	<div class="ka_commenttime mui-pull-left">
 				           		<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span> 
 				           		1 天前
 				           	</div>
@@ -49,12 +49,42 @@
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			window.addEventListener('comid',function(event){
 			  var id = event.detail.id;
 			  //alert(id);
+			  getccomments(id);
 			});
+			function getccomments(rid){
+				var params = {
+					"commodity_id": "100006"
+				};
+				Repository.Commodity.Commoditycomment(params, {
+					ok: function(data) {
+						Log.d("success");
+						showpcomehts(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+					}
+				});
+			}
+			function showpcomehts(results){
+				var datas=results.data;
+				var dataslengh=datas.length;
+				for(var i=0;i<dataslengh;i++){
+					var pcommentobj = JSON.stringify(datas[j]);
+					var pcommentinfo = $.parseJSON(pcommentobj);
+					var headimg=pcommentinfo.user_photo;
+					var uname=pcommentinfo.user_name;
+					var content=pcommentinfo.leave_msg_detail;
+					var time=pcommentinfo.ins_date;
+					console.log(content);
+				}
+			}
 		</script>
 	</body>
 

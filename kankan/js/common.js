@@ -505,6 +505,7 @@ var Api;
 			},
 			error: function(xhr, type, errorThrown) {
 				plus.ui.alert(errorThrown);
+				if (Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}
 		});
@@ -627,20 +628,24 @@ var Log;
 })(Log || (Log = {}));
 var TextMessage;
 (function(TextMessage) {
-	var language = navigator.language;
-	TextMessage.back = language == "ja-JP" ? "戻る" : "返回";
-	TextMessage.skip = language == "ja-JP" ? "スキップ" : "跳过";
-	TextMessage.test = language == "ja-JP" ? "まずはログインしてください。" : "请先登录!";
-	TextMessage.share = language == "ja-JP" ? "共有" : "分享到";
-	TextMessage.success = language == "ja-JP" ? "成功!" : "成功!";
-	TextMessage.faile = language == "ja-JP" ? "失敗:" : "失败:";
-	TextMessage.sharecontent = language == "ja-JP" ? "カンカンからの共有" : "看看的分享";
-	TextMessage.sharetitle = language == "ja-JP" ? "カンカン" : "看看";
-	TextMessage.login = language == "ja-JP" ? "登録済みの方はこちら" : "登录";
-	TextMessage.register = language == "ja-JP" ? "新しいはじめる方はこちら" : "注册";
-	TextMessage.cancel = language == "ja-JP" ? "キャンセル" : "取消";
-	TextMessage.towchatfrind = language == "ja-JP" ? "微信の友を送る" : "发送给微信好友";
-	TextMessage.towchatcircle = language == "ja-JP" ? "友達の輪に分けて、友達の" : "分享到微信朋友圈";
+	var language = (navigator.language == "ja-JP" || navigator.language == "ja-jp");
+	TextMessage.back = language ? "戻る" : "返回";
+	TextMessage.skip = language ? "スキップ" : "跳过";
+	TextMessage.test = language ? "まずはログインしてください。" : "请先登录!";
+	TextMessage.share = language ? "共有" : "分享到";
+	TextMessage.success = language ? "成功!" : "成功!";
+	TextMessage.faile = language  ? "失敗:" : "失败:";
+	TextMessage.sharecontent = language  ? "カンカンからの共有" : "看看的分享";
+	TextMessage.sharetitle = language  ? "カンカン" : "看看";
+	TextMessage.login = language ? "登録済みの方はこちら" : "登录";
+	TextMessage.register = language  ? "新しいはじめる方はこちら" : "注册";
+	TextMessage.cancel = language  ? "キャンセル" : "取消";
+	TextMessage.towchatfrind = language ? "微信の友を送る" : "发送给微信好友";
+	TextMessage.towchatcircle = language ? "友達の輪に分けて、友達の" : "分享到微信朋友圈";
+	TextMessage.allshowmes = language ? "全て" : "全部";
+	TextMessage.goodshowmes = language  ? "良い" : "好评";
+	TextMessage.normalshowmes = language  ? "普通" : "中评";
+	TextMessage.badshowmes = language  ? "悪い" : "差评";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
