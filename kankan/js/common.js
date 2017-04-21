@@ -646,6 +646,8 @@ var TextMessage;
 	TextMessage.goodshowmes = language  ? "良い" : "好评";
 	TextMessage.normalshowmes = language  ? "普通" : "中评";
 	TextMessage.badshowmes = language  ? "悪い" : "差评";
+	TextMessage.datanull = language  ? "暫時データ" : "暂无数据";
+	TextMessage.not_network = language ? "申し訳ございません。ただ今ネットワークが問題がありますが、1分間立ってもう一度お試してください。" : "当前网络不给力，请稍后再试";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

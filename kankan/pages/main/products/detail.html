@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title>detail</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -25,19 +25,12 @@
 					<div class="mui-slider-item mui-slider-item-duplicate firstimage">
 						<img src="">
 					</div>
-					<!--<div class="mui-slider-item">
-			        	<img src="http://placehold.it/400x300"> 
-			   		 </div>-->
 					<!-- first -->
 					<div class="mui-slider-item mui-slider-item-duplicate lastimage">
 						<img src="">
 					</div>
 				</div>
 				<div class="mui-slider-indicator">
-					<div class="mui-indicator mui-active"></div>
-					<div class="mui-indicator"></div>
-					<div class="mui-indicator"></div>
-					<div class="mui-indicator"></div>
 				</div>
 			</div>
 			<ul class="mui-table-view">
@@ -295,6 +288,7 @@
 				});
 				var imgsarr = commodity.commodity_imgs;
 				var htmlimg = "";
+				var htmlfocus="";
 				for(i = 0; i < imgsarr.length; i++) {
 					var la = imgsarr.length - 1 * 1;
 					$(".firstimage img").attr("src", imgsarr[0]);
@@ -302,6 +296,12 @@
 					htmlimg += '<div class="mui-slider-item">';
 					htmlimg += '<img src="' + imgsarr[i] + '">';
 					htmlimg += '</div>';
+					if(i==0){
+						var htmlfocus='<div class="mui-indicator mui-active"></div>';
+					}else{
+						var htmlfocus='<div class="mui-indicator"></div>';
+					}
+					$(".mui-slider-indicator").append(htmlfocus);
 				}
 				$(".firstimage").after(htmlimg);
 				var goodcount = commodity.commodity_praise.praise_count;

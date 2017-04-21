@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>kankan</title>
+		<title>productslist</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
@@ -71,7 +71,12 @@
 				preloadPages: [{
 						id: 'commentlist.html',
 						url: 'commentlist.html'
-					}]
+					},
+					{
+						id: 'detail.html',
+						url: 'detail.html'
+					}
+				]
 			});
 			window.addEventListener('prolid', function(event) {
 				var uid = event.detail.id;
@@ -88,12 +93,13 @@
 						messageshow(data);
 					},
 					ng: function(data) {
-						Log.d('error');
+						Log.d(data);
 					}
 				});
 			}
 
 			function messageshow(results) {
+				$(".comditylists").empty();
 				var commodity = results.data;
 				var uname = commodity.user_name;
 				var uimage = commodity.user_photo;
@@ -142,12 +148,12 @@
 				var commentPage = null;
 				//go comment list			
 				mui('.commentlist').on('tap', 'a', function(e) {
-					var id = commodity.user_id;
+					var ucid = commodity.user_id;
 					if(!commentPage) {
 						commentPage = plus.webview.getWebviewById('commentlist.html');
 					}
 					mui.fire(commentPage, 'ucid', {
-						id: id
+						id: ucid
 					});
 					mui.openWindow({
 						id: 'commentlist.html'

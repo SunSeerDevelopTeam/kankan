@@ -52,6 +52,9 @@ var JSLocale = {
 	"det_normalcomments":"中评",
 	"det_badcomments":"差评",
 	"det_all":"全部",
+	"comdity_null":"暂无数据",
+	"contentlength":"评论内容（不超过三百字）",
+	"contentsend":"发 送",
 	
 	// Home Page
 	"app_name":"看看",
@@ -68,6 +71,10 @@ $(function(){
 	});
 	
 	$('input.lang').each(function(e){
+		var msg_key = $(this).attr('data-locale');
+		$(this).attr('placeholder',JSLocale[msg_key]);
+	});
+	$('textarea.lang').each(function(e){
 		var msg_key = $(this).attr('data-locale');
 		$(this).attr('placeholder',JSLocale[msg_key]);
 	});

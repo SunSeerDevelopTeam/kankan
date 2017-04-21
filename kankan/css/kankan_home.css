@@ -305,6 +305,15 @@
 .commentlists{
 	margin-right: 4em;
 }
+.ka_sendmesbox{
+	background-color: #FFFFFF;padding-top:0.3em;margin-bottom: -1em;
+}
+.ka_sendcontent{
+	width: 80%;font-size: 14px;
+}
+.ka_sendbutton{
+	color:#007AFF; border: 1px #FFFFFF solid;
+}
 /***comment list*****/
 
 .ka_commentsort {
@@ -337,13 +346,14 @@
 .ka_commentinfobox {
 	border: 1px #666666 solid;
 	width: 70%;
-	margin-left: 1em;
 	border-radius: 2px;
-	text-indent: 25px;
+	/*text-indent: 25px;*/
 	padding: 0.5em;
 	color: #808080;
 	font-size: 14px;
 	margin-bottom: 1em;
+	word-wrap:break-word;
+	text-align: center;
 }
 
 .ka_commenttime {

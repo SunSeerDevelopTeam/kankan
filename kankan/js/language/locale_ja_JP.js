@@ -52,6 +52,9 @@ var JSLocale = {
 	"det_normalcomments":"普通",
 	"det_badcomments":"悪い",
 	"det_all":"全て",
+	"comdity_null":"暫時データ",
+	"contentlength":"レビューの内容（300字を超えない）",
+	"contentsend":"送 信",
 	
 	// Home Page
 	"app_name":"カンカン",
@@ -68,6 +71,10 @@ $(function(){
 	});
 	
 	$('input.lang').each(function(e){
+		var msg_key = $(this).attr('data-locale');
+		$(this).attr('placeholder',JSLocale[msg_key]);
+	});
+	$('textarea.lang').each(function(e){
 		var msg_key = $(this).attr('data-locale');
 		$(this).attr('placeholder',JSLocale[msg_key]);
 	});
