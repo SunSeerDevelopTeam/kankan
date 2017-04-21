@@ -20,8 +20,8 @@
 	}
 
 	mui.plusReady(function() {
-		var language = plus.os.language;
-		if(!language || language == "ja_JP") {
+		var language = navigator.language;
+		if(!language || language == "ja_JP" || language == "ja-jp") {
 			appendJS("../../js/language/locale_ja_JP.js");
 			appendJS("../../../js/language/locale_ja_JP.js");
 		} else {

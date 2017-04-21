@@ -189,6 +189,10 @@
 							},
 							ng: function(data) {
 								Log.e(data);
+							},
+							error: function(){
+								self.endPullDownToRefresh();
+								self.endPullUpToRefresh();
 							}
 						}).then(function() {
 							var ul = self.element.querySelector('.mui-table-view');

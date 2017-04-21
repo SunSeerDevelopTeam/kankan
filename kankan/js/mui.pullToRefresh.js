@@ -23,7 +23,6 @@
 	$.PullToRefresh = $.Class.extend({
 		init: function(element, options) {
 			var language = navigator.language;
-			console.log("current language is " + language);
 			this.element = element;
 			this.options = $.extend(true, {
 				down: {
@@ -34,10 +33,10 @@
 					auto: false,
 					offset: 100,
 					show: true,
-					contentinit: language == "ja-JP" ? "プルダウン更新" : "下拉可以刷新",
-					contentdown: language == "ja-JP" ? "プルダウン更新" : "下拉可以刷新",
-					contentrefresh: language == "ja-JP" ? "ローディング…" : "加载中...",
-					contentnomore: language == "ja-JP" ? "データがないと" : "没有数据了",
+					contentinit: (language == "ja-JP" || language == "ja-jp") ? "プルダウン更新" : "下拉可以刷新",
+					contentdown: (language == "ja-JP" || language == "ja-jp") ? "プルダウン更新" : "下拉可以刷新",
+					contentrefresh: (language == "ja-JP" || language == "ja-jp") ? "ローディング…" : "加载中...",
+					contentnomore: (language == "ja-JP" || language == "ja-jp")  ? "データがないと" : "没有数据了",
 					callback: false
 				},
 				preventDefaultException: {
