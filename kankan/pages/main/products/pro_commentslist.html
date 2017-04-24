@@ -19,18 +19,36 @@
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell ka_userbox" id="comments">
 					<p id="null" class="lang" data-locale="comdity_null" style="display: none;"></p>
-					<!--<div class="mui-pull-left">
+				
+				<!--<div class="comtent">
+					<div class="mui-pull-left">
 			           	<img src="../../../images/muwu.jpg" width="40" height="40" class="ka_touxiangimg" />
-			           	<div class="ka_userbox ka_userboxtext"><b>muiu</b></div>
+			           	<div class="ka_userbox ka_userboxtext"><b>muiufgdfhdfhdfhdfhdfhdf</b></div>
 			           </div>
-			           <div class="mui-pull-left ka_commentinfobox">
+			           <div class="mui-pull-right ka_commentinfobox">
 			           	shdfjshfjskdhfkjd ahsdjkahsdjk ashjkdhasjkd asdkhasjkdhasjkd sadhjkashdjk ashjkdhkasdj 
 			           	ashdjkasdh ashjkdhasd 中文的大小好像太大了dfj sdjfklsdjf jksdlfj jsdklfj jklsdfjsdklfjsdfjs jsdklfj
-				           	<div class="ka_commenttime mui-pull-left">
+				           	<div class="ka_commenttime">
 				           		<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span> 
 				           		1 天前
 				           	</div>
-			           	</div>-->
+			           	</div>
+			       </div>
+			       
+			       <div class="comtent mui-pull-left">
+					<div class="mui-pull-left">
+			           	<img src="../../../images/muwu.jpg" width="40" height="40" class="ka_touxiangimg" />
+			           	<div class="ka_userbox ka_userboxtext"><b>muiufgdfhdfhdfhdfhdfhdf</b></div>
+			           </div>
+			           <div class="mui-pull-right ka_commentinfobox">
+			           	shdfjshfjskdhfkjd ahsdjkahsdjk ashjkdhasjkd asdkhasjkdhasjkd sadhjkashdjk ashjkdhkasdj 
+			           	ashdjkasdh ashjkdhasd 中文的大小好像太大了dfj sdjfklsdjf jksdlfj jsdklfj jklsdfjsdklfjsdfjs jsdklfj
+				           	<div class="ka_commenttime">
+				           		<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span> 
+				           		1 天前
+				           	</div>
+			           	</div>
+			       </div>-->
 				</li>
 			</ul>
 		</div>
@@ -52,7 +70,14 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init();
+			mui.init(
+//				{
+//				beforeback: function(){
+//			    	var wobj = plus.webview.getWebviewById("detail");
+//					wobj.reload(true);
+//			    },
+//			}
+			);
 			window.addEventListener('comid', function(event) {
 				var id = event.detail.id;
 				$("#commodity_id").val(id);
@@ -77,7 +102,6 @@
 					}
 				});
 			}
-
 			function showpcomehts(results) {
 				$("#comments").empty();
 				var datas = results.data;
@@ -90,11 +114,11 @@
 					var content = pcommentinfo.leave_msg_detail;
 					var time = pcommentinfo.ins_date;
 					var html = new Util.StringBuilder();
-					html.append('<div class="comtent"><div class="mui-pull-left">')
+					html.append('<div class="comtent mui-pull-left"><div class="mui-pull-left">')
 						.appendFormat('<img src="{0}" width="40" height="40" class="ka_touxiangimg" />', headimg)
 						.appendFormat('<div class="ka_userbox ka_userboxtext"><b>{0}</b></div>', uname)
 						.append('</div>')
-						.append('<div class="mui-pull-left ka_commentinfobox">')
+						.append('<div class="mui-pull-right ka_commentinfobox">')
 						.appendFormat('{0}', content)
 						.append('<div class="ka_commenttime">')
 						.append('<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span>')
@@ -118,22 +142,61 @@
 				}
 				var pid=$("#commodity_id").val();
 				var param2 = {
+					//"tokencheck":"+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh\/PqKa19BIs=f18de066a468abc7ec408dfba0ff14f7d49c455aabcdf54ad28547bb7d7470ab",
 					"commodity_id":pid,
 					"leave_msg_detail":contents
 				};
-				console.log(contents);
+				//console.log(contents);
 				Repository.Commodity.comments(param2, {
 					ok: function(data) {
+						Log.d(data);
 						Log.d("success");
-						showpcomehts(data);
+						addcomment(data);
 					},
 					ng: function(data) {
 						Log.d(data);
-						if(data == "2001") {
-							alert("未登录");
+						if(data == "1000") {
+							alert(TextMessage.test);
 						}
 					}
 				});
+			}
+			//get current date
+			function getNowFormatDate() {
+			    var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+			            + " " + date.getHours() + seperator2 + date.getMinutes()
+			            + seperator2 + date.getSeconds();
+			    return currentdate;
+			} 
+			function addcomment(results){
+				var time2=getNowFormatDate();
+				var contents2=document.commodity_comments.leave_msg_detail.value;
+				var headimg2="../../../images/muwu.jpg";
+				var uname2="";
+				var html2 = new Util.StringBuilder();
+					html2.append('<div class="comtent mui-pull-left"><div class="mui-pull-left">')
+						.appendFormat('<img src="{0}" width="40" height="40" class="ka_touxiangimg" />', headimg2)
+						.appendFormat('<div class="ka_userbox ka_userboxtext"><b>{0}</b></div>', uname2)
+						.append('</div>')
+						.append('<div class="mui-pull-left ka_commentinfobox">')
+						.appendFormat('{0}', contents2)
+						.append('<div class="ka_commenttime">')
+						.append('<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span>')
+						.appendFormat('{0}', time2)
+						.append('</div></div></div>');
+					$("#comments").prepend(html2.toString());
+					document.commodity_comments.leave_msg_detail.value="";
 			}
 		</script>
 	</body>
