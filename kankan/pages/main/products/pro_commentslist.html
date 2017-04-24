@@ -36,10 +36,13 @@
 		</div>
 		<div>
 			<nav class="mui-bar mui-bar-tab">
-			<div class="ka_sendmesbox ka_userbox">
-				<textarea type="text" class="ka_sendcontent lang" data-locale="contentlength" maxlength="300"  rows="1"></textarea>
-				<button type="submit" class="mui-btn ka_sendbutton lang"  data-locale="contentsend"></button>
-			</div>
+				<form id="commodity_comments" name="commodity_comments" method="post">
+					<div class="ka_sendmesbox ka_userbox">
+						<input  type="hidden" id="commodity_id" name="commodity_id" />
+						<textarea type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="leave_msg_detail" name="leave_msg_detail" ></textarea>
+						<button type="button" class="mui-btn ka_sendbutton lang"  data-locale="contentsend" onclick="formSubmit()"></button>
+					</div>
+				</form>
 			</nav>
 
 		</div>
@@ -52,12 +55,14 @@
 			mui.init();
 			window.addEventListener('comid', function(event) {
 				var id = event.detail.id;
+				$("#commodity_id").val(id);
+				$("#leave_msg_detail").attr("placeholder",TextMessage.contentlength);
 				getccomments(id);
 			});
 
 			function getccomments(rid) {
 				var params = {
-					"commodity_id": "100006"
+					"commodity_id": rid
 				};
 				Repository.Commodity.Commoditycomment(params, {
 					ok: function(data) {
@@ -97,6 +102,38 @@
 						.append('</div></div></div>');
 					$("#comments").append(html.toString());
 				}
+			}
+			function formSubmit(){
+				//alert("bbbbb");
+				var contents=document.commodity_comments.leave_msg_detail.value;
+				if(contents==""){
+					alert(TextMessage.commenttestnull);
+					document.commodity_comments.leave_msg_detail.focus();
+					return false;
+				}
+				if(contents.length>300){
+					alert(TextMessage.commenttestlength);
+					document.commodity_comments.leave_msg_detail.focus();
+					return false;
+				}
+				var pid=$("#commodity_id").val();
+				var param2 = {
+					"commodity_id":pid,
+					"leave_msg_detail":contents
+				};
+				console.log(contents);
+				Repository.Commodity.comments(param2, {
+					ok: function(data) {
+						Log.d("success");
+						showpcomehts(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "2001") {
+							alert("未登录");
+						}
+					}
+				});
 			}
 		</script>
 	</body>
