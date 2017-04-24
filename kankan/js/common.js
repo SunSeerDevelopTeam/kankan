@@ -466,16 +466,16 @@ var Api;
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
 			commodityList: baseUrl + '/index/index/',
 			category: baseUrl + '/commodity/catalog/',
-			praise:baseUrl + '/commodity/praise/',
-			commodityulist:baseUrl+'/commodity/Commodityusers/',
-			Usercomment:baseUrl+'/user/Usercomment/',
-			Commoditycomment:baseUrl+'/commodity/Commoditycomment/',
-			comments:baseUrl+'/commodity/comment/'
+			praise: baseUrl + '/commodity/praise/',
+			commodityulist: baseUrl + '/commodity/Commodityusers/',
+			Usercomment: baseUrl + '/user/Usercomment/',
+			Commoditycomment: baseUrl + '/commodity/Commoditycomment/',
+			comments: baseUrl + '/commodity/comment/'
 		}
 	};
 	Api.Params = {
 		email: 'email',
-		username: 'username',
+		username: 'user_name',
 		password: 'user_pwd',
 		token: 'tokencheck',
 		sign: 'signcheck',
@@ -593,7 +593,8 @@ var Repository;
 			return Api.call(Api.url.Commodity.Commoditycomment, params, callback);
 		}
 		Commodity.Commoditycomment = Commoditycomment;
-		function comments(params,callback){
+
+		function comments(params, callback) {
 			return Api.call(Api.url.Commodity.comments, params, callback);
 		}
 		Commodity.comments = comments;
@@ -657,12 +658,17 @@ var TextMessage;
 	TextMessage.badshowmes = language ? "悪い" : "差评";
 	TextMessage.datanull = language ? "暫時データ" : "暂无数据";
 	TextMessage.not_network = language ? "申し訳ございません。ただ今ネットワークが問題がありますが、1分間立ってもう一度お試してください。" : "当前网络不给力，请稍后再试";
-	TextMessage.contentlength = language  ? "レビューの内容（300字を超えない）" : "评论内容（不超过三百字）";
-	TextMessage.commenttestnull = language  ? "コメントの内容は空っぽにならない!" : "评论内容不能为空!";
-	TextMessage.commenttestlength = language  ? "レビューの内容300字を超えない!" : "评论内容不能超过三百字！!";
+	TextMessage.contentlength = language ? "レビューの内容（300字を超えない）" : "评论内容（不超过三百字）";
+	TextMessage.commenttestnull = language ? "コメントの内容は空っぽにならない!" : "评论内容不能为空!";
+	TextMessage.commenttestlength = language ? "レビューの内容300字を超えない!" : "评论内容不能超过三百字！!";
 	TextMessage.send_code_ok = language ? "認証コードは入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
 	TextMessage.send_code_ng = language ? "認証コード発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
 	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
+	TextMessage.username = language ? "ユーザー名" : "用户名";
+	TextMessage.verificationCode = language ? "確認コード" : "验证码";
+
+	TextMessage.errorCode_1001 = language ? "検証番号の有効期限が切れて、再び試みて下さい " : "您输入的验证码已过期，请重试！";
+	TextMessage.errorCode_1002 = language ? "不能为空，请重新输入" : "不能为空，请重新输入";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

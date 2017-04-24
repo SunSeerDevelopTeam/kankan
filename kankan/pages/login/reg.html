@@ -183,6 +183,7 @@
 		<script src="../../js/picker/mui.poppicker.js"></script>
 		<script src="../../js/picker/city.data.js"></script>
 		<script src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/md5.js"></script>
 		<script src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			(function(mui, doc) {
@@ -223,12 +224,39 @@
 						params[Api.Params.rCode] = doc.getElementById('introduction-code').value.trim();
 						Repository.User.register(params, {
 							ok: function(data) {
+								Log.i("register ok");
 								mui.openWindow({
 									id: 'login',
 									url: 'login.html'
 								});
 							},
-							ng: function(data) {}
+							ng: function(data) {
+								Log.e("register ng");
+								Log.e(data);
+								$.each(data, function(key, value) {
+									console.log(key, value);
+									switch(value) {
+										case "1001":
+											if(key == Api.Params.vCode) {
+												mui.toast(TextMessage.verificationCode + TextMessage.errorCode_1001, {
+													duration: 'long',
+													type: 'div'
+												})
+											}
+											break;
+										case "1002":
+											if(key == Api.Params.username) {
+												mui.toast(TextMessage.username + TextMessage.errorCode_1002, {
+													duration: 'long',
+													type: 'div'
+												})
+											}
+											break;
+										default:
+											break;
+									}
+								});
+							}
 						});
 					});
 
