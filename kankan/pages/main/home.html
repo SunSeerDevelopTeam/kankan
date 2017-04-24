@@ -36,7 +36,7 @@
 			header a.mui-icon-search {
 				width: 60px;
 			}
-			
+			/**
 			html,
 			body {
 				min-height: 100%;
@@ -341,6 +341,7 @@
 				-webkit-transform: translate3d(0, 0, 0);
 				transform: translate3d(0, 0, 0);
 			}
+			**/
 		</style>
 	</head>
 
@@ -355,6 +356,7 @@
 		</header>
 		<div class="mui-content">
 		</div>
+		<!--
 		<div id="menu-wrapper" class="menu-wrapper hidden">
 			<div id="menu" class="menu">
 				<ul class="mui-table-view mui-table-view-inverted">
@@ -373,6 +375,7 @@
 				</ul>
 			</div>
 		</div>
+		-->
 	</body>
 	<script src="../../js/mui.min.js"></script>
 	<script src="../../js/jquery-3.2.0.min.js"></script>
@@ -393,13 +396,16 @@
 					}
 				}]
 			});
-			var network = false;
+			//var network = false;
 			mui.plusReady(function() {
+				/**
 				if(plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_NONE) {
 					network = true;
 				}
+				**/
 				var userPhoto = document.getElementById("user");
 				var isLogin = plus.storage.getItem("LoginFlag");
+				/**
 				var busying = false;
 				var menuWrapper = document.getElementById("menu-wrapper");
 				var menuWrapperClassList = menuWrapper.classList;
@@ -424,14 +430,17 @@
 						busying = false;
 					}, 500);
 				}
+				**/
 				userPhoto.addEventListener('click', function(event) {
 					console.log("userPhoto clicked.");
+					/**
 					if(!network) {
 						console.log(TextMessage.not_network);
 						mui.toast(TextMessage.not_network);
 					} else {
 						toggleMenu();
 					}
+					**/
 					if(!isLogin) {
 						var btnArray = [TextMessage.register, TextMessage.login, TextMessage.skip];
 						mui.confirm('1', '0', btnArray, function(e) {
