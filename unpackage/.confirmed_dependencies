@@ -1,0 +1,61 @@
+{
+  "main.html": {
+    "resources": [
+      "fonts/mui-icons-extra.ttf",
+      "images/muwu.jpg",
+      "fonts/mui.ttf",
+      "subpage_home.html",
+      "css/icons-extra.css"
+    ],
+    "refer": [
+      "offcanvas-drag-left-plus-menu.html",
+      "subpage_home.html",
+      "subpage_product_login.html",
+      "subpage_request.html",
+      "subpage_chat.html"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "images/sinaweibo.png",
+      "css/mui.min.css",
+      "css/style.css",
+      "images/weixin.png",
+      "images/qq.png",
+      "js/mui.enterfocus.js"
+    ],
+    "refer": [
+      "main.html"
+    ]
+  },
+  "subpage_home.html": {
+    "resources": [
+      "pullrefresh_sub.html"
+    ],
+    "refer": [
+      "pullrefresh_sub.html"
+    ]
+  },
+  "subpage_product_login.html": {
+    "resources": [
+      "images/logo.png",
+      "images/shuijiao.jpg"
+    ]
+  },
+  "pullrefresh_sub.html": {
+    "resources": [
+      "js/Common.js"
+    ]
+  },
+  "subpage_request.html": {
+    "resources": [
+      "images/cbd.jpg",
+      "images/MacPro.jpg",
+      "images/yuantiao.jpg",
+      "images/xinhuan.png",
+      "images/whitejiantou.png"
+    ]
+  }
+}

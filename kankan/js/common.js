@@ -466,11 +466,18 @@ var Api;
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
 			commodityList: baseUrl + '/index/index/',
 			category: baseUrl + '/commodity/catalog/',
+<<<<<<< HEAD
 			praise:baseUrl + '/commodity/praise/',
 			commodityulist:baseUrl+'/commodity/Commodityusers/',
 			Usercomment:baseUrl+'/user/Usercomment/',
 			Commoditycomment:baseUrl+'/commodity/Commoditycomment/',
 			comments:baseUrl+'/commodity/comment/'
+=======
+			praise: baseUrl + '/commodity/praise/',
+			commodityulist: baseUrl + '/commodity/Commodityusers/',
+			Usercomment: baseUrl + '/user/Usercomment/',
+			Commoditycomment: baseUrl + '/commodity/Commoditycomment/'
+>>>>>>> lx/13551
 		}
 	};
 	Api.Params = {
@@ -507,7 +514,7 @@ var Api;
 			error: function(xhr, type, errorThrown) {
 				plus.ui.alert(type);
 				plus.ui.alert(errorThrown);
-				if (Validator.isFunc(callback.error)) callback.error();
+				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}
 		});
@@ -578,15 +585,18 @@ var Repository;
 			return Api.call(Api.url.Commodity.praise, params, callback);
 		}
 		Commodity.praise = praise;
-		function commodityulist(params,callback){
+
+		function commodityulist(params, callback) {
 			return Api.call(Api.url.Commodity.commodityulist, params, callback);
 		}
 		Commodity.commodityulist = commodityulist;
-		function Usercomment(params,callback){
+
+		function Usercomment(params, callback) {
 			return Api.call(Api.url.Commodity.Usercomment, params, callback);
 		}
 		Commodity.Usercomment = Usercomment;
-		function Commoditycomment(params,callback){
+
+		function Commoditycomment(params, callback) {
 			return Api.call(Api.url.Commodity.Commoditycomment, params, callback);
 		}
 		Commodity.Commoditycomment = Commoditycomment;
@@ -640,23 +650,29 @@ var TextMessage;
 	TextMessage.test = language ? "まずはログインしてください。" : "请先登录!";
 	TextMessage.share = language ? "共有" : "分享到";
 	TextMessage.success = language ? "成功!" : "成功!";
-	TextMessage.faile = language  ? "失敗:" : "失败:";
-	TextMessage.sharecontent = language  ? "カンカンからの共有" : "看看的分享";
-	TextMessage.sharetitle = language  ? "カンカン" : "看看";
+	TextMessage.faile = language ? "失敗:" : "失败:";
+	TextMessage.sharecontent = language ? "カンカンからの共有" : "看看的分享";
+	TextMessage.sharetitle = language ? "カンカン" : "看看";
 	TextMessage.login = language ? "登録済みの方はこちら" : "登录";
-	TextMessage.register = language  ? "新しいはじめる方はこちら" : "注册";
-	TextMessage.cancel = language  ? "キャンセル" : "取消";
+	TextMessage.register = language ? "新しいはじめる方はこちら" : "注册";
+	TextMessage.cancel = language ? "キャンセル" : "取消";
 	TextMessage.towchatfrind = language ? "微信の友を送る" : "发送给微信好友";
 	TextMessage.towchatcircle = language ? "友達の輪に分けて、友達の" : "分享到微信朋友圈";
 	TextMessage.allshowmes = language ? "全て" : "全部";
-	TextMessage.goodshowmes = language  ? "良い" : "好评";
-	TextMessage.normalshowmes = language  ? "普通" : "中评";
-	TextMessage.badshowmes = language  ? "悪い" : "差评";
-	TextMessage.datanull = language  ? "暫時データ" : "暂无数据";
+	TextMessage.goodshowmes = language ? "良い" : "好评";
+	TextMessage.normalshowmes = language ? "普通" : "中评";
+	TextMessage.badshowmes = language ? "悪い" : "差评";
+	TextMessage.datanull = language ? "暫時データ" : "暂无数据";
 	TextMessage.not_network = language ? "申し訳ございません。ただ今ネットワークが問題がありますが、1分間立ってもう一度お試してください。" : "当前网络不给力，请稍后再试";
+<<<<<<< HEAD
 	TextMessage.contentlength = language  ? "レビューの内容（300字を超えない）" : "评论内容（不超过三百字）";
 	TextMessage.commenttestnull = language  ? "コメントの内容は空っぽにならない!" : "评论内容不能为空!";
 	TextMessage.commenttestlength = language  ? "レビューの内容300字を超えない!" : "评论内容不能超过三百字！!";
+=======
+	TextMessage.send_code_ok = language ? "認証コードは入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
+	TextMessage.send_code_ng = language ? "認証コード発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
+	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
+>>>>>>> lx/13551
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
