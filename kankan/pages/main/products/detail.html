@@ -18,7 +18,13 @@
 			<h1 class="mui-title"></h1>
 			<a class="mui-icon  mui-icon-reload mui-icon-right-nav mui-pull-right"></a>
 		</header>
-		<div class="mui-content">
+		<div id="loading" class="mui-content ka_userbox">
+			<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+			</div>
+		</div>
+		<div class="mui-content" style="display: none;">
 			<div id="slider" class="mui-slider">
 				<div class="mui-slider-group mui-slider-loop">
 					<!-- last -->
@@ -105,8 +111,7 @@
 			</a>
 			</li>
 			</ul>
-		</div>
-		<!--Produce goods of concern-->
+			<!--Produce goods of concern-->
 		<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
 		<div class="mui-slider">
 			<div class="mui-slider-group mui-slider-loop">
@@ -152,15 +157,16 @@
 			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
 		</div>
-		</div>
+	</div>
+		
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			mui.init({
-				swipeBack: true,
+			mui.init({			    
+				swipeBack: false,
 				preloadPages: [{
 						id: 'pro_commentslist.html',
 						url: 'pro_commentslist.html'
@@ -256,7 +262,19 @@
 				});
 			}
 			//share end***********/
+			function emptyhtml(){
+				$(".mui-slider-indicator").empty();
+				$(".firstimage img").attr("src","");
+				$(".lastimage img").attr("src", "");
+				$(".sliderimg").remove();
+				$("#lastremmondul").empty();
+				$("#firstremmondul").empty();
+				$("#lastconcerul").empty();
+				$("#firstconcerul").empty();
+				$(".mui-title").empty();
+			}
 			function getinfo(pid) {
+				emptyhtml();
 				var params = {
 					"commodity_id": pid
 				};
@@ -294,7 +312,7 @@
 					var la = imgsarr.length - 1 * 1;
 					$(".firstimage img").attr("src", imgsarr[0]);
 					$(".lastimage img").attr("src", imgsarr[la]);
-					htmlimg += '<div class="mui-slider-item">';
+					htmlimg += '<div class="mui-slider-item sliderimg">';
 					htmlimg += '<img src="' + imgsarr[i] + '">';
 					htmlimg += '</div>';
 					if(i==0){
@@ -356,7 +374,7 @@
 				}
 				//*************************************recommend
 				var recomendhtml2 = "";
-				var recomendhtml = '<div class="mui-slider-item">';
+				var recomendhtml = '<div class="mui-slider-item sliderimg">';
 				recomendhtml += '<ul class="mui-table-view mui-grid-view">';
 				var recomendsarrs = commodity.commodity_recommend;
 				var recomdlenght = recomendsarrs.length;
@@ -379,10 +397,9 @@
 						recomendhtml += '</ul></div>';
 					}
 					if(vall == 0 && j < recomdlenght) {
-						recomendhtml += '<div class="mui-slider-item">';
+						recomendhtml += '<div class="mui-slider-item sliderimg">';
 						recomendhtml += '<ul class="mui-table-view mui-grid-view">';
 					}
-
 					recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 					recomendaddhtml += '<a href="detail.html" id="' + recomdid + '">';
 					recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '">';
@@ -391,7 +408,7 @@
 						$("#firstremmondul").html(recomendaddhtml);
 					}
 					if(j > recomdlenght - 4) {
-						$("#lastremmondul").html(recomendaddhtml);
+						//$("#lastremmondul").html(recomendaddhtml);
 					}
 				}
 				recomendhtml2 += recomendhtml;
@@ -399,7 +416,7 @@
 				//recommend end*********************************/
 				//*************************************concenered
 				var concernhtml2 = "";
-				var concernhtml = '<div class="mui-slider-item">';
+				var concernhtml = '<div class="mui-slider-item sliderimg">';
 				concernhtml += '<ul class="mui-table-view mui-grid-view">';
 				var concernarrs = commodity.user_praise_commoditys;
 				var concernlenght = concernarrs.length;
@@ -420,7 +437,7 @@
 						concernhtml += '</ul></div>';
 					}
 					if(vallm == 0 && l < concernlenght) {
-						concernhtml += '<div class="mui-slider-item">';
+						concernhtml += '<div class="mui-slider-item sliderimg">';
 						concernhtml += '<ul class="mui-table-view mui-grid-view">';
 					}
 
@@ -495,6 +512,8 @@
 						id: 'detail.html'
 					});
 				});
+				$(".mui-content").show();
+				$("#loading").hide();
 			}
 			//messageshow end************/
 			//goods
