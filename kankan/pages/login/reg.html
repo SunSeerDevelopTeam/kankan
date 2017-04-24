@@ -141,7 +141,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="address"></label>
-						<input id="city" name="city" type="text" class="mui-input-clear mui-input lang" data-locale="address-details">
+						<input id="city" name="city" type="text" class="mui-input-clear mui-input lang" data-locale="address-details" readonly="readonly">
 						<a id="showCityPicker" class="mui-navigate-right"></a>
 					</div>
 				</div>
@@ -196,13 +196,13 @@
 						params[Api.Params.email] = doc.getElementById('email').value;
 						Repository.User.checkEmail(params, {
 							ok: function(data) {
-								mui.toast('验证码已发送至邮箱，请查收。', {
+								mui.toast(TextMessage.send_code_ok, {
 									duration: 'long',
 									type: 'div'
 								})
 							},
 							ng: function(data) {
-								mui.toast('发送验证码失败，请重试。', {
+								mui.toast(TextMessage.send_code_ng, {
 									duration: 'long',
 									type: 'div'
 								})
@@ -223,25 +223,30 @@
 						params[Api.Params.rCode] = doc.getElementById('introduction-code').value.trim();
 						Repository.User.register(params, {
 							ok: function(data) {
-								Log.i("注册成功");
 								mui.openWindow({
-									id:'login',
-									url:'login.html'
+									id: 'login',
+									url: 'login.html'
 								});
 							},
-							ng: function(data) {
-								Log.i("注册失败")
-							}
+							ng: function(data) {}
 						});
 					});
 
 					// address logic
 					var cityPickerBtn = doc.getElementById('showCityPicker');
+					var cityInput = doc.getElementById('city');
 					var cityPicker = new mui.PopPicker({
 						layer: 2
 					});
 					cityPicker.setData(cityData);
 					cityPickerBtn.addEventListener('tap', function(event) {
+						showCityPicker();
+					});
+					cityInput.addEventListener('tap', function(event) {
+						showCityPicker();
+					});
+
+					var showCityPicker = function() {
 						Log.i("click cityPicker");
 						cityPicker.show(function(items) {
 							Log.i(items[1]);
@@ -249,7 +254,7 @@
 							cityElement.value = items[0].text + " " + items[1].text;
 							cityElement.setAttribute('data-val', items[1].value);
 						});
-					});
+					}
 				});
 			})(mui, document);
 		</script>
