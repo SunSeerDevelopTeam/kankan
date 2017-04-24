@@ -112,7 +112,6 @@
 					statusBarBackground: '#FFFFFF'
 				});
 				$.plusReady(function() {
-					Log.level = Log._level.DEBUG;
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
@@ -121,22 +120,12 @@
 					var authBtns = ['weixin'];
 					var auths = {};
 					var oauthArea = doc.getElementById('weixin-oauth');
-					var mainPage = $.preload({
-						"id": 'main',
-						"url": '../main/main.html'
-					});
-					var main_loaded_flag = false;
-					mainPage.addEventListener("loaded", function() {
-						main_loaded_flag = true;
-					});
+					
 					var toMain = function() {
-						var id = setInterval(function() {
-							if(main_loaded_flag) {
-								clearInterval(id);
-								$.fire(mainPage, 'show', null);
-								mainPage.show("pop-in");
-							}
-						}, 20);
+						mui.openWindow({
+							"id": 'main',
+							"url": '../main/main.html'
+						});
 					};
 					plus.oauth.getServices(function(services) {
 						for(var i in services) {
@@ -147,7 +136,7 @@
 								var isDisable = (!isInstalled && service.id === 'weixin') ? 'disabled' : '';
 							}
 						}
-						if (isDisable === 'disabled') {
+						if(isDisable === 'disabled') {
 							doc.getElementsByClassName('oauth-btn')[0].setAttribute('data-able', 'disabled');
 						}
 						$(oauthArea).on('tap', '.oauth-btn', function() {
