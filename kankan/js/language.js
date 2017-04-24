@@ -21,7 +21,8 @@
 
 	mui.plusReady(function() {
 		var language = navigator.language;
-		if(!language || language == "ja_JP" || language == "ja-jp") {
+		console.log("language is " + language);
+		if(!language || language == "ja-jp" || language == "ja-JP") {
 			appendJS("../../js/language/locale_ja_JP.js");
 			appendJS("../../../js/language/locale_ja_JP.js");
 		} else {
