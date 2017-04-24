@@ -272,6 +272,7 @@
 			}
 			//message show
 			function messageshow(results) {
+				$(".mui-slider-indicator").empty();
 				var commodity = results.data;
 				var comdbasic = commodity.commodity_basic;
 				var comdname = comdbasic[0].comm_name;

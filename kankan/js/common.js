@@ -469,7 +469,8 @@ var Api;
 			praise:baseUrl + '/commodity/praise/',
 			commodityulist:baseUrl+'/commodity/Commodityusers/',
 			Usercomment:baseUrl+'/user/Usercomment/',
-			Commoditycomment:baseUrl+'/commodity/Commoditycomment/'
+			Commoditycomment:baseUrl+'/commodity/Commoditycomment/',
+			comments:baseUrl+'/commodity/comment/'
 		}
 	};
 	Api.Params = {
@@ -504,6 +505,7 @@ var Api;
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
+				plus.ui.alert(type);
 				plus.ui.alert(errorThrown);
 				if (Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
@@ -588,6 +590,10 @@ var Repository;
 			return Api.call(Api.url.Commodity.Commoditycomment, params, callback);
 		}
 		Commodity.Commoditycomment = Commoditycomment;
+		function comments(params,callback){
+			return Api.call(Api.url.Commodity.comments, params, callback);
+		}
+		Commodity.comments = comments;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
@@ -648,6 +654,9 @@ var TextMessage;
 	TextMessage.badshowmes = language  ? "悪い" : "差评";
 	TextMessage.datanull = language  ? "暫時データ" : "暂无数据";
 	TextMessage.not_network = language ? "申し訳ございません。ただ今ネットワークが問題がありますが、1分間立ってもう一度お試してください。" : "当前网络不给力，请稍后再试";
+	TextMessage.contentlength = language  ? "レビューの内容（300字を超えない）" : "评论内容（不超过三百字）";
+	TextMessage.commenttestnull = language  ? "コメントの内容は空っぽにならない!" : "评论内容不能为空!";
+	TextMessage.commenttestlength = language  ? "レビューの内容300字を超えない!" : "评论内容不能超过三百字！!";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
