@@ -36,7 +36,6 @@
 			header a.mui-icon-search {
 				width: 60px;
 			}
-			
 		</style>
 	</head>
 
@@ -71,14 +70,22 @@
 					}
 				}]
 			});
+
+			var searchBtn = $('.mui-icon-search').first();
+			searchBtn.click(function() {
+				mui.openWindow({
+					id: 'search',
+					url: 'search.html'
+				});
+			});
 			network = false;
 			mui.plusReady(function() {
 				Log.i("home.html plusReady...");
-				
+
 				if(plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_NONE) {
 					network = true;
 				}
-				
+
 				var userPhoto = document.getElementById("user");
 				var isLogin = plus.storage.getItem("LoginFlag");
 				userPhoto.addEventListener('click', function(event) {
@@ -87,35 +94,11 @@
 						console.log(TextMessage.not_network);
 						mui.toast(TextMessage.not_network);
 					}
-					mui.fire(plus.webview.getWebviewById('pullrefresh_with_tab'),'showMenu',{});
-					/**
 					if(!isLogin) {
-						var btnArray = [TextMessage.register, TextMessage.login, TextMessage.skip];
-						mui.confirm('1', '0', btnArray, function(e) {
-							switch(e.index) {
-								case 0:
-									console.log("新しいはじめる方はこちら");
-									mui.openWindow({
-										id: 'reg',
-										url: '../login/reg.html'
-									});
-									break;
-								case 1:
-									console.log("登録済みの方はこちら");
-									mui.openWindow({
-										id: 'login',
-										url: '../login/login.html'
-									});
-									break;
-								default:
-									console.log("スキップ");
-									break;
-							}
-						})
+						mui.fire(plus.webview.getWebviewById('pullrefresh_with_tab'), 'showMenu', {});
 					} else {
 						// TODO not login
 					}
-					**/
 				});
 			});
 		})(mui, document);

@@ -493,7 +493,7 @@
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script src="../../js/sha256.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
-		<script type="text/javascript" src="../../js/language.js" ></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
 		<script src="../../js/knockout-3.4.2.js"></script>
 		<script src="../../js/common.js"></script>
 		<script>
@@ -505,10 +505,24 @@
 					indicators: true,
 					deceleration: deceleration
 				});
-				
+
 				$('#menu-wrapper a').first().text(TextMessage.register);
 				$('#menu-wrapper a').eq(1).text(TextMessage.login);
 				$('#menu-wrapper a').last().text(TextMessage.skip);
+
+				$('#menu-wrapper a').first().click(function() {
+					mui.openWindow({
+						id: 'reg',
+						url: '../login/reg.html'
+					});
+				});
+
+				$('#menu-wrapper a').eq(1).click(function() {
+					mui.openWindow({
+						id: 'login',
+						url: '../login/login.html'
+					});
+				});
 
 				var menuWrapper = document.getElementById("menu-wrapper");
 				var menuWrapperClassList = menuWrapper.classList;
@@ -536,6 +550,10 @@
 						busying = false;
 					}, 500);
 				}
+
+				$('#menu-wrapper a').last().click(function() {
+					toggleMenu();
+				});
 
 				window.addEventListener('showMenu', function(event) {
 					Log.i("showMenu...");
@@ -567,8 +585,7 @@
 								}
 								Log.i("create catalog finish...");
 							},
-							ng: function(data) {
-							}
+							ng: function(data) {}
 						}).then(function() {
 							createFragment(null, true);
 							mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
@@ -603,8 +620,7 @@
 									commodityArray.push(commodity);
 								}
 							},
-							ng: function(data) {
-							},
+							ng: function(data) {},
 							error: function() {
 								if(self != null) {
 									self.endPullDownToRefresh();
@@ -617,7 +633,6 @@
 								ul = self.element.querySelector('.mui-table-view');
 							} else {
 								ul = document.querySelectorAll('.mui-slider-group .mui-scroll .mui-table-view')[0];
-								Log.i(ul);
 							}
 							var fragment = document.createDocumentFragment();
 							var li;
@@ -645,7 +660,6 @@
 								if(self != null) {
 									self.endPullDownToRefresh();
 								}
-
 							} else {
 								ul.appendChild(fragment);
 								if(self != null) {
@@ -657,7 +671,6 @@
 
 							mui(".mui-table-view").on('tap', 'a', function() {
 								var id = this.getAttribute("id");
-								Log.i(id);
 								if(!detailPage)
 									detailPage = plus.webview.getWebviewById('detail');
 								mui.fire(detailPage, 'cid', {

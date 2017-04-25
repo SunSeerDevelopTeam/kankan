@@ -299,7 +299,6 @@
 					var showCityPicker = function() {
 						Log.i("click cityPicker");
 						cityPicker.show(function(items) {
-							Log.i(items[1]);
 							var cityElement = doc.getElementById('city');
 							cityElement.value = items[0].text + " " + items[1].text;
 							cityElement.setAttribute('data-val', items[1].value);
