@@ -498,6 +498,9 @@ var Api;
 			type: 'post',
 			timeout: 10000,
 			success: function(data) {
+				Log.i(url);
+				Log.i(data);
+				setToken(data.tokencheck);
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng))
@@ -505,8 +508,11 @@ var Api;
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
-				plus.ui.alert(type);
-				plus.ui.alert(errorThrown);
+				Log.e(url);
+				Log.e(xhr);
+				Log.e(type);
+				Log.e(errorThrown);
+				plus.ui.alert(TextMessage.not_network);
 				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}
@@ -531,10 +537,27 @@ var Api;
 	 * return token info
 	 */
 	function getToken() {
-		// TODO return token info
-		return "";
+		var token = "";
+		if(plus != null) {
+			token = plus.storage.getItem('token');
+			if(token == null) {
+				return "";
+			}
+		}
+		return token;
 	}
 	Api.getToken = getToken;
+
+	/**
+	 * save token info
+	 */
+	function setToken(token) {
+		if(token != null && token != "" && plus != null) {
+			plus.storage.setItem('token', token);
+			Log.d("save token to storage.");
+		}
+	}
+	Api.setToken = setToken;
 })(Api || (Api = {}));
 var Repository;
 (function(Repository) {
@@ -666,6 +689,14 @@ var TextMessage;
 	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
 	TextMessage.username = language ? "ユーザー名" : "用户名";
 	TextMessage.verificationCode = language ? "確認コード" : "验证码";
+	TextMessage.login_error = language ? "登録名もしくはパスワードが間違っています。" : "用户名或者密码错误";
+	TextMessage.send_verification_code = language ? "認証コードを発信" : "发送验证码";
+	TextMessage.commodity_descriptionlength = language ? "商品説明（1000文字まで）" : "商品说明（1000字以内）";
+	TextMessage.publishsure = language ? "確認出品する？" : "确认出品展出吗?";
+	TextMessage.tackpicture = language ? "写真撮影" : "拍照";
+	TextMessage.comdity_takepic = language ? "商品に写真を撮る" : "为商品拍照";
+	TextMessage.gallerychoose = language ? "携帯電話からアルバムを選ぶ" : "从手机相册中选择";
+	TextMessage.chooseimage = language ? "写真を選択する" : "选择照片";
 
 	TextMessage.errorCode_1001 = language ? "検証番号の有効期限が切れて、再び試みて下さい " : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "不能为空，请重新输入" : "不能为空，请重新输入";
