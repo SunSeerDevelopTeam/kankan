@@ -177,8 +177,6 @@
 		<script src="../../js/app.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../js/language.js"></script>
-		<script src="../../js/validation/jquery.js"></script>
-		<script src="../../js/validation/jquery.validate.js"></script>
 		<script src="../../js/picker/mui.picker.js"></script>
 		<script src="../../js/picker/mui.poppicker.js"></script>
 		<script src="../../js/picker/city.data.js"></script>
@@ -191,22 +189,42 @@
 				mui.plusReady(function() {
 					console.log("reg page plus ready...");
 					var sendVCodeBtn = doc.getElementById('send-verification-code');
+					var canClick = true;
 					sendVCodeBtn.addEventListener('tap', function(event) {
+						if(!canClick) return;
 						console.log("click sendVCodeBtn");
+						canClick = false;
+						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value;
 						Repository.User.checkEmail(params, {
 							ok: function(data) {
+								waiting.close();
 								mui.toast(TextMessage.send_code_ok, {
 									duration: 'long',
 									type: 'div'
 								})
+								var i = 0;
+								var updateText = setInterval(function() {
+									i++;
+									sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
+									if(180 - i == 0) {
+										canClick = true;
+										clearInterval(updateText);
+									}
+								}, 1000);
 							},
 							ng: function(data) {
+								waiting.close();
+								canClick = true;
 								mui.toast(TextMessage.send_code_ng, {
 									duration: 'long',
 									type: 'div'
 								})
+							},
+							error: function() {
+								canClick = true;
+								waiting.close();
 							}
 						});
 					});
@@ -215,6 +233,7 @@
 					var regBtn = doc.getElementById('reg');
 					regBtn.addEventListener('tap', function(event) {
 						console.log("click regBtn");
+						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value.trim();
 						params[Api.Params.username] = doc.getElementById('username').value.trim();
@@ -225,14 +244,14 @@
 						Repository.User.register(params, {
 							ok: function(data) {
 								Log.i("register ok");
+								waiting.close();
 								mui.openWindow({
 									id: 'login',
 									url: 'login.html'
 								});
 							},
 							ng: function(data) {
-								Log.e("register ng");
-								Log.e(data);
+								waiting.close();
 								$.each(data, function(key, value) {
 									console.log(key, value);
 									switch(value) {
@@ -256,6 +275,9 @@
 											break;
 									}
 								});
+							},
+							error: function() {
+								waiting.close();
 							}
 						});
 					});
