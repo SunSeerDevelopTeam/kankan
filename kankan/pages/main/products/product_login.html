@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title>product_login</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -12,9 +12,8 @@
 		<link href="../../../css/mui.picker.css" rel="stylesheet" />
 		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />
 	</head>
-
 	<body class="mui-fullscreen">
-		<!--页面主结构开始-->
+		<!--page main-->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar">
@@ -23,140 +22,113 @@
 				</div>
 			</div>
 		</div>
-		<!--页面主结构结束-->
+		<!--page main end-->
 	<div id="productlogin" class="mui-page">
-		<!--页面标题栏开始-->
+		<!--page title begin-->
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title">商品登录</h1>
+				<h1 class="mui-center mui-title lang" data-locale="commodity_login"></h1>
 			</div>
-			<!--页面标题栏结束-->
-			<!--页面主内容区开始-->
+			<!--page title end-->
+			<!--page main start-->
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="mui-content kankan_jyimgbox">
-							 <h5 class="ka_proloh5 ka_propicfonts">商品拍照</h5>
+							 <h5 class="ka_proloh5 ka_propicfonts lang" data-locale="commodity_photos"></h5>
 							<div class="ka_prologbox0 z_photo">
-								<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);">
-									<input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+								<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);" id="gallery">
+									<!--<input type="file" name="file" id="file" value=""  class="takepic" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />-->
 								</div>
 								<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
 				            	 
 							</div>
-							<!--遮罩层-->
+							<!--mask-->
 					        <div class="z_mask">
-					            <!--弹出框-->
+					            <!--alert box-->
 					            <div class="z_alert">
-					                <p>确定要删除这张图片吗？</p>
+					                 <p class="lang" data-locale="commodity_photodet"></p>
 					                <p>
-					                    <span class="z_cancel">取消</span>
-					                    <span class="z_sure">确定</span>
+					                    <span class="z_cancel lang" data-locale="det_goodconcel"></span>
+					                    <span class="z_sure lang" data-locale="register"></span>
 					                </p>
 					            </div>
 					        </div>
 							     <br />
 							     <div class="ka_prologbox">
-								    <h5 class="ka_proloh5">商品名和说明</h5>
+								     <h5 class="ka_proloh5 lang" data-locale="commodity_name"></h5>
 								    <ul class="mui-table-view">
 							            <li class="mui-table-view-cell">
-						                    <input type="text" placeholder="商品名（40字以内）" id="productname" maxlength="40">
+						                   <input type="text" class="lang" data-locale="commodity_namelength" id="productname" maxlength="40">
 							            </li>
 							            <li class="mui-table-view-cell">
-							                <textarea placeholder="商品说明（1000字以内）" class="ka_noborder" maxlength="10"></textarea>
+							                 <textarea  class="ka_noborder" maxlength="1000"></textarea>
 							            </li>
 							        </ul>
 							     </div>
 							     <br />
 							     <div class="ka_prologbox">
-								    <h5 class="ka_proloh5">商品详情</h5>
+								     <h5 class="ka_proloh5 lang" data-locale="commodity_detail"></h5>
 								    <ul class="mui-table-view">
 							            <li class="mui-table-view-cell" >
 							                <div class="mui-navigate-right"   id="showCityPicker">
-							                    	<span class="ka_proinfo">商品种类</span>
-							                    	<div class="mui-pull-right ka_bitian" id="bitian1">必填</div>
+							                    	<span class="ka_proinfo lang" data-locale="commodity_sorts" ></span>
+							                    	<div class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian1"></div>
 							                    	<div id='sortResult' class="ui-alert mui-pull-right ka_sortname"></div>
 							                </div>
 							                
 							            </li>
 							            <li class="mui-table-view-cell">
 							                <a class="mui-navigate-right" href="#productstaute" id="prostuat">
-							                     	<span class="ka_proinfo">商品状态</span>
-							                     	<div class="mui-pull-right ka_bitian">必填</div>
+							                     	<span class="ka_proinfo lang" data-locale="commodity_stuates"></span>
+							                     	<div class="mui-pull-right ka_bitian lang" data-locale="commodity_must"></div>
 							                </a>
+							            </li>
+							            <li class="mui-table-view-cell">
+					                     	<span class="ka_proinfo lang" data-locale="commodity_price"></span>
+					                     	<div class="mui-pull-right">
+					                     		<input type="text" name="price" id="price" value="" placeholder="0" cla="ka_comdprice" maxlength="10" />
+					                     		<span class="comd_login_unit">P</span>
+					                     	</div>
+					                     	
 							            </li>
 							        </ul>
 							    </div><br />
 							    <div class="ka_prologbox">
-							    	 <h5 class="ka_proloh5">交换手段</h5>
+							    	 <h5 class="ka_proloh5 lang" data-locale="commodity_buyway"></h5>
 							    	 <ul class="mui-table-view">
 							    	         <li class="mui-table-view-cell">
-							    	             <div style="text-align: center;">
-							    	            <div class="mui-pull-left ka_exchangered">交 换</div>
-							    	             <div class="mui-pull-left ka_exchangegrey" >白 送</div>
-							    	              <div class="mui-pull-left ka_exchangegrey">交 易</div>
+							    	             <div class="ka_userbox">
+								    	            <div class="mui-pull-left ka_exchangered lang" data-locale="commodity_switch"></div>
+								    	            <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free"></div>
+								    	            <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_pointbuy"></div>
 							    	            </div>
 							    	         </li>
 							    	     </ul>
 							    </div>
 						</div><br/>
-						<div class="ka_description">
-						说明禁止就开机就ijijjkj啊实打实打算看大家是打算京东卡升级带宽啊京东卡死机了打开啊就是打卡时间的啊世界的坷拉三季稻就卡死了的
-							就是卡号登机口是放假咯卡拉回复
+						<div class="ka_description lang" data-locale="commodity_forbidentext">
 						</div>
 						<div class="ka_userbox">
-							<button type="button" class="mui-btn mui-btn-red ka_prologsure" onclick="return confirm('确认出品？')">确&nbsp;&nbsp;认</button>
+							<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_buttonsure" onclick="return publish()"></button>
 						</div>
 						<br/>
-						        <div class="showimg">
-						
+						<div class="showimg">
 				        </div>
 				        
 				    </div>    
 				</div>
 			</div>
     </div>
-    <!--productsort page-->
-		<div id="productsort" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
-				</button>
-				<h1 class="mui-center mui-title">商品种类</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-					        <li class="mui-table-view-cell">
-					            <a class="mui-navigate-right"  onclick="foundsort(this)">
-					              	<span class="ka_sortfont">日用品</span>
-					            </a>
-					        </li>
-					        <li class="mui-table-view-cell">
-					            <a class="mui-navigate-right" onclick="foundsort(this)">
-					            	   <span class="ka_sortfont"> 电子产品</span>
-					            </a>
-					        </li>
-					        <li class="mui-table-view-cell">
-					            <a class="mui-navigate-right" onclick="foundsort(this)">
-					             	  <span class="ka_sortfont">家具</span>
-					            </a>
-					        </li>
-					   </ul>	
-					</div>
-				</div>
-			</div>
-		</div>
 	 <!--productsataute page-->
 	 	<div id="productstaute" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title">商品状态</h1>
+				<h1 class="mui-center mui-title lang" data-locale="commodity_stuates"></h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
@@ -190,11 +162,18 @@
 	<script src="../../../js/mui.poppicker.js"></script>
 	<script src="../../../js/pro_loginsort.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../../js/language.js"></script>
+	<script src="../../../js/sha256.js"></script>
+	<script src="../../../js/common.js"></script>
+	<script src="../../../js/compress.js"></script>
 	<script>
+		$(function(){
+			$(".ka_noborder").attr("placeholder",TextMessage.commodity_descriptionlength);
+		});
+		//sort 
 		(function($, doc) {
 				$.init();
 				$.ready(function() {
-					//级联示例
 					var cityPicker = new $.PopPicker({
 						layer: 2
 					});
@@ -204,7 +183,7 @@
 					showCityPickerButton.addEventListener('tap', function(event) {
 						cityPicker.show(function(items) {
 							cityResult.innerText =items[0].text + " " + items[1].text;
-							//返回 false 可以阻止选择框的关闭
+							//return  false Can prevent the selection box off
 							//return false;
 						});
 						document.getElementById("bitian1").style.display="none";
@@ -212,28 +191,23 @@
 					//-----------------------------------------	
 				});
 			})(mui, document);
-			
-		//mui.init();
-
-		//初始化单页view
 		var viewApi = mui('#app').view({
 			defaultPage: '#productlogin'
 		});
-		//初始化单页的区域滚动
 		mui('.mui-scroll-wrapper').scroll();
 		var view = viewApi.view;
 		(function($) {
-			//处理view的后退与webview后退
+			//view back and webviewback
 			var oldBack = $.back;
 			$.back = function() {
-				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+				if (viewApi.canBack()) { 
+					//view back
 					viewApi.back();
-				} else { //执行webview后退
+				} else { 
+					//webview back
 					oldBack();
 				}
 			};
-			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
-			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
 			view.addEventListener('pageBeforeShow', function(e) {
 				//				console.log(e.detail.page.id + ' beforeShow');
 			});
@@ -247,18 +221,8 @@
 				//				console.log(e.detail.page.id + ' back');
 			});
 		})(mui);
-		//sort value
-		function foundsort(e){
-			var sort=$(e).children("span").html();
-			$("#prosort div").html(sort);
-			$("#prosort div").removeClass("ka_bitian");
-			$("#prosort div").addClass("ka_sortname");
-			$("#productsort .ka_gaoliang").each(function(){
-				$(this).removeClass("ka_gaoliang");
-				$(this).addClass("ka_sortfont");
-			});
-			$(e).children("span").removeClass("ka_sortfont");
-			$(e).children("span").addClass("ka_gaoliang");
+		function publish(){
+			return confirm(TextMessage.publishsure)
 		}
 		//stuat value
 		function foundstuat(e){
@@ -277,12 +241,12 @@
 		///////////////take picture/////////////////
 		function imglength(){
 			var imglength=$(".z_addImg").length;
-			    if(imglength>=3){
+			    if(imglength>3){
 			    	$(".z_file").hide();
 			    	$("#takepic").hide();
 			    }
 		}
-			 //px转换为rem
+	     //px Convert to rem
         (function(doc, win) {
             var docEl = doc.documentElement,
                 resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
@@ -300,38 +264,6 @@
             win.addEventListener(resizeEvt, recalc, false);
             doc.addEventListener('DOMContentLoaded', recalc, false);
         })(document, window);
-
-        function imgChange(obj1, obj2) {
-        	if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {  //判断iPhone|iPad|iPod|iOS
-			    alert("iphone");  
-			    //window.location.href ="iPhone.html";
-			} else{
-			    //alert("andrior"); 
-			    imglength();
-			    
-			} 
-            //获取点击的文本框
-            var file = document.getElementById("file");
-            //存放图片的父级元素
-            var imgContainer = document.getElementsByClassName(obj1)[0];
-            //获取的图片文件
-            var fileList = file.files;
-            //文本框的父级元素
-            var input = document.getElementsByClassName(obj2)[0];
-            var imgArr = [];
-            //遍历获取到得图片文件
-            for (var i = 0; i < fileList.length; i++) {
-                var imgUrl = window.URL.createObjectURL(file.files[i]);
-                imgArr.push(imgUrl);
-                var img = document.createElement("img");
-                img.setAttribute("src", imgArr[i]);
-                var imgAdd = document.createElement("div");
-                imgAdd.setAttribute("class", "z_addImg");
-                imgAdd.appendChild(img);
-                imgContainer.appendChild(imgAdd);
-            };
-            imgRemove();
-        };
 
         function imgRemove() {
             var imgList = document.getElementsByClassName("z_addImg");
@@ -363,16 +295,15 @@
             };
              
         };
+        //take picture
         mui(".ka_prologbox0").on("tap", "#takepic",function(e) {
 				if(mui.os.plus){
 					var a = [{
-						title: "拍照"
-					}/*, {
-						title: "从手机相册选择"
-					}*/];
+						title: TextMessage.tackpicture
+					}];
 					plus.nativeUI.actionSheet({
-						title: "为商品拍照",
-						cancel: "取消",
+						title: TextMessage.comdity_takepic,
+						cancel: TextMessage.cancel,
 						buttons: a
 					}, function(b) {
 						switch (b.index) {
@@ -381,9 +312,6 @@
 							case 1:
 								getImage();
 								break;
-//							case 2:
-//								galleryImg();
-//								break;
 							default:
 								break
 						}
@@ -391,34 +319,98 @@
 				}
 				
 			});
+			//gallery
+			mui(".ka_prologbox0").on("tap", "#gallery",function(e) {
+				if(mui.os.plus){
+					var a = [{
+						title: TextMessage.gallerychoose
+					}];
+					plus.nativeUI.actionSheet({
+						title: TextMessage.chooseimage,
+						cancel: TextMessage.cancel,
+						buttons: a
+					}, function(b) {
+						switch (b.index) {
+							case 0:
+								break;
+							case 1:
+								galleryImg();
+								break;
+							default:
+								break
+						}
+					})	
+				}
+				
+			});
+			//compressImage
+			function compressImg(path){
+				console.log(path);
+				plus.zip.compressImage({
+						src:path,
+						dst:"_doc/123.jpg",
+						quality:20,
+						overwrite:true,
+						format:"jpg"	
+					},
+					function(event) {
+						alert("Compress success!");
+						var target = event.target; // 压缩转换后的图片url路径，以"file://"开头
+						var size = event.size; // 压缩转换后图片的大小，单位为字节（Byte）
+						var width = event.width; // 压缩转换后图片的实际宽度，单位为px
+						var height = event.height; // 压缩转换后图片的实际高度，单位为px
+						alert(size);
+					},function(error) {
+						alert("Compress error!"+error.message);
+				});
+			}
 			function getImage() {
 				var c = plus.camera.getCamera();
 				c.captureImage(function(e) {
 					plus.io.resolveLocalFileSystemURL(e, function(entry) {
-						var s = entry.toLocalURL() + "?version=" + new Date().getTime();
-						
+						//var s = entry.toLocalURL() + "?version=" + new Date().getTime();
+						var localurl = entry.toLocalURL();
+						console.log(localurl);
 						var img = document.createElement("img");
-		                img.setAttribute("src",s);
+		                img.setAttribute("src",localurl);
 		                var imgAdd = document.createElement("div");
 		                imgAdd.setAttribute("class", "z_addImg");
 		                imgAdd.appendChild(img);
 		                $(".z_photo").append(imgAdd);
 		                 imglength();
 		                 imgRemove();
-						//document.getElementById("head-img").src = s;
-						//document.getElementById("head-img2").src = s;
-						//变更大图预览的src
-						//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-						//document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
+		                 compressImg(localurl);
 					}, function(e) {
-						console.log("读取拍照文件错误：" + e.message);
+						console.log("Read the picture file error：" + e.message);
 					});
 				}, function(s) {
 					console.log("error" + s);
 				}, {
-					filename: "_doc/head.jpg"
+					filename: "_doc/camera/"
 				})
 			}
+			function galleryImg() {
+			plus.gallery.pick(function(a) {
+				plus.io.resolveLocalFileSystemURL(a, function(entry) {
+					var localURL2 = entry.toLocalURL();
+					console.log(localURL2);
+					var img = document.createElement("img");
+	                img.setAttribute("src",localURL2);
+	                var imgAdd = document.createElement("div");
+	                imgAdd.setAttribute("class", "z_addImg");
+	                imgAdd.appendChild(img);
+	                $(".z_photo").append(imgAdd);
+	                 imglength();
+	                 imgRemove();
+	                 compressImg(localURL2);
+						
+				}, function(e) {
+					console.log("Read photo file error：" + e.message);
+				});
+			}, function(a) {}, {
+				filter: "image"
+			})
+		};
 	</script>
 
 </html>

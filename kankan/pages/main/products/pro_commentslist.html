@@ -52,7 +52,6 @@
 				</li>
 			</ul>
 		</div>
-		<div>
 			<nav class="mui-bar mui-bar-tab">
 				<form id="commodity_comments" name="commodity_comments" method="post">
 					<div class="ka_sendmesbox ka_userbox">
@@ -63,7 +62,6 @@
 				</form>
 			</nav>
 
-		</div>
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
@@ -175,21 +173,21 @@
 			        strDate = "0" + strDate;
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-			            + " " + date.getHours() + seperator2 + date.getMinutes()
-			            + seperator2 + date.getSeconds();
+			           + " " + date.getHours() + seperator2 + date.getMinutes();
+			           // + seperator2 + date.getSeconds();
 			    return currentdate;
 			} 
 			function addcomment(results){
 				var time2=getNowFormatDate();
 				var contents2=document.commodity_comments.leave_msg_detail.value;
-				var headimg2="../../../images/muwu.jpg";
-				var uname2="";
+				var headimg2=results.data[0].photo;
+				var uname2=results.data[0].nick_name;
 				var html2 = new Util.StringBuilder();
 					html2.append('<div class="comtent mui-pull-left"><div class="mui-pull-left">')
 						.appendFormat('<img src="{0}" width="40" height="40" class="ka_touxiangimg" />', headimg2)
 						.appendFormat('<div class="ka_userbox ka_userboxtext"><b>{0}</b></div>', uname2)
 						.append('</div>')
-						.append('<div class="mui-pull-left ka_commentinfobox">')
+						.append('<div class="mui-pull-right ka_commentinfobox">')
 						.appendFormat('{0}', contents2)
 						.append('<div class="ka_commenttime">')
 						.append('<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span>')

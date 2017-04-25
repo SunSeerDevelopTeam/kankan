@@ -293,6 +293,7 @@
 
 .ka_mainbox {
 	margin-top: -1em;
+	margin-bottom: 3em;
 }
 
 .ka_userbox {
@@ -594,7 +595,12 @@
 	font-size: 14px;
 	color: #555555;
 }
-
+#price{
+	border: 1px #FFFFFF solid;width: 7.1em;margin-top: -1em;
+}
+.comd_login_unit{
+	color: #2187E7;
+}
 
 /*----user page----*/
 
