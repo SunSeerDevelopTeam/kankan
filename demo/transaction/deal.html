@@ -1,0 +1,377 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link href="../css/icons-extra.css" rel="stylesheet" />
+		<script src="jquery-3.2.0.min.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../css/feedback.css" />
+		<link rel="stylesheet" href="kankan_home.css">
+		<link href="wu.css" rel="stylesheet" />
+	</head>
+
+	<body class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="setting" class="mui-page">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る<font size="4"></span>
+				</button>
+				<h1 class="mui-center mui-title"><b>Tran</b></h1>
+			</div>
+
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="tran-page">
+						<div class="tran-body">
+							<ul class="mui-table-view mui-grid-view before_hide after_hide tran-name">
+								<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+									<img height="32px" width="32px" src="../images/sinaweibo.png"/>
+									<font size="2" vertical-align="middle">Mary</font>
+								</li>
+								<li class="tran-name-middle tran-name-sell">
+									<div class="tran-name-middle-status">
+										<font size="2" color="#ffffff" vertical-align="middle">問い合わせ中</font>
+									</div>
+								</li>
+								<li class="mui-table-view-cell tran-name-buy">
+									<img height="32px" width="32px" src="../images/weixin.png"/>
+									<font size="2" vertical-align="middle">Jimmy</font>
+								</li>
+							</ul>
+							<ul class="tran-pic">
+								<li class="tran-pic-sell">
+									<a href="#sellGoods">
+										<img height="100%" width="100%" src="../images/cbd.jpg"/>
+									</a>
+								</li>
+								<li class="tran-pic-middle">
+									<img height="24px" width="24px" src="../images/xinhuan.png"/>
+								</li>
+								<li class="tran-pic-buy">
+									<a href="#buyGoods">
+										<img height="100%" width="100%" src="../images/muwu.jpg"/>
+									</a>
+								</li>
+							</ul>
+							<ul class="tran-button">
+								<li class="tran-button-sell">
+									<div>
+										<font size="2" vertical-align="middle">交易中止</font>
+									</div>
+								</li>
+								<li class="tran-button-middle">
+								</li>
+								<li class="tran-button-buy">
+									<div>
+										<font size="2" color="#FFFFF" vertical-align="middle">交易開始</font>
+									</div>
+								</li>
+							</ul>
+							<ul class="tran-distribution">
+								<li class="tran-distribution-law">
+									<div class="tran-distribution-law-detail">
+										<a href="#tradeLaw">
+											<font size="3" color="999999" vertical-align="middle">特定商取引法に基づく表記</font>
+										</a>										
+									</div>
+									<a href="distribution.html">
+										<div class="tran-distribution-call">
+												<font size="2" color="#FFFFF" vertical-align="middle">物流と連絡する</font>
+										</div>
+									</a>
+								</li>
+							</ul>
+							<ul id="msgArea" class="tran-chat">
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../images/sinaweibo.png"/>
+								</li>
+								<li class="tran-chat-word">
+									特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記
+								</li>
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../images/weixin.png"/>
+								</li>
+								<li class="tran-chat-word">
+									メッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージ
+								</li>
+							</ul>
+							<nav class="mui-bar mui-bar-tab">
+								<ul class="tran-foot">
+									<li class="tran-foot-input">
+										<input id="msg" type="text"/>
+									</li>
+									<li class="tran-foot-submit">
+										<button type="button" onclick="sendMsg();" class="mui-btn-link mui-btn-nav mui-pull-left">
+											<span><font size="4">送信<font size="4"></span>
+										</button>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面结束-->
+		<div id="buyGoods" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">商品リスト</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="tran-page">
+						<div>
+							<ul class="goods-list">
+								<li onclick="checkImg('1');" class="goods-grid">
+									<img height="100%" width="90%" src="../images/cbd.jpg"/>
+									<img id="check1" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('2');"  class="goods-grid2">
+									<img height="100%" width="90%"  src="../images/PSVista.png"/>
+									<img id="check2" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('3');"  class="goods-grid2">
+									<img height="100%" width="90%" src="../images/muwu.jpg"/>
+									<img id="check3" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+							</ul>
+							<ul class="goods-list">
+								<li onclick="checkImg('4');"  class="goods-grid">
+									<img height="100%" width="90%" src="../images/cbd.jpg"/>
+									<img id="check4" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('5');"  class="goods-grid2">
+									<img height="100%" width="90%"  src="../images/PSVista.png"/>
+									<img id="check5" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('6');"  class="goods-grid2">
+									<img height="100%" width="90%" src="../images/muwu.jpg"/>
+									<img id="check6" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+							</ul>
+							<ul class="goods-list">
+								<li onclick="checkImg('7');"  class="goods-grid">
+									<img height="100%" width="90%" src="../images/cbd.jpg"/>
+									<img id="check7" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('8');"  class="goods-grid2">
+									<img height="100%" width="90%"  src="../images/PSVista.png"/>
+									<img id="check8" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('9');"  class="goods-grid2">
+									<img height="100%" width="90%" src="../images/muwu.jpg"/>
+									<img id="check9" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面结束-->
+		<div id="sellGoods" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">商品リスト</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="tran-page">
+						<div>
+							<ul class="goods-list">
+								<li onclick="checkImg('1');" class="goods-grid">
+									<img height="100%" width="90%" src="../images/cbd.jpg"/>
+									<img id="check1" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('2');"  class="goods-grid2">
+									<img height="100%" width="90%"  src="../images/PSVista.png"/>
+									<img id="check2" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('3');"  class="goods-grid2">
+									<img height="100%" width="90%" src="../images/muwu.jpg"/>
+									<img id="check3" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+							</ul>
+							<ul class="goods-list">
+								<li onclick="checkImg('4');"  class="goods-grid">
+									<img height="100%" width="90%" src="../images/cbd.jpg"/>
+									<img id="check4" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('5');"  class="goods-grid2">
+									<img height="100%" width="90%"  src="../images/PSVista.png"/>
+									<img id="check5" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('6');"  class="goods-grid2">
+									<img height="100%" width="90%" src="../images/muwu.jpg"/>
+									<img id="check6" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+							</ul>
+							<ul class="goods-list">
+								<li onclick="checkImg('7');"  class="goods-grid">
+									<img height="100%" width="90%" src="../images/cbd.jpg"/>
+									<img id="check7" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('8');"  class="goods-grid2">
+									<img height="100%" width="90%"  src="../images/PSVista.png"/>
+									<img id="check8" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+								<li onclick="checkImg('9');"  class="goods-grid2">
+									<img height="100%" width="90%" src="../images/muwu.jpg"/>
+									<img id="check9" height="30%" width="20%" class="goods-grid-check" src="../images/goodbefor.png"/>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面结束-->
+		<div id="tradeLaw" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">特定商取引に関する表記</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="tran-page">
+						<div class="tran-body">
+							<ul class="trade-law">
+								<li class="trade-law-detail">
+									■ 事業者<br>
+									  株式会社サンシーア<br>
+									■ 代表者<br>
+									  望月　敏行<br>
+									■ ホームページ<br>
+									  https://sunseer.co.jp<br>
+									■ メールアドレス<br>
+									  support(at)sunseer.co.jp<br>
+									■ 所在地<br>
+									  〒110-0015<br>
+									  東京都台東区東上野6丁目2番1号<br>
+									  MPR東上野ビル6F<br>
+									■ 電話番号<br>
+									  （03-6280-7380）<br>
+									  ※お取引やサービスについてのお問い合わせは電話では受け付けておりません<br>
+									  大変申し訳ありませんが、お問い合わせについては個人情報保護などのためアプリ内の「お問い合わせ」フォームよりご連絡をいただき対応させていただいております。<br>
+									  ご不便をおかけいたしますが、ご理解ご協力をよろしくお願いいたします。<br>
+									■ 販売価格<br>
+									  各商品に表記された価格に準じます<br>
+									■ 商品等の引き渡し時期<br>
+									  交換・購入完了後、速やかにお引き渡しいたします<br>
+									■ お支払方法<br>
+									  各プラットフォームが定めるお支払い方法に基づきます<br>
+									■ 商品代金以外に必要な費用<br>
+									  通信時に発生するパケット通信料<br>
+									  支払い方法により所定の手数料<br>
+									■ 返品・交換について<br>
+									  お客様都合による返品・交換は受け付けておりません<br>
+									  不良品については販売者への連絡対応を行ってください<br>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.view.js "></script>
+	<script src='../js/feedback.js'></script>
+	<script>
+		mui.init();
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#setting'
+		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+			view.addEventListener('pageBeforeShow', function(e) {
+				//				console.log(e.detail.page.id + ' beforeShow');
+			});
+			view.addEventListener('pageShow', function(e) {
+				//				console.log(e.detail.page.id + ' show');
+			});
+			view.addEventListener('pageBeforeBack', function(e) {
+				//				console.log(e.detail.page.id + ' beforeBack');
+			});
+			view.addEventListener('pageBack', function(e) {
+				//				console.log(e.detail.page.id + ' back');
+			});
+		})(mui);
+
+		function sendMsg() {
+			var msg = document.getElementById('msg').value;
+			
+			// insert msg into db
+			
+			// when insert success add input message above the exist message
+			var msgArea = document.getElementById('msgArea');
+			var newMsg = "";
+			newMsg += "<li class=\"tran-chat-face\">";
+			newMsg += "<img height=\"32px\" width=\"32px\" src=\"../images/sinaweibo.png\"/>";
+			newMsg += "</li>";
+			newMsg += "<li class=\"tran-chat-word\">";
+			newMsg += msg;
+			newMsg += "</li>";
+			msgArea.innerHTML = newMsg + msgArea.innerHTML;
+			// clear input message
+			document.getElementById('msg').value = "";
+		}
+		
+		function checkImg(id) {
+			var src = document.getElementById("check" + id).src;
+			// change img to checked or not checked
+			if (src.indexOf("/images/goodafter.png") != -1) {
+				document.getElementById("check" + id).src = "../images/goodbefor.png";
+			} else {
+				document.getElementById("check" + id).src = "../images/goodafter.png";
+			}
+		}
+	</script>
+
+</html>
