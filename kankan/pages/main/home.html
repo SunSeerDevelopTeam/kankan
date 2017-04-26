@@ -61,6 +61,18 @@
 				gestureConfig: {
 					doubletap: true
 				},
+				preloadPages: [{
+					id: 'search',
+					url: 'search.html',
+					show: {
+						aniShow: 'slide-in-bottom',
+						duration: 200
+					},
+					waiting: {
+						autoShow: false
+					}
+				}],
+				preloadLimit: 3,
 				subpages: [{
 					url: 'pullrefresh_with_tab.html',
 					id: 'pullrefresh_with_tab',
@@ -75,7 +87,14 @@
 			searchBtn.click(function() {
 				mui.openWindow({
 					id: 'search',
-					url: 'search.html'
+					url: 'search.html',
+					show: {
+						aniShow: 'slide-in-bottom',
+						duration: 200
+					},
+					waiting: {
+						autoShow: false
+					}
 				});
 			});
 			network = false;
