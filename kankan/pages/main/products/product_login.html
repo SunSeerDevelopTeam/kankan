@@ -43,7 +43,6 @@
 									<!--<input type="file" name="file" id="file" value=""  class="takepic" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />-->
 								</div>
 								<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
-				            	 
 							</div>
 							<!--mask-->
 					        <div class="z_mask">
@@ -57,6 +56,10 @@
 					            </div>
 					        </div>
 							     <br />
+							  <input type="hidden" name="" id="0" value="0" class="imgname" />
+			            	 <input type="hidden" name="" id="1" value="0" class="imgname" />
+			            	 <input type="hidden" name="" id="2" value="0" class="imgname" />
+			            	 <input type="hidden" name="" id="3" value="0" class="imgname" />
 							     <div class="ka_prologbox">
 								     <h5 class="ka_proloh5 lang" data-locale="commodity_name"></h5>
 								    <ul class="mui-table-view">
@@ -117,7 +120,7 @@
 						<br/>
 						<div class="showimg">
 				        </div>
-				        
+				        <div id="deltimg" style="display: none;"></div>
 				    </div>    
 				</div>
 			</div>
@@ -239,63 +242,6 @@
 			
 		}
 		///////////////take picture/////////////////
-		function imglength(){
-			var imglength=$(".z_addImg").length;
-			    if(imglength>3){
-			    	$(".z_file").hide();
-			    	$("#takepic").hide();
-			    }
-		}
-	     //px Convert to rem
-        (function(doc, win) {
-            var docEl = doc.documentElement,
-                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-                recalc = function() {
-                    var clientWidth = docEl.clientWidth;
-                    if (!clientWidth) return;
-                    if (clientWidth >= 640) {
-                        docEl.style.fontSize = '100px';
-                    } else {
-                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
-                    }
-                };
-
-            if (!doc.addEventListener) return;
-            win.addEventListener(resizeEvt, recalc, false);
-            doc.addEventListener('DOMContentLoaded', recalc, false);
-        })(document, window);
-
-        function imgRemove() {
-            var imgList = document.getElementsByClassName("z_addImg");
-            var mask = document.getElementsByClassName("z_mask")[0];
-            var cancel = document.getElementsByClassName("z_cancel")[0];
-            var sure = document.getElementsByClassName("z_sure")[0];
-            for (var j = 0; j < imgList.length; j++) {
-                imgList[j].index = j;
-                imgList[j].onclick = function() {
-                    var t = this;
-                    mask.style.display = "block";
-                    cancel.onclick = function() {
-                        mask.style.display = "none";
-                    };
-                    sure.onclick = function() {
-                        mask.style.display = "none";
-                        t.style.display = "none";
-                        var picdisp=$(".z_file").css("display");
-                        if(picdisp=="none"){
-                        	$(".z_file").show();
-                        }
-                        var takpic=$("#takepic").css("display");
-                        if(takpic=="none"){
-                        	$("#takepic").show();
-                        }
-                    };
-
-                } 
-            };
-             
-        };
-        //take picture
         mui(".ka_prologbox0").on("tap", "#takepic",function(e) {
 				if(mui.os.plus){
 					var a = [{
@@ -343,40 +289,166 @@
 				}
 				
 			});
+		function imglength(){
+			var imglength=$(".z_images").length;
+			    if(imglength>3){
+			    	$(".z_file").hide();
+			    	$("#takepic").hide();
+			    }
+		}
+	     //px Convert to rem
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 640) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+		//delete image
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("z_addImg");
+            var mask = document.getElementsByClassName("z_mask")[0];
+            var cancel = document.getElementsByClassName("z_cancel")[0];
+            var sure = document.getElementsByClassName("z_sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                        //alert($(t).html());
+                        var picdisp=$(".z_file").css("display");
+                        if(picdisp=="none"){
+                        	$(".z_file").show();
+                        }
+                        var takpic=$("#takepic").css("display");
+                        if(takpic=="none"){
+                        	$("#takepic").show();
+                        }
+                        var dethtml=$(t).html();
+                   		$("#deltimg").html(dethtml);
+                   		var altval=$("#deltimg img").attr("alt");
+                   		$("#"+altval).val("0");
+                   		nums=altval;
+                   		$(t).remove();
+                   		$("#deltimg").empty();
+                    };
+
+                } 
+            };
+             
+        };
+        
 			//compressImage
 			function compressImg(path){
-				console.log(path);
+		        var currenttime=Date.parse(new Date());
 				plus.zip.compressImage({
 						src:path,
-						dst:"_doc/123.jpg",
+						dst:"_doc/"+currenttime+".jpg",
 						quality:20,
 						overwrite:true,
 						format:"jpg"	
 					},
 					function(event) {
-						alert("Compress success!");
-						var target = event.target; // 压缩转换后的图片url路径，以"file://"开头
-						var size = event.size; // 压缩转换后图片的大小，单位为字节（Byte）
-						var width = event.width; // 压缩转换后图片的实际宽度，单位为px
-						var height = event.height; // 压缩转换后图片的实际高度，单位为px
-						alert(size);
+						console.log("Compress success!");
+						var target = event.target; 
+						var size = event.size; // （Byte）
+						var width = event.width; // px
+						var height = event.height; // px
+						console.log(target);
+						uploadimage(target);
 					},function(error) {
 						alert("Compress error!"+error.message);
 				});
+			}
+			function uploadimage(path){
+				var num2=nums;
+				var targetimg=path;
+				var value=$("#"+num2).val();
+				if(value=="0"){
+					$("#"+num2).val(targetimg);
+				}
+				//imgappend(path);
+//				var params={
+//					"serial":num2,
+//					"imges":targetimg
+//				};
+				//console.log("imges:"+params.imges);
+				//console.log("num2:"+params.serial);
+				var server = "http://192.168.1.8:7998/commodity/release/upload/";
+                    //打开等待旋转提示按钮
+                    var wt=plus.nativeUI.showWaiting();
+                    var task = plus.uploader.createUpload(server, {  
+                        method: "post"  
+                    }, function(t, status) {  
+                        if(status == 200) { 
+                            alert("上传成功："+t.responseText);
+                                wt.close(); //关闭等待提示按钮
+                        }else{
+                            alert("上传失败："+status);
+                            wt.close();//关闭等待提示按钮
+                        }
+                    });  
+                    task.addFile(targetimg, {key:"imges"});  
+                    //添加其他参数
+                    task.addData("tokencheck","+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh/PqKa19BIs=70760a3f4cbcc375c67df5c75919adbe09b8aca4fc25fa6d7068bcd66169a108");
+                    task.addData("signcheck","1493201299377_273278f18ed1013e348c6b7c2fa405979401432d6ecd74a6e21800f4fb1646f2_4ed8e0895cbd09a1503277a0148274d10cbe333fc6fcc205ba6b30a7944e19d2");
+                    task.addData("serial",num2);
+                    task.start(); 
+//				Repository.Commodity.imgupload(params, {
+//					ok: function(data) {
+//						Log.d("success");
+//						//messageshow(data);
+//					},
+//					ng: function(data) {
+//						Log.d(data);
+//						if(data=="1000"){
+//							alert(TextMessage.test);
+//						}
+//					}
+//				});
+			}
+			var nums=0;
+			function imgappend(localurl){
+				var flag=true;
+				for(var m=0;m<4;m++){
+                	var valuem=$("#"+m).val();
+					if(valuem=="0"){
+						nums=m;
+						break;
+					}
+            	}
+				//alert("nums is "+nums);
+				var img = document.createElement("img");
+                img.setAttribute("src",localurl);
+                img.setAttribute("alt",nums);
+                img.setAttribute("class","z_images");
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                $(".z_photo").append(imgAdd);
 			}
 			function getImage() {
 				var c = plus.camera.getCamera();
 				c.captureImage(function(e) {
 					plus.io.resolveLocalFileSystemURL(e, function(entry) {
-						//var s = entry.toLocalURL() + "?version=" + new Date().getTime();
 						var localurl = entry.toLocalURL();
-						console.log(localurl);
-						var img = document.createElement("img");
-		                img.setAttribute("src",localurl);
-		                var imgAdd = document.createElement("div");
-		                imgAdd.setAttribute("class", "z_addImg");
-		                imgAdd.appendChild(img);
-		                $(".z_photo").append(imgAdd);
+						imgappend(localurl);
 		                 imglength();
 		                 imgRemove();
 		                 compressImg(localurl);
@@ -393,13 +465,7 @@
 			plus.gallery.pick(function(a) {
 				plus.io.resolveLocalFileSystemURL(a, function(entry) {
 					var localURL2 = entry.toLocalURL();
-					console.log(localURL2);
-					var img = document.createElement("img");
-	                img.setAttribute("src",localURL2);
-	                var imgAdd = document.createElement("div");
-	                imgAdd.setAttribute("class", "z_addImg");
-	                imgAdd.appendChild(img);
-	                $(".z_photo").append(imgAdd);
+					imgappend(localURL2);
 	                 imglength();
 	                 imgRemove();
 	                 compressImg(localURL2);
