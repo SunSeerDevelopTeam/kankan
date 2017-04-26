@@ -470,7 +470,9 @@ var Api;
 			commodityulist: baseUrl + '/commodity/Commodityusers/',
 			Usercomment: baseUrl + '/user/Usercomment/',
 			Commoditycomment: baseUrl + '/commodity/Commoditycomment/',
-			comments: baseUrl + '/commodity/comment/'
+			comments: baseUrl + '/commodity/comment/',
+			imgupload: baseUrl + '/commodity/release/upload/',
+			Commoditypublish:baseUrl + '/commodity/release/'
 		}
 	};
 	Api.Params = {
@@ -541,7 +543,7 @@ var Api;
 		if(plus != null) {
 			token = plus.storage.getItem('token');
 			if(token == null) {
-				return "";
+				return "+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh/PqKa19BIs=70760a3f4cbcc375c67df5c75919adbe09b8aca4fc25fa6d7068bcd66169a108";
 			}
 		}
 		return token;
@@ -621,6 +623,14 @@ var Repository;
 			return Api.call(Api.url.Commodity.comments, params, callback);
 		}
 		Commodity.comments = comments;
+		function imgupload(params, callback) {
+			return Api.call(Api.url.Commodity.imgupload, params, callback);
+		}
+		Commodity.imgupload = imgupload;
+		function Commoditypublish(params, callback) {
+			return Api.call(Api.url.Commodity.Commoditypublish, params, callback);
+		}
+		Commodity.Commoditypublish = Commoditypublish;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
