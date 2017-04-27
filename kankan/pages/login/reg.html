@@ -247,10 +247,8 @@
 							ok: function(data) {
 								Log.i("register ok");
 								waiting.close();
-								mui.openWindow({
-									id: 'login',
-									url: 'login.html'
-								});
+								plus.storage.setItem('LoginFlag', 'isLogin');
+								mui.back();
 							},
 							ng: function(data) {
 								waiting.close();

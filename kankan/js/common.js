@@ -505,7 +505,7 @@ var Api;
 			timeout: 10000,
 			success: function(data) {
 				Log.i(data);
-				setToken(data.tokencheck);
+				setToken(data.result.tokencheck);
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng))
