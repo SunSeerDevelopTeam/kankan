@@ -30,6 +30,10 @@
 	color: grey;
 }
 
+.ka_heartred{
+	color: red;
+}
+
 .ka_heartnum {
 	font-size: 11px;
 	margin-top: -2em;

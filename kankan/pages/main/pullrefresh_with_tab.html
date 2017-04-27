@@ -546,7 +546,7 @@
 							.appendFormat('<div>{0}<font color="#000000"> P</font></div>', commodityArray[i].price == "" ? 0 : commodityArray[i].price)
 							.append('</div>')
 							.append('<div class="mui-pull-right ka_heartlocation">')
-							.append('<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"></span>')
+							.appendFormat("<span class='mui-icon-extra mui-icon-extra-heart-filled " + '{0}' + "' disabled='{1}'></span>", (commodityArray[i].likeFlg == "" || commodityArray[i].likeFlg == "0") ? "ka_heartgrey" : "ka_heartred", commodityArray[i].likeFlg == "" ? "disabled" : "")
 							.appendFormat('<div class="ka_heartnum">{0}</div>', commodityArray[i].praise)
 							.append('</div>');
 						li.innerHTML = html.toString();
@@ -565,8 +565,8 @@
 					}
 					$('.spinner').css('display', 'none');
 					var detailPage = null;
-					
-					$('.listitem').click(function(){
+
+					$('.listitem').click(function() {
 						if(isShowMenu) return;
 						var id = this.getAttribute("id");
 						if(!detailPage)
@@ -574,16 +574,77 @@
 						mui.fire(detailPage, 'cid', {
 							id: id
 						});
-						mui.openWindow({
-							id: 'detail'
-						});
+						setTimeout(function() {
+							mui.openWindow({
+								id: 'detail',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								}
+							});
+						}, 300);
 					});
-					
-					mui('.ka_heartgrey').on('tap', function(){
-						Log.i("like");
+
+					$('.ka_heartlocation').unbind('click').click(function() {
+						Log.i("this disabled value is " + $(this).find('span').attr("disabled"));
+						if(!$(this).find('span').attr("disabled")) {
+							var commid = $(this).siblings("a").attr('id');
+							setTimeout(function() {
+								var isLogin = plus.storage.getItem("LoginFlag");
+								if(false) {
+									toggleMenu();
+								} else {
+									var params = {
+										commid: commid
+									};
+									Repository.Commodity.praise(params, {
+										ok:function(result){},
+										ng:function(result){
+											if (result === "2004") {
+												plus.nativeUI.alert(TextMessage.operation_error);
+											}
+										},
+										error:function(){}
+									});
+								}
+							}, 300);
+						} else {
+							Log.i("can't click span");
+							toggleMenu();
+						}
 					});
 				});
 			};
+			var menuWrapper = document.getElementById("menu-wrapper");
+			var menuWrapperClassList = menuWrapper.classList;
+			var busying = false;
+
+			function toggleMenu() {
+				if(busying) {
+					return;
+				}
+				busying = true;
+				if(menuWrapperClassList.contains('mui-active')) {
+					document.body.classList.remove('menu-open');
+					menuWrapper.className = 'menu-wrapper fade-out-up animated';
+					menu.className = 'menu bounce-out-up animated';
+					setTimeout(function() {
+						menuWrapper.classList.add('hidden');
+						isShowMenu = false;
+					}, 500);
+				} else {
+					document.body.classList.add('menu-open');
+					menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
+					menu.className = 'menu bounce-in-down animated';
+					isShowMenu = true;
+				}
+				setTimeout(function() {
+					busying = false;
+				}, 500);
+			}
+
 			$(document).ready(function() {
 				$('#menu-wrapper a').first().text(TextMessage.register);
 				$('#menu-wrapper a').eq(1).text(TextMessage.login);
@@ -631,34 +692,6 @@
 					setTimeout(toggleMenu(), 500);
 					return true;
 				});
-
-				var menuWrapper = document.getElementById("menu-wrapper");
-				var menuWrapperClassList = menuWrapper.classList;
-				var busying = false;
-
-				function toggleMenu() {
-					if(busying) {
-						return;
-					}
-					busying = true;
-					if(menuWrapperClassList.contains('mui-active')) {
-						document.body.classList.remove('menu-open');
-						menuWrapper.className = 'menu-wrapper fade-out-up animated';
-						menu.className = 'menu bounce-out-up animated';
-						setTimeout(function() {
-							menuWrapper.classList.add('hidden');
-							isShowMenu = false;
-						}, 500);
-					} else {
-						document.body.classList.add('menu-open');
-						menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
-						menu.className = 'menu bounce-in-down animated';
-						isShowMenu = true;
-					}
-					setTimeout(function() {
-						busying = false;
-					}, 500);
-				}
 
 				window.addEventListener('showMenu', function(event) {
 					Log.i("showMenu...");

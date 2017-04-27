@@ -458,7 +458,7 @@ var Api;
 	var baseUrl = 'http://124.114.150.138:7998';
 	Api.url = {
 		User: {
-			checkEmail: baseUrl + '/user/emailCode',
+			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
 			register: 　baseUrl + '/user/Register',
 			login: baseUrl + '/user/login/login'
 		},
@@ -486,21 +486,24 @@ var Api;
 		openId: 'openid',
 		headimgUrl: 'headimgurl',
 		addressId: 'address_id',
-		vCode: 'verificationCode',
-		rCode: 'recom_code'
+		vCode: 'vc_code',
+		rCode: 'recom_code',
+		page:'page'
 	};
 
 	function call(url, params, callback) {
 		var $d = $.Deferred();
+		Log.i("current API URL is " + url);
 		params[Api.Params.token] = getToken();
 		params[Api.Params.sign] = createSignInfo();
+		Log.i("current API params is ----> ");
+		Log.i(params);
 		mui.ajax(url, {
 			data: params,
 			dataType: 'json',
 			type: 'post',
 			timeout: 10000,
 			success: function(data) {
-				Log.i(url);
 				Log.i(data);
 				setToken(data.tokencheck);
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
@@ -510,7 +513,6 @@ var Api;
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
-				Log.e(url);
 				Log.e(xhr);
 				Log.e(type);
 				Log.e(errorThrown);
@@ -543,7 +545,7 @@ var Api;
 		if(plus != null) {
 			token = plus.storage.getItem('token');
 			if(token == null) {
-				return "+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh/PqKa19BIs=70760a3f4cbcc375c67df5c75919adbe09b8aca4fc25fa6d7068bcd66169a108";
+				return "";
 			}
 		}
 		return token;
@@ -554,7 +556,9 @@ var Api;
 	 * save token info
 	 */
 	function setToken(token) {
-		if(token != null && token != "" && plus != null) {
+		Log.d("setToken function is " + token);
+		Log.d("plus is " + plus);
+		if(typeof(token) != "undefined" && token != null && token != "" && plus != null) {
 			plus.storage.setItem('token', token);
 			Log.d("save token to storage.");
 		}
@@ -707,7 +711,7 @@ var TextMessage;
 	TextMessage.comdity_takepic = language ? "商品に写真を撮る" : "为商品拍照";
 	TextMessage.gallerychoose = language ? "携帯電話からアルバムを選ぶ" : "从手机相册中选择";
 	TextMessage.chooseimage = language ? "写真を選択する" : "选择照片";
-
+	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
 	TextMessage.errorCode_1001 = language ? "検証番号の有効期限が切れて、再び試みて下さい " : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "不能为空，请重新输入" : "不能为空，请重新输入";
 })(TextMessage || (TextMessage = {}));
@@ -722,6 +726,7 @@ var Entity;
 			this.imgs = null;
 			this.praise = null;
 			this.price = null;
+			this.likeFlg = null;
 		}
 		Commodity.prototype.fromJson = function(json) {
 			if(Validator.isNull(json)) return;
@@ -731,6 +736,7 @@ var Entity;
 			this.imgs = json.imgs;
 			this.praise = json.praise;
 			this.price = json.price;
+			this.likeFlg = json.like_flg;
 		};
 		Commodity.prototype.reset = function() {
 			this.classes(null);
@@ -739,6 +745,7 @@ var Entity;
 			this.imgs(null);
 			this.praise(null);
 			this.price(null);
+			this.likeFlg(null);
 		};
 		return Commodity;
 	}());
