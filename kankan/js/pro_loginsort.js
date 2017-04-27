@@ -2,49 +2,49 @@ var cityData = [{
 	value: '110000',
 	text: '电器',
 	children: [{
-		value: "110101",
+		value: "1",
 		text: "电饭锅"
 	}, {
-		value: "110102",
+		value: "2",
 		text: "吸尘器"
 	}, {
-		value: "110103",
+		value: "3",
 		text: "空调"
 	}, {
-		value: "110104",
+		value: "4",
 		text: "电视机"
 	}, {
-		value: "110105",
+		value: "5",
 		text: "电脑"
 	}, {
-		value: "110106",
+		value: "6",
 		text: "手机"
 	}, {
-		value: "110107",
+		value: "7",
 		text: "石景山区"
 	}, {
-		value: "110108",
+		value: "8",
 		text: "海淀区"
 	}, {
-		value: "110109",
+		value: "9",
 		text: "门头沟区"
 	}, {
-		value: "110111",
+		value: "12",
 		text: "房山区"
 	}, {
-		value: "110112",
+		value: "13",
 		text: "通州区"
 	}, {
-		value: "110113",
+		value: "14",
 		text: "顺义区"
 	}, {
-		value: "110114",
+		value: "15",
 		text: "昌平区"
 	}, {
-		value: "110115",
+		value: "16",
 		text: "大兴区"
 	}, {
-		value: "110116",
+		value: "17",
 		text: "怀柔区"
 	}, {
 		value: "110117",
@@ -63,19 +63,19 @@ var cityData = [{
 	value: '120000',
 	text: '日用品',
 	children: [{
-		value: "120101",
+		value: "1",
 		text: "牙刷"
 	}, {
-		value: "120102",
+		value: "2",
 		text: "牙膏"
 	}, {
-		value: "120103",
+		value: "3",
 		text: "毛巾"
 	}, {
-		value: "120104",
+		value: "4",
 		text: "垃圾袋"
 	}, {
-		value: "120105",
+		value: "5",
 		text: "收纳盒"
 	}, {
 		value: "120106",
