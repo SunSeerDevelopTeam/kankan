@@ -192,6 +192,7 @@
 	<script src="../../../js/common.js"></script>
 	<script src="../../../js/compress.js"></script>
 	<script>
+		
 		$(function(){
 			$(".ka_noborder").attr("placeholder",TextMessage.commodity_descriptionlength);
 			mui.plusReady(function() {
@@ -513,8 +514,8 @@
                         }
                     });  
                     //add parameter
-                    task.addData("tokencheck","+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh/PqKa19BIs=70760a3f4cbcc375c67df5c75919adbe09b8aca4fc25fa6d7068bcd66169a108");
-                    task.addData("signcheck","1493287721102_49389b1a23ee8666d3a8c67c8f77ff4710c6d5b57828d3f7e9072bb435224a82_ee1eb2312fdfef2ae95820e306f93a6b4696772182f9dcbdd44d406d7cff379c");
+                    task.addData("tokencheck",Api.getToken());
+                    task.addData("signcheck",Api.createSignInfo());
                     task.addData("serial",nums.toString());
                     task.addFile(targetimg, {key:"image"});  
                     task.start(); 
@@ -522,7 +523,7 @@
 			function Processing(results){
 				var data=JSON.parse(results);
 				var stautes=data.result.status;
-				console.log(stautes);
+				//console.log(stautes);
 				if(stautes=="OK"){
 					var imagesrc=data.result.data[1];
 					var value=$("#"+nums).val();
