@@ -34,7 +34,7 @@
 			<!--page title end-->
 			<!--page main start-->
 			<div class="mui-page-content">
-			<form action="" method="post" name="publish" id="publish">
+			<form action="" method="post" name="publishcomodity" id="publishcomodity">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="mui-content kankan_jyimgbox">
@@ -121,7 +121,7 @@
 						<div class="ka_description lang" data-locale="commodity_forbidentext">
 						</div>
 						<div class="ka_userbox">
-							<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_buttonsure" onclick="return publishs()"></button>
+							<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_buttonsure" onclick="publishs()"></button>
 						</div>
 						<br/>
 						<div class="showimg">
@@ -192,8 +192,26 @@
 	<script src="../../../js/common.js"></script>
 	<script src="../../../js/compress.js"></script>
 	<script>
+		
 		$(function(){
 			$(".ka_noborder").attr("placeholder",TextMessage.commodity_descriptionlength);
+			mui.plusReady(function() {
+			var param2={
+				"flg":"commodity"
+				};
+			Repository.Commodity.category(param2, {
+					ok: function(data) {
+						Log.d("success");
+						console.dir(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data=="1000"){
+							alert(TextMessage.test);
+						}
+					}
+				});
+			});
 		});
 		//sort 
 		(function($, doc) {
@@ -212,7 +230,7 @@
 						});
 						document.getElementById("bitian1").style.display="none";
 					}, false);
-					//-----------------------------------------	
+					//-----------------------------------------
 				});
 			})(mui, document);
 		var viewApi = mui('#app').view({
@@ -245,8 +263,90 @@
 				//				console.log(e.detail.page.id + ' back');
 			});
 		})(mui);
+		
 		function publishs(){
-			return confirm(TextMessage.publishsure)
+			//return confirm(TextMessage.publishsure);
+			var buy_sell_flag="0";
+			var comm_name=$("#comm_name").val();
+			var comm_detail=$("#comm_detail").val();
+			var classify_id=$("#classify_id").val();
+			var comm_state=$("#comm_state").val();
+			var exchange=$("#exchange").val();
+			var business=$("#business").val();
+			var gratis=$("#gratis").val();
+			var imges0=$("#0").val();
+			var imges1=$("#1").val();
+			var imges2=$("#2").val();
+			var imges3=$("#3").val();
+			var price=$("#price").val();
+			if(imges0=="0" & imges1=="0" & imges2=="0" & imges3=="0"){
+				alert("请为商品至少选择一张图片！");
+				return false;
+			}
+			if(comm_name==""){
+				alert("商品名称不能为空！");
+				document.publishcomodity.comm_name.focus();
+				return false;
+			}
+			if(comm_detail==""){
+				alert("商品描述不能为空！");
+				document.publishcomodity.comm_detail.focus();
+				return false;
+			}
+			if(classify_id==""){
+				alert("请选择商品分类！");
+				return false;
+			}
+			if(comm_state==""){
+				alert("请选择商品状态！");
+				return false;
+			}
+			if(price!=""){
+				if(isNaN(price)){
+					alert("价格只能是数字！");
+					document.publishcomodity.price.focus();
+					return false;
+				}
+				if(price<0){
+					alert("价格必须大于或等于0！");
+					document.publishcomodity.price.focus();
+					return false;
+				}
+			}
+			if(exchange=="0" & business=="0" & gratis=="0"){
+				alert("请选择交易手段！");
+				return false;
+			}
+			var params={
+				"buy_sell_flag":buy_sell_flag,
+				"comm_name":comm_name,
+				"comm_detail":comm_detail,
+				"classify_id":classify_id,
+				"comm_state":comm_state,
+				"exchange":exchange,
+				"business":business,
+				"gratis":gratis,
+				"price":price,
+				"imges[0]":imges0,
+				"imges[1]":imges1,
+				"imges[2]":imges2,
+				"imges[3]":imges3
+			};
+			//console.dir(params);
+			Repository.Commodity.Commoditypublish(params, {
+					ok: function(data) {
+						Log.d("success");
+						alert("发布成功！");
+						location.reload();
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data=="1000"){
+							alert(TextMessage.test);
+						}
+					}
+				});
+			
 		}
 		//stuat value
 		function foundstuat(e){
@@ -262,7 +362,6 @@
 			});
 			$(e).children("span").removeClass("ka_sortfont");
 			$(e).children("span").addClass("ka_gaoliang");
-			
 		}
 		///////////////take picture/////////////////
         mui(".ka_prologbox0").on("tap", "#takepic",function(e) {
@@ -415,28 +514,16 @@
                         }
                     });  
                     //add parameter
-                    task.addData("tokencheck","+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh/PqKa19BIs=70760a3f4cbcc375c67df5c75919adbe09b8aca4fc25fa6d7068bcd66169a108");
-                    task.addData("signcheck","1493268550092_20a022c5f0e5865ad60a8f804552d57955ddfb1531a6ca984137ab0ae4620af6_1d36ade608dc4f344c2d6f42496fc10dd30fcdd09d8139e6fbdb57a436c56d26");
+                    task.addData("tokencheck",Api.getToken());
+                    task.addData("signcheck",Api.createSignInfo());
                     task.addData("serial",nums.toString());
                     task.addFile(targetimg, {key:"image"});  
                     task.start(); 
-//				Repository.Commodity.imgupload(params, {
-//					ok: function(data) {
-//						Log.d("success");
-//						//messageshow(data);
-//					},
-//					ng: function(data) {
-//						Log.d(data);
-//						if(data=="1000"){
-//							alert(TextMessage.test);
-//						}
-//					}
-//				});
 			}
 			function Processing(results){
 				var data=JSON.parse(results);
 				var stautes=data.result.status;
-				console.log(stautes);
+				//console.log(stautes);
 				if(stautes=="OK"){
 					var imagesrc=data.result.data[1];
 					var value=$("#"+nums).val();

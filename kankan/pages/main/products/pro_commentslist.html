@@ -108,7 +108,10 @@
 					var pcommentobj = JSON.stringify(datas[i]);
 					var pcommentinfo = $.parseJSON(pcommentobj);
 					var headimg = pcommentinfo.user_photo;
-					var uname = pcommentinfo.user_name;
+					var uname = pcommentinfo.nick_name;
+					if(pcommentinfo.nick_name==""){
+						var uname = pcommentinfo.user_name;
+					}
 					var content = pcommentinfo.leave_msg_detail;
 					var time = pcommentinfo.ins_date;
 					var html = new Util.StringBuilder();
@@ -195,6 +198,7 @@
 						.append('</div></div></div>');
 					$("#comments").prepend(html2.toString());
 					document.commodity_comments.leave_msg_detail.value="";
+					$("#null").hide();
 			}
 		</script>
 	</body>
