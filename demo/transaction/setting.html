@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link href="../css/icons-extra.css" rel="stylesheet" />
+		<script src="jquery-3.2.0.min.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../css/feedback.css" />
+		<link rel="stylesheet" href="kankan_home.css">
+		<link href="wu.css" rel="stylesheet" />
+	</head>
+
+	<body class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="setting" class="mui-page">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る</font></span>
+				</button>
+				<h1 class="mui-center mui-title title-center">設定</h1>
+			</div>
+
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="set-page">
+						<div class="set-title">
+							ポイント
+						</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								ポイント購入
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<div class="set-title">
+							その他
+						</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								招待コードを確認
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								チケット購入
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								利用規約
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								プライバシーポリシー
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								禁止物・禁止行為
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								お問い合わせ
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								会社概要
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								ログアウト
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								バージョン
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.view.js "></script>
+	<script src='../js/feedback.js'></script>
+	<script>
+		mui.init();
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#setting'
+		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+			view.addEventListener('pageBeforeShow', function(e) {
+				//				console.log(e.detail.page.id + ' beforeShow');
+			});
+			view.addEventListener('pageShow', function(e) {
+				//				console.log(e.detail.page.id + ' show');
+			});
+			view.addEventListener('pageBeforeBack', function(e) {
+				//				console.log(e.detail.page.id + ' beforeBack');
+			});
+			view.addEventListener('pageBack', function(e) {
+				//				console.log(e.detail.page.id + ' back');
+			});
+		})(mui);
+	</script>
+</html>

@@ -4,7 +4,9 @@
 .after_hide:after {
     display: none;
 }
-
+.title-center {
+	position: static;
+}
 /* deal page */
 .tran-page {
 	height:100%; 
@@ -212,6 +214,7 @@
 	background-color:#FFFFFF;
 }
 .tran-chat-face {
+	margin-top:5%;
 	padding-left:14px;
 	margin-right:-4px;
 	width:15%; 
@@ -383,7 +386,6 @@
 }
 .goods-list {
 	padding-left:0px;
-	margin-top:5px; 
 	margin-bottom:0px; 
 	padding-right:0px; 
 	padding-bottom:0px; 
@@ -393,6 +395,7 @@
 	vertical-align:middle;
 	position:relative;
 	background:0 0;
+	background-color:#FFFFFF;
 }
 .goods-grid {
 	padding-top:0px; 
@@ -415,7 +418,7 @@
 	position:relative;
 	background:0 0;
 	vertical-align: middle;
-	text-align:center; 
+	text-align:center;
 }
 .goods-grid-check {
 	background:#FFFFFF; 
@@ -498,4 +501,478 @@
 	background:0 0;
 	overflow:hidden;
 	text-align:center; 
+}
+
+
+/* user page */
+.user-title-center {
+	position: static;
+	padding-left:7%;
+}
+.user-title {
+	padding-right:5%;
+	position:static;
+	font-size:17px;
+	font-weight:500;
+	line-height:44px;
+	text-align:center;
+	display:inline-block;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.head-img-box {
+	height: 100%;
+	text-align: center;
+	position:relative;
+	background:0 0;
+	overflow:hidden;
+	text-align:center; 
+	padding:11px 15px;
+}
+.head-img-box img {
+	border-radius:50%;
+}
+.user-num {
+	padding-left:0px;
+	padding-right:5%; 
+	padding-bottom:0px; 
+	margin-top:-10px;
+	border-width:0px; 
+	height:4%;
+	font-size:0;
+	display:block;
+	width:100%;
+	position:relative;
+	background-color:#FFFFFF;
+}
+.user-num-comment {
+	padding-top:0px; 
+	padding-left:14px;
+	margin-right:-4px;
+	width:33%;
+	font-size:17px;
+	display:inline-block;
+	text-align:center;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+	overflow:hidden;	
+}
+.user-num-sell {
+	padding-top:0px; 
+	padding-left:0px; 
+	margin-right:-4px;
+	width:30%;
+	font-size:17px;
+	display:inline-block;
+	text-align:center;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+	overflow:hidden;
+}
+.user-num-sell2 {
+	padding-top:0px; 
+	padding-left:0px; 
+	margin-right:-4px;
+	width:40%;
+	font-size:17px;
+	display:inline-block;
+	text-align:center;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+	overflow:hidden;
+}
+.user-comment-list {
+	padding-left:0px;
+	margin-bottom:0px; 
+	padding-right:0px; 
+	padding-bottom:0px; 
+	height:18%;
+	font-size:0;
+	display:block;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+	background-color:#FFFFFF;
+}
+.user-comment-grid {
+	padding-top:0px; 
+	padding-right:4%;
+	margin-right:-4px;
+	width:32%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center; 
+}
+.user-comment-grid2 {
+	padding-top:0px; 
+	padding-right:4%;
+	margin-right:-14px;
+	width:32%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center;
+}
+.user-comment-grid3 {
+	padding-top:0px; 
+	margin-left:34px;
+	margin-right:-4px;
+	width:4%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center;
+}
+.user-comment-num {
+	position:absolute; 
+	top:20%; 
+	left:60%;
+}
+.user-point-grid {
+	padding-top:2%; 
+	padding-bottom:2%; 
+	margin-left:-8px;
+	margin-right:-14px;
+	width:38%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center;
+	border:2px solid;
+	border-color: darkgray;
+}
+.user-point-grid2 {
+	padding-top:0px; 
+	padding-left:6%; 
+	margin-right:-14px;
+	width:32%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:left;
+}
+.user-goods-list {
+	padding-left:4px;
+	padding-right:4px;
+	margin-bottom:0px; 
+	padding-right:0px; 
+	padding-bottom:0px; 
+	height:8%; 
+	width:100%;
+	font-size:0;
+	display:block;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+	background-color:#FFFFFF;
+}
+.user-goods-title-grid {
+	height:100%; 
+	padding-top:0px; 
+	width:33%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center; 
+}
+.user-product-tab1 {
+	height:100%; 
+	background-color:#FF0000; 
+	text-align:center; 
+	padding-top:10%; 
+	vertical-align:middle;
+	border:1px #FFFFFF solid;
+}
+.user-product-tab12 {
+	height:100%; 
+	background-color:gray; 
+	text-align:center; 
+	padding-top:10%; 
+	vertical-align:middle;
+	border:1px #FFFFFF solid;
+}
+.user-product-tab2 {
+	height:100%; 
+	background-color:#FF0000; 
+	text-align:center; 
+	vertical-align:middle;
+	border:1px #FFFFFF solid;
+}
+.user-product-tab22 {
+	height:100%; 
+	background-color:gray; 
+	text-align:center; 
+	vertical-align:middle;
+	border:1px #FFFFFF solid;
+}
+.user-product-tab3 {
+	height:100%; 
+	background-color:#FF0000; 
+	text-align:center; 
+	padding-top:10%; 
+	vertical-align:middle;
+	border:1px #FFFFFF solid;
+}
+.user-product-tab32 {
+	height:100%; 
+	background-color:gray; 
+	text-align:center; 
+	padding-top:10%; 
+	vertical-align:middle;
+	border:1px #FFFFFF solid;
+}
+.user-goods-grid {
+	padding-top:5px; 
+	padding-left:2px;
+	padding-right:2px;
+	width:33%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center; 
+}
+.user-item-list {
+	padding-left:4px;
+	padding-right:4px;
+	margin-bottom:0px; 
+	padding-right:0px; 
+	padding-bottom:0px; 
+	height:50%; 
+	width:100%;
+	font-size:0;
+	display:block;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+	background-color:#FFFFFF;
+}
+
+/* user comment page */
+.user-comment-page {
+	height:100%; 
+	background-color:whitesmoke;
+}
+.user-comment-list-title {
+	padding-left:0px;
+	margin-bottom:0px; 
+	padding-right:0px; 
+	padding-bottom:0px; 
+	height:16%;
+	font-size:0;
+	display:block;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+	background-color:#FFFFFF;
+	border-bottom:1px solid;
+}
+.user-comment-list-title-col1 {
+	padding-top:12%; 
+	height:100%;
+	width:31%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center; 
+}
+.user-comment-list-title-col2 {
+	padding-top:0px; 
+	height:100%;
+	width:23%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:left; 
+}
+.user-comment-list-title-row1 {
+	padding-top:20%;
+	width:100%;
+	height:50%;
+}
+.user-comment-list-title-row2 {
+	width:100%;
+	height:20%;
+	vertical-align: middle;
+}
+.user-comment-list-title-row3 {
+	width:35%;
+	height:30%;
+	vertical-align: top;
+	text-align:center;
+}
+.tran-chat-page {
+	margin-top:20px;
+	padding-left:0px;
+	padding-right:0px; 
+	padding-bottom:0px; 
+	max-height:76%; 
+	overflow:auto; 
+	font-size:0;
+	display:block;
+	width:100%;
+	position:relative;
+	background-color:whitesmoke;
+}
+/* CSS talk bubble */
+.talk-bubble {
+	padding-top:4%;
+	padding-left:6%;
+	padding-right:4%;
+  	display: inline-block;
+ 	position: relative;
+	width: 100%;
+	height: auto;
+	background-color: white;
+}
+/* Right triangle, left side slightly down */
+.tri-right.border.left-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  	left: -40px;
+	right: auto;
+  	top: 30px;
+	bottom: auto;
+	border: 20px solid;
+	border-color: #666 #666 transparent transparent;
+}
+.tri-right.left-in:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  	left: -5%;
+	right: auto;
+  	top: 38px;
+	bottom: auto;
+	border: 12px solid;
+	border-color: white white transparent transparent;
+}
+.round{
+  border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+
+}
+.comment-bottom {
+	padding-left:0px;
+	margin-bottom:0px; 
+	padding-right:0px; 
+	padding-bottom:0px; 
+	height:16%;
+	font-size:0;
+	display:block;
+	vertical-align:middle;
+	position:relative;
+	background:0 0;
+}
+.comment-bottom-col1 {
+	height:100%;
+	width:15%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center; 
+}
+.comment-bottom-col2 {
+	padding-bottom:1%;
+	height:100%;
+	width:25%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:left; 
+}
+.comment-bottom-col3 {
+	height:100%;
+	width:60%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:right; 
+}
+
+/* setting page */
+.set-page {
+	height:100%; 
+	background-color:whitesmoke;
+	max-height:100%; 
+	overflow:auto; 
+	font-size:0;
+	display:block;
+}
+.set-title {
+	padding-top:5%;
+	padding-left:1%;
+	height:8%; 
+	background-color:whitesmoke;
+	border-bottom:1px solid;
+	font-size:17px;
+}
+.set-item {
+	padding-top:4%;
+	padding-left:7%;
+	padding-right:5%; 
+	padding-bottom:0px; 
+	border-width:0px; 
+	height:8%;
+	font-size:0;
+	display:block;
+	width:100%;
+	position:relative;
+	background-color:#FFFFFF;
+	border-bottom:1px solid;
+}
+.set-item-col1 {
+	padding-top:0px; 
+	margin-left:0px;
+	margin-right:-4px;
+	width:88%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:left;
+}
+.set-item-col2 {
+	padding-top:0px; 
+	margin-left:10%;
+	margin-right:-4px;
+	width:4%;
+	font-size:17px;
+	display:inline-block;
+	position:relative;
+	background:0 0;
+	vertical-align: middle;
+	text-align:center;
 }
