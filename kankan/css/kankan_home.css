@@ -398,7 +398,7 @@
 	color: #333333;
 }
 
-#productname {
+#comm_name {
 	border: #ffffff;
 	font-size: 14px;
 	color: #333333;
@@ -444,6 +444,7 @@
 	border: 1px #DD524D solid;
 	background-color: #DD524D;
 	border-radius: 2px;
+	margin-left: 1em;
 	color: #ffffff;
 	padding: 0.3em 0em;
 	font-size: 14px;
@@ -544,7 +545,7 @@
 
 .z_mask {
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	background: rgba(0, 0, 0, .5);
 	position: fixed;
 	top: 0;

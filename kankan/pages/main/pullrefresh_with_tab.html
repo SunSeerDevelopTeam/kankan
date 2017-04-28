@@ -488,17 +488,236 @@
 				</div>
 			</div>
 		</div>
-		<script src="../../js/mui.min.js"></script>
-		<script src="../../js/mui.pullToRefresh.js"></script>
-		<script src="../../js/mui.pullToRefresh.material.js"></script>
-		<script src="../../js/sha256.js"></script>
-		<script src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
-		<script src="../../js/knockout-3.4.2.js"></script>
-		<script src="../../js/common.js"></script>
-		<script>
-			mui.init();
-			(function(mui) {
+		<script type="text/javascript" src="../../js/knockout-3.4.2.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript">
+			var isShowMenu = false;
+			var keyword = "";
+			var page = 0;
+			var list, max, catalog;
+			//ul, index, count, reverse
+			var createFragment = function(params, index, self, isDown) {
+				// get commodity list data
+				Log.d("createFragment...");
+				var commodityArray = [];
+				Repository.Commodity.commodityList(params, {
+					ok: function(result) {
+						list = result.page.list;
+						max = result.page.max;
+						page = parseInt(result.page.page);
+						for(var i = 0; i < result.data.length; i++) {
+							var commodity = new Entity.Commodity();
+							commodity.fromJson(result.data[i]);
+							commodityArray.push(commodity);
+						}
+					},
+					ng: function(data) {},
+					error: function() {
+						if(self != null) {
+							self.endPullDownToRefresh();
+							self.endPullUpToRefresh();
+						}
+					}
+				}).then(function() {
+					var ul;
+					if(self != null) {
+						ul = self.element.querySelector('.mui-table-view');
+					} else {
+						ul = document.querySelectorAll('.mui-slider-group .mui-scroll .mui-table-view')[index];
+					}
+					var fragment = document.createDocumentFragment();
+					var li;
+					for(var i = 0; i < commodityArray.length; i++) {
+						li = document.createElement('li');
+						li.className = 'mui-table-view-cell mui-media mui-col-xs-6';
+						var html = new Util.StringBuilder();
+						html.appendFormat('<a class="listitem" id="{0}">', commodityArray[i].commodityId)
+							.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', commodityArray[i].imgs)
+							.appendFormat('<div class="mui-media-body">{0}</div>', commodityArray[i].commName)
+							.append('</a>')
+							.appendFormat('<div class="kankan_area">{0}</div>', commodityArray[i].classes)
+							.append('<div class="mui-pull-left ka_mony">')
+							.appendFormat('<div>{0}<font color="#000000"> P</font></div>', commodityArray[i].price == "" ? 0 : commodityArray[i].price)
+							.append('</div>')
+							.append('<div class="mui-pull-right ka_heartlocation">')
+							.appendFormat("<span class='mui-icon-extra mui-icon-extra-heart-filled " + '{0}' + "' disabled='{1}'></span>", (commodityArray[i].likeFlg == "" || commodityArray[i].likeFlg == "0") ? "ka_heartgrey" : "ka_heartred", commodityArray[i].likeFlg == "" ? "disabled" : "")
+							.appendFormat('<div class="ka_heartnum">{0}</div>', commodityArray[i].praise)
+							.append('</div>');
+						li.innerHTML = html.toString();
+						fragment.appendChild(li);
+					}
+					if(isDown) {
+						ul.insertBefore(fragment, ul.firstChild);
+						if(self != null) {
+							self.endPullDownToRefresh();
+						}
+					} else {
+						ul.appendChild(fragment);
+						if(self != null) {
+							self.endPullUpToRefresh();
+						}
+					}
+					$('.spinner').css('display', 'none');
+					var detailPage = null;
+
+					$('.listitem').click(function() {
+						if(isShowMenu) return;
+						var id = this.getAttribute("id");
+						if(!detailPage)
+							detailPage = plus.webview.getWebviewById('detail');
+						mui.fire(detailPage, 'cid', {
+							id: id
+						});
+						setTimeout(function() {
+							mui.openWindow({
+								id: 'detail',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								}
+							});
+						}, 300);
+					});
+
+					$('.ka_heartlocation').unbind('click').click(function() {
+						Log.i("this disabled value is " + $(this).find('span').attr("disabled"));
+						if(!$(this).find('span').attr("disabled")) {
+							var commid = $(this).siblings("a").attr('id');
+							setTimeout(function() {
+								var isLogin = plus.storage.getItem("LoginFlag");
+								if(false) {
+									toggleMenu();
+								} else {
+									var params = {
+										commid: commid
+									};
+									Repository.Commodity.praise(params, {
+										ok:function(result){},
+										ng:function(result){
+											if (result === "2004") {
+												plus.nativeUI.alert(TextMessage.operation_error);
+											}
+										},
+										error:function(){}
+									});
+								}
+							}, 300);
+						} else {
+							Log.i("can't click span");
+							toggleMenu();
+						}
+					});
+				});
+			};
+			var menuWrapper = document.getElementById("menu-wrapper");
+			var menuWrapperClassList = menuWrapper.classList;
+			var busying = false;
+
+			function toggleMenu() {
+				if(busying) {
+					return;
+				}
+				busying = true;
+				if(menuWrapperClassList.contains('mui-active')) {
+					document.body.classList.remove('menu-open');
+					menuWrapper.className = 'menu-wrapper fade-out-up animated';
+					menu.className = 'menu bounce-out-up animated';
+					setTimeout(function() {
+						menuWrapper.classList.add('hidden');
+						isShowMenu = false;
+					}, 500);
+				} else {
+					document.body.classList.add('menu-open');
+					menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
+					menu.className = 'menu bounce-in-down animated';
+					isShowMenu = true;
+				}
+				setTimeout(function() {
+					busying = false;
+				}, 500);
+			}
+
+			$(document).ready(function() {
+				$('#menu-wrapper a').first().text(TextMessage.register);
+				$('#menu-wrapper a').eq(1).text(TextMessage.login);
+				$('#menu-wrapper a').last().text(TextMessage.skip);
+
+				$('#menu-wrapper a').first().click(function() {
+					setTimeout(function() {
+						toggleMenu();
+					}, 100);
+					setTimeout(function() {
+						mui.openWindow({
+							id: 'reg',
+							url: '../login/reg.html',
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+					}, 400);
+					return true;
+				});
+
+				$('#menu-wrapper a').eq(1).click(function() {
+					setTimeout(function() {
+						toggleMenu();
+					}, 100);
+					setTimeout(function() {
+						mui.openWindow({
+							id: 'login',
+							url: '../login/login.html',
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+					}, 400);
+					return true;
+				});
+
+				$('#menu-wrapper a').last().click(function() {
+					setTimeout(toggleMenu(), 500);
+					return true;
+				});
+
+				window.addEventListener('showMenu', function(event) {
+					Log.i("showMenu...");
+					toggleMenu();
+				});
+
+				window.addEventListener('refresh', function(event) {
+					Log.i("refresh..., params is " + event.detail.keyword);
+					keyword = event.detail.keyword;
+					if(typeof(keyword) == "undefined" || keyword == "") {
+						return;
+					}
+					$('.mui-slider-group .mui-scroll .mui-table-view li').each(function() {
+						$(this).remove();
+					});
+					var params = {
+						keyword: keyword.toString(),
+						page: page,
+						//catalog: catalog
+					};
+					createFragment(params, 0, null, false);
+				});
+			});
+
+			(function(mui, doc) {
+				mui.init();
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
 				mui('.mui-scroll-wrapper').scroll({
 					bounce: false,
@@ -506,59 +725,6 @@
 					deceleration: deceleration
 				});
 
-				$('#menu-wrapper a').first().text(TextMessage.register);
-				$('#menu-wrapper a').eq(1).text(TextMessage.login);
-				$('#menu-wrapper a').last().text(TextMessage.skip);
-
-				$('#menu-wrapper a').first().click(function() {
-					mui.openWindow({
-						id: 'reg',
-						url: '../login/reg.html'
-					});
-				});
-
-				$('#menu-wrapper a').eq(1).click(function() {
-					mui.openWindow({
-						id: 'login',
-						url: '../login/login.html'
-					});
-				});
-
-				var menuWrapper = document.getElementById("menu-wrapper");
-				var menuWrapperClassList = menuWrapper.classList;
-				var network = false;
-				var busying = false;
-
-				function toggleMenu() {
-					if(busying) {
-						return;
-					}
-					busying = true;
-					if(menuWrapperClassList.contains('mui-active')) {
-						document.body.classList.remove('menu-open');
-						menuWrapper.className = 'menu-wrapper fade-out-up animated';
-						menu.className = 'menu bounce-out-up animated';
-						setTimeout(function() {
-							menuWrapper.classList.add('hidden');
-						}, 500);
-					} else {
-						document.body.classList.add('menu-open');
-						menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
-						menu.className = 'menu bounce-in-down animated';
-					}
-					setTimeout(function() {
-						busying = false;
-					}, 500);
-				}
-
-				$('#menu-wrapper a').last().click(function() {
-					toggleMenu();
-				});
-
-				window.addEventListener('showMenu', function(event) {
-					Log.i("showMenu...");
-					toggleMenu();
-				});
 				mui.plusReady(function() {
 					Log.i("pullrefresh_with_tab.html plusReady...");
 					mui.preload({
@@ -570,6 +736,9 @@
 						Repository.Commodity.category(params, {
 							ok: function(result) {
 								for(var i = 0; i < result.data.length; i++) {
+									if(i == 0) {
+										catalog = result.data[i].catalog_id;
+									}
 									var html = new Util.StringBuilder();
 									html.appendFormat('<a class="{0}" href="{1}" data-catalogId="{2}">', i == 0 ? "mui-control-item mui-active" : "mui-control-item", "#item" + (i + 1) + "mobile", result.data[i].catalog_id)
 										.append(result.data[i].catalog_detail)
@@ -587,103 +756,35 @@
 							},
 							ng: function(data) {}
 						}).then(function() {
-							createFragment(null, true);
+							var params = {
+								page: page,
+								//catalog: catalog
+							};
+							createFragment(params, 0, null, true);
 							mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+								Log.d(document.querySelectorAll('.mui-slider-group .mui-scroll'));
+								Log.d("index is " + index);
 								mui(pullRefreshEl).pullToRefresh({
 									down: {
 										callback: function() {
 											var self = this;
-											createFragment(self, true);
+											params[Api.Params.page] = page++;
+											createFragment(params, 0, self, true);
 										}
 									},
 									up: {
 										callback: function() {
 											var self = this;
-											createFragment(self, false);
+											params[Api.Params.page] = page--;
+											createFragment(params, 0, self, false);
 										}
 									}
 								});
 							});
 						});
 					})();
-
-					//ul, index, count, reverse
-					var createFragment = function(self, isDown) {
-						// get commodity list data
-						var params = {};
-						var commodityArray = [];
-						Repository.Commodity.commodityList(params, {
-							ok: function(result) {
-								for(var i = 0; i < result.data.length; i++) {
-									var commodity = new Entity.Commodity();
-									commodity.fromJson(result.data[i]);
-									commodityArray.push(commodity);
-								}
-							},
-							ng: function(data) {},
-							error: function() {
-								if(self != null) {
-									self.endPullDownToRefresh();
-									self.endPullUpToRefresh();
-								}
-							}
-						}).then(function() {
-							var ul;
-							if(self != null) {
-								ul = self.element.querySelector('.mui-table-view');
-							} else {
-								ul = document.querySelectorAll('.mui-slider-group .mui-scroll .mui-table-view')[0];
-							}
-							var fragment = document.createDocumentFragment();
-							var li;
-							for(var i = 0; i < commodityArray.length; i++) {
-								li = document.createElement('li');
-								li.className = 'mui-table-view-cell mui-media mui-col-xs-6';
-								var html = new Util.StringBuilder();
-								html.appendFormat('<a id="{0}">', commodityArray[i].commodityId)
-									.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', commodityArray[i].imgs)
-									.appendFormat('<div class="mui-media-body">{0}</div>', commodityArray[i].commName)
-									.append('</a>')
-									.appendFormat('<div class="kankan_area">{0}</div>', commodityArray[i].classes)
-									.append('<div class="mui-pull-left ka_mony">')
-									.appendFormat('<div>{0}<font color="#000000"> P</font></div>', commodityArray[i].price == "" ? 0 : commodityArray[i].price)
-									.append('</div>')
-									.append('<div class="mui-pull-right ka_heartlocation">')
-									.append('<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey" onclick="good(this)"></span>')
-									.appendFormat('<div class="ka_heartnum">{0}</div>', commodityArray[i].praise)
-									.append('</div>');
-								li.innerHTML = html.toString();
-								fragment.appendChild(li);
-							}
-							if(isDown) {
-								ul.insertBefore(fragment, ul.firstChild);
-								if(self != null) {
-									self.endPullDownToRefresh();
-								}
-							} else {
-								ul.appendChild(fragment);
-								if(self != null) {
-									self.endPullUpToRefresh();
-								}
-							}
-							$('.spinner').css('display', 'none');
-							var detailPage = null;
-
-							mui(".mui-table-view").on('tap', 'a', function() {
-								var id = this.getAttribute("id");
-								if(!detailPage)
-									detailPage = plus.webview.getWebviewById('detail');
-								mui.fire(detailPage, 'cid', {
-									id: id
-								});
-								mui.openWindow({
-									id: 'detail'
-								});
-							})
-						});
-					};
 				});
-			})(mui);
+			})(mui, document);
 		</script>
 	</body>
 

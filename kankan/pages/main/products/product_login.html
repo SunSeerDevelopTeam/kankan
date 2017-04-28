@@ -34,6 +34,7 @@
 			<!--page title end-->
 			<!--page main start-->
 			<div class="mui-page-content">
+			<form action="" method="post" name="publishcomodity" id="publishcomodity">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="mui-content kankan_jyimgbox">
@@ -43,7 +44,6 @@
 									<!--<input type="file" name="file" id="file" value=""  class="takepic" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />-->
 								</div>
 								<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
-				            	 
 							</div>
 							<!--mask-->
 					        <div class="z_mask">
@@ -57,14 +57,18 @@
 					            </div>
 					        </div>
 							     <br />
+							  <input type="hidden" name="" id="0" value="0" class="imgname" />
+			            	 <input type="hidden" name="" id="1" value="0" class="imgname" />
+			            	 <input type="hidden" name="" id="2" value="0" class="imgname" />
+			            	 <input type="hidden" name="" id="3" value="0" class="imgname" />
 							     <div class="ka_prologbox">
 								     <h5 class="ka_proloh5 lang" data-locale="commodity_name"></h5>
 								    <ul class="mui-table-view">
 							            <li class="mui-table-view-cell">
-						                   <input type="text" class="lang" data-locale="commodity_namelength" id="productname" maxlength="40">
+						                   <input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40">
 							            </li>
 							            <li class="mui-table-view-cell">
-							                 <textarea  class="ka_noborder" maxlength="1000"></textarea>
+							                 <textarea  class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail"></textarea>
 							            </li>
 							        </ul>
 							     </div>
@@ -77,6 +81,7 @@
 							                    	<span class="ka_proinfo lang" data-locale="commodity_sorts" ></span>
 							                    	<div class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian1"></div>
 							                    	<div id='sortResult' class="ui-alert mui-pull-right ka_sortname"></div>
+							                    	<input type="hidden" name="classify_id" id="classify_id" value="" />
 							                </div>
 							                
 							            </li>
@@ -84,6 +89,7 @@
 							                <a class="mui-navigate-right" href="#productstaute" id="prostuat">
 							                     	<span class="ka_proinfo lang" data-locale="commodity_stuates"></span>
 							                     	<div class="mui-pull-right ka_bitian lang" data-locale="commodity_must"></div>
+							                     	<input type="hidden" name="comm_state" id="comm_state" value="" />
 							                </a>
 							            </li>
 							            <li class="mui-table-view-cell">
@@ -101,9 +107,12 @@
 							    	 <ul class="mui-table-view">
 							    	         <li class="mui-table-view-cell">
 							    	             <div class="ka_userbox">
-								    	            <div class="mui-pull-left ka_exchangered lang" data-locale="commodity_switch"></div>
-								    	            <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free"></div>
-								    	            <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_pointbuy"></div>
+								    	            <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_switch" id="exchbuybtn"></div>
+								    	            <input type="hidden" name="exchange" id="exchange" value="0" />
+								    	            <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_pointbuy" id="pointbuybtn"></div>
+								    	             <input type="hidden" name="business" id="business" value="0" />
+								    	             <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free" id="freebuybtn"></div>
+								    	             <input type="hidden" name="gratis" id="gratis" value="0" />
 							    	            </div>
 							    	         </li>
 							    	     </ul>
@@ -112,14 +121,15 @@
 						<div class="ka_description lang" data-locale="commodity_forbidentext">
 						</div>
 						<div class="ka_userbox">
-							<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_buttonsure" onclick="return publish()"></button>
+							<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_buttonsure" onclick="publishs()"></button>
 						</div>
 						<br/>
 						<div class="showimg">
 				        </div>
-				        
+				        <div id="deltimg" style="display: none;"></div>
 				    </div>    
 				</div>
+			</form>
 			</div>
     </div>
 	 <!--productsataute page-->
@@ -135,18 +145,33 @@
 					<div class="mui-scroll">
 						<ul class="mui-table-view">
 					        <li class="mui-table-view-cell">
-					            <a class="mui-navigate-right" onclick="foundstuat(this)">
-					              	<span class="ka_sortfont" >全新</span>
+					            <a class="mui-pull-left" onclick="foundstuat(this)">
+					              	<span class="ka_sortfont">新品・未使用</span>
+					              	 <input type="hidden" name="stuate0" id="stuate0" value="0" />
 					            </a>
 					        </li>
 					        <li class="mui-table-view-cell">
-					            <a class="mui-navigate-right" onclick="foundstuat(this)">
-					            	   <span class="ka_sortfont">用了一年</span>
+					            <a class="mui-pull-left" onclick="foundstuat(this)">
+					            	   <span class="ka_sortfont">未使用に近い</span>
+					            	    <input type="hidden" name="stuate1" id="stuate1" value="1" />
 					            </a>
 					        </li>
 					        <li class="mui-table-view-cell">
-					            <a class="mui-navigate-right" onclick="foundstuat(this)">
-					             	  <span class="ka_sortfont">用了三年</span>
+					            <a class="mui-pull-left" onclick="foundstuat(this)">
+					             	  <span class="ka_sortfont">目立った傷や汚れなし</span>
+					             	   <input type="hidden" name="stuate2" id="stuate2" value="2" />
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell">
+					            <a class="mui-pull-left" onclick="foundstuat(this)">
+					             	  <span class="ka_sortfont">傷や汚れあり</span>
+					             	  <input type="hidden" name="stuate3" id="stuate3" value="3" />
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell">
+					            <a class="mui-pull-left" onclick="foundstuat(this)">
+					             	  <span class="ka_sortfont">全体的に状態が悪い)</span>
+					             	   <input type="hidden" name="stuate4" id="stuate4" value="4" />
 					            </a>
 					        </li>
 					    </ul>
@@ -167,8 +192,26 @@
 	<script src="../../../js/common.js"></script>
 	<script src="../../../js/compress.js"></script>
 	<script>
+		
 		$(function(){
 			$(".ka_noborder").attr("placeholder",TextMessage.commodity_descriptionlength);
+			mui.plusReady(function() {
+			var param2={
+				"flg":"commodity"
+				};
+			Repository.Commodity.category(param2, {
+					ok: function(data) {
+						Log.d("success");
+						console.dir(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data=="1000"){
+							alert(TextMessage.test);
+						}
+					}
+				});
+			});
 		});
 		//sort 
 		(function($, doc) {
@@ -183,12 +226,11 @@
 					showCityPickerButton.addEventListener('tap', function(event) {
 						cityPicker.show(function(items) {
 							cityResult.innerText =items[0].text + " " + items[1].text;
-							//return  false Can prevent the selection box off
-							//return false;
+							document.getElementById("classify_id").value=items[1].value;
 						});
 						document.getElementById("bitian1").style.display="none";
 					}, false);
-					//-----------------------------------------	
+					//-----------------------------------------
 				});
 			})(mui, document);
 		var viewApi = mui('#app').view({
@@ -221,13 +263,97 @@
 				//				console.log(e.detail.page.id + ' back');
 			});
 		})(mui);
-		function publish(){
-			return confirm(TextMessage.publishsure)
+		
+		function publishs(){
+			//return confirm(TextMessage.publishsure);
+			var buy_sell_flag="0";
+			var comm_name=$("#comm_name").val();
+			var comm_detail=$("#comm_detail").val();
+			var classify_id=$("#classify_id").val();
+			var comm_state=$("#comm_state").val();
+			var exchange=$("#exchange").val();
+			var business=$("#business").val();
+			var gratis=$("#gratis").val();
+			var imges0=$("#0").val();
+			var imges1=$("#1").val();
+			var imges2=$("#2").val();
+			var imges3=$("#3").val();
+			var price=$("#price").val();
+			if(imges0=="0" & imges1=="0" & imges2=="0" & imges3=="0"){
+				alert("请为商品至少选择一张图片！");
+				return false;
+			}
+			if(comm_name==""){
+				alert("商品名称不能为空！");
+				document.publishcomodity.comm_name.focus();
+				return false;
+			}
+			if(comm_detail==""){
+				alert("商品描述不能为空！");
+				document.publishcomodity.comm_detail.focus();
+				return false;
+			}
+			if(classify_id==""){
+				alert("请选择商品分类！");
+				return false;
+			}
+			if(comm_state==""){
+				alert("请选择商品状态！");
+				return false;
+			}
+			if(price!=""){
+				if(isNaN(price)){
+					alert("价格只能是数字！");
+					document.publishcomodity.price.focus();
+					return false;
+				}
+				if(price<0){
+					alert("价格必须大于或等于0！");
+					document.publishcomodity.price.focus();
+					return false;
+				}
+			}
+			if(exchange=="0" & business=="0" & gratis=="0"){
+				alert("请选择交易手段！");
+				return false;
+			}
+			var params={
+				"buy_sell_flag":buy_sell_flag,
+				"comm_name":comm_name,
+				"comm_detail":comm_detail,
+				"classify_id":classify_id,
+				"comm_state":comm_state,
+				"exchange":exchange,
+				"business":business,
+				"gratis":gratis,
+				"price":price,
+				"imges[0]":imges0,
+				"imges[1]":imges1,
+				"imges[2]":imges2,
+				"imges[3]":imges3
+			};
+			//console.dir(params);
+			Repository.Commodity.Commoditypublish(params, {
+					ok: function(data) {
+						Log.d("success");
+						alert("发布成功！");
+						location.reload();
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data=="1000"){
+							alert(TextMessage.test);
+						}
+					}
+				});
+			
 		}
 		//stuat value
 		function foundstuat(e){
 			var stuat=$(e).children("span").html();
+			var stuatenumber=$(e).children("input").val()
 			$("#prostuat div").html(stuat);
+			$("#comm_state").val(stuatenumber);
 			$("#prostuat div").removeClass("ka_bitian");
 			$("#prostuat div").addClass("ka_sortname");
 			$("#productstaute .ka_gaoliang").each(function(){
@@ -236,66 +362,8 @@
 			});
 			$(e).children("span").removeClass("ka_sortfont");
 			$(e).children("span").addClass("ka_gaoliang");
-			
 		}
 		///////////////take picture/////////////////
-		function imglength(){
-			var imglength=$(".z_addImg").length;
-			    if(imglength>3){
-			    	$(".z_file").hide();
-			    	$("#takepic").hide();
-			    }
-		}
-	     //px Convert to rem
-        (function(doc, win) {
-            var docEl = doc.documentElement,
-                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-                recalc = function() {
-                    var clientWidth = docEl.clientWidth;
-                    if (!clientWidth) return;
-                    if (clientWidth >= 640) {
-                        docEl.style.fontSize = '100px';
-                    } else {
-                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
-                    }
-                };
-
-            if (!doc.addEventListener) return;
-            win.addEventListener(resizeEvt, recalc, false);
-            doc.addEventListener('DOMContentLoaded', recalc, false);
-        })(document, window);
-
-        function imgRemove() {
-            var imgList = document.getElementsByClassName("z_addImg");
-            var mask = document.getElementsByClassName("z_mask")[0];
-            var cancel = document.getElementsByClassName("z_cancel")[0];
-            var sure = document.getElementsByClassName("z_sure")[0];
-            for (var j = 0; j < imgList.length; j++) {
-                imgList[j].index = j;
-                imgList[j].onclick = function() {
-                    var t = this;
-                    mask.style.display = "block";
-                    cancel.onclick = function() {
-                        mask.style.display = "none";
-                    };
-                    sure.onclick = function() {
-                        mask.style.display = "none";
-                        t.style.display = "none";
-                        var picdisp=$(".z_file").css("display");
-                        if(picdisp=="none"){
-                        	$(".z_file").show();
-                        }
-                        var takpic=$("#takepic").css("display");
-                        if(takpic=="none"){
-                        	$("#takepic").show();
-                        }
-                    };
-
-                } 
-            };
-             
-        };
-        //take picture
         mui(".ka_prologbox0").on("tap", "#takepic",function(e) {
 				if(mui.os.plus){
 					var a = [{
@@ -343,40 +411,154 @@
 				}
 				
 			});
+		function imglength(){
+			var imglength=$(".z_images").length;
+			    if(imglength>3){
+			    	$(".z_file").hide();
+			    	$("#takepic").hide();
+			    }
+		}
+	     //px Convert to rem
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 640) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+		//delete image
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("z_addImg");
+            var mask = document.getElementsByClassName("z_mask")[0];
+            var cancel = document.getElementsByClassName("z_cancel")[0];
+            var sure = document.getElementsByClassName("z_sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                        var picdisp=$(".z_file").css("display");
+                        if(picdisp=="none"){
+                        	$(".z_file").show();
+                        }
+                        var takpic=$("#takepic").css("display");
+                        if(takpic=="none"){
+                        	$("#takepic").show();
+                        }
+                        var dethtml=$(t).html();
+                   		$("#deltimg").html(dethtml);
+                   		var altval=$("#deltimg img").attr("alt");
+                   		$("#"+altval).val("0");
+                   		nums=altval;
+                   		$(t).remove();
+                   		$("#deltimg").empty();
+                    };
+
+                } 
+            };
+             
+        };
+        
 			//compressImage
 			function compressImg(path){
-				console.log(path);
+		        var currenttime=Date.parse(new Date());
 				plus.zip.compressImage({
 						src:path,
-						dst:"_doc/123.jpg",
+						dst:"_doc/"+currenttime+".jpg",
 						quality:20,
 						overwrite:true,
 						format:"jpg"	
 					},
 					function(event) {
-						alert("Compress success!");
-						var target = event.target; // 压缩转换后的图片url路径，以"file://"开头
-						var size = event.size; // 压缩转换后图片的大小，单位为字节（Byte）
-						var width = event.width; // 压缩转换后图片的实际宽度，单位为px
-						var height = event.height; // 压缩转换后图片的实际高度，单位为px
-						alert(size);
+						console.log("Compress success!");
+						var target = event.target; 
+						var size = event.size; // （Byte）
+						var width = event.width; // px
+						var height = event.height; // px
+						uploadimage(target);
 					},function(error) {
 						alert("Compress error!"+error.message);
 				});
+			}
+			function uploadimage(path){
+				var targetimg=path;
+				var server = "http://192.168.1.8:7998/commodity/release/upload/";
+                    //open loading button
+                    var wt=plus.nativeUI.showWaiting();
+                    var task = plus.uploader.createUpload(server, {  
+                        method: "post"  
+                    }, function(t, status) {  
+                        if(status == 200) { 
+                           console.log("upload success:"+t.responseText);
+                           Processing(t.responseText);
+                           wt.close(); 
+                        }else{
+                            console.log("upload error："+status);
+                            wt.close();
+                        }
+                    });  
+                    //add parameter
+                    task.addData("tokencheck",Api.getToken());
+                    task.addData("signcheck",Api.createSignInfo());
+                    task.addData("serial",nums.toString());
+                    task.addFile(targetimg, {key:"image"});  
+                    task.start(); 
+			}
+			function Processing(results){
+				var data=JSON.parse(results);
+				var stautes=data.result.status;
+				//console.log(stautes);
+				if(stautes=="OK"){
+					var imagesrc=data.result.data[1];
+					var value=$("#"+nums).val();
+					if(value=="0"){
+						$("#"+nums).val(imagesrc);
+					}
+				}else{
+					alert("image error:"+data.result.statuscode.image);
+				}
+			}
+			var nums=0;
+			function imgappend(localurl){
+				var flag=true;
+				for(var m=0;m<4;m++){
+                	var valuem=$("#"+m).val();
+					if(valuem=="0"){
+						nums=m;
+						break;
+					}
+            	}
+				var img = document.createElement("img");
+                img.setAttribute("src",localurl);
+                img.setAttribute("alt",nums);
+                img.setAttribute("class","z_images");
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                $(".z_photo").append(imgAdd);
 			}
 			function getImage() {
 				var c = plus.camera.getCamera();
 				c.captureImage(function(e) {
 					plus.io.resolveLocalFileSystemURL(e, function(entry) {
-						//var s = entry.toLocalURL() + "?version=" + new Date().getTime();
 						var localurl = entry.toLocalURL();
-						console.log(localurl);
-						var img = document.createElement("img");
-		                img.setAttribute("src",localurl);
-		                var imgAdd = document.createElement("div");
-		                imgAdd.setAttribute("class", "z_addImg");
-		                imgAdd.appendChild(img);
-		                $(".z_photo").append(imgAdd);
+						imgappend(localurl);
 		                 imglength();
 		                 imgRemove();
 		                 compressImg(localurl);
@@ -393,13 +575,7 @@
 			plus.gallery.pick(function(a) {
 				plus.io.resolveLocalFileSystemURL(a, function(entry) {
 					var localURL2 = entry.toLocalURL();
-					console.log(localURL2);
-					var img = document.createElement("img");
-	                img.setAttribute("src",localURL2);
-	                var imgAdd = document.createElement("div");
-	                imgAdd.setAttribute("class", "z_addImg");
-	                imgAdd.appendChild(img);
-	                $(".z_photo").append(imgAdd);
+					imgappend(localURL2);
 	                 imglength();
 	                 imgRemove();
 	                 compressImg(localURL2);
@@ -411,6 +587,45 @@
 				filter: "image"
 			})
 		};
+		//buy way choose
+		/*exchange*/
+		document.getElementById('exchbuybtn').addEventListener('tap',function(e){
+			$("#exchange").val("1");
+			$("#exchbuybtn").removeClass("ka_exchangegrey");
+			$("#exchbuybtn").addClass("ka_exchangered");
+			if($("#gratis").val()=="1"){
+				$("#gratis").val("0");
+				$("#freebuybtn").removeClass("ka_exchangered");
+				$("#freebuybtn").addClass("ka_exchangegrey");
+			}
+		});
+		/*point*/
+		document.getElementById('pointbuybtn').addEventListener('tap',function(e){
+			$("#business").val("1");
+			$("#pointbuybtn").removeClass("ka_exchangegrey");
+			$("#pointbuybtn").addClass("ka_exchangered");
+			if($("#gratis").val()=="1"){
+				$("#gratis").val("0");
+				$("#freebuybtn").removeClass("ka_exchangered");
+				$("#freebuybtn").addClass("ka_exchangegrey");
+			}
+		});
+		/*free*/
+		document.getElementById('freebuybtn').addEventListener('tap',function(e){
+			$("#gratis").val("1");
+			$("#freebuybtn").removeClass("ka_exchangegrey");
+			$("#freebuybtn").addClass("ka_exchangered");
+			if($("#business").val()=="1"){
+				$("#business").val("0");
+				$("#pointbuybtn").removeClass("ka_exchangered");
+				$("#pointbuybtn").addClass("ka_exchangegrey");
+			}
+			if($("#exchange").val()=="1"){
+				$("#exchange").val("0");
+				$("#exchbuybtn").removeClass("ka_exchangered");
+				$("#exchbuybtn").addClass("ka_exchangegrey");
+			}
+		});
 	</script>
 
 </html>

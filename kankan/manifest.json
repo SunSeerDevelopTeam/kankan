@@ -82,7 +82,7 @@
 		"Webview": {},
 		"NativeUI": {},
 		"Navigator": {},
-		"NativeObj": {},"Share":{},"OAuth":{},"Device":{}
+		"NativeObj": {},"Share":{},"OAuth":{},"Device":{},"Camera":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -105,7 +105,7 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>"]
+				"permissions": ["<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
 			},
 			"orientation": [
 				"portrait-primary",
@@ -323,7 +323,8 @@
 					"images/line.png",
 					"images/Good.PNG",
 					"images/userPhoto.png",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"js/md5.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -353,7 +354,8 @@
 					"css/mui.min.css",
 					"js/common.js",
 					"js/sha256.js",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"js/language/locale_zh_CN.js"
 				],
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
@@ -375,7 +377,11 @@
 					"css/mui.picker.css",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/sha256.js",
+					"js/common.js",
+					"js/language.js",
+					"js/language/locale_zh_CN.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -411,7 +417,9 @@
 					"css/icons-extra.css",
 					"js/language.js",
 					"js/jquery-3.2.0.min.js",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"js/common.js",
+					"js/language/locale_zh_CN.js"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
@@ -445,7 +453,11 @@
 					"images/MacPro.jpg",
 					"images/logo.png",
 					"images/muwu.jpg",
-					"images/jiantou.png"
+					"images/jiantou.png",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"images/cbd.jpg"
 				],
 				"refer": [],
 				"priority": 0
@@ -463,10 +475,13 @@
 					"css/kankan_home.css",
 					"css/home.css",
 					"css/icons-extra.css",
-					"fonts/mui-icons-extra.ttf"
+					"fonts/mui-icons-extra.ttf",
+					"js/language.js"
 				],
 				"refer": [
-					"pages/main/products/detail.html"
+					"pages/main/products/detail.html",
+					"pages/login/login.html",
+					"pages/login/reg.html"
 				],
 				"priority": 0
 			},
@@ -477,6 +492,13 @@
 					"images/Normal.PNG",
 					"images/Good.PNG",
 					"images/shuijiao.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/pro_commentslist.html": {
+				"resources": [
+					"js/language/locale_zh_CN.js"
 				],
 				"refer": [],
 				"priority": 0
