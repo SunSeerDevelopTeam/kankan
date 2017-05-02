@@ -83,7 +83,7 @@ var JSLocale = {
 	"commodity_forbidentext": "请确认被禁止的出品物以及行为。如果是名牌物品的话，请明示相关编号，假冒名牌的贩卖行为将会受到处罚以及追究相关责任。",
 	"commodity_want":"求购商品发布",
 	"commodity_want_butonsure":"发	布",
-	"commodity_want_forbidentext":"",
+	"commodity_want_forbidentext":"违法或有违社会常识的求购信息禁止发布，谢谢您的理解和合作",
 }
 
 $(function() {

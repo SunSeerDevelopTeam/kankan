@@ -81,9 +81,9 @@ var JSLocale = {
 	"commodity_buttonsure": "出品する",
 	"commodity_price": "価  格",
 	"commodity_forbidentext": "禁止されている出品、行為を必ず確認ください。またブランド品でシリアルナンバー等がある場合はご記載ください。偽ブランドの販売は犯罪であり処罰される可能性があります。",
-	"commodity_want":"質問登録",
+	"commodity_want":"買いたい情報登録",
 	"commodity_want_butonsure":"投稿する",
-	"commodity_want_forbidentext":"",
+	"commodity_want_forbidentext":"违法或有违社会常识的求购信息禁止发布，谢谢您的理解和合作。",
 }
 
 $(function() {
