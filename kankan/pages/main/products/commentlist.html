@@ -165,11 +165,11 @@
 					var comentinfodetail=comentinfo.user_comm_detail;
 					//console.log("comentinfoimg:"+comentinfoimg+"comentinfoname:"+comentinfoname+"comentinfotime:"+comentinfotime+"comentinfoflag:"+comentinfoflag);
 					var html = new Util.StringBuilder();
-					html.append('<div class="mui-pull-left ka_userbox">')
+					html.append('<div class="comtent mui-pull-left"><div class="mui-pull-left ka_userbox">')
 						.appendFormat('<img src="{0}" width="40" height="40" class="ka_touxiangimg" />',comentinfoimg)
 						.appendFormat('<div class="ka_userbox ka_userboxtext"><b>{0}</b></div>', comentinfoname)
 						.append('</div>')
-						.append('<div class="mui-pull-left ka_commentinfobox">')
+						.append('<div class="mui-pull-right ka_commentinfobox">')
 						.appendFormat('{0}',comentinfodetail)
 						.append('<div class="ka_commenttime">')
 						.append('<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span>')
@@ -182,7 +182,7 @@
 						}else if(comentinfoflag=="2"){
 							html.append('<img src="../../../images/Bad.PNG" width="20" height="20" />')
 						}
-						html.append('</div></div>')
+						html.append('</div></div></div>')
 						.append('<!-----end----->');
 					$("#allcommentlist").append(html.toString());
 					//html.clear();

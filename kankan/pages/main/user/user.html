@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title>User</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -17,8 +17,9 @@
 				background-color: #efeff4;
 			}
 		</style>
-		<link rel="stylesheet" type="text/css" href="../css/feedback.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
+		<link rel="stylesheet" href="../../../css/wu.css">
 	</head>
 
 	<body class="mui-fullscreen">
@@ -37,103 +38,330 @@
 			<!--页面标题栏开始-->
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
+					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る</font></span>
 				</button>
-				<h1 class="mui-center mui-title">张三</h1>
+				<h1 class="mui-center mui-title user-title-center">Mary</h1>
+				<a href="../../setting/setting.html">
+					<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
+						<span class="mui-icon mui-icon-gear"></span>
+					</button>
+				</a>
 			</div>
 			<!--页面标题栏结束-->
 			<!--页面主内容区开始-->
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
+					<div class="tran-page">
 						<ul class="mui-table-view">
-							<li class="mui-table-view-cell headimgbox">
-								<div><img src="../../../images/muwu.jpg" width="100" height="100"></div>
+							<li class="head-img-box">
+								<div><img src="../../../images/muwu.jpg" width="150" height="150"></div>
 								<div class="mui-pull-caption">
-									<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton">编辑</button>
+									<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton">プロフィール編集</button>
+								</div>
+								<br>
+								<div>
+									<ul class="user-num">
+										<li class="user-num-comment">
+											<font size="2">評価：999</font>
+										</li>
+										<li class="user-num-sell">
+											<font size="2">出品数：999</font>											
+										</li>
+										<li class="user-num-sell2">
+											<font size="2">チケット数：999</font>											
+										</li>
+									</ul>
+								</div>
+								<ul class="user-comment-list">
+									<li class="user-comment-grid">
+										<img height="30%" width="30%" src="../../../images/Good.PNG"/>
+										<div class="user-comment-num">999</div>
+									</li>
+									<li class="user-comment-grid2">
+										<img height="30%" width="30%"  src="../../../images/Normal.PNG"/>
+										<div class="user-comment-num">999</div>
+									</li>
+									<li class="user-comment-grid2">
+										<img height="30%" width="30%" src="../../../images/Bad.PNG"/>
+										<div class="user-comment-num">999</div>
+									</li>
+									<li class="user-comment-grid3">
+										<a href="#evaluate">
+											<span class="mui-icon mui-navigate-right"></span>
+										</a>
+									</li>
+								</ul>
+								<ul class="user-comment-list">
+									<li class="user-point-grid">
+										<a href="#">
+											<font color="#AAAAAA" size="2">
+												<span class="mui-icon-extra mui-icon-extra-share"></span>　ポイント
+											</font>
+										</a>
+									</li>
+									<li class="user-point-grid2">
+											<font size="2">
+												20000
+											</font>
+									</li>
+									<li class="user-point-grid">
+										<a href="#area">
+											<font color="#AAAAAA" size="2">
+												<span class="mui-icon mui-icon-paperplane"><font size="3">东京都</font></span>
+											</font>
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="user-goods-list">
+							<li class="user-goods-title-grid">
+								<div id="products" class="user-product-tab1" onclick="switchs(this)">
+									<font size="2" color="#FFFFFF">出品中アイテム</font>
+								</div>
+							</li>
+							<li class="user-goods-title-grid">
+								<div id="favourate" class="user-product-tab22" onclick="switchs(this)">
+									<font size="2" color="#FFFFFF">いいねした<br>アイテム</font>
+								</div>
+							</li>
+							<li class="user-goods-title-grid">
+								<div id="friends" class="user-product-tab32" onclick="switchs(this)">
+									<font size="2" color="#FFFFFF">気になる</font>
 								</div>
 							</li>
 						</ul>
-						<div class="mui-slider-group">
-							<ul class="mui-table-view mui-grid-view mui-table-view-chevron">
-								<li class="mui-table-view-cell mui-media mui-col-xs-6">
-									<div>
-										<span class="mui-icon-extra mui-icon-extra-gold"></span>
-										<font color="#AAAAAA" size="2">
-											<font color="red"><b id="points">20</b></font>
-										</font>
-									</div>
-								</li>
-								<li class="mui-table-view-cell mui-media mui-col-xs-6">
-									<a href="#area">
-										<font color="#AAAAAA" size="2">
-											<span class="mui-icon mui-icon-paperplane"><font size="3">东京都</font></span>
-										</font>
-									</a>
-								</li>
-							</ul>
-							<div>
-								<ul class="mui-table-view mui-grid-view">
-									<li class="mui-table-view-cell mui-media mui-col-xs-6">
-										<div class="mui-pull-right">
-											<button type="button" class="mui-btn mui-btn-blue productbutton" onclick="switchs(this)" id="Produced">出品商品</button>
-										</div>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-6">
-										<div class="mui-pull-left">
-											<button type="button" class="mui-btn mui-btn-grey productbutton" onclick="switchs(this)" id="goods">点赞商品</button>
-										</div>
-									</li>
-								</ul>
-								<!--Produced products--->
-								<ul class="mui-table-view mui-grid-view" id="Producedproducts">
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="1" href="../products/detail.html?targetid=1">
-											<img class="mui-media-object ka_imgoption" src="../../../images/MacPro.jpg">
-										</a>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="1" href="../products/detail.html?targetid=1">
-											<img class="mui-media-object ka_imgoption" src="../../../images/MacPro.jpg">
-										</a>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="1" href="../products/detail.html?targetid=1">
-											<img class="mui-media-object ka_imgoption" src="../../../images/MacPro.jpg">
-										</a>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="1" href="../products/detail.html?targetid=1">
-											<img class="mui-media-object ka_imgoption" src="../../../images/MacPro.jpg">
-										</a>
-									</li>
-								</ul>
-								<!--goods products--->
-								<ul class="mui-table-view mui-grid-view" id="goodsproducts" style="display: none;">
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="2" href="../products/detail.html?targetid=1">
-											<img class="mui-media-object ka_imgoption" src="../../../images/muwu.jpg">
-										</a>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="2" href="../products/detail.html?targetid=2">
-											<img class="mui-media-object ka_imgoption" src="../../../images/muwu.jpg">
-										</a>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="2" href="../products/detail.html?targetid=2">
-											<img class="mui-media-object ka_imgoption" src="../../../images/muwu.jpg">
-										</a>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
-										<a id="2" href="../products/detail.html?targetid=2">
-											<img class="mui-media-object ka_imgoption" src="../../../images/muwu.jpg">
-										</a>
-									</li>
-								</ul>
+						<!--Produced products--->
+						<div id="myproducts" class="mui-slider">
+					        <div class="mui-slider-group">
+								<div class="mui-slider-item" style="height:25%">
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+									</ul>
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="mui-slider-item" style="height:25%">
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+									</ul>
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/MacPro.jpg">
+											</a>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
-
+						<!--favourate products--->
+						<div id="myfavourate" class="mui-slider" style="height:100%; display:none;">
+					        <div class="mui-slider-group">
+								<div class="mui-slider-item" style="height:25%">
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+									</ul>
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="mui-slider-item" style="height:25%">
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+									</ul>
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/muwu.jpg">
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!--favourate person--->
+						<div id="myfriends" class="mui-slider" style="height:100%; display:none;">
+					        <div class="mui-slider-group">
+								<div class="mui-slider-item" style="height:25%">
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+									</ul>
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="mui-slider-item" style="height:25%">
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+									</ul>
+									<ul class="user-item-list">
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+										<li class="user-goods-grid">
+											<a id="1" href="../../../products/detail.html?targetid=1">
+												<img height="90%" width="90%" src="../../../images/cbd.jpg">
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -168,6 +396,175 @@
 							</li>
 						</ul>
 
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面结束-->
+		<div id="evaluate" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る</font></span>
+				</button>
+				<h1 class="mui-center mui-title">評価</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="user-comment-page">
+						<ul class="user-comment-list-title">
+							<li onclick="showComment('all');" class="user-comment-list-title-col1">
+								<font color="red">すべて</font>
+							</li>
+							<li onclick="showComment('good');"  class="user-comment-list-title-col2">
+								<div class="user-comment-list-title-row1">
+									<img id="check2" height="100%" width="38%" src="Good.PNG"/>
+								</div>
+								<div class="user-comment-list-title-row2">良い</div>
+								<div class="user-comment-list-title-row3">1</div>
+							</li>
+							<li onclick="showComment('normal');"  class="user-comment-list-title-col2">
+								<div class="user-comment-list-title-row1">
+									<img id="check2" height="100%" width="38%" src="Normal.PNG"/>
+								</div>
+								<div class="user-comment-list-title-row2">普通</div>
+								<div class="user-comment-list-title-row3">12</div>
+							</li>
+							<li onclick="showComment('bad');"  class="user-comment-list-title-col2">
+								<div class="user-comment-list-title-row1">
+									<img id="check2" height="100%" width="38%" src="Bad.PNG"/>
+								</div>
+								<div class="user-comment-list-title-row2">悪い</div>
+								<div class="user-comment-list-title-row3">999</div>
+							</li>
+						</ul>
+						<ul class="tran-chat-page">
+							<div name="goodComment">
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../../../images/sinaweibo.png"/>Tony
+								</li>
+								<li class="tran-chat-word">
+									<div class="talk-bubble tri-right left-in round">
+										特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記
+										<ul class="comment-bottom">
+											<li class="comment-bottom-col1">
+												<img height="32px" width="32px" src="../../../images/xinhuan.png"/>
+											</li>
+											<li class="comment-bottom-col2">
+												2日前
+											</li>
+											<li class="comment-bottom-col3">
+												<img id="check2" height="20%" width="20%" src="Good.PNG"/>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</div>
+							<div name="normalComment">
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../../../images/weixin.png"/>Jerry
+								</li>
+								<li id="normalComment" class="tran-chat-word">
+									<div class="talk-bubble tri-right left-in round">
+										メッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージ
+										<ul class="comment-bottom">
+											<li class="comment-bottom-col1">
+												<img height="32px" width="32px" src="../../../images/xinhuan.png"/>
+											</li>
+											<li class="comment-bottom-col2">
+												2日前
+											</li>
+											<li class="comment-bottom-col3">
+												<img id="check2" height="20%" width="20%" src="Normal.PNG"/>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</div>
+							<div name="badComment">
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../../../images/sinaweibo.png"/>Tony
+								</li>
+								<li class="tran-chat-word">
+									<div class="talk-bubble tri-right left-in round">
+										特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記
+										<ul class="comment-bottom">
+											<li class="comment-bottom-col1">
+												<img height="32px" width="32px" src="../../../images/xinhuan.png"/>
+											</li>
+											<li class="comment-bottom-col2">
+												2日前
+											</li>
+											<li class="comment-bottom-col3">
+												<img id="check2" height="20%" width="20%" src="Bad.PNG"/>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</div>
+							<div name="goodComment">
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../../../images/sinaweibo.png"/>Tony
+								</li>
+								<li class="tran-chat-word">
+									<div class="talk-bubble tri-right left-in round">
+										特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記
+										<ul class="comment-bottom">
+											<li class="comment-bottom-col1">
+												<img height="32px" width="32px" src="../../../images/xinhuan.png"/>
+											</li>
+											<li class="comment-bottom-col2">
+												2日前
+											</li>
+											<li class="comment-bottom-col3">
+												<img id="check2" height="20%" width="20%" src="Good.PNG"/>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</div>
+							<div name="normalComment">
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../../../images/weixin.png"/>Jerry
+								</li>
+								<li id="normalComment" class="tran-chat-word">
+									<div class="talk-bubble tri-right left-in round">
+										メッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージメッセージ
+										<ul class="comment-bottom">
+											<li class="comment-bottom-col1">
+												<img height="32px" width="32px" src="../../../images/xinhuan.png"/>
+											</li>
+											<li class="comment-bottom-col2">
+												2日前
+											</li>
+											<li class="comment-bottom-col3">
+												<img id="check2" height="20%" width="20%" src="Normal.PNG"/>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</div>
+							<div name="badComment">
+								<li class="tran-chat-face">
+									<img height="32px" width="32px" src="../../../images/sinaweibo.png"/>Tony
+								</li>
+								<li class="tran-chat-word">
+									<div class="talk-bubble tri-right left-in round">
+										特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記特定商取引法に基づく表記
+										<ul class="comment-bottom">
+											<li class="comment-bottom-col1">
+												<img height="32px" width="32px" src="../../../images/xinhuan.png"/>
+											</li>
+											<li class="comment-bottom-col2">
+												2日前
+											</li>
+											<li class="comment-bottom-col3">
+												<img id="check2" height="20%" width="20%" src="Bad.PNG"/>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</div>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -315,12 +712,12 @@
 		//					document.getElementById("head-img").src = s;
 		//					document.getElementById("head-img1").src = s;
 		//				}, function(e) {
-		//					document.getElementById("head-img").src = '../images/logo.png';
-		//					document.getElementById("head-img1").src = '../images/logo.png';
+		//					document.getElementById("head-img").src = '../../../images/logo.png';
+		//					document.getElementById("head-img1").src = '../../../images/logo.png';
 		//				})
 		//			}else{
-		//				document.getElementById("head-img").src = '../images/logo.png';
-		//				document.getElementById("head-img1").src = '../images/logo.png';
+		//				document.getElementById("head-img").src = '../../../images/logo.png';
+		//				document.getElementById("head-img1").src = '../../../images/logo.png';
 		//			}
 		//			
 		//		}
@@ -332,26 +729,93 @@
 		//		document.getElementById('setting').addEventListener('tap',function(){
 		//			//Open about the page
 		//		  mui.openWindow({
-		//		    url: '../../setting/setting.html',
+		//		    url: '../../../../../../setting/setting.html',
 		//		    id:'setting',
 		//		  });
 		//		});
+		
 		//Commodity switch
 		function switchs(e) {
-			if(e.id == "goods") {
-				$("#Producedproducts").hide();
-				$("#goodsproducts").show();
-				$("#goods").removeClass("mui-btn-grey");
-				$("#goods").addClass("mui-btn-blue");
-				$("#Produced").removeClass("mui-btn-blue");
-				$("#Produced").addClass("mui-btn-grey");
+			if(e.id == "products") {
+				// click 出品中アイテム
+				$("#myfavourate").hide();
+				$("#myfriends").hide();
+				$("#myproducts").show();
+				$("#favourate").removeClass("user-product-tab2");
+				$("#favourate").addClass("user-product-tab22");
+				$("#friends").removeClass("user-product-tab3");
+				$("#friends").addClass("user-product-tab32");
+				$("#products").removeClass("user-product-tab12");
+				$("#products").addClass("user-product-tab1");
+			} else if(e.id == "favourate") {
+				// click いいねをしたアイテム
+				$("#myproducts").hide();
+				$("#myfriends").hide();
+				$("#myfavourate").show();
+				$("#products").removeClass("user-product-tab1");
+				$("#products").addClass("user-product-tab12");
+				$("#friends").removeClass("user-product-tab3");
+				$("#friends").addClass("user-product-tab32");
+				$("#favourate").removeClass("user-product-tab22");
+				$("#favourate").addClass("user-product-tab2");
 			} else {
-				$("#Producedproducts").show();
-				$("#goodsproducts").hide();
-				$("#Produced").removeClass("mui-btn-grey");
-				$("#Produced").addClass("mui-btn-blue");
-				$("#goods").removeClass("mui-btn-blue");
-				$("#goods").addClass("mui-btn-grey");
+				// click 気になる
+				$("#myproducts").hide();
+				$("#myfavourate").hide();
+				$("#myfriends").show();
+				$("#products").removeClass("user-product-tab1");
+				$("#products").addClass("user-product-tab12");
+				$("#favourate").removeClass("user-product-tab2");
+				$("#favourate").addClass("user-product-tab22");
+				$("#friends").removeClass("user-product-tab32");
+				$("#friends").addClass("user-product-tab3");
+			}
+		}
+		
+		function showComment(cmt) {
+			var goodCmt = document.getElementsByName('goodComment');
+			var normalCmt = document.getElementsByName('normalComment');
+			var badCmt = document.getElementsByName('badComment');
+			if (cmt == 'good') {
+				for (var i = 0; i < goodCmt.length; i++) {
+					goodCmt[i].style.display = "block";
+				}
+				for (var i = 0; i < normalCmt.length; i++) {
+					normalCmt[i].style.display = "none";
+				}
+				for (var i = 0; i < badCmt.length; i++) {
+					badCmt[i].style.display = "none";
+				}
+			} else if (cmt == 'normal') {
+				for (var i = 0; i < goodCmt.length; i++) {
+					goodCmt[i].style.display = "none";
+				}
+				for (var i = 0; i < normalCmt.length; i++) {
+					normalCmt[i].style.display = "block";
+				}
+				for (var i = 0; i < badCmt.length; i++) {
+					badCmt[i].style.display = "none";
+				}		
+			} else if (cmt == 'bad') {
+				for (var i = 0; i < goodCmt.length; i++) {
+					goodCmt[i].style.display = "none";
+				}
+				for (var i = 0; i < normalCmt.length; i++) {
+					normalCmt[i].style.display = "none";
+				}
+				for (var i = 0; i < badCmt.length; i++) {
+					badCmt[i].style.display = "block";
+				}				
+			} else {
+				for (var i = 0; i < goodCmt.length; i++) {
+					goodCmt[i].style.display = "block";
+				}
+				for (var i = 0; i < normalCmt.length; i++) {
+					normalCmt[i].style.display = "block";
+				}
+				for (var i = 0; i < badCmt.length; i++) {
+					badCmt[i].style.display = "block";
+				}
 			}
 		}
 	</script>

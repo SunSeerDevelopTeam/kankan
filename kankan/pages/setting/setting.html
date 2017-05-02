@@ -1,178 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 	<head>
-		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<meta charset="UTF-8">
+		<title></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<script src="../../js/jquery-3.2.0.min.js"></script>
 		<style>
 			html,
 			body {
 				background-color: #efeff4;
 			}
-			.mui-views,
-			.mui-view,
-			.mui-pages,
-			.mui-page,
-			.mui-page-content {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #efeff4;
-			}
-			.mui-pages {
-				top: 46px;
-				height: auto;
-			}
-			.mui-scroll-wrapper,
-			.mui-scroll {
-				background-color: #efeff4;
-			}
-			.mui-page.mui-transitioning {
-				-webkit-transition: -webkit-transform 300ms ease;
-				transition: transform 300ms ease;
-			}
-			.mui-page-left {
-				-webkit-transform: translate3d(0, 0, 0);
-				transform: translate3d(0, 0, 0);
-			}
-			.mui-ios .mui-page-left {
-				-webkit-transform: translate3d(-20%, 0, 0);
-				transform: translate3d(-20%, 0, 0);
-			}
-			.mui-navbar {
-				position: fixed;
-				right: 0;
-				left: 0;
-				z-index: 10;
-				height: 44px;
-				background-color: #f7f7f8;
-			}
-			.mui-navbar .mui-bar {
-				position: absolute;
-				background: transparent;
-				text-align: center;
-			}
-			.mui-android .mui-navbar-inner.mui-navbar-left {
-				opacity: 0;
-			}
-			.mui-ios .mui-navbar-left .mui-left,
-			.mui-ios .mui-navbar-left .mui-center,
-			.mui-ios .mui-navbar-left .mui-right {
-				opacity: 0;
-			}
-			.mui-navbar .mui-btn-nav {
-				-webkit-transition: none;
-				transition: none;
-				-webkit-transition-duration: .0s;
-				transition-duration: .0s;
-			}
-			.mui-navbar .mui-bar .mui-title {
-				display: inline-block;
-				width: auto;
-			}
-			.mui-page-shadow {
-				position: absolute;
-				right: 100%;
-				top: 0;
-				width: 16px;
-				height: 100%;
-				z-index: -1;
-				content: '';
-			}
-			.mui-page-shadow {
-				background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
-				background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
-			}
-			.mui-navbar-inner.mui-transitioning,
-			.mui-navbar-inner .mui-transitioning {
-				-webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
-				transition: opacity 300ms ease, transform 300ms ease;
-			}
-			.mui-page {
-				display: none;
-			}
-			.mui-pages .mui-page {
-				display: block;
-			}
-			.mui-page .mui-table-view:first-child {
-				margin-top: 15px;
-			}
-			.mui-page .mui-table-view:last-child {
-				margin-bottom: 30px;
-			}
-			.mui-table-view {
-				margin-top: 20px;
-			}
-			
-			.mui-table-view span.mui-pull-right {
-				color: #999;
-			}
-			.mui-table-view-divider {
-				background-color: #efeff4;
-				font-size: 14px;
-			}
-			.mui-table-view-divider:before,
-			.mui-table-view-divider:after {
-				height: 0;
-			}
-			.head {
-				height: 40px;
-			}
-			#head {
-				line-height: 40px;
-			}
-			.head-img {
-				width: 40px;
-				height: 40px;
-			}
-			#head-img1 {
-				position: absolute;
-				bottom: 10px;
-				right: 40px;
-				width: 40px;
-				height: 40px;
-			}
-			.update {
-				font-style: normal;
-				color: #999999;
-				margin-right: -25px;
-				font-size: 15px
-			}
-			.mui-fullscreen {
-				position: fixed;
-				z-index: 20;
-				background-color: #000;
-			}
-			.mui-ios .mui-navbar .mui-bar .mui-title {
-				position: static;
-			}
-			/*Problem feedback on the setting page separate css*/
-			#feedback .mui-popover{
-				position: fixed;
-			}
-			#feedback .mui-table-view:last-child {
-			    margin-bottom: 0px;
-			}
-			#feedback .mui-table-view:first-child {
-			    margin-top: 0px;
-			}
-			/*Problem feedback on the setting page separate css == end*/
-			
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css">
+		<link href="../../css/wu.css" rel="stylesheet" />
 	</head>
 
 	<body class="mui-fullscreen">
-		<!--The main structure of the page starts-->
+		<!--页面主结构开始-->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar">
@@ -181,541 +31,157 @@
 				</div>
 			</div>
 		</div>
-		<!--The main structure of the page ends-->
-		<!--Single page starts-->
+		<!--页面主结构结束-->
+		<!--单页面开始-->
 		<div id="setting" class="mui-page">
-			<!--The page title bar starts-->
+			<!--页面标题栏开始-->
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
+					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る</font></span>
 				</button>
-				<h1 class="mui-center mui-title">设置</h1>
+				<h1 class="mui-center mui-title title-center">設定</h1>
 			</div>
-			<!--The page title bar ends-->
-			<!--The page main content area starts-->
+
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell mui-media">
-								<a class="mui-navigate-right" href="#account">
-									<img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
-									<div class="mui-media-body">
-										Hello MUI
-										<p class='mui-ellipsis'>Account:hellomui</p>
-									</div>
+					<div class="set-page">
+						<div class="set-title">
+							ポイント
+						</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								ポイント購入
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
 								</a>
 							</li>
 						</ul>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell">
-								<a href="#account" class="mui-navigate-right">Account and security</a>
-							</li>
-						</ul>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell">
-								<a href="#notifications" class="mui-navigate-right">New news notification</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a href="#privacy" class="mui-navigate-right">privacy</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a href="#general" class="mui-navigate-right">General</a>
-							</li>
-						</ul>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell">
-								<a href="#about" class="mui-navigate-right">About MUI <i class="mui-pull-right update">V3.6.0</i></a>
-							</li>
-						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell" style="text-align: center;">
-								<a>Sign out</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<!--The main content area of the page ends-->
-		</div>
-		<!--Single page ends-->
-		<div id="account" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>Set up
-				</button>
-				<h1 class="mui-center mui-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account and security</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a id="head" class="mui-navigate-right">Avatar
-								<span class="mui-pull-right head">
-									<img class="head-img mui-action-preview" id="head-img1" src=""/>
-								</span>
-							</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>Name<span class="mui-pull-right">Hbuilder</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>HBuilder account<span class="mui-pull-right">hbuilder@dcloud.io</span></a>
-							</li>
-						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a>QQ Number<span class="mui-pull-right">88888888</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>phone number<span class="mui-pull-right">18601234567</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>email address<span class="mui-pull-right">hbuilder@dcloud.io</span></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="notifications" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>set up
-				</button>
-				<h1 class="mui-center mui-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New news notification</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a>Receive new message notifications<span class="mui-pull-right">Turned on</span></a>
-							</li>
-						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								The notification displays the message details
-								<div class="mui-switch mui-active mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
-							</li>
-						</ul>
-						<div class="mui-content-padded">
-							<p>If the message is closed, the notification prompt will not show the sender and the content summary when a new message is received</p>
+						<div class="set-title">
+							その他
 						</div>
-
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell">
-								<a href="#notifications_disturb" class="mui-navigate-right">Function message Do not disturb</a>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								招待コードを確認
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-						<div class="mui-content-padded">
-							<p>Set the system function message to indicate the duration of the sound and vibration</p>
-						</div>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a>Receive new message notifications<span class="mui-pull-right">Turned on</span></a>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								チケット購入
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								sound
-								<div class="mui-switch mui-active mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								利用規約
 							</li>
-							<li class="mui-table-view-cell">
-								shock
-								<div class="mui-switch mui-active mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-						<div class="mui-content-padded">
-							<p>When HelloMUI is running, you can set whether or not sound or vibration is required</p>
-						</div>
-						<div></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="notifications_disturb" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>New news notification
-				</button>
-				<h1 class="mui-center mui-title">Function message Do not disturb</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view mui-table-view-radio">
-							<li class="mui-table-view-cell">
-								<a class="mui-navigate-right">Open</a>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								プライバシーポリシー
 							</li>
-							<li class="mui-table-view-cell">
-								<a class="mui-navigate-right">Only open at night</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a class="mui-navigate-right">shut down</a>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="privacy" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>Set up
-				</button>
-				<h1 class="mui-center mui-title">privacy</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-divider">Contacts</li>
-							<li class="mui-table-view-cell">
-								Plus when I need to verify my friend
-								<div class="mui-switch mui-active mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								禁止物・禁止行為
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								Recommend to me QQ friends
-								<div class="mui-switch mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								お問い合わせ
 							</li>
-							<li class="mui-table-view-cell">
-								Search for me via QQ number
-								<div class="mui-switch mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								Can be found by phone number to me
-								<div class="mui-switch mui-active mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								会社概要
 							</li>
-							<li class="mui-table-view-cell">
-								Recommend a friend to me
-								<div class="mui-switch mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
-							</li>
-							<li class="mui-table-view-divider">After opening, you have recommended for the opening of HBuilder mobile phone contacts</li>
-						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								Search me via HBuilder account
-								<div class="mui-switch mui-active mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
-							</li>
-							<li class="mui-table-view-divider">When closed, other users will not be able to search for you via HBuilder</li>
-						</ul>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="general" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>Set up
-				</button>
-				<h1 class="mui-center mui-title">General</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								multi-language
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								Handset mode
-								<div class="mui-switch mui-switch-mini">
-									<div class="mui-switch-handle"></div>
-								</div>
+						<ul class="set-item">
+							<li class="set-item-col1">
+								ログアウト
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								Features
+						<ul class="set-item">
+							<li class="set-item-col1">
+								バージョン
+							</li>
+							<li class="set-item-col2">
+								<a href="#">
+									<span class="mui-icon mui-navigate-right"></span>
+								</a>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div id="about" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>Set up
-				</button>
-				<h1 class="mui-center mui-title">About MUI</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell mui-plus-visible">
-								<a id="rate" class="mui-navigate-right">Score to encourage</a>
-							</li>
-							<li class="mui-table-view-cell mui-plus-visible">
-								<a id="welcome" class="mui-navigate-right">welcome page</a>
-							</li>
-							<li class="mui-table-view-cell mui-plus-visible">
-								<a id="share" class="mui-navigate-right">Share recommendations</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a id="tel" class="mui-navigate-right">consumer hotline</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a id="feedback-btn" href="#feedback" class="mui-navigate-right">feedback</a>
-							</li>
-							<li id="check_update" class="mui-table-view-cell mui-plus-visible">
-								<a id="update" class="mui-navigate-right">Check for updates</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="feedback" class="mui-page feedback">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>About MUI
-				</button>
-				<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">send</button>
-				<h1 class="mui-center mui-title">feedback</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-content-padded">
-					<div class="mui-inline">Questions and opinions</div>
-					<a class="mui-pull-right mui-inline" href="#popover">
-						Shortcut input
-						<span class="mui-icon mui-icon-arrowdown"></span>
-					</a>
-					<!--Quickly enter the specific content, the developer can replace their own language-->
-					<div id="popover" class="mui-popover">
-						<div class="mui-popover-arrow"></div>
-						<div class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<ul class="mui-table-view">
-									<!--Only stream application environment display-->
-									<li class="mui-table-view-cell stream">
-										<a href="#">Desktop shortcuts created failed</a>
-									</li>
-									<li class="mui-table-view-cell"><a href="#">Interface shows disorder</a></li>
-									<li class="mui-table-view-cell"><a href="#">Start slowly, the card out of the Cheung</a></li>
-									<li class="mui-table-view-cell"><a href="#">Occasional collapse</a></li>
-									<li class="mui-table-view-cell"><a href="#">UI can not look directly, ugly cry</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row mui-input-row">
-					<textarea id='question' class="mui-input-clear question" placeholder="Please describe your questions and opinions in detail..."></textarea>
-				</div>
-				<p>Picture (optional, provide problem screenshots, total size below 10M)</p>
-				<div id='image-list' class="row image-list"></div>
-				<p>QQ / mailbox</p>
-				<div class="mui-input-row">
-					<input id='contact' type="text" class="mui-input-clear contact" placeholder="(Optional, so that we can contact you )" />
-				</div>
-				<div class="mui-content-padded">
-					<div class="mui-inline">Application score</div>
-					<div class="icons mui-inline" style="margin-left: 6px;">
-						<i data-index="1" class="mui-icon mui-icon-star"></i>
-						<i data-index="2" class="mui-icon mui-icon-star"></i>
-						<i data-index="3" class="mui-icon mui-icon-star"></i>
-						<i data-index="4" class="mui-icon mui-icon-star"></i>
-						<i data-index="5" class="mui-icon mui-icon-star"></i>
-					</div>
-				</div><br />
-			</div>
-		</div>
-
 	</body>
-	<script src="../../js/mui.min.js "></script>
+	<script src="../../js/mui.min.js"></script>
 	<script src="../../js/mui.view.js "></script>
 	<script src='../../js/feedback.js'></script>
 	<script>
 		mui.init();
-		//Initialize a single page view
+		//初始化单页view
 		var viewApi = mui('#app').view({
 			defaultPage: '#setting'
 		});
-		//Initialize single page area scrolling
+		//初始化单页的区域滚动
 		mui('.mui-scroll-wrapper').scroll();
-		//Share the operation
-		var shares = {};
-		
-		mui.plusReady(function() {
-			plus.share.getServices(function(s) {
-				if (s && s.length > 0) {
-					for (var i = 0; i < s.length; i++) {
-						var t = s[i];
-						shares[t.id] = t;
-					}
-				}
-			}, function() {
-				console.log("Failed to get shared service list");
-			});
-		});
-		
-		setTimeout(function () {
-			defaultImg();
-			setTimeout(function() {
-				initImgPreview();
-			}, 300);
-		},500);
-		
-		//Share link click event
-		document.getElementById("share").addEventListener('tap', function() {
-			var ids = [{
-					id: "weixin",
-					ex: "WXSceneSession"
-				}, {
-					id: "weixin",
-					ex: "WXSceneTimeline"
-				}, {
-					id: "sinaweibo"
-				}, {
-					id: "tencentweibo"
-				}, {
-					id: "qq"
-				}],
-				bts = [{
-					title: "Sent to the WeChat friends"
-				}, {
-					title: "Share to the WeChat circle of friends"
-				}, {
-					title: "share to Sina Weibo"
-				}, {
-					title: "Share to Tencent microblogging"
-				}, {
-					title: "Share to QQ"
-				}];
-			plus.nativeUI.actionSheet({
-				cancel: "cancel",
-				buttons: bts
-			}, function(e) {
-				var i = e.index;
-				if (i > 0) {
-					var s_id = ids[i - 1].id;
-					var share = shares[s_id];
-					if (share) {
-						if (share.authenticated) {
-							shareMessage(share, ids[i - 1].ex);
-						} else {
-							share.authorize(function() {
-								shareMessage(share, ids[i - 1].ex);
-							}, function(e) {
-								console.log("Authentication authorization failed：" + e.code + " - " + e.message);
-							});
-						}
-					} else {
-						mui.toast("Can not get sharing service, please check the manifest.json share plug-in parameter configuration, and re-packaged")
-					}
-				}
-			});
-		});
-
-		function shareMessage(share, ex) {
-			var msg = {
-				extra: {
-					scene: ex
-				}
-			};
-			msg.href = "http://www.dcloud.io/hellomui/";
-			msg.title = "Closest to the native APP experience of high-performance front-end framework";
-			msg.content = "I was experiencing HelloMUI, it really is very smooth, basically do not see the gap and the original App";
-			if (~share.id.indexOf('weibo')) {
-				msg.content += "；Experience the address：http://www.dcloud.io/hellomui/";
-			}
-			msg.thumbs = ["_www/images/logo.png"];
-			share.send(msg, function() {
-				console.log("share to\"" + share.description + "\"success！ ");
-			}, function(e) {
-				console.log("share to\"" + share.description + "\"failure: " + e.code + " - " + e.message);
-			});
-		}
-		//To score
-		document.getElementById("rate").addEventListener('tap', function() {
-			if (mui.os.ios) {
-				location.href = 'https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=682211190&pageNumber=0&sortOrdering=2&type=&mt=8';
-			} else if (mui.os.android) {
-				plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
-					plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
-						mui.alert("360 mobile assistant and application of treasure, you are not installed, temporarily unable to score, thanks for support");
-					}, "com.qihoo.appstore");
-				}, "com.tencent.android.qqdownloader");
-			}
-		});
-		//consumer hotline
-		document.getElementById("tel").addEventListener('tap', function() {
-			if(mui.os.plus){
-				plus.device.dial("114");
-			}else{
-				location.href = 'tel:114';
-			}
-			
-		});
-		//		//Feedback
-		//		document.getElementById("quest").addEventListener('tap', function() {
-		//			
-		//		});
-		//		
-		//Check for updates
-		document.getElementById("update").addEventListener('tap', function() {
-			var server = "http://www.dcloud.io/check/update"; //Get the upgrade profile server address
-			mui.getJSON(server, {
-				"appid": plus.runtime.appid,
-				"version": plus.runtime.version,
-				"imei": plus.device.imei
-			}, function(data) {
-				if (data.status) {
-					plus.ui.confirm(data.note, function(i) {
-						if (0 == i) {
-							plus.runtime.openURL(data.url);
-						}
-					}, data.title, ["update immediately", "Cancel"]);
-				} else {
-					mui.toast('Hello MUI Is the latest version ~')
-				}
-			});
-		});
 		var view = viewApi.view;
 		(function($) {
-			//The back of the view is back with webview
+			//处理view的后退与webview后退
 			var oldBack = $.back;
 			$.back = function() {
-				if (viewApi.canBack()) { //If the view can be retreated, the view is back
+				if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
 					viewApi.back();
-				} else { //Perform webview backwards
+				} else { //执行webview后退
 					oldBack();
 				}
 			};
-			//Listen to page switching events Scenario 1, through the view element to listen to all the page switching events, currently provide pageBeforeShow | pageShow | pageBeforeBack | pageBack four events (before event before the animation starts to trigger)
-			//The first parameter for the event name, the second parameter for the event callback, which e.detail.page for the current page html object
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
 			view.addEventListener('pageBeforeShow', function(e) {
 				//				console.log(e.detail.page.id + ' beforeShow');
 			});
@@ -729,182 +195,5 @@
 				//				console.log(e.detail.page.id + ' back');
 			});
 		})(mui);
-		//Replace the picture
-		mui(".mui-table-view-cell").on("tap", "#head", function(e) {
-			if(mui.os.plus){
-				var a = [{
-					title: "Take pictures"
-				}, {
-					title: "Choose from the phone album"
-				}];
-				plus.nativeUI.actionSheet({
-					title: "Modify avatar",
-					cancel: "cancel",
-					buttons: a
-				}, function(b) {
-					switch (b.index) {
-						case 0:
-							break;
-						case 1:
-							getImage();
-							break;
-						case 2:
-							galleryImg();
-							break;
-						default:
-							break
-					}
-				})	
-			}
-			
-		});
-
-		function getImage() {
-			var c = plus.camera.getCamera();
-			c.captureImage(function(e) {
-				plus.io.resolveLocalFileSystemURL(e, function(entry) {
-					var s = entry.toLocalURL() + "?version=" + new Date().getTime();
-					console.log(s);
-					document.getElementById("head-img").src = s;
-					document.getElementById("head-img1").src = s;
-					//Change the preview of the src
-					//At present there is only one picture, for the time being so, the follow-up needs to be achieved through the standard components
-					document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
-				}, function(e) {
-					console.log("Read photo file error：" + e.message);
-				});
-			}, function(s) {
-				console.log("error" + s);
-			}, {
-				filename: "_doc/head.jpg"
-			})
-		}
-
-		function galleryImg() {
-			plus.gallery.pick(function(a) {
-				plus.io.resolveLocalFileSystemURL(a, function(entry) {
-					plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
-						root.getFile("head.jpg", {}, function(file) {
-							//The file already exists
-							file.remove(function() {
-								console.log("file remove success");
-								entry.copyTo(root, 'head.jpg', function(e) {
-										var e = e.fullPath + "?version=" + new Date().getTime();
-										document.getElementById("head-img").src = e;
-										document.getElementById("head-img1").src = e;
-										//Change the preview of the src
-										//At present there is only one picture, for the time being so, the follow-up needs to be achieved through the standard components
-										document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
-									},
-									function(e) {
-										console.log('copy image fail:' + e.message);
-									});
-							}, function() {
-								console.log("delete image fail:" + e.message);
-							});
-						}, function() {
-							//file does not exist
-							entry.copyTo(root, 'head.jpg', function(e) {
-									var path = e.fullPath + "?version=" + new Date().getTime();
-									document.getElementById("head-img").src = path;
-									document.getElementById("head-img1").src = path;
-									//Change the preview of the src
-									//At present there is only one picture, for the time being so, the follow-up needs to be achieved through the standard components
-									document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
-								},
-								function(e) {
-									console.log('copy image fail:' + e.message);
-								});
-						});
-					}, function(e) {
-						console.log("get _www folder fail");
-					})
-				}, function(e) {
-					console.log("Read photo file error：" + e.message);
-				});
-			}, function(a) {}, {
-				filter: "image"
-			})
-		};
-
-		function defaultImg() {
-			if(mui.os.plus){
-				plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
-					var s = entry.fullPath + "?version=" + new Date().getTime();;
-					document.getElementById("head-img").src = s;
-					document.getElementById("head-img1").src = s;
-				}, function(e) {
-					document.getElementById("head-img").src = 'images/logo.png';
-					document.getElementById("head-img1").src = 'images/logo.png';
-				})
-			}else{
-				document.getElementById("head-img").src = 'images/logo.png';
-				document.getElementById("head-img1").src = 'images/logo.png';
-			}
-			
-		}
-		document.getElementById("head-img1").addEventListener('tap', function(e) {
-			e.stopPropagation();
-		});
-		document.getElementById("welcome").addEventListener('tap', function(e) {
-			//Show boot navigation
-			mui.openWindow({
-				id: 'guide',
-				url: 'guide.html',
-				show: {
-					aniShow: 'fade-in',
-					duration: 300
-				},
-				waiting: {
-					autoShow: false
-				}
-			});
-		});
-
-		function initImgPreview() {
-			var imgs = document.querySelectorAll("img.mui-action-preview");
-			imgs = mui.slice.call(imgs);
-			if (imgs && imgs.length > 0) {
-				var slider = document.createElement("div");
-				slider.setAttribute("id", "__mui-imageview__");
-				slider.classList.add("mui-slider");
-				slider.classList.add("mui-fullscreen");
-				slider.style.display = "none";
-				slider.addEventListener("tap", function() {
-					slider.style.display = "none";
-				});
-				slider.addEventListener("touchmove", function(event) {
-					event.preventDefault();
-				})
-				var slider_group = document.createElement("div");
-				slider_group.setAttribute("id", "__mui-imageview__group");
-				slider_group.classList.add("mui-slider-group");
-				imgs.forEach(function(value, index, array) {
-					//Add a click event to the picture to trigger the preview display;
-					value.addEventListener('tap', function() {
-						slider.style.display = "block";
-						_slider.refresh();
-						_slider.gotoItem(index, 0);
-					})
-					var item = document.createElement("div");
-					item.classList.add("mui-slider-item");
-					var a = document.createElement("a");
-					var img = document.createElement("img");
-					img.setAttribute("src", value.src);
-					a.appendChild(img)
-					item.appendChild(a);
-					slider_group.appendChild(item);
-				});
-				slider.appendChild(slider_group);
-				document.body.appendChild(slider);
-				var _slider = mui(slider).slider();
-			}
-		}
-		
-		if(mui.os.stream){
-			document.getElementById("check_update").display = "none";
-		}
-		
 	</script>
-
 </html>
