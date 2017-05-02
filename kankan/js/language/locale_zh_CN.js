@@ -78,9 +78,12 @@ var JSLocale = {
 	"commodity_switch": "交  换",
 	"commodity_free": "白 送",
 	"commodity_pointbuy": "point",
-	"commodity_buttonsure": "确  认",
+	"commodity_buttonsure": "发	布",
 	"commodity_price": "价格",
 	"commodity_forbidentext": "请确认被禁止的出品物以及行为。如果是名牌物品的话，请明示相关编号，假冒名牌的贩卖行为将会受到处罚以及追究相关责任。",
+	"commodity_want":"求购商品发布",
+	"commodity_want_butonsure":"发	布",
+	"commodity_want_forbidentext":"",
 }
 
 $(function() {

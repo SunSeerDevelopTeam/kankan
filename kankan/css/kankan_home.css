@@ -268,7 +268,10 @@
 	margin: 1em 0;
 	text-align: center;
 }
-
+.ka_imgewh img{
+	width: 95px;
+    height: 81px;
+}
 
 /***productlist page***/
 

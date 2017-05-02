@@ -13,15 +13,15 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
 			<h1 class="mui-center mui-title lang" data-locale="commodity_login"></h1>
 		</header>
-		<form action="" method="post" name="publishcomodity" id="publishcomodity">
+		
 			<div class="mui-content kankan_jyimgbox">
+				<form action="" method="post" name="publishcomodity" id="publishcomodity">
 				 <h5 class="ka_proloh5 ka_propicfonts lang" data-locale="commodity_photos"></h5>
 				<div class="ka_prologbox0 z_photo">
-					<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);" id="gallery">
-					</div>
+					<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);" id="gallery"></div>
 					<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
 				</div>
 				<!--mask-->
@@ -75,7 +75,7 @@
 				            <li class="mui-table-view-cell">
 		                     	<span class="ka_proinfo lang" data-locale="commodity_price"></span>
 		                     	<div class="mui-pull-right">
-		                     		<input type="text" name="price" id="price" value="" placeholder="0" cla="ka_comdprice" maxlength="10" />
+		                     		<input type="text" name="price" id="price" value="0" placeholder="0" cla="ka_comdprice" maxlength="10" />
 		                     		<span class="comd_login_unit">P</span>
 		                     	</div>
 		                     	
@@ -97,15 +97,17 @@
 				    	         </li>
 				    	     </ul>
 				    </div>
-			</div><br/>
-			<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
-			<div class="ka_userbox">
-				<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_buttonsure" onclick="publishs()"></button>
+					<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
+					<div class="ka_userbox">
+						<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_buttonsure" onclick="publishs()"></button>
+					</div>
+					<br/>
+					<div class="showimg"></div>
+			        <div id="deltimg" style="display: none;"></div>
+		        </form>
 			</div>
-			<br/>
-			<div class="showimg"></div>
-	        <div id="deltimg" style="display: none;"></div>
-		</form>
+			
+		
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
@@ -123,7 +125,6 @@ $(function() {
 //sort 
 (function($, doc) {
 	$.init();
-	console.dir(cityData);
 	var testarr=[];
 		function categorypush(results){
 			var catedata=results.data;
@@ -170,19 +171,16 @@ $(function() {
 		var userPicker = new $.PopPicker();
 		userPicker.setData([{
 			value: '0',
-			text: '新品・未使用'
+			text: TextMessage.prostaute0
 		}, {
 			value: '1',
-			text: '未使用に近い'
+			text: TextMessage.prostaute1
 		}, {
 			value: '2',
-			text: '目立った傷や汚れなし'
+			text: TextMessage.prostaute2
 		}, {
 			value: '3',
-			text: '傷や汚れあり'
-		}, {
-			value: '4',
-			text: '全体的に状態が悪い'
+			text: TextMessage.prostaute3
 		}]);
 		var showUserPickerButton = doc.getElementById('prostuat');
 		var stauteResult = doc.getElementById('stauteResult');
@@ -228,41 +226,41 @@ function publishs() {
 	var imges3 = $("#3").val();
 	var price = $("#price").val();
 	if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
-		alert("请为商品至少选择一张图片！");
+		alert(TextMessage.pro_imagetest);
 		return false;
 	}
 	if(comm_name == "") {
-		alert("商品名称不能为空！");
+		alert(TextMessage.pro_nametest);
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
 	if(comm_detail == "") {
-		alert("商品描述不能为空！");
+		alert(TextMessage.pro_descriptiontest);
 		document.publishcomodity.comm_detail.focus();
 		return false;
 	}
 	if(classify_id == "") {
-		alert("请选择商品分类！");
+		alert(TextMessage.pro_sorttest);
 		return false;
 	}
 	if(comm_state == "") {
-		alert("请选择商品状态！");
+		alert(TextMessage.pro_stautetest);
 		return false;
 	}
-	if(price != "") {
+	if(price != "0") {
 		if(isNaN(price)) {
-			alert("价格只能是数字！");
+			alert(TextMessage.pro_pricetest);
 			document.publishcomodity.price.focus();
 			return false;
 		}
 		if(price < 0) {
-			alert("价格必须大于0！");
+			alert(TextMessage.pro_pricenumbtest);
 			document.publishcomodity.price.focus();
 			return false;
 		}
 	}
 	if(exchange == "0" & business == "0" & gratis == "0") {
-		alert("请选择交易手段！");
+		alert(TextMessage.pro_buywaytest);
 		return false;
 	}
 	var params = {
@@ -284,7 +282,7 @@ function publishs() {
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
 			Log.d("success");
-			alert("发布成功！");
+			alert(TextMessage.pro_logininfo);
 			location.reload();
 		},
 		ng: function(data) {
@@ -421,7 +419,7 @@ function compressImg(path) {
 			overwrite: true,
 			format: "jpg",
 			width: "auto",
-			height: "239px"
+			height: "auto"
 		},
 		function(event) {
 			console.log("Compress success!");
@@ -445,7 +443,7 @@ function uploadimage(path) {
 		method: "post"
 	}, function(t, status) {
 		if(status == 200) {
-			console.log("upload success:" + t.responseText);
+			//console.log("upload success:" + t.responseText);
 			console.log("upload success!");
 			Processing(t.responseText);
 			wt.close();
