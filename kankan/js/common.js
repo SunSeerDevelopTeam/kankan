@@ -727,6 +727,7 @@ var TextMessage;
 	TextMessage.pro_pricenumbtest = language ? "有効な数字（0円以上）を設定してください" : "价格必须大于0";
 	TextMessage.pro_buywaytest = language ? "取引手段を設定してください。" : "请选择交易手段";
 	TextMessage.pro_logininfo = language ? "登録う成功" : "发布成功";
+	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

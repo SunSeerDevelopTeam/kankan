@@ -8,7 +8,6 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
-		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />-->
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -60,12 +59,8 @@
 			        <div id="deltimg" style="display: none;"></div>
 		        </form>
 			</div>
-			
-		
 	</body>
 	<script src="../../../js/mui.min.js"></script>
-	<script src="../../../js/mui.view.js "></script>
-	<script src="../../../js/mui.poppicker.js"></script>-->
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
@@ -84,10 +79,6 @@ function publishs() {
 	var imges1 = $("#1").val();
 	var imges2 = $("#2").val();
 	var imges3 = $("#3").val();
-	if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
-		alert(TextMessage.pro_imagetest);
-		return false;
-	}
 	if(comm_name == "") {
 		alert(TextMessage.pro_nametest);
 		document.publishcomodity.comm_name.focus();

@@ -75,7 +75,7 @@
 				            <li class="mui-table-view-cell">
 		                     	<span class="ka_proinfo lang" data-locale="commodity_price"></span>
 		                     	<div class="mui-pull-right">
-		                     		<input type="text" name="price" id="price" value="0" placeholder="0" cla="ka_comdprice" maxlength="10" />
+		                     		<input type="text" name="price" id="price" value="" placeholder="" cla="ka_comdprice" maxlength="10" />
 		                     		<span class="comd_login_unit">P</span>
 		                     	</div>
 		                     	
@@ -247,7 +247,12 @@ function publishs() {
 		alert(TextMessage.pro_stautetest);
 		return false;
 	}
-	if(price != "0") {
+	if(business== "1") {
+		if(price==""){
+			alert(TextMessage.pro_pricenulltest);
+			document.publishcomodity.price.focus();
+			return false;
+		}
 		if(isNaN(price)) {
 			alert(TextMessage.pro_pricetest);
 			document.publishcomodity.price.focus();
@@ -272,12 +277,14 @@ function publishs() {
 		"exchange": exchange,
 		"business": business,
 		"gratis": gratis,
-		"price": price,
 		"imges[0]": imges0,
 		"imges[1]": imges1,
 		"imges[2]": imges2,
 		"imges[3]": imges3
 	};
+	if(price!=""){
+		params.price=price;
+	}
 	//console.dir(params);
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
