@@ -460,7 +460,8 @@ var Api;
 		User: {
 			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
 			register: 　baseUrl + '/user/Register',
-			login: baseUrl + '/user/login/login'
+			login: baseUrl + '/user/login/login',
+			forgetPwd: baseUrl + '/user/password'
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
@@ -546,7 +547,7 @@ var Api;
 		if(plus != null) {
 			token = plus.storage.getItem('token');
 			if(token == null) {
-				return "+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh\/PqKa19BIs=dde7c00a235549514739d87726262fd047d3884ef162ec1543bb3181ac0e62df";
+				return "";
 			}
 		}
 		return token;
@@ -584,6 +585,10 @@ var Repository;
 			return Api.call(Api.url.User.login, params, callback);
 		}
 		User.login = login;
+		function forgetPwd(params, callback) {
+			return Api.call(Api.url.User.forgetPwd, params, callback);
+		}
+		User.forgetPwd = forgetPwd;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -718,7 +723,7 @@ var TextMessage;
 	TextMessage.chooseimage = language ? "写真を選択する" : "选择照片";
 	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
 	TextMessage.errorCode_1001 = language ? "検証番号の有効期限が切れて、再び試みて下さい " : "您输入的验证码已过期，请重试！";
-	TextMessage.errorCode_1002 = language ? "不能为空，请重新输入" : "不能为空，请重新输入";
+	TextMessage.errorCode_1002 = language ? "空白できません、再入力してください" : "不能为空，请重新输入";
 	TextMessage.prostaute0 = language ? "新品・未使用" : "未使用过";
 	TextMessage.prostaute1 = language ? "未使用に近い" : "几乎未使用过";
 	TextMessage.prostaute2 = language ? "目立った傷や汚れなし " : "无使用痕迹";
@@ -733,6 +738,7 @@ var TextMessage;
 	TextMessage.pro_buywaytest = language ? "取引手段を設定してください。" : "请选择交易手段";
 	TextMessage.pro_logininfo = language ? "登録う成功" : "发布成功";
 	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
+	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
