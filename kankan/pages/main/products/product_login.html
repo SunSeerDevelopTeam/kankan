@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-center mui-title lang" data-locale="commodity_login"></h1>
 		</header>
 		
@@ -104,10 +104,9 @@
 					<br/>
 					<div class="showimg"></div>
 			        <div id="deltimg" style="display: none;"></div>
+			        <input type="hidden" name="codid" id="codid" value="" />
 		        </form>
 			</div>
-			
-		
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
@@ -117,36 +116,145 @@
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
 	<script src="../../../js/common.js"></script>
-	<!--<script src="../../../js/pro_loginsort.js" type="text/javascript" charset="utf-8"></script>-->
 	<script>
-$(function() {
-	$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
-});
-//sort 
+	$(function() {
+		$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
+	});
+	window.addEventListener('eid', function(event) {
+		var id = event.detail.id;
+		//alert(id);
+		$(".z_addImg").remove();
+		$(".mui-title").html(TextMessage.commodity_edit);
+		document.getElementById('codid').value=id;
+		getcomdinfo(id);
+	});
+	//edite image show
+	function imagepull(im,srcval){
+		var img = document.createElement("img");
+		img.setAttribute("src", srcval);
+		img.setAttribute("alt", im);
+		img.setAttribute("class", "z_images");
+		var imgAdd = document.createElement("div");
+		imgAdd.setAttribute("class", "z_addImg");
+		imgAdd.appendChild(img);
+		$(".z_photo").append(imgAdd);
+		imglength();
+		imgRemove();
+	}
+	//edite information show
+	function messages(results){
+		var name=results.data.comm_name;
+		var detail=results.data.comm_detail;
+		var business=results.data.business;
+		var exchange=results.data.exchange;
+		var gratis=results.data.gratis;
+		var image0=results.data.imges[0];
+		var image1=results.data.imges[1];
+		var image2=results.data.imges[2];
+		var image3=results.data.imges[3];
+		var classify_id=results.data.classify_id;
+		var price=results.data.price;
+		var state=results.data.state;
+		document.getElementById('comm_name').value=name;
+		document.getElementById('comm_detail').value=detail;
+		document.getElementById('business').value=business;
+		document.getElementById('exchange').value=exchange;
+		document.getElementById('gratis').value=gratis;
+		document.getElementById('classify_id').value=classify_id;
+		document.getElementById('price').value=price;
+		document.getElementById('comm_state').value=state;
+		if(image0!=""){
+			document.getElementById('0').value=image0;
+			imagepull(0,image0);
+		}
+		if(image1!=""){
+			document.getElementById('1').value=image1;
+			imagepull(1,image1);
+		}
+		if(image2!=""){
+			document.getElementById('2').value=image2;
+			imagepull(2,image2);
+		}
+		if(image3!=""){
+			document.getElementById('3').value=image3;
+			imagepull(3,image3);
+		}
+		if(business=="1"){
+			$("#pointbuybtn").removeClass("ka_exchangegrey");
+			$("#pointbuybtn").addClass("ka_exchangered");
+		}
+		if(exchange=="1"){
+			$("#exchbuybtn").removeClass("ka_exchangegrey");
+			$("#exchbuybtn").addClass("ka_exchangered");
+		}
+		if(gratis=="1"){
+			$("#freebuybtn").removeClass("ka_exchangegrey");
+			$("#freebuybtn").addClass("ka_exchangered");
+		}
+	}
+	//edite show
+	function getcomdinfo(dataid){
+		var param3={
+			"commodity_id":dataid
+		}
+		Repository.Commodity.Commodityedite(param3, {
+					ok: function(data) {
+						Log.d("success");
+						messages(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+					}
+		});
+	}
+	//get classfiy 
+	var testarr=[];
+	function categorypush(results){
+		var catedata=results.data;
+		for(var c=0;c<catedata.length;c++){
+			var categoryadd={
+					value: catedata[c].catalog_id,
+					text: catedata[c].catalog_detail,
+					children:[]
+			};
+			var childrenarr=categoryadd.children;
+			var secondcatearr=catedata[c].children;
+			for(var t=0;t<secondcatearr.length;t++){
+				var childrenadd={
+						value: secondcatearr[t].classify_id,
+						text: secondcatearr[t].classify_detail
+					}
+				childrenarr.push(childrenadd);
+			}
+			testarr.push(categoryadd);
+		}
+		return testarr;
+	}
+	function categorychoose(catearr,catid){
+		for(var ci=0; ci<catearr.length; ci++){
+			var childredarr=catearr[ci].children;
+			for(var di=0;di<childredarr.length;di++){
+				if(childredarr[di].value==catid){
+					return catearr[ci];
+					break;
+				}
+			}
+		}
+	}
+	function childrentext(childredarr,catid){
+		for(var chd=0;chd<childredarr.length;chd++){
+			if(childredarr[chd].value==catid){
+				return childredarr[chd].text;
+				break;
+			}
+		}
+	}
+//picker
 (function($, doc) {
 	$.init();
-	var testarr=[];
-		function categorypush(results){
-			var catedata=results.data;
-			for(var c=0;c<catedata.length;c++){
-				var categoryadd={
-						value: catedata[c].catalog_id,
-						text: catedata[c].catalog_detail,
-						children:[]
-				};
-				var childrenarr=categoryadd.children;
-				var secondcatearr=catedata[c].children;
-				for(var t=0;t<secondcatearr.length;t++){
-					var childrenadd={
-							value: secondcatearr[t].classify_id,
-							text: secondcatearr[t].classify_detail
-						}
-					childrenarr.push(childrenadd);
-				}
-				testarr.push(categoryadd);
-			}
-			return testarr;
-		}
 	$.ready(function() {
 		mui.plusReady(function() {
 			var param2 = {
@@ -166,46 +274,87 @@ $(function() {
 				}
 			});
 		});
-		
-		//commodity use stuate
-		var userPicker = new $.PopPicker();
-		userPicker.setData([{
-			value: '0',
-			text: TextMessage.prostaute0
-		}, {
-			value: '1',
-			text: TextMessage.prostaute1
-		}, {
-			value: '2',
-			text: TextMessage.prostaute2
-		}, {
-			value: '3',
-			text: TextMessage.prostaute3
-		}]);
-		var showUserPickerButton = doc.getElementById('prostuat');
-		var stauteResult = doc.getElementById('stauteResult');
-		showUserPickerButton.addEventListener('tap', function(event) {
-			userPicker.show(function(items) {
-				stauteResult.innerText = items[0].text;
-				document.getElementById('comm_state').value = items[0].value;
-			});
-			document.getElementById("bitian2").style.display = "none";
-		}, false);
 		//commodity sort
 		function sortpicker(catearrs){
-			var cityPicker = new $.PopPicker({
+			//commodity category
+			var categoryPicker = new $.PopPicker({
 				layer: 2
 			});
-			cityPicker.setData(catearrs);
-			var showCityPickerButton = doc.getElementById('showCityPicker');
-			var cityResult = doc.getElementById('sortResult');
-			showCityPickerButton.addEventListener('tap', function(event) {
-				cityPicker.show(function(items) {
-					cityResult.innerText = items[0].text + " " + items[1].text;
+			categoryPicker.setData(catearrs);
+			//commodity use stuate
+			var statedate=[{
+				value: '0',
+				text: TextMessage.prostaute0
+			}, {
+				value: '1',
+				text: TextMessage.prostaute1
+			}, {
+				value: '2',
+				text: TextMessage.prostaute2
+			}, {
+				value: '3',
+				text: TextMessage.prostaute3
+			}];
+			var statePicker = new $.PopPicker();
+			statePicker.setData(statedate);
+			
+			window.addEventListener('eid', function(event) {
+				var picksortid = event.detail.id;
+				var param4={
+					"commodity_id":picksortid
+				}
+				Repository.Commodity.Commodityedite(param4, {
+							ok: function(data) {
+								console.log("success");
+								var catid=data.data.classify_id;//second category value
+								var pickcatarr=categorychoose(catearrs,catid);//selected category value
+								var stautid=data.data.state;
+								//console.dir(pickcatarr);
+								var firstcateval=pickcatarr.value;//first category value
+								//set category picker Default value
+								categoryPicker.pickers[0].setSelectedValue(firstcateval,0,function() {
+									setTimeout(function(){
+										categoryPicker.pickers[1].setSelectedValue(catid);
+									},10);
+								});
+								var childrentextcat=childrentext(pickcatarr.children,catid);
+								document.getElementById("bitian1").style.display = "none";
+								doc.getElementById('sortResult').innerText = pickcatarr.text + " " + childrentextcat;
+								//set use state picker Default value
+								statePicker.pickers[0].setSelectedValue(stautid);
+								document.getElementById("bitian2").style.display = "none";
+								var childrentextstate=childrentext(statedate,stautid);
+								document.getElementById('stauteResult').innerHTML=childrentextstate;
+							},
+							ng: function(data) {
+								Log.d(data);
+								if(data == "1000") {
+									alert(TextMessage.test);
+								}
+							}
+				});
+			});
+			//category click picker
+			var showCatePickerButton = doc.getElementById('showCityPicker');
+			var cateResult = doc.getElementById('sortResult');
+			showCatePickerButton.addEventListener('tap', function(event) {
+				categoryPicker.show(function(items) {
+					cateResult.innerText = items[0].text + " " + items[1].text;
 					document.getElementById("classify_id").value = items[1].value;
 				});
 				document.getElementById("bitian1").style.display = "none";
 			}, false);
+			//staute click picker
+			var showstatePickerButton = doc.getElementById('prostuat');
+			var stauteResult = doc.getElementById('stauteResult');
+			showstatePickerButton.addEventListener('tap', function(event) {
+				statePicker.show(function(items) {
+					stauteResult.innerText = items[0].text;
+					document.getElementById('comm_state').value = items[0].value;
+				});
+				document.getElementById("bitian2").style.display = "none";
+			}, false);
+			
 		}
 	});
 })(mui, document);
@@ -285,7 +434,10 @@ function publishs() {
 	if(price!=""){
 		params.price=price;
 	}
-	//console.dir(params);
+	var commodity_id=$("#codid").val();
+	if(commodity_id!=""){
+		params.commodity_id=commodity_id;
+	}
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
 			Log.d("success");
@@ -581,6 +733,7 @@ document.getElementById('freebuybtn').addEventListener('tap', function(e) {
 		$("#exchbuybtn").removeClass("ka_exchangered");
 		$("#exchbuybtn").addClass("ka_exchangegrey");
 	}
-});</script>
+});
+</script>
 
 </html>

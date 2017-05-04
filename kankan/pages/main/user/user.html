@@ -40,7 +40,7 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る</font></span>
 				</button>
-				<h1 class="mui-center mui-title user-title-center">Mary</h1>
+				<h1 class="mui-center mui-title user-title-center"></h1>
 				<a href="../../setting/setting.html">
 					<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
 						<span class="mui-icon mui-icon-gear"></span>
@@ -54,7 +54,7 @@
 					<div class="tran-page">
 						<ul class="mui-table-view">
 							<li class="head-img-box">
-								<div><img src="../../../images/muwu.jpg" width="150" height="150"></div>
+								<div><img src="../../../images/userPhoto.png" width="150" height="150" class="headimg"></div>
 								<div class="mui-pull-caption">
 									<a href="#uinfoedite">
 										<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton">プロフィール編集</button>
@@ -64,28 +64,29 @@
 								<div>
 									<ul class="user-num">
 										<li class="user-num-comment">
-											<font size="2">評価：999</font>
+											<font size="2"><span>評価：</span><span class="commentnum"></span></font>
+											
 										</li>
 										<li class="user-num-sell">
-											<font size="2">出品数：999</font>											
+											<font size="2"><span>出品数：</span><span class="sellnum"></span></font>	
 										</li>
 										<li class="user-num-sell2">
-											<font size="2">チケット数：999</font>											
+											<font size="2"><span>チケット数：</span><span class="ticknum"></span></font>											
 										</li>
 									</ul>
 								</div>
 								<ul class="user-comment-list">
 									<li class="user-comment-grid">
 										<img height="30%" width="30%" src="../../../images/Good.PNG"/>
-										<div class="user-comment-num">999</div>
+										<div class="user-comment-num good"></div>
 									</li>
 									<li class="user-comment-grid2">
 										<img height="30%" width="30%"  src="../../../images/Normal.PNG"/>
-										<div class="user-comment-num">999</div>
+										<div class="user-comment-num normal"></div>
 									</li>
 									<li class="user-comment-grid2">
 										<img height="30%" width="30%" src="../../../images/Bad.PNG"/>
-										<div class="user-comment-num">999</div>
+										<div class="user-comment-num bad"></div>
 									</li>
 									<li class="user-comment-grid3 usercommentlist">
 										<a href="../products/commentlist.html#allcommentlist">
@@ -102,14 +103,12 @@
 										</a>
 									</li>
 									<li class="user-point-grid2">
-											<font size="2">
-												20000
-											</font>
+											<font size="2" class="point"></font>
 									</li>
 									<li class="user-point-grid">
 										<a href="#area">
 											<font color="#AAAAAA" size="2">
-												<span class="mui-icon mui-icon-paperplane"><font size="3">东京都</font></span>
+												<span class="mui-icon mui-icon-paperplane"><font size="3" class="address"></font></span>
 											</font>
 										</a>
 									</li>
@@ -437,7 +436,7 @@
 					<div class="mui-scroll">
 						<div style="margin: 0.3em;">
 							<div style="width: 30%;text-align: left;margin-left: -1em;" class="head-img-box">
-								<img src="../../../images/muwu.jpg" height="50" width="50" />
+								<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg" />
 							</div>
 							<div style="width: 78%;float: right;margin-top: -4.5em;">
 							<h6>用户名</h6>
@@ -455,7 +454,13 @@
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
+	<script src="../../../js/mui.picker.js"></script>
+	<script src="../../../js/mui.poppicker.js"></script>
 	<script src='../../../js/feedback.js'></script>
+	<script src="../../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../../js/language.js"></script>
+	<script src="../../../js/sha256.js"></script>
+	<script src="../../../js/common.js"></script>
 	<script>
 		mui.init({
 				swipeBack: false,
@@ -467,8 +472,8 @@
 						id: 'detail.html',
 						url: '../products/detail.html'
 					},{
-						id: 'product_edit.html',
-						url: '../products/product_edit.html'
+						id: 'product_login.html',
+						url: '../products/product_login.html'
 					}
 				]
 			});
@@ -483,14 +488,12 @@
 			//处理view的后退与webview后退
 			var oldBack = $.back;
 			$.back = function() {
-				if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
+				if(viewApi.canBack()) { 
 					viewApi.back();
-				} else { //执行webview后退
+				} else { 
 					oldBack();
 				}
 			};
-			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
-			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
 			view.addEventListener('pageBeforeShow', function(e) {
 				//				console.log(e.detail.page.id + ' beforeShow');
 			});
@@ -663,13 +666,13 @@
 			//var eid = this.getAttribute('id');
 			var eid="226";
 			if(!editePage) {
-				editePage = plus.webview.getWebviewById('product_edit.html');
+				editePage = plus.webview.getWebviewById('product_login.html');
 			}
 			mui.fire(editePage, 'eid', {
 				id: eid
 			});
 			mui.openWindow({
-				id: 'product_edit.html'
+				id: 'product_login.html'
 			});
 		});
 		//Commodity switch
@@ -756,6 +759,52 @@
 				}
 			}
 		}
+		function showuser(results){
+			var uaddress=results.data.address;
+			var ucomentnum=results.data.comment_cnt;
+			var unick_name=results.data.nick_name;
+			if(results.data.user_photo==""){
+				var user_photo="../../../images/userPhoto.png";
+			}else{
+				var user_photo=results.data.user_photo;
+			}
+			var user_point=results.data.user_point;
+			var ucomoditynum=results.data.exhibit_cnt;
+			var ugoodnum=results.data.user_opinion_h_count;
+			var unormalnum=results.data.user_opinion_m_count;
+			var badnum=results.data.user_opinion_l_count;
+			var uname=results.data.user_name;
+			$(".headimg").attr("src",user_photo);
+			$(".commentnum").html(ucomentnum);
+			$(".sellnum").html(ucomoditynum);
+			$(".good").html(ugoodnum);
+			$(".normal").html(unormalnum);
+			$(".bad").html(badnum);
+			$(".address").html(address);
+			$("#nickname").val(unick_name);
+			$(".point").html(user_point);
+			$(".mui-title").html(uname);
+			
+		}
+		//message show
+		mui.plusReady(function(){
+			var params={};
+			Repository.User.Usershow(params, {
+				ok: function(data) {
+					console.log("success");
+					console.dir(data);
+					//showuser(data);
+				},
+				ng: function(data) {
+					Log.d(data);
+					if(data == "1000") {
+						alert(TextMessage.test);
+					} else {
+						alert("other error code:" + data);
+					}
+				}
+			});
+		});
 	</script>
 
 </html>

@@ -461,7 +461,9 @@ var Api;
 			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
 			register: 　baseUrl + '/user/Register',
 			login: baseUrl + '/user/login/login',
-			forgetPwd: baseUrl + '/user/password'
+			forgetPwd: baseUrl + '/user/password',
+			Usershow: baseUrl + '/user/Usershow',
+			userinfo: baseUrl + '/user/setting'
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
@@ -589,6 +591,14 @@ var Repository;
 			return Api.call(Api.url.User.forgetPwd, params, callback);
 		}
 		User.forgetPwd = forgetPwd;
+		function Usershow(params, callback) {
+			return Api.call(Api.url.User.Usershow, params, callback);
+		}
+		User.Usershow = Usershow;
+		function userinfo(params, callback) {
+			return Api.call(Api.url.User.userinfo, params, callback);
+		}
+		User.userinfo = userinfo;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -739,6 +749,7 @@ var TextMessage;
 	TextMessage.pro_logininfo = language ? "登録う成功" : "发布成功";
 	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
 	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
+	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
