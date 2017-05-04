@@ -17,6 +17,7 @@ var JSLocale = {
 	"email": "メールアドレス",
 	"username": "ユーザー名",
 	"password": "パスワード",
+	"new_password": "新しいパスワード",
 	"password-confirm": "パスワード再入力",
 	"address": "都通府県",
 	"address-details": "未設定",
@@ -31,6 +32,8 @@ var JSLocale = {
 	"please-input-introduction-code": "半角英数字6位",
 	"please-input-verification-code": "コードを入力",
 	"send-verification-code": "認証コードを発信",
+	"retrieve_password":"パスワード再発行",
+	"forget_password_msg": "カンカンで登録しているE-mailを入力してください 入力頂いたE-mailに新しいパスワードを送信します",
 	/*user login page message end*/
 	/*detail page*/
 	"det_spdescription": "商品説明 ",

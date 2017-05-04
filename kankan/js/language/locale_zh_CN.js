@@ -17,6 +17,7 @@ var JSLocale = {
 	"email": "邮箱",
 	"username": "用户名",
 	"password": "密码",
+	"new_password": "新密码",
 	"password-confirm": "确认密码",
 	"address": "地址",
 	"address-details": "未设定",
@@ -31,6 +32,8 @@ var JSLocale = {
 	"please-input-introduction-code": "请输入介绍码",
 	"please-input-verification-code": "请输入验证码",
 	"send-verification-code": "发送验证码",
+	"retrieve_password":"找回密码",
+	"forget_password_msg": "请入力kankan登陆用邮箱地址，系统将把新密码发送过去请查收",
 	/*user login page message end*/
 	/*detail page*/
 	"det_spdescription": "商品说明",

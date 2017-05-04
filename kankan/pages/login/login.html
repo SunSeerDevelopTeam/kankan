@@ -113,6 +113,9 @@
 					statusBarBackground: '#FFFFFF'
 				});
 				$.plusReady(function() {
+					var webviewArray = plus.webview.all();
+					Log.i("webview Array is ");
+					Log.i(webviewArray);
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
@@ -158,10 +161,14 @@
 												if(mainWebView != null) {
 													mainWebView.show();
 												} else {
+													var launchView = plus.webview.getLaunchWebview();
+													launchView.reload(true);
+													/**
 													mui.openWindow({
-														id: "main",
-														url: "../main/main.html"
+														id: "home.html",
+														url: "../main/home.html"
 													});
+													**/
 												}
 											});
 										},
@@ -223,6 +230,20 @@
 							},
 							error: function() {
 								waiting.close();
+							}
+						});
+					});
+					
+					var forgetPwdBtn = doc.getElementById('forget_password');
+					forgetPwdBtn.addEventListener('tap', function(event){
+						$.openWindow({
+							id:'forget_password',
+							url:'forget_password.html',
+							extras: {
+								email:doc.getElementById('email').value.trim()
+							},
+							waiting: {
+								autoShow:false
 							}
 						});
 					});
