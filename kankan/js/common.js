@@ -472,7 +472,8 @@ var Api;
 			Commoditycomment: baseUrl + '/commodity/Commoditycomment/',
 			comments: baseUrl + '/commodity/comment/',
 			imgupload: baseUrl + '/commodity/release/upload/',
-			Commoditypublish:baseUrl + '/commodity/release/'
+			Commoditypublish:baseUrl + '/commodity/release/',
+			Commodityedite:baseUrl + '/commodity/release/update/'
 		}
 	};
 	Api.Params = {
@@ -545,7 +546,7 @@ var Api;
 		if(plus != null) {
 			token = plus.storage.getItem('token');
 			if(token == null) {
-				return "";
+				return "+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh\/PqKa19BIs=dde7c00a235549514739d87726262fd047d3884ef162ec1543bb3181ac0e62df";
 			}
 		}
 		return token;
@@ -635,6 +636,10 @@ var Repository;
 			return Api.call(Api.url.Commodity.Commoditypublish, params, callback);
 		}
 		Commodity.Commoditypublish = Commoditypublish;
+		function Commodityedite(params, callback) {
+			return Api.call(Api.url.Commodity.Commodityedite, params, callback);
+		}
+		Commodity.Commodityedite = Commodityedite;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
