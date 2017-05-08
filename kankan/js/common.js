@@ -455,7 +455,7 @@ var Util;
 })(Util || (Util = {}));
 var Api;
 (function(Api) {
-	var baseUrl = 'http://124.114.150.138:7998';
+	var baseUrl = 'http://192.168.1.8:7998';
 	Api.url = {
 		User: {
 			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
@@ -463,7 +463,7 @@ var Api;
 			login: baseUrl + '/user/login/login',
 			forgetPwd: baseUrl + '/user/password',
 			Usershow: baseUrl + '/user/Usershow',
-			userinfo: baseUrl + '/user/setting'
+			userinfo: baseUrl + '/user/setting/'
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',

@@ -781,6 +781,9 @@
 .productbutton {
 	width: 150px;
 }
+.ka_aboutupro{
+	margin-bottom: 5em;
+}
 /*loading*/
 .spinner {
   margin: 100px auto 0;

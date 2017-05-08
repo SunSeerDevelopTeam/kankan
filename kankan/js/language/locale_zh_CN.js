@@ -50,7 +50,7 @@ var JSLocale = {
 	"det_send": "白送",
 	"detli_title": "商品列表",
 	"det_procoment": "商品评论",
-	"det_pcercomment": "出品者评论",
+	"det_pcercomment": "评论列表",
 	"det_goodcomments": "好评",
 	"det_normalcomments": "中评",
 	"det_badcomments": "差评",

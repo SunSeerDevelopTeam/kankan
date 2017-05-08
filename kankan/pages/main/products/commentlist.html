@@ -159,10 +159,13 @@
 					var comentobj = JSON.stringify(comment_detailarr[i]);
 					var comentinfo = $.parseJSON(comentobj);
 					var comentinfoimg=comentinfo.user_photo;
-					var comentinfoname=comentinfo.user_name;
+					var comentinfoname=comentinfo.nick_name;
+					if(comentinfo.nick_name==""){
+						var comentinfoname=comentinfo.user_name;
+					}
 					var comentinfotime=comentinfo.ins_date;
-					var comentinfoflag=comentinfo.user_comm_flag;
-					var comentinfodetail=comentinfo.user_comm_detail;
+					var comentinfoflag=comentinfo.appraise_flag;
+					var comentinfodetail=comentinfo.appraise_detail;
 					//console.log("comentinfoimg:"+comentinfoimg+"comentinfoname:"+comentinfoname+"comentinfotime:"+comentinfotime+"comentinfoflag:"+comentinfoflag);
 					var html = new Util.StringBuilder();
 					html.append('<div class="comtent mui-pull-left"><div class="mui-pull-left ka_userbox">')
