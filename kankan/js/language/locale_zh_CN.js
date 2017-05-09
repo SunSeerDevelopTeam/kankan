@@ -87,6 +87,21 @@ var JSLocale = {
 	"commodity_want":"求购商品发布",
 	"commodity_want_butonsure":"发	布",
 	"commodity_want_forbidentext":"请注意!发布的求购信息是一个月内有效（违法或有违社会常识的求购信息禁止发布）,感谢您的理解和合作。",
+	//user page
+	"ticknumber":"Ticket数目",
+	"userinforbutntext":"用户信息编辑",
+	"userpointtext":"Point",
+	"onshowingtext":"出品中商品",
+	"praiseprotext":"点赞商品",
+	"favoriteprotext":"人气商品",
+	"uinfousername":"用户名",
+	"introducetext":"介绍文",
+	"userlanguage":"语言",
+	"jpanese_user":"日本语",
+	"chinese_user":"汉语",
+	"english_user":"英语",
+	"korean_user":"韩语",
+	"infoeditetitle":"信息编辑",
 }
 
 $(function() {

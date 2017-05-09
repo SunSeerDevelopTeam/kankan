@@ -442,7 +442,8 @@ function publishs() {
 		ok: function(data) {
 			Log.d("success");
 			alert(TextMessage.pro_logininfo);
-			location.reload();
+			//location.reload();
+			mui.back();
 		},
 		ng: function(data) {
 			Log.d(data);

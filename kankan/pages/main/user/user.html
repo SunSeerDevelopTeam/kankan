@@ -20,10 +20,11 @@
 		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
 		<link rel="stylesheet" href="../../../css/wu.css">
+		<link href="../../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />
 	</head>
 
 	<body class="mui-fullscreen">
-		<!--页面主结构开始-->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar">
@@ -32,46 +33,47 @@
 				</div>
 			</div>
 		</div>
-		<!--页面主结构结束-->
-		<!--单页面开始-->
-		<div id="setting" class="mui-page">
-			<!--页面标题栏开始-->
+		<div id="userinfoshow" class="mui-page">
+			<!--title start-->
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る</font></span>
+					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
 				</button>
-				<h1 class="mui-center mui-title user-title-center"></h1>
+				<h1 class="mui-center mui-title user-title-center maintitle"></h1>
 				<a href="../../setting/setting.html">
 					<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
 						<span class="mui-icon mui-icon-gear"></span>
 					</button>
 				</a>
 			</div>
-			<!--页面标题栏结束-->
-			<!--页面主内容区开始-->
+			<!--title end-->
+			<!--main content start-->
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="tran-page">
 						<ul class="mui-table-view">
 							<li class="head-img-box">
-								<div><img src="../../../images/userPhoto.png" width="150" height="150" class="headimg"></div>
+								<div>
+									<img src="../../../images/userPhoto.png" width="150" height="150" class="headimg">
+									<input type="hidden" name="headimgupdate" id="headimgupdate" value=""/>
+								</div>
 								<div class="mui-pull-caption">
 									<a href="#uinfoedite">
-										<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton">プロフィール編集</button>
+										<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton lang" data-locale="userinforbutntext"></button>
 									</a>
 								</div>
 								<br>
 								<div>
 									<ul class="user-num">
 										<li class="user-num-comment">
-											<font size="2"><span>評価：</span><span class="commentnum"></span></font>
+											<font size="2"><span class="lang" data-locale="det_pcercomment"></span><span class="commentnum"></span></font>
 											
 										</li>
 										<li class="user-num-sell">
-											<font size="2"><span>出品数：</span><span class="sellnum"></span></font>	
+											<font size="2"><span class="lang" data-locale="det_producednum"></span><span class="sellnum"></span></font>	
 										</li>
 										<li class="user-num-sell2">
-											<font size="2"><span>チケット数：</span><span class="ticknum"></span></font>											
+											<font size="2"><span class="lang" data-locale="ticknumber"></span><span class="ticknum"></span></font>											
 										</li>
 									</ul>
 								</div>
@@ -97,18 +99,18 @@
 								<ul class="user-comment-list">
 									<li class="user-point-grid">
 										<a href="#">
-											<font color="#AAAAAA" size="2">
-												<span class="mui-icon-extra mui-icon-extra-share"></span>　ポイント
+											<font color="#AAAAAA" size="1">
+												<span class="mui-icon-extra mui-icon-extra-share lang" data-locale="userpointtext" style="font-size: 16px;"></span>　
 											</font>
 										</a>
 									</li>
 									<li class="user-point-grid2">
 											<font size="2" class="point"></font>
 									</li>
-									<li class="user-point-grid">
-										<a href="#area">
+									<li class="user-point-grid" id="area">
+										<a href="#">
 											<font color="#AAAAAA" size="2">
-												<span class="mui-icon mui-icon-paperplane"><font size="3" class="address"></font></span>
+												<span class="mui-icon mui-icon-paperplane"><font size="3" class="address" id="city"></font></span>
 											</font>
 										</a>
 									</li>
@@ -118,17 +120,17 @@
 						<ul class="user-goods-list">
 							<li class="user-goods-title-grid">
 								<div id="products" class="user-product-tab1" onclick="switchs(this)">
-									<font size="2" color="#FFFFFF">出品中アイテム</font>
+									<font size="2" color="#FFFFFF" class="lang" data-locale="onshowingtext"></font>
 								</div>
 							</li>
 							<li class="user-goods-title-grid">
 								<div id="favourate" class="user-product-tab22" onclick="switchs(this)">
-									<font size="2" color="#FFFFFF">いいねした<br>アイテム</font>
+									<font size="2" color="#FFFFFF" class="lang" data-locale="praiseprotext"></font>
 								</div>
 							</li>
 							<li class="user-goods-title-grid">
 								<div id="friends" class="user-product-tab32" onclick="switchs(this)">
-									<font size="2" color="#FFFFFF">気になる</font>
+									<font size="2" color="#FFFFFF" class="lang" data-locale="favoriteprotext"></font>
 								</div>
 							</li>
 						</ul>
@@ -218,83 +220,50 @@
 					</div>
 				</div>
 			</div>
-			<!--页面主内容区结束-->
+			<!--main content end-->
 		</div>
-		<!--单页面结束-->
-		<div id="area" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
-				</button>
-				<h1 class="mui-center mui-title">地址设置</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a class="mui-navigate-right">
-									东京
-								</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a class="mui-navigate-right">
-									大阪
-								</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a class="mui-navigate-right">
-									北海道
-								</a>
-							</li>
-						</ul>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--单页面结束-->
+		<!--child page user information edite page-->
 		<div id="uinfoedite" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title">プロフィール編集</h1>
+				<h1 class="mui-center mui-title lang" data-locale="infoeditetitle"></h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<form method="post" name="userinfosub" id="userinfosub">
-							<div style="margin: 0.3em;">
-								<div style="width: 30%;text-align: left;margin-left: -1em;" class="head-img-box">
+							<div class="ka_editebox">
+								<div class="head-img-box ka_userimagebox">
 									<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg"  />
 								</div>
-								<div style="width: 78%;float: right;margin-top: -4.5em;">
-								<h6>用户名</h6>
-								<input type="text" name="nickname" id="nickname" value="" placeholder="mary" style="font-size: 14px;"maxlength="50" />
+								<div class="ka_usernicknamebox">
+								<h6 class="lang" data-locale="uinfousername"></h6>
+								<input type="text" name="nickname" id="nickname" value="" placeholder="mary" class="ka_userfontsize" maxlength="50" />
 								</div>
-								<h6>介绍文</h6>
-								<textarea name="introduce" id="introduce" rows="5" cols="" style="font-size: 14px;" maxlength="500"></textarea>
-								<h6>语言</h6>
-								<div style="background-color: #FFFFFF;">
+								<h6 class="lang" data-locale="introducetext"></h6>
+								<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500"></textarea>
+								<h6 class="lang" data-locale="userlanguage"></h6>
+								<div class="backgroundwhite">
 									<div class="mui-input-row mui-checkbox ">
-									    <label>日本语</label>
+									    <label class="lang" data-locale="jpanese_user"></label>
 									    <input name="userlanageval" type="checkbox" value="0">
 									</div>
 									<div class="mui-input-row mui-checkbox ">
-									    <label>汉语</label>
+									    <label class="lang" data-locale="chinese_user"></label>
 									    <input name="userlanageval" type="checkbox" value="1">
 									</div>
 									<div class="mui-input-row mui-checkbox ">
-									    <label>英语</label>
+									    <label class="lang" data-locale="english_user"></label>
 									    <input name="userlanageval" type="checkbox" value="2">
 									</div>
 									<div class="mui-input-row mui-checkbox ">
-									    <label>韩语</label>
+									    <label class="lang" data-locale="korean_user"></label>
 									    <input name="userlanageval" type="checkbox" value="3">
 									</div>
 				    	     </div>
-								<button type="button" class="mui-btn mui-btn-red" style="width: 100%;margin-top: 2em;" onclick="userinfosubmit()">更 新</button>
+								<button type="button" class="mui-btn mui-btn-red ka_usersubmitbtn lang" data-locale="commodity_buttonsure" onclick="userinfosubmit()"></button>
 						</div>
 						</form>
 						
@@ -305,8 +274,9 @@
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
-	<script src="../../../js/mui.picker.js"></script>
-	<script src="../../../js/mui.poppicker.js"></script>
+	<script src="../../../js/picker/city.data.js"></script>
+	<script src="../../../js/picker/mui.picker.js"></script>
+	<script src="../../../js/picker/mui.poppicker.js"></script>
 	<script src='../../../js/feedback.js'></script>
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
@@ -328,15 +298,12 @@
 					}
 				]
 			});
-		//初始化单页view
 		var viewApi = mui('#app').view({
-			defaultPage: '#setting'
+			defaultPage: '#userinfoshow'
 		});
-		//初始化单页的区域滚动
 		mui('.mui-scroll-wrapper').scroll();
 		var view = viewApi.view;
 		(function($) {
-			//处理view的后退与webview后退
 			var oldBack = $.back;
 			$.back = function() {
 				if(viewApi.canBack()) { 
@@ -358,17 +325,17 @@
 				//				console.log(e.detail.page.id + ' back');
 			});
 		})(mui);
-		//更换头像
+		//change head image
 		mui(".head-img-box").on("tap", ".headimg", function(e) {
 			if(mui.os.plus){
 				var a = [{
-					title: "拍照"
+					title: TextMessage.tackpicture
 				}, {
-					title: "从手机相册选择"
+					title: TextMessage.gallerychoose
 				}];
 				plus.nativeUI.actionSheet({
-					title: "修改头像",
-					cancel: "取消",
+					title: TextMessage.edite_headimage,
+					cancel: TextMessage.cancel,
 					buttons: a
 				}, function(b) {
 					switch (b.index) {
@@ -393,6 +360,7 @@
 				plus.io.resolveLocalFileSystemURL(e, function(entry) {
 					var localurl = entry.toLocalURL();
 					$(".headimg").attr("src",localurl);
+					$("#headimgupdate").val(localurl);
 					//compressImg(localurl);
 				}, function(e) {
 					console.log("Read the picture file error：" + e.message);
@@ -409,6 +377,7 @@
 				plus.io.resolveLocalFileSystemURL(a, function(entry) {
 					var localURL2 = entry.toLocalURL();
 					$(".headimg").attr("src",localURL2);
+					$("#headimgupdate").val(localURL2);
 		
 				}, function(e) {
 					console.log("Read photo file error：" + e.message);
@@ -417,15 +386,6 @@
 				filter: "image"
 			})
 		};
-
-		//Set the page
-//		document.getElementById('setting').addEventListener('tap',function(){
-//			//Open about the page
-//		  mui.openWindow({
-//		    url: '../../../../../../setting/setting.html',
-//		    id:'setting',
-//		  });
-//		});
 		//Commodity switch
 		function switchs(e) {
 			if(e.id == "products") {
@@ -482,8 +442,6 @@
 			var detailPage = null;
 			mui('.detail').on('tap', 'a', function(e) {
 				var id = this.getAttribute('id');
-				//var id="100001";
-				
 				if(!detailPage) {
 					detailPage = plus.webview.getWebviewById('detail.html');
 				}
@@ -499,7 +457,6 @@
 			var editePage = null;
 			mui('.codedite').on('tap', 'a', function(e) {
 				var eid = this.getAttribute('id');
-				//var eid="226";
 				if(!editePage) {
 					editePage = plus.webview.getWebviewById('product_login.html');
 				}
@@ -511,6 +468,7 @@
 				});
 			});
 		}
+		//show user information
 		function showuser(results){
 			$(".myfavourateshow").empty();
 			$(".myproductshow").empty();
@@ -540,13 +498,12 @@
 			$(".address").html(address);
 			$("#nickname").val(unick_name);
 			$(".point").html(user_point);
-			$(".mui-title").html(uname);
+			$(".maintitle").html(uname);
 			$("#introduce").val(uintroduce);
 			$(".ticknum").html(uticknum);
 			var language=results.data.talk_flag;
 			var userlanageval=document.getElementsByName('userlanageval');
 			for(var ukey=0;ukey<userlanageval.length;ukey++){
-				console.log(ukey);
 				var eachvalue=userlanageval[ukey].value;
 				if(language.indexOf(eachvalue) >= 0){
 					userlanageval[ukey].checked="checked";
@@ -603,6 +560,7 @@
 			clickdetail();
 			clickeditepro();
 		}
+		//submit userinformation form
 		function userinfosubmit(){
 			var nickname=document.userinfosub.nickname.value;
 			var introduce=document.userinfosub.introduce.value;
@@ -615,84 +573,89 @@
 			}
 			var talk_flagtru=talk_flag.substr(1);
 			//compress Image
-			var path=$(".headimg").attr("src");
-			var currenttime = Date.parse(new Date());
-			plus.zip.compressImage({
-					src: path,
-					dst: "_doc/" + currenttime + ".jpg",
-					quality: 20,
-					overwrite: true,
-					format: "jpg",
-					width: "auto",
-					height: "auto"
-				},
-				function(event) {
-					console.log("Compress success!");
-					var target = event.target;
-					var size = event.size; // （Byte）
-					var width = event.width; // px
-					var height = event.height; // px
-					console.log("size:"+size);
-					submitvalues(target);//upload
-				},
-				function(error) {
-					alert("Compress error!" + error.message);
-				});
-				function submitvalues(target){
-					var serverurl=Api.url.User.userinfo;
-					console.log(target);
-					//$(".headimg").attr("src",target);
-					var wt = plus.nativeUI.showWaiting();
-					var task = plus.uploader.createUpload(serverurl, {
-						method: "post"
-					}, function(t, status) {
-						if(status == 200) {
-							console.log("upload success:" + t.responseText);
-							console.log("upload success!");
-							mui.alert("更新成功！");
-							wt.close();
+			var path=$("#headimgupdate").val();
+			var serverimg=$(".headimg").attr("src");
+			if(path==""){
+				var params4={
+					"flag":"info",
+					"nick_name":nickname,
+					"talk_flag":talk_flagtru,
+					"introduce":introduce
+				};
+				Repository.User.userinfo(params4, {
+					ok: function(data) {
+						console.log("success");
+						mui.alert(TextMessage.updatesuccessinfo);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							alert(TextMessage.test);
 						} else {
-							console.log("upload error:" + status);
-							console.log("upload error:" + t.responseText);
-							wt.close();
+							alert("other error code:" + data);
 						}
+					}
+				});
+			}else{
+				var currenttime = Date.parse(new Date());
+				plus.zip.compressImage({
+						src: path,
+						dst: "_doc/" + currenttime + ".jpg",
+						quality: 20,
+						overwrite: true,
+						format: "jpg",
+						width: "auto",
+						height: "auto"
+					},
+					function(event) {
+						console.log("Compress success!");
+						var target = event.target;
+						var size = event.size; // （Byte）
+						var width = event.width; // px
+						var height = event.height; // px
+						submitvalues(target);//upload
+					},
+					function(error) {
+						alert("Compress error!" + error.message);
 					});
-					//add parameter
-					task.addData("tokencheck", Api.getToken()); //Api.getToken()
-					task.addData("signcheck", Api.createSignInfo());
-					task.addData("flag","info");
-					task.addData("nick_name",nickname);
-					task.addData("talk_flag",talk_flagtru);
-					task.addData("introduce",introduce);
-					task.addFile(target, { key: "image" });
-					task.start();
-					var parms2={
-						"flag":"address",
-					};
-					Repository.User.userinfo(parms2, {
-						ok: function(data) {
-							console.log("success");
-							console.dir(data);
-						},
-						ng: function(data) {
-							Log.d(data);
-							if(data == "1000") {
-								alert(TextMessage.test);
+					function submitvalues(target){
+						var serverurl=Api.url.User.userinfo;
+						var wt = plus.nativeUI.showWaiting();
+						var task = plus.uploader.createUpload(serverurl, {
+							method: "post"
+						}, function(t, status) {
+							if(status == 200) {
+								//console.log("upload success:" + t.responseText);
+								console.log("upload success!");
+								mui.alert(TextMessage.updatesuccessinfo);
+								wt.close();
 							} else {
-								alert("other error code:" + data);
+								console.log("upload error:" + status);
+								console.log("upload error:" + t.responseText);
+								wt.close();
 							}
-						}
-					});
+						});
+						//add parameter
+						task.addData("tokencheck", Api.getToken()); //Api.getToken()
+						task.addData("signcheck", Api.createSignInfo());
+						task.addData("flag","info");
+						task.addData("nick_name",nickname);
+						task.addData("talk_flag",talk_flagtru);
+						task.addData("introduce",introduce);
+						task.addFile(target, { key: "image" });
+						task.start();
+					}
 				}
 		}
-		//message show
-		mui.plusReady(function(){
+		mui.plusReady(function() {
+			//message show
 			var params={};
 			Repository.User.Usershow(params, {
 				ok: function(data) {
 					console.log("success");
 					console.dir(data);
 					showuser(data);
+					
 				},
 				ng: function(data) {
 					Log.d(data);
@@ -704,8 +667,74 @@
 				}
 			});
 		});
-		//user lanage
-		
+	//address picker
+	(function($, doc) {
+		$.init();
+		$.ready(function() {
+			mui.plusReady(function() {
+				//message show
+				var params={};
+				Repository.User.Usershow(params, {
+					ok: function(data) {
+						console.log("get address success");
+						var address=data.data.address;
+						addresspicker(address);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							alert(TextMessage.test);
+						} else {
+							alert("other error code:" + data);
+						}
+					}
+				});
+			});
+			function chosecictval(addresstext){
+				for(var ca=0;ca<cityData.length;ca++){
+					if(cityData[ca].text==addresstext){
+						return cityData[ca].value;
+						break;
+					}
+				}
+			}
+			
+			function addresspicker(addresstext){
+				//address picker
+				var cityPicker = new mui.PopPicker();
+				cityPicker.setData(cityData);
+				var cityvalue=chosecictval(addresstext);
+				cityPicker.pickers[0].setSelectedValue(cityvalue);
+				var showcityPickerButton = doc.getElementById('area');
+				var cityResult = doc.getElementById('city');
+				showcityPickerButton.addEventListener('tap', function(event) {
+					cityPicker.show(function(items) {
+						cityResult.innerText = items[0].text;
+						var addresscity=items[0].value;
+						var parms2={
+							"flag":"address",
+							"address_id":addresscity
+						};
+						Repository.User.userinfo(parms2, {
+							ok: function(data) {
+								console.log("success");
+								console.dir(data);
+								alert(TextMessage.updatesuccessinfo);
+							},
+							ng: function(data) {
+								Log.d(data);
+								if(data == "1000") {
+									alert(TextMessage.test);
+								} else {
+									alert("other error code:" + data);
+								}
+							}
+						});
+					});
+				}, false);
+			}
+		});
+	})(mui, document);	
 	</script>
 
 </html>

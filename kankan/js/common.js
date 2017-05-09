@@ -750,6 +750,8 @@ var TextMessage;
 	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
 	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
+	TextMessage.updatesuccessinfo = language ? "更新が成功する!" : "更新成功!";
+	TextMessage.edite_headimage = language ? "改正頭像" : "修改头像";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

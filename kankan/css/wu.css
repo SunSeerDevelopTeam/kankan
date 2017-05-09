@@ -718,6 +718,7 @@
 	height:100%; 
 	background-color:gray; 
 	text-align:center; 
+	padding-top:10%; 
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }

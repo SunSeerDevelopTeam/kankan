@@ -784,6 +784,24 @@
 .ka_aboutupro{
 	margin-bottom: 5em;
 }
+.ka_editebox{
+	margin: 0.3em;
+}
+.ka_userimagebox{
+	width: 30%;text-align: left;margin-left: -1em;
+}
+.ka_usernicknamebox{
+	width: 78%;float: right;margin-top: -4.5em;
+}
+.ka_userfontsize{
+	font-size: 14px;
+}
+.backgroundwhite{
+	background-color: #FFFFFF;
+}
+.ka_usersubmitbtn{
+	width: 100%;margin-top: 2em;
+}
 /*loading*/
 .spinner {
   margin: 100px auto 0;

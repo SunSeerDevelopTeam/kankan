@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 	</head>
+
 	<body>
 		<style>
 			.mui-control-content {
@@ -24,64 +25,71 @@
 			}
 		</style>
 
-		<!--<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">设置</h1>
-		</header>-->
+		<header class="mui-bar mui-bar-nav">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<h1 class="mui-title">请求</h1>
+			<div id="history">
+				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right"><span style="font-size: 14px;">交易履历</span></a>
+			</div>
+		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<a class="mui-control-item" href="#item1mobile">
-						Send the transaction
+						被请求商品
 					</a>
 					<a class="mui-control-item" href="#item2mobile">
-						Receive a transaction request
+						请求商品
 					</a>
-			</div>
+				</div>
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scrolls">
-			<ul class="mui-table-view mui-grid-view">
-										<li class="mui-table-view-cell mui-media mui-col-xs-6 detail" >	
-											<a  id="1" href="detail.html" onclick="detail(10)" >
-												<img class="mui-media-object ka_imgoption" src="../../../images/MacPro.jpg">
-												<div class="mui-media-body">
-													Can be with 
-												</div>
-											</a>
-											<div class="kankan_jyz">in transaction</div>
-											<!--<div class="mui-pull-left" style="margin-top: 1em;">
+								<ul class="mui-table-view mui-grid-view">
+									<li class="mui-table-view-cell mui-media mui-col-xs-6 translate">
+										<a id="1" href="#">
+											<img class="mui-media-object ka_imgoption" src="../../../images/MacPro.jpg">
+											<div class="mui-media-body">
+												Can be with
+											</div>
+										</a>
+										<div class="kankan_jyz">in transaction</div>
+										<!--<div class="mui-pull-left" style="margin-top: 1em;">
 												<img src="../../../images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
 											</div>-->
-											<div class="mui-pull-left ka_mony">
-												<div>800<font color="#000000"> P</font></div>
+										<div class="mui-pull-left ka_mony">
+											<div>800
+												<font color="#000000"> P</font>
 											</div>
-										</li>
-										<li class="mui-table-view-cell mui-media mui-col-xs-6 detail" >	
-											<a  id="2" href="detail.html" onclick="detail(10)">
-												<img class="mui-media-object ka_imgoption" src="../../../images/muwu.jpg">
-												<div class="mui-media-body">
-													Can be with Can be with 
-												</div>
-											</a>
-											<div class="kankan_jycl">established</div>
-											<div class="mui-pull-right kankan_jyimgbox">
-												<img src="../../../images/muwu.jpg" style="border-radius: 50%; width: 20px; height: 20px;">
-												<img src="../../../images/jiantou.png" class="kankan_jhjiantou">
-												<img src="../../../images/logo.png" style="border-radius: 50%; width: 20px; height: 20px;">
+										</div>
+									</li>
+									<li class="mui-table-view-cell mui-media mui-col-xs-6 detail">
+										<a id="2" href="#">
+											<img class="mui-media-object ka_imgoption" src="../../../images/muwu.jpg">
+											<div class="mui-media-body">
+												Can be with Can be with
 											</div>
-											<div class="mui-pull-left ka_mony">
-												<div>800<font color="#000000"> P</font></div>
+										</a>
+										<div class="kankan_jycl">established</div>
+										<div class="mui-pull-right kankan_jyimgbox">
+											<img src="../../../images/muwu.jpg" style="border-radius: 50%; width: 20px; height: 20px;">
+											<img src="../../../images/jiantou.png" class="kankan_jhjiantou">
+											<img src="../../../images/logo.png" style="border-radius: 50%; width: 20px; height: 20px;">
+										</div>
+										<div class="mui-pull-left ka_mony">
+											<div>800
+												<font color="#000000"> P</font>
 											</div>
-											<div class="mui-pull-right ka_heartlocation">
-												<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"  onclick="good(this)"></span>
-												<div class="ka_heartnum" id="91num">2</div>
-											</div>
-										</li>
-									</ul>
-								</div>
+										</div>
+										<div class="mui-pull-right ka_heartlocation">
+											<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey" onclick="good(this)"></span>
+											<div class="ka_heartnum" id="91num">2</div>
+										</div>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					<div id="item2mobile" class="mui-slider-item mui-control-content">
@@ -98,11 +106,20 @@
 			</div>
 
 		</div>
-	<script src="../../../js/mui.min.js"></script>
-	<script>
-		mui.init({
-				swipeBack: false
-		});
+		<script src="../../../js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: false,
+				preloadPages: [{
+						id: 'requestlist.html',
+						url: 'requestlist.html'
+					},
+					{
+						id:"translatelist",
+						url:"translatelist.html"
+					}
+				]
+			});
 			/////////////////////////Swipe left and right////////////////////////////////
 			(function($) {
 				$('.mui-scroll-wrapper').scroll({
@@ -150,16 +167,38 @@
 							}, 500);
 						}
 					}
-		});
-				//var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
-				//				$('.mui-input-group').on('change', 'input', function() {
-				//					if (this.checked) {
-				//						sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
-				//						//force repaint
-				//						sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
-				//					}
-				//				});
+				});
+				var requestlistPage = null;
+				mui('#history').on('tap','a',function(e) {
+					//var rid = this.getAttribute('id');
+					var rid="10";
+					if(!requestlistPage) {
+						requestlistPage = plus.webview.getWebviewById('requestlist.html');
+					}
+					mui.fire(requestlistPage, 'rid', {
+						id: rid
+					});
+					mui.openWindow({
+						id: 'requestlist.html'
+					});
+				});
+				var translatepage=null;
+				mui('.translate').on('tap','a',function(e) {
+					var tid = this.getAttribute('id');
+					//var rid="10";
+					if(!translatepage) {
+						translatepage = plus.webview.getWebviewById('translatelist');
+					}
+					mui.fire(translatepage, 'traid', {
+						id: tid
+					});
+					mui.openWindow({
+						id: 'translatelist'
+					});
+				});
 			})(mui);
-	</script>
+			
+		</script>
 	</body>
+
 </html>

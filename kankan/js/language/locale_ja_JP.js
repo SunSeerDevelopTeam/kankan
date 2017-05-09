@@ -87,6 +87,21 @@ var JSLocale = {
 	"commodity_want":"物探す登録",
 	"commodity_want_butonsure":"投稿する",
 	"commodity_want_forbidentext":"法律に禁止されているもの或は非常識ものを登録しないで下さい、投稿した情報の有効期限は一ヶ月内になりますので、ご了承ください。",
+	//user page
+	"ticknumber":"チケット数",
+	"userinforbutntext":"プロフィール編集",
+	"userpointtext":"ポイント",
+	"onshowingtext":"出品中アイテム",
+	"praiseprotext":"いいねしたアイテム",
+	"favoriteprotext":"気になる",
+	"uinfousername":"ユーザ名",
+	"introducetext":"紹介文",
+	"userlanguage":"言語",
+	"jpanese_user":"日本語",
+	"chinese_user":"漢語",
+	"english_user":"英語",
+	"korean_user":"韓国語",
+	"infoeditetitle":"プロフィール編集",
 }
 
 $(function() {
