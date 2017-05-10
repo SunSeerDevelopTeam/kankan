@@ -254,7 +254,13 @@
 	}
 //picker
 (function($, doc) {
-	$.init();
+	$.init({
+	    beforeback: function() {
+	        var list = plus.webview.currentWebview().opener();
+	        mui.fire(list, 'refreshlist');
+	        return true;
+	    }
+	});
 	$.ready(function() {
 		mui.plusReady(function() {
 			var param2 = {
@@ -442,8 +448,11 @@ function publishs() {
 		ok: function(data) {
 			Log.d("success");
 			alert(TextMessage.pro_logininfo);
-			//location.reload();
-			mui.back();
+			if(commodity_id==""){
+				location.reload();
+			}else{
+				mui.back();
+			}
 		},
 		ng: function(data) {
 			Log.d(data);

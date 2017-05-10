@@ -1,5 +1,7 @@
 /*****<!-----home-----*/
-
+body .mui-table-view-cell.mui-active{
+	background-color: #ffffff;
+}
 .kankan_area {
 	background-color: #777777;
 	margin-top: -8em;
@@ -61,7 +63,9 @@
 .ka_imgoption {
 	max-height: 100px;
 }
-
+.ka_exchangeheadimage{
+	border-radius: 50%; width: 20px; height: 20px;
+}
 
 /*loading*/
 

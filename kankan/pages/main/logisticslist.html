@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>logisticslist</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css">
+		<link href="../../css/wu.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!--send message to delivery-->
+		<div id="dialog" class="call-dialog-div">
+			<div id="deliveryMsgDiv" class="call-dialog-msg-div">						
+			</div>
+			<div>
+				<ul class="call-dialog">
+					<li class="call-dialog-cancel">
+						<a onclick="goback();">
+						<font color="white">キャンセル</font>
+						</a>
+					</li>
+					<li class="call-dialog-ok">
+						<a onclick="goSend();">
+							<font color="white">送る</font>	
+						</a>
+					</li>
+				</ul>
+				<input id="deliveryMsg" type="hidden"  value="" />
+				<input id="deliveryTel" type="hidden"  value="" />
+			</div>
+		</div>
+		<!--show message when click 送る button-->
+		<div id="dialogOK" class="call-dialog-div">
+		</div>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon-back  mui-icon mui-icon-left-nav mui-pull-left"><font size="4">戻る<font size="4"></a>
+			<h1 class="mui-title">物流</h1>
+		</header>
+		<div class="mui-content" style="margin-top: 2.1em;">
+			<div class="tran-page">
+				<div class="tran-body">
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/mui.view.js "></script>
+	<script src='../../js/feedback.js'></script>
+	<script type="text/javascript" src="../../js/sha256.js"></script>
+	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="../../js/language.js"></script>
+	<script type="text/javascript" src="../../js/knockout-3.4.2.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		var timer;
+		mui.init();		
+		function showDialog(msg, tel,l_com_id) {
+			var dialog = document.getElementById('dialog');
+			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
+			var content = "";
+			
+			
+			document.getElementById('deliveryMsg').value = msg;
+			document.getElementById('deliveryTel').value = tel;
+			// create content into innerHTML
+			content += "<font color=\"white\">";
+			content += msg;
+			content += "<br>";
+			content += tel;
+			content += "にメールを送りますか？</font>";
+			content += "<input type='hidden' id='l_com_idval' value='"+l_com_id+"' />";
+			deliveryMsgDialog.innerHTML = content;
+			dialog.style.display = "block";
+			// display div slowly
+			var x=0;
+			timer=setInterval(function()
+			{
+			    x+=0.05;
+			    dialog.style.opacity=x;
+			},10);
+		}
+		
+		function showCallDialog(msg, tel) {
+			var dialog = document.getElementById('dialog');
+			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
+			var content = "";
+			document.getElementById('deliveryMsg').value = "";
+			document.getElementById('deliveryTel').value = tel;
+			// create content into innerHTML
+			content += "<font color=\"white\">";
+			content += msg;
+			content += "<br>";
+			content += tel;
+			content += "に電話を送りますか？</font>";
+			deliveryMsgDialog.innerHTML = content;
+			dialog.style.display = "block";
+			// display div slowly
+			var x=0;
+			timer=setInterval(function()
+			{
+			    x+=0.05;
+			    dialog.style.opacity=x;
+			},10);
+		}
+		
+		// close div and stop the timer
+		function goback() {
+			var dialog = document.getElementById('dialog');
+			clearInterval(timer);
+			dialog.style.opacity=0;
+			dialog.style.display="none";
+		}
+		function goSend() {
+			var dialog = document.getElementById('dialog');
+			var dialogOK = document.getElementById('dialogOK');
+			var msg = document.getElementById('deliveryMsg').value;
+			var tel = document.getElementById('deliveryTel').value;
+			var loid=document.getElementById('l_com_idval').value;;
+			clearInterval(timer);
+			dialog.style.opacity=0;
+			dialog.style.display = "none";
+			// send mail OK
+			if (msg !== "" && tel != "") {
+				if(loid!=null){
+					var params = {
+						"l_com_id":loid
+					};
+					Repository.Commodity.logisticssendmail(params, {
+						ok: function(data) {
+							Log.d("success");
+							console.log("send mail success!");
+						},
+						ng: function(data) {
+							Log.d(data);
+							if(data == "1000") {
+								alert(TextMessage.test);
+								mui.openWindow({
+									id: 'login',
+									url:'../main/login.html'
+								});
+							}
+						}
+					});
+				}
+				
+				// show dialog OK
+				dialogOK.style.display = "block";
+				var content = "";
+				content += "<div class=\"call-dialog-msg-div\">";
+				content += "<font size=\"2\" color=\"white\">";
+				content += "ご利用ありがとうございます。<br>";
+				content += msg + "<br>";
+				content += tel + "ににメールを送りました。<br>";
+				content += "返信お待ちください<br><br></font>";
+				content += "<a onclick=\"gook();\">";
+				content += "<font color=\"white\">OK</font>";
+				content += "</a>";
+				content += "</div>";
+				dialogOK.innerHTML = content;
+				// display div slowly
+				var x=0;
+				timer=setInterval(function()
+				{
+				    x+=0.05;
+				    dialogOK.style.opacity=x;
+				},10);
+			} else {
+				// phone call OK
+				window.location.href = "tel://" + tel;
+			}
+		}
+		// send mail successed and close div
+		function gook(msg, tel) {
+			var dialogOK = document.getElementById('dialogOK');
+			clearInterval(timer);
+			dialogOK.style.opacity=0;
+			dialogOK.style.display="none";
+		}
+		function showlogisticslist(results){
+			var datearr=results.data;
+			for(var da=0;da<datearr.length;da++){
+				var l_com_id=datearr[da].l_com_id;
+				var l_com_name=datearr[da].l_com_name;
+				var l_com_phone=datearr[da].l_com_phone;
+				var l_com_pro=datearr[da].l_com_pro;
+				var l_com_email=datearr[da].l_com_email;
+				var l_com_url=datearr[da].l_com_url;
+				//console.log("l_com_id:"+l_com_id+"l_com_name"+l_com_name);
+				var html = new Util.StringBuilder();
+					html.append('<ul class="delivery-info"><li class="delivery-icon">')
+						.appendFormat('<a href="#" onclick="location.href='+"'{0}'"+'"><img height="100%" width="100%" src="../../images/car.png"/></a>', l_com_url)
+						.appendFormat('</li><li class="delivery-detail"><font color="#000000" size="2">{0}<br>{1}<br>{2}</font></li></ul>', l_com_name,l_com_pro,l_com_phone)
+						.append('<ul class="delivery-list"><li class="delivery-grid">')
+						.appendFormat('<div class="delivery-detail-call" onclick="showDialog('+"'{0}'"+",'{1}'"+",'{2}'"+');">', l_com_name,l_com_phone,l_com_id)
+						.append('<font size="2" color="#FFFFFF" vertical-align="middle">メール送信</font></div></li>')
+						.appendFormat('<li class="delivery-grid2"><div class="delivery-detail-call2" onclick="showCallDialog('+"'{0}'"+",'{1}'"+',null);"><font size="2" color="#FFFFFF" vertical-align="middle">電話</font></div></li>', l_com_name,l_com_phone)
+						.append('<li class="delivery-grid3"><div class="delivery-detail-call3"><font size="2" color="#FFFFFF" vertical-align="middle">ホームページへ</font></div></li></ul>');
+				$(".tran-body").append(html.toString());
+			}
+		}
+		mui.plusReady(function() {
+			var params = {};
+			Repository.Commodity.logisticslist(params, {
+				ok: function(data) {
+					Log.d("success");
+					showlogisticslist(data);
+				},
+				ng: function(data) {
+					Log.d(data);
+					if(data == "1000") {
+						alert(TextMessage.test);
+						mui.openWindow({
+							id: 'login',
+							url:'../main/login.html'
+						});
+					}
+				}
+			});
+		});
+	</script>
+
+</html>

@@ -256,6 +256,7 @@
 				msg.content = TextMessage.sharecontent;
 				msg.thumbs = ["../../../images/muwu.jpg"];
 				share.send(msg, function() {
+					alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 				}, function(e) {
 					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
@@ -300,7 +301,7 @@
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
 				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
-				//lunbo
+				//Carousel figure
 				var slider = mui("#slider");
 				slider.slider({
 					interval: 1000
@@ -310,10 +311,14 @@
 				var htmlfocus="";
 				for(i = 0; i < imgsarr.length; i++) {
 					var la = imgsarr.length - 1 * 1;
+					var imgurl=imgsarr[i];
+					if(imgsarr[i]==""){
+						imgurl="../../../images/nopic.jpg";
+					}
 					$(".firstimage img").attr("src", imgsarr[0]);
 					$(".lastimage img").attr("src", imgsarr[la]);
 					htmlimg += '<div class="mui-slider-item sliderimg">';
-					htmlimg += '<img src="' + imgsarr[i] + '" style="max-height: 239px;">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: 239px;">';
 					htmlimg += '</div>';
 					if(i==0){
 						var htmlfocus='<div class="mui-indicator mui-active"></div>';

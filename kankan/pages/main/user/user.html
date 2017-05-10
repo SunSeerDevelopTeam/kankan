@@ -284,20 +284,24 @@
 	<script src="../../../js/common.js"></script>
 	<script>
 		mui.init({
-				swipeBack: false,
-				preloadPages: [{
-						id: 'commentlist.html',
-						url: '../products/commentlist.html'
-					},
-					{
-						id: 'detail.html',
-						url: '../products/detail.html'
-					},{
-						id: 'product_login.html',
-						url: '../products/product_login.html'
-					}
-				]
-			});
+			swipeBack: false,
+			preloadPages: [{
+					id: 'commentlist.html',
+					url: '../products/commentlist.html'
+				},
+				{
+					id: 'detail.html',
+					url: '../products/detail.html'
+				},{
+					id: 'product_login.html',
+					url: '../products/product_login.html'
+				}
+			]
+		});
+		//back refresh
+		window.addEventListener('refreshlist', function(e){//执行刷新
+		    location.reload();
+		});
 		var viewApi = mui('#app').view({
 			defaultPage: '#userinfoshow'
 		});
@@ -592,7 +596,7 @@
 						if(data == "1000") {
 							alert(TextMessage.test);
 						} else {
-							alert("other error code:" + data);
+							console.log("other error code:" + data);
 						}
 					}
 				});

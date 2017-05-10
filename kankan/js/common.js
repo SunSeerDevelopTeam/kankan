@@ -476,7 +476,9 @@ var Api;
 			comments: baseUrl + '/commodity/comment/',
 			imgupload: baseUrl + '/commodity/release/upload/',
 			Commoditypublish:baseUrl + '/commodity/release/',
-			Commodityedite:baseUrl + '/commodity/release/update/'
+			Commodityedite:baseUrl + '/commodity/release/update/',
+			logisticslist:baseUrl + '/logistics/',
+			logisticssendmail:baseUrl + '/logistics/index/sendMailtoLCO/'
 		}
 	};
 	Api.Params = {
@@ -655,6 +657,17 @@ var Repository;
 			return Api.call(Api.url.Commodity.Commodityedite, params, callback);
 		}
 		Commodity.Commodityedite = Commodityedite;
+		
+		function logisticslist(params, callback) {
+			return Api.call(Api.url.Commodity.logisticslist, params, callback);
+		}
+		Commodity.logisticslist = logisticslist;
+		
+		function logisticssendmail(params, callback) {
+			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
+		}
+		Commodity.logisticssendmail = logisticssendmail;
+		
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
