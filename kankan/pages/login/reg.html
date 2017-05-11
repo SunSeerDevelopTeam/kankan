@@ -256,6 +256,7 @@
 								Log.i("register ok");
 								waiting.close();
 								plus.storage.setItem('LoginFlag', 'isLogin');
+								loginFlg = true;
 								mui.back();
 							},
 							ng: function(data) {

@@ -497,7 +497,6 @@
 		<script type="text/javascript" src="../../js/knockout-3.4.2.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
-			alert("begin script");
 			var isShowMenu = false;
 			var keyword = "";
 			var page = 0;
@@ -597,11 +596,11 @@
 
 					$('.ka_heartlocation').unbind('click').click(function() {
 						Log.i("this disabled value is " + $(this).find('span').attr("disabled"));
-						if(!$(this).find('span').attr("disabled")) {
+						if(!$(this).find('span').attr("disabled") || loginFlg) {
 							var commid = $(this).siblings("a").attr('id');
 							setTimeout(function() {
 								var isLogin = plus.storage.getItem("LoginFlag");
-								if(isLogin == "isLogin") {
+								if(isLogin == "isLogin" || loginFlg) {
 									var params = {
 										commid: commid
 									};
@@ -729,7 +728,6 @@
 						page: page,
 						//catalog: catalog
 					};
-					alert("1");
 					createFragment(params, 0, null, false);
 				});
 			});
@@ -751,11 +749,7 @@
 					});
 					(function() {
 						var params = {
-<<<<<<< HEAD
 							flg:""
-=======
-							flg: ""
->>>>>>> lx/13551
 						};
 						Repository.Commodity.category(params, {
 							ok: function(result) {
@@ -788,11 +782,6 @@
 								page: page,
 								//catalog: catalog
 							};
-<<<<<<< HEAD
-							console.log("aaaaaa");
-=======
-							alert("2");
->>>>>>> lx/13551
 							createFragment(params, 0, null, true);
 							console.log("bbbb");
 							mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
@@ -803,7 +792,6 @@
 										callback: function() {
 											var self = this;
 											params[Api.Params.page] = page++;
-											alert("3");
 											createFragment(params, 0, self, true);
 										}
 									},
@@ -811,7 +799,6 @@
 										callback: function() {
 											var self = this;
 											params[Api.Params.page] = page--;
-											alert("4");
 											createFragment(params, 0, self, false);
 										}
 									}

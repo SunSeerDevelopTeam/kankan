@@ -164,6 +164,7 @@
 										ok: function(data) {
 											app.createState(name, function() {
 												plus.storage.setItem('LoginFlag', 'isLogin');
+												loginFlg = true;
 												setTimeout(function() {
 													waiting.close();
 													plus.webview.currentWebview().close();
@@ -204,6 +205,7 @@
 								// TODO OK logic
 								Log.d("email login ok");
 								plus.storage.setItem('LoginFlag', 'isLogin');
+								loginFlg = true;
 								setTimeout(function() {
 									waiting.close();
 									plus.webview.currentWebview().close();
