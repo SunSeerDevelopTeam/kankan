@@ -114,7 +114,8 @@
 						console.log(TextMessage.not_network);
 						mui.toast(TextMessage.not_network);
 					}
-					if(isLogin == "isLogin") {
+					
+					if(isLogin == "isLogin" || loginFlg) {
 						mui.openWindow({
 							id:"user",
 							url:"user/user.html",

@@ -1,4 +1,5 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
+var loginFlg = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -455,7 +456,10 @@ var Util;
 })(Util || (Util = {}));
 var Api;
 (function(Api) {
-	var baseUrl = 'http://192.168.1.8:7998';
+	// develop
+	// var baseUrl = 'http://192.168.1.8:7998';
+	// 本番
+	var baseUrl = 'http://210.189.72.25:7998';
 	Api.url = {
 		User: {
 			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
