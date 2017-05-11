@@ -508,6 +508,7 @@
 				var commodityArray = [];
 				Repository.Commodity.commodityList(params, {
 					ok: function(result) {
+						console.dir(result);
 						list = result.page.list;
 						max = result.page.max;
 						page = parseInt(result.page.page);
@@ -552,7 +553,7 @@
 						li.innerHTML = html.toString();
 						fragment.appendChild(li);
 					}
-					if(isDown) {
+					if(isDown && ul) {
 						ul.insertBefore(fragment, ul.firstChild);
 						if(self != null) {
 							self.endPullDownToRefresh();
@@ -732,9 +733,13 @@
 						url: '../main/products/detail.html'
 					});
 					(function() {
-						var params = {};
+						var params = {
+							flg:""
+						};
 						Repository.Commodity.category(params, {
 							ok: function(result) {
+								console.log("main page debug -----");
+								console.dir(result);
 								for(var i = 0; i < result.data.length; i++) {
 									if(i == 0) {
 										catalog = result.data[i].catalog_id;
@@ -754,13 +759,15 @@
 								}
 								Log.i("create catalog finish...");
 							},
-							ng: function(data) {}
+							ng: function(data) {console.log("aaaaa")}
 						}).then(function() {
 							var params = {
 								page: page,
 								//catalog: catalog
 							};
+							console.log("aaaaaa");
 							createFragment(params, 0, null, true);
+							console.log("bbbb");
 							mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
 								Log.d(document.querySelectorAll('.mui-slider-group .mui-scroll'));
 								Log.d("index is " + index);
