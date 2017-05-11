@@ -497,6 +497,7 @@
 		<script type="text/javascript" src="../../js/knockout-3.4.2.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
+			alert("begin script");
 			var isShowMenu = false;
 			var keyword = "";
 			var page = 0;
@@ -504,7 +505,6 @@
 			//ul, index, count, reverse
 			var createFragment = function(params, index, self, isDown) {
 				// get commodity list data
-				Log.d("createFragment...");
 				var commodityArray = [];
 				Repository.Commodity.commodityList(params, {
 					ok: function(result) {
@@ -518,7 +518,14 @@
 							commodityArray.push(commodity);
 						}
 					},
-					ng: function(data) {},
+					ng: function(data) {
+						if(data == "0100") {
+							mui.toast(TextMessage.not_network, {
+								duration: 'long',
+								type: 'div'
+							})
+						}
+					},
 					error: function() {
 						if(self != null) {
 							self.endPullDownToRefresh();
@@ -594,21 +601,21 @@
 							var commid = $(this).siblings("a").attr('id');
 							setTimeout(function() {
 								var isLogin = plus.storage.getItem("LoginFlag");
-								if(false) {
-									toggleMenu();
-								} else {
+								if(isLogin == "isLogin") {
 									var params = {
 										commid: commid
 									};
 									Repository.Commodity.praise(params, {
-										ok:function(result){},
-										ng:function(result){
-											if (result === "2004") {
+										ok: function(result) {},
+										ng: function(result) {
+											if(result === "2004") {
 												plus.nativeUI.alert(TextMessage.operation_error);
 											}
 										},
-										error:function(){}
+										error: function() {}
 									});
+								} else {
+									toggleMenu();
 								}
 							}, 300);
 						} else {
@@ -700,6 +707,15 @@
 				});
 
 				window.addEventListener('refresh', function(event) {
+					var page = event.detail.page;
+					if(typeof(page) != "undefined" && page == "login") {
+						$('.mui-slider-group .mui-scroll .mui-table-view li').each(function() {
+							$(this).remove();
+						});
+						var params = {};
+						createFragment(params, 0, null, false);
+						return;
+					}
 					Log.i("refresh..., params is " + event.detail.keyword);
 					keyword = event.detail.keyword;
 					if(typeof(keyword) == "undefined" || keyword == "") {
@@ -713,6 +729,7 @@
 						page: page,
 						//catalog: catalog
 					};
+					alert("1");
 					createFragment(params, 0, null, false);
 				});
 			});
@@ -734,7 +751,11 @@
 					});
 					(function() {
 						var params = {
+<<<<<<< HEAD
 							flg:""
+=======
+							flg: ""
+>>>>>>> lx/13551
 						};
 						Repository.Commodity.category(params, {
 							ok: function(result) {
@@ -749,7 +770,9 @@
 										.append(result.data[i].catalog_detail)
 										.append('</a>');
 									$('#sliderSegmentedControl .mui-scroll').append(html.toString());
+
 									html.clear();
+
 									html.appendFormat('<div id="{0}" class="{1}">', "item" + (i + 1) + "mobile", i == 0 ? "mui-slider-item mui-control-content mui-active" : "mui-slider-item mui-control-content")
 										.append('<div class="mui-scroll-wrapper">')
 										.append('<div class="mui-scroll">')
@@ -765,7 +788,11 @@
 								page: page,
 								//catalog: catalog
 							};
+<<<<<<< HEAD
 							console.log("aaaaaa");
+=======
+							alert("2");
+>>>>>>> lx/13551
 							createFragment(params, 0, null, true);
 							console.log("bbbb");
 							mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
@@ -776,6 +803,7 @@
 										callback: function() {
 											var self = this;
 											params[Api.Params.page] = page++;
+											alert("3");
 											createFragment(params, 0, self, true);
 										}
 									},
@@ -783,6 +811,7 @@
 										callback: function() {
 											var self = this;
 											params[Api.Params.page] = page--;
+											alert("4");
 											createFragment(params, 0, self, false);
 										}
 									}

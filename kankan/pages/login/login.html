@@ -104,13 +104,20 @@
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
 		<script type="text/javascript" src="../../js/md5.js"></script>
-		<script type="text/javascript" src="../../js/sha1.js" ></script>
-		<script type="text/javascript" src="../../js/sha256.js" ></script>
+		<script type="text/javascript" src="../../js/sha1.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script>
 			(function($, doc) {
 				$.init({
-					statusBarBackground: '#FFFFFF'
+					statusBarBackground: '#FFFFFF',
+					beforeback: function() {
+						var list = plus.webview.getWebviewById('pullrefresh_with_tab');
+						mui.fire(list, 'refresh', {
+							page: "login"
+						});
+						return true;
+					}
 				});
 				$.plusReady(function() {
 					var webviewArray = plus.webview.all();
@@ -157,20 +164,10 @@
 										ok: function(data) {
 											app.createState(name, function() {
 												plus.storage.setItem('LoginFlag', 'isLogin');
-												waiting.close();
-												var mainWebView = plus.webview.getWebviewById('main');
-												if(mainWebView != null) {
-													mainWebView.show();
-												} else {
-													var launchView = plus.webview.getLaunchWebview();
-													launchView.reload(true);
-													/**
-													mui.openWindow({
-														id: "home.html",
-														url: "../main/home.html"
-													});
-													**/
-												}
+												setTimeout(function() {
+													waiting.close();
+													plus.webview.currentWebview().close();
+												}, 500);
 											});
 										},
 										ng: function(data) {
@@ -206,17 +203,11 @@
 							ok: function(data) {
 								// TODO OK logic
 								Log.d("email login ok");
-								waiting.close();
 								plus.storage.setItem('LoginFlag', 'isLogin');
-								var mainWebView = plus.webview.getWebviewById('main');
-								if(mainWebView != null) {
-									mainWebView.show();
-								} else {
-									mui.openWindow({
-										id: "main",
-										url: "../main/main.html"
-									});
-								}
+								setTimeout(function() {
+									waiting.close();
+									plus.webview.currentWebview().close();
+								}, 500);
 							},
 							ng: function(data) {
 								// TODO NG logic
@@ -234,17 +225,17 @@
 							}
 						});
 					});
-					
+
 					var forgetPwdBtn = doc.getElementById('forget_password');
-					forgetPwdBtn.addEventListener('tap', function(event){
+					forgetPwdBtn.addEventListener('tap', function(event) {
 						$.openWindow({
-							id:'forget_password',
-							url:'forget_password.html',
+							id: 'forget_password',
+							url: 'forget_password.html',
 							extras: {
-								email:doc.getElementById('email').value.trim()
+								email: doc.getElementById('email').value.trim()
 							},
 							waiting: {
-								autoShow:false
+								autoShow: false
 							}
 						});
 					});

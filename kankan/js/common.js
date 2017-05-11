@@ -560,8 +560,7 @@ var Api;
 	 * save token info
 	 */
 	function setToken(token) {
-		Log.d("setToken function is " + token);
-		Log.d("plus is " + plus);
+		Log.d("[setToken function] token is " + token);
 		if(typeof(token) != "undefined" && token != null && token != "" && plus != null) {
 			plus.storage.setItem('token', token);
 			Log.d("save token to storage.");
