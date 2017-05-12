@@ -102,6 +102,9 @@ var JSLocale = {
 	"english_user":"英語",
 	"korean_user":"韓国語",
 	"infoeditetitle":"プロフィール編集",
+	//logisticslist page
+	"sendmes":"は",
+	"logistic":"物流",
 }
 
 $(function() {

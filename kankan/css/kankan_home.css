@@ -14,17 +14,26 @@ body .mui-table-view-cell.mui-active{
 
 .kankan_jyz {
 	background-color: #F0AD4E;
-	margin-top: -8em;
+	margin-top: -9em;
 	position: absolute;
 	opacity: 0.6;
 	padding: 0 0.5em;
 	color: #FFFFFF;
 	font-size: 12px;
 }
-
+.kankan_morecoin {
+	margin-top: -10.5em;
+	position: absolute;
+	opacity: 1;
+	padding: 0 1.2em;
+	color: #FFFFFF;
+	font-size: 12px;
+	width:100%;
+	text-align: right;
+}
 .kankan_jycl {
 	background-color: #C7254E;
-	margin-top: -8em;
+	margin-top: -9em;
 	position: absolute;
 	opacity: 0.6;
 	padding: 0 0.5em;

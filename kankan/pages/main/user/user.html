@@ -620,7 +620,7 @@
 						submitvalues(target);//upload
 					},
 					function(error) {
-						alert("Compress error!" + error.message);
+						console.log("Compress error!" + error.message);
 					});
 					function submitvalues(target){
 						var serverurl=Api.url.User.userinfo;
@@ -666,7 +666,7 @@
 					if(data == "1000") {
 						alert(TextMessage.test);
 					} else {
-						alert("other error code:" + data);
+						console.log("other error code:" + data);
 					}
 				}
 			});
@@ -689,7 +689,7 @@
 						if(data == "1000") {
 							alert(TextMessage.test);
 						} else {
-							alert("other error code:" + data);
+							console.log("other error code:" + data);
 						}
 					}
 				});
@@ -730,7 +730,7 @@
 								if(data == "1000") {
 									alert(TextMessage.test);
 								} else {
-									alert("other error code:" + data);
+									console.log("other error code:" + data);
 								}
 							}
 						});

@@ -457,9 +457,9 @@ var Util;
 var Api;
 (function(Api) {
 	// develop
-	// var baseUrl = 'http://192.168.1.8:7998';
+	 var baseUrl = 'http://192.168.1.8:7998';
 	// 本番
-	var baseUrl = 'http://210.189.72.25:7998';
+	//var baseUrl = 'http://210.189.72.25:7998';
 	Api.url = {
 		User: {
 			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
@@ -467,7 +467,8 @@ var Api;
 			login: baseUrl + '/user/login/login',
 			forgetPwd: baseUrl + '/user/password',
 			Usershow: baseUrl + '/user/Usershow',
-			userinfo: baseUrl + '/user/setting/'
+			userinfo: baseUrl + '/user/setting/',
+			Usertranslist:baseUrl + '/user/Usertrans/'
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
@@ -480,7 +481,9 @@ var Api;
 			comments: baseUrl + '/commodity/comment/',
 			imgupload: baseUrl + '/commodity/release/upload/',
 			Commoditypublish:baseUrl + '/commodity/release/',
-			Commodityedite:baseUrl + '/commodity/release/update/'
+			Commodityedite:baseUrl + '/commodity/release/update/',
+			logisticslist:baseUrl + '/logistics/',
+			logisticssendmail:baseUrl + '/logistics/index/sendMailtoLCO/'
 		}
 	};
 	Api.Params = {
@@ -603,6 +606,11 @@ var Repository;
 			return Api.call(Api.url.User.userinfo, params, callback);
 		}
 		User.userinfo = userinfo;
+		
+		function Usertranslist(params, callback) {
+			return Api.call(Api.url.User.Usertranslist, params, callback);
+		}
+		User.Usertranslist = Usertranslist;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -659,6 +667,16 @@ var Repository;
 			return Api.call(Api.url.Commodity.Commodityedite, params, callback);
 		}
 		Commodity.Commodityedite = Commodityedite;
+		
+		function logisticslist(params, callback) {
+			return Api.call(Api.url.Commodity.logisticslist, params, callback);
+		}
+		Commodity.logisticslist = logisticslist;
+		
+		function logisticssendmail(params, callback) {
+			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
+		}
+		Commodity.logisticssendmail = logisticssendmail;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 })(Repository || (Repository = {}));
@@ -756,6 +774,15 @@ var TextMessage;
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 	TextMessage.updatesuccessinfo = language ? "更新が成功する!" : "更新成功!";
 	TextMessage.edite_headimage = language ? "改正頭像" : "修改头像";
+	TextMessage.sendtextrequest = language ? "にメールを送りますか" : "发送电子邮件";
+	TextMessage.telrequesttext = language ? "に電話を送りますか" : "拨打电话";
+	TextMessage.sedsuccseetext = language ? "ご利用ありがとうございます。" : "谢谢您的使用";
+	TextMessage.mailsucetext = language ? "ににメールを送りました。" : "给我发送了邮件";
+	TextMessage.requestmailtext = language ? "返信お待ちください。" : "请回复";
+	TextMessage.sendmailbutext = language ? "メール送信" : "发送邮件";
+	TextMessage.calbutext = language ? "電話" : "电话";
+	TextMessage.homebutext = language ? "ホームページへ" : "主页";
+	TextMessage.comdity_null = language ? "暫時データ" : "暂无数据";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
