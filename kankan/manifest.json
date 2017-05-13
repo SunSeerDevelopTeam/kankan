@@ -14,7 +14,9 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "pages/main/main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	/*"launch_path": "pages/transaction/transaction2.html",*//*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path":"pages/main/main.html",
+	/*"launch_path":"pages/login/reg.html",*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -173,7 +175,7 @@
 					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
 					"xxhdpi": ""
 				}
-			}
+			},"debug":true
 		}
 	},
 	"dependencies": {
@@ -292,10 +294,12 @@
 					"js/language.js",
 					"images/weixin.png",
 					"js/language/locale_zh_CN.js",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"js/sha1.js"
 				],
 				"refer": [
-					"pages/main/main.html"
+					"pages/main/main.html",
+					"pages/login/forget_password.html"
 				],
 				"priority": 0
 			},
@@ -324,7 +328,8 @@
 					"images/Good.PNG",
 					"images/userPhoto.png",
 					"js/language/locale_ja_JP.js",
-					"js/md5.js"
+					"js/md5.js",
+					"js/sha1.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -359,7 +364,8 @@
 				],
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
-					"pages/main/products/productslist.html"
+					"pages/main/products/productslist.html",
+					"pages/transaction/transaction2.html"
 				],
 				"priority": 0
 			},
@@ -404,7 +410,9 @@
 				],
 				"refer": [
 					"pages/login/login.html",
-					"pages/login/reg.html"
+					"pages/login/reg.html",
+					"pages/main/search.html",
+					"pages/main/user/user.html"
 				],
 				"priority": 0
 			},
@@ -459,7 +467,10 @@
 					"css/kankan_home.css",
 					"images/cbd.jpg"
 				],
-				"refer": [],
+				"refer": [
+					"pages/main/products/requestlist.html",
+					"pages/main/products/translatelist.html"
+				],
 				"priority": 0
 			},
 			"pages/main/pullrefresh_with_tab.html": {
@@ -476,7 +487,8 @@
 					"css/home.css",
 					"css/icons-extra.css",
 					"fonts/mui-icons-extra.ttf",
-					"js/language.js"
+					"js/language.js",
+					"js/language/locale_zh_CN.js"
 				],
 				"refer": [
 					"pages/main/products/detail.html",
@@ -491,16 +503,229 @@
 					"images/Bad.PNG",
 					"images/Normal.PNG",
 					"images/Good.PNG",
-					"images/shuijiao.jpg"
+					"images/shuijiao.jpg",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js"
+				],
+				"refer": [
+					"pages/main/products/commentlist.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/transaction.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"images/Bad.PNG",
+					"images/Normal.PNG",
+					"images/Good.PNG",
+					"images/shuijiao.jpg",
+					"css/wu.css",
+					"css/feedback.css"
 				],
 				"refer": [],
 				"priority": 0
 			},
 			"pages/main/products/pro_commentslist.html": {
 				"resources": [
+					"js/language/locale_zh_CN.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/kankan_home.css",
+					"css/icons-extra.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/transaction/point_to_ticket.html": {
+				"resources": [
+					"css/wu.css",
+					"css/feedback.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"js/feedback.js",
+					"css/icons-extra.css",
+					"js/mui.view.js",
+					"js/language/locale_zh_CN.js",
+					"js/app.js",
+					"js/jquery-3.2.0.min.js",
+					"js/mui.enterfocus.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/requestlist.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/translatelist.html": {
+				"resources": [
+					"images/15724-200.png",
+					"images/cbd.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/product_want_to_buy.html": {
+				"resources": [
+					"images/iconfont-tianjia.png",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
 					"js/language/locale_zh_CN.js"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"pages/main/search.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/icons-extra.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/transaction/point_to_ticket2.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"js/language/locale_zh_CN.js",
+					"js/mui.view.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/transaction/point_buy.html": {
+				"resources": [
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js",
+					"css/style.css",
+					"js/mui.view.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/transaction/transaction2.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"css/wu.css",
+					"css/feedback.css",
+					"images/muwu.jpg",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/sinaweibo.png",
+					"css/mui.min.css",
+					"images/xinhuan.png",
+					"images/weixin.png",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"pages/main/logisticslist.html",
+					"js/jquery-3.2.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/logisticslist.html": {
+				"resources": [
+					"js/common.js",
+					"js/jquery-3.2.0.min.js",
+					"js/sha256.js",
+					"js/language.js",
+					"js/language/locale_zh_CN.js",
+					"js/feedback.js",
+					"js/knockout-3.4.2.js",
+					"js/mui.view.js",
+					"pages/transaction/transaction2.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/commentlist.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"images/Bad.PNG",
+					"images/Normal.PNG",
+					"images/Good.PNG",
+					"css/icons-extra.css",
+					"js/language/locale_zh_CN.js",
+					"css/kankan_home.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/user/user.html": {
+				"resources": [
+					"js/picker/mui.poppicker.js",
+					"images/cbd.jpg",
+					"css/feedback.css",
+					"css/wu.css",
+					"js/picker/mui.picker.js",
+					"images/muwu.jpg",
+					"images/Bad.PNG",
+					"images/Normal.PNG",
+					"images/Good.PNG",
+					"images/userPhoto.png",
+					"js/language/locale_zh_CN.js",
+					"css/kankan_home.css",
+					"css/mui.picker.css",
+					"css/icons-extra.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"js/picker/city.data.js",
+					"js/feedback.js",
+					"js/mui.view.js",
+					"fonts/mui-icons-extra.ttf",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"pages/main/products/product_login.html",
+					"pages/main/products/commentlist.html"
+				],
 				"priority": 0
 			}
 		},
