@@ -61,6 +61,7 @@
 								<font color="#000000" size="3" id="commentsnum"></font>
 							</P>
 						</a>
+						<input type="hidden" name="comodityid" id="comodityid" value="" />
 
 					</div>
 
@@ -283,10 +284,27 @@
 					ok: function(data) {
 						Log.d("success");
 						messageshow(data);
+						clickprocomment();
 					},
 					ng: function(data) {
 						Log.d(data);
 					}
+				});
+			}
+			function clickprocomment(){
+				//commodity comments list
+				var comdcommentpage = null;
+				mui('.kankan_det_comment').on('tap', 'a', function(e) {
+					var cid = $("#comodityid").val();
+					if(!comdcommentpage) {
+						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
+					}
+					mui.fire(comdcommentpage, 'comid', {
+						id: cid
+					});
+					mui.openWindow({
+						id: 'pro_commentslist.html'
+					});
 				});
 			}
 			//message show
@@ -297,6 +315,7 @@
 				var comdname = comdbasic[0].comm_name;
 				var comdmesage = comdbasic[0].comm_detail;
 				var comdityid = comdbasic[0].commodity_id;
+				$("#comodityid").val(comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
@@ -488,7 +507,6 @@
 				//products list
 				var prolistpage = null;
 				mui('.productlist').on('tap', 'a', function(e) {
-					var id = commodity.user_basic.user_id;;
 					if(!prolistpage) {
 						prolistpage = plus.webview.getWebviewById('productslist.html');
 					}
@@ -499,29 +517,15 @@
 						id: 'productslist.html'
 					});
 				});
-				//commodity comments list
-				var comdcommentpage = null;
-				mui('.kankan_det_comment').on('tap', 'a', function(e) {
-					var id = comdbasic[0].commodity_id;
-					if(!comdcommentpage) {
-						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
-					}
-					mui.fire(comdcommentpage, 'comid', {
-						id: id
-					});
-					mui.openWindow({
-						id: 'pro_commentslist.html'
-					});
-				});
 				//detail page
 				var detailPage = null;
 				mui('.detail').on('tap', 'a', function(e) {
-					var id = this.getAttribute('id');
+					var did = this.getAttribute('id');
 					if(!detailPage) {
 						detailPage = plus.webview.getWebviewById('detail.html');
 					}
 					mui.fire(detailPage, 'cid', {
-						id: id
+						id: did
 					});
 					mui.openWindow({
 						id: 'detail.html'

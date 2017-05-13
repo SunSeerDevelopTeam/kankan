@@ -21,35 +21,35 @@
 	</head>
 
 	<body>
-		<!--send message to delivery-->
-		<div id="dialog" class="call-dialog-div">
-			<div id="deliveryMsgDiv" class="call-dialog-msg-div">						
-			</div>
-			<div>
-				<ul class="call-dialog">
-					<li class="call-dialog-cancel">
-						<a onclick="goback();">
-						<font color="white">キャンセル</font>
-						</a>
-					</li>
-					<li class="call-dialog-ok">
-						<a onclick="goSend();">
-							<font color="white">送る</font>	
-						</a>
-					</li>
-				</ul>
-				<input id="deliveryMsg" type="hidden"  value="" />
-				<input id="deliveryTel" type="hidden"  value="" />
-			</div>
-		</div>
-		<!--show message when click 送る button-->
-		<div id="dialogOK" class="call-dialog-div">
-		</div>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-icon-back  mui-icon mui-icon-left-nav mui-pull-left"><font size="4">戻る<font size="4"></a>
-			<h1 class="mui-title">物流</h1>
+			<a class="mui-icon-back  mui-icon mui-icon-left-nav mui-pull-left"><font size="4" id="goback"><font size="4"></a>
+			<h1 class="mui-title lang" data-locale="logistic"></h1>
 		</header>
 		<div class="mui-content" style="margin-top: 2.1em;">
+			<!--send message to delivery-->
+			<div id="dialog" class="call-dialog-div">
+				<div id="deliveryMsgDiv" class="call-dialog-msg-div">						
+				</div>
+				<div>
+					<ul class="call-dialog">
+						<li class="call-dialog-cancel">
+							<a onclick="goback();">
+							<font color="white" class="lang" data-locale="det_goodconcel"></font>
+							</a>
+						</li>
+						<li class="call-dialog-ok">
+							<a onclick="goSend();">
+								<font color="white" class="lang" data-locale="sendmes"></font>	
+							</a>
+						</li>
+					</ul>
+					<input id="deliveryMsg" type="hidden"  value="" />
+					<input id="deliveryTel" type="hidden"  value="" />
+				</div>
+			</div>
+			<!--show message when click 送る button-->
+			<div id="dialogOK" class="call-dialog-div">
+			</div>
 			<div class="tran-page">
 				<div class="tran-body">
 				</div>
@@ -59,10 +59,9 @@
 	<script src="../../js/mui.min.js"></script>
 	<script src="../../js/mui.view.js "></script>
 	<script src='../../js/feedback.js'></script>
-	<script type="text/javascript" src="../../js/sha256.js"></script>
 	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="../../js/sha256.js"></script>
 	<script type="text/javascript" src="../../js/language.js"></script>
-	<script type="text/javascript" src="../../js/knockout-3.4.2.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
 	<script>
 		var timer;
@@ -80,7 +79,7 @@
 			content += msg;
 			content += "<br>";
 			content += tel;
-			content += "にメールを送りますか？</font>";
+			content += TextMessage.sendtextrequest+"？</font>";
 			content += "<input type='hidden' id='l_com_idval' value='"+l_com_id+"' />";
 			deliveryMsgDialog.innerHTML = content;
 			dialog.style.display = "block";
@@ -104,7 +103,7 @@
 			content += msg;
 			content += "<br>";
 			content += tel;
-			content += "に電話を送りますか？</font>";
+			content += TextMessage.telrequesttext+"？</font>";
 			deliveryMsgDialog.innerHTML = content;
 			dialog.style.display = "block";
 			// display div slowly
@@ -128,7 +127,9 @@
 			var dialogOK = document.getElementById('dialogOK');
 			var msg = document.getElementById('deliveryMsg').value;
 			var tel = document.getElementById('deliveryTel').value;
-			var loid=document.getElementById('l_com_idval').value;;
+			if(document.getElementById('l_com_idval')){
+				var loid=document.getElementById('l_com_idval').value;
+			}
 			clearInterval(timer);
 			dialog.style.opacity=0;
 			dialog.style.display = "none";
@@ -161,10 +162,11 @@
 				var content = "";
 				content += "<div class=\"call-dialog-msg-div\">";
 				content += "<font size=\"2\" color=\"white\">";
-				content += "ご利用ありがとうございます。<br>";
+				content += TextMessage.sedsuccseetext;
+				content += "<br>";
 				content += msg + "<br>";
-				content += tel + "ににメールを送りました。<br>";
-				content += "返信お待ちください<br><br></font>";
+				content += tel + TextMessage.mailsucetext+"<br>";
+				content += TextMessage.requestmailtext+"<br><br></font>";
 				content += "<a onclick=\"gook();\">";
 				content += "<font color=\"white\">OK</font>";
 				content += "</a>";
@@ -205,10 +207,11 @@
 						.appendFormat('</li><li class="delivery-detail"><font color="#000000" size="2">{0}<br>{1}<br>{2}</font></li></ul>', l_com_name,l_com_pro,l_com_phone)
 						.append('<ul class="delivery-list"><li class="delivery-grid">')
 						.appendFormat('<div class="delivery-detail-call" onclick="showDialog('+"'{0}'"+",'{1}'"+",'{2}'"+');">', l_com_name,l_com_phone,l_com_id)
-						.append('<font size="2" color="#FFFFFF" vertical-align="middle">メール送信</font></div></li>')
-						.appendFormat('<li class="delivery-grid2"><div class="delivery-detail-call2" onclick="showCallDialog('+"'{0}'"+",'{1}'"+',null);"><font size="2" color="#FFFFFF" vertical-align="middle">電話</font></div></li>', l_com_name,l_com_phone)
-						.append('<li class="delivery-grid3"><div class="delivery-detail-call3"><font size="2" color="#FFFFFF" vertical-align="middle">ホームページへ</font></div></li></ul>');
+						.append('<font size="2" color="#FFFFFF" vertical-align="middle">'+TextMessage.sendmailbutext+'</font></div></li>')
+						.appendFormat('<li class="delivery-grid2"><div class="delivery-detail-call2" onclick="showCallDialog('+"'{0}'"+",'{1}'"+',null);"><font size="2" color="#FFFFFF" vertical-align="middle">'+TextMessage.calbutext+'</font></div></li>', l_com_name,l_com_phone)
+						.append('<li class="delivery-grid3"><div class="delivery-detail-call3"><font size="2" color="#FFFFFF" vertical-align="middle">'+TextMessage.homebutext+'</font></div></li></ul>');
 				$(".tran-body").append(html.toString());
+				$("#goback").html(TextMessage.back);
 			}
 		}
 		mui.plusReady(function() {

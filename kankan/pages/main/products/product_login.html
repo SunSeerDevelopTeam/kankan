@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
 			<h1 class="mui-center mui-title lang" data-locale="commodity_login"></h1>
 		</header>
 		
@@ -221,13 +221,15 @@
 					children:[]
 			};
 			var childrenarr=categoryadd.children;
-			var secondcatearr=catedata[c].children;
-			for(var t=0;t<secondcatearr.length;t++){
-				var childrenadd={
-						value: secondcatearr[t].classify_id,
-						text: secondcatearr[t].classify_detail
-					}
-				childrenarr.push(childrenadd);
+			if(catedata[c].children){
+				var secondcatearr=catedata[c].children;
+				for(var t=0;t<secondcatearr.length;t++){
+					var childrenadd={
+							value: secondcatearr[t].classify_id,
+							text: secondcatearr[t].classify_detail
+						}
+					childrenarr.push(childrenadd);
+				}
 			}
 			testarr.push(categoryadd);
 		}
@@ -264,7 +266,7 @@
 	$.ready(function() {
 		mui.plusReady(function() {
 			var param2 = {
-				"flg": "commodity"
+				"flg": "classify"
 			};
 			Repository.Commodity.category(param2, {
 				ok: function(data) {

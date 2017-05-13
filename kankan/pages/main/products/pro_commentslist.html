@@ -79,10 +79,11 @@
 			//back refresh 
 			mui(".mui-bar-nav").on("tap","a",function(){
 				var view = plus.webview.currentWebview().opener();
-		    	var id=$("#commodity_id").val();
+		    	var cmid=$("#commodity_id").val();
 				mui.fire(view,'cid',{
-				    id:id
+				    id:cmid
 				});
+				$("#comments").empty();
 				mui.back();
 			});
 			function getccomments(rid) {
@@ -97,6 +98,7 @@
 					ng: function(data) {
 						Log.d(data);
 						if(data == "2001") {
+							//$("#comments").empty();
 							$("#null").show();
 						}
 					}
