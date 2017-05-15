@@ -468,9 +468,13 @@ var Api;
 			Usershow: baseUrl + '/user/Usershow',
 			userinfo: baseUrl + '/user/setting/',
 			Usertranslist:baseUrl + '/user/Usertrans/',
+<<<<<<< HEAD
 			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/',
 			Buyticket: baseUrl + '/pay/Buyticket/',
 			pointbuyticketway: baseUrl + '/pay/Buyticket/pointbuyticketway/'
+=======
+			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/'
+>>>>>>> lx/13551
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
@@ -499,7 +503,13 @@ var Api;
 			transSubmitOrder:baseUrl + '/transaction/transoperation/trans_submit_order/',
 			transRequestOrder:baseUrl + '/transaction/transoperation/trans_request_order/',
 			transChangePrice:baseUrl + '/transaction/transoperation/trans_change_price/', 
+<<<<<<< HEAD
 			transStop:baseUrl + '/transaction/transoperation/transaction_stop/'	
+=======
+			transStop:baseUrl + '/transaction/transoperation/transaction_stop/',	
+			Commoditypublish: baseUrl + '/commodity/release/',
+			Commodityedite: baseUrl + '/commodity/release/update/'
+>>>>>>> lx/13551
 		}
 	};
 	Api.Params = {
