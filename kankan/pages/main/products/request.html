@@ -26,7 +26,7 @@
 
 		<header class="mui-bar mui-bar-nav">
 			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
-			<h1 class="mui-title">请求</h1>
+			<h1 class="mui-title lang" data-locale="requesttitle"></h1>
 			<div id="history">
 				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right"><span style="font-size: 14px;">交易履历</span></a>
 			</div>
@@ -34,11 +34,9 @@
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" href="#item1mobile">
-						被请求商品
+					<a class="mui-control-item lang" href="#item1mobile" data-locale="requestedpro">
 					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						请求商品
+					<a class="mui-control-item lang" href="#item2mobile" data-locale="requestpro">
 					</a>
 				</div>
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
@@ -74,14 +72,9 @@
 			mui.init({
 				swipeBack: false,
 				preloadPages: [{
-						id: 'requestlist.html',
-						url: 'requestlist.html'
-					},
-					{
 						id:"translatelist",
 						url:"translatelist.html"
-					}
-				]
+				}]
 			});
 			function showcommodity(results){
 				var data=results.data;
@@ -93,9 +86,9 @@
 					var comm_img=others[ot].trans[0].comm_img;
 					var trans_type=others[ot].trans.trans_type;
 					if(trans_type=="0"){
-						var trans_typetext="問い合わせ中";
+						var trans_typetext=TextMessage.requireing;
 					}else{
-						var trans_typetext="交易成立";
+						var trans_typetext=TextMessage.requresuces;
 					}
 					var status=others[ot].trans.status;
 					var other_photo=others[ot].trans.other_photo;
@@ -105,7 +98,7 @@
 					var transprocount=others[ot].trans.trans_comm_nums;
 					var html = new Util.StringBuilder();
 					html.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-6 translate"><a id="{0}" href="#">',transid)
-						.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}" style="height: 131px;">',comm_img=="" ? "../../../images/nopic.jpg":comm_img)
+						.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">',comm_img=="" ? "../../../images/nopic.jpg":comm_img)
 						.appendFormat('<div class="mui-media-body">{0}</div>', comm_name)
 						.appendFormat('</a><div class="{0}">{1}</div>',trans_type==0 ? "kankan_jyz":"kankan_jycl",trans_typetext)
 						.appendFormat('<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 25px; height: 25px;display:{0}"></div>',transprocount>1 ?"":"none")
@@ -148,7 +141,7 @@
 						var otrans_mode=own[ow].trans.trans_mode;
 						var otransprocount=own[ow].trans.trans_comm_nums;
 						html2 += '<li class="mui-table-view-cell mui-media mui-col-xs-6 translate"><a id="'+otransid+'" href="#">';
-						html2 += '<img class="mui-media-object ka_imgoption" src="'+ocomm_img+'" style="height: 131px;">';
+						html2 += '<img class="mui-media-object ka_imgoption" src="'+ocomm_img+'" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 						html2 += '<div class="mui-media-body">'+ocomm_name+'</div>';
 						html2 += '</a><div class="';
 						if(otrans_type=="0"){
@@ -160,7 +153,7 @@
 						if(otransprocount>1){
 							html2 += '<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 25px; height: 25px;"></div>';
 						}
-						html2 += '<div class="mui-pull-right kankan_jyimgbox"><img src="'+omy_photo+'" style="border-radius: 50%; width: 20px; height: 20px;">';
+						html2 += '<div class="mui-pull-right kankan_jyimgbox"><img src="'+omy_photo+'" style="border-radius: 50%; width: 20px; height: 20px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 						html2 += '<img src="../../../images/jiantou.png" class="kankan_jhjiantou"><img src="'+oother_photo+'" style="border-radius: 50%; width: 20px; height: 20px;"></div>';
 						html2 += '<div class="mui-pull-left ka_mony"><div>'+oprice+'<font color="#000000"> P</font></div></div></li>';
 					}
@@ -175,11 +168,6 @@
 								}, 500);
 							}
 						}
-					});
-					mui('#history').on('tap','a',function(e) {
-						mui.openWindow({
-							id: 'requestlist.html'
-						});
 					});
 					function clicktrans(){
 						var translatepage=null;
@@ -201,6 +189,12 @@
 				})(mui);
 			}
 			mui.plusReady(function() {
+				mui('#history').on('tap','a',function(e) {
+					mui.openWindow({
+						id: 'requestlist',
+						url:"requestlist.html"
+					});
+				});
 				var params = {};
 				Repository.User.Usertranslist(params, {
 					ok: function(data) {
@@ -214,6 +208,20 @@
 						if(data=="2001"){
 							alert(TextMessage.datanull);
 							//$("ul").hide();
+						}
+						if(data=="1000"){
+							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						if(data=="2002"){
+							alert(TextMessage.userng);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						}
 					}
 				});
