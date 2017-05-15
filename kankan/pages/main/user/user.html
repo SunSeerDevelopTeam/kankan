@@ -599,9 +599,16 @@
 								id: 'login',
 								url:"../../login/login.html"
 							});
-						} else {
-							console.log("other error code:" + data);
+						} 
+						if(data=="2002"){
+							alert(TextMessage.userng);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						}
+						console.log("other error code:" + data);
+						
 					}
 				});
 			}else{

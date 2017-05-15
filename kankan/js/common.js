@@ -468,7 +468,9 @@ var Api;
 			Usershow: baseUrl + '/user/Usershow',
 			userinfo: baseUrl + '/user/setting/',
 			Usertranslist:baseUrl + '/user/Usertrans/',
-			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/'
+			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/',
+			Buyticket: baseUrl + '/pay/Buyticket/',
+			pointbuyticketway: baseUrl + '/pay/Buyticket/pointbuyticketway/'
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
@@ -570,7 +572,7 @@ var Api;
 	function getToken() {
 		var token = "";
 		if(typeof(plus) != "undefined") {
-			token = plus.storage.getItem('token');
+			token = plus.storage.getItem('token');//"+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh/PqKa19BIs=5a07a2c62f2e8c4b8cc15cf35f58cb995226d710955ba3d30630b56a94655072";
 			if(token == null) {
 				return "";
 			}
@@ -634,6 +636,16 @@ var Repository;
 			return Api.call(Api.url.User.mytranshistory, params, callback);
 		}
 		User.mytranshistory = mytranshistory;
+		
+		function Buyticket(params, callback) {
+			return Api.call(Api.url.User.Buyticket, params, callback);
+		}
+		User.Buyticket = Buyticket;
+		
+		function pointbuyticketway(params, callback) {
+			return Api.call(Api.url.User.pointbuyticketway, params, callback);
+		}
+		User.pointbuyticketway = pointbuyticketway;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -882,6 +894,9 @@ var TextMessage;
 	TextMessage.requireing = language ? "問い合わせ中" : "请求中";
 	TextMessage.requresuces = language ? "交易成立" : "交易成立";
 	TextMessage.userng = language ? "この口座利用できない" : "该账户不可用";
+	TextMessage.pointnot = language ? "ポイントポイント不足" : "Point点数不足";
+	TextMessage.buywaynot = language ? "購入方は無効" : "购买方式无效";
+	TextMessage.buyyes = language ? "購入成功" : "购买成功";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

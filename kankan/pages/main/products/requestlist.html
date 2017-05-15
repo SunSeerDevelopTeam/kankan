@@ -83,11 +83,17 @@
 						Log.d(data);
 						//emptycontent();
 						if(data=="2001"){
-							alert(TextMessage.datanull);
-							//$("ul").hide();
+							mui.toast(TextMessage.datanull, {
+								duration: 'long',
+								type: 'div'
+							})
 						}
 						if(data=="1000"){
 							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						}
 						if(data=="2002"){
 							alert(TextMessage.userng);

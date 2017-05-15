@@ -200,13 +200,20 @@
 		}
 		Repository.Commodity.Commodityedite(param3, {
 					ok: function(data) {
-						Log.d("success");
+						console.log("success");
 						messages(data);
 					},
 					ng: function(data) {
-						Log.d(data);
+						console.log("error:"+data);
 						if(data == "1000") {
 							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						if(data=="2002"){
+							alert(TextMessage.userng);
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
@@ -275,15 +282,12 @@
 			};
 			Repository.Commodity.category(param2, {
 				ok: function(data) {
-					Log.d("success");
+					console.log("success");
 					var catearrs=categorypush(data);
 					sortpicker(catearrs);
 				},
 				ng: function(data) {
-					Log.d(data);
-					if(data == "1000") {
-						alert(TextMessage.test);
-					}
+					console.log("error"+data);
 				}
 			});
 		});
@@ -343,6 +347,13 @@
 								Log.d(data);
 								if(data == "1000") {
 									alert(TextMessage.test);
+									mui.openWindow({
+										id: 'login',
+										url:"../../login/login.html"
+									});
+								}
+								if(data=="2002"){
+									alert(TextMessage.userng);
 									mui.openWindow({
 										id: 'login',
 										url:"../../login/login.html"
@@ -473,9 +484,16 @@ function publishs() {
 					id: 'login',
 					url:"../../login/login.html"
 				});
-			} else {
-				console.log("other error code:" + data);
+			} 
+			if(data=="2002"){
+				alert(TextMessage.userng);
+				mui.openWindow({
+					id: 'login',
+					url:"../../login/login.html"
+				});
 			}
+			console.log("other error code:" + data);
+			
 		}
 	});
 
