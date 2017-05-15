@@ -365,7 +365,8 @@
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
 					"pages/main/products/productslist.html",
-					"pages/transaction/transaction2.html"
+					"pages/transaction/transaction2.html",
+					"pages/transaction/transaction.html"
 				],
 				"priority": 0
 			},
@@ -465,7 +466,8 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"css/kankan_home.css",
-					"images/cbd.jpg"
+					"images/cbd.jpg",
+					"images/morebut.png"
 				],
 				"refer": [
 					"pages/main/products/requestlist.html",
@@ -510,7 +512,9 @@
 					"js/jquery-3.2.0.min.js",
 					"js/language.js",
 					"css/mui.min.css",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"fonts/mui.ttf",
+					"css/kankan_home.css"
 				],
 				"refer": [
 					"pages/main/products/commentlist.html"
@@ -525,7 +529,9 @@
 					"images/Good.PNG",
 					"images/shuijiao.jpg",
 					"css/wu.css",
-					"css/feedback.css"
+					"css/feedback.css",
+					"images/sinaweibo.png",
+					"images/xinhuan.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -541,7 +547,8 @@
 					"css/mui.min.css",
 					"fonts/mui.ttf",
 					"css/kankan_home.css",
-					"css/icons-extra.css"
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -569,7 +576,8 @@
 			"pages/main/products/requestlist.html": {
 				"resources": [
 					"images/cbd.jpg",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/kankan_home.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -577,7 +585,15 @@
 			"pages/main/products/translatelist.html": {
 				"resources": [
 					"images/15724-200.png",
-					"images/cbd.jpg"
+					"images/cbd.jpg",
+					"images/MacPro.jpg",
+					"images/muwu.jpg",
+					"images/jiantou.png",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/kankan_home.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -655,7 +671,9 @@
 					"css/kankan_home.css",
 					"css/icons-extra.css",
 					"pages/main/logisticslist.html",
-					"js/jquery-3.2.0.min.js"
+					"js/jquery-3.2.0.min.js",
+					"js/common.js",
+					"js/sha256.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -670,7 +688,8 @@
 					"js/feedback.js",
 					"js/knockout-3.4.2.js",
 					"js/mui.view.js",
-					"pages/transaction/transaction2.html"
+					"pages/transaction/transaction2.html",
+					"images/car.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -688,7 +707,8 @@
 					"images/Good.PNG",
 					"css/icons-extra.css",
 					"js/language/locale_zh_CN.js",
-					"css/kankan_home.css"
+					"css/kankan_home.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -720,12 +740,30 @@
 					"js/feedback.js",
 					"js/mui.view.js",
 					"fonts/mui-icons-extra.ttf",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"pages/setting/setting.html"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
-					"pages/main/products/commentlist.html"
+					"pages/main/products/commentlist.html",
+					"pages/main/products/detail.html"
 				],
+				"priority": 0
+			},
+			"pages/setting/setting.html": {
+				"resources": [
+					"pages/main/user/user.html",
+					"css/wu.css",
+					"css/feedback.css",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"js/feedback.js",
+					"css/icons-extra.css",
+					"js/mui.view.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
