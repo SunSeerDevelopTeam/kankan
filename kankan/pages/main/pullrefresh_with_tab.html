@@ -8,8 +8,8 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../css/mui.min.css" />
-		<link rel="stylesheet" href="../../css/icons-extra.css">
-		<link rel="stylesheet" href="../../css/home.css" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../css/listitem.css" />
 		<style>
 			html,
 			body {
@@ -95,60 +95,7 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
-			
-			.spinner {
-				margin: 100px auto 0;
-				width: 150px;
-				text-align: center;
-			}
-			
-			.spinner>div {
-				width: 30px;
-				height: 30px;
-				background-color: #1E90FF;
-				border-radius: 100%;
-				display: inline-block;
-				-webkit-animation: bouncedelay 1.4s infinite ease-in-out;
-				animation: bouncedelay 1.4s infinite ease-in-out;
-				/* Prevent first frame from flickering when animation starts */
-				-webkit-animation-fill-mode: both;
-				animation-fill-mode: both;
-			}
-			
-			.spinner .bounce1 {
-				-webkit-animation-delay: -0.32s;
-				animation-delay: -0.32s;
-			}
-			
-			.spinner .bounce2 {
-				-webkit-animation-delay: -0.16s;
-				animation-delay: -0.16s;
-			}
-			
-			@-webkit-keyframes bouncedelay {
-				0%,
-				80%,
-				100% {
-					-webkit-transform: scale(0.0)
-				}
-				40% {
-					-webkit-transform: scale(1.0)
-				}
-			}
-			
-			@keyframes bouncedelay {
-				0%,
-				80%,
-				100% {
-					transform: scale(0.0);
-					-webkit-transform: scale(0.0);
-				}
-				40% {
-					transform: scale(1.0);
-					-webkit-transform: scale(1.0);
-				}
-			}
-			/*******************************************/
+			/******************Menu Style begin**********************/
 			
 			html,
 			body {
@@ -454,6 +401,7 @@
 				-webkit-transform: translate3d(0, 0, 0);
 				transform: translate3d(0, 0, 0);
 			}
+			/******************Menu Style end**********************/
 		</style>
 	</head>
 
@@ -462,10 +410,132 @@
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
+						<a class="mui-control-item mui-active" href="#item1mobile">
+						</a>
+						<a class="mui-control-item" href="#item2mobile">
+						</a>
+						<a class="mui-control-item" href="#item3mobile">
+						</a>
+						<a class="mui-control-item" href="#item4mobile">
+						</a>
+						<a class="mui-control-item" href="#item5mobile">
+						</a>
+						<a class="mui-control-item" href="#item6mobile">
+						</a>
+						<a class="mui-control-item" href="#item7mobile">
+						</a>
+						<a class="mui-control-item" href="#item8mobile">
+						</a>
+						<a class="mui-control-item" href="#item9mobile">
+						</a>
+						<a class="mui-control-item" href="#item10mobile">
+						</a>
+						<a class="mui-control-item" href="#item11mobile">
+						</a>
+						<a class="mui-control-item" href="#item12mobile">
+						</a>
 					</div>
 				</div>
+
 				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item4mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item5mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item6mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item7mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item8mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item9mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item10mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item11mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item12mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view mui-row">
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div id="menu-wrapper" class="menu-wrapper hidden">
 					<div id="menu" class="menu">
 						<ul class="mui-table-view mui-table-view-inverted">
@@ -481,11 +551,6 @@
 						</ul>
 					</div>
 				</div>
-				<div class="spinner">
-					<div class="bounce1"></div>
-					<div class="bounce2"></div>
-					<div class="bounce3"></div>
-				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -493,97 +558,249 @@
 		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
-		<script type="text/javascript" src="../../js/language.js"></script>
-		<script type="text/javascript" src="../../js/knockout-3.4.2.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
-		<script type="text/javascript">
-			var isShowMenu = false;
-			var keyword = "";
-			var page = 0;
-			var list, max, catalog;
-			//ul, index, count, reverse
-			var createFragment = function(params, index, self, isDown) {
-				// get commodity list data
-				var commodityArray = [];
-				Repository.Commodity.commodityList(params, {
-					ok: function(result) {
-						console.dir(result);
-						list = result.page.list;
-						max = result.page.max;
-						page = parseInt(result.page.page);
-						for(var i = 0; i < result.data.length; i++) {
-							var commodity = new Entity.Commodity();
-							commodity.fromJson(result.data[i]);
-							commodityArray.push(commodity);
+		<script>
+			(function(mui) {
+
+				mui.init({
+					preloadPages: [{
+						id: "detail",
+						url: "../main/products/detail.html"
+					}],
+					preloadLimit: 3
+				});
+
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				mui('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+				mui.ready(function() {
+
+					/**
+					 * get category data from server and show data.
+					 */
+					Repository.Commodity.category({
+						flg: ""
+					}, {
+						ok: function(data) {
+							updateCategoryView(data.data);
+						},
+						ng: function(statuscode) {},
+						error: function() {}
+					});
+
+					var updateCategoryView = function(data) {
+						var categoryHTML = new Util.StringBuilder();
+						var index = 0
+						data.forEach(function(item) {
+							$('#sliderSegmentedControl .mui-scroll a:eq(' + index + ')').text(item.catalog_detail);
+							$('.mui-slider-group .mui-scroll:eq(' + index + ')').attr('data-category-id', item.catalog_id);
+							index++;
+						});
+						$('#sliderSegmentedControl .mui-scroll a:gt(' + (index - 1) + ')').remove();
+						$('.mui-slider-group').children('div:gt(' + (index - 1) + ')').remove();
+					}
+
+					//循环初始化所有下拉刷新，上拉加载。
+					mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+						mui(pullRefreshEl).pullToRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										getDataFromServer(ul, index, 10, true, self);
+									}, 1000);
+								}
+							},
+							up: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										getDataFromServer(ul, index, 5, false, self);
+									}, 1000);
+								}
+							}
+						});
+					});
+
+					var getDataFromServer = function(ul, index, count, reverse, self) {
+						Repository.Commodity.commodityList({
+							catalog: $('.mui-slider-group .mui-scroll:eq(' + index + ')').attr('data-category-id')
+						}, {
+							ok: function(data) {
+								createFragment(data.data, ul, index, count, reverse, self);
+							},
+							ng: function(statuscode) {
+								if(statuscode == "0100") {
+									if(reverse) {
+										self.endPullDownToRefresh(true);
+									} else {
+										self.endPullUpToRefresh(true);
+									}
+								}
+							},
+							error: function() {}
+						});
+					};
+
+					var createFragment = function(data, ul, index, count, reverse, self) {
+						var fragment = document.createDocumentFragment();
+						var li;
+						if(Validator.isEmpty(data)) {
+							if(reverse) {
+								self.endPullDownToRefresh(true);
+							} else {
+								self.endPullUpToRefresh(true);
+							}
+							return;
 						}
-					},
-					ng: function(data) {
-						if(data == "0100") {
-							mui.toast(TextMessage.not_network, {
-								duration: 'long',
-								type: 'div'
-							})
-						}
-					},
-					error: function() {
-						if(self != null) {
+						data.forEach(function(item) {
+							li = document.createElement('li');
+							li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
+							var listItemHTML = new Util.StringBuilder();
+							listItemHTML.appendFormat('<div class="li-content" data-comm-id="{0}">', item.commodity_id)
+								.append('<div class="comm-item">')
+								.append('<div class="item-tap mui-col-sm-12 mui-col-xs-12">')
+								.appendFormat('<img src="{0}">', item.imgs)
+								.append('<span>新宿区</span>')
+								.append('</div>')
+								.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
+								.append('<div class="height-max mui-row">')
+								.append('<div class="height-max mui-col-sm-8 mui-col-xs-8">')
+								.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', item.comm_name)
+								.appendFormat('<div class="comm-price mui-col-sm-12">{0} P</div>', item.price)
+								.append('</div>')
+								.append('<div class="height-max mui-col-sm-4 mui-col-xs-4">')
+								.append('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled">')
+								.append('</span>')
+								.appendFormat('<span class="comm-like-num">{0}</span>', item.praise)
+								.append('</div>')
+								.append('</div>')
+								.append('</div>')
+								.append('</div>')
+								.append('</div>');
+							li.innerHTML = listItemHTML.toString();
+							fragment.appendChild(li);
+						});
+						updateListView(fragment, ul, index, count, reverse, self);
+					};
+
+					var updateListView = function(fragment, ul, index, count, reverse, self) {
+						if(reverse) {
+							ul.insertBefore(fragment, ul.firstChild);
 							self.endPullDownToRefresh();
+						} else {
+							ul.appendChild(fragment);
 							self.endPullUpToRefresh();
 						}
-					}
-				}).then(function() {
-					var ul;
-					if(self != null) {
-						ul = self.element.querySelector('.mui-table-view');
-					} else {
-						ul = document.querySelectorAll('.mui-slider-group .mui-scroll .mui-table-view')[index];
-					}
-					var fragment = document.createDocumentFragment();
-					var li;
-					for(var i = 0; i < commodityArray.length; i++) {
-						li = document.createElement('li');
-						li.className = 'mui-table-view-cell mui-media mui-col-xs-6';
-						var html = new Util.StringBuilder();
-						html.appendFormat('<a class="listitem" id="{0}">', commodityArray[i].commodityId)
-							.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}">', commodityArray[i].imgs)
-							.appendFormat('<div class="mui-media-body">{0}</div>', commodityArray[i].commName)
-							.append('</a>')
-							.appendFormat('<div class="kankan_area">{0}</div>', commodityArray[i].classes)
-							.append('<div class="mui-pull-left ka_mony">')
-							.appendFormat('<div>{0}<font color="#000000"> P</font></div>', commodityArray[i].price == "" ? 0 : commodityArray[i].price)
-							.append('</div>')
-							.append('<div class="mui-pull-right ka_heartlocation">')
-							.appendFormat("<span class='mui-icon-extra mui-icon-extra-heart-filled " + '{0}' + "' disabled='{1}'></span>", (commodityArray[i].likeFlg == "" || commodityArray[i].likeFlg == "0") ? "ka_heartgrey" : "ka_heartred", commodityArray[i].likeFlg == "" ? "disabled" : "")
-							.appendFormat('<div class="ka_heartnum">{0}</div>', commodityArray[i].praise)
-							.append('</div>');
-						li.innerHTML = html.toString();
-						fragment.appendChild(li);
-					}
-					if(isDown && ul) {
-						ul.insertBefore(fragment, ul.firstChild);
-						if(self != null) {
-							self.endPullDownToRefresh();
-						}
-					} else {
-						ul.appendChild(fragment);
-						if(self != null) {
-							self.endPullUpToRefresh();
-						}
-					}
-					$('.spinner').css('display', 'none');
+						bindEventOnListViewItem();
+					};
+
 					var detailPage = null;
 
-					$('.listitem').click(function() {
-						if(isShowMenu) return;
-						var id = this.getAttribute("id");
-						if(!detailPage)
-							detailPage = plus.webview.getWebviewById('detail');
-						mui.fire(detailPage, 'cid', {
-							id: id
+					var bindEventOnListViewItem = function() {
+						$(".li-content").on("click", function(event) {
+							if(isShowMenu) return;
+							var id = $(this).attr("data-comm-id");
+							if(!detailPage)
+								detailPage = plus.webview.getWebviewById('detail');
+							mui.fire(detailPage, 'cid', {
+								id: id
+							});
+							setTimeout(function() {
+								mui.openWindow({
+									id: 'detail',
+									url: "../main/products/detail.html",
+									waiting: {
+										autoShow: false
+									},
+									show: {
+										duration: 200
+									}
+								});
+							}, 200);
 						});
+
+						$(".comm-like, .comm-like-num").on("click", function(event) {
+							var isLogin = plus.storage.getItem("LoginFlag");
+							if(!isLogin) {
+								toggleMenu();
+								return false;
+							}
+							var _self = $(this);
+							var commId = _self.closest('li').children().attr('data-comm-id');
+							var params = {
+								commid: commId
+							};
+							Repository.Commodity.praise(params, {
+								ok: function(result) {
+									_self.css("color", "red");
+								},
+								ng: function(result) {
+									if(result === "2004") {
+										plus.nativeUI.alert(TextMessage.operation_error);
+									}
+								},
+								error: function() {}
+							});
+							return false;
+						});
+
+						$(".li-content img").on("error", function() {
+							$(this).attr("src", "../../images/nopic.jpg");
+						});
+					}
+
+					var menuWrapper = document.getElementById("menu-wrapper");
+					var menuWrapperClassList = menuWrapper.classList;
+					var busying = false;
+					var isShowMenu = false;
+
+					var toggleMenu = function() {
+						if(busying) {
+							return;
+						}
+						busying = true;
+						if(menuWrapperClassList.contains('mui-active')) {
+							document.body.classList.remove('menu-open');
+							menuWrapper.className = 'menu-wrapper fade-out-up animated';
+							menu.className = 'menu bounce-out-up animated';
+							setTimeout(function() {
+								menuWrapper.classList.add('hidden');
+								isShowMenu = false;
+							}, 500);
+						} else {
+							document.body.classList.add('menu-open');
+							menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
+							menu.className = 'menu bounce-in-down animated';
+							isShowMenu = true;
+						}
+						setTimeout(function() {
+							busying = false;
+						}, 500);
+					}
+
+					window.addEventListener("showMenu", function(event) {
+						toggleMenu();
+					});
+
+					$('#menu-wrapper a').first().text(TextMessage.register);
+					$('#menu-wrapper a').eq(1).text(TextMessage.login);
+					$('#menu-wrapper a').last().text(TextMessage.skip);
+
+					$('#menu-wrapper a').first().click(function() {
+						setTimeout(function() {
+							toggleMenu();
+						}, 100);
 						setTimeout(function() {
 							mui.openWindow({
-								id: 'detail',
+								id: 'reg',
+								url: '../login/reg.html',
 								waiting: {
 									autoShow: false
 								},
@@ -591,223 +808,35 @@
 									duration: 200
 								}
 							});
-						}, 300);
+						}, 400);
+						return true;
 					});
 
-					$('.ka_heartlocation').unbind('click').click(function() {
-						Log.i("this disabled value is " + $(this).find('span').attr("disabled"));
-						if(!$(this).find('span').attr("disabled") || loginFlg) {
-							var commid = $(this).siblings("a").attr('id');
-							setTimeout(function() {
-								var isLogin = plus.storage.getItem("LoginFlag");
-								if(isLogin == "isLogin" || loginFlg) {
-									var params = {
-										commid: commid
-									};
-									Repository.Commodity.praise(params, {
-										ok: function(result) {},
-										ng: function(result) {
-											if(result === "2004") {
-												plus.nativeUI.alert(TextMessage.operation_error);
-											}
-										},
-										error: function() {}
-									});
-								} else {
-									toggleMenu();
-								}
-							}, 300);
-						} else {
-							Log.i("can't click span");
+					$('#menu-wrapper a').eq(1).click(function() {
+						setTimeout(function() {
 							toggleMenu();
-						}
-					});
-				});
-			};
-			var menuWrapper = document.getElementById("menu-wrapper");
-			var menuWrapperClassList = menuWrapper.classList;
-			var busying = false;
-
-			function toggleMenu() {
-				if(busying) {
-					return;
-				}
-				busying = true;
-				if(menuWrapperClassList.contains('mui-active')) {
-					document.body.classList.remove('menu-open');
-					menuWrapper.className = 'menu-wrapper fade-out-up animated';
-					menu.className = 'menu bounce-out-up animated';
-					setTimeout(function() {
-						menuWrapper.classList.add('hidden');
-						isShowMenu = false;
-					}, 500);
-				} else {
-					document.body.classList.add('menu-open');
-					menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
-					menu.className = 'menu bounce-in-down animated';
-					isShowMenu = true;
-				}
-				setTimeout(function() {
-					busying = false;
-				}, 500);
-			}
-
-			$(document).ready(function() {
-				$('#menu-wrapper a').first().text(TextMessage.register);
-				$('#menu-wrapper a').eq(1).text(TextMessage.login);
-				$('#menu-wrapper a').last().text(TextMessage.skip);
-
-				$('#menu-wrapper a').first().click(function() {
-					setTimeout(function() {
-						toggleMenu();
-					}, 100);
-					setTimeout(function() {
-						mui.openWindow({
-							id: 'reg',
-							url: '../login/reg.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-					}, 400);
-					return true;
-				});
-
-				$('#menu-wrapper a').eq(1).click(function() {
-					setTimeout(function() {
-						toggleMenu();
-					}, 100);
-					setTimeout(function() {
-						mui.openWindow({
-							id: 'login',
-							url: '../login/login.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-					}, 400);
-					return true;
-				});
-
-				$('#menu-wrapper a').last().click(function() {
-					setTimeout(toggleMenu(), 500);
-					return true;
-				});
-
-				window.addEventListener('showMenu', function(event) {
-					Log.i("showMenu...");
-					toggleMenu();
-				});
-
-				window.addEventListener('refresh', function(event) {
-					var page = event.detail.page;
-					if(typeof(page) != "undefined" && page == "login") {
-						$('.mui-slider-group .mui-scroll .mui-table-view li').each(function() {
-							$(this).remove();
-						});
-						var params = {};
-						createFragment(params, 0, null, false);
-						return;
-					}
-					Log.i("refresh..., params is " + event.detail.keyword);
-					keyword = event.detail.keyword;
-					if(typeof(keyword) == "undefined" || keyword == "") {
-						return;
-					}
-					$('.mui-slider-group .mui-scroll .mui-table-view li').each(function() {
-						$(this).remove();
-					});
-					var params = {
-						keyword: keyword.toString(),
-						page: page,
-						//catalog: catalog
-					};
-					createFragment(params, 0, null, false);
-				});
-			});
-
-			(function(mui, doc) {
-				mui.init();
-				var deceleration = mui.os.ios ? 0.003 : 0.0009;
-				mui('.mui-scroll-wrapper').scroll({
-					bounce: false,
-					indicators: true,
-					deceleration: deceleration
-				});
-
-				mui.plusReady(function() {
-					Log.i("pullrefresh_with_tab.html plusReady...");
-					mui.preload({
-						id: 'detail',
-						url: '../main/products/detail.html'
-					});
-					(function() {
-						var params = {
-							flg:""
-						};
-						Repository.Commodity.category(params, {
-							ok: function(result) {
-								console.log("main page debug -----");
-								console.dir(result);
-								for(var i = 0; i < result.data.length; i++) {
-									if(i == 0) {
-										catalog = result.data[i].catalog_id;
-									}
-									var html = new Util.StringBuilder();
-									html.appendFormat('<a class="{0}" href="{1}" data-catalogId="{2}">', i == 0 ? "mui-control-item mui-active" : "mui-control-item", "#item" + (i + 1) + "mobile", result.data[i].catalog_id)
-										.append(result.data[i].catalog_detail)
-										.append('</a>');
-									$('#sliderSegmentedControl .mui-scroll').append(html.toString());
-
-									html.clear();
-
-									html.appendFormat('<div id="{0}" class="{1}">', "item" + (i + 1) + "mobile", i == 0 ? "mui-slider-item mui-control-content mui-active" : "mui-slider-item mui-control-content")
-										.append('<div class="mui-scroll-wrapper">')
-										.append('<div class="mui-scroll">')
-										.append('<ul class="mui-table-view mui-grid-view"></ul>')
-										.append('</div></div></div>');
-									$('.mui-slider-group').append(html.toString());
+						}, 100);
+						setTimeout(function() {
+							mui.openWindow({
+								id: 'login',
+								url: '../login/login.html',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
 								}
-								Log.i("create catalog finish...");
-							},
-							ng: function(data) {console.log("aaaaa")}
-						}).then(function() {
-							var params = {
-								page: page,
-								//catalog: catalog
-							};
-							createFragment(params, 0, null, true);
-							console.log("bbbb");
-							mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
-								Log.d(document.querySelectorAll('.mui-slider-group .mui-scroll'));
-								Log.d("index is " + index);
-								mui(pullRefreshEl).pullToRefresh({
-									down: {
-										callback: function() {
-											var self = this;
-											params[Api.Params.page] = page++;
-											createFragment(params, 0, self, true);
-										}
-									},
-									up: {
-										callback: function() {
-											var self = this;
-											params[Api.Params.page] = page--;
-											createFragment(params, 0, self, false);
-										}
-									}
-								});
 							});
-						});
-					})();
+						}, 400);
+						return true;
+					});
+
+					$('#menu-wrapper a').last().click(function() {
+						setTimeout(toggleMenu(), 500);
+						return true;
+					});
 				});
-			})(mui, document);
+			})(mui);
 		</script>
 	</body>
 

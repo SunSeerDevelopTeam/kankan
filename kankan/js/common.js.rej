@@ -1,0 +1,9 @@
+diff a/kankan/js/common.js b/kankan/js/common.js	(rejected hunks)
+@@ -483,6 +483,7 @@
+ 			Commoditycomment: baseUrl + '/commodity/Commoditycomment/',
+ 			comments: baseUrl + '/commodity/comment/',
+ 			imgupload: baseUrl + '/commodity/release/upload/',
++<<<<<<< HEAD
+ 			Commoditypublish:baseUrl + '/commodity/release/',
+ 			Commodityedite:baseUrl + '/commodity/release/update/',
+ 			logisticslist:baseUrl + '/logistics/',
