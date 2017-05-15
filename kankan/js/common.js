@@ -1,5 +1,4 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
-var loginFlg = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -467,7 +466,8 @@ var Api;
 			login: baseUrl + '/user/login/login',
 			forgetPwd: baseUrl + '/user/password',
 			Usershow: baseUrl + '/user/Usershow',
-			userinfo: baseUrl + '/user/setting/'
+			userinfo: baseUrl + '/user/setting/',
+			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/'
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
@@ -479,8 +479,8 @@ var Api;
 			Commoditycomment: baseUrl + '/commodity/Commoditycomment/',
 			comments: baseUrl + '/commodity/comment/',
 			imgupload: baseUrl + '/commodity/release/upload/',
-			Commoditypublish:baseUrl + '/commodity/release/',
-			Commodityedite:baseUrl + '/commodity/release/update/'
+			Commoditypublish: baseUrl + '/commodity/release/',
+			Commodityedite: baseUrl + '/commodity/release/update/'
 		}
 	};
 	Api.Params = {
@@ -496,7 +496,7 @@ var Api;
 		addressId: 'address_id',
 		vCode: 'vc_code',
 		rCode: 'recom_code',
-		page:'page'
+		page: 'page'
 	};
 
 	function call(url, params, callback) {
@@ -550,7 +550,7 @@ var Api;
 	 */
 	function getToken() {
 		var token = "";
-		if(plus != null) {
+		if(typeof(plus) != "undefined") {
 			token = plus.storage.getItem('token');
 			if(token == null) {
 				return "";
@@ -565,8 +565,7 @@ var Api;
 	 */
 	function setToken(token) {
 		Log.d("setToken function is " + token);
-		Log.d("plus is " + plus);
-		if(typeof(token) != "undefined" && token != null && token != "" && plus != null) {
+		if(typeof(token) != "undefined" && token != null && token != "" && typeof(plus) != "undefined") {
 			plus.storage.setItem('token', token);
 			Log.d("save token to storage.");
 		}
@@ -591,18 +590,26 @@ var Repository;
 			return Api.call(Api.url.User.login, params, callback);
 		}
 		User.login = login;
+
 		function forgetPwd(params, callback) {
 			return Api.call(Api.url.User.forgetPwd, params, callback);
 		}
 		User.forgetPwd = forgetPwd;
+
 		function Usershow(params, callback) {
 			return Api.call(Api.url.User.Usershow, params, callback);
 		}
 		User.Usershow = Usershow;
+
 		function userinfo(params, callback) {
 			return Api.call(Api.url.User.userinfo, params, callback);
 		}
 		User.userinfo = userinfo;
+
+		function mytranshistory(params, callback) {
+			return Api.call(Api.url.User.mytranshistory, params, callback);
+		}
+		User.mytranshistory = mytranshistory;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -647,14 +654,17 @@ var Repository;
 			return Api.call(Api.url.Commodity.comments, params, callback);
 		}
 		Commodity.comments = comments;
+
 		function imgupload(params, callback) {
 			return Api.call(Api.url.Commodity.imgupload, params, callback);
 		}
 		Commodity.imgupload = imgupload;
+
 		function Commoditypublish(params, callback) {
 			return Api.call(Api.url.Commodity.Commoditypublish, params, callback);
 		}
 		Commodity.Commoditypublish = Commoditypublish;
+
 		function Commodityedite(params, callback) {
 			return Api.call(Api.url.Commodity.Commodityedite, params, callback);
 		}
@@ -756,19 +766,23 @@ var TextMessage;
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 	TextMessage.updatesuccessinfo = language ? "更新が成功する!" : "更新成功!";
 	TextMessage.edite_headimage = language ? "改正頭像" : "修改头像";
+	TextMessage.email_error = language ? "メール、ユーザー名が間違っています、もしくはすでに存在しています、" : "注册邮箱/用户名 错误，或已存在";
+	TextMessage.requireing = language ? "問い合わせ中" : "请求中";
+	TextMessage.requresuces = language ? "交易成立" : "交易成立";
+	TextMessage.userng = language ? "この口座利用できない" : "该账户不可用";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
 	var Commodity = (function() {
 		function Commodity() {
 			var self = this;
-			this.classes = null;
-			this.commName = null;
-			this.commodityId = null;
-			this.imgs = null;
-			this.praise = null;
-			this.price = null;
-			this.likeFlg = null;
+			this.classes = ko.observable(null);
+			this.commName = ko.observable(null);
+			this.commodityId = ko.observable(null);
+			this.imgs = ko.observable(null);
+			this.praise = ko.observable(null);
+			this.price = ko.observable(null);
+			this.likeFlg = ko.observable(null);
 		}
 		Commodity.prototype.fromJson = function(json) {
 			if(Validator.isNull(json)) return;
@@ -792,4 +806,25 @@ var Entity;
 		return Commodity;
 	}());
 	Entity.Commodity = Commodity;
+	var Category = (function() {
+		function Category() {
+			var self = this;
+			this.category_detail = ko.observable(null);
+			this.category_id = ko.observable(null);
+			this.category_href = ko.observable(null);
+		}
+		Category.prototype.fromJson = function(json) {
+			if(Validator.isNull(json)) return;
+			this.category_detail = json.catalog_detail;
+			this.category_id = json.catalog_id;
+			this.category_href = "#" + json.catalog_id;
+		}
+		Category.prototype.reset = function() {
+			this.category_detail(null);
+			this.category_id(null);
+			this.category_href(null);
+		}
+		return Category;
+	}());
+	Entity.Category = Category;
 })(Entity || (Entity = {}));
