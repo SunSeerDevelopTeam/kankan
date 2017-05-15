@@ -116,6 +116,11 @@ var JSLocale = {
 	
 	//buy point page
 	"change":"チャージ",
+	//request
+	"requesttitle":"リクエスト",
+	"requesthistory":"交易履历",
+	"requestedpro":"リクエストされた",
+	"requestpro":"リスエストした"
 }
 
 $(function() {
