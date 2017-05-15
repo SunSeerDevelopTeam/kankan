@@ -292,8 +292,7 @@
 					"js/language.js",
 					"images/weixin.png",
 					"js/language/locale_zh_CN.js",
-					"js/language/locale_ja_JP.js",
-					"js/sha1.js"
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
 					"pages/main/main.html"
@@ -325,8 +324,7 @@
 					"images/Good.PNG",
 					"images/userPhoto.png",
 					"js/language/locale_ja_JP.js",
-					"js/md5.js",
-					"js/sha1.js"
+					"js/md5.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -406,9 +404,7 @@
 				],
 				"refer": [
 					"pages/login/login.html",
-					"pages/login/reg.html",
-					"pages/main/search.html",
-					"pages/main/user/user.html"
+					"pages/login/reg.html"
 				],
 				"priority": 0
 			},
@@ -463,10 +459,7 @@
 					"css/kankan_home.css",
 					"images/cbd.jpg"
 				],
-				"refer": [
-					"pages/main/products/requestlist.html",
-					"pages/main/products/translatelist.html"
-				],
+				"refer": [],
 				"priority": 0
 			},
 			"pages/main/pullrefresh_with_tab.html": {
@@ -483,12 +476,7 @@
 					"css/home.css",
 					"css/icons-extra.css",
 					"fonts/mui-icons-extra.ttf",
-					"js/language.js",
-					"fonts/mui.ttf",
-					"css/listitem.css",
-					"images/nopic.jpg",
-					"images/muwu.jpg",
-					"images/MacPro.jpg"
+					"js/language.js"
 				],
 				"refer": [
 					"pages/main/products/detail.html",
@@ -511,78 +499,6 @@
 			"pages/main/products/pro_commentslist.html": {
 				"resources": [
 					"js/language/locale_zh_CN.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/products/requestlist.html": {
-				"resources": [
-					"images/cbd.jpg"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/products/translatelist.html": {
-				"resources": [
-					"images/15724-200.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/products/product_want_to_buy.html": {
-				"resources": [
-					"images/iconfont-tianjia.png",
-					"css/kankan_home.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/user/user.html": {
-				"resources": [
-					"js/picker/mui.poppicker.js",
-					"js/picker/mui.picker.js",
-					"css/wu.css",
-					"css/feedback.css",
-					"js/feedback.js",
-					"js/picker/city.data.js",
-					"fonts/mui-icons-extra.ttf",
-					"images/Bad.PNG",
-					"images/Normal.PNG",
-					"images/Good.PNG",
-					"fonts/mui.ttf"
-				],
-				"refer": [
-					"pages/main/products/product_login.html",
-					"pages/main/products/commentlist.html",
-					"pages/main/products/detail.html"
-				],
-				"priority": 0
-			},
-			"pages/main/pullrefresh_with_tab_lixin.html": {
-				"resources": [
-					"js/mui.pullToRefresh.js",
-					"js/common.js",
-					"js/mui.min.js",
-					"js/mui.pullToRefresh.material.js",
-					"js/sha256.js",
-					"js/jquery-3.2.0.min.js",
-					"css/mui.min.css",
-					"js/knockout.min.js",
-					"css/home.css",
-					"css/icons-extra.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/search.html": {
-				"resources": [
-					"js/common.js",
-					"js/mui.min.js",
-					"js/jquery-3.2.0.min.js",
-					"fonts/mui.ttf",
-					"js/language.js",
-					"css/mui.min.css",
-					"css/icons-extra.css"
 				],
 				"refer": [],
 				"priority": 0
