@@ -148,13 +148,13 @@
 
 		<!--Commodity exchange, white send, point exchange information button-->
 		<div class="ka_buyway">
-			<button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;">
+			<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
 			<b><span class="lang" data-locale="det_pointexch"></span>(<span class="comdprice"></span>)</b>
 		</button>
-			<button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;">
+			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;"></a>
 			<span class="lang" data-locale="det_exchange"><b></b></span>
 		</button>
-			<button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;">
+			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;"></a>
 			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
 		</div>
@@ -166,6 +166,7 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
+			var commodity_id;
 			mui.init({			    
 				swipeBack: false,
 				preloadPages: [{
@@ -179,11 +180,16 @@
 					{
 						id: 'detail.html',
 						url: 'detail.html'
-					}
+					}/*,
+					{
+						id:'../../transaction/transaction2.html',
+						url:'../../transaction/transaction2.html'
+					}*/
 				]
 			});
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
+				commodity_id = event.detail.id;
 				getinfo(id);
 			});
 //			$(function() {
@@ -575,6 +581,45 @@
 					document.getElementById("zanshu").innerHTML = gooafter;
 				}
 			}
+			
+			//
+			mui(".ka_buyway").on('tap','.mui-btn',function(){
+				var change_name = $(this).attr("id");
+				var mode;
+				if(change_name == 'switchp'){
+					mode = 'business';
+				}else if(change_name == 'switchex'){
+					mode = 'exchange';
+				}else{
+					mode = 'grait';
+				}
+				var codid = $(".kankan_zanbox").attr("id");
+				var params = {
+					"commodity_id": commodity_id,
+					"mode":mode,
+				};
+				Repository.Transaction.transRequest(params, {
+					ok: function(data) {
+						var trans_id = data.data.transinfo[0].trans_id;
+						//alert(trans_id);
+						mui.openWindow({
+							url:"../../transaction/transaction2.html?transid=" + trans_id,
+							id:"../../transaction/transaction2.html",
+							extras:{
+								"transid":trans_id
+							}
+						})
+					},
+					ng: function(data) {
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+					}
+				});
+			})
 		</script>
 	</body>
 

@@ -484,6 +484,20 @@ var Api;
 			Commodityedite:baseUrl + '/commodity/release/update/',
 			logisticslist:baseUrl + '/logistics/',
 			logisticssendmail:baseUrl + '/logistics/index/sendMailtoLCO/'
+		},
+		Trans:{
+			transConversation: baseUrl + '/transaction/transoperation/trans_conversation/',  //请求/订单对话API:
+			transCommdChange: baseUrl + '/transaction/transcommdchange/',   //提交请求商品变更API:
+			transShowRequest: baseUrl + '/transaction/transrequest/show_request_detail/', //显示当前交易请求/订单API
+			transGetUserCommd: baseUrl + '/transaction/transpublic/get_user_commodity/',
+			transRequest: baseUrl + '/transaction/transrequest/',
+			transOrderEvaluate: baseUrl + '/transaction/transoperation/trans_order_evaluate/',
+			transOrderReceipt: baseUrl  + '/transaction/transoperation/trans_order_receipt/',
+			transOrderLogustics:baseUrl + '/transaction/transoperation/trans_order_logistics/',
+			transSubmitOrder:baseUrl + '/transaction/transoperation/trans_submit_order/',
+			transRequestOrder:baseUrl + '/transaction/transoperation/trans_request_order/',
+			transChangePrice:baseUrl + '/transaction/transoperation/trans_change_price/', 
+			transStop:baseUrl + '/transaction/transoperation/transaction_stop/'	
 		}
 	};
 	Api.Params = {
@@ -679,6 +693,75 @@ var Repository;
 		Commodity.logisticssendmail = logisticssendmail;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
+	var Transaction;
+	(function(Transaction) {
+		function transRequest(params, callback) {
+			return Api.call(Api.url.Trans.transRequest, params, callback);
+		}
+		Transaction.transRequest = transRequest;
+		
+		function transConversation(params, callback) {
+			return Api.call(Api.url.Trans.transConversation, params, callback);
+		}
+		Transaction.transConversation = transConversation;
+		
+		function transGetUserCommd(params, callback) {
+			return Api.call(Api.url.Trans.transGetUserCommd, params, callback);
+		}
+		Transaction.transGetUserCommd = transGetUserCommd;
+		
+		function transShowRequest(params, callback) {
+			return Api.call(Api.url.Trans.transShowRequest, params, callback);
+		}
+		Transaction.transShowRequest = transShowRequest;
+		
+		function transCommdChange(params, callback) {
+			return Api.call(Api.url.Trans.transCommdChange, params, callback);
+		}
+		Transaction.transCommdChange = transCommdChange;
+		
+		function transConversation(params, callback) {
+			return Api.call(Api.url.Trans.transConversation, params, callback);
+		}
+		Transaction.transConversation = transConversation;
+		
+		function transOrderEvaluate(params, callback){
+			return Api.call(Api.url.Trans.transOrderEvaluate, params, callback);
+		}
+		Transaction.transOrderEvaluate = transOrderEvaluate;
+		
+		function transOrderReceipt(params, callback){
+			return Api.call(Api.url.Trans.transOrderReceipt, params, callback);
+		}
+		Transaction.transOrderReceipt = transOrderReceipt;
+		
+		function transOrderLogustics(params, callback){
+			return Api.call(Api.url.Trans.transOrderLogustics, params, callback);
+		}
+		Transaction.transOrderLogustics = transOrderLogustics;
+		
+		function transSubmitOrder(params, callback){
+			return Api.call(Api.url.Trans.transSubmitOrder, params, callback);
+		}
+		Transaction.transSubmitOrder = transSubmitOrder;
+		
+		function transRequestOrder(params, callback){
+			return Api.call(Api.url.Trans.transRequestOrder, params, callback);
+		}
+		Transaction.transRequestOrder = transRequestOrder;
+		
+		function transChangePrice(params, callback){
+			return Api.call(Api.url.Trans.transChangePrice, params, callback);
+		}
+		Transaction.transChangePrice = transChangePrice;
+		
+		function transStop(params, callback){
+			return Api.call(Api.url.Trans.transStop, params, callback);
+		}
+		Transaction.transStop = transStop;
+		
+	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
+	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
 var Log;
 (function(Log) {

@@ -105,6 +105,17 @@ var JSLocale = {
 	//logisticslist page
 	"sendmes":"は",
 	"logistic":"物流",
+	
+	//point change to ticket page
+	"point_to_ticket_title":"チケット購入",
+	"point_to_ticket_num1":"チケット1枚",
+	"point_to_ticket_num4":"チケット4枚(3枚+1枚)",
+	"point_to_ticket_num7":"チケット7枚(5枚+2枚)",
+	"point_to_ticket_num15":"チケット15枚(10枚+5枚)",
+	"buy":"購入",
+	
+	//buy point page
+	"change":"チャージ",
 }
 
 $(function() {

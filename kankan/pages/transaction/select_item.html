@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/icons-extra.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			a#user img {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				margin-top: -0.2em;
+			}
+			
+			header a.mui-icon-extra-notice {
+				margin-top: 0.5em;
+				margin-right: 0.25em;
+			}
+			
+			header a.mui-icon-search {
+				width: 60px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
+				</button>
+				<h1 class="mui-center mui-title user-title-center maintitle">商品リスト</h1>
+				<span  class="mui-right mui-pull-right">
+					<font class="mui-icon maintitle user-title-center" style="font-size:15px">確定</font>
+				</span>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div class="mui-slider-group">
+					<div class="mui-slider-item ">
+						<ul class="mui-table-view mui-grid-view">
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail" >
+								<a  id="1" href="#" onclick="detail(this.id)" >
+									<img class="" src="../../images/shuijiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a id="2" href="#" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/shuijiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a id="3" href="#" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/cbd.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/yuantiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/yuantiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/yuantiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/yuantiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/yuantiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/yuantiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+								<a href="javascript:;" id="5" onclick="detail(this.id)">
+									<img class="mui-media-object" src="../../images/yuantiao.jpg">
+									<input style="float:right;position: fixed;margin-left:-13px;" name="checkbox1" value="Item 3" type="checkbox" >
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="spinner">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
