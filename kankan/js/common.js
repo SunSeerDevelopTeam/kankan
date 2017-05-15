@@ -456,9 +456,9 @@ var Util;
 var Api;
 (function(Api) {
 	// develop
-	// var baseUrl = 'http://192.168.1.8:7998';
+	 var baseUrl = 'http://192.168.1.8:7998';
 	// 本番
-	var baseUrl = 'http://210.189.72.25:7998';
+	//var baseUrl = 'http://210.189.72.25:7998';
 	Api.url = {
 		User: {
 			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
@@ -467,6 +467,7 @@ var Api;
 			forgetPwd: baseUrl + '/user/password',
 			Usershow: baseUrl + '/user/Usershow',
 			userinfo: baseUrl + '/user/setting/',
+			Usertranslist:baseUrl + '/user/Usertrans/',
 			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/'
 		},
 		Commodity: {
@@ -479,6 +480,24 @@ var Api;
 			Commoditycomment: baseUrl + '/commodity/Commoditycomment/',
 			comments: baseUrl + '/commodity/comment/',
 			imgupload: baseUrl + '/commodity/release/upload/',
+			Commoditypublish:baseUrl + '/commodity/release/',
+			Commodityedite:baseUrl + '/commodity/release/update/',
+			logisticslist:baseUrl + '/logistics/',
+			logisticssendmail:baseUrl + '/logistics/index/sendMailtoLCO/'
+		},
+		Trans:{
+			transConversation: baseUrl + '/transaction/transoperation/trans_conversation/',  //请求/订单对话API:
+			transCommdChange: baseUrl + '/transaction/transcommdchange/',   //提交请求商品变更API:
+			transShowRequest: baseUrl + '/transaction/transrequest/show_request_detail/', //显示当前交易请求/订单API
+			transGetUserCommd: baseUrl + '/transaction/transpublic/get_user_commodity/',
+			transRequest: baseUrl + '/transaction/transrequest/',
+			transOrderEvaluate: baseUrl + '/transaction/transoperation/trans_order_evaluate/',
+			transOrderReceipt: baseUrl  + '/transaction/transoperation/trans_order_receipt/',
+			transOrderLogustics:baseUrl + '/transaction/transoperation/trans_order_logistics/',
+			transSubmitOrder:baseUrl + '/transaction/transoperation/trans_submit_order/',
+			transRequestOrder:baseUrl + '/transaction/transoperation/trans_request_order/',
+			transChangePrice:baseUrl + '/transaction/transoperation/trans_change_price/', 
+			transStop:baseUrl + '/transaction/transoperation/transaction_stop/',	
 			Commoditypublish: baseUrl + '/commodity/release/',
 			Commodityedite: baseUrl + '/commodity/release/update/'
 		}
@@ -605,6 +624,11 @@ var Repository;
 			return Api.call(Api.url.User.userinfo, params, callback);
 		}
 		User.userinfo = userinfo;
+		
+		function Usertranslist(params, callback) {
+			return Api.call(Api.url.User.Usertranslist, params, callback);
+		}
+		User.Usertranslist = Usertranslist;
 
 		function mytranshistory(params, callback) {
 			return Api.call(Api.url.User.mytranshistory, params, callback);
@@ -669,8 +693,87 @@ var Repository;
 			return Api.call(Api.url.Commodity.Commodityedite, params, callback);
 		}
 		Commodity.Commodityedite = Commodityedite;
+		
+		function logisticslist(params, callback) {
+			return Api.call(Api.url.Commodity.logisticslist, params, callback);
+		}
+		Commodity.logisticslist = logisticslist;
+		
+		function logisticssendmail(params, callback) {
+			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
+		}
+		Commodity.logisticssendmail = logisticssendmail;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
+	var Transaction;
+	(function(Transaction) {
+		function transRequest(params, callback) {
+			return Api.call(Api.url.Trans.transRequest, params, callback);
+		}
+		Transaction.transRequest = transRequest;
+		
+		function transConversation(params, callback) {
+			return Api.call(Api.url.Trans.transConversation, params, callback);
+		}
+		Transaction.transConversation = transConversation;
+		
+		function transGetUserCommd(params, callback) {
+			return Api.call(Api.url.Trans.transGetUserCommd, params, callback);
+		}
+		Transaction.transGetUserCommd = transGetUserCommd;
+		
+		function transShowRequest(params, callback) {
+			return Api.call(Api.url.Trans.transShowRequest, params, callback);
+		}
+		Transaction.transShowRequest = transShowRequest;
+		
+		function transCommdChange(params, callback) {
+			return Api.call(Api.url.Trans.transCommdChange, params, callback);
+		}
+		Transaction.transCommdChange = transCommdChange;
+		
+		function transConversation(params, callback) {
+			return Api.call(Api.url.Trans.transConversation, params, callback);
+		}
+		Transaction.transConversation = transConversation;
+		
+		function transOrderEvaluate(params, callback){
+			return Api.call(Api.url.Trans.transOrderEvaluate, params, callback);
+		}
+		Transaction.transOrderEvaluate = transOrderEvaluate;
+		
+		function transOrderReceipt(params, callback){
+			return Api.call(Api.url.Trans.transOrderReceipt, params, callback);
+		}
+		Transaction.transOrderReceipt = transOrderReceipt;
+		
+		function transOrderLogustics(params, callback){
+			return Api.call(Api.url.Trans.transOrderLogustics, params, callback);
+		}
+		Transaction.transOrderLogustics = transOrderLogustics;
+		
+		function transSubmitOrder(params, callback){
+			return Api.call(Api.url.Trans.transSubmitOrder, params, callback);
+		}
+		Transaction.transSubmitOrder = transSubmitOrder;
+		
+		function transRequestOrder(params, callback){
+			return Api.call(Api.url.Trans.transRequestOrder, params, callback);
+		}
+		Transaction.transRequestOrder = transRequestOrder;
+		
+		function transChangePrice(params, callback){
+			return Api.call(Api.url.Trans.transChangePrice, params, callback);
+		}
+		Transaction.transChangePrice = transChangePrice;
+		
+		function transStop(params, callback){
+			return Api.call(Api.url.Trans.transStop, params, callback);
+		}
+		Transaction.transStop = transStop;
+		
+	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
+	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
 var Log;
 (function(Log) {
@@ -766,6 +869,15 @@ var TextMessage;
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 	TextMessage.updatesuccessinfo = language ? "更新が成功する!" : "更新成功!";
 	TextMessage.edite_headimage = language ? "改正頭像" : "修改头像";
+	TextMessage.sendtextrequest = language ? "にメールを送りますか" : "发送电子邮件";
+	TextMessage.telrequesttext = language ? "に電話を送りますか" : "拨打电话";
+	TextMessage.sedsuccseetext = language ? "ご利用ありがとうございます。" : "谢谢您的使用";
+	TextMessage.mailsucetext = language ? "ににメールを送りました。" : "给我发送了邮件";
+	TextMessage.requestmailtext = language ? "返信お待ちください。" : "请回复";
+	TextMessage.sendmailbutext = language ? "メール送信" : "发送邮件";
+	TextMessage.calbutext = language ? "電話" : "电话";
+	TextMessage.homebutext = language ? "ホームページへ" : "主页";
+	TextMessage.comdity_null = language ? "暫時データ" : "暂无数据";
 	TextMessage.email_error = language ? "メール、ユーザー名が間違っています、もしくはすでに存在しています、" : "注册邮箱/用户名 错误，或已存在";
 	TextMessage.requireing = language ? "問い合わせ中" : "请求中";
 	TextMessage.requresuces = language ? "交易成立" : "交易成立";

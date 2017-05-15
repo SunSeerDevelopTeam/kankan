@@ -29,11 +29,11 @@
 				<div class="mui-slider-group mui-slider-loop">
 					<!-- last -->
 					<div class="mui-slider-item mui-slider-item-duplicate firstimage">
-						<img src="" style="max-height: 239px;">
+						<img src="" style="max-height: 239px;" onerror="this.src='../../../images/nopic.jpg'">
 					</div>
 					<!-- first -->
 					<div class="mui-slider-item mui-slider-item-duplicate lastimage">
-						<img src="" style="max-height: 239px;">
+						<img src="" style="max-height: 239px;" onerror="this.src='../../../images/nopic.jpg'">
 					</div>
 				</div>
 				<div class="mui-slider-indicator">
@@ -61,6 +61,7 @@
 								<font color="#000000" size="3" id="commentsnum"></font>
 							</P>
 						</a>
+						<input type="hidden" name="comodityid" id="comodityid" value="" />
 
 					</div>
 
@@ -147,13 +148,13 @@
 
 		<!--Commodity exchange, white send, point exchange information button-->
 		<div class="ka_buyway">
-			<button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;">
+			<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
 			<b><span class="lang" data-locale="det_pointexch"></span>(<span class="comdprice"></span>)</b>
 		</button>
-			<button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;">
+			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;"></a>
 			<span class="lang" data-locale="det_exchange"><b></b></span>
 		</button>
-			<button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;">
+			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;"></a>
 			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
 		</div>
@@ -165,6 +166,7 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
+			var commodity_id;
 			mui.init({			    
 				swipeBack: false,
 				preloadPages: [{
@@ -178,11 +180,16 @@
 					{
 						id: 'detail.html',
 						url: 'detail.html'
-					}
+					}/*,
+					{
+						id:'../../transaction/transaction2.html',
+						url:'../../transaction/transaction2.html'
+					}*/
 				]
 			});
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
+				commodity_id = event.detail.id;
 				getinfo(id);
 			});
 //			$(function() {
@@ -283,10 +290,27 @@
 					ok: function(data) {
 						Log.d("success");
 						messageshow(data);
+						clickprocomment();
 					},
 					ng: function(data) {
 						Log.d(data);
 					}
+				});
+			}
+			function clickprocomment(){
+				//commodity comments list
+				var comdcommentpage = null;
+				mui('.kankan_det_comment').on('tap', 'a', function(e) {
+					var cid = $("#comodityid").val();
+					if(!comdcommentpage) {
+						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
+					}
+					mui.fire(comdcommentpage, 'comid', {
+						id: cid
+					});
+					mui.openWindow({
+						id: 'pro_commentslist.html'
+					});
 				});
 			}
 			//message show
@@ -297,6 +321,7 @@
 				var comdname = comdbasic[0].comm_name;
 				var comdmesage = comdbasic[0].comm_detail;
 				var comdityid = comdbasic[0].commodity_id;
+				$("#comodityid").val(comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
@@ -318,7 +343,7 @@
 					$(".firstimage img").attr("src", imgsarr[0]);
 					$(".lastimage img").attr("src", imgsarr[la]);
 					htmlimg += '<div class="mui-slider-item sliderimg">';
-					htmlimg += '<img src="' + imgurl + '" style="max-height: 239px;">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: 239px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 					htmlimg += '</div>';
 					if(i==0){
 						var htmlfocus='<div class="mui-indicator mui-active"></div>';
@@ -396,7 +421,7 @@
 					var advflag = recomendsobj.is_ad;
 					recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 					recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-					recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: 81px;">';
+					recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 					recomendhtml += '</a></li>';
 					var vall = k % 4;
 					if(vall == 0 || j == recomdlenght - 1) {
@@ -410,14 +435,14 @@
 					if(j < 4) {
 						recomendaddfirsthtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddfirsthtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: 81px;">';
+						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 						recomendaddfirsthtml += '</a></li>';
 						$("#firstremmondul").html(recomendaddfirsthtml);
 					}
 					if(j > recomdlenght - 4) {
 						recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;">';
+						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 						recomendaddhtml += '</a></li>';
 						$("#lastremmondul").html(recomendaddhtml);
 					}
@@ -442,7 +467,7 @@
 					var concernid = concernsobj.commodity_id;
 					concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 					concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-					concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;">';
+					concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 					concernhtml += '</a></li>';
 					var vallm = m % 4;
 					if(vallm == 0 || l == concernlenght - 1) {
@@ -455,14 +480,14 @@
 					if(l < 4) {
 						concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;">';
+						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}
 					if(l > concernlenght - 4) {
 						concernlastaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernlastaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;">';
+						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 						concernlastaddhtml += '</a></li>';
 						$("#lastconcerul").html(concernlastaddhtml);
 					}
@@ -488,7 +513,6 @@
 				//products list
 				var prolistpage = null;
 				mui('.productlist').on('tap', 'a', function(e) {
-					var id = commodity.user_basic.user_id;;
 					if(!prolistpage) {
 						prolistpage = plus.webview.getWebviewById('productslist.html');
 					}
@@ -499,29 +523,15 @@
 						id: 'productslist.html'
 					});
 				});
-				//commodity comments list
-				var comdcommentpage = null;
-				mui('.kankan_det_comment').on('tap', 'a', function(e) {
-					var id = comdbasic[0].commodity_id;
-					if(!comdcommentpage) {
-						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
-					}
-					mui.fire(comdcommentpage, 'comid', {
-						id: id
-					});
-					mui.openWindow({
-						id: 'pro_commentslist.html'
-					});
-				});
 				//detail page
 				var detailPage = null;
 				mui('.detail').on('tap', 'a', function(e) {
-					var id = this.getAttribute('id');
+					var did = this.getAttribute('id');
 					if(!detailPage) {
 						detailPage = plus.webview.getWebviewById('detail.html');
 					}
 					mui.fire(detailPage, 'cid', {
-						id: id
+						id: did
 					});
 					mui.openWindow({
 						id: 'detail.html'
@@ -547,6 +557,10 @@
 						Log.d(data);
 						if(data == "1000") {
 							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						}
 						if(data == "2004") {
 							alert(TextMessage.operation_error);
@@ -571,6 +585,45 @@
 					document.getElementById("zanshu").innerHTML = gooafter;
 				}
 			}
+			
+			//
+			mui(".ka_buyway").on('tap','.mui-btn',function(){
+				var change_name = $(this).attr("id");
+				var mode;
+				if(change_name == 'switchp'){
+					mode = 'business';
+				}else if(change_name == 'switchex'){
+					mode = 'exchange';
+				}else{
+					mode = 'grait';
+				}
+				var codid = $(".kankan_zanbox").attr("id");
+				var params = {
+					"commodity_id": commodity_id,
+					"mode":mode,
+				};
+				Repository.Transaction.transRequest(params, {
+					ok: function(data) {
+						var trans_id = data.data.transinfo[0].trans_id;
+						//alert(trans_id);
+						mui.openWindow({
+							url:"../../transaction/transaction2.html?transid=" + trans_id,
+							id:"../../transaction/transaction2.html",
+							extras:{
+								"transid":trans_id
+							}
+						})
+					},
+					ng: function(data) {
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+					}
+				});
+			})
 		</script>
 	</body>
 

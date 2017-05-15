@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
@@ -27,7 +26,7 @@
 
 		<header class="mui-bar mui-bar-nav">
 			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
-			<h1 class="mui-title">请求</h1>
+			<h1 class="mui-title lang" data-locale="requesttitle"></h1>
 			<div id="history">
 				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right"><span style="font-size: 14px;">交易履历</span></a>
 			</div>
@@ -35,11 +34,9 @@
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" href="#item1mobile">
-						被请求商品
+					<a class="mui-control-item lang" href="#item1mobile" data-locale="requestedpro">
 					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						请求商品
+					<a class="mui-control-item lang" href="#item2mobile" data-locale="requestpro">
 					</a>
 				</div>
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
@@ -47,47 +44,7 @@
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scrolls">
-								<ul class="mui-table-view mui-grid-view">
-									<li class="mui-table-view-cell mui-media mui-col-xs-6 translate">
-										<a id="1" href="#">
-											<img class="mui-media-object ka_imgoption" src="../../../images/MacPro.jpg">
-											<div class="mui-media-body">
-												Can be with
-											</div>
-										</a>
-										<div class="kankan_jyz">in transaction</div>
-										<!--<div class="mui-pull-left" style="margin-top: 1em;">
-												<img src="../../../images/logo.png" style="border-radius: 50%; width: 15px; height: 15px;">
-											</div>-->
-										<div class="mui-pull-left ka_mony">
-											<div>800
-												<font color="#000000"> P</font>
-											</div>
-										</div>
-									</li>
-									<li class="mui-table-view-cell mui-media mui-col-xs-6 translate">
-										<a id="2" href="#">
-											<img class="mui-media-object ka_imgoption" src="../../../images/muwu.jpg">
-											<div class="mui-media-body">
-												Can be with Can be with
-											</div>
-										</a>
-										<div class="kankan_jycl">established</div>
-										<div class="mui-pull-right kankan_jyimgbox">
-											<img src="../../../images/muwu.jpg" style="border-radius: 50%; width: 20px; height: 20px;">
-											<img src="../../../images/jiantou.png" class="kankan_jhjiantou">
-											<img src="../../../images/logo.png" style="border-radius: 50%; width: 20px; height: 20px;">
-										</div>
-										<div class="mui-pull-left ka_mony">
-											<div>800
-												<font color="#000000"> P</font>
-											</div>
-										</div>
-										<div class="mui-pull-right ka_heartlocation">
-											<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"></span>
-											<div class="ka_heartnum" id="91num">2</div>
-										</div>
-									</li>
+								<ul class="mui-table-view mui-grid-view want-sell">
 								</ul>
 							</div>
 						</div>
@@ -107,96 +64,168 @@
 
 		</div>
 		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
 		<script>
 			mui.init({
 				swipeBack: false,
 				preloadPages: [{
-						id: 'requestlist.html',
-						url: 'requestlist.html'
-					},
-					{
 						id:"translatelist",
 						url:"translatelist.html"
-					}
-				]
+				}]
 			});
-			/////////////////////////Swipe left and right////////////////////////////////
-			(function($) {
-				$('.mui-scroll-wrapper').scroll({
-					indicators: true //Whether to display a scroll bar
-				});
-				var html2 = '<ul class="mui-table-view">';
-				html2 += '<li class="mui-table-view-cell">';
-				html2 += '<a class="mui-navigate-right">';
-				html2 += '<div class="mui-pull-left">';
-				html2 += '<img src="../../../images/cbd.jpg" style="max-width: 50px;max-height: 45px;">';
-				html2 += '</div>';
-				html2 += '<div  class="mui-pull-left requestbox">';
-				html2 += '<span>商品名</span>';
-				html2 += '<div><font color="#0062CC">500</font> P</div>';
-				html2 += '</div>';
-				html2 += '<div class="mui-pull-right requeststop">交易中止</div>';
-				html2 += '</a>';
-				html2 += '</li>';
-				html2 += '<li class="mui-table-view-cell">';
-				html2 += '<a class="mui-navigate-right">';
-				html2 += '<div class="mui-pull-left">';
-				html2 += '<img src="../../../images/cbd.jpg" style="max-width: 50px;max-height: 45px;">';
-				html2 += '</div>';
-				html2 += '<div  class="mui-pull-left requestbox">';
-				html2 += '<span>商品名</span>';
-				html2 += '<div><font color="#0062CC">500</font> P</div>';
-				html2 += '</div>';
-				html2 += '<div class="mui-pull-right requestsuccess">交易成功</div>';
-				html2 += '</a>';
-				html2 += '</li>';
-				html2 += '</ul>';
-				//var html2 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第二个选项卡子项-1</li><li class="mui-table-view-cell">第二个选项卡子项-2</li><li class="mui-table-view-cell">第二个选项卡子项-3</li><li class="mui-table-view-cell">第二个选项卡子项-4</li><li class="mui-table-view-cell">第二个选项卡子项-5</li></ul>';	
-				var item2 = document.getElementById('item2mobile');
-				document.getElementById('slider').addEventListener('slide', function(e) {
-					if(e.detail.slideNumber === 1) {
-						if(item2.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item2.querySelector('.mui-scrolls').innerHTML = html2;
-							}, 500);
-						}
-					} else if(e.detail.slideNumber === 2) {
-						if(item3.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item3.querySelector('.mui-scrolls').innerHTML = html3;
-							}, 500);
-						}
+			function showcommodity(results){
+				var data=results.data;
+				//sell commodity
+				var others=data.other;
+				for(var ot=0;ot<others.length;ot++){
+					var transid=others[ot].trans.trans_id;
+					var comm_name=others[ot].trans[0].comm_name;
+					var comm_img=others[ot].trans[0].comm_img;
+					var trans_type=others[ot].trans.trans_type;
+					if(trans_type=="0"){
+						var trans_typetext=TextMessage.requireing;
+					}else{
+						var trans_typetext=TextMessage.requresuces;
 					}
-				});
-				var requestlistPage = null;
+					var status=others[ot].trans.status;
+					var other_photo=others[ot].trans.other_photo;
+					var my_photo=others[ot].trans.my_photo;
+					var price=others[ot].trans.price;
+					var trans_mode=others[ot].trans.trans_mode;
+					var transprocount=others[ot].trans.trans_comm_nums;
+					var html = new Util.StringBuilder();
+					html.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-6 translate"><a id="{0}" href="#">',transid)
+						.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">',comm_img=="" ? "../../../images/nopic.jpg":comm_img)
+						.appendFormat('<div class="mui-media-body">{0}</div>', comm_name)
+						.appendFormat('</a><div class="{0}">{1}</div>',trans_type==0 ? "kankan_jyz":"kankan_jycl",trans_typetext)
+						.appendFormat('<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 25px; height: 25px;display:{0}"></div>',transprocount>1 ?"":"none")
+						.appendFormat('<div class="mui-pull-right kankan_jyimgbox"><img src="{0}" style="border-radius: 50%; width: 20px; height: 20px;">',my_photo=="" ? "../../../images/userPhoto.png": my_photo)
+						.appendFormat('<img src="../../../images/jiantou.png" class="kankan_jhjiantou"><img src="{0}" style="border-radius: 50%; width: 20px; height: 20px;"></div>', other_photo=="" ?"../../../images/userPhoto.png":other_photo)
+						.appendFormat('<div class="mui-pull-left ka_mony"><div>{0}<font color="#000000"> P</font></div></div></li>',price);
+					$(".want-sell").append(html.toString());
+				}
+				/////////////////////////Swipe left and right////////////////////////////////
+				(function($) {
+					$('.mui-scroll-wrapper').scroll({
+						indicators: true //Whether to display a scroll bar
+					});
+					//want buy commodity
+					var own=data.own
+					var html2='<ul class="mui-table-view mui-grid-view want-sell">';
+					for(var ow=0;ow<own.length;ow++){
+						var otransid=own[ow].trans.trans_id;
+						var ocomm_name=own[ow].trans[0].comm_name;
+						var ocomm_img=own[ow].trans[0].comm_img;
+						if(own[ow].trans[0].comm_img==""){
+							var ocomm_img="../../../images/nopic.jpg";
+						}
+						var otrans_type=own[ow].trans.trans_type;
+						if(otrans_type=="0"){
+							var otrans_typetext="問い合わせ中";
+						}else{
+							var otrans_typetext="交易成立";
+						}
+						var ostatus=own[ow].trans.status;
+						var oother_photo=own[ow].trans.other_photo;
+						var omy_photo=own[ow].trans.my_photo;
+						if(own[ow].trans.my_photo==""){
+							var omy_photo="../../../images/userPhoto.png";
+						}
+						if(own[ow].trans.other_photo==""){
+							var oother_photo="../../../images/userPhoto.png";
+						}
+						var oprice=own[ow].trans.price;
+						var otrans_mode=own[ow].trans.trans_mode;
+						var otransprocount=own[ow].trans.trans_comm_nums;
+						html2 += '<li class="mui-table-view-cell mui-media mui-col-xs-6 translate"><a id="'+otransid+'" href="#">';
+						html2 += '<img class="mui-media-object ka_imgoption" src="'+ocomm_img+'" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						html2 += '<div class="mui-media-body">'+ocomm_name+'</div>';
+						html2 += '</a><div class="';
+						if(otrans_type=="0"){
+							html2 +='kankan_jyz';
+						}else{
+							html2 +='kankan_jycl';
+						}
+						html2 += '">'+otrans_typetext+'</div>';
+						if(otransprocount>1){
+							html2 += '<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 25px; height: 25px;"></div>';
+						}
+						html2 += '<div class="mui-pull-right kankan_jyimgbox"><img src="'+omy_photo+'" style="border-radius: 50%; width: 20px; height: 20px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						html2 += '<img src="../../../images/jiantou.png" class="kankan_jhjiantou"><img src="'+oother_photo+'" style="border-radius: 50%; width: 20px; height: 20px;"></div>';
+						html2 += '<div class="mui-pull-left ka_mony"><div>'+oprice+'<font color="#000000"> P</font></div></div></li>';
+					}
+					html2 += '</ul>';
+					var item2 = document.getElementById('item2mobile');
+					document.getElementById('slider').addEventListener('slide', function(e) {
+						if(e.detail.slideNumber === 1) {
+							if(item2.querySelector('.mui-loading')) {
+								setTimeout(function() {
+									item2.querySelector('.mui-scrolls').innerHTML = html2;
+									clicktrans();
+								}, 500);
+							}
+						}
+					});
+					function clicktrans(){
+						var translatepage=null;
+						mui('.translate').on('tap','a',function(e) {
+							var tid = this.getAttribute('id');
+							//var rid="10";
+							if(!translatepage) {
+								translatepage = plus.webview.getWebviewById('translatelist');
+							}
+							mui.fire(translatepage, 'traid', {
+								id: tid
+							});
+							mui.openWindow({
+								id: 'translatelist'
+							});
+						});
+					}
+					clicktrans();
+				})(mui);
+			}
+			mui.plusReady(function() {
 				mui('#history').on('tap','a',function(e) {
-					//var rid = this.getAttribute('id');
-					var rid="10";
-					if(!requestlistPage) {
-						requestlistPage = plus.webview.getWebviewById('requestlist.html');
-					}
-					mui.fire(requestlistPage, 'rid', {
-						id: rid
-					});
 					mui.openWindow({
-						id: 'requestlist.html'
+						id: 'requestlist',
+						url:"requestlist.html"
 					});
 				});
-				var translatepage=null;
-				mui('.translate').on('tap','a',function(e) {
-					var tid = this.getAttribute('id');
-					//var rid="10";
-					if(!translatepage) {
-						translatepage = plus.webview.getWebviewById('translatelist');
+				var params = {};
+				Repository.User.Usertranslist(params, {
+					ok: function(data) {
+						console.log("request success");
+						showcommodity(data);
+					},
+					ng: function(data) {
+						console.log("error");
+						Log.d(data);
+						//emptycontent();
+						if(data=="2001"){
+							alert(TextMessage.datanull);
+							//$("ul").hide();
+						}
+						if(data=="1000"){
+							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						if(data=="2002"){
+							alert(TextMessage.userng);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
 					}
-					mui.fire(translatepage, 'traid', {
-						id: tid
-					});
-					mui.openWindow({
-						id: 'translatelist'
-					});
 				});
-			})(mui);
+			});
 			
 		</script>
 	</body>

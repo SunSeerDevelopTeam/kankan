@@ -102,6 +102,25 @@ var JSLocale = {
 	"english_user":"英语",
 	"korean_user":"韩语",
 	"infoeditetitle":"信息编辑",
+	//logisticslist page
+	"sendmes":"是",
+	"logistic":"物流",
+	
+	//point change to ticket page
+	"point_to_ticket_title":"兑换点券",
+	"point_to_ticket_num1":"1个点券",
+	"point_to_ticket_num4":"4个点券(3+1)",
+	"point_to_ticket_num7":"7个点券(5+2)",
+	"point_to_ticket_num15":"15个点券(10+5)",
+	"point_to_ticket_description":"チケット15枚(10枚+5枚)",
+	"buy":"兑换",
+	// buy point 
+	"change":"兑换",
+	//request
+	"requesttitle":"请求",
+	"requesthistory":"交易履历",
+	"requestedpro":"被请求商品",
+	"requestpro":"请求商品"
 }
 
 $(function() {

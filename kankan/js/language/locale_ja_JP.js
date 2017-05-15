@@ -102,6 +102,25 @@ var JSLocale = {
 	"english_user":"英語",
 	"korean_user":"韓国語",
 	"infoeditetitle":"プロフィール編集",
+	//logisticslist page
+	"sendmes":"は",
+	"logistic":"物流",
+	
+	//point change to ticket page
+	"point_to_ticket_title":"チケット購入",
+	"point_to_ticket_num1":"チケット1枚",
+	"point_to_ticket_num4":"チケット4枚(3枚+1枚)",
+	"point_to_ticket_num7":"チケット7枚(5枚+2枚)",
+	"point_to_ticket_num15":"チケット15枚(10枚+5枚)",
+	"buy":"購入",
+	
+	//buy point page
+	"change":"チャージ",
+	//request
+	"requesttitle":"リクエスト",
+	"requesthistory":"交易履历",
+	"requestedpro":"リクエストされた",
+	"requestpro":"リスエストした"
 }
 
 $(function() {

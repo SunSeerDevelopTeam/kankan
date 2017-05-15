@@ -522,7 +522,7 @@
 				var commeximg_url=exhibit_commdata[ex].img_url;
 				exhibit_html+='<li class="user-goods-grid codedite">';
 				exhibit_html+='<a id="'+commexid+'" href="#">';
-				exhibit_html+='<img style="width: 113px;height: 76px;" src="'+commeximg_url+'">';
+				exhibit_html+='<img style="width: 113px;height: 76px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
 				var yunum=k%6;
@@ -545,7 +545,7 @@
 				var praiseimg_url=praise_commdata[pi].img_url;
 				praise_html+='<li class="user-goods-grid detail">';
 				praise_html+='<a id="'+praisepid+'" href="#">';
-				praise_html+='<img style="width: 113px;height: 76px;" src="'+praiseimg_url+'">';
+				praise_html+='<img style="width: 113px;height: 76px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
 				praise_html+='</a>';
 				praise_html+='</li>';
 				var kiunum=ki%6;
@@ -595,6 +595,10 @@
 						Log.d(data);
 						if(data == "1000") {
 							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						} else {
 							console.log("other error code:" + data);
 						}
@@ -620,7 +624,7 @@
 						submitvalues(target);//upload
 					},
 					function(error) {
-						alert("Compress error!" + error.message);
+						console.log("Compress error!" + error.message);
 					});
 					function submitvalues(target){
 						var serverurl=Api.url.User.userinfo;
@@ -665,8 +669,12 @@
 					Log.d(data);
 					if(data == "1000") {
 						alert(TextMessage.test);
+						mui.openWindow({
+							id: 'login',
+							url:"../../login/login.html"
+						});
 					} else {
-						alert("other error code:" + data);
+						console.log("other error code:" + data);
 					}
 				}
 			});
@@ -688,8 +696,12 @@
 						Log.d(data);
 						if(data == "1000") {
 							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						} else {
-							alert("other error code:" + data);
+							console.log("other error code:" + data);
 						}
 					}
 				});
@@ -729,8 +741,12 @@
 								Log.d(data);
 								if(data == "1000") {
 									alert(TextMessage.test);
+									mui.openWindow({
+										id: 'login',
+										url:"../../login/login.html"
+									});
 								} else {
-									alert("other error code:" + data);
+									console.log("other error code:" + data);
 								}
 							}
 						});

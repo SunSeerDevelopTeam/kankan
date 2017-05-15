@@ -226,20 +226,10 @@
 							ng: function(data) {
 								waiting.close();
 								canClick = true;
-								switch(data) {
-									case "2013":
-										mui.toast(TextMessage.email_error, {
-											duration: 'long',
-											type: 'div'
-										})
-										break;
-									default:
-										mui.toast(TextMessage.send_code_ng, {
-											duration: 'long',
-											type: 'div'
-										})
-										break;
-								}
+								mui.toast(TextMessage.send_code_ng, {
+									duration: 'long',
+									type: 'div'
+								})
 							},
 							error: function() {
 								canClick = true;
@@ -266,6 +256,7 @@
 								Log.i("register ok");
 								waiting.close();
 								plus.storage.setItem('LoginFlag', 'isLogin');
+								loginFlg = true;
 								mui.back();
 							},
 							ng: function(data) {

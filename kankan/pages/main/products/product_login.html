@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;"></a>
 			<h1 class="mui-center mui-title lang" data-locale="commodity_login"></h1>
 		</header>
 		
@@ -85,7 +85,7 @@
 				    <div class="ka_prologbox">
 				    	 <h5 class="ka_proloh5 lang" data-locale="commodity_buyway"></h5>
 				    	 <ul class="mui-table-view">
-				    	         <li class="mui-table-view-cell">
+				    	         <li class="mui-table-view-cell" style="text-align:center;margin-left:3%;">
 				    	             <div class="ka_userbox">
 					    	            <div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_switch" id="exchbuybtn"></div>
 					    	            <input type="hidden" name="exchange" id="exchange" value="0" />
@@ -125,6 +125,7 @@
 		//alert(id);
 		$(".z_addImg").remove();
 		$(".mui-title").html(TextMessage.commodity_edit);
+		$(".mui-action-back").show();
 		document.getElementById('codid').value=id;
 		getcomdinfo(id);
 	});
@@ -206,6 +207,10 @@
 						Log.d(data);
 						if(data == "1000") {
 							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						}
 					}
 		});
@@ -221,13 +226,15 @@
 					children:[]
 			};
 			var childrenarr=categoryadd.children;
-			var secondcatearr=catedata[c].children;
-			for(var t=0;t<secondcatearr.length;t++){
-				var childrenadd={
-						value: secondcatearr[t].classify_id,
-						text: secondcatearr[t].classify_detail
-					}
-				childrenarr.push(childrenadd);
+			if(catedata[c].children){
+				var secondcatearr=catedata[c].children;
+				for(var t=0;t<secondcatearr.length;t++){
+					var childrenadd={
+							value: secondcatearr[t].classify_id,
+							text: secondcatearr[t].classify_detail
+						}
+					childrenarr.push(childrenadd);
+				}
 			}
 			testarr.push(categoryadd);
 		}
@@ -264,7 +271,7 @@
 	$.ready(function() {
 		mui.plusReady(function() {
 			var param2 = {
-				"flg": "commodity"
+				"flg": "classify"
 			};
 			Repository.Commodity.category(param2, {
 				ok: function(data) {
@@ -336,6 +343,10 @@
 								Log.d(data);
 								if(data == "1000") {
 									alert(TextMessage.test);
+									mui.openWindow({
+										id: 'login',
+										url:"../../login/login.html"
+									});
 								}
 							}
 				});
@@ -458,8 +469,12 @@ function publishs() {
 			Log.d(data);
 			if(data == "1000") {
 				alert(TextMessage.test);
+				mui.openWindow({
+					id: 'login',
+					url:"../../login/login.html"
+				});
 			} else {
-				alert("other error code:" + data);
+				console.log("other error code:" + data);
 			}
 		}
 	});
@@ -645,6 +660,10 @@ function Processing(results) {
 		console.log("NG:" + errorcode);
 		if(errorcode == "1000") {
 			alert(TextMessage.test);
+			mui.openWindow({
+				id: 'login',
+				url:"../../login/login.html"
+			});
 		}
 	}
 }

@@ -109,6 +109,10 @@ function publishs() {
 			Log.d(data);
 			if(data == "1000") {
 				alert(TextMessage.test);
+				mui.openWindow({
+				id: 'login',
+				url:"../../login/login.html"
+			});
 			} else {
 				alert("other error code:" + data);
 			}
@@ -256,7 +260,7 @@ function compressImg(path) {
 
 function uploadimage(path) {
 	var targetimg = path;
-	var server = "http://192.168.1.8:7998/commodity/release/upload/";
+	var server = Api.url.Commodity.imgupload;
 	//open loading button
 	var wt = plus.nativeUI.showWaiting();
 	var task = plus.uploader.createUpload(server, {

@@ -106,14 +106,16 @@
 				}
 
 				var userPhoto = document.getElementById("user");
+				var isLogin = plus.storage.getItem("LoginFlag");
+				Log.i("home.html isLogin " + isLogin)
 				userPhoto.addEventListener('click', function(event) {
 					console.log("userPhoto clicked.");
 					if(!network) {
 						console.log(TextMessage.not_network);
 						mui.toast(TextMessage.not_network);
 					}
-					var isLogin = plus.storage.getItem("LoginFlag");
-					if(isLogin == "isLogin") {
+					
+					if(isLogin == "isLogin" || loginFlg) {
 						mui.openWindow({
 							id:"user",
 							url:"user/user.html",
