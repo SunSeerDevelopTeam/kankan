@@ -599,9 +599,22 @@
 								id: 'login',
 								url:"../../login/login.html"
 							});
+<<<<<<< .merge_file_a12680
 						} else {
 							console.log("other error code:" + data);
 						}
+=======
+						} 
+						if(data=="2002"){
+							alert(TextMessage.userng);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						console.log("other error code:" + data);
+						
+>>>>>>> .merge_file_a08204
 					}
 				});
 			}else{

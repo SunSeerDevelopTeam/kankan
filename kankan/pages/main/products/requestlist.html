@@ -83,11 +83,25 @@
 						Log.d(data);
 						//emptycontent();
 						if(data=="2001"){
+<<<<<<< .merge_file_a11388
 							alert(TextMessage.datanull);
 							//$("ul").hide();
 						}
 						if(data=="1000"){
 							alert(TextMessage.test);
+=======
+							mui.toast(TextMessage.datanull, {
+								duration: 'long',
+								type: 'div'
+							})
+						}
+						if(data=="1000"){
+							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+>>>>>>> .merge_file_a04532
 						}
 						if(data=="2002"){
 							alert(TextMessage.userng);
