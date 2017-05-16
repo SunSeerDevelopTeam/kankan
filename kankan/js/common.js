@@ -456,7 +456,7 @@ var Util;
 var Api;
 (function(Api) {
 	// develop
-	 var baseUrl = 'http://192.168.1.8:7998';
+	var baseUrl = 'http://192.168.1.8:7998';
 	// 本番
 	//var baseUrl = 'http://210.189.72.25:7998';
 	Api.url = {
@@ -470,8 +470,11 @@ var Api;
 			Usertranslist:baseUrl + '/user/Usertrans/',
 			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/',
 			Buyticket: baseUrl + '/pay/Buyticket/',
-			pointbuyticketway: baseUrl + '/pay/Buyticket/pointbuyticketway/'
-
+			pointbuyticketway: baseUrl + '/pay/Buyticket/pointbuyticketway/',
+			logout:baseUrl + '/user/logout/',
+			userupimage:baseUrl + '/user/Usercomplaint/uploadImg/',
+			Usercomplaint:baseUrl + '/user/Usercomplaint/',
+			addComplaint:baseUrl + '/user/Usercomplaint/addComplaint/'
 		},
 		Commodity: {
 			commodityDetail: baseUrl + '/commodity/commoditydetail',
@@ -647,6 +650,21 @@ var Repository;
 			return Api.call(Api.url.User.pointbuyticketway, params, callback);
 		}
 		User.pointbuyticketway = pointbuyticketway;
+		
+		function logout(params, callback) {
+			return Api.call(Api.url.User.logout, params, callback);
+		}
+		User.logout = logout;
+		
+		function Usercomplaint(params, callback) {
+			return Api.call(Api.url.User.Usercomplaint, params, callback);
+		}
+		User.Usercomplaint = Usercomplaint;
+		
+		function addComplaint(params, callback) {
+			return Api.call(Api.url.User.addComplaint, params, callback);
+		}
+		User.addComplaint = addComplaint;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -858,7 +876,7 @@ var TextMessage;
 	TextMessage.commodity_descriptionlength = language ? "商品説明（1000文字まで）" : "商品说明（1000字以内）";
 	TextMessage.publishsure = language ? "確認出品する？" : "确认出品展出吗?";
 	TextMessage.tackpicture = language ? "写真撮影" : "拍照";
-	TextMessage.comdity_takepic = language ? "商品に写真を撮る" : "为商品拍照";
+	TextMessage.comdity_takepic = language ? "撮影" : "拍摄";
 	TextMessage.gallerychoose = language ? "携帯電話からアルバムを選ぶ" : "从手机相册中选择";
 	TextMessage.chooseimage = language ? "写真を選択する" : "选择照片";
 	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
@@ -898,6 +916,10 @@ var TextMessage;
 	TextMessage.pointnot = language ? "ポイントポイント不足" : "Point点数不足";
 	TextMessage.buywaynot = language ? "購入方は無効" : "购买方式无效";
 	TextMessage.buyyes = language ? "購入成功" : "购买成功";
+	TextMessage.sure = language ? "確認" : "确认";
+	TextMessage.logoutconfirm = language ? "確定して登録するかな？" : "确定要退出登录吗?";
+	TextMessage.logouttitle = language ? "登録するかな" : "退出登录";
+	TextMessage.logoutsuccess = language ? "成功する" : "退出成功";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

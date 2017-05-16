@@ -78,8 +78,8 @@
 			});
 			function showcommodity(results){
 				var data=results.data;
-				//sell commodity
-				var others=data.other;
+				//requested
+				var others=data.own;
 				for(var ot=0;ot<others.length;ot++){
 					var transid=others[ot].trans.trans_id;
 					var comm_name=others[ot].trans[0].comm_name;
@@ -112,8 +112,8 @@
 					$('.mui-scroll-wrapper').scroll({
 						indicators: true //Whether to display a scroll bar
 					});
-					//want buy commodity
-					var own=data.own
+					//request
+					var own=data.other
 					var html2='<ul class="mui-table-view mui-grid-view want-sell">';
 					for(var ow=0;ow<own.length;ow++){
 						var otransid=own[ow].trans.trans_id;
@@ -208,13 +208,6 @@
 						if(data=="2001"){
 							alert(TextMessage.datanull);
 							//$("ul").hide();
-						}
-						if(data=="1000"){
-							alert(TextMessage.test);
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/login.html"
-							});
 						}
 						if(data=="2002"){
 							alert(TextMessage.userng);

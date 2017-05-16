@@ -120,7 +120,19 @@ var JSLocale = {
 	"requesttitle":"请求",
 	"requesthistory":"交易履历",
 	"requestedpro":"被请求商品",
-	"requestpro":"请求商品"
+	"requestpro":"请求商品",
+	//setting page
+	"setting:":"设置",
+	"pointbuytext":"购买point",
+	"other":"其他",
+	"ticketbuy":"购买ticket",
+	"userule":"使用条款",
+	"privacytext":"隐私保护说明",
+	"forbidontext":"禁止行为",
+	"inquiry":"申诉",
+	"overview":"公司概要",
+	"logout":"退出登录",
+	"version":"版本号"
 }
 
 $(function() {

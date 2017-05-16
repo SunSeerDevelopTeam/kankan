@@ -121,6 +121,18 @@ var JSLocale = {
 	"requesthistory":"交易履历",
 	"requestedpro":"リクエストされた",
 	"requestpro":"リスエストした"
+	//setting page
+	"setting:":"設定",
+	"pointbuytext":"ポイント購入",
+	"other":"その他",
+	"ticketbuy":"チケット購入",
+	"userule":"利用規約",
+	"privacytext":"プライバシーポリシー",
+	"forbidontext":"禁止物・禁止行為",
+	"inquiry":"お問い合わせ",
+	"overview":"会社概要",
+	"logout":"ログアウト",
+	"version":"バージョン"
 }
 
 $(function() {

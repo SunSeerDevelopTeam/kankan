@@ -433,7 +433,9 @@ body .mui-table-view-cell.mui-active{
 	margin-bottom: 3em;
 	background-color: #FFFFFF;
 }
-
+.ka_prologbox1 {
+	background-color: #FFFFFF;
+}
 .ka_proloh5 {
 	color: #000000;
 }

@@ -206,14 +206,20 @@
 					ng: function(data) {
 						console.log("error:"+data);
 						if(data == "1000") {
-							alert(TextMessage.test);
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
 							});
 						}
 						if(data=="2002"){
-							alert(TextMessage.userng);
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							});
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
@@ -346,14 +352,20 @@
 							ng: function(data) {
 								Log.d(data);
 								if(data == "1000") {
-									alert(TextMessage.test);
+									mui.toast(TextMessage.test, {
+										duration: 'long',
+										type: 'div'
+									});
 									mui.openWindow({
 										id: 'login',
 										url:"../../login/login.html"
 									});
 								}
 								if(data=="2002"){
-									alert(TextMessage.userng);
+									mui.toast(TextMessage.userng, {
+										duration: 'long',
+										type: 'div'
+									});
 									mui.openWindow({
 										id: 'login',
 										url:"../../login/login.html"
@@ -479,20 +491,24 @@ function publishs() {
 		ng: function(data) {
 			Log.d(data);
 			if(data == "1000") {
-				alert(TextMessage.test);
+				mui.toast(TextMessage.test, {
+					duration: 'long',
+					type: 'div'
+				});
 				mui.openWindow({
 					id: 'login',
 					url:"../../login/login.html"
 				});
 			} 
 			if(data=="2002"){
-				alert(TextMessage.userng);
+				mui.toast(TextMessage.userng, {
+					duration: 'long',
+					type: 'div'
+				});
 				mui.openWindow({
 					id: 'login',
 					url:"../../login/login.html"
 				});
-			} else {
-				console.log("other error code:" + data);
 			}
 			console.log("other error code:" + data);
 			
@@ -679,7 +695,10 @@ function Processing(results) {
 		var errorcode = data.result.statuscode;
 		console.log("NG:" + errorcode);
 		if(errorcode == "1000") {
-			alert(TextMessage.test);
+			mui.toast(TextMessage.test, {
+				duration: 'long',
+				type: 'div'
+			});
 			mui.openWindow({
 				id: 'login',
 				url:"../../login/login.html"
