@@ -40,7 +40,7 @@
 					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
 				</button>
 				<h1 class="mui-center mui-title user-title-center maintitle"></h1>
-				<a href="../../setting/setting.html">
+				<a href="../../setting/setting.html" class="settingbut">
 					<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
 						<span class="mui-icon mui-icon-gear"></span>
 					</button>
@@ -50,7 +50,13 @@
 			<!--main content start-->
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
-					<div class="tran-page">
+					<div id="loading" class="mui-content ka_userbox">
+						<div class="spinner">
+						  <div class="double-bounce1"></div>
+						  <div class="double-bounce2"></div>
+						</div>
+					</div>
+					<div class="tran-page" style="display:none;">
 						<ul class="mui-table-view">
 							<li class="head-img-box">
 								<div>
@@ -235,7 +241,7 @@
 					<div class="mui-scroll">
 						<form method="post" name="userinfosub" id="userinfosub">
 							<div class="ka_editebox">
-								<div class="head-img-box ka_userimagebox">
+								<div class="head-img-box ka_userimagebox editeimg">
 									<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg"  />
 								</div>
 								<div class="ka_usernicknamebox">
@@ -330,7 +336,7 @@
 			});
 		})(mui);
 		//change head image
-		mui(".head-img-box").on("tap", ".headimg", function(e) {
+		mui(".editeimg").on("tap", ".headimg", function(e) {
 			if(mui.os.plus){
 				var a = [{
 					title: TextMessage.tackpicture
@@ -599,14 +605,6 @@
 								id: 'login',
 								url:"../../login/login.html"
 							});
-<<<<<<< HEAD
-<<<<<<< .merge_file_a12680
-=======
->>>>>>> lx/13551
-						} else {
-							console.log("other error code:" + data);
-						}
-=======
 						} 
 						if(data=="2002"){
 							alert(TextMessage.userng);
@@ -617,7 +615,6 @@
 						}
 						console.log("other error code:" + data);
 						
->>>>>>> .merge_file_a08204
 					}
 				});
 			}else{
@@ -679,11 +676,13 @@
 					console.log("success");
 					console.dir(data);
 					showuser(data);
-					
+					$("#loading").hide();
+					$(".tran-page").show();
 				},
 				ng: function(data) {
 					Log.d(data);
 					if(data == "1000") {
+						$(".settingbut").hide();
 						alert(TextMessage.test);
 						mui.openWindow({
 							id: 'login',
@@ -709,16 +708,9 @@
 						addresspicker(address);
 					},
 					ng: function(data) {
-						Log.d(data);
-						if(data == "1000") {
-							alert(TextMessage.test);
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/login.html"
-							});
-						} else {
-							console.log("other error code:" + data);
-						}
+						console.log(data);
+						console.log("other error code:" + data);
+						
 					}
 				});
 			});

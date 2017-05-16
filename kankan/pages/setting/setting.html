@@ -22,7 +22,6 @@
 	</head>
 
 	<body class="mui-fullscreen">
-		<!--页面主结构开始-->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar">
@@ -31,70 +30,49 @@
 				</div>
 			</div>
 		</div>
-		<!--页面主结构结束-->
-		<!--单页面开始-->
 		<div id="setting" class="mui-page">
-			<!--页面标题栏开始-->
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る</font></span>
+					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
 				</button>
-				<h1 class="mui-center mui-title title-center">設定</h1>
+				<h1 class="mui-center mui-title title-center lang" data-locale="setting"></h1>
 			</div>
-
-			<!--页面标题栏结束-->
-			<!--页面主内容区开始-->
+			<!--page title end-->
+			<!--main page-->
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
-					<h5>ポイント</h4>
+					<h5 class="lang" data-locale="userpointtext"></h4>
 					<ul class="mui-table-view">
 				        <li class="mui-table-view-cell pointbuy">
-				            <a class="mui-navigate-right">
-				               ポイント購入
-				            </a>
+				            <a class="mui-navigate-right lang" data-locale="pointbuytext"></a>
 				        </li>
 				    </ul>
-				    <h5>その他</h4>
+				    <h5 class="lang" data-locale="other"></h4>
 					<ul class="mui-table-view">
 				        <li class="mui-table-view-cell tickbuy">
-				            <a class="mui-navigate-right">
-				               チケット購入
-				            </a>
+				            <a class="mui-navigate-right lang" data-locale="ticketbuy"></a>
 				        </li>
 				         <li class="mui-table-view-cell">
-				            <a class="mui-navigate-right" href="#Utilization">
-				               利用規約
-				            </a>
+				            <a class="mui-navigate-right lang" data-locale="userule" href="#Utilization"></a>
 				        </li>
 				        <li class="mui-table-view-cell">
-				            <a class="mui-navigate-right" href="#Privacy">
-				               プライバシーポリシー
-				            </a>
+				            <a class="mui-navigate-right lang" href="#Privacy" data-locale="privacytext"></a>
 				        </li>
 				        <li class="mui-table-view-cell">
-				            <a class="mui-navigate-right" href="#forbidon">
-				               禁止物・禁止行為
-				            </a>
+				            <a class="mui-navigate-right lang" href="#forbidon" data-locale="forbidontext"></a>
 				        </li>
 				        <li class="mui-table-view-cell Contact">
-				            <a class="mui-navigate-right" >
-				              お問い合わせ
-				            </a>
+				            <a class="mui-navigate-right lang" data-locale="inquiry"></a>
 				        </li>
 				        <li class="mui-table-view-cell">
-				            <a class="mui-navigate-right" href="#Summary">
-				              会社概要
-				            </a>
+				            <a class="mui-navigate-right lang" data-locale="overview" href="#Summary"></a>
+				        </li>
+				        <li class="mui-table-view-cell logout">
+				            <a class="mui-navigate-right lang" href="#" data-locale="logout"></a>
 				        </li>
 				        <li class="mui-table-view-cell">
-				            <a class="mui-navigate-right" href="#">
-				             ログアウト
-				            </a>
-				        </li>
-				        <li class="mui-table-view-cell">
-				            <a class="mui-navigate-right" href="#">
-				            バージョン
-				            </a>
+				         <div class="mui-pull-left lang" data-locale="version"></div> 
+				         <div class="mui-pull-right">1.0.0</div>
 				        </li>
 				    </ul>
 				</div>
@@ -106,7 +84,7 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title lang" data-locale="">利用规约</h1>
+				<h1 class="mui-center mui-title lang" data-locale="userule">利用规约</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
@@ -192,6 +170,10 @@
 	<script src="../../js/mui.min.js"></script>
 	<script src="../../js/mui.view.js "></script>
 	<script src='../../js/feedback.js'></script>
+	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
+	<script type="text/javascript" src="../../js/language.js" ></script>
+	<script src="../../js/sha256.js"></script>
+	<script src="../../js/common.js"></script>
 	<script>
 		mui.init();
 		var viewApi = mui('#app').view({
@@ -233,6 +215,39 @@
 			mui.openWindow({
 				id: 'point_buy',
 				url:"point_buy.html"
+			});
+		});
+		mui(".logout").on("tap","a",function(e){
+			var btnArray=new Array();
+			btnArray[0]=TextMessage.sure;
+			btnArray[1]=TextMessage.cancel;
+			mui.confirm(TextMessage.logoutconfirm,TextMessage.logouttitle,btnArray,function(e){
+				var clickval=e.index;
+				//sure log out
+				if(clickval=="0"){
+					mui.plusReady(function() {
+						var params={};
+						Repository.User.logout(params,{
+							ok: function(data) {
+								console.log("log out success");
+							},
+							ng: function(data) {
+								console.log("error:"+data);
+								Log.d(data);
+							}
+						});
+					});
+					plus.storage.setItem('token','');//clear locale token
+					plus.storage.setItem('LoginFlag', '');//clear LoginFlag
+					mui.toast(TextMessage.logoutsuccess, {
+						duration: 'long',
+						type: 'div'
+					});
+					mui.openWindow({
+						id: 'login',
+						url:"../login/login.html"
+					});
+				}
 			});
 		});
 	</script>

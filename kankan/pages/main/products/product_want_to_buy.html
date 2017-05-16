@@ -108,14 +108,27 @@ function publishs() {
 		ng: function(data) {
 			Log.d(data);
 			if(data == "1000") {
-				alert(TextMessage.test);
+				mui.toast(TextMessage.test, {
+					duration: 'long',
+					type: 'div'
+				});
 				mui.openWindow({
-				id: 'login',
-				url:"../../login/login.html"
-			});
-			} else {
-				alert("other error code:" + data);
+					id: 'login',
+					url:"../../login/login.html"
+				});
+			} 
+			if(data=="2002"){
+				mui.toast(TextMessage.userng, {
+					duration: 'long',
+					type: 'div'
+				});
+				mui.openWindow({
+					id: 'login',
+					url:"../../login/login.html"
+				});
 			}
+			alert("other error code:" + data);
+			
 		}
 	});
 
@@ -299,7 +312,24 @@ function Processing(results) {
 		var errorcode = data.result.statuscode;
 		console.log("NG:" + errorcode);
 		if(errorcode == "1000") {
-			alert(TextMessage.test);
+			mui.toast(TextMessage.test, {
+				duration: 'long',
+				type: 'div'
+			});
+			mui.openWindow({
+				id: 'login',
+				url:"../../login/login.html"
+			});
+		}
+		if(errorcode=="2002"){
+			mui.toast(TextMessage.userng, {
+				duration: 'long',
+				type: 'div'
+			});
+			mui.openWindow({
+				id: 'login',
+				url:"../../login/login.html"
+			});
 		}
 	}
 }

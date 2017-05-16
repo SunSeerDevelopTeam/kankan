@@ -565,15 +565,6 @@
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script>
 			(function(mui) {
-
-				mui.init({
-					preloadPages: [{
-						id: "detail",
-						url: "../main/products/detail.html"
-					}],
-					preloadLimit: 3
-				});
-
 				//阻尼系数
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
 				mui('.mui-scroll-wrapper').scroll({
@@ -582,7 +573,13 @@
 					deceleration: deceleration
 				});
 				mui.ready(function() {
-
+					mui.init({
+						preloadPages: [{
+							id: "detail",
+							url: "../main/products/detail.html"
+						}],
+						preloadLimit: 3
+					});
 					/**
 					 * get category data from server and show data.
 					 */
@@ -703,17 +700,15 @@
 						bindEventOnListViewItem();
 					};
 
-					var detailPage = null;
-
 					var bindEventOnListViewItem = function() {
 						$(".li-content").on("click", function(event) {
 						if(isShowMenu) return;
 							var id = $(this).attr("data-comm-id");
-						if(!detailPage)
-							detailPage = plus.webview.getWebviewById('detail');
+							var detailPage = plus.webview.getWebviewById('detail');
 						mui.fire(detailPage, 'cid', {
 							id: id
 						});
+						/**
 						setTimeout(function() {
 							mui.openWindow({
 								id: 'detail',
@@ -725,7 +720,7 @@
 									duration: 200
 								}
 							});
-							}, 200);
+							}, 200);**/
 					});
 
 						$(".comm-like, .comm-like-num").on("click", function(event) {

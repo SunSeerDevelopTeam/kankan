@@ -7,6 +7,7 @@
 		<title></title>
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/kankan_home.css" rel="stylesheet" />
 		<style>
 			.mui-icon {
 				margin-top:10px;
@@ -18,34 +19,44 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav"></a>
-			<a class="lang" data-locale="back"></a>
-			<h1 class="mui-title"><span class="lang" data-locale="change">お問い合わせ</span></h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav"><a class="lang" data-locale="back"></a></a>
+			<h1 class="mui-title"><span class="lang" data-locale="">お問い合わせ</span></h1>
 		</header>
 		<div class="mui-content">
-			
 			<form  style="background:#FEFDF8">
 				<div style="padding:15px 15px;"><span style="color:red">*</span>印がある項目は必須項目となります。</div>
-				<h5 style="padding-left:15px"><span style="color:red">*</span>姓</h5>
-    			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
-					<input type="text" style="background:#FFFFFF;width:90%;" class="mui-input-clear" placeholder="带清除按钮的输入框">
+				<div style="padding-left:15px;margin-bottom: 1.2em;"><h5>上传图片</h5></div>
+				<div class="ka_prologbox0 z_photo" style="margin-top: -1em; width: 95%;">
+					<div class="z_file" style="background-image: url(../../images/iconfont-tianjia.png);" id="gallery"></div>
+					<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic" style="width: 30px;"></div>
 				</div>
-				<h5 style="padding-left:15px"><span style="color:red">*</span>名</h5>
-    			<div class="mui-input-row" style="text-align:center;">
-					<input type="text" style="background:#FFFFFF;width:90%;" class="mui-input-clear" placeholder="带清除按钮的输入框">
+				<!--mask-->
+		        <div class="z_mask">
+		            <!--alert box-->
+		            <div class="z_alert">
+		                 <p class="lang" data-locale="commodity_photodet"></p>
+		                <p>
+		                    <span class="z_cancel lang" data-locale="det_goodconcel"></span>
+		                    <span class="z_sure lang" data-locale="register"></span>
+		                </p>
+		            </div>
+		        </div>
+				 <div id="deltimg" style="display: none;"></div>
+				 <input type="hidden" name="" id="0" value="0" class="imgname" />
+	        	 <input type="hidden" name="" id="1" value="0" class="imgname" />
+	        	 <input type="hidden" name="" id="2" value="0" class="imgname" />
+	        	 <input type="hidden" name="" id="3" value="0" class="imgname" />
+				<h5 style="padding-left:15px"><span style="color:red">*</span>姓名</h5>
+    			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear" placeholder="姓名">
 				</div>
 				<h5 style="padding-left:15px"><span style="color:red">*</span>Email</h5>
     			<div class="mui-input-row" style="text-align:center;">
-					<input type="text" style="background:#FFFFFF;width:90%;" class="mui-input-clear" placeholder="带清除按钮的输入框">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="" placeholder="email" id="email" name="email" disabled="disabled">
 				</div>
-				<h5 style="padding-left:15px">アプリ内の「あなたあのID」</h5>
-    			<div class="mui-input-row" style="text-align:center;">
-					<input type="text" style="background:#FFFFFF;width:90%;" class="mui-input-clear" placeholder="带清除按钮的输入框">
-				</div>
-				
 				<h5 style="padding-left:15px"><span style="color:red">*</span>お問い合わせ内容</h5>
     			<div class="mui-input-row" style="text-align:center;">
-					<textarea id="textarea" style="background:#FFFFFF;width:90%;" rows="5" placeholder="多行文本框"></textarea>
+					<textarea id="textarea" style="background:#FFFFFF;width:85%;" rows="5" placeholder="多行文本框"></textarea>
 				</div>
 				<div class="mui-button-row">
 					<button type="button" class="mui-btn mui-btn-primary　mui-btn-outline" onclick="return false;">確認</button>&nbsp;&nbsp;
@@ -54,8 +65,35 @@
 			</form>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js" ></script>
-	<script type="text/javascript" src="../../js/mui.view.js" ></script>
-	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
-	<script type="text/javascript" src="../../js/language.js" ></script>
+		<script type="text/javascript" src="../../js/mui.view.js" ></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
+		<script type="text/javascript" src="../../js/language.js" ></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script src="../../js/uploadimage.js"></script>
+		<script>
+			mui.init();
+			//upload image url
+			var server = Api.url.User.userupimage;
+			function showinfo(reaults){
+				var info=reaults.data[0];
+				var email=info.email;
+				var fullname=info.full_name;
+				$("#email").val(email);
+			}
+			mui.plusReady(function() {
+				var params={};
+				Repository.User.Usercomplaint(params,{
+					ok: function(data) {
+						console.log("success");
+						showinfo(data);
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						Log.d(data);
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
