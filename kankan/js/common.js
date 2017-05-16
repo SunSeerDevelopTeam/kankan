@@ -7,6 +7,15 @@ var LOGIN_TYPE = {
 	EMAIL: "0",
 	OAUTH: "1"
 }
+
+var TRANS_STATUS = {
+	0:"请求中",
+	1:"请求转订单",
+	2:"订单中",
+	3:"订单完成",
+	8:"请求终止",
+	9:"订单终止"
+}
 var Validator;
 (function(Validator) {
 	Validator.types = {
@@ -500,9 +509,8 @@ var Api;
 			transSubmitOrder:baseUrl + '/transaction/transoperation/trans_submit_order/',
 			transRequestOrder:baseUrl + '/transaction/transoperation/trans_request_order/',
 			transChangePrice:baseUrl + '/transaction/transoperation/trans_change_price/', 
-			transStop:baseUrl + '/transaction/transoperation/transaction_stop/',	
-			Commoditypublish: baseUrl + '/commodity/release/',
-			Commodityedite: baseUrl + '/commodity/release/update/'
+			transStop:baseUrl + '/transaction/transoperation/transaction_stop/',
+			transEdite: baseUrl + '/transaction/transoperation/transaction_show/'
 		}
 	};
 	Api.Params = {
@@ -784,6 +792,11 @@ var Repository;
 			return Api.call(Api.url.Trans.transStop, params, callback);
 		}
 		Transaction.transStop = transStop;
+				
+		function transEdite(params, callback){
+			return Api.call(Api.url.Trans.transEdite, params, callback);
+		}
+		Transaction.transEdite = transEdite;
 		
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
