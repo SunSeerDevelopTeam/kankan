@@ -546,8 +546,10 @@ var Api;
 				setToken(data.result.tokencheck);
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
-				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng))
-					callback.ng(data.result.statuscode)
+				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng)) {
+					Log.alert("statuscode is " + data.result.statuscode);
+					callback.ng(data.result.statuscode);
+				}
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
@@ -835,6 +837,13 @@ var Log;
 			console.debug(data)
 	}
 	Log.d = d;
+	
+	function alert(info) {
+		if (true) {
+			alert(info);
+		}
+	}
+	Log.alert = alert;
 })(Log || (Log = {}));
 var TextMessage;
 (function(TextMessage) {
