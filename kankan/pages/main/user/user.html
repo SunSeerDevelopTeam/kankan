@@ -235,7 +235,7 @@
 					<div class="mui-scroll">
 						<form method="post" name="userinfosub" id="userinfosub">
 							<div class="ka_editebox">
-								<div class="head-img-box ka_userimagebox">
+								<div class="head-img-box ka_userimagebox editeimg">
 									<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg"  />
 								</div>
 								<div class="ka_usernicknamebox">
@@ -330,7 +330,7 @@
 			});
 		})(mui);
 		//change head image
-		mui(".head-img-box").on("tap", ".headimg", function(e) {
+		mui(".editeimg").on("tap", ".headimg", function(e) {
 			if(mui.os.plus){
 				var a = [{
 					title: TextMessage.tackpicture
@@ -599,14 +599,6 @@
 								id: 'login',
 								url:"../../login/login.html"
 							});
-<<<<<<< HEAD
-<<<<<<< .merge_file_a12680
-=======
->>>>>>> lx/13551
-						} else {
-							console.log("other error code:" + data);
-						}
-=======
 						} 
 						if(data=="2002"){
 							alert(TextMessage.userng);
@@ -617,7 +609,6 @@
 						}
 						console.log("other error code:" + data);
 						
->>>>>>> .merge_file_a08204
 					}
 				});
 			}else{
