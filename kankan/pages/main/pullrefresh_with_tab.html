@@ -95,12 +95,6 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
-			
-			
-			
-			
-			
-			
 			/******************Menu Style begin**********************/
 			
 			html,
@@ -417,8 +411,9 @@
 				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
 						<a class="mui-control-item mui-active" href="#item1mobile">
+							All
 						</a>
-						<a class="mui-control-item" href="#item2mobile">
+						<a class="mui-control-item lang" href="#item2mobile" data-locale="tab_3">
 						</a>
 						<a class="mui-control-item" href="#item3mobile">
 						</a>
@@ -445,7 +440,7 @@
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
+							<div class="mui-scroll" data-category-id="all">
 								<ul class="mui-table-view mui-row">
 								</ul>
 							</div>
@@ -453,7 +448,7 @@
 					</div>
 					<div id="item2mobile" class="mui-slider-item mui-control-content">
 						<div class="mui-scroll-wrapper">
-							<div class="mui-scroll">
+							<div class="mui-scroll" data-category-id="want">
 								<ul class="mui-table-view mui-row">
 								</ul>
 							</div>
@@ -562,18 +557,22 @@
 		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js" ></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script>
+			mui.plusReady(function() {
+				Log.i("pullrefresh_with_tab.html plusReady...");
+				mui.preload({
+					id: 'detail',
+					url: '../main/products/detail.html'
+				});
+			});
+
 			(function(mui) {
 
-				mui.init({
-					preloadPages: [{
-						id: "detail",
-						url: "../main/products/detail.html"
-					}],
-					preloadLimit: 3
-				});
-
+				var search = "";
+				var page = "";
+				var pageInfo = {};
 				//阻尼系数
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
 				mui('.mui-scroll-wrapper').scroll({
@@ -582,7 +581,6 @@
 					deceleration: deceleration
 				});
 				mui.ready(function() {
-
 					/**
 					 * get category data from server and show data.
 					 */
@@ -596,9 +594,12 @@
 						error: function() {}
 					});
 
+					/**
+					 * get list data init view
+					 */
 					var updateCategoryView = function(data) {
 						var categoryHTML = new Util.StringBuilder();
-						var index = 0
+						var index = 2
 						data.forEach(function(item) {
 							$('#sliderSegmentedControl .mui-scroll a:eq(' + index + ')').text(item.catalog_detail);
 							$('.mui-slider-group .mui-scroll:eq(' + index + ')').attr('data-category-id', item.catalog_id);
@@ -606,7 +607,7 @@
 						});
 						$('#sliderSegmentedControl .mui-scroll a:gt(' + (index - 1) + ')').remove();
 						$('.mui-slider-group').children('div:gt(' + (index - 1) + ')').remove();
-						}
+					}
 
 					//循环初始化所有下拉刷新，上拉加载。
 					mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
@@ -616,108 +617,256 @@
 									var self = this;
 									setTimeout(function() {
 										var ul = self.element.querySelector('.mui-table-view');
-										getDataFromServer(ul, index, 10, true, self);
+										var catalog = $(ul).parent().attr("data-category-id");
+										getDataFromServer(ul, index, 5, catalog, null, null, true, self);
 									}, 1000);
-						}
-					},
+								}
+							},
 							up: {
 								callback: function() {
 									var self = this;
 									setTimeout(function() {
 										var ul = self.element.querySelector('.mui-table-view');
-										getDataFromServer(ul, index, 5, false, self);
+										var catalog = $(ul).parent().attr("data-category-id");
+										/**
+										if (pageInfo.list * pageInfo.page  >= pageInfo.cnt) {
+											self.endPullUpToRefresh(true);
+										} else {
+											getDataFromServer(ul, index, 5, catalog, null, ++pageInfo.page, false, self);
+										}
+										**/
+										getDataFromServer(ul, index, 5, catalog, null, ++pageInfo.page, false, self);
 									}, 1000);
-						}
-					}
+								}
+							}
 						});
 					});
-					var getDataFromServer = function(ul, index, count, reverse, self) {
-						Repository.Commodity.commodityList({
-							//catalog: $('.mui-slider-group .mui-scroll:eq(' + index + ')').attr('data-category-id')
-						}, {
+					var getDataFromServer = function(ul, index, max, catalog, search, page, reverse, self) {
+						var params = {};
+						switch(catalog) {
+							case "all":
+								break;
+							case "want":
+								params.want = 1;
+								break;
+							default:
+								params.catalog = catalog;
+								break;
+						}
+						if(max != null) {
+							params.max = max;
+						}
+						if(search != null) {
+							params.search = search;
+						}
+						if(page != null) {
+							params.page = page;
+						}
+						Repository.Commodity.commodityList(params, {
 							ok: function(data) {
-								createFragment(data.data, ul, index, count, reverse, self);
+								createFragment(data.data.commd, ul, index, reverse, self);
+								updateUserPhoto(data.data.users);
+								savePageInfo(data.data.pages);
 							},
 							ng: function(statuscode) {
 								if(statuscode == "0100") {
 									if(reverse) {
 										self.endPullDownToRefresh(true);
-					} else {
+									} else {
 										self.endPullUpToRefresh(true);
-					}
+									}
 								}
 							},
 							error: function() {}
 						});
 					};
-					var createFragment = function(data, ul, index, count, reverse, self) {
-					var fragment = document.createDocumentFragment();
-					var li;
+
+					var savePageInfo = function(pages) {
+						pageInfo.cnt = pages.cnt;
+						pageInfo.list = pages.list;
+						pageInfo.page = pages.page;
+					}
+
+					var updateUserPhoto = function(userImgURL) {
+						if(typeof(plus) == "undefined") {
+							return;
+						}
+						var homePage = plus.webview.getWebviewById('home.html');
+						mui.fire(homePage, 'updateUserImgEvent', {
+							userImgURL: userImgURL
+						});
+					}
+
+					var createFragment = function(data, ul, index, reverse, self) {
+						var fragment = document.createDocumentFragment();
+						var li;
 						if(Validator.isEmpty(data)) {
 							if(reverse) {
-								self.endPullDownToRefresh(true);
+								if(self != null) {
+									self.endPullDownToRefresh(true);
+								}
 							} else {
-								self.endPullUpToRefresh(true);
+								if(self != null) {
+									self.endPullUpToRefresh(true);
+								}
 							}
 							return;
 						}
 						data.forEach(function(item) {
-						li = document.createElement('li');
+							li = document.createElement('li');
 							li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
 							var listItemHTML = new Util.StringBuilder();
 							listItemHTML.appendFormat('<div class="li-content" data-comm-id="{0}">', item.commodity_id)
 								.append('<div class="comm-item">')
 								.append('<div class="item-tap mui-col-sm-12 mui-col-xs-12">')
-								.appendFormat('<img src="{0}">', item.imgs)
-								.append('<span>新宿区</span>')
+								.appendFormat('<img src="{0}">', item.img_flag)
+								.appendFormat('<span>{0}</span>', item.address)
 								.append('</div>')
 								.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
 								.append('<div class="height-max mui-row">')
 								.append('<div class="height-max mui-col-sm-8 mui-col-xs-8">')
 								.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', item.comm_name)
 								.appendFormat('<div class="comm-price mui-col-sm-12">{0} P</div>', item.price)
-							.append('</div>')
+								.append('</div>')
 								.append('<div class="height-max mui-col-sm-4 mui-col-xs-4">')
-								.append('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled">')
+								.appendFormat('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled ' + "{0}" + '">', item.praise_flg == 0 ? "comm-like-gray" : "comm-like-red")
 								.append('</span>')
-								.appendFormat('<span class="comm-like-num">{0}</span>', item.praise)
+								.appendFormat('<span class="comm-like-num">{0}</span>', item.praise_cnt)
 								.append('</div>')
 								.append('</div>')
 								.append('</div>')
 								.append('</div>')
-							.append('</div>');
+								.append('</div>');
 							li.innerHTML = listItemHTML.toString();
-						fragment.appendChild(li);
+							fragment.appendChild(li);
 						});
-						updateListView(fragment, ul, index, count, reverse, self);
+						updateListView(fragment, ul, index, reverse, self);
 					};
 
-					var updateListView = function(fragment, ul, index, count, reverse, self) {
+					var updateListView = function(fragment, ul, index, reverse, self) {
 						if(reverse) {
-						ul.insertBefore(fragment, ul.firstChild);
-							self.endPullDownToRefresh();
-					} else {
-						ul.appendChild(fragment);
-							self.endPullUpToRefresh();
+							ul.insertBefore(fragment, ul.firstChild);
+							if(self != null) {
+								self.endPullDownToRefresh();
+							}
+						} else {
+							ul.appendChild(fragment);
+							if(self != null) {
+								self.endPullUpToRefresh();
+							}
 						}
 						bindEventOnListViewItem();
 					};
-
+					getDataFromServer(
+						$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
+						0,
+						5,
+						$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
+						null,
+						null,
+						false,
+						null
+					);
+					
 					var detailPage = null;
-
 					var bindEventOnListViewItem = function() {
 						$(".li-content").on("click", function(event) {
-						if(isShowMenu) return;
+							if(isShowMenu) return;
 							var id = $(this).attr("data-comm-id");
-						if(!detailPage)
-							detailPage = plus.webview.getWebviewById('detail');
-						mui.fire(detailPage, 'cid', {
-							id: id
+							if(!detailPage) {
+								detailPage = plus.webview.getWebviewById('detail');
+							}
+							mui.fire(detailPage, 'cid', {
+								id: id
+							});
+							setTimeout(function() {
+								mui.openWindow({
+									id: 'detail',
+									waiting: {
+										autoShow: false
+									},
+									show: {
+										duration: 200
+									}
+								});
+							}, 300);
+
 						});
+
+						$(".comm-like, .comm-like-num").on("click", function(event) {
+							var isLogin = plus.storage.getItem("LoginFlag");
+							if(!isLogin) {
+								toggleMenu();
+								return false;
+							}
+							var _self = $(this);
+							var commId = _self.closest('li').children().attr('data-comm-id');
+							var params = {
+								commid: commId
+							};
+							Repository.Commodity.praise(params, {
+								ok: function(result) {
+									var praise_flag = result.data.praise_flag;
+									_self.css("color", "red");
+								},
+								ng: function(result) {
+									if(result === "2004") {
+										plus.nativeUI.alert(TextMessage.operation_error);
+									}
+								},
+								error: function() {}
+							});
+							return false;
+						});
+						$(".li-content img").on("error", function() {
+							$(this).attr("src", "../../images/nopic.jpg");
+						});
+					}
+					var menuWrapper = document.getElementById("menu-wrapper");
+					var menuWrapperClassList = menuWrapper.classList;
+					var busying = false;
+					var isShowMenu = false;
+
+					var toggleMenu = function() {
+						if(busying) {
+							return;
+						}
+						busying = true;
+						if(menuWrapperClassList.contains('mui-active')) {
+							document.body.classList.remove('menu-open');
+							menuWrapper.className = 'menu-wrapper fade-out-up animated';
+							menu.className = 'menu bounce-out-up animated';
+							setTimeout(function() {
+								menuWrapper.classList.add('hidden');
+								isShowMenu = false;
+							}, 500);
+						} else {
+							document.body.classList.add('menu-open');
+							menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
+							menu.className = 'menu bounce-in-down animated';
+							isShowMenu = true;
+						}
+						setTimeout(function() {
+							busying = false;
+						}, 500);
+					}
+
+					window.addEventListener("showMenu", function(event) {
+						toggleMenu();
+					});
+
+					$('#menu-wrapper a').first().text(TextMessage.register);
+					$('#menu-wrapper a').eq(1).text(TextMessage.login);
+					$('#menu-wrapper a').last().text(TextMessage.skip);
+
+					$('#menu-wrapper a').first().click(function() {
+						setTimeout(function() {
+							toggleMenu();
+						}, 100);
 						setTimeout(function() {
 							mui.openWindow({
-								id: 'detail',
-									url: "../main/products/detail.html",
+								id: 'reg',
+								url: '../login/reg.html',
 								waiting: {
 									autoShow: false
 								},
@@ -725,122 +874,35 @@
 									duration: 200
 								}
 							});
-							}, 200);
+						}, 400);
+						return true;
 					});
 
-						$(".comm-like, .comm-like-num").on("click", function(event) {
-								var isLogin = plus.storage.getItem("LoginFlag");
-							if(!isLogin) {
-								toggleMenu();
-								return false;
-							}
-							var _self = $(this);
-							var commId = _self.closest('li').children().attr('data-comm-id');
-									var params = {
-										commid: commid
-									};
-									Repository.Commodity.praise(params, {
-								ok: function(result) {
-									_self.css("color", "red");
+					$('#menu-wrapper a').eq(1).click(function() {
+						setTimeout(function() {
+							toggleMenu();
+						}, 100);
+						setTimeout(function() {
+							mui.openWindow({
+								id: 'login',
+								url: '../login/login.html',
+								waiting: {
+									autoShow: false
 								},
-										ng: function(result) {
-											if(result === "2004") {
-												plus.nativeUI.alert(TextMessage.operation_error);
-											}
-										},
-										error: function() {}
-									});
-							return false;
-					});
-						$(".li-content img").on("error", function() {
-							$(this).attr("src", "../../images/nopic.jpg");
-				});
-					}
-			var menuWrapper = document.getElementById("menu-wrapper");
-			var menuWrapperClassList = menuWrapper.classList;
-			var busying = false;
-					var isShowMenu = false;
-
-					var toggleMenu = function() {
-				if(busying) {
-					return;
-				}
-				busying = true;
-				if(menuWrapperClassList.contains('mui-active')) {
-					document.body.classList.remove('menu-open');
-					menuWrapper.className = 'menu-wrapper fade-out-up animated';
-					menu.className = 'menu bounce-out-up animated';
-					setTimeout(function() {
-						menuWrapper.classList.add('hidden');
-						isShowMenu = false;
-					}, 500);
-				} else {
-					document.body.classList.add('menu-open');
-					menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
-					menu.className = 'menu bounce-in-down animated';
-					isShowMenu = true;
-				}
-				setTimeout(function() {
-					busying = false;
-				}, 500);
-			}
-
-					window.addEventListener("showMenu", function(event) {
-						toggleMenu();
+								show: {
+									duration: 200
+								}
+							});
+						}, 400);
+						return true;
 					});
 
-				$('#menu-wrapper a').first().text(TextMessage.register);
-				$('#menu-wrapper a').eq(1).text(TextMessage.login);
-				$('#menu-wrapper a').last().text(TextMessage.skip);
-
-				$('#menu-wrapper a').first().click(function() {
-					setTimeout(function() {
-						toggleMenu();
-					}, 100);
-					setTimeout(function() {
-						mui.openWindow({
-							id: 'reg',
-							url: '../login/reg.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-					}, 400);
-					return true;
-				});
-
-				$('#menu-wrapper a').eq(1).click(function() {
-					setTimeout(function() {
-						toggleMenu();
-					}, 100);
-					setTimeout(function() {
-						mui.openWindow({
-							id: 'login',
-							url: '../login/login.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-					}, 400);
-					return true;
-				});
-
-				$('#menu-wrapper a').last().click(function() {
-					setTimeout(toggleMenu(), 500);
-					return true;
-				});
+					$('#menu-wrapper a').last().click(function() {
+						setTimeout(toggleMenu(), 500);
+						return true;
+					});
 
 				});
-
-
-
-
 
 			})(mui);
 		</script>
