@@ -716,8 +716,8 @@
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
 							var listItemHTML = new Util.StringBuilder();
-							listItemHTML.appendFormat('<div class="li-content" data-comm-id="{0}">', item.commodity_id)
-								.append('<div class="comm-item">')
+							listItemHTML.append('<div class="li-content">')
+								.appendFormat('<div class="comm-item" data-comm-id="{0}">',item.commodity_id)
 								.append('<div class="item-tap mui-col-sm-12 mui-col-xs-12">')
 								.appendFormat('<img src="{0}">', item.img_flag)
 								.appendFormat('<span>{0}</span>', item.address)
@@ -770,7 +770,7 @@
 					
 					var detailPage = null;
 					var bindEventOnListViewItem = function() {
-						$(".li-content").on("click", function(event) {
+						$(".li-content").on("tap",".comm-item", function(event) {
 							if(isShowMenu) return;
 							var id = $(this).attr("data-comm-id");
 							if(!detailPage) {

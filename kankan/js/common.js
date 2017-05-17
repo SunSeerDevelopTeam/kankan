@@ -1,4 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
+var DEBUG = false;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -464,56 +466,61 @@ var Util;
 })(Util || (Util = {}));
 var Api;
 (function(Api) {
-	// develop
-	var baseUrl = 'http://192.168.1.8:7998';
-	// 本番
-	//var baseUrl = 'http://210.189.72.25:7998';
+	
+	baseUrl = function(){
+		if (DEVELOPMENT) {
+			return "http://192.168.1.8:7998";
+		} else {
+			return "http://210.189.72.25:7998";
+		}
+	}
+	
 	Api.url = {
 		User: {
-			checkEmail: baseUrl + '/user/Register/email_rgister_check/',
-			register: 　baseUrl + '/user/Register',
-			login: baseUrl + '/user/login/login',
-			forgetPwd: baseUrl + '/user/password',
-			Usershow: baseUrl + '/user/Usershow',
-			userinfo: baseUrl + '/user/setting/',
-			Usertranslist:baseUrl + '/user/Usertrans/',
-			mytranshistory: baseUrl + '/user/Usertrans/mytranshistory/',
-			Buyticket: baseUrl + '/pay/Buyticket/',
-			pointbuyticketway: baseUrl + '/pay/Buyticket/pointbuyticketway/',
-			logout:baseUrl + '/user/logout/',
-			userupimage:baseUrl + '/user/Usercomplaint/uploadImg/',
-			Usercomplaint:baseUrl + '/user/Usercomplaint/',
-			addComplaint:baseUrl + '/user/Usercomplaint/addComplaint/'
+			checkEmail: baseUrl() + '/user/Register/email_rgister_check/',
+			register: 　baseUrl() + '/user/Register',
+			login: baseUrl() + '/user/login/login',
+			forgetPwd: baseUrl() + '/user/password',
+			Usershow: baseUrl() + '/user/Usershow',
+			userinfo: baseUrl() + '/user/setting/',
+			Usertranslist:baseUrl() + '/user/Usertrans/',
+			mytranshistory: baseUrl() + '/user/Usertrans/mytranshistory/',
+			Buyticket: baseUrl() + '/pay/Buyticket/',
+			pointbuyticketway: baseUrl() + '/pay/Buyticket/pointbuyticketway/',
+			logout:baseUrl() + '/user/logout/',
+			userupimage:baseUrl() + '/user/Usercomplaint/uploadImg/',
+			Usercomplaint:baseUrl() + '/user/Usercomplaint/',
+			addComplaint:baseUrl() + '/user/Usercomplaint/addComplaint/'
 		},
 		Commodity: {
-			commodityDetail: baseUrl + '/commodity/commoditydetail',
-			commodityList: baseUrl + '/index/index/',
-			category: baseUrl + '/commodity/catalog/',
-			praise: baseUrl + '/commodity/praise/',
-			commodityulist: baseUrl + '/commodity/Commodityusers/',
-			Usercomment: baseUrl + '/user/Usercomment/',
-			Commoditycomment: baseUrl + '/commodity/Commoditycomment/',
-			comments: baseUrl + '/commodity/comment/',
-			imgupload: baseUrl + '/commodity/release/upload/',
-			Commoditypublish:baseUrl + '/commodity/release/',
-			Commodityedite:baseUrl + '/commodity/release/update/',
-			logisticslist:baseUrl + '/logistics/',
-			logisticssendmail:baseUrl + '/logistics/index/sendMailtoLCO/'
+			commodityDetail: baseUrl() + '/commodity/commoditydetail',
+			commodityList: baseUrl() + '/index/index/',
+			category: baseUrl() + '/commodity/catalog/',
+			praise: baseUrl() + '/commodity/praise/',
+			commodityulist: baseUrl() + '/commodity/Commodityusers/',
+			Usercomment: baseUrl() + '/user/Usercomment/',
+			Commoditycomment: baseUrl() + '/commodity/Commoditycomment/',
+			comments: baseUrl() + '/commodity/comment/',
+			imgupload: baseUrl() + '/commodity/release/upload/',
+			Commoditypublish:baseUrl() + '/commodity/release/',
+			Commodityedite:baseUrl() + '/commodity/release/update/',
+			logisticslist:baseUrl() + '/logistics/',
+			logisticssendmail:baseUrl() + '/logistics/index/sendMailtoLCO/'
 		},
 		Trans:{
-			transConversation: baseUrl + '/transaction/transoperation/trans_conversation/',  //请求/订单对话API:
-			transCommdChange: baseUrl + '/transaction/transcommdchange/',   //提交请求商品变更API:
-			transShowRequest: baseUrl + '/transaction/transrequest/show_request_detail/', //显示当前交易请求/订单API
-			transGetUserCommd: baseUrl + '/transaction/transpublic/get_user_commodity/',
-			transRequest: baseUrl + '/transaction/transrequest/',
-			transOrderEvaluate: baseUrl + '/transaction/transoperation/trans_order_evaluate/',
-			transOrderReceipt: baseUrl  + '/transaction/transoperation/trans_order_receipt/',
-			transOrderLogustics:baseUrl + '/transaction/transoperation/trans_order_logistics/',
-			transSubmitOrder:baseUrl + '/transaction/transoperation/trans_submit_order/',
-			transRequestOrder:baseUrl + '/transaction/transoperation/trans_request_order/',
-			transChangePrice:baseUrl + '/transaction/transoperation/trans_change_price/', 
-			transStop:baseUrl + '/transaction/transoperation/transaction_stop/',
-			transEdite: baseUrl + '/transaction/transoperation/transaction_show/'
+			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/',  //请求/订单对话API:
+			transCommdChange: baseUrl() + '/transaction/transcommdchange/',   //提交请求商品变更API:
+			transShowRequest: baseUrl() + '/transaction/transrequest/show_request_detail/', //显示当前交易请求/订单API
+			transGetUserCommd: baseUrl() + '/transaction/transpublic/get_user_commodity/',
+			transRequest: baseUrl() + '/transaction/transrequest/',
+			transOrderEvaluate: baseUrl() + '/transaction/transoperation/trans_order_evaluate/',
+			transOrderReceipt: baseUrl()  + '/transaction/transoperation/trans_order_receipt/',
+			transOrderLogustics:baseUrl() + '/transaction/transoperation/trans_order_logistics/',
+			transSubmitOrder:baseUrl() + '/transaction/transoperation/trans_submit_order/',
+			transRequestOrder:baseUrl() + '/transaction/transoperation/trans_request_order/',
+			transChangePrice:baseUrl() + '/transaction/transoperation/trans_change_price/', 
+			transStop:baseUrl() + '/transaction/transoperation/transaction_stop/',
+			transEdite: baseUrl() + '/transaction/transoperation/transaction_show/'
 		}
 	};
 	Api.Params = {
@@ -550,6 +557,9 @@ var Api;
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng)) {
+					if (DEBUG) {
+						alert("return NG, statuscode is " + data.result.statuscode);
+					}
 					callback.ng(data.result.statuscode);
 				}
 				$d.resolve();
@@ -558,6 +568,9 @@ var Api;
 				Log.e(xhr);
 				Log.e(type);
 				Log.e(errorThrown);
+				if (DEBUG) {
+					alert("ajax error callback. error type is " + type);
+				}
 				plus.ui.alert(TextMessage.not_network);
 				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
