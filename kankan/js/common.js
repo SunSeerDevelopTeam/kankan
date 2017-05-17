@@ -550,7 +550,6 @@ var Api;
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng)) {
-					Log.alert("statuscode is " + data.result.statuscode);
 					callback.ng(data.result.statuscode);
 				}
 				$d.resolve();
@@ -855,13 +854,6 @@ var Log;
 			console.debug(data)
 	}
 	Log.d = d;
-	
-	function alert(info) {
-		if (true) {
-			alert(info);
-		}
-	}
-	Log.alert = alert;
 })(Log || (Log = {}));
 var TextMessage;
 (function(TextMessage) {
@@ -942,6 +934,9 @@ var TextMessage;
 	TextMessage.logoutconfirm = language ? "確定して登録するかな？" : "确定要退出登录吗?";
 	TextMessage.logouttitle = language ? "登録するかな" : "退出登录";
 	TextMessage.logoutsuccess = language ? "成功する" : "退出成功";
+	TextMessage.requiresuccess = language ? "クレーム提出が成功しました" : "申述成功提出";
+	TextMessage.namenotnull = language ? "ユーザー名を入力してください" : "姓名不能为空";
+	TextMessage.contentnotnull = language ? "内容を入力してください" : "内容不能为空";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

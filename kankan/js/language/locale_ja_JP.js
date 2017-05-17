@@ -122,7 +122,7 @@ var JSLocale = {
 	"requestedpro":"リクエストされた",
 	"requestpro":"リスエストした"
 	//setting page
-	"setting:":"設定",
+	"setting":"設定",
 	"pointbuytext":"ポイント購入",
 	"other":"その他",
 	"ticketbuy":"チケット購入",
@@ -132,7 +132,14 @@ var JSLocale = {
 	"inquiry":"お問い合わせ",
 	"overview":"会社概要",
 	"logout":"ログアウト",
-	"version":"バージョン"
+	"version":"バージョン",
+	//question page
+	"Appeal":"お問い合わせ",
+	"musttext":"印がある項目は必須項目となります。",
+	"upimgtext":"画像をアップロード",
+	"nametext":"姓名",
+	"contenttext":"お問い合わせ内容",
+	"suretext":"確    認"
 }
 
 $(function() {

@@ -19,16 +19,33 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav"><a class="lang" data-locale="back"></a></a>
-			<h1 class="mui-title"><span class="lang" data-locale="">お問い合わせ</span></h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+				<font class="lang" data-locale="back" size="3"></font>
+			</a>
+			<h1 class="mui-center mui-title lang" data-locale="Appeal"></h1>
 		</header>
 		<div class="mui-content">
 			<form  style="background:#FEFDF8">
-				<div style="padding:15px 15px;"><span style="color:red">*</span>印がある項目は必須項目となります。</div>
-				<div style="padding-left:15px;margin-bottom: 1.2em;"><h5>上传图片</h5></div>
-				<div class="ka_prologbox0 z_photo" style="margin-top: -1em; width: 95%;">
-					<div class="z_file" style="background-image: url(../../images/iconfont-tianjia.png);" id="gallery"></div>
-					<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic" style="width: 30px;"></div>
+				<div style="padding:15px 15px;"><span style="color:red">*</span><span class="lang" data-locale="musttext"></span></div>
+				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="nametext"></span></h5>
+    			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear lang" data-locale="nametext" name="full_name" id="full_name">
+				</div>
+				<h5 style="padding-left:15px"><span style="color:red">*</span>Email</h5>
+    			<div class="mui-input-row" style="text-align:center;">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="" placeholder="Email" id="email" name="email" disabled="disabled">
+				</div>
+				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="contenttext"></span></h5>
+    			<div class="mui-input-row" style="text-align:center;">
+					<textarea style="background:#FFFFFF;width:85%;" rows="5"  id="contents" name="contents"></textarea>
+    			</div>
+    			<h5 class="lang" data-locale="upimgtext" style="padding-left:15px;"></h5>
+    			<div class="ka_prologbox0 z_photo" style="width: 85%; height:auto; margin-top: -0.2em;">
+					<div class="mui-pull-left mui-icon mui-icon-camera takepic" id="takepic"></div>
+				</div>
+				<div class="mui-button-row" style="margin-bottom: 1em;">
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="submitvals()" data-locale="suretext"></button>&nbsp;&nbsp;
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="clearallval()" data-locale="det_goodconcel"></button>
 				</div>
 				<!--mask-->
 		        <div class="z_mask">
@@ -46,22 +63,6 @@
 	        	 <input type="hidden" name="" id="1" value="0" class="imgname" />
 	        	 <input type="hidden" name="" id="2" value="0" class="imgname" />
 	        	 <input type="hidden" name="" id="3" value="0" class="imgname" />
-				<h5 style="padding-left:15px"><span style="color:red">*</span>姓名</h5>
-    			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
-					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear" placeholder="姓名">
-				</div>
-				<h5 style="padding-left:15px"><span style="color:red">*</span>Email</h5>
-    			<div class="mui-input-row" style="text-align:center;">
-					<input type="text" style="background:#FFFFFF;width:85%;" class="" placeholder="email" id="email" name="email" disabled="disabled">
-				</div>
-				<h5 style="padding-left:15px"><span style="color:red">*</span>お問い合わせ内容</h5>
-    			<div class="mui-input-row" style="text-align:center;">
-					<textarea id="textarea" style="background:#FFFFFF;width:85%;" rows="5" placeholder="多行文本框"></textarea>
-				</div>
-				<div class="mui-button-row">
-					<button type="button" class="mui-btn mui-btn-primary　mui-btn-outline" onclick="return false;">確認</button>&nbsp;&nbsp;
-					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline" onclick="return false;">キャンセル</button>
-				</div>
 			</form>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js" ></script>
@@ -81,6 +82,64 @@
 				var fullname=info.full_name;
 				$("#email").val(email);
 			}
+			function submitvals(){
+				var full_name=$("#full_name").val();
+				var email=$("#email").val();
+				var contents=$("#contents").val();
+				var img0=$("#0").val();
+				var img1=$("#1").val();
+				var img2=$("#2").val();
+				var img3=$("#3").val();
+				if(full_name==""){
+					mui.toast(TextMessage.namenotnull, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
+				if(contents==""){
+					mui.toast(TextMessage.contentnotnull, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
+				var params2={
+					"full_name":full_name,
+					"email":email,
+					"contents":contents,
+					"images[0]":img0,
+					"images[1]":img1,
+					"images[2]":img2,
+					"images[3]":img3
+				};
+				mui.plusReady(function() {
+					Repository.User.addComplaint(params2,{
+						ok: function(data) {
+							console.log("success");
+							mui.toast(TextMessage.requiresuccess, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.back();
+						},
+						ng: function(data) {
+							console.log("error:"+data);
+							Log.d(data);
+						}
+					});
+				});
+			}
+			function clearallval(){
+				$("#full_name").val("");
+				$("#contents").val("");
+				$("#0").val("");
+				$("#1").val("");
+				$("#2").val("");
+				$("#3").val("");
+				$(".z_images").remove();
+				//location.reload();
+			}
 			mui.plusReady(function() {
 				var params={};
 				Repository.User.Usercomplaint(params,{
@@ -94,6 +153,7 @@
 					}
 				});
 			});
+			
 		</script>
 	</body>
 </html>

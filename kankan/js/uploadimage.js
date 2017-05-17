@@ -3,29 +3,8 @@
 		if(mui.os.plus) {
 			var a = [{
 				title: TextMessage.tackpicture
-			}];
-			plus.nativeUI.actionSheet({
-				title: TextMessage.comdity_takepic,
-				cancel: TextMessage.cancel,
-				buttons: a
-			}, function(b) {
-				switch(b.index) {
-					case 0:
-						break;
-					case 1:
-						getImage();
-						break;
-					default:
-						break
-				}
-			})
-		}
-	
-	});
-	//gallery
-	mui(".ka_prologbox0").on("tap", "#gallery", function(e) {
-		if(mui.os.plus) {
-			var a = [{
+			},
+			{
 				title: TextMessage.gallerychoose
 			}];
 			plus.nativeUI.actionSheet({
@@ -37,6 +16,9 @@
 					case 0:
 						break;
 					case 1:
+						getImage();
+						break;
+					case 2:
 						galleryImg();
 						break;
 					default:
@@ -46,7 +28,6 @@
 		}
 	
 	});
-	
 	function imglength() {
 		var imglength = $(".z_images").length;
 		if(imglength > 3) {
@@ -164,7 +145,7 @@
 		var data = JSON.parse(results);
 		var stautes = data.result.status;
 		if(stautes == "OK") {
-			var imagesrc = data.result.data[1];
+			var imagesrc = data.result.data.photo_url;
 			var value = $("#" + nums).val();
 			if(value == "0") {
 				$("#" + nums).val(imagesrc);
