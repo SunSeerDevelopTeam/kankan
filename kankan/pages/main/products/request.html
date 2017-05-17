@@ -78,7 +78,11 @@
 			function showcommodity(results){
 				var data=results.data;
 				//requested
+				var htmlnull='<div style="text-align: center;"><p>'+TextMessage.datanull+'</p></div>';
 				var others=data.own;
+				if(others==""){
+					$("#scroll1 .mui-scrolls").html(htmlnull);
+				}
 				for(var ot=0;ot<others.length;ot++){
 					var transid=others[ot].trans.trans_id;
 					var comm_name=others[ot].trans[0].comm_name;
@@ -112,7 +116,7 @@
 						indicators: true //Whether to display a scroll bar
 					});
 					//request
-					var own=data.other
+					var own=data.other;
 					var html2='<ul class="mui-table-view mui-grid-view want-sell">';
 					for(var ow=0;ow<own.length;ow++){
 						var otransid=own[ow].trans.trans_id;
@@ -123,9 +127,9 @@
 						}
 						var otrans_type=own[ow].trans.trans_type;
 						if(otrans_type=="0"){
-							var otrans_typetext="問い合わせ中";
+							var otrans_typetext=TextMessage.requireing;
 						}else{
-							var otrans_typetext="交易成立";
+							var otrans_typetext=TextMessage.requresuces;
 						}
 						var ostatus=own[ow].trans.status;
 						var oother_photo=own[ow].trans.other_photo;
@@ -157,6 +161,9 @@
 						html2 += '<div class="mui-pull-left ka_mony"><div>'+oprice+'<font color="#000000"> P</font></div></div></li>';
 					}
 					html2 += '</ul>';
+					if(own==""){
+						html2=htmlnull;
+					}
 					var item2 = document.getElementById('item2mobile');
 					document.getElementById('slider').addEventListener('slide', function(e) {
 						if(e.detail.slideNumber === 1) {
@@ -200,18 +207,12 @@
 					ng: function(data) {
 						console.log("error");
 						Log.d(data);
-						//emptycontent();
-						if(data=="2001"){
-							alert(TextMessage.datanull);
-							//$("ul").hide();
-						}
 						if(data=="2002"){
-							alert(TextMessage.userng);
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
 							});
-							mui.toast(TextMessage.datanull, {
+							mui.toast(TextMessage.userng, {
 								duration: 'long',
 								type: 'div'
 							})
