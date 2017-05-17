@@ -42,7 +42,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-icon mui-pull-left" id="user">
-				<img src="../../images/userPhoto.png" />
+				<img src="../../images/default.jpg"/>
 			</a>
 			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
 			<a class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow"></a>
@@ -56,6 +56,11 @@
 	<script src="../../js/language.js"></script>
 	<script src="../../js/common.js"></script>
 	<script type="text/javascript" charset="UTF-8">
+		
+		window.addEventListener("updateUserImgEvent", function(event){
+			$('#user img').attr('src', event.detail.userImgURL);
+		});
+		
 		(function(mui, doc) {
 			mui.init({
 				gestureConfig: {

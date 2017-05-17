@@ -27,6 +27,8 @@
 	margin-top: -92px;
 	text-align: center;
 	vertical-align: middle;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .item-buttom {
@@ -42,6 +44,8 @@
 	font-size: 14px;
 	height: 50%;
 	padding: 5%;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .comm-price {
@@ -54,9 +58,16 @@
 .comm-like {
 	font-size: 35px;
 	line-height: 50px;
-	color: gray;
 	text-align: center;
 	width: 100%;
+}
+
+.comm-like-gray {
+	color: gray;
+}
+
+.comm-like-red {
+	color: red;
 }
 
 .comm-like-num {
