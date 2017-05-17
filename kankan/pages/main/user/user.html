@@ -601,7 +601,10 @@
 				Repository.User.userinfo(params4, {
 					ok: function(data) {
 						console.log("success");
-						mui.alert(TextMessage.updatesuccessinfo);
+						mui.toast(TextMessage.updatesuccessinfo, {
+							duration: 'long',
+							type: 'div'
+						});
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -660,7 +663,10 @@
 							if(status == 200) {
 								//console.log("upload success:" + t.responseText);
 								console.log("upload success!");
-								mui.alert(TextMessage.updatesuccessinfo);
+								mui.toast(TextMessage.updatesuccessinfo, {
+									duration: 'long',
+									type: 'div'
+								});
 								wt.close();
 							} else {
 								console.log("upload error:" + status);
@@ -686,7 +692,7 @@
 			Repository.User.Usershow(params, {
 				ok: function(data) {
 					console.log("success");
-					console.dir(data);
+					//console.dir(data);
 					showuser(data);
 					$("#loading").hide();
 					$(".tran-page").show();
@@ -757,8 +763,11 @@
 						Repository.User.userinfo(parms2, {
 							ok: function(data) {
 								console.log("success");
-								console.dir(data);
-								alert(TextMessage.updatesuccessinfo);
+								//console.dir(data);
+								mui.toast(TextMessage.updatesuccessinfo, {
+									duration: 'long',
+									type: 'div'
+								});
 							},
 							ng: function(data) {
 								Log.d(data);

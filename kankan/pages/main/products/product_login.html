@@ -144,6 +144,10 @@
 	}
 	//edite information show
 	function messages(results){
+		$("#0").val("0");
+		$("#1").val("0");
+		$("#2").val("0");
+		$("#3").val("0");
 		var name=results.data.comm_name;
 		var detail=results.data.comm_detail;
 		var business=results.data.business;
@@ -195,38 +199,41 @@
 	}
 	//edite show
 	function getcomdinfo(dataid){
-		var param3={
-			"commodity_id":dataid
-		}
-		Repository.Commodity.Commodityedite(param3, {
-					ok: function(data) {
-						console.log("success");
-						messages(data);
-					},
-					ng: function(data) {
-						console.log("error:"+data);
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/login.html"
-							});
+		mui.plusReady(function() {
+			var param3={
+				"commodity_id":dataid
+			}
+			Repository.Commodity.Commodityedite(param3, {
+						ok: function(data) {
+							console.log("success");
+							messages(data);
+						},
+						ng: function(data) {
+							console.log("error:"+data);
+							if(data == "1000") {
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+							}
+							if(data=="2002"){
+								mui.toast(TextMessage.userng, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+							}
 						}
-						if(data=="2002"){
-							mui.toast(TextMessage.userng, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/login.html"
-							});
-						}
-					}
+			});
 		});
+		
 	}
 	//get classfiy 
 	var testarr=[];
@@ -567,9 +574,13 @@ mui(".ka_prologbox0").on("tap", "#gallery", function(e) {
 
 function imglength() {
 	var imglength = $(".z_images").length;
+	//alert(imglength);
 	if(imglength > 3) {
-		$(".z_file").hide();
+		$("#gallery").hide();
 		$("#takepic").hide();
+	}else{
+		$("#gallery").attr("style","background-image: url(../../../images/iconfont-tianjia.png);display: block;");
+		$("#takepic").attr("style","display: block;");
 	}
 }
 //px Convert to rem
