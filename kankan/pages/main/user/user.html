@@ -135,7 +135,7 @@
 								</div>
 							</li>
 							<li class="user-goods-title-grid">
-								<div id="friends" class="user-product-tab32" onclick="switchs(this)">
+								<div id="friends" class="user-product-tab32" onclick="closed()">
 									<font size="2" color="#FFFFFF" class="lang" data-locale="favoriteprotext"></font>
 								</div>
 							</li>
@@ -304,6 +304,12 @@
 				}
 			]
 		});
+		function closed(){
+			mui.toast(TextMessage.noopen, {
+				duration: 'long',
+				type: 'div'
+			});
+		}
 		//back refresh
 		window.addEventListener('refreshlist', function(e){//执行刷新
 		    location.reload();
@@ -600,14 +606,20 @@
 					ng: function(data) {
 						Log.d(data);
 						if(data == "1000") {
-							alert(TextMessage.test);
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
 							});
 						} 
 						if(data=="2002"){
-							alert(TextMessage.userng);
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							});
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
@@ -683,7 +695,10 @@
 					Log.d(data);
 					if(data == "1000") {
 						$(".settingbut").hide();
-						alert(TextMessage.test);
+						mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
 						mui.openWindow({
 							id: 'login',
 							url:"../../login/login.html"
@@ -748,7 +763,10 @@
 							ng: function(data) {
 								Log.d(data);
 								if(data == "1000") {
-									alert(TextMessage.test);
+									mui.toast(TextMessage.test, {
+										duration: 'long',
+										type: 'div'
+									});
 									mui.openWindow({
 										id: 'login',
 										url:"../../login/login.html"

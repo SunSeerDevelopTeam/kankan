@@ -16,7 +16,6 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title"></h1>
-			<a class="mui-icon  mui-icon-reload mui-icon-right-nav mui-pull-right"></a>
 		</header>
 		<div id="loading" class="mui-content ka_userbox">
 			<div class="spinner">
@@ -556,14 +555,20 @@
 					ng: function(data) {
 						Log.d(data);
 						if(data == "1000") {
-							alert(TextMessage.test);
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
 							});
 						}
 						if(data == "2004") {
-							alert(TextMessage.operation_error);
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
 						}
 					}
 				});
@@ -616,10 +621,16 @@
 					},
 					ng: function(data) {
 						if(data == "1000") {
-							alert(TextMessage.test);
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
 						}
 						if(data == "2004") {
-							alert(TextMessage.operation_error);
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
 						}
 					}
 				});

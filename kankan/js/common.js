@@ -937,6 +937,7 @@ var TextMessage;
 	TextMessage.requiresuccess = language ? "クレーム提出が成功しました" : "申述成功提出";
 	TextMessage.namenotnull = language ? "ユーザー名を入力してください" : "姓名不能为空";
 	TextMessage.contentnotnull = language ? "内容を入力してください" : "内容不能为空";
+	TextMessage.noopen = language ? "開通していない、お楽しみに" : "暂未开通，敬请期待";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
