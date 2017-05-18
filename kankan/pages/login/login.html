@@ -112,10 +112,9 @@
 				$.init({
 					statusBarBackground: '#FFFFFF',
 					beforeback: function() {
-						var list = plus.webview.getWebviewById('pullrefresh_with_tab');
-						mui.fire(list, 'refresh', {
-							page: "login"
-						});
+						//var list = plus.webview.getWebviewById('pullrefresh_with_tab');
+						var list = plus.webview.currentWebview().opener();
+						mui.fire(list, 'refresh');
 						return true;
 					}
 				});
@@ -207,7 +206,8 @@
 								loginFlg = true;
 								setTimeout(function() {
 									waiting.close();
-									plus.webview.currentWebview().close();
+									mui.back();
+									//plus.webview.currentWebview().close();
 								}, 500);
 							},
 							ng: function(data) {
