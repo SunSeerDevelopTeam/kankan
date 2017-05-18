@@ -177,7 +177,6 @@
 						showChatMsg(usersinfo,messginfo,cur_user_id);
 					},
 					ng: function(data) {
-						alert('bbb failed');
 						Log.i("message send faild!");
 						if(data == "1000") {
 							alert(TextMessage.test);
@@ -240,6 +239,9 @@
 						if(messginfo[chat].user_id == buyer_id){
 							chatMsg += '<li class="tran-chat-word" style="width:75%;">'+messginfo[chat].msg_detail+'</li>';
 							chatMsg += '<li class="tran-chat-face"><img height="32px" width="32px" src="' + buyer_photo + '"></li>';
+							chatMsg += '<div class="comtent mui-pull-left"><div class="mui-pull-left">';
+							charMsg += '<img src="'+ buyer_photo +'" width="40" height="40" class="ka_touxiangimg">';
+							charMsg += '</div><div class="mui-pull-right ka_commentinfobox">'+messginfo[chat].msg_detaila+'<div class="ka_commenttime"></div></div></div>';
 						}else{
 							chatMsg += '<li class="tran-chat-face" style="float:right;"><img height="32px" width="32px" src="' + seller_photo + '"></li>';
 							chatMsg += '<li class="tran-chat-word" style="float:right;width:75%;word-break:break-all;">'+messginfo[chat].msg_detail+'</li>';
@@ -247,10 +249,10 @@
 					}else{
 						if(messginfo[chat].user_id == seller_id){
 							chatMsg += '<li class="tran-chat-word" style="width:75%;">'+messginfo[chat].msg_detail + '</li>';
-							chatMsg += '<li class="tran-chat-face"><img height="32px" width="32px" src="' + buyer_photo +'"></li>';
+							chatMsg += '<li class="tran-chat-face"><img height="32px" width="32px" src="' + seller_photo +'"></li>';
 						}else{
-							chatMsg += '<li class="tran-chat-face" style="float:right;"><img height="32px" width="32px" src="' + seller_photo + '"></li>';
-							chatMsg += '<li class="tran-chat-word" style="float:right;width:75%;word-break:break-all;">' + messginfo[chat].msg_detail + '</li>';
+							chatMsg += '<li class="tran-chat-face" style="float:right;width:20%;"><img height="32px" width="32px" src="' + buyer_photo + '"></li>';
+							chatMsg += '<li class="tran-chat-word" style="float:right;width:70%;min-height:20px;word-break:break-all;">' + messginfo[chat].msg_detail + '</li>';
 						}
 					}
 				}
@@ -262,15 +264,9 @@
 				};
 				Repository.Transaction.transShowRequest(params,{
 					ok: function(data) {
-						alert("aaaa success!");
-						console.log("data start ----");
 						console.dir(data);
-						console.log("data end ------");
-						Log.i("message send successfully!");
-						
 					},
 					ng: function(data) {
-						alert('bbb failed');
 						Log.i("message send faild!");
 						if(data == "1000") {
 							alert(TextMessage.test);
