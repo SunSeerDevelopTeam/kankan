@@ -490,7 +490,11 @@ function publishs() {
 			Log.d("success");
 			alert(TextMessage.pro_logininfo);
 			if(commodity_id==""){
-				location.reload();
+				mui.plusReady(function() {
+					var mainpage=plus.webview.getLaunchWebview();
+					 mui.fire(mainpage,'gohome');
+				});
+				//location.reload();
 			}else{
 				mui.back();
 			}
