@@ -11,12 +11,12 @@ var LOGIN_TYPE = {
 }
 
 var TRANS_STATUS = {
-	0:"请求中",
-	1:"请求转订单",
-	2:"订单中",
-	3:"订单完成",
-	8:"请求终止",
-	9:"订单终止"
+	0: "请求中",
+	1: "请求转订单",
+	2: "订单中",
+	3: "订单完成",
+	8: "请求终止",
+	9: "订单终止"
 }
 var Validator;
 (function(Validator) {
@@ -466,15 +466,15 @@ var Util;
 })(Util || (Util = {}));
 var Api;
 (function(Api) {
-	
-	baseUrl = function(){
-		if (DEVELOPMENT) {
+
+	baseUrl = function() {
+		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
 			return "http://210.189.72.25:7998";
 		}
 	}
-	
+
 	Api.url = {
 		User: {
 			checkEmail: baseUrl() + '/user/Register/email_rgister_check/',
@@ -483,14 +483,14 @@ var Api;
 			forgetPwd: baseUrl() + '/user/password',
 			Usershow: baseUrl() + '/user/Usershow',
 			userinfo: baseUrl() + '/user/setting/',
-			Usertranslist:baseUrl() + '/user/Usertrans/',
+			Usertranslist: baseUrl() + '/user/Usertrans/',
 			mytranshistory: baseUrl() + '/user/Usertrans/mytranshistory/',
 			Buyticket: baseUrl() + '/pay/Buyticket/',
 			pointbuyticketway: baseUrl() + '/pay/Buyticket/pointbuyticketway/',
-			logout:baseUrl() + '/user/logout/',
-			userupimage:baseUrl() + '/user/Usercomplaint/uploadImg/',
-			Usercomplaint:baseUrl() + '/user/Usercomplaint/',
-			addComplaint:baseUrl() + '/user/Usercomplaint/addComplaint/'
+			logout: baseUrl() + '/user/logout/',
+			userupimage: baseUrl() + '/user/Usercomplaint/uploadImg/',
+			Usercomplaint: baseUrl() + '/user/Usercomplaint/',
+			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/'
 		},
 		Commodity: {
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
@@ -502,24 +502,24 @@ var Api;
 			Commoditycomment: baseUrl() + '/commodity/Commoditycomment/',
 			comments: baseUrl() + '/commodity/comment/',
 			imgupload: baseUrl() + '/commodity/release/upload/',
-			Commoditypublish:baseUrl() + '/commodity/release/',
-			Commodityedite:baseUrl() + '/commodity/release/update/',
-			logisticslist:baseUrl() + '/logistics/',
-			logisticssendmail:baseUrl() + '/logistics/index/sendMailtoLCO/'
+			Commoditypublish: baseUrl() + '/commodity/release/',
+			Commodityedite: baseUrl() + '/commodity/release/update/',
+			logisticslist: baseUrl() + '/logistics/',
+			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/'
 		},
-		Trans:{
-			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/',  //请求/订单对话API:
-			transCommdChange: baseUrl() + '/transaction/transcommdchange/',   //提交请求商品变更API:
+		Trans: {
+			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
+			transCommdChange: baseUrl() + '/transaction/transcommdchange/', //提交请求商品变更API:
 			transShowRequest: baseUrl() + '/transaction/transrequest/show_request_detail/', //显示当前交易请求/订单API
 			transGetUserCommd: baseUrl() + '/transaction/transpublic/get_user_commodity/',
 			transRequest: baseUrl() + '/transaction/transrequest/',
 			transOrderEvaluate: baseUrl() + '/transaction/transoperation/trans_order_evaluate/',
-			transOrderReceipt: baseUrl()  + '/transaction/transoperation/trans_order_receipt/',
-			transOrderLogustics:baseUrl() + '/transaction/transoperation/trans_order_logistics/',
-			transSubmitOrder:baseUrl() + '/transaction/transoperation/trans_submit_order/',
-			transRequestOrder:baseUrl() + '/transaction/transoperation/trans_request_order/',
-			transChangePrice:baseUrl() + '/transaction/transoperation/trans_change_price/', 
-			transStop:baseUrl() + '/transaction/transoperation/transaction_stop/',
+			transOrderReceipt: baseUrl() + '/transaction/transoperation/trans_order_receipt/',
+			transOrderLogustics: baseUrl() + '/transaction/transoperation/trans_order_logistics/',
+			transSubmitOrder: baseUrl() + '/transaction/transoperation/trans_submit_order/',
+			transRequestOrder: baseUrl() + '/transaction/transoperation/trans_request_order/',
+			transChangePrice: baseUrl() + '/transaction/transoperation/trans_change_price/',
+			transStop: baseUrl() + '/transaction/transoperation/transaction_stop/',
 			transEdite: baseUrl() + '/transaction/transoperation/transaction_show/'
 		}
 	};
@@ -557,8 +557,16 @@ var Api;
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng)) {
-					if (DEBUG) {
-						alert("return NG, statuscode is " + data.result.statuscode);
+					if(DEBUG) {
+						var description = "";
+						if(Validator.isObj(data.result.statuscode)) {
+							for(var i in data.result.statuscode) {
+								var property = data.result.statuscode[i];
+								description += i + " = " + property + "\n";
+							}
+						}
+						var alertInfo = Validator.isObj(data.result.statuscode) ? description : data.result.statuscode;
+						alert("return NG, statuscode is " + alertInfo + ". API URL is " + url);
 					}
 					callback.ng(data.result.statuscode);
 				}
@@ -568,7 +576,7 @@ var Api;
 				Log.e(xhr);
 				Log.e(type);
 				Log.e(errorThrown);
-				if (DEBUG) {
+				if(DEBUG) {
 					alert("ajax error callback. error type is " + type);
 				}
 				plus.ui.alert(TextMessage.not_network);
@@ -598,10 +606,13 @@ var Api;
 	function getToken() {
 		var token = "";
 		if(typeof(plus) != "undefined") {
-			token = plus.storage.getItem('token');//"+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh/PqKa19BIs=5a07a2c62f2e8c4b8cc15cf35f58cb995226d710955ba3d30630b56a94655072";
+			token = plus.storage.getItem('token');
 			if(token == null) {
 				return "";
 			}
+		} else {
+			throw new Error("plus is undefined, you should call mui.plusReady().");
+			return null;
 		}
 		return token;
 	}
@@ -652,7 +663,7 @@ var Repository;
 			return Api.call(Api.url.User.userinfo, params, callback);
 		}
 		User.userinfo = userinfo;
-		
+
 		function Usertranslist(params, callback) {
 			return Api.call(Api.url.User.Usertranslist, params, callback);
 		}
@@ -662,27 +673,27 @@ var Repository;
 			return Api.call(Api.url.User.mytranshistory, params, callback);
 		}
 		User.mytranshistory = mytranshistory;
-		
+
 		function Buyticket(params, callback) {
 			return Api.call(Api.url.User.Buyticket, params, callback);
 		}
 		User.Buyticket = Buyticket;
-		
+
 		function pointbuyticketway(params, callback) {
 			return Api.call(Api.url.User.pointbuyticketway, params, callback);
 		}
 		User.pointbuyticketway = pointbuyticketway;
-		
+
 		function logout(params, callback) {
 			return Api.call(Api.url.User.logout, params, callback);
 		}
 		User.logout = logout;
-		
+
 		function Usercomplaint(params, callback) {
 			return Api.call(Api.url.User.Usercomplaint, params, callback);
 		}
 		User.Usercomplaint = Usercomplaint;
-		
+
 		function addComplaint(params, callback) {
 			return Api.call(Api.url.User.addComplaint, params, callback);
 		}
@@ -746,12 +757,12 @@ var Repository;
 			return Api.call(Api.url.Commodity.Commodityedite, params, callback);
 		}
 		Commodity.Commodityedite = Commodityedite;
-		
+
 		function logisticslist(params, callback) {
 			return Api.call(Api.url.Commodity.logisticslist, params, callback);
 		}
 		Commodity.logisticslist = logisticslist;
-		
+
 		function logisticssendmail(params, callback) {
 			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
 		}
@@ -764,72 +775,72 @@ var Repository;
 			return Api.call(Api.url.Trans.transRequest, params, callback);
 		}
 		Transaction.transRequest = transRequest;
-		
+
 		function transConversation(params, callback) {
 			return Api.call(Api.url.Trans.transConversation, params, callback);
 		}
 		Transaction.transConversation = transConversation;
-		
+
 		function transGetUserCommd(params, callback) {
 			return Api.call(Api.url.Trans.transGetUserCommd, params, callback);
 		}
 		Transaction.transGetUserCommd = transGetUserCommd;
-		
+
 		function transShowRequest(params, callback) {
 			return Api.call(Api.url.Trans.transShowRequest, params, callback);
 		}
 		Transaction.transShowRequest = transShowRequest;
-		
+
 		function transCommdChange(params, callback) {
 			return Api.call(Api.url.Trans.transCommdChange, params, callback);
 		}
 		Transaction.transCommdChange = transCommdChange;
-		
+
 		function transConversation(params, callback) {
 			return Api.call(Api.url.Trans.transConversation, params, callback);
 		}
 		Transaction.transConversation = transConversation;
-		
-		function transOrderEvaluate(params, callback){
+
+		function transOrderEvaluate(params, callback) {
 			return Api.call(Api.url.Trans.transOrderEvaluate, params, callback);
 		}
 		Transaction.transOrderEvaluate = transOrderEvaluate;
-		
-		function transOrderReceipt(params, callback){
+
+		function transOrderReceipt(params, callback) {
 			return Api.call(Api.url.Trans.transOrderReceipt, params, callback);
 		}
 		Transaction.transOrderReceipt = transOrderReceipt;
-		
-		function transOrderLogustics(params, callback){
+
+		function transOrderLogustics(params, callback) {
 			return Api.call(Api.url.Trans.transOrderLogustics, params, callback);
 		}
 		Transaction.transOrderLogustics = transOrderLogustics;
-		
-		function transSubmitOrder(params, callback){
+
+		function transSubmitOrder(params, callback) {
 			return Api.call(Api.url.Trans.transSubmitOrder, params, callback);
 		}
 		Transaction.transSubmitOrder = transSubmitOrder;
-		
-		function transRequestOrder(params, callback){
+
+		function transRequestOrder(params, callback) {
 			return Api.call(Api.url.Trans.transRequestOrder, params, callback);
 		}
 		Transaction.transRequestOrder = transRequestOrder;
-		
-		function transChangePrice(params, callback){
+
+		function transChangePrice(params, callback) {
 			return Api.call(Api.url.Trans.transChangePrice, params, callback);
 		}
 		Transaction.transChangePrice = transChangePrice;
-		
-		function transStop(params, callback){
+
+		function transStop(params, callback) {
 			return Api.call(Api.url.Trans.transStop, params, callback);
 		}
 		Transaction.transStop = transStop;
-				
-		function transEdite(params, callback){
+
+		function transEdite(params, callback) {
 			return Api.call(Api.url.Trans.transEdite, params, callback);
 		}
 		Transaction.transEdite = transEdite;
-		
+
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
