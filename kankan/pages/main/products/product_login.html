@@ -774,12 +774,19 @@ function galleryImg() {
 		filter: "image"
 	})
 };
-//buy way choose
+//************************buy way choose*****************************
 /*exchange*/
 document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
-	$("#exchange").val("1");
-	$("#exchbuybtn").removeClass("ka_exchangegrey");
-	$("#exchbuybtn").addClass("ka_exchangered");
+	var exchangeval=$("#exchange").val();
+	if(exchangeval=="0"){
+		$("#exchange").val("1");
+		$("#exchbuybtn").removeClass("ka_exchangegrey");
+		$("#exchbuybtn").addClass("ka_exchangered");
+	}else{
+		$("#exchange").val("0");
+		$("#exchbuybtn").removeClass("ka_exchangered");
+		$("#exchbuybtn").addClass("ka_exchangegrey");
+	}
 	if($("#gratis").val() == "1") {
 		$("#gratis").val("0");
 		$("#freebuybtn").removeClass("ka_exchangered");
@@ -788,9 +795,17 @@ document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
 });
 /*point*/
 document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
-	$("#business").val("1");
-	$("#pointbuybtn").removeClass("ka_exchangegrey");
-	$("#pointbuybtn").addClass("ka_exchangered");
+	var businessval=$("#business").val();
+	if(businessval=="0"){
+		$("#business").val("1");
+		$("#pointbuybtn").removeClass("ka_exchangegrey");
+		$("#pointbuybtn").addClass("ka_exchangered");
+	}else{
+		$("#business").val("0");
+		$("#pointbuybtn").removeClass("ka_exchangered");
+		$("#pointbuybtn").addClass("ka_exchangegrey");
+	}
+	
 	if($("#gratis").val() == "1") {
 		$("#gratis").val("0");
 		$("#freebuybtn").removeClass("ka_exchangered");
@@ -799,9 +814,17 @@ document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
 });
 /*free*/
 document.getElementById('freebuybtn').addEventListener('tap', function(e) {
-	$("#gratis").val("1");
-	$("#freebuybtn").removeClass("ka_exchangegrey");
-	$("#freebuybtn").addClass("ka_exchangered");
+	var gratisval=$("#gratis").val();
+	if(gratisval=="0"){
+		$("#gratis").val("1");
+		$("#freebuybtn").removeClass("ka_exchangegrey");
+		$("#freebuybtn").addClass("ka_exchangered");
+	}else{
+		$("#gratis").val("0");
+		$("#freebuybtn").removeClass("ka_exchangered");
+		$("#freebuybtn").addClass("ka_exchangegrey");
+	}
+	
 	if($("#business").val() == "1") {
 		$("#business").val("0");
 		$("#pointbuybtn").removeClass("ka_exchangered");

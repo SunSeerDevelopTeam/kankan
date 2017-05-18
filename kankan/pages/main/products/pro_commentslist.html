@@ -17,37 +17,6 @@
 		<div class="mui-content ka_mainbox">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell ka_userbox" id="comments">
-					<p id="null" class="lang" data-locale="comdity_null" style="display: none;"></p>
-				
-				<!--<div class="comtent">
-					<div class="mui-pull-left">
-			           	<img src="../../../images/muwu.jpg" width="40" height="40" class="ka_touxiangimg" />
-			           	<div class="ka_userbox ka_userboxtext"><b>muiufgdfhdfhdfhdfhdfhdf</b></div>
-			           </div>
-			           <div class="mui-pull-right ka_commentinfobox">
-			           	shdfjshfjskdhfkjd ahsdjkahsdjk ashjkdhasjkd asdkhasjkdhasjkd sadhjkashdjk ashjkdhkasdj 
-			           	ashdjkasdh ashjkdhasd 中文的大小好像太大了dfj sdjfklsdjf jksdlfj jsdklfj jklsdfjsdklfjsdfjs jsdklfj
-				           	<div class="ka_commenttime">
-				           		<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span> 
-				           		1 天前
-				           	</div>
-			           	</div>
-			       </div>
-			       
-			       <div class="comtent mui-pull-left">
-					<div class="mui-pull-left">
-			           	<img src="../../../images/muwu.jpg" width="40" height="40" class="ka_touxiangimg" />
-			           	<div class="ka_userbox ka_userboxtext"><b>muiufgdfhdfhdfhdfhdfhdf</b></div>
-			           </div>
-			           <div class="mui-pull-right ka_commentinfobox">
-			           	shdfjshfjskdhfkjd ahsdjkahsdjk ashjkdhasjkd asdkhasjkdhasjkd sadhjkashdjk ashjkdhkasdj 
-			           	ashdjkasdh ashjkdhasd 中文的大小好像太大了dfj sdjfklsdjf jksdlfj jsdklfj jklsdfjsdklfjsdfjs jsdklfj
-				           	<div class="ka_commenttime">
-				           		<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span> 
-				           		1 天前
-				           	</div>
-			           	</div>
-			       </div>-->
 				</li>
 			</ul>
 		</div>
@@ -98,8 +67,8 @@
 					ng: function(data) {
 						Log.d(data);
 						if(data == "2001") {
-							//$("#comments").empty();
-							$("#null").show();
+							var htmlnull='<p id="null" >'+TextMessage.datanull+'</p>';
+							$("#comments").html(htmlnull);
 						}
 					}
 				});
@@ -160,7 +129,10 @@
 					ng: function(data) {
 						Log.d(data);
 						if(data == "1000") {
-							alert(TextMessage.test);
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							})
 						}
 					}
 				});
