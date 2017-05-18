@@ -120,7 +120,7 @@ var JSLocale = {
 	"requesttitle":"リクエスト",
 	"requesthistory":"交易履历",
 	"requestedpro":"リクエストされた",
-	"requestpro":"リスエストした"
+	"requestpro":"リスエストした",
 	//setting page
 	"setting":"設定",
 	"pointbuytext":"ポイント購入",
