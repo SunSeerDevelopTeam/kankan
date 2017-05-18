@@ -293,6 +293,10 @@
 					},
 					ng: function(data) {
 						Log.d(data);
+						if(data=="2001"){
+							$("#loading").show();
+							$(".mui-content").hide();
+						}
 					}
 				});
 			}

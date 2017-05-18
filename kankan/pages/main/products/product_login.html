@@ -407,6 +407,12 @@
 })(mui, document);
 //submit form
 function publishs() {
+	mui.plusReady(function() {
+		var mainpage=plus.webview.getLaunchWebview();
+		var list = plus.webview.currentWebview().opener();
+		 mui.fire(mainpage,'gohome');
+		  return true;
+	});
 	//return confirm(TextMessage.publishsure);
 	var buy_sell_flag = "0";
 	var comm_name = $("#comm_name").val();
