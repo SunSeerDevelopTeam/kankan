@@ -35,7 +35,7 @@
 			mui.init({
 				beforeback: function() {
 					var list = plus.webview.getWebviewById('pullrefresh_with_tab');
-					mui.fire(list, 'refresh', {
+					mui.fire(list, 'search', {
 						keyword: keyword
 					});
 					return true;

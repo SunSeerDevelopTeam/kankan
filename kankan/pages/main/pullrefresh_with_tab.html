@@ -579,6 +579,16 @@
 						if (DEBUG) {
 							alert("search event.");
 						}
+						getDataFromServer(
+							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
+							0,
+							5,
+							$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
+							event.detail.keyword,
+							null,
+							true,
+							null
+						);
 					});
 					
 					window.addEventListener("refresh", function(event){
