@@ -550,6 +550,12 @@
 						</ul>
 					</div>
 				</div>
+
+				<div class="logistics">
+					<a>
+						<img src="../../images/car.png" />
+					</a>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -574,9 +580,18 @@
 					deceleration: deceleration
 				});
 				mui.ready(function() {
-					
-					window.addEventListener("search", function(event){
-						if (DEBUG) {
+
+					$(".logistics a").on("tap", function(event) {
+						mui.openWindow({
+							id: "logisticslist",
+							url: "logisticslist.html",
+							waiting: {
+								autoShow: false
+							}
+						});
+					});
+					window.addEventListener("search", function(event) {
+						if(DEBUG) {
 							alert("search event.");
 						}
 						getDataFromServer(
@@ -590,11 +605,18 @@
 							null
 						);
 					});
-					
-					window.addEventListener("refresh", function(event){
-						if (DEBUG) {
-							alert("refresh event.");
-						}
+
+					window.addEventListener("refresh", function(event) {
+						getDataFromServer(
+							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
+							0,
+							5,
+							$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
+							null,
+							null,
+							true,
+							null
+						);
 					});
 					/**
 					 * get category data from server and show data.
@@ -610,7 +632,7 @@
 							error: function() {}
 						});
 					}
-					
+
 					/**
 					 * get list data init view
 					 */

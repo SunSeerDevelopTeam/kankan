@@ -80,3 +80,10 @@
 	text-align: center;
 	width: 100%;
 }
+
+.logistics img {
+	position: relative;
+	width: 50px;
+	margin-top: 110%;
+	margin-left: 10%;
+}
