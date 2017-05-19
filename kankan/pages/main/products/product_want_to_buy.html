@@ -127,6 +127,17 @@ function publishs() {
 					url:"../../login/login.html"
 				});
 			}
+			if(data=="2007"){
+				mui.toast(TextMessage.ticketng, {
+					duration: 'long',
+					type: 'div'
+				});
+				location.reload();
+				mui.openWindow({
+					id: 'point_to_ticket',
+					url:"../sttting/point_to_ticket.html"
+				});
+			}
 			alert("other error code:" + data);
 			
 		}

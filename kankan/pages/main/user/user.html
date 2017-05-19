@@ -381,6 +381,7 @@
 					var localurl = entry.toLocalURL();
 					$(".headimg").attr("src",localurl);
 					$("#headimgupdate").val(localurl);
+					uploadimage(localurl);
 					//compressImg(localurl);
 				}, function(e) {
 					console.log("Read the picture file error：" + e.message);
@@ -398,6 +399,7 @@
 					var localURL2 = entry.toLocalURL();
 					$(".headimg").attr("src",localURL2);
 					$("#headimgupdate").val(localURL2);
+					uploadimage(localURL2);
 		
 				}, function(e) {
 					console.log("Read photo file error：" + e.message);
@@ -580,6 +582,58 @@
 			clickdetail();
 			clickeditepro();
 		}
+		function uploadimage(path){
+		var currenttime = Date.parse(new Date());
+		plus.zip.compressImage({
+				src: path,
+				dst: "_doc/" + currenttime + ".jpg",
+				quality: 20,
+				overwrite: true,
+				format: "jpg",
+				width: "auto",
+				height: "auto"
+			},
+			function(event) {
+				console.log("Compress success!");
+				var target = event.target;
+				var size = event.size; // （Byte）
+				var width = event.width; // px
+				var height = event.height; // px
+				mui.plusReady(function() {
+					submitvalues(target);//upload
+				});
+			},
+			function(error) {
+				console.log("Compress error!" + error.message);
+			});
+			function submitvalues(target){
+				var serverurl=Api.url.User.setImg;
+				var wt = plus.nativeUI.showWaiting();
+				var task = plus.uploader.createUpload(serverurl, {
+					method: "post"
+				}, function(t, status) {
+					if(status == 200) {
+						//console.log("upload success:" + t.responseText);
+						console.log("upload success!");
+						mui.toast(TextMessage.updatesuccessinfo, {
+							duration: 'long',
+							type: 'div'
+						});
+						wt.close();
+						//mui.back();
+					} else {
+						console.log("upload error:" + status);
+						console.log("upload error:" + t.responseText);
+						wt.close();
+					}
+				});
+				//add parameter
+				task.addData("tokencheck", Api.getToken()); //Api.getToken()
+				task.addData("signcheck", Api.createSignInfo());
+				task.addFile(target, { key: "image" });
+				task.start();
+			}
+		}
 		//submit userinformation form
 		function userinfosubmit(){
 			var nickname=document.userinfosub.nickname.value;
@@ -592,105 +646,52 @@
 				}
 			}
 			var talk_flagtru=talk_flag.substr(1);
-			//compress Image
-			var path=$("#headimgupdate").val();
-			var serverimg=$(".headimg").attr("src");
 			mui.plusReady(function() {
-				if(path==""){
-					var params4={
-						"flag":"info",
-						"nick_name":nickname,
-						"talk_flag":talk_flagtru,
-						"introduce":introduce
-					};
-					Repository.User.userinfo(params4, {
-						ok: function(data) {
-							console.log("success");
-							mui.toast(TextMessage.updatesuccessinfo, {
+				//compress Image
+				var path=$("#headimgupdate").val();
+				var serverimg=$(".headimg").attr("src");
+				var params4={
+					"flag":"info",
+					"nick_name":nickname,
+					"talk_flag":talk_flagtru,
+					"introduce":introduce
+				};
+				Repository.User.userinfo(params4, {
+					ok: function(data) {
+						console.log("success");
+						mui.toast(TextMessage.updatesuccessinfo, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.back();
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
 								duration: 'long',
 								type: 'div'
 							});
-						},
-						ng: function(data) {
-							Log.d(data);
-							if(data == "1000") {
-								mui.toast(TextMessage.test, {
-									duration: 'long',
-									type: 'div'
-								});
-								mui.openWindow({
-									id: 'login',
-									url:"../../login/login.html"
-								});
-							} 
-							if(data=="2002"){
-								mui.toast(TextMessage.userng, {
-									duration: 'long',
-									type: 'div'
-								});
-								mui.openWindow({
-									id: 'login',
-									url:"../../login/login.html"
-								});
-							}
-							console.log("other error code:" + data);
-							
-						}
-					});
-				}else{
-					var currenttime = Date.parse(new Date());
-					plus.zip.compressImage({
-							src: path,
-							dst: "_doc/" + currenttime + ".jpg",
-							quality: 20,
-							overwrite: true,
-							format: "jpg",
-							width: "auto",
-							height: "auto"
-						},
-						function(event) {
-							console.log("Compress success!");
-							var target = event.target;
-							var size = event.size; // （Byte）
-							var width = event.width; // px
-							var height = event.height; // px
-							submitvalues(target);//upload
-						},
-						function(error) {
-							console.log("Compress error!" + error.message);
-						});
-						function submitvalues(target){
-							var serverurl=Api.url.User.userinfo;
-							var wt = plus.nativeUI.showWaiting();
-							var task = plus.uploader.createUpload(serverurl, {
-								method: "post"
-							}, function(t, status) {
-								if(status == 200) {
-									//console.log("upload success:" + t.responseText);
-									console.log("upload success!");
-									mui.toast(TextMessage.updatesuccessinfo, {
-										duration: 'long',
-										type: 'div'
-									});
-									wt.close();
-								} else {
-									console.log("upload error:" + status);
-									console.log("upload error:" + t.responseText);
-									wt.close();
-								}
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
 							});
-							//add parameter
-							task.addData("tokencheck", Api.getToken()); //Api.getToken()
-							task.addData("signcheck", Api.createSignInfo());
-							task.addData("flag","info");
-							task.addData("nick_name",nickname);
-							task.addData("talk_flag",talk_flagtru);
-							task.addData("introduce",introduce);
-							task.addFile(target, { key: "image" });
-							task.start();
+						} 
+						if(data=="2002"){
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
 						}
+						console.log("other error code:" + data);
+						
 					}
 				});
+			});
 		}
 		mui.plusReady(function() {
 			//message show
@@ -704,20 +705,14 @@
 					$(".tran-page").show();
 				},
 				ng: function(data) {
-					Log.d(data);
-					if(data == "1000") {
-						$(".settingbut").hide();
-						mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-						mui.openWindow({
-							id: 'login',
-							url:"../../login/login.html"
+					if(data == "2002") {
+						mui.toast(TextMessage.userng, {
+							duration: 'long',
+							type: 'div'
 						});
-					} else {
-						console.log("other error code:" + data);
 					}
+					console.log("other error code:" + data);
+					mui.back();
 				}
 			});
 		});
@@ -786,9 +781,15 @@
 										id: 'login',
 										url:"../../login/login.html"
 									});
-								} else {
-									console.log("other error code:" + data);
 								}
+								if(data == "2002") {
+									mui.toast(TextMessage.userng, {
+										duration: 'long',
+										type: 'div'
+									});
+								}
+								console.log("other error code:" + data);
+								
 							}
 						});
 					});

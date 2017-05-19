@@ -490,7 +490,8 @@ var Api;
 			logout: baseUrl() + '/user/logout/',
 			userupimage: baseUrl() + '/user/Usercomplaint/uploadImg/',
 			Usercomplaint: baseUrl() + '/user/Usercomplaint/',
-			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/'
+			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/',
+			setImg: baseUrl() + '/user/setting/setImg/'
 		},
 		Commodity: {
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
@@ -962,6 +963,7 @@ var TextMessage;
 	TextMessage.namenotnull = language ? "ユーザー名を入力してください" : "姓名不能为空";
 	TextMessage.contentnotnull = language ? "内容を入力してください" : "内容不能为空";
 	TextMessage.noopen = language ? "開通していない、お楽しみに" : "暂未开通，敬请期待";
+	TextMessage.ticketng = language ? "チケット数が不足" : "Ticket数量不足";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
