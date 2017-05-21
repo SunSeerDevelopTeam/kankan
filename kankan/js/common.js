@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -521,7 +521,8 @@ var Api;
 			transRequestOrder: baseUrl() + '/transaction/transoperation/trans_request_order/',
 			transChangePrice: baseUrl() + '/transaction/transoperation/trans_change_price/',
 			transStop: baseUrl() + '/transaction/transoperation/transaction_stop/',
-			transEdite: baseUrl() + '/transaction/transoperation/transaction_show/'
+			transEdite: baseUrl() + '/transaction/transoperation/transaction_show/',
+			transUrgeDelive: baseUrl() + '/transaction/transoperation/trans_urge_deliver/'
 		}
 	};
 	Api.Params = {
@@ -841,7 +842,10 @@ var Repository;
 			return Api.call(Api.url.Trans.transEdite, params, callback);
 		}
 		Transaction.transEdite = transEdite;
-
+		function transUrgeDelive(params, callback) {
+			return Api.call(Api.url.Trans.transUrgeDelive, params, callback);
+		}
+		Transaction.transUrgeDelive = transUrgeDelive;
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
