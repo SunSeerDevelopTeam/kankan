@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="libs/aps-igexin.jar"/>
+	<classpathentry kind="lib" path="libs/aps.jar"/>
+	<classpathentry kind="lib" path="libs/camera.jar"/>
+	<classpathentry kind="lib" path="libs/device.jar"/>
+	<classpathentry kind="lib" path="libs/downloader.jar"/>
+	<classpathentry kind="lib" path="libs/file.jar"/>
+	<classpathentry kind="lib" path="libs/gallery.jar"/>
+	<classpathentry kind="lib" path="libs/GetuiSDK2.10.2.0.jar"/>
+	<classpathentry kind="lib" path="libs/gif.jar"/>
+	<classpathentry kind="lib" path="libs/invocation.jar"/>
+	<classpathentry kind="lib" path="libs/messaging.jar"/>
+	<classpathentry kind="lib" path="libs/my-imageloader.jar"/>
+	<classpathentry kind="lib" path="libs/my-nineoldandroids-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/nativeObj.jar"/>
+	<classpathentry kind="lib" path="libs/nativeui.jar"/>
+	<classpathentry kind="lib" path="libs/navigatorui.jar"/>
+	<classpathentry kind="lib" path="libs/nopermission.jar"/>
+	<classpathentry kind="lib" path="libs/oauth-weixin.jar"/>
+	<classpathentry kind="lib" path="libs/oauth.jar"/>
+	<classpathentry kind="lib" path="libs/payment-weixin.jar"/>
+	<classpathentry kind="lib" path="libs/payment.jar"/>
+	<classpathentry kind="lib" path="libs/pdr.jar"/>
+	<classpathentry kind="lib" path="libs/sensor.jar"/>
+	<classpathentry kind="lib" path="libs/share-weixin.jar"/>
+	<classpathentry kind="lib" path="libs/share.jar"/>
+	<classpathentry kind="lib" path="libs/tx_wx.jar"/>
+	<classpathentry kind="lib" path="libs/ui.jar"/>
+	<classpathentry kind="lib" path="libs/uploader.jar"/>
+	<classpathentry kind="lib" path="libs/xhr.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
