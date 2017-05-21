@@ -52,6 +52,9 @@
 				        <li class="mui-table-view-cell tickbuy">
 				            <a class="mui-navigate-right lang" data-locale="ticketbuy"></a>
 				        </li>
+				        <li class="mui-table-view-cell pointmony">
+				            <a class="mui-navigate-right lang" data-locale="">point提现</a>
+				        </li>
 				         <li class="mui-table-view-cell">
 				            <a class="mui-navigate-right lang" data-locale="userule" href="#Utilization"></a>
 				        </li>
@@ -208,6 +211,12 @@
 			mui.openWindow({
 				id: 'point_to_ticket',
 				url:"point_to_ticket.html"
+			});
+		});
+		mui('.pointmony').on('tap','a',function(e) {
+			mui.openWindow({
+				id: 'point_to_mony',
+				url:"point_to_mony.html"
 			});
 		});
 		mui('.Contact').on('tap','a',function(e) {

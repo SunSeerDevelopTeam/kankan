@@ -107,7 +107,7 @@ function publishs() {
 		},
 		ng: function(data) {
 			Log.d(data);
-			if(data == "1000") {
+			if(data == "1000" || data=="2002") {
 				mui.toast(TextMessage.test, {
 					duration: 'long',
 					type: 'div'
@@ -117,16 +117,16 @@ function publishs() {
 					url:"../../login/login.html"
 				});
 			} 
-			if(data=="2002"){
-				mui.toast(TextMessage.userng, {
-					duration: 'long',
-					type: 'div'
-				});
-				mui.openWindow({
-					id: 'login',
-					url:"../../login/login.html"
-				});
-			}
+//			if(data=="2002"){
+//				mui.toast(TextMessage.userng, {
+//					duration: 'long',
+//					type: 'div'
+//				});
+//				mui.openWindow({
+//					id: 'login',
+//					url:"../../login/login.html"
+//				});
+//			}
 			if(data=="2007"){
 				mui.toast(TextMessage.ticketng, {
 					duration: 'long',
@@ -138,7 +138,7 @@ function publishs() {
 					url:"../sttting/point_to_ticket.html"
 				});
 			}
-			alert("other error code:" + data);
+			//alert("other error code:" + data);
 			
 		}
 	});
@@ -322,7 +322,7 @@ function Processing(results) {
 	} else {
 		var errorcode = data.result.statuscode;
 		console.log("NG:" + errorcode);
-		if(errorcode == "1000") {
+		if(errorcode == "1000" || errorcode=="2002") {
 			mui.toast(TextMessage.test, {
 				duration: 'long',
 				type: 'div'
@@ -332,16 +332,16 @@ function Processing(results) {
 				url:"../../login/login.html"
 			});
 		}
-		if(errorcode=="2002"){
-			mui.toast(TextMessage.userng, {
-				duration: 'long',
-				type: 'div'
-			});
-			mui.openWindow({
-				id: 'login',
-				url:"../../login/login.html"
-			});
-		}
+//		if(errorcode=="2002"){
+//			mui.toast(TextMessage.userng, {
+//				duration: 'long',
+//				type: 'div'
+//			});
+//			mui.openWindow({
+//				id: 'login',
+//				url:"../../login/login.html"
+//			});
+//		}
 	}
 }
 var nums = 0;

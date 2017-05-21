@@ -134,11 +134,11 @@
 									<font size="2" color="#FFFFFF" class="lang" data-locale="praiseprotext"></font>
 								</div>
 							</li>
-							<li class="user-goods-title-grid">
+							<!--<li class="user-goods-title-grid">
 								<div id="friends" class="user-product-tab32" onclick="closed()">
 									<font size="2" color="#FFFFFF" class="lang" data-locale="favoriteprotext"></font>
 								</div>
-							</li>
+							</li>-->
 						</ul>
 						<!--Produced products--->
 						<div id="myproducts" class="mui-slider ka_aboutupro">
@@ -305,7 +305,7 @@
 			],
 			beforeback: function() {
 		        var homePage = plus.webview.getWebviewById('pullrefresh_with_tab');
-				mui.fire(homePage, 'refresh');
+				mui.fire(homePage, 'refresh',{refresh:"canRefresh"});
 		    }
 		});
 		function closed(){
