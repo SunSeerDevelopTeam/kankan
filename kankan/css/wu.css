@@ -683,8 +683,10 @@
 .user-goods-title-grid {
 	height:100%; 
 	padding-top:0px; 
-	width:33%;
-	font-size:17px;
+	/*width:33%;*/
+	width:50%;
+	/*font-size:17px;*/
+	font-size:20px;
 	display:inline-block;
 	position:relative;
 	background:0 0;
@@ -695,7 +697,8 @@
 	height:100%; 
 	background-color:#FF0000; 
 	text-align:center; 
-	padding-top:10%; 
+	/*padding-top:10%; */
+	padding-top:5%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }
@@ -703,7 +706,8 @@
 	height:100%; 
 	background-color:gray; 
 	text-align:center; 
-	padding-top:10%; 
+	/*padding-top:10%; */
+	padding-top:5%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }
@@ -711,7 +715,8 @@
 	height:100%; 
 	background-color:#FF0000; 
 	text-align:center; 
-	padding-top:10%;
+	/*padding-top:10%;*/
+	padding-top:5%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }
@@ -719,7 +724,8 @@
 	height:100%; 
 	background-color:gray; 
 	text-align:center; 
-	padding-top:10%;
+	/*padding-top:10%;*/
+	padding-top:5%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }

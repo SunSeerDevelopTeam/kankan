@@ -721,7 +721,7 @@ function Processing(results) {
 	} else {
 		var errorcode = data.result.statuscode;
 		console.log("NG:" + errorcode);
-		if(errorcode == "1000") {
+		if(errorcode == "1000" || errorcode == "2002") {
 			mui.toast(TextMessage.test, {
 				duration: 'long',
 				type: 'div'
