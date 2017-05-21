@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>request</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+	</head>
+
+	<body>
+		<style>
+			.mui-control-content {
+				background-color: white;
+				/*min-height: 500px;*/
+			}
+			
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+		</style>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title lang" data-locale="requesttitle"></h1>
+			<div id="history">
+				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right jiaoyihitext"><span style="font-size: 14px;">交易履历</span></a>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item lang" href="#item1mobile" data-locale="requestedpro">
+					</a>
+					<a class="mui-control-item lang" href="#item2mobile" data-locale="requestpro">
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scrolls">
+								<ul class="mui-table-view mui-grid-view want-sell">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scrolls">
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
+		<script>
+			mui.init(/*{
+				swipeBack: false,
+				preloadPages: [{
+						id:"translatelist",
+						url:"../../transaction/transaction2.html"
+				}]
+			}*/);
+			function showcommodity(results){
+				var data=results.data;
+				//requested
+				var htmlnull='<div style="text-align: center;"><p>'+TextMessage.datanull+'</p></div>';
+				var others=data.own;
+				if(others==""){
+					$("#scroll1 .mui-scrolls").html(htmlnull);
+				}
+				for(var ot=0;ot<others.length;ot++){
+					var transid=others[ot].trans.trans_id;
+					var comm_name=others[ot].trans[0].comm_name;
+					var comm_img=others[ot].trans[0].comm_img;
+					var trans_type=others[ot].trans.trans_type;
+					if(trans_type=="0"){
+						var trans_typetext=TextMessage.requireing;
+					}else{
+						var trans_typetext=TextMessage.requresuces;
+					}
+					var status=others[ot].trans.status;
+					var other_photo=others[ot].trans.other_photo;
+					var my_photo=others[ot].trans.my_photo;
+					var price=others[ot].trans.price;
+					var trans_mode=others[ot].trans.trans_mode;
+					var transprocount=others[ot].trans.trans_comm_nums;
+					var html = new Util.StringBuilder();
+					html.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-6 translate"><a id="{0}" href="#">',transid)
+						.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">',comm_img=="" ? "../../../images/nopic.jpg":comm_img)
+						.appendFormat('<div class="mui-media-body">{0}</div>', comm_name)
+						.appendFormat('</a><div class="{0}">{1}</div>',trans_type==0 ? "kankan_jyz":"kankan_jycl",trans_typetext)
+						.appendFormat('<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 25px; height: 25px;display:{0}"></div>',transprocount>1 ?"":"none")
+						.appendFormat('<div class="mui-pull-right kankan_jyimgbox"><img src="{0}" style="border-radius: 50%; width: 20px; height: 20px;">',my_photo=="" ? "../../../images/userPhoto.png": my_photo)
+						.appendFormat('<img src="../../../images/jiantou.png" class="kankan_jhjiantou"><img src="{0}" style="border-radius: 50%; width: 20px; height: 20px;"></div>', other_photo=="" ?"../../../images/userPhoto.png":other_photo)
+						.appendFormat('<div class="mui-pull-left ka_mony"><div>{0}<font color="#000000"> P</font></div></div></li>',price);
+					$(".want-sell").append(html.toString());
+				}
+				/////////////////////////Swipe left and right////////////////////////////////
+				(function($) {
+					$('.mui-scroll-wrapper').scroll({
+						indicators: true //Whether to display a scroll bar
+					});
+					//request
+					var own=data.other;
+					var html2='<ul class="mui-table-view mui-grid-view want-sell">';
+					for(var ow=0;ow<own.length;ow++){
+						var otransid=own[ow].trans.trans_id;
+						var ocomm_name=own[ow].trans[0].comm_name;
+						var ocomm_img=own[ow].trans[0].comm_img;
+						if(own[ow].trans[0].comm_img==""){
+							var ocomm_img="../../../images/nopic.jpg";
+						}
+						var otrans_type=own[ow].trans.trans_type;
+						if(otrans_type=="0"){
+							var otrans_typetext=TextMessage.requireing;
+						}else{
+							var otrans_typetext=TextMessage.requresuces;
+						}
+						var ostatus=own[ow].trans.status;
+						var oother_photo=own[ow].trans.other_photo;
+						var omy_photo=own[ow].trans.my_photo;
+						if(own[ow].trans.my_photo==""){
+							var omy_photo="../../../images/userPhoto.png";
+						}
+						if(own[ow].trans.other_photo==""){
+							var oother_photo="../../../images/userPhoto.png";
+						}
+						var oprice=own[ow].trans.price;
+						var otrans_mode=own[ow].trans.trans_mode;
+						var otransprocount=own[ow].trans.trans_comm_nums;
+						html2 += '<li class="mui-table-view-cell mui-media mui-col-xs-6 translate"><a id="'+otransid+'" href="#">';
+						html2 += '<img class="mui-media-object ka_imgoption" src="'+ocomm_img+'" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						html2 += '<div class="mui-media-body">'+ocomm_name+'</div>';
+						html2 += '</a><div class="';
+						if(otrans_type=="0"){
+							html2 +='kankan_jyz';
+						}else{
+							html2 +='kankan_jycl';
+						}
+						html2 += '">'+otrans_typetext+'</div>';
+						if(otransprocount>1){
+							html2 += '<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 25px; height: 25px;"></div>';
+						}
+						html2 += '<div class="mui-pull-right kankan_jyimgbox"><img src="'+omy_photo+'" style="border-radius: 50%; width: 20px; height: 20px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						html2 += '<img src="../../../images/jiantou.png" class="kankan_jhjiantou"><img src="'+oother_photo+'" style="border-radius: 50%; width: 20px; height: 20px;"></div>';
+						html2 += '<div class="mui-pull-left ka_mony"><div>'+oprice+'<font color="#000000"> P</font></div></div></li>';
+					}
+					html2 += '</ul>';
+					if(own==""){
+						html2=htmlnull;
+					}
+					var item2 = document.getElementById('item2mobile');
+					document.getElementById('slider').addEventListener('slide', function(e) {
+						if(e.detail.slideNumber === 1) {
+							if(item2.querySelector('.mui-loading')) {
+								setTimeout(function() {
+									item2.querySelector('.mui-scrolls').innerHTML = html2;
+									clicktrans();
+								}, 500);
+							}
+						}
+					});
+					function clicktrans(){
+						var translatepage=null;
+						mui('.translate').on('tap','a',function(e) {
+							var tid = this.getAttribute('id');
+							mui.openWindow({
+								url:"../../transaction/transaction2.html?transid=" + tid,
+								id:"transaction",
+								extras:{
+									"transid":tid
+								}
+							});
+						});
+					}
+					clicktrans();
+				})(mui);
+			}
+			mui.plusReady(function() {
+				mui('#history').on('tap','a',function(e) {
+					mui.openWindow({
+						id: 'requestlist',
+						url:"requestlist.html"
+					});
+				});
+				var params = {};
+				Repository.User.Usertranslist(params, {
+					ok: function(data) {
+						console.log("request success");
+						showcommodity(data);
+					},
+					ng: function(data) {
+						console.log("error");
+						Log.d(data);
+						if(data=="2002"){
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							})
+						}
+						if(data=="1000"){
+							$(".jiaoyihitext").hide();
+						}
+					}
+				});
+			});
+			
+		</script>
+	</body>
+
+</html>
