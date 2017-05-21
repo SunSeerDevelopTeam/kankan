@@ -114,7 +114,9 @@
 					beforeback: function() {
 						//var list = plus.webview.getWebviewById('pullrefresh_with_tab');
 						var list = plus.webview.currentWebview().opener();
-						mui.fire(list, 'refresh');
+						mui.fire(list, 'refresh', {
+							refresh: "canRefresh"
+						});
 						return true;
 					}
 				});
