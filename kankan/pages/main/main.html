@@ -88,10 +88,6 @@
 			//Tab click event
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
-				if(targetTab=="products/request.html"){
-					var requestpa = plus.webview.getWebviewById("request.html");
-					mui.fire(requestpa, 'requestRefresh');
-				}
 				if(targetTab == activeTab) {
 					return;
 				}
