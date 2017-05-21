@@ -64,7 +64,7 @@ var JSLocale = {
 	"tab_1": "首页",
 	"tab_2": "发布",
 	"tab_3": "求购",
-	"tab_4": "请求",
+	"tab_4": "物流",
 
 	//commodity login page
 	"commodity_login": "商品登录",

@@ -82,16 +82,43 @@
 		"Webview": {},
 		"NativeUI": {},
 		"Navigator": {},
-		"NativeObj": {},"Share":{},"OAuth":{},"Device":{},"Camera":{}
+		"NativeObj": {},
+		"Share": {},
+		"OAuth": {},
+		"Device": {},
+		"Camera": {},
+		
+		"Payment": {}
 	},
 	"plus": {
 		"splashscreen": {
-			"autoclose": false,
-			"waiting": true
+			"autoclose": true,
+			"waiting": true,"delay":"0"
 		},
 		"runmode": "liberate",
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",
 		"distribute": {
+			"plugins": {
+				"payment": {
+					"weixin": {
+						"description": "微信支付",
+						"appid": "wx321b171a15b31c63"
+					}
+				},
+				"share": {
+					"weixin": {
+						"appid": "wx321b171a15b31c63",
+						"appsecret": "b136008481192a032c36f5bfc91ebc39",
+						"description": "可选，微信分享"
+					}
+				},
+				"oauth": {
+					"weixin": {
+						"appid": "wx321b171a15b31c63",
+						"appsecret": "b136008481192a032c36f5bfc91ebc39"
+					}
+				}
+			},
 			"apple": {
 				"appid": "",
 				"mobileprovision": "",
@@ -105,7 +132,20 @@
 				"keystore": "",
 				"password": "",
 				"aliasname": "",
-				"permissions": ["<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+				"permissions": [
+					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
+					"<uses-feature android:name=\"android.hardware.camera\"/>",
+					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"/>"
+				]
 			},
 			"orientation": [
 				"portrait-primary",
@@ -113,27 +153,27 @@
 			],
 			"icons": {
 				"ios": {
-					"prerendered": true, 
-					"auto": "", 
+					"prerendered": true,
+					"auto": "",
 					"iphone": {
 						"normal": "unpackage/res/icons/57x57.png",
 						"retina": "unpackage/res/icons/114x114.png",
 						"retina7": "unpackage/res/icons/120x120.png",
-						"spotlight-normal": "unpackage/res/icons/29x29.png", 
-						"spotlight-retina": "unpackage/res/icons/58x58.png", 
+						"spotlight-normal": "unpackage/res/icons/29x29.png",
+						"spotlight-retina": "unpackage/res/icons/58x58.png",
 						"spotlight-retina7": "unpackage/res/icons/80x80.png",
-						"settings-normal": "unpackage/res/icons/29x29.png", 
+						"settings-normal": "unpackage/res/icons/29x29.png",
 						"settings-retina": "unpackage/res/icons/58x58.png",
 						"retina8": "unpackage/res/icons/180x180.png",
 						"settings-retina8": "unpackage/res/icons/87x87.png"
 					},
 					"ipad": {
-						"normal": "unpackage/res/icons/72x72.png", 
-						"retina": "unpackage/res/icons/144x144.png", 
-						"normal7": "unpackage/res/icons/76x76.png", 
-						"retina7": "unpackage/res/icons/152x152.png", 
-						"spotlight-normal": "unpackage/res/icons/50x50.png", 
-						"spotlight-retina": "unpackage/res/icons/100x100.png", 
+						"normal": "unpackage/res/icons/72x72.png",
+						"retina": "unpackage/res/icons/144x144.png",
+						"normal7": "unpackage/res/icons/76x76.png",
+						"retina7": "unpackage/res/icons/152x152.png",
+						"spotlight-normal": "unpackage/res/icons/50x50.png",
+						"spotlight-retina": "unpackage/res/icons/100x100.png",
 						"spotlight-normal7": "unpackage/res/icons/40x40.png",
 						"spotlight-retina7": "unpackage/res/icons/80x80.png",
 						"settings-normal": "unpackage/res/icons/29x29.png",
@@ -141,39 +181,40 @@
 					}
 				},
 				"android": {
-					"mdpi": "unpackage/res/icons/48x48.png", 
-					"ldpi": "unpackage/res/icons/48x48.png", 
-					"hdpi": "unpackage/res/icons/72x72.png", 
+					"mdpi": "unpackage/res/icons/48x48.png",
+					"ldpi": "unpackage/res/icons/48x48.png",
+					"hdpi": "unpackage/res/icons/72x72.png",
 					"xhdpi": "unpackage/res/icons/96x96.png",
-					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "", 
+						"default": "",
 						"retina35": "",
 						"retina40": ""
 					},
 					"ipad": {
-						"portrait": "", 
+						"portrait": "",
 						"portrait-retina": "",
-						"landscape": "", 
-						"landscape-retina": "", 
-						"portrait7": "", 
+						"landscape": "",
+						"landscape-retina": "",
+						"portrait7": "",
 						"portrait-retina7": "",
-						"landscape7": "", 
+						"landscape7": "",
 						"landscape-retina7": ""
 					}
 				},
 				"android": {
-					"mdpi": "", 
-					"ldpi": "", 
-					"hdpi": "", 
-					"xhdpi": "", 
+					"mdpi": "",
+					"ldpi": "",
+					"hdpi": "",
+					"xhdpi": "",
 					"xxhdpi": ""
 				}
-			}
+			},"debug":true
 		}
 	},
 	"dependencies": {
@@ -296,7 +337,8 @@
 					"js/sha1.js"
 				],
 				"refer": [
-					"pages/main/main.html"
+					"pages/main/main.html",
+					"pages/login/forget_password.html"
 				],
 				"priority": 0
 			},
@@ -408,7 +450,8 @@
 				"refer": [
 					"pages/login/login.html",
 					"pages/login/reg.html",
-					"pages/main/search.html"
+					"pages/main/search.html",
+					"pages/main/user/user.html"
 				],
 				"priority": 0
 			},
@@ -461,9 +504,16 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"css/kankan_home.css",
-					"images/cbd.jpg"
+					"images/cbd.jpg",
+					"js/sha256.js",
+					"images/morebut.png",
+					"js/language/locale_zh_CN.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/login/login.html",
+					"pages/main/products/requestlist.html",
+					"pages/transaction/transaction2.html"
+				],
 				"priority": 0
 			},
 			"pages/main/pullrefresh_with_tab.html": {
@@ -481,12 +531,19 @@
 					"css/icons-extra.css",
 					"fonts/mui-icons-extra.ttf",
 					"js/language.js",
-					"css/listitem.css"
+					"css/listitem.css",
+					"images/car.png",
+					"js/lazy-load-img.min.js",
+					"images/nopic.jpg",
+					"js/language/locale_zh_CN.js",
+					"images/request.png"
 				],
 				"refer": [
 					"pages/main/products/detail.html",
 					"pages/login/login.html",
-					"pages/login/reg.html"
+					"pages/login/reg.html",
+					"pages/main/logisticslist.html",
+					"pages/main/products/request.html"
 				],
 				"priority": 0
 			},
@@ -515,6 +572,96 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"pages/main/user/user.html": {
+				"resources": [
+					"js/picker/mui.poppicker.js",
+					"images/cbd.jpg",
+					"js/picker/mui.picker.js",
+					"css/wu.css",
+					"css/feedback.css",
+					"images/muwu.jpg",
+					"images/Bad.PNG",
+					"images/Normal.PNG",
+					"images/Good.PNG",
+					"images/userPhoto.png",
+					"js/feedback.js",
+					"js/picker/city.data.js"
+				],
+				"refer": [
+					"pages/main/products/product_login.html",
+					"pages/main/products/detail.html",
+					"pages/main/products/commentlist.html"
+				],
+				"priority": 0
+			},
+			"pages/main/logisticslist.html": {
+				"resources": [
+					"css/wu.css",
+					"css/feedback.css",
+					"js/feedback.js",
+					"images/car.png",
+					"js/language/locale_zh_CN.js",
+					"fonts/mui.ttf",
+					"pages/transaction/transaction2.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/login/forget_password.html": {
+				"resources": [
+					"js/language/locale_zh_CN.js",
+					"js/app.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/search.html": {
+				"resources": [
+					"js/language/locale_zh_CN.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/requestlist.html": {
+				"resources": [
+					"js/language/locale_zh_CN.js"
+				],
+				"refer": [
+					"pages/main/products/translatelist.html"
+				],
+				"priority": 0
+			},
+			"pages/main/products/translatelist.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"images/15724-200.png",
+					"images/MacPro.jpg",
+					"images/muwu.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/transaction/transaction2.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"css/wu.css",
+					"css/feedback.css",
+					"images/muwu.jpg",
+					"images/sinaweibo.png",
+					"images/xinhuan.png",
+					"pages/main/logisticslist.html"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -525,9 +672,9 @@
 			]
 		}
 	},
-	"unpackage":[
-	  "README.md",
-	  "images/user-photo.png",
-	  "libs/easymob-webim-sdk/quickstart.md"
+	"unpackage": [
+		"README.md",
+		"images/user-photo.png",
+		"libs/easymob-webim-sdk/quickstart.md"
 	]
 }
