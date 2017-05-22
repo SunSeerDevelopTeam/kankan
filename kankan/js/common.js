@@ -522,7 +522,8 @@ var Api;
 			transChangePrice: baseUrl() + '/transaction/transoperation/trans_change_price/',
 			transStop: baseUrl() + '/transaction/transoperation/transaction_stop/',
 			transEdite: baseUrl() + '/transaction/transoperation/transaction_show/',
-			transUrgeDelive: baseUrl() + '/transaction/transoperation/trans_urge_deliver/'
+			transUrgeDelive: baseUrl() + '/transaction/transoperation/trans_urge_deliver/',
+			transUrgeReceipt: baseUrl() + '/transaction/transoperation/trans_urge_receipt/'
 		}
 	};
 	Api.Params = {
@@ -846,6 +847,11 @@ var Repository;
 			return Api.call(Api.url.Trans.transUrgeDelive, params, callback);
 		}
 		Transaction.transUrgeDelive = transUrgeDelive;
+		function transUrgeReceipt(params, callback) {
+			return Api.call(Api.url.Trans.transUrgeReceipt, params, callback);
+		}
+		Transaction.transUrgeReceipt = transUrgeReceipt;
+		
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));

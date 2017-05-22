@@ -596,21 +596,8 @@
 			}
 			
 			//
-			mui(".ka_buyway").on('tap','.mui-btn',function(){
-				var change_name = $(this).attr("id");
-				var mode;
-				if(change_name == 'switchp'){
-					mode = 'business';
-				}else if(change_name == 'switchex'){
-					mode = 'exchange';
-				}else{
-					mode = 'gratis';
-				}
-				var codid = $(".kankan_zanbox").attr("id");
-				var params = {
-					"commodity_id": commodity_id,
-					"mode":mode,
-				};
+			
+			function transRequest(params){
 				Repository.Transaction.transRequest(params, {
 					ok: function(data) {
 						var trans_id = data.data.transinfo[0].trans_id;
@@ -638,6 +625,35 @@
 						}
 					}
 				});
+			}
+			mui(".ka_buyway").on('tap','.mui-btn',function(){
+				var change_name = $(this).attr("id");
+				var mode;
+				alert(change_name);
+				var codid = $(".kankan_zanbox").attr("id");
+				var params = {
+					"commodity_id": codid
+				};
+				if(change_name == 'switchp'){
+					mode = 'business';
+					params.mode = mode;
+					transRequest();
+				}else if(change_name == 'switchex'){
+					mode = 'exchange';
+					params.mode = mode;
+					mui.openWindow({
+							url: "../../transaction/select_item.html",
+							id: "selectitem",
+							extras:{
+								"commodity_id":codid,
+								"mode":mode
+							}
+						})
+				}else{
+					mode = 'gratis';
+					params.mode = mode;
+					transRequest();
+				}
 			})
 		</script>
 	</body>
