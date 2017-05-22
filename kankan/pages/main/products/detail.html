@@ -157,6 +157,7 @@
 			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
 		</div>
+		<input type="hidden" name="userid" id="userid" value="" />
 	</div>
 		
 		<script src="../../../js/mui.min.js"></script>
@@ -189,13 +190,10 @@
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
 				commodity_id = event.detail.id;
-				getinfo(id);
+				mui.plusReady(function() {
+					getinfo(id);
+				});
 			});
-//			$(function() {
-//				var id2 = "100006";
-//				getinfo(id2);
-//			});
-
 			//*********************share start
 			var shares = {};
 			mui.plusReady(function() {
@@ -279,6 +277,7 @@
 				$("#lastconcerul").empty();
 				$("#firstconcerul").empty();
 				$(".mui-title").empty();
+				$("#userid").val("");
 			}
 			function getinfo(pid) {
 				emptyhtml();
@@ -329,11 +328,6 @@
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
 				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
-				//Carousel figure
-				var slider = mui("#slider");
-				slider.slider({
-					interval: 1000
-				});
 				var imgsarr = commodity.commodity_imgs;
 				var htmlimg = "";
 				var htmlfocus="";
@@ -366,6 +360,7 @@
 				var ucomentnum = commodity.user_basic.user_comment_count;
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
+				$("#userid").val(userid);
 				$(".ka_authorname b").html(uname);
 				$(".ka_touxiangimg").attr("src", uimage);
 				$(".authcom").html(ucomentnum);
@@ -513,19 +508,7 @@
 					$("#zanqian").hide();
 					$("#zanhou").show();
 				}
-				//products list
-				var prolistpage = null;
-				mui('.productlist').on('tap', 'a', function(e) {
-					if(!prolistpage) {
-						prolistpage = plus.webview.getWebviewById('productslist.html');
-					}
-					mui.fire(prolistpage, 'prolid', {
-						id: userid
-					});
-					mui.openWindow({
-						id: 'productslist.html'
-					});
-				});
+				
 				//detail page
 				var detailPage = null;
 				mui('.detail').on('tap', 'a', function(e) {
@@ -542,7 +525,26 @@
 				});
 				$(".mui-content").show();
 				$("#loading").hide();
+				//Carousel figure
+				var slider = mui("#slider");
+				slider.slider({
+					interval: 1000
+				});
 			}
+			//products list
+			var prolistpage = null;
+			mui('.productlist').on('tap', 'a', function(e) {
+				var uid=$("#userid").val();
+				if(!prolistpage) {
+					prolistpage = plus.webview.getWebviewById('productslist.html');
+				}
+				mui.fire(prolistpage, 'prolid', {
+					id: uid
+				});
+				mui.openWindow({
+					id: 'productslist.html'
+				});
+			});
 			//messageshow end************/
 			//goods
 			function dianzan(bid) {
