@@ -1,0 +1,10 @@
+diff a/kankan/pages/transaction/transaction2.html b/kankan/pages/transaction/transaction2.html	(rejected hunks)
+@@ -30,7 +30,7 @@
+ 				<div class="mui-scroll-wrapper">
+ 					<div class="tran-page">
+ 						<div class="tran-body" style="margin-top:45px;">
+-							<ul class="mui-table-view mui-grid-view before_hide after_hide tran-name" style="display:none;">
++							<ul class="mui-table-view mui-grid-view before_hide after_hide tran-name">
+ 								<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+ 									<img height="32px" width="32px" src="../../images/sinaweibo.png"/>
+ 									<font size="2" vertical-align="middle">Mary</font>

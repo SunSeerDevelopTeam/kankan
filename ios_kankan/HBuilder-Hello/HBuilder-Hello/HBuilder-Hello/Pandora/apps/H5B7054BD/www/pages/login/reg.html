@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-input-group:first {
+				margin-top: 30px;
+			}
+			
+			.mui-input-group {
+				margin-top: -1px;
+			}
+			
+			.mui-input-group label {
+				width: 41%;
+			}
+			
+			.mui-input-row {
+				overflow: inherit;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 59%;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			#avatar {
+				width: 100%;
+				height: 15%;
+				text-align: center;
+				margin-top: 20px;
+			}
+			
+			#avatar img {
+				border-radius: 50%;
+			}
+			
+			label.error {
+				width: 100%;
+				color: red;
+				display: block;
+				height: 30px;
+				float: left;
+				text-align: center;
+			}
+			
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+			
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+			
+			#regForm {
+				margin-top: 45px;
+			}
+			
+			#regForm label {
+				font-size: 75%;
+			}
+			
+			#regForm input {
+				font-size: 67%;
+				line-height: 1.5;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav"></a>
+			<a class="lang" data-locale="back"></a>
+			<h1 class="mui-title"><span class="lang" data-locale="user-login"></span></h1>
+			<a class="mui-icon mui-icon-closeempty mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+			<div id="avatar">
+				<img src="../../images/userPhoto.png" />
+			</div>
+			<form id="regForm" method="post">
+				<!-- email -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="email" class="lang" data-locale="email"></label>
+						<input id='email' name="email" type="email" class="mui-input lang" data-locale="please-input-email">
+					</div>
+				</div>
+				<!-- username -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="username" class="lang" data-locale="username"></label>
+						<input id='username' name="username" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-username">
+					</div>
+				</div>
+				<!-- password -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="password"></label>
+						<input id='password' name="password" type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
+					</div>
+				</div>
+				<!-- password confirm -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="password-confirm"></label>
+						<input id='passwordConfirm' name="passwordConfirm" type="password" class="mui-input-clear mui-input lang" data-locale="please-confirm-password">
+					</div>
+				</div>
+				<!-- address -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="address"></label>
+						<input id="city" name="city" type="text" class="mui-input-clear mui-input lang" data-locale="address-details" readonly="readonly">
+						<a id="showCityPicker" class="mui-navigate-right"></a>
+					</div>
+				</div>
+				<!-- verification code -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="verification-code"></label>
+						<input id='verificationCode' name="verificationCode" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+					</div>
+				</div>
+				<!-- send verification code button -->
+				<div class="mui-content-padded">
+					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
+				</div>
+				<!-- introduction code -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="introduction-code"></label>
+						<input id='introduction-code' name="introduction-code" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
+					</div>
+				</div>
+				<!-- submit button -->
+				<div class="mui-content-padded">
+					<button id='reg' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
+				</div>
+			</form>
+
+			<div class="mui-content-padded">
+				<p class="lang" data-locale="register-tips"></p>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/picker/mui.picker.js"></script>
+		<script type="text/javascript" src="../../js/picker/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../../js/picker/city.data.js"></script>
+		<script type="text/javascript" src="../../js/sha1.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/md5.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			(function(mui, doc) {
+				mui.init();
+				mui.plusReady(function() {
+					console.log("reg page plus ready...");
+					var sendVCodeBtn = doc.getElementById('send-verification-code');
+					var canClick = true;
+					sendVCodeBtn.addEventListener('tap', function(event) {
+						if(!canClick) return;
+						console.log("click sendVCodeBtn");
+						canClick = false;
+						var waiting = plus.nativeUI.showWaiting();
+						var params = {};
+						params[Api.Params.email] = doc.getElementById('email').value;
+						Repository.User.checkEmail(params, {
+							ok: function(data) {
+								waiting.close();
+								mui.toast(TextMessage.send_code_ok, {
+									duration: 'long',
+									type: 'div'
+								})
+								var i = 0;
+								var updateText = setInterval(function() {
+									i++;
+									sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
+									if(180 - i == 0) {
+										canClick = true;
+										clearInterval(updateText);
+									}
+								}, 1000);
+							},
+							ng: function(data) {
+								waiting.close();
+								canClick = true;
+								switch(data) {
+									case "2013":
+										mui.toast(TextMessage.email_error, {
+											duration: 'long',
+											type: 'div'
+										})
+										break;
+									default:
+								mui.toast(TextMessage.send_code_ng, {
+									duration: 'long',
+									type: 'div'
+								})
+										break;
+								}
+							},
+							error: function() {
+								canClick = true;
+								waiting.close();
+							}
+						});
+					});
+
+					// register logic
+					var regBtn = doc.getElementById('reg');
+					regBtn.addEventListener('tap', function(event) {
+						console.log("click regBtn");
+						var waiting = plus.nativeUI.showWaiting();
+						var params = {};
+						params[Api.Params.email] = doc.getElementById('email').value.trim();
+						params[Api.Params.username] = doc.getElementById('username').value.trim();
+						params[Api.Params.password] = hex_sha1(hex_md5(doc.getElementById('password').value.trim()));
+						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');
+						params[Api.Params.vCode] = doc.getElementById('verificationCode').value.trim();
+						params[Api.Params.rCode] = doc.getElementById('introduction-code').value.trim();
+						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
+						Repository.User.register(params, {
+							ok: function(data) {
+								Log.i("register ok");
+								waiting.close();
+								plus.storage.setItem('LoginFlag', 'isLogin');
+								mui.back();
+							},
+							ng: function(data) {
+								waiting.close();
+								$.each(data, function(key, value) {
+									console.log(key, value);
+									switch(value) {
+										case "1001":
+											if(key == Api.Params.vCode) {
+												mui.toast(TextMessage.verificationCode + TextMessage.errorCode_1001, {
+													duration: 'long',
+													type: 'div'
+												})
+											}
+											break;
+										case "1002":
+											if(key == Api.Params.username) {
+												mui.toast(TextMessage.username + TextMessage.errorCode_1002, {
+													duration: 'long',
+													type: 'div'
+												})
+											}
+											break;
+										default:
+											break;
+									}
+								});
+							},
+							error: function() {
+								waiting.close();
+							}
+						});
+					});
+
+					// address logic
+					var cityPickerBtn = doc.getElementById('showCityPicker');
+					var cityInput = doc.getElementById('city');
+					var cityPicker = new mui.PopPicker();
+					cityPicker.setData(cityData);
+					cityPickerBtn.addEventListener('tap', function(event) {
+						showCityPicker();
+					});
+					cityInput.addEventListener('tap', function(event) {
+						showCityPicker();
+					});
+
+					var showCityPicker = function() {
+						Log.i("click cityPicker");
+						cityPicker.show(function(items) {
+							var cityElement = doc.getElementById('city');
+							cityElement.value = items[0].text;
+							cityElement.setAttribute('data-val', items[0].value);
+						});
+					}
+				});
+			})(mui, document);
+		</script>
+	</body>
+
+</html>

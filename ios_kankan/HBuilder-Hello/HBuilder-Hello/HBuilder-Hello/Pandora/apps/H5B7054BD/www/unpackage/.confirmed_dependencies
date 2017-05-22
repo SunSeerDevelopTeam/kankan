@@ -1,0 +1,278 @@
+{
+	"pages/login/login.html": {
+		"resources": [
+			"js/app.js",
+			"js/sha1.js",
+			"css/style.css",
+			"js/mui.enterfocus.js",
+			"js/md5.js",
+			"fonts/mui.ttf",
+			"images/weixin.png",
+			"js/language/locale_zh_CN.js"
+		],
+		"refer": [
+			"pages/login/forget_password.html"
+		]
+	},
+	"pages/main/products/detail.html": {
+		"resources": [
+			"images/hk.png",
+			"images/twitter.png",
+			"images/jp.png",
+			"images/nopic.jpg",
+			"images/us.png",
+			"images/line.png",
+			"images/facebook.png",
+			"images/weixin.png",
+			"images/china.png",
+			"fonts/mui.ttf",
+			"css/kankan_home.css",
+			"css/icons-extra.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/sha256.js",
+			"js/jquery-3.2.0.min.js",
+			"js/language.js",
+			"css/mui.min.css",
+			"js/language/locale_zh_CN.js"
+		],
+		"refer": [
+			"pages/main/products/pro_commentslist.html",
+			"pages/main/products/productslist.html"
+		]
+	},
+	"pages/main/products/product_login.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"js/sha256.js",
+			"js/mui.poppicker.js",
+			"css/mui.poppicker.css",
+			"css/kankan_home.css",
+			"css/mui.picker.css",
+			"js/mui.view.js",
+			"images/iconfont-tianjia.png",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-3.2.0.min.js",
+			"js/language.js",
+			"js/language/locale_zh_CN.js"
+		],
+		"refer": []
+	},
+	"pages/main/home.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"images/default.jpg",
+			"pages/main/pullrefresh_with_tab.html",
+			"fonts/mui.ttf",
+			"css/icons-extra.css",
+			"css/mui.min.css",
+			"js/language/locale_zh_CN.js"
+		],
+		"refer": [
+			"pages/main/search.html",
+			"pages/main/pullrefresh_with_tab.html",
+			"pages/main/user/user.html"
+		]
+	},
+	"pages/main/products/product_want_to_buy.html": {
+		"resources": [
+			"images/iconfont-tianjia.png",
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/sha256.js",
+			"js/jquery-3.2.0.min.js",
+			"js/language.js",
+			"css/mui.min.css",
+			"css/kankan_home.css"
+		],
+		"refer": []
+	},
+	"pages/main/main.html": {
+		"resources": [
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-3.2.0.min.js",
+			"fonts/mui.ttf",
+			"js/language.js",
+			"css/mui.min.css",
+			"js/language/locale_zh_CN.js",
+			"pages/main/home.html",
+			"css/icons-extra.css",
+			"js/language/locale_ja_JP.js"
+		],
+		"refer": [
+			"pages/main/products/product_login.html",
+			"pages/main/home.html",
+			"pages/main/products/product_want_to_buy.html",
+			"pages/main/products/request.html",
+			"pages/main/logisticslist.html"
+		]
+	},
+	"pages/main/pullrefresh_with_tab.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"js/mui.pullToRefresh.material.js",
+			"css/listitem.css",
+			"fonts/mui-icons-extra.ttf",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-3.2.0.min.js",
+			"js/sha256.js",
+			"js/language.js",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"images/nopic.jpg",
+			"js/lazy-load-img.min.js",
+			"images/car.png",
+			"pages/main/logisticslist.html",
+			"js/language/locale_zh_CN.js",
+			"images/request.png"
+		],
+		"refer": [
+			"pages/login/login.html",
+			"pages/main/products/detail.html",
+			"pages/main/logisticslist.html",
+			"pages/main/products/request.html"
+		]
+	},
+	"pages/main/products/productslist.html": {
+		"resources": [
+			"images/Bad.PNG",
+			"images/Normal.PNG",
+			"images/Good.PNG",
+			"js/language/locale_zh_CN.js"
+		]
+	},
+	"pages/main/user/user.html": {
+		"resources": [
+			"js/picker/mui.poppicker.js",
+			"images/cbd.jpg",
+			"js/picker/mui.picker.js",
+			"css/wu.css",
+			"css/feedback.css",
+			"images/muwu.jpg",
+			"images/Bad.PNG",
+			"images/Normal.PNG",
+			"images/Good.PNG",
+			"images/userPhoto.png",
+			"js/feedback.js",
+			"js/picker/city.data.js",
+			"pages/setting/setting.html"
+		],
+		"refer": [
+			"pages/main/products/product_login.html",
+			"pages/main/products/detail.html",
+			"pages/main/products/commentlist.html",
+			"pages/setting/setting.html"
+		]
+	},
+	"pages/main/search.html": {
+		"resources": [
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-3.2.0.min.js",
+			"fonts/mui.ttf",
+			"js/language.js",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"js/language/locale_zh_CN.js"
+		]
+	},
+	"pages/main/products/request.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/kankan_home.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/sha256.js",
+			"js/jquery-3.2.0.min.js",
+			"js/language.js",
+			"css/mui.min.css",
+			"images/morebut.png",
+			"images/jiantou.png",
+			"js/language/locale_zh_CN.js"
+		],
+		"refer": [
+			"pages/login/login.html",
+			"pages/main/products/requestlist.html",
+			"pages/transaction/transaction2.html"
+		]
+	},
+	"pages/main/logisticslist.html": {
+		"resources": [
+			"css/wu.css",
+			"css/feedback.css",
+			"js/feedback.js",
+			"images/car.png",
+			"js/language/locale_zh_CN.js",
+			"fonts/mui.ttf",
+			"pages/transaction/transaction2.html"
+		],
+		"refer": [
+			"pages/transaction/transaction2.html"
+		]
+	},
+	"pages/setting/setting.html": {
+		"refer": [
+			"pages/login/login.html",
+			"pages/main/user/user.html"
+		],
+		"resources": [
+			"pages/main/user/user.html"
+		]
+	},
+	"pages/main/products/requestlist.html": {
+		"refer": [
+			"pages/main/products/translatelist.html"
+		],
+		"resources": [
+			"js/language/locale_zh_CN.js"
+		]
+	},
+	"pages/main/products/translatelist.html": {
+		"resources": [
+			"images/15724-200.png",
+			"images/MacPro.jpg",
+			"images/jiantou.png",
+			"images/cbd.jpg",
+			"images/muwu.jpg"
+		]
+	},
+	"pages/login/forget_password.html": {
+		"resources": [
+			"js/language/locale_zh_CN.js",
+			"js/app.js",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/sha256.js",
+			"js/jquery-3.2.0.min.js",
+			"fonts/mui.ttf",
+			"js/language.js",
+			"css/mui.min.css",
+			"css/style.css"
+		]
+	},
+	"pages/transaction/transaction2.html": {
+		"resources": [
+			"images/cbd.jpg",
+			"css/wu.css",
+			"css/feedback.css",
+			"images/muwu.jpg",
+			"images/sinaweibo.png",
+			"images/xinhuan.png",
+			"pages/main/logisticslist.html"
+		],
+		"refer": [
+			"pages/main/logisticslist.html"
+		]
+	},
+	"pages/main/products/pro_commentslist.html": {
+		"resources": [
+			"js/language/locale_zh_CN.js"
+		]
+	}
+}

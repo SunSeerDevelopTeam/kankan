@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>translatelist</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<script src="../../jquery-3.2.0.min.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css">
+		<link href="../../css/wu.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav"></a>
+			<a class="lang" data-locale="back">戻る</a>
+			<h1 class="mui-title"><span class="lang" data-locale="change">Tran</span></h1>
+		</header>
+		<div class="mui-content">
+			<div id="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="tran-page">
+						<div class="tran-body" style="margin-top:45px;margin-bottom:60px;">
+							<ul class="mui-table-view mui-grid-view before_hide after_hide tran-name">
+								<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">
+									<img height="32px" width="32px" src="../../images/sinaweibo.png"/>
+									<font size="2" vertical-align="middle">Mary</font>
+								</li>
+								<li class="tran-name-middle tran-name-sell">
+									<div class="tran-name-middle-status">
+										<font size="2" color="#ffffff" vertical-align="middle">問い合わせ中</font>
+									</div>
+								</li>
+								<li class="mui-table-view-cell tran-name-buy">
+									<img height="32px" width="32px" src="../../images/weixin.png"/>
+									<font size="2" vertical-align="middle">Jimmy</font>
+								</li>
+							</ul>
+							<ul class="tran-pic">
+								<li class="tran-pic-sell">
+									<a href="#sellGoods" onclick="showRequestDetail()">
+										<img height="100%" width="100%" src="../../images/cbd.jpg"/>
+									</a>
+								</li>
+								<li class="tran-pic-middle">
+									<img height="24px" width="24px" src="../../images/xinhuan.png"/>
+								</li>
+								<li class="tran-pic-buy">
+									<a href="#buyGoods">
+										<img height="100%" width="100%" src="../../images/muwu.jpg"/>
+									</a>
+								</li>
+							</ul>
+							
+							<ul class="tran-button">
+								<li class="tran-button-sell">
+									<div>
+										<font size="2" vertical-align="middle" onclick="stopTransaction();">交易中止</font>
+									</div>
+								</li>
+								<li class="tran-button-middle">
+								</li>
+								<li class="tran-button-buy">
+									<div>
+										<font size="2" color="#FFFFF" vertical-align="middle">交易開始</font>
+									</div>
+								</li>
+							</ul>
+							<ul class="tran-distribution">
+								<li class="tran-distribution-law">
+									<div class="tran-distribution-law-detail">
+										<a href="#tradeLaw">
+											<font size="3" color="999999" vertical-align="middle">特定商取引法に基づく表記</font>
+										</a>										
+									</div>
+									<a href="distribution.html">
+										<div class="tran-distribution-call">
+												<a href="../main/logisticslist.html"><font size="2" color="#FFFFF" vertical-align="middle">物流と連絡する</font></a>
+										</div>
+									</a>
+								</li>
+							</ul>
+							<ul id="msgArea" class="tran-chat">
+								
+							</ul>
+							<nav class="mui-bar mui-bar-tab">
+								<ul class="tran-foot">
+									<li class="tran-foot-input">
+										<input id="msg" type="text" value=""/>
+									</li>
+									<li class="tran-foot-submit">
+										<button type="button" onclick="submitChat();" class="mui-btn-link mui-btn-nav mui-pull-left">
+											<span><font size="4">送信<font size="4"></span>
+										</button>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>				
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js" ></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var trans_id;
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				trans_id = self.transid;
+				showRequestDetail();
+			})
+			
+			
+			function submitChat(){
+				var chatMsg = $("#msg").val();
+				if(chatMsg == ''){
+					mui.toast("内容はありませんね");
+					$("#msg").focus();
+				}else{
+					var params = {
+						"message": chatMsg,
+						"transid":trans_id
+					};
+					Repository.Transaction.transConversation(params, {
+						ok: function(data) {
+							console.dir(data);
+							Log.i("message send successfully!");
+							$("#msg").val("");
+							var transinfo = data.data.transinfo;
+							var messginfo  = data.data.messginfo;
+							var commdinfo  = data.data.commdinfo;
+							var usersinfo  = data.data.usersinfo;
+							var cur_user_id = data.data.myid;
+							showChatMsg(usersinfo,messginfo,cur_user_id);
+						},
+						ng: function(data) {
+							Log.i("message send faild!");
+							if(data == "1000") {
+								alert(TextMessage.test);
+							}
+							if(data == "2004") {
+								alert(TextMessage.operation_error);
+							}
+						}
+					});
+				}
+			}
+			
+			function showRequestDetail(){
+				var params = {
+					"transid":trans_id
+				};
+				Repository.Transaction.transEdite(params,{
+					ok: function(data) {
+						var transinfo = data.data.transinfo;
+						var messginfo  = data.data.messginfo;
+						var commdinfo  = data.data.commdinfo;
+						var usersinfo  = data.data.usersinfo;
+						var tranStatusVal = getTransStatus(transinfo.status);
+						$(".tran-name-middle-status font").html(tranStatusVal);
+						showTranCommodMsg(usersinfo,commdinfo,messginfo);
+						var buyer_id = transinfo.issue_user_id;
+						var seller_id = transinfo.accept_user_id;
+						var cur_user_id = data.data.myid;
+						showChatMsg(usersinfo,messginfo,cur_user_id);
+					},
+					ng: function(data) {
+						Log.i("message send faild!");
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+					}
+				});
+			}
+			
+			function getTransStatus(status){
+				var tranStatusVal = TRANS_STATUS[status];
+				return tranStatusVal;
+			}
+			
+			function showTranCommodMsg(cur_user_id,usersinfo,commdinfo,messginfo){
+				var buyer_photo,buyer_nickname,buyer_id,seller_photo,seller_nickname,seller_id,tranGoodMsg,userRole;
+				for(var user in usersinfo){
+					if(usersinfo[user].user_role == 'issue'){
+						buyer_photo = usersinfo[user].photo;
+						buyer_nickname = usersinfo[user].nick_name;
+						buyer_id       = usersinfo[user].user_id;
+					}else if(usersinfo[user].user_role == 'accept'){
+						seller_photo = usersinfo[user].photo;
+						seller_nickname = usersinfo[user].nick_name;
+						seller_id       = usersinfo[user].user_id;
+					}
+				}
+				
+				if(cur_user_id == buyer_id) userRole = 'buyer';
+				if(cur_user_id == buyer_id) userRole = 'seller';
+				for(var goods in commdinfo){
+					if(commdinfo[goods].user_id == buyer_id){
+						
+					}else if(commdinfo[goods].user_id == seller_id){
+						
+					}
+				}
+			}
+			
+			
+			function showChatMsg(usersinfo,messginfo,cur_user_id){
+				var buyer_photo,buyer_nickname,buyer_id,seller_photo,seller_nickname,seller_id,chatMsg;
+				
+				for(var user in usersinfo){
+					if(usersinfo[user].user_role == "issue"){
+						buyer_photo    = usersinfo[user].photo;
+						buyer_nickname = usersinfo[user].nick_name;
+						buyer_id       = usersinfo[user].user_id;
+					}else if(usersinfo[user].user_role == 'accept'){
+						seller_photo = usersinfo[user].photo;
+						seller_nickname = usersinfo[user].nick_name;
+						seller_id       = usersinfo[user].user_id;
+					}
+				}
+				
+				for(var chat in messginfo){
+					if(cur_user_id == buyer_id){
+						if(messginfo[chat].user_id == buyer_id){
+							chatMsg += '<li class="tran-chat-word" style="width:75%;">'+messginfo[chat].msg_detail+'</li>';
+							chatMsg += '<li class="tran-chat-face"><img height="32px" width="32px" src="' + buyer_photo + '"></li>';
+							chatMsg += '<div class="comtent mui-pull-left"><div class="mui-pull-left">';
+							charMsg += '<img src="'+ buyer_photo +'" width="40" height="40" class="ka_touxiangimg">';
+							charMsg += '</div><div class="mui-pull-right ka_commentinfobox">'+messginfo[chat].msg_detaila+'<div class="ka_commenttime"></div></div></div>';
+						}else{
+							chatMsg += '<li class="tran-chat-face" style="float:right;"><img height="32px" width="32px" src="' + seller_photo + '"></li>';
+							chatMsg += '<li class="tran-chat-word" style="float:right;width:75%;word-break:break-all;">'+messginfo[chat].msg_detail+'</li>';
+						}
+					}else{
+						if(messginfo[chat].user_id == seller_id){
+							chatMsg += '<li class="tran-chat-word" style="width:75%;">'+messginfo[chat].msg_detail + '</li>';
+							chatMsg += '<li class="tran-chat-face"><img height="32px" width="32px" src="' + seller_photo +'"></li>';
+						}else{
+							chatMsg += '<li class="tran-chat-face" style="float:right;width:20%;"><img height="32px" width="32px" src="' + buyer_photo + '"></li>';
+							chatMsg += '<li class="tran-chat-word" style="float:right;width:70%;min-height:20px;word-break:break-all;">' + messginfo[chat].msg_detail + '</li>';
+						}
+					}
+				}
+				$("#msgArea").html(chatMsg);
+			}
+			function showRequestCommodity(){
+				var params = {
+					"transid":trans_id
+				};
+				Repository.Transaction.transShowRequest(params,{
+					ok: function(data) {
+						console.dir(data);
+					},
+					ng: function(data) {
+						Log.i("message send faild!");
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+					}
+				});
+			}
+			function stopTransaction(){
+				var params = {
+					"transid":trans_id
+				};
+				Repository.Transaction.transStop(params, {
+					ok: function(data) {
+						Log.i("message send successfully!");
+					},
+					ng: function(data) {
+						Log.i("message send faild!");
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

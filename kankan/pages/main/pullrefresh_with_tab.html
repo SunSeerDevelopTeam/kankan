@@ -924,8 +924,13 @@
 							}, 300);
 
 						});
-
+						
+						var isClickLikeBtn = false;
 						$(".comm-like-num").on("tap", function(event) {
+							if (isClickLikeBtn) {
+								return false;
+							}
+							isClickLikeBtn = true;
 							if(DEBUG) {
 								alert("首页商品点赞事件被触发。");
 							}
@@ -955,11 +960,11 @@
 											alert("praise_flag is error.");
 										}
 									}
+									isClickLikeBtn = false;
 								},
 								ng: function(result) {
 									if(result === "2004") {
 										plus.nativeUI.alert(TextMessage.operation_error);
-										return;
 									}
 									if(Validator.isObj(result)) {
 										$.each(result, function(key, value) {
@@ -974,8 +979,11 @@
 											}
 										});
 									}
+									isClickLikeBtn = false;
 								},
-								error: function() {}
+								error: function() {
+									isClickLikeBtn = false;
+								}
 							});
 							return false;
 						});

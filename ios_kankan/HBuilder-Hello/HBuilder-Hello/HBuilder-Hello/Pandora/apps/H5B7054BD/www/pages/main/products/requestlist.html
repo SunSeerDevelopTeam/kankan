@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>requestlist</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
+			<h1 class="mui-title lang" data-locale="requesthistory"></h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="historyshow">
+			</ul>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: false,
+				preloadPages: [{
+						id:"translatelist",
+						url:"translatelist.html"
+				}]
+			});
+			function showhistory(results){
+				var data=results.data;
+				var datalen=data.length;
+				for(var i=0;i<datalen;i++){
+					var trans=data[i].trans;
+					var price=trans.price;
+					var trans_id=trans.trans_id;
+					var trstatus=trans.status;
+					if(trstatus=="3"){
+						var status="交易成功";
+					}else{
+						var status="交易中止";
+					}
+					if(trans[0].comm_img==""){
+						var comm_img ="../../../images/nopic.jpg";
+					}else{
+						var comm_img=trans[0].comm_img;
+					}
+					var comm_name=trans[0].comm_name;
+					var html = new Util.StringBuilder();
+					html.appendFormat('<li class="mui-table-view-cell transli"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img src="{1}" style="max-width: 60px;max-height: 60px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>',trans_id,comm_img)
+						.appendFormat('<div class="mui-pull-left requestbox"><span>{0}</span><div><font color="#0062CC">{1}</font> P</div></div>',comm_name,price)
+						.appendFormat('<div class="mui-pull-right {0}">{1}</div></a></li>',trstatus=="3" ? "requestsuccess":"requeststop",status);
+					$("#historyshow").append(html.toString());
+					var translatepage=null;
+					mui('.transli').on('tap','a',function(e) {
+						var tid = this.getAttribute('id');
+						if(!translatepage) {
+							translatepage = plus.webview.getWebviewById('translatelist');
+						}
+						mui.fire(translatepage, 'traid', {
+							id: tid
+						});
+						mui.openWindow({
+							id: 'translatelist'
+						});
+					});
+				}
+			}
+			mui.plusReady(function() {
+				var params = {};
+				Repository.User.mytranshistory(params,{
+					ok: function(data) {
+						console.log("request history success");
+						showhistory(data);
+					},
+					ng: function(data) {
+						console.log("error");
+						Log.d(data);
+						//emptycontent();
+						if(data=="2001"){
+							alert(TextMessage.datanull);
+							//$("ul").hide();
+						}
+						if(data=="1000"){
+							alert(TextMessage.test);
+							mui.toast(TextMessage.datanull, {
+								duration: 'long',
+								type: 'div'
+							})
+						}
+						if(data=="1000"){
+							alert(TextMessage.test);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						if(data=="2002"){
+							alert(TextMessage.userng);
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>
