@@ -15,7 +15,13 @@
 			<h1 class="mui-title lang" data-locale="detli_title"></h1>
 			<a class="mui-icon mui-icon-more mui-icon-right-nav mui-pull-right"></a>
 		</header>
-		<div class="mui-content ka_mainbox">
+		<div id="loading" class="mui-content ka_userbox">
+			<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+			</div>
+		</div>
+		<div class="mui-content ka_mainbox" style="display: none;">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<div class="ka_userbox">
@@ -44,6 +50,7 @@
 								<div class="ka_comlevnumber badnum"></div>
 							</div>
 						</div>
+						<input type="hidden" value="" id="commid" name="commid" />
 					</a>
 				</li>
 			</ul>
@@ -80,6 +87,7 @@
 			});
 			window.addEventListener('prolid', function(event) {
 				var uid = event.detail.id;
+				console.log(uid);
 				getmessage(uid);
 			});
 			//get message
@@ -100,6 +108,10 @@
 
 			function messageshow(results) {
 				$(".comditylists").empty();
+				$(".ka_touxiangimg").empty();
+				$(".uname").empty();
+				$(".uproducts").empty();
+				$(".ucomment").empty();
 				var commodity = results.data;
 				var uname = commodity.user_name;
 				var uimage = commodity.user_photo;
@@ -109,6 +121,7 @@
 				var goodcoment = commodity.user_opinion_h_count;
 				var normalcoment = commodity.user_opinion_m_count;
 				var badcoment = commodity.user_opinion_l_count;
+				$("#commid").val(userid);
 				$(".uname").html(uname);
 				$(".ka_touxiangimg").attr("src", uimage);
 				$(".ucomment").html(ucomentnum);
@@ -148,21 +161,23 @@
 						id: 'detail.html'
 					});
 				});
-				var commentPage = null;
-				//go comment list			
-				mui('.commentlist').on('tap', 'a', function(e) {
-					var ucid = commodity.user_id;
-					if(!commentPage) {
-						commentPage = plus.webview.getWebviewById('commentlist.html');
-					}
-					mui.fire(commentPage, 'ucid', {
-						id: ucid
-					});
-					mui.openWindow({
-						id: 'commentlist.html'
-					});
-				});
+				$(".mui-content").show();
+				$("#loading").hide();
 			}
+			var commentPage = null;
+			//go comment list			
+			mui('.commentlist').on('tap', 'a', function(e) {
+				var ucid = $("#commid").val();
+				if(!commentPage) {
+					commentPage = plus.webview.getWebviewById('commentlist.html');
+				}
+				mui.fire(commentPage, 'ucid', {
+					id: ucid
+				});
+				mui.openWindow({
+					id: 'commentlist.html'
+				});
+			});
 		</script>
 	</body>
 

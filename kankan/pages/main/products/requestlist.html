@@ -52,7 +52,7 @@
 					}
 					var comm_name=trans[0].comm_name;
 					var html = new Util.StringBuilder();
-					html.appendFormat('<li class="mui-table-view-cell transli"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img src="{1}" style="max-width: 60px;max-height: 60px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>',trans_id,comm_img)
+					html.appendFormat('<li class="mui-table-view-cell transli"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img src="{1}" style="width: 60px;max-height: 60px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>',trans_id,comm_img)
 						.appendFormat('<div class="mui-pull-left requestbox"><span>{0}</span><div><font color="#0062CC">{1}</font> P</div></div>',comm_name,price)
 						.appendFormat('<div class="mui-pull-right {0}">{1}</div></a></li>',trstatus=="3" ? "requestsuccess":"requeststop",status);
 					$("#historyshow").append(html.toString());

@@ -25,7 +25,7 @@
 		</style>
 
 		<header class="mui-bar mui-bar-nav">
-			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title lang" data-locale="requesttitle"></h1>
 			<div id="history">
 				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right jiaoyihitext"><span style="font-size: 14px;">交易履历</span></a>
@@ -207,17 +207,7 @@
 					ng: function(data) {
 						console.log("error");
 						Log.d(data);
-						if(data=="2002"){
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/login.html"
-							});
-							mui.toast(TextMessage.userng, {
-								duration: 'long',
-								type: 'div'
-							})
-						}
-						if(data=="1000"){
+						if(data=="1000"|| data=="2002"){
 							$(".jiaoyihitext").hide();
 						}
 					}

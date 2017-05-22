@@ -457,12 +457,12 @@ body .mui-table-view-cell.mui-active{
 }
 
 .ka_exchangered {
-	width: 80px;
+	width: 32%;
 	height: 30px;
 	border: 1px #DD524D solid;
 	background-color: #DD524D;
 	border-radius: 2px;
-	margin-left: 1em;
+	margin-left: 0.2em;
 	color: #ffffff;
 	padding: 0.3em 0em;
 	font-size: 14px;
@@ -470,12 +470,12 @@ body .mui-table-view-cell.mui-active{
 }
 
 .ka_exchangegrey {
-	width: 80px;
+	width: 32%;
 	height: 30px;
 	border: 1px #ACACB4 solid;
 	background-color: #ACACB4;
 	border-radius: 2px;
-	margin-left: 1em;
+	margin-left: 0.2em;
 	color: #ffffff;
 	padding: 0.3em 0em;
 	font-size: 14px;
@@ -491,7 +491,7 @@ body .mui-table-view-cell.mui-active{
 }
 
 .ka_prologsure {
-	width: 15em;
+	width: 80%;
 }
 
 .ka_propicfonts {
