@@ -133,6 +133,8 @@ var JSLocale = {
 	"overview":"公司概要",
 	"logout":"退出登录",
 	"version":"版本号",
+	"moneycla":"金钱决算",
+	"speciallow":"特商法",
 	//question page
 	"Appeal":"申诉",
 	"musttext":"标记为必填项",
