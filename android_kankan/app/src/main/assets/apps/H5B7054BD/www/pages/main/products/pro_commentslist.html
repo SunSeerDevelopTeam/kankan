@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>pro_commentslist</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title lang" data-locale="det_procoment"></h1>
+		</header>
+		<div class="mui-content ka_mainbox">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell ka_userbox" id="comments">
+				</li>
+			</ul>
+		</div>
+			<nav class="mui-bar mui-bar-tab">
+				<form id="commodity_comments" name="commodity_comments" method="post">
+					<div class="ka_sendmesbox ka_userbox">
+						<input  type="hidden" id="commodity_id" name="commodity_id" />
+						<textarea type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="leave_msg_detail" name="leave_msg_detail" ></textarea>
+						<button type="button" class="mui-btn ka_sendbutton lang"  data-locale="contentsend" onclick="formSubmit()"></button>
+					</div>
+				</form>
+			</nav>
+
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			window.addEventListener('comid', function(event) {
+				var id = event.detail.id;
+				//var id="19";
+				$("#commodity_id").val(id);
+				$("#leave_msg_detail").attr("placeholder",TextMessage.contentlength);
+				getccomments(id);
+				
+			});
+			//back refresh 
+			mui(".mui-bar-nav").on("tap","a",function(){
+				var view = plus.webview.currentWebview().opener();
+		    	var cmid=$("#commodity_id").val();
+				mui.fire(view,'cid',{
+				    id:cmid
+				});
+				$("#comments").empty();
+				mui.back();
+			});
+			function getccomments(rid) {
+				var params = {
+					"commodity_id": rid
+				};
+				Repository.Commodity.Commoditycomment(params, {
+					ok: function(data) {
+						Log.d("success");
+						showpcomehts(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "2001") {
+							var htmlnull='<p id="null" >'+TextMessage.datanull+'</p>';
+							$("#comments").html(htmlnull);
+						}
+					}
+				});
+			}
+			function showpcomehts(results) {
+				$("#comments").empty();
+				var datas = results.data;
+				var dataslengh = datas.length;
+				for(var i = 0; i < dataslengh; i++) {
+					var pcommentobj = JSON.stringify(datas[i]);
+					var pcommentinfo = $.parseJSON(pcommentobj);
+					var headimg = pcommentinfo.user_photo;
+					var uname = pcommentinfo.nick_name;
+					if(pcommentinfo.nick_name==""){
+						var uname = pcommentinfo.user_name;
+					}
+					var content = pcommentinfo.msg_detail;
+					var time = pcommentinfo.ins_date;
+					var html = new Util.StringBuilder();
+					html.append('<div class="comtent mui-pull-left"><div class="mui-pull-left">')
+						.appendFormat('<img src="{0}" width="40" height="40" class="ka_touxiangimg" />', headimg)
+						.appendFormat('<div class="ka_userbox ka_userboxtext"><b>{0}</b></div>', uname)
+						.append('</div>')
+						.append('<div class="mui-pull-right ka_commentinfobox">')
+						.appendFormat('{0}', content)
+						.append('<div class="ka_commenttime">')
+						.append('<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span>')
+						.appendFormat('{0}', time)
+						.append('</div></div></div>');
+					$("#comments").append(html.toString());
+				}
+			}
+			function formSubmit(){
+				var contents=document.commodity_comments.leave_msg_detail.value;
+				if(contents==""){
+					alert(TextMessage.commenttestnull);
+					document.commodity_comments.leave_msg_detail.focus();
+					return false;
+				}
+				if(contents.length>300){
+					alert(TextMessage.commenttestlength);
+					document.commodity_comments.leave_msg_detail.focus();
+					return false;
+				}
+				var pid=$("#commodity_id").val();
+				var param2 = {
+					//"tokencheck":"+GGzMiM28W8dy+XxzQAl4x3L5fHNACXjh\/PqKa19BIs=f18de066a468abc7ec408dfba0ff14f7d49c455aabcdf54ad28547bb7d7470ab",
+					"commodity_id":pid,
+					"msg_detail":contents
+				};
+				//console.log(contents);
+				Repository.Commodity.comments(param2, {
+					ok: function(data) {
+						Log.d(data);
+						Log.d("success");
+						addcomment(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							})
+						}
+						mui.openWindow({
+							id: 'login',
+							url:"../../login/login.html"
+						});
+					}
+				});
+			}
+			//get current date
+			function getNowFormatDate() {
+			    var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+			           + " " + date.getHours() + seperator2 + date.getMinutes();
+			           // + seperator2 + date.getSeconds();
+			    return currentdate;
+			} 
+			function addcomment(results){
+				var time2=getNowFormatDate();
+				var contents2=document.commodity_comments.leave_msg_detail.value;
+				var headimg2=results.data[0].photo;
+				console.log(headimg2);
+				var uname2=results.data[0].nick_name;
+				var html2 = new Util.StringBuilder();
+					html2.append('<div class="comtent mui-pull-left"><div class="mui-pull-left">')
+						.appendFormat('<img src="{0}" width="40" height="40" class="ka_touxiangimg" />', headimg2)
+						.appendFormat('<div class="ka_userbox ka_userboxtext"><b>{0}</b></div>', uname2)
+						.append('</div>')
+						.append('<div class="mui-pull-right ka_commentinfobox">')
+						.appendFormat('{0}', contents2)
+						.append('<div class="ka_commenttime">')
+						.append('<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span>')
+						.appendFormat('{0}', time2)
+						.append('</div></div></div>');
+					$("#comments").prepend(html2.toString());
+					document.commodity_comments.leave_msg_detail.value="";
+					$("#null").hide();
+			}
+		</script>
+	</body>
+
+</html>
