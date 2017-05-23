@@ -631,7 +631,6 @@
 			mui(".ka_buyway").on('tap','.mui-btn',function(){
 				var change_name = $(this).attr("id");
 				var mode;
-				alert(change_name);
 				var codid = $(".kankan_zanbox").attr("id");
 				var params = {
 					"commodity_id": codid
@@ -639,7 +638,7 @@
 				if(change_name == 'switchp'){
 					mode = 'business';
 					params.mode = mode;
-					transRequest();
+					transRequest(params);
 				}else if(change_name == 'switchex'){
 					mode = 'exchange';
 					params.mode = mode;
@@ -654,7 +653,7 @@
 				}else{
 					mode = 'gratis';
 					params.mode = mode;
-					transRequest();
+					transRequest(params);
 				}
 			})
 		</script>

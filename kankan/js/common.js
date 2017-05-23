@@ -1,5 +1,5 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
-var DEBUG = false;
+var DEBUG = true;
 var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
@@ -974,6 +974,8 @@ var TextMessage;
 	TextMessage.contentnotnull = language ? "内容を入力してください" : "内容不能为空";
 	TextMessage.noopen = language ? "開通していない、お楽しみに" : "暂未开通，敬请期待";
 	TextMessage.ticketng = language ? "チケット数が不足" : "Ticket数量不足";
+	TextMessage.yes = language ? "はい" : "好的";
+	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请补充邮箱信息";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

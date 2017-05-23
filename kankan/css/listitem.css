@@ -42,7 +42,7 @@
 
 .comm-name {
 	font-size: 14px;
-	height: 50%;
+	height: 55%;
 	padding: 5%;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -50,8 +50,9 @@
 
 .comm-price {
 	font-size: 14px;
-	height: 50%;
-	padding: 5%;
+	height: 45%;
+	padding-left: 5%;
+	padding-bottom: 5%;
 	font-weight: 800;
 }
 
