@@ -245,8 +245,8 @@
 					text: catedata[c].catalog_detail,
 					children:[]
 			};
-			var childrenarr=categoryadd.children;
 			if(catedata[c].children){
+				var childrenarr=categoryadd.children;
 				var secondcatearr=catedata[c].children;
 				for(var t=0;t<secondcatearr.length;t++){
 					var childrenadd={
@@ -255,8 +255,9 @@
 						}
 					childrenarr.push(childrenadd);
 				}
+				testarr.push(categoryadd);
 			}
-			testarr.push(categoryadd);
+			
 		}
 		return testarr;
 	}

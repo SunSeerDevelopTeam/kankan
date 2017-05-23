@@ -133,6 +133,8 @@ var JSLocale = {
 	"overview":"会社概要",
 	"logout":"ログアウト",
 	"version":"バージョン",
+	"moneycla":"資金決済法",
+	"speciallow":"特定商取引",
 	//question page
 	"Appeal":"お問い合わせ",
 	"musttext":"印がある項目は必須項目となります。",
@@ -140,6 +142,7 @@ var JSLocale = {
 	"nametext":"姓名",
 	"contenttext":"お問い合わせ内容",
 	"suretext":"確    認"
+	
 }
 
 $(function() {
