@@ -63,7 +63,7 @@ var JSLocale = {
 	"app_name": "カンカン",
 	"tab_1": "ホーム",
 	"tab_2": "登録",
-	"tab_3": "質問",
+	"tab_3": "求め",
 	"tab_4": "物流",
 
 	//commodity login page
