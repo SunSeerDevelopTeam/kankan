@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="aps-igexin">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/aps-igexin.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
