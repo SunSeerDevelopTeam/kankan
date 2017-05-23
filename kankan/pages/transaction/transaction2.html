@@ -288,10 +288,10 @@
 				alert(cur_user_id);
 			}
 
-			function show_request_comm(){
-				
+			function show_request_comm() {
+
 			}
-			
+
 			function showChatMsg(usersinfo, messginfo, cur_user_id) {
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg;
 				for(var user in usersinfo) {
@@ -341,7 +341,7 @@
 				var params = {
 					"transid": trans_id
 				};
-				alert("status is :" + status + "mode is " + trans_mode + "=== deiliver is " + deliver + "buyer is :" + buyer_flag);
+
 				if(status == 8) {
 					mui.alert('已终止交易，不能继续交易。如果要继续交易请重新请求！！');
 				} else if(status == 3) {
