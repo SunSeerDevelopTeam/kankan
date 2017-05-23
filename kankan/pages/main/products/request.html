@@ -85,8 +85,8 @@
 				}
 				for(var ot=0;ot<others.length;ot++){
 					var transid=others[ot].trans.trans_id;
-					var comm_name=others[ot].trans[0].comm_name;
-					var comm_img=others[ot].trans[0].comm_img;
+					//var comm_name=others[ot].trans[0].comm_name;
+					//var comm_img=others[ot].trans[0].comm_img;
 					var trans_type=others[ot].trans.trans_type;
 					if(trans_type=="0"){
 						var trans_typetext=TextMessage.requireing;
@@ -101,8 +101,8 @@
 					var transprocount=others[ot].trans.trans_comm_nums;
 					var html = new Util.StringBuilder();
 					html.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-6 translate"><a id="{0}" href="#">',transid)
-						.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">',comm_img=="" ? "../../../images/nopic.jpg":comm_img)
-						.appendFormat('<div class="mui-media-body">{0}</div>', comm_name)
+						//.appendFormat('<img class="mui-media-object ka_imgoption" src="{0}" style="height: 131px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">',comm_img=="" ? "../../../images/nopic.jpg":comm_img)
+						//.appendFormat('<div class="mui-media-body">{0}</div>', comm_name)
 						.appendFormat('</a><div class="{0}">{1}</div>',trans_type==0 ? "kankan_jyz":"kankan_jycl",trans_typetext)
 						.appendFormat('<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 25px; height: 25px;display:{0}"></div>',transprocount>1 ?"":"none")
 						.appendFormat('<div class="mui-pull-right kankan_jyimgbox"><img src="{0}" style="border-radius: 50%; width: 20px; height: 20px;">',my_photo=="" ? "../../../images/userPhoto.png": my_photo)
@@ -179,6 +179,8 @@
 						var translatepage=null;
 						mui('.translate').on('tap','a',function(e) {
 							var tid = this.getAttribute('id');
+							var curView = plus.webview.currentWebview();
+							plus.webview.close(curView);
 							mui.openWindow({
 								url:"../../transaction/transaction2.html?transid=" + tid,
 								id:"transaction",
@@ -193,6 +195,8 @@
 			}
 			mui.plusReady(function() {
 				mui('#history').on('tap','a',function(e) {
+					//var curView = plus.webview.currentWebview();
+					//plus.webview.close(curView);
 					mui.openWindow({
 						id: 'requestlist',
 						url:"requestlist.html"

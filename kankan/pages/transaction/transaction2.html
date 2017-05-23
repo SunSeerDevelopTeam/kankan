@@ -119,8 +119,9 @@
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
+				var preView = plus.webview.getWebviewById('requestlist');
+				plus.webview.close(preView);
 				showRequestDetail();
-				//alert(trans_id);
 			})
 
 			function submitChat() {
@@ -261,7 +262,7 @@
 					buyer_msg += '</a>';
 					buyer_msg += '<input type="hidden" name="buyer_commodity_id" value="' + buyer_comm_id + '">';
 					buyer_msg += '<input type="hidden" name="buyer_user_id" value="' + buyer_id + '">';
-					$(".cur-user").append("<input type='hidden' name='myid' value='" + cur_user_id + "'>");
+					$(".cur-user").append("<input type='hidden' name='myid' id='myid' value='" + cur_user_id + "'>");
 					if(buyer_flag) {
 						$(".cur-user").html(buyer_msg);
 						$(".request-user").html(seller_msg);
@@ -283,9 +284,14 @@
 			}
 
 			function goods_detail() {
-
+				var cur_user_id = $("#myid").val();
+				alert(cur_user_id);
 			}
 
+			function show_request_comm(){
+				
+			}
+			
 			function showChatMsg(usersinfo, messginfo, cur_user_id) {
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg;
 				for(var user in usersinfo) {
@@ -310,8 +316,8 @@
 							chatMsg += '</div>';
 						} else {
 							chatMsg += '<div class="comtent mui-pull-left">';
-							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
-							chatMsg += '<div class="mui-pull-right"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
+							chatMsg += '<div class="mui-pull-left"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
+							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
 							chatMsg += '</div>';
 						}
 					} else {
@@ -340,6 +346,8 @@
 					mui.alert('已终止交易，不能继续交易。如果要继续交易请重新请求！！');
 				} else if(status == 3) {
 					mui.alert('交易已完成！！');
+					//var curView = plus.webview.currentWebview();
+					//plus.webview.close(curView);
 					mui.openWindow({
 						url: "./transevaluate.html?transid=" + trans_id,
 						id: "transevaluate",
