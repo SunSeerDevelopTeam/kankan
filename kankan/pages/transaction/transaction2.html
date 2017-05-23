@@ -71,7 +71,8 @@
 							<li class="tran-distribution-law">
 								<a href="../main/logisticslist.html">
 									<div class="tran-distribution-call">
-										<font size="2" color="#FFFFF" vertical-align="middle">改价</font></font>
+										<font size="2" color="#FFFFF" vertical-align="middle">改价</font>
+										</font>
 									</div>
 								</a>
 							</li>
@@ -194,11 +195,9 @@
 						if(messginfo) {
 							showChatMsg(usersinfo, messginfo, cur_user_id);
 						}
-						alert(buyer_flag);
 						showRequestStaus(trans_status, trans_mode, trans_deliver, buyer_flag);
 					},
 					ng: function(data) {
-						Log.i("message send faild!");
 						if(data == "1000") {
 							alert(TextMessage.test);
 						}
@@ -251,7 +250,8 @@
 					seller_msg += '</div>';
 					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
 					seller_msg += '</a>';
-					
+					seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
+					seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
 					buyer_msg += '<a href="#">';
 					buyer_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
 					buyer_msg += '<img height="32px" width="32px" src="' + buyer_photo + '" />';
@@ -259,10 +259,13 @@
 					buyer_msg += '</div>';
 					buyer_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + buyer_comm_img + '">';
 					buyer_msg += '</a>';
-					if(buyer_flag){
+					buyer_msg += '<input type="hidden" name="buyer_commodity_id" value="' + buyer_comm_id + '">';
+					buyer_msg += '<input type="hidden" name="buyer_user_id" value="' + buyer_id + '">';
+					$(".cur-user").append("<input type='hidden' name='myid' value='" + cur_user_id + "'>");
+					if(buyer_flag) {
 						$(".cur-user").html(buyer_msg);
 						$(".request-user").html(seller_msg);
-					}else{
+					} else {
 						$(".request-user").html(buyer_msg);
 						$(".cur-user").html(seller_msg);
 					}
@@ -278,11 +281,11 @@
 				}
 
 			}
-			
-			function goods_detail(){
-				
+
+			function goods_detail() {
+
 			}
-			
+
 			function showChatMsg(usersinfo, messginfo, cur_user_id) {
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg;
 				for(var user in usersinfo) {
@@ -302,7 +305,7 @@
 						if(messginfo[chat].user_id == buyer_id) {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-right"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							
+
 							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
 							chatMsg += '</div>';
 						} else {
@@ -332,6 +335,7 @@
 				var params = {
 					"transid": trans_id
 				};
+				alert("status is :" + status + "mode is " + trans_mode + "=== deiliver is " + deliver + "buyer is :" + buyer_flag);
 				if(status == 8) {
 					mui.alert('已终止交易，不能继续交易。如果要继续交易请重新请求！！');
 				} else if(status == 3) {
@@ -344,18 +348,19 @@
 						}
 					})
 				} else if(status == 0) {
-					if(trans_mode > 0){
-					if(buyer_flag == false) {
-						$(".tran-button-buy").hide();
-					} else {
-						if(trans_mode == 1){
-							$(".tran-button-buy font").show();
-						}else{
+					if(trans_mode > 0) {
+						if(buyer_flag == false) {
+							//$(".tran-button-buy").hide();
 							$(".tran-button-buy font").text("确认交易");
-							$(".tran-button-buy font").hide();
+						} else {
+							if(trans_mode == 1) {
+								$(".tran-button-buy font").text("等待对方确认");
+							} else {
+								$(".tran-button-buy font").text("确认交易");
+								//$(".tran-button-buy font").hide();
+							}
 						}
-					}
-					}else{
+					} else {
 						$(".tran-button-buy font").text("确认交易");
 					}
 				} else if(status == 1) {
@@ -566,38 +571,38 @@
 				}
 			})
 
-
-			function change_price(){
+			function change_price() {
 				var new_price = '';
 				var params = {
 					"transid": trans_id
 				};
 				var btnArray = ['取消', '确定'];
 				mui.prompt('请输修改后的价格：', '', '改价', btnArray, function(e) {
-					if (e.index == 1) {
-						new_price =  e.value;
+					if(e.index == 1) {
+						new_price = e.value;
 						params.price = new_price;
 						Repository.Transaction.transChangePrice(params, {
-						ok: function(data) {
-							Log.i("message send successfully!");
-							mui.alert('价格改变成功');
-							$(".change_price").hide();
-						},
-						ng: function(data) {
-							Log.i("message send faild!");
-							if(data == "1000") {
-								alert(TextMessage.test);
+							ok: function(data) {
+								Log.i("message send successfully!");
+								mui.alert('价格改变成功');
+								$(".change_price").hide();
+							},
+							ng: function(data) {
+								Log.i("message send faild!");
+								if(data == "1000") {
+									alert(TextMessage.test);
+								}
+								if(data == "2004") {
+									alert(TextMessage.operation_error);
+								}
 							}
-							if(data == "2004") {
-								alert(TextMessage.operation_error);
-							}
-						}
-					});
+						});
 					} else {
 						info.innerText = '确认不变更？';
 					}
 				})
 			}
+
 			function stopTransaction() {
 				var params = {
 					"transid": trans_id

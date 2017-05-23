@@ -118,7 +118,7 @@
 					ok: function(data) {
 						Log.i("message send successfully!");
 						mui.openWindow({
-							url: "../main.html",
+							url: "../main/main.html",
 							id: "main.html",
 							extras: {
 								"transid": trans_id
@@ -136,7 +136,7 @@
 						if(data == "2019") {
 							alert("不能重复评论");
 							mui.openWindow({
-								url: "../main.html",
+								url: "../main/main.html",
 								id: "main.html",
 								extras: {
 									"transid": trans_id
