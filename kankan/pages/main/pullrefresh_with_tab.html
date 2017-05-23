@@ -564,7 +564,7 @@
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
-		<script type="text/javascript" src="../../js/lazy-load-img.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.lazyload.min.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script>
 			mui.init({
@@ -788,31 +788,6 @@
 						});
 					}
 
-					var lazyLoadImg = new LazyLoadImg({
-						el: document.querySelector('.mui-scroll .mui-table-view'),
-						mode: 'diy',
-						time: 300,
-						complete: true,
-						position: {
-							top: 0,
-							right: 0,
-							bottom: 0,
-							left: 0
-						},
-						diy: {
-							backgroundSize: 'cover',
-							backgroundRepeat: 'no-repeat',
-							backgroundPosition: 'center center'
-						},
-						before: function() {},
-						success: function(el) {
-							el.classList.add('success')
-						},
-						error: function(el) {
-							el.src = './images/error.png'
-						}
-					});
-
 					var createFragment = function(data, ul, index, reverse, self) {
 						var fragment = document.createDocumentFragment();
 						var li;
@@ -835,8 +810,8 @@
 							listItemHTML.append('<div class="li-content">')
 								.append('<div class="comm-item">')
 								.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
-								//.appendFormat('<img src="../../images/nopic.jpg" data-src="{0}">', item.img_flag)
-								.appendFormat('<img src="{0}">', item.img_flag)
+								.appendFormat('<img class="lazy" src="../../images/nopic.jpg" data-original="{0}">', item.img_flag)
+								//.appendFormat('<img src="{0}">', item.img_flag)
 								.appendFormat('<span>{0}</span>', item.address)
 								.append('</div>')
 								.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
@@ -874,6 +849,11 @@
 							}
 						}
 						//lazyLoadImg.start();
+						$("img.lazy").lazyload({
+							threshold : 200,
+							placeholder: "../../images/nopic.jpg",
+							effect: "fadeIn"
+						});
 						bindEventOnListViewItem();
 					};
 
