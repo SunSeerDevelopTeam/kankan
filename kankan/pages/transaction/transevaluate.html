@@ -97,7 +97,16 @@
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			mui.init();
+			mui.init({
+					beforeback: function() {
+						//var list = plus.webview.getWebviewById('pullrefresh_with_tab');
+						var list = plus.webview.currentWebview().opener();
+						mui.fire(list, 'refresh', {
+							refresh: "canRefresh"
+						});
+						return true;
+					}
+					});
 			var trans_id;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
@@ -106,6 +115,7 @@
 			//mui(".mui-input-row").on('tap','#evaluate_btn',function(){
 			//	evaluate_submit();
 			//});
+
 			function evaluate_submit() {
 				var evaluate_flg = $("input[name='evalueate']:checked").val();
 				var evaluate_msg = $("#evaluate_msg").val();
@@ -117,12 +127,17 @@
 				Repository.Transaction.transOrderEvaluate(params, {
 					ok: function(data) {
 						Log.i("message send successfully!");
-						mui.openWindow({
+						/*mui.openWindow({
 							url: "../main/main.html",
 							id: "main.html",
 							extras: {
 								"transid": trans_id
 							}
+						});*/
+						mui.plusReady(function() {
+							var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+							alert(mainpage.getURL());
+							mui.fire(mainpage, 'gohome');
 						});
 					},
 					ng: function(data) {
@@ -135,12 +150,28 @@
 						}
 						if(data == "2019") {
 							alert("不能重复评论");
-							mui.openWindow({
+							/*mui.openWindow({
 								url: "../main/main.html",
 								id: "main.html",
-								extras: {
-									"transid": trans_id
-								}
+							});*/
+							//location.reload();
+
+							mui.plusReady(function() {
+								alert("aaaa");
+								var preView = plus.webview.getWebviewById('transaction');
+								plus.webview.close(preView);
+								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+								//var h = plus.webview.getLaunchWebview();
+								//alert(h.getURL()+"aaa");
+								//console.log("main page log ====");
+								//console.dir(mainpage);
+								//console.log("main page log end ===");
+								//alert("refresh");
+								//mui.fire(mainpage,'gohome');
+								//plus.webview.show(h.getURL());
+								//plus.webview.close(curView);
+								mui.back();
+								mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
 							});
 						}
 					}
