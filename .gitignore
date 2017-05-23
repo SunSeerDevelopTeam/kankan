@@ -1,3 +1,7 @@
 /kankan/unpackage
 /android_kankan/gen
 /android_kankan/bin
+/android_kankan/.idea
+/android_kankan/.gradle
+/android_kankan/*.iml
+/android_kankan/*

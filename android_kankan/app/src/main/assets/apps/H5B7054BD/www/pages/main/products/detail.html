@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>detail</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title"></h1>
+		</header>
+		<div id="loading" class="mui-content ka_userbox">
+			<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+			</div>
+		</div>
+		<div class="mui-content" style="display: none;">
+			<div id="slider" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!-- last -->
+					<div class="mui-slider-item mui-slider-item-duplicate firstimage">
+						<img src="" style="max-height: 239px;" onerror="this.src='../../../images/nopic.jpg'">
+					</div>
+					<!-- first -->
+					<div class="mui-slider-item mui-slider-item-duplicate lastimage">
+						<img src="" style="max-height: 239px;" onerror="this.src='../../../images/nopic.jpg'">
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+				</div>
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p class="kankan_productname"></p>
+					<div class="mui-pull-left kankan_zanbox">
+						<div id="zanhou" style="display:none;" onclick="dianzan(this.id)" class="kankan_goods">
+							<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartred"></span>
+							<p class="kankan_goodsfonts lang" data-locale="det_goodconcel">
+							</P>
+						</div>
+						<div id="zanqian" onclick="dianzan(this.id)" class="kankan_goods">
+							<span class="mui-icon-extra mui-icon-extra-heart-filled ka_heartgrey"></span>
+							<p class="kankan_goodsfonts lang" data-locale="det_goods">
+							</P>
+						</div>
+					</div>
+					<div class="mui-pull-right kankan_det_comment">
+						<a href="pro_commentslist.html">
+							<span class="mui-icon mui-icon-chatboxes"></span>
+							<p><span class="lang" data-locale="det_comment"></span>&nbsp;&nbsp;
+								<font color="#000000" size="3" id="commentsnum"></font>
+							</P>
+						</a>
+						<input type="hidden" name="comodityid" id="comodityid" value="" />
+
+					</div>
+
+					<div class="kankan_det_goodsnum" id="zanshu"></div>
+				</li>
+				<li class="mui-table-view-cell kankan_det_description">
+					<div class="mui-pull-left lang" data-locale="det_spdescription"></div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="kankan_det_information"></div>
+				</li>
+			</ul>
+			<!--share-->
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell kankan_det_description" id="share">
+					<span class="lang" data-locale="det_spahare"></span>
+					<img src="../../../images/weixin.png" width="30" height="30">
+					<!--<img src="../../../images/facebook.png" width="40" height="30">
+					<img src="../../../images/line.png" width="30" height="30">
+					<img src="../../../images/twitter.png" width="30" height="30">-->
+
+				</li>
+			</ul>
+			<!--Producer information-->
+			<div class="kankan_det_author">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell kankan_det_description productlist">
+						<a href="productslist.html">
+							<div class="mui-pull-right">
+								<span class="mui-icon-extra mui-icon-extra-find kankan_det_aulocation"></span>
+								<p class="kankan_det_locationinfo"></p>
+							</div>
+							<div class="mui-pull-left">
+								<img src="" width="40" height="40" class="ka_touxiangimg"></div>
+							<div class="ka_authorname"><b></b></div>
+							<div>
+								<img src="../../../images/china.png" width="20" height="20" class="lanch" style="display: none;">
+								<img src="../../../images/jp.png" width="20" height="20" class="lanjp" style="display: none;">
+								<img src="../../../images/hk.png" width="20" height="20" class="lanhk" style="display: none;">
+								<img src="../../../images/us.png" width="20" height="20" class="lanen" style="display: none;">
+							</div>
+							<font color="#808080" size="2"><span class="lang" data-locale="det_coments"></span>:
+								<font color="#007AFF" class="authcom"></font> <span class="lang" data-locale="det_producednum"></span>:
+								<font color="#007AFF" class="authcomdnum"></font>
+							</font>
+
+			</div>
+			</a>
+			</li>
+			</ul>
+			<!--Produce goods of concern-->
+		<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
+		<div class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop">
+				<!--last-->
+				<div class="mui-slider-item mui-slider-item-duplicate" id="lastconcenered">
+					<ul class="mui-table-view mui-grid-view" id="lastconcerul">
+
+					</ul>
+				</div>
+				<!--first-->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<ul class="mui-table-view mui-grid-view" id="firstconcerul">
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--Recommended products-->
+		<h5 class="ka_h5backcolor lang" data-locale="det_recommends"></h5>
+		<div class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop">
+				<!--last-->
+				<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
+					<ul class="mui-table-view mui-grid-view" id="lastremmondul">
+					</ul>
+				</div>
+				<!--first-->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<ul class="mui-table-view mui-grid-view" id="firstremmondul">
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--Commodity exchange, white send, point exchange information button-->
+		<div class="ka_buyway">
+			<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
+			<b><span class="lang" data-locale="det_pointexch"></span>(<span class="comdprice"></span>)</b>
+		</button>
+			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;"></a>
+			<span class="lang" data-locale="det_exchange"><b></b></span>
+		</button>
+			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;"></a>
+			<span class="lang" data-locale="det_send"><b></b></span>
+		</button>
+		</div>
+		<input type="hidden" name="userid" id="userid" value="" />
+	</div>
+		
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var commodity_id;
+			mui.init({			    
+				swipeBack: false,
+				preloadPages: [{
+						id: 'pro_commentslist.html',
+						url: 'pro_commentslist.html'
+					},
+					{
+						id: 'productslist.html',
+						url: 'productslist.html'
+					},
+					{
+						id: 'detail.html',
+						url: 'detail.html'
+					}/*,
+					{
+						id:'../../transaction/transaction2.html',
+						url:'../../transaction/transaction2.html'
+					}*/
+				]
+			});
+			window.addEventListener('cid', function(event) {
+				var id = event.detail.id;
+				commodity_id = event.detail.id;
+				mui.plusReady(function() {
+					getinfo(id);
+				});
+			});
+			//*********************share start
+			var shares = {};
+			mui.plusReady(function() {
+				TextMessage.language = plus.os.language;
+				plus.share.getServices(function(s) {
+					if(s && s.length > 0) {
+						for(var i = 0; i < s.length; i++) {
+							var t = s[i];
+							shares[t.id] = t;
+						}
+					}
+				}, function() {
+					console.log("share server fail");
+				});
+			});
+
+			//onclick share
+			document.getElementById("share").addEventListener('tap', function() {
+				var ids = [{
+						id: "weixin",
+						ex: "WXSceneSession"
+					}, {
+						id: "weixin",
+						ex: "WXSceneTimeline"
+					}],
+					bts = [{
+						title: TextMessage.towchatfrind
+					}, {
+						title: TextMessage.towchatcircle
+					}];
+				plus.nativeUI.actionSheet({
+					cancel: TextMessage.cancel,
+					buttons: bts
+				}, function(e) {
+					var i = e.index;
+					if(i > 0) {
+						var s_id = ids[i - 1].id;
+						var share = shares[s_id];
+						if(share) {
+							if(share.authenticated) {
+								shareMessage(share, ids[i - 1].ex);
+							} else {
+								share.authorize(function() {
+									shareMessage(share, ids[i - 1].ex);
+								}, function(e) {
+									console.log("error：" + e.code + " - " + e.message);
+								});
+							}
+						} else {
+							mui.toast("can not get share server")
+						}
+					}
+				});
+			});
+
+			function shareMessage(share, ex) {
+				var msg = {
+					extra: {
+						scene: ex
+					}
+				};
+				msg.href = "http://www.baidu.com";
+				msg.title = TextMessage.sharetitle;
+				msg.content = TextMessage.sharecontent;
+				msg.thumbs = ["../../../images/muwu.jpg"];
+				share.send(msg, function() {
+					alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+				}, function(e) {
+					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
+				});
+			}
+			//share end***********/
+			function emptyhtml(){
+				$(".mui-slider-indicator").empty();
+				$(".firstimage img").attr("src","");
+				$(".lastimage img").attr("src", "");
+				$(".sliderimg").remove();
+				$("#lastremmondul").empty();
+				$("#firstremmondul").empty();
+				$("#lastconcerul").empty();
+				$("#firstconcerul").empty();
+				$(".mui-title").empty();
+				$("#userid").val("");
+			}
+			function getinfo(pid) {
+				emptyhtml();
+				var params = {
+					"commodity_id": pid
+				};
+				Repository.Commodity.commodityDetail(params, {
+					ok: function(data) {
+						Log.d("success");
+						messageshow(data);
+						clickprocomment();
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data=="2001"){
+							$("#loading").show();
+							$(".mui-content").hide();
+						}
+					}
+				});
+			}
+			function clickprocomment(){
+				//commodity comments list
+				var comdcommentpage = null;
+				mui('.kankan_det_comment').on('tap', 'a', function(e) {
+					var cid = $("#comodityid").val();
+					if(!comdcommentpage) {
+						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
+					}
+					mui.fire(comdcommentpage, 'comid', {
+						id: cid
+					});
+					mui.openWindow({
+						id: 'pro_commentslist.html'
+					});
+				});
+			}
+			//message show
+			function messageshow(results) {
+				$(".mui-slider-indicator").empty();
+				var commodity = results.data;
+				var comdbasic = commodity.commodity_basic;
+				var comdname = comdbasic[0].comm_name;
+				var comdmesage = comdbasic[0].comm_detail;
+				var comdityid = comdbasic[0].commodity_id;
+				$("#comodityid").val(comdityid);
+				$(".kankan_productname").html(comdname); //name
+				$(".kankan_det_information").html(comdmesage); //message
+				$(".mui-title").html(comdname); //title
+				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
+				var imgsarr = commodity.commodity_imgs;
+				var htmlimg = "";
+				var htmlfocus="";
+				for(i = 0; i < imgsarr.length; i++) {
+					var la = imgsarr.length - 1 * 1;
+					var imgurl=imgsarr[i];
+					if(imgsarr[i]==""){
+						imgurl="../../../images/nopic.jpg";
+					}
+					$(".firstimage img").attr("src", imgsarr[0]);
+					$(".lastimage img").attr("src", imgsarr[la]);
+					htmlimg += '<div class="mui-slider-item sliderimg">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: 239px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+					htmlimg += '</div>';
+					if(i==0){
+						var htmlfocus='<div class="mui-indicator mui-active"></div>';
+					}else{
+						var htmlfocus='<div class="mui-indicator"></div>';
+					}
+					$(".mui-slider-indicator").append(htmlfocus);
+				}
+				$(".firstimage").after(htmlimg);
+				var goodcount = commodity.commodity_praise.praise_count;
+				$("#zanshu").html(goodcount);
+				var comentnum = commodity.commodity_levave_mess.leave_mess_count;
+				$("#commentsnum").html(comentnum); //product comment count
+				var uname = commodity.user_basic.user_name;
+				var uimage = commodity.user_basic.user_photo;
+				var userid = commodity.user_basic.user_id;
+				var ucomentnum = commodity.user_basic.user_comment_count;
+				var uadress = commodity.user_basic.pref_detail;
+				var ucomeditynum = commodity.user_basic.user_commodity_count;
+				$("#userid").val(userid);
+				$(".ka_authorname b").html(uname);
+				$(".ka_touxiangimg").attr("src", uimage);
+				$(".authcom").html(ucomentnum);
+				$(".authcomdnum").html(ucomeditynum);
+				$(".kankan_det_locationinfo").html(uadress);
+				var authlang = commodity.user_basic.talk_flag;
+				if(authlang.indexOf("0") > 0) {
+					$(".lanjp").show();
+				}
+				if(authlang.indexOf("1") > 0) {
+					$(".lanch").show();
+				}
+				if(authlang.indexOf("2") > 0) {
+					$(".lanen").show();
+				}
+				if(authlang.indexOf("3") > 0) {
+					$(".lanhk").show();
+				}
+				//buy way
+				var exchange = commodity.commodity_buy_way.exchange;
+				var business = commodity.commodity_buy_way.business;
+				var gratis = commodity.commodity_buy_way.gratis;
+				var price = comdbasic[0].price;
+				if(exchange == "1") {
+					$("#switchex").show();
+				} else {
+					$("#switchex").hide();
+				}
+				if(business == "1") {
+					$("#switchp").show();
+					$(".comdprice").html(price);
+				} else {
+					$("#switchp").hide();
+				}
+				if(gratis == "1") {
+					$("#switchsend").show();
+				} else {
+					$("#switchsend").hide();
+				}
+				//*************************************recommend
+				var recomendhtml2 = "";
+				var recomendhtml = '<div class="mui-slider-item sliderimg">';
+				recomendhtml += '<ul class="mui-table-view mui-grid-view">';
+				var recomendsarrs = commodity.commodity_recommend;
+				var recomdlenght = recomendsarrs.length;
+				var recomendsobj = {};
+				var recomendaddhtml = ""; //add dom
+				var recomendaddfirsthtml="";
+				var c = 0;
+				for(var j = 0; j < recomdlenght; j++) {
+					var k = j + 1 * 1;
+					var recomendsobj1 = JSON.stringify(recomendsarrs[j]);
+					recomendsobj = $.parseJSON(recomendsobj1);
+					var recomdimg = recomendsobj.commodity_photo_url;
+					var recomdid = recomendsobj.commodity_id;
+					var advflag = recomendsobj.is_ad;
+					recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+					recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
+					recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+					recomendhtml += '</a></li>';
+					var vall = k % 4;
+					if(vall == 0 || j == recomdlenght - 1) {
+						recomendhtml += '</ul></div>';
+					}
+					if(vall == 0 && k < recomdlenght) {
+						recomendhtml += '<div class="mui-slider-item sliderimg">';
+						recomendhtml += '<ul class="mui-table-view mui-grid-view">';
+					}
+					
+					if(j < 4) {
+						recomendaddfirsthtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+						recomendaddfirsthtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
+						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						recomendaddfirsthtml += '</a></li>';
+						$("#firstremmondul").html(recomendaddfirsthtml);
+					}
+					if(j > recomdlenght - 4) {
+						recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+						recomendaddhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
+						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						recomendaddhtml += '</a></li>';
+						$("#lastremmondul").html(recomendaddhtml);
+					}
+				}
+				recomendhtml2 += recomendhtml;
+				$("#lastrecommend").after(recomendhtml2);
+				//recommend end*********************************/
+				//*************************************concenered
+				var concernhtml2 = "";
+				var concernhtml = '<div class="mui-slider-item sliderimg">';
+				concernhtml += '<ul class="mui-table-view mui-grid-view">';
+				var concernarrs = commodity.user_praise_commoditys;
+				var concernlenght = concernarrs.length;
+				var concernsobj = {};
+				var concernaddhtml = ""; //add dom
+				var concernlastaddhtml="";
+				for(var l = 0; l < concernlenght; l++) {
+					var m = l + 1 * 1;
+					var concernobj1 = JSON.stringify(concernarrs[l]);
+					concernsobj = $.parseJSON(concernobj1);
+					var concernimg = concernsobj.commodity_photo_url;
+					var concernid = concernsobj.commodity_id;
+					concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+					concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
+					concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+					concernhtml += '</a></li>';
+					var vallm = m % 4;
+					if(vallm == 0 || l == concernlenght - 1) {
+						concernhtml += '</ul></div>';
+					}
+					if(vallm == 0 && m < concernlenght) {
+						concernhtml += '<div class="mui-slider-item sliderimg">';
+						concernhtml += '<ul class="mui-table-view mui-grid-view">';
+					}
+					if(l < 4) {
+						concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+						concernaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
+						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						concernaddhtml += '</a></li>';
+						$("#firstconcerul").html(concernaddhtml);
+					}
+					if(l > concernlenght - 4) {
+						concernlastaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+						concernlastaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
+						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						concernlastaddhtml += '</a></li>';
+						$("#lastconcerul").html(concernlastaddhtml);
+					}
+
+				}
+				concernhtml2 += concernhtml;
+				$("#lastconcenered").after(concernhtml2);
+				//concenered end**************************************/
+				//buy way
+				var buy_sell_flag = comdbasic[0].buy_sell_flag;
+				if(buy_sell_flag == "1") {
+					$(".ka_buyway").hide();
+				}
+				//praise staute
+				var user_praise_status = commodity.commodity_praise.user_praise_status;
+				if(user_praise_status == "0") {
+					$("#zanqian").show();
+					$("#zanhou").hide();
+				} else {
+					$("#zanqian").hide();
+					$("#zanhou").show();
+				}
+				
+				//detail page
+				var detailPage = null;
+				mui('.detail').on('tap', 'a', function(e) {
+					var did = this.getAttribute('id');
+					if(!detailPage) {
+						detailPage = plus.webview.getWebviewById('detail.html');
+					}
+					mui.fire(detailPage, 'cid', {
+						id: did
+					});
+					mui.openWindow({
+						id: 'detail.html'
+					});
+				});
+				$(".mui-content").show();
+				$("#loading").hide();
+				//Carousel figure
+				var slider = mui("#slider");
+				slider.slider({
+					interval: 1000
+				});
+			}
+			//products list
+			var prolistpage = null;
+			mui('.productlist').on('tap', 'a', function(e) {
+				var uid=$("#userid").val();
+				if(!prolistpage) {
+					prolistpage = plus.webview.getWebviewById('productslist.html');
+				}
+				mui.fire(prolistpage, 'prolid', {
+					id: uid
+				});
+				mui.openWindow({
+					id: 'productslist.html'
+				});
+			});
+			//messageshow end************/
+			//goods
+			function dianzan(bid) {
+				var codid = $(".kankan_zanbox").attr("id");
+				//ajax post 
+				var params1 = {
+					"commid": codid
+				};
+				Repository.Commodity.praise(params1, {
+					ok: function(data) {
+						Log.d("success");
+						praise(bid);
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						if(data == "2004") {
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+					}
+				});
+
+			}
+			//praise css controll
+			function praise(aid) {
+				if(aid == "zanqian") {
+					document.getElementById(aid).style.display = "none";
+					document.getElementById("zanhou").style.display = "block";
+					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
+					var gooafter = goodbefor + 1 * 1;
+					document.getElementById("zanshu").innerHTML = gooafter;
+				} else {
+					document.getElementById(aid).style.display = "none";
+					document.getElementById("zanqian").style.display = "block";
+					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
+					var gooafter = goodbefor - 1 * 1;
+					document.getElementById("zanshu").innerHTML = gooafter;
+				}
+			}
+			
+			//
+			
+			function transRequest(params){
+				Repository.Transaction.transRequest(params, {
+					ok: function(data) {
+						var trans_id = data.data.transinfo[0].trans_id;
+						//alert(trans_id);
+						mui.openWindow({
+							url:"../../transaction/transaction2.html?transid=" + trans_id,
+							id:"transaction",
+							extras:{
+								"transid":trans_id
+							}
+						})
+					},
+					ng: function(data) {
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+						if(data == "2004") {
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+					}
+				});
+			}
+			mui(".ka_buyway").on('tap','.mui-btn',function(){
+				var change_name = $(this).attr("id");
+				var mode;
+				var codid = $(".kankan_zanbox").attr("id");
+				var params = {
+					"commodity_id": codid
+				};
+				if(change_name == 'switchp'){
+					mode = 'business';
+					params.mode = mode;
+					transRequest(params);
+				}else if(change_name == 'switchex'){
+					mode = 'exchange';
+					params.mode = mode;
+					mui.openWindow({
+							url: "../../transaction/select_item.html",
+							id: "selectitem",
+							extras:{
+								"commodity_id":codid,
+								"mode":mode
+							}
+						})
+				}else{
+					mode = 'gratis';
+					params.mode = mode;
+					transRequest(params);
+				}
+			})
+		</script>
+	</body>
+
+</html>
