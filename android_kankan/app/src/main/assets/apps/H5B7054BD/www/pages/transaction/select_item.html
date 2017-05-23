@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>select item</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/icons-extra.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			a#user img {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				margin-top: -0.2em;
+			}
+			
+			header a.mui-icon-extra-notice {
+				margin-top: 0.5em;
+				margin-right: 0.25em;
+			}
+			
+			header a.mui-icon-search {
+				width: 60px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
+				</button>
+			<h1 class="mui-center mui-title user-title-center maintitle">商品リスト</h1>
+			<span class="mui-right mui-pull-right">
+					<font class="mui-icon goods-list-btn maintitle user-title-center" onclick="select_goods();" style="font-size:15px">確定</font>
+				</span>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div class="mui-slider-group">
+					<div class="mui-slider-item ">
+						<ul class="mui-table-view mui-grid-view goods-list">
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="spinner">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../js/language.js"></script>
+		<script src="../../js/sha256.js"></script>
+		<script src="../../js/common.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var comm_id, mode;
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				comm_id = self.commodity_id;
+				mode = self.mode;
+				get_goods_list();
+			})
+
+			function get_goods_list(params) {
+				var params = {
+					'commodity_id': comm_id,
+					'mode': mode
+				}
+				transRequest(params, 'first');
+			}
+
+			function select_goods() {
+				var choice = '';
+				$("input[name='commodity_id']:checked").each(function() {
+					choice += $(this).val() + ',';
+				})
+				choice = choice.substr(0, choice.length - 1);
+				alert(comm_id);
+				var params = {
+					'commodity_id': comm_id,
+					'mode': mode,
+					'choice': choice
+				}
+				params.choice = choice;
+				transRequest(params, 'second');
+			}
+
+			function transRequest(params, flag) {
+				Repository.Transaction.transRequest(params, {
+					ok: function(data) {
+						if(flag == 'first') {
+							var comm_info = data.data.data;
+							var goods_list = '';
+							for(var gds in comm_info) {
+								goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail" >';
+								goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
+								goods_list += '<img class="" width="30%"  height="98px;" src="' + comm_info[gds].img_flg + '">';
+								goods_list += '<input  style="float:right;position: fixed;margin-left:-13px;" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+								goods_list += '</label>';
+								goods_list += '</li>';
+							}
+							$(".goods-list").html(goods_list);
+						} else {
+							var trans_id = data.data.transinfo[0].trans_id;
+							mui.openWindow({
+								url: "./transaction2.html?transid=" + trans_id,
+								id: "transaction",
+								extras: {
+									"transid": trans_id
+								}
+							})
+						}
+					},
+					ng: function(data) {
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+						if(data == "2004") {
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

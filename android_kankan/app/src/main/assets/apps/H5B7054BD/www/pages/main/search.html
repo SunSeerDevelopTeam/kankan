@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>search</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
+		<style>
+			#search {
+				width: 70%;
+				height: 80%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav"></a>
+			<a class="lang" data-locale="back"></a>
+			<input id="search"></input>
+			<a class="mui-icon mui-icon-search mui-pull-right"></a>
+		</header>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="../../js/language.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		(function(mui, doc) {
+			var keyword = "";
+			mui.init({
+				beforeback: function() {
+					var list = plus.webview.getWebviewById('pullrefresh_with_tab');
+					mui.fire(list, 'search', {
+						keyword: keyword
+					});
+					return true;
+				}
+			});
+			$(doc).ready(function() {
+				$('.mui-icon-search').click(function() {
+					keyword = $('#search').val().trim();
+					Log.i("keyword is " + keyword);
+					setTimeout(function() {
+						mui.back();
+					}, 1000);
+				});
+			});
+		})(mui, document);
+	</script>
+
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css">
+		<link href="../../css/wu.css" rel="stylesheet" />
+	</head>
+
+	<body>
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
+				<h1 class="mui-title lang" data-locale="point_to_ticket_title"></h1>
+			</header>
+			<div id="" class=" mui-content mui-popover-bottom mui-popover-action">
+				<div class="mui-card">
+				</div>	
+				<div class="mui-button-row">資金決済方に基づく表記<br/>
+特定商取引法に基づく表記</div>
+			</div>
+		
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/mui.view.js" ></script>
+	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
+	<script type="text/javascript" src="../../js/language.js" ></script>
+	<script src="../../js/sha256.js"></script>
+	<script src="../../js/common.js"></script>
+	<script>
+		mui.init();
+		mui.plusReady(function() {
+				var params = {};
+				Repository.User.Buyticket(params,{
+					ok: function(data) {
+						console.log("buyticket show success");
+						console.dir(data);
+						showbuyinfo(data);
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						Log.d(data);
+						if(data=="2001"){
+							mui.toast(TextMessage.datanull, {
+								duration: 'long',
+								type: 'div'
+							})
+						}
+					}
+				});
+			});
+			function showbuyinfo(results){
+				var data=results.data;
+				for(var i=0;i<data.length;i++){
+					var r_id=data[i].r_id;
+					var r_detail=data[i].r_detail;
+					var r_change_num=data[i].r_change_num;
+					var html = new Util.StringBuilder();
+					html.appendFormat('<div class="mui-card-footer"><span class="mui-card-link" style="width:55%" data-locale="point_to_ticket_num1">{0}</span>',r_detail)
+						.appendFormat('<span class="mui-card-link ">{0}</span>',r_change_num)
+						.appendFormat('<button type="button" class="mui-btn mui-btn-red buyticket" data-locale="buy"><a id="{0}"><font color="#FFFFFF">兑换</font></a></button></div>', r_id);
+						$(".mui-card").append(html.toString());
+				}
+				mui(".buyticket").on("tap","a",function(e){
+					var rid = this.getAttribute('id');
+					var params = {"buy_ticket_id":rid};
+					Repository.User.pointbuyticketway(params,{
+						ok: function(data) {
+							console.log("by ticket success");
+							//console.dir(data);
+							alert(TextMessage.buyyes);
+						},
+						ng: function(data) {
+							console.log("error:"+data);
+							Log.d(data);
+							if(data=="1000"){
+								alert(TextMessage.test);
+								mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+							}
+							if(data=="2002"){
+								alert(TextMessage.userng);
+								mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+							}
+							if(data=="2010"){
+								mui.toast(TextMessage.pointnot, {
+									duration: 'long',
+									type: 'div'
+								})
+							}
+							if(data=="3012"){
+								mui.toast(TextMessage.buywaynot, {
+									duration: 'long',
+									type: 'div'
+								})
+							}
+						}
+					});
+				});
+			}
+	</script>
+
+</html>

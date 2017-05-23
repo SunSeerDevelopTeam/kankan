@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\share-weixin.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="db98f1ff07b2e0e38416896fec5aa0724d6cdec0">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\share-weixin_b4bc3923c8698161b464821205841192f875bdc8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\navigatorui.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="af8311651693610823fe8d72aa305290cadda478">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\navigatorui_234f1e6f008b3b0e7486f1c4e8c40bc5dc1757a8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\camera.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c57591cf51f444673ff1693fc882d83675292cc8">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\camera_0fd5e48eca60ab78f44b87785a7d7006b1b40b18\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-20.0.0_d01623b835486ba8b9ae70a9212f5b3afbb8fdee\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\messaging.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ddd3807e3a7b33815219144649a8ce79aaf7f553">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\messaging_ccab3ed6b30b2ed268a9986e1872351d645e0b07\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\sensor.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="1cc640dfc6f051351fa339d5a160995662f2c5f1">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\sensor_f9f93b243723e752bd321ad2b9315f89571a5e6c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\nativeui.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="bc2ffabbb1a977ef45aaedd619a5b474eb3dc4e1">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\nativeui_6820c01c3dff457ded9a89ee301285b4ca9916fb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\device.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="80f4c043b752f5d15bfb05e1d0dccf6a971b94f7">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\device_aa1d8ae51d3aea9ce4ccffb574222ddafb9ab8f7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\nopermission.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="abc2837174c0e5bf34f147d9a400e5816bb62175">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\nopermission_d134e83844bd2d2062ff39439d6987d1ef84339d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\tx_wx.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="11b09244aedaa51bfd09269637be7c32c60da314">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\tx_wx_dcc085b6bdbab87067544a4f3ac85c97e0681be7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\gif.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="3b86e72dbf272c69b3acd5e552066d9f521e9616">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\gif_e312cdab61792e6fd0a6880082163303d85e765f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\oauth-weixin.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5a5a7a0ed2c9a822429328227389fb3272784354">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\oauth-weixin_5034ebcec25dee7a7c1c3602177d991f2a350852\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\.android\build-cache\ae971e6d1d026d9b85a8cdabd3e1c977ddaba905\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a237f08197e2850fcca8cb83e8b26958d7c53336\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\xhr.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="96762112029979b07a980956d796d8e14db8bbae">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\xhr_8bb9dbdaa3c28de5da1d5f9c497ead0f95d76d6c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\uploader.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ffc178cd3efe94544faecb96129c600c693d8f46">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\uploader_a139764f29ed64c7fcfcda1e26e0a4bfda4d8809\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\my-imageloader.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e0d3251f3d10893c82ced22f2c225ea442a69c7b">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\my-imageloader_3128caa7646b9279f83096805e951f04808eb951\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\my-nineoldandroids-2.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="fa202f70b9e42e2ad90e0cb9cdc573e701c254ac">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\my-nineoldandroids-2.4.0_b7dbe57262b521a367c87e69657fa9370ea58c60\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\gallery.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e85cf2cfc11b5897560aa9b0e30e52dda98b0575">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\gallery_9becbfdf5459a4524b578fbea2d366dbb1435aea\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\ui.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e3e75af2446dbe58111e0657ab11c98c39dfb4ea">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\ui_6aeecd16aac6b352db047d9be25e5e381ac13233\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\invocation.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4b5518209980e8bd42a2682c9a153cdd87f7f33b">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\invocation_606d9c3e9afc0d9a82bc82d403d6e5fa3503bfe7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\GetuiSDK2.10.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="42fa5f206accc54f63357aef61409a9e88eccb8e">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\GetuiSDK2.10.2.0_c66810babd86b92f8026e672a3fbdd2d26a5c1e9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\.android\build-cache\ae971e6d1d026d9b85a8cdabd3e1c977ddaba905\output\jars\libs\internal_impl-20.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-20.0.0_52c287e4be57c722ae83acb7ac6c58120b274817\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_97fb54b6adb2c784d1e5cb7eb83e5c2f8ac801b0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\share.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="2ecf79120e4beacbab172130111b7ca9df504be7">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\share_5876405ad0fcb043ee75e9af62d46e69c0b8c0d6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\downloader.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="763224e87241f2bac2128d5e329ff00bd149064a">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\downloader_dc46ad1f7a0e818005d0ae644e2ae6924df4b925\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\file.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6612680f2385e8b556fba69e6285adb5527d0cee">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\file_d9b1f800de51c7f5031c1eacc3701107661be132\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\payment-weixin.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5e367ecbd79ac5ccdd2fea1eac737511272347f8">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\payment-weixin_26d46fb2b9a438d52b58bb56321904b16636b9f5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\aps-igexin.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="fa046f85a4f47a6e8f0f407b9c414d4c325b5472">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\aps-igexin_3b0dc5bc8a008ba2fc0b7c5a28f7e24df6b8e7a8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\payment.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="977ddc7a061954dbb066ef84e96fdd946f037cd3">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\payment_e55eba8159f8cacca8f38f37e701257224f3ea91\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\pdr.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6fb74289a867258ac31ea8c1ce79865fe1659096">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\pdr_12c1dd2dfa305f12d2c9c05ab299b83c57b1c213\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\oauth.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="46368e7be3f93fa8538ae78c01c873cc98b58023">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\oauth_75d99bb2dcab06e462b7213f78d2f594c86b57e9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\aps.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="01fb1dcde7140005d9b0cd81c74649c48402ab8f">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\aps_1bee24abd1e473394c33842b9e1128640aea70c7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a51d856133c87936200d98081c869d3efc236258">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d22e7d9ac04003e383cfda4dd18a8a10288dccfa\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\libs\nativeObj.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b6f5892cea38e7fabd937f4fa44882be14ac9b25">
+        <dex dex="C:\Users\sunseer-pc-019\Documents\HBuilder-Hello1\app\build\intermediates\transforms\dex\debug\folders\1000\2\nativeObj_35bdf02e25035cfad0e8019b6853bd143a0fefe7\classes.dex" />
+    </item>
+
+</items>
