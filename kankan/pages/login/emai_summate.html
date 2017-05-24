@@ -11,30 +11,32 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">emai完善</h1>
+		    <h1 class="mui-title lang" data-locale="writeemail"></h1>
 		</header>
-		<div style="text-align: left;margin-top: 50px;margin-bottom: -2.5em;"><p><font color="red">*</font>请先完善邮箱资料</p></div>
+		<div style="text-align: left;margin-top: 50px;margin-bottom: -2.5em;"><p><font color="red">*</font><span class="lang" data-locale="emailwtext"></span></p></div>
 		<div class="mui-content">
-        	<div class="mui-input-group">
-				<div class="mui-input-row">
-					<label for="email" class="lang" data-locale="email"></label>
-					<input id='email' name="email" type="email" class="mui-input lang" data-locale="please-input-email">
+			<form id="form1" name="form1" method="post" action="">
+	        	<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="email" class="lang" data-locale="email"></label>
+						<input id='email' name="email" type="email" class="mui-input lang" data-locale="please-input-email">
+					</div>
 				</div>
-			</div>
-			<!-- send verification code button -->
-			<div class="mui-content-padded">
-				<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
-			</div>
-			<div class="mui-input-group">
-				<div class="mui-input-row">
-					<label class="lang" data-locale="verification-code"></label>
-					<input id='verificationCode' name="verificationCode" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+				<!-- send verification code button -->
+				<div class="mui-content-padded">
+					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
 				</div>
-			</div>
-			<!-- submit button -->
-			<div class="mui-content-padded">
-				<button id='reg' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
-			</div>
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="verification-code"></label>
+						<input id='verificationCode' name="verificationCode" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+					</div>
+				</div>
+				<!-- submit button -->
+				<div class="mui-content-padded">
+					<button id='submit' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register" onclick="submits()"></button>
+				</div>
+			</form>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
@@ -96,6 +98,53 @@
 					});
 				});
 			});
+			function submits(){
+				var email=$("#email").val();
+				var code=$("#verificationCode").val();
+				if(email==""){
+					alert(TextMessage.emailnull);
+					document.form1.email.focus();
+					return false;
+				}
+				if(code==""){
+					alert(TextMessage.codenull);
+					document.form1.verificationCode.focus();
+					return false;
+				}
+				var params2={
+					"email":email,
+					"vc_code":code
+				};
+				Repository.User.email_rgister_check(params2, {
+					ok: function(data) {
+						mui.toast(TextMessage.updatesuccessinfo, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.back;
+					},
+					ng: function(data) {
+						console.log(data);
+						switch(data) {
+							case "1000":
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
+								default:
+							mui.toast(TextMessage.updatemailng, {
+								duration: 'long',
+								type: 'div'
+							})
+									break;
+							}
+						},
+						error: function() {
+							waiting.close();
+						}
+					});
+				}
 		</script>
 	</body>
 
