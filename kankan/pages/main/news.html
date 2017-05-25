@@ -31,8 +31,6 @@
 		</header>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
   			<div class="mui-scroll">
-  				<div class="messagelist">
-				</div>
 				<ul id="OA_task_1" class="mui-table-view">
 				<!--<li class="mui-table-view-cell">
 					<div class="mui-slider-right mui-disabled">
@@ -42,7 +40,7 @@
 						左滑显示删除按钮
 					</div>
 				</li>-->
-			</ul>
+				</ul>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
@@ -51,6 +49,9 @@
 		<script src="../../js/sha256.js"></script>
 		<script src="../../js/common.js"></script>
 		<script type="text/javascript">
+			$(function(){
+				
+			});
 			var count = 0;
 			var page="";
 			var max=10;
@@ -62,9 +63,16 @@
 			        callback: pullupRefresh
 			      },
 			      up: {
-			        contentrefresh: '正在加载...',
+			        contentrefresh: TextMessage.loading,
+			        contentnomore:TextMessage.nomore,
+			        contentinit: TextMessage.upmore,
+			        contentdown:TextMessage.upmore,
 			        callback: pullupRefresh
 			      }
+			    },
+			    beforeback: function() {
+			        var homePage = plus.webview.getWebviewById('pullrefresh_with_tab');
+					mui.fire(homePage, 'refresh',{refresh:"canRefresh"});
 			    }
 		  });  
 		  //delete message
@@ -74,7 +82,7 @@
 				
 				var elem = this;
 				var li = elem.parentNode.parentNode;
-				mui.confirm('确认删除该条记录？', TextMessage.sharetitle, btnArray, function(e) {
+				mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
 					if (e.index == 0) {
 						li.parentNode.removeChild(li);
 						console.log(li.getAttribute("id"));
@@ -127,12 +135,12 @@
 			        table.appendChild(li);
 				}
 				page=page+1;
-				click();
+				//$(".mui-pull-caption-down").hide();
 			}
 		  //load
 		  function pullupRefresh() 
 		  {
-		  	setTimeout(function() {getmessage(page);},1500);
+		  	getmessage(page);
 			//get message
 			function getmessage(page){
 			  	mui.plusReady(function() {
@@ -187,13 +195,6 @@
 		      mui('#pullrefresh').pullRefresh().pullupLoading();
 		    });
 		 }
-		 //click delt
-		 function click(){
-		 	mui(".newsb").on("tap",".newsbox",function() {
-		 		alert("sss");
-			});
-		 }
-		
 		//update message staute
 	mui.plusReady(function(){
 		var params={};
