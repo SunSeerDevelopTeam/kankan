@@ -33,6 +33,16 @@
   			<div class="mui-scroll">
   				<div class="messagelist">
 				</div>
+				<ul id="OA_task_1" class="mui-table-view">
+				<!--<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						左滑显示删除按钮
+					</div>
+				</li>-->
+			</ul>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
@@ -56,7 +66,46 @@
 			        callback: pullupRefresh
 			      }
 			    }
-		  });      
+		  });  
+		  //delete message
+		  (function($) {
+		  	var btnArray = [TextMessage.sure, TextMessage.cancel];
+			$('#OA_task_1').on('tap', '.mui-btn', function(event) {
+				
+				var elem = this;
+				var li = elem.parentNode.parentNode;
+				mui.confirm('确认删除该条记录？', TextMessage.sharetitle, btnArray, function(e) {
+					if (e.index == 0) {
+						li.parentNode.removeChild(li);
+						console.log(li.getAttribute("id"));
+						var mid=li.getAttribute("id");
+						var parms3={
+							"msg_ids":mid,
+						};
+						Repository.User.del_message(parms3, {
+						ok: function(data) {
+							console.log(data);
+							console.log("delete success!");
+						},
+						ng: function(data) {
+							console.log(data);
+							if(data=="1000"){
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								})
+							}
+						},
+					});
+					} else {
+						setTimeout(function() {
+							$.swipeoutClose(li);
+						}, 0);
+					}
+				});
+			});
+				
+		  })(mui)
 			//show message
 			function showmessage(results){
 				var messarr=results.data.message;
@@ -67,13 +116,15 @@
 				var htmls='';
 				for(var j=0; j<messarr.length;j++){
 					var mess=messarr[j].message;
+					var mesid=messarr[j].msg_id;
 				      mui('#pullrefresh').pullRefresh().endPullupToRefresh((num >= count)); //参数为true代表没有更多数据了。
-				      var table = document.body.querySelector('.messagelist');
-				      var cells = document.body.querySelectorAll('.newsb');
-			        var div = document.createElement('div');
-			        div.className = 'newsb';
-			        div.innerHTML = '<div class="message">'+mess+'<div class="newsbox"> <img src="../../images/clear.png"  width="25" height="25"/></div></div><div class="lines"></div>';
-			        table.appendChild(div);
+				      var table = document.body.querySelector('#OA_task_1');
+				      var cells = document.body.querySelectorAll('.mui-table-view');
+			        var li = document.createElement('li');
+			        li.className = 'mui-table-view-cell';
+			        li.id=mesid;
+			        li.innerHTML = '<div class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red">删除</a></div><div class="mui-slider-handle">'+mess+'</div>';
+			        table.appendChild(li);
 				}
 				page=page+1;
 				click();
@@ -81,42 +132,34 @@
 		  //load
 		  function pullupRefresh() 
 		  {
-		  	getmessage(page);
-		//get message
-		function getmessage(page){
-		  	mui.plusReady(function() {
-			  	var params2={};
-				if(max!=null){
-					params2.max=max;
-				}
-				if(page!=null){
-					params2.page=page;
-				}
-				Repository.User.get_message(params2, {
-					ok: function(data) {
-						console.log(data);
-						showmessage(data);
-					},
-					ng: function(data) {
-						console.log(data);
-						switch(data) {
-							case "1000":
+		  	setTimeout(function() {getmessage(page);},1500);
+			//get message
+			function getmessage(page){
+			  	mui.plusReady(function() {
+				  	var params2={};
+					if(max!=null){
+						params2.max=max;
+					}
+					if(page!=null){
+						params2.page=page;
+					}
+					Repository.User.get_message(params2, {
+						ok: function(data) {
+							console.log(data);
+							showmessage(data);
+						},
+						ng: function(data) {
+							console.log(data);
+							if(data=="1000"){
 								mui.toast(TextMessage.test, {
 									duration: 'long',
 									type: 'div'
 								})
-								break;
-								default:
-							mui.toast(TextMessage.updatemailng, {
-								duration: 'long',
-								type: 'div'
-							})
-								break;
-						}
-					},
+							}
+						},
+					});
 				});
-			});
-		}
+			}
 			
 //		    setTimeout(function() {
 //		      mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
@@ -160,19 +203,11 @@
 			},
 			ng: function(data) {
 				console.log(data);
-				switch(data) {
-					case "1000":
-						mui.toast(TextMessage.test, {
-							duration: 'long',
-							type: 'div'
-						})
-						break;
-						default:
-					mui.toast(TextMessage.updatemailng, {
+				if(data=="1000"){
+					mui.toast(TextMessage.test, {
 						duration: 'long',
 						type: 'div'
 					})
-						break;
 				}
 			},
 		});
