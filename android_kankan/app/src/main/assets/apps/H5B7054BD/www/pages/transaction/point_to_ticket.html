@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css">
+		<link href="../../css/wu.css" rel="stylesheet" />
+	</head>
+
+	<body class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="setting" class="mui-page">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font class="lang" data-locale="back" size="4"></font></span>
+				</button>
+				<h1 class="mui-center mui-title title-center"><b  class="lang" data-locale="point_to_ticket_title"></b></h1>
+			</div>
+			<div id="" class=" mui-content mui-popover-bottom mui-popover-action">
+				<div class="mui-card">
+					<div class="mui-card-footer">
+						<span class="mui-card-link lang" style="width:40%" data-locale="point_to_ticket_num1"></span>
+						<span class="mui-card-link ">120P</span>
+						<button type="button" class="mui-btn mui-btn-red lang" data-locale="buy"></button> 
+					</div>
+					<div class="mui-card-footer">
+						<span class="mui-card-link lang" style="width:40%" data-locale="point_to_ticket_num4"></span>
+						<span class="mui-card-link ">360P</span>
+						<button type="button" class="mui-btn mui-btn-red lang" data-locale="buy"></button> 
+					</div>
+					<div class="mui-card-footer">
+						<span class="mui-card-link lang" style="width:40%" data-locale="point_to_ticket_num7"></span>
+						<span class="mui-card-link ">600P</span>
+						<button type="button" class="mui-btn mui-btn-red lang" data-locale="buy"></button> 
+					</div>
+					<div class="mui-card-footer">
+						<span class="mui-card-link lang" style="width:40%" data-locale="point_to_ticket_num15"></span>
+						<span class="mui-card-link ">1200P</span>
+						<button type="button" class="mui-btn mui-btn-red lang" data-locale="buy"></button> 			
+					</div>
+				</div>	
+				<div class="mui-button-row">資金決済方に基づく表記<br/>
+特定商取引法に基づく表記</div>
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/mui.view.js" ></script>
+	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
+	<script type="text/javascript" src="../../js/language.js" ></script>
+	<script>
+		mui.init();
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#setting'
+		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+			view.addEventListener('pageBeforeShow', function(e) {
+				//				console.log(e.detail.page.id + ' beforeShow');
+			});
+			view.addEventListener('pageShow', function(e) {
+				//				console.log(e.detail.page.id + ' show');
+			});
+			view.addEventListener('pageBeforeBack', function(e) {
+				//				console.log(e.detail.page.id + ' beforeBack');
+			});
+			view.addEventListener('pageBack', function(e) {
+				//				console.log(e.detail.page.id + ' back');
+			});
+		})(mui);	
+	</script>
+
+</html>

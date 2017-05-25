@@ -637,6 +637,62 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
+	
+	function getApiUrl(flag){
+		var apiUrl = '';
+		switch(flag){
+			case 'transConversation':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/';
+				break;
+			case 'transConversation': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/'; //请求/订单对话API:
+				break;
+			case 'transCommdChange': 
+				apiUrl = baseUrl() + '/transaction/transcommdchange/'; //提交请求商品变更API:
+				break;
+			case 'transShowRequest': 
+				apiUrl = baseUrl() + '/transaction/transrequest/show_request_detail/'; //显示当前交易请求/订单API
+				break;
+			case 'transGetUserCommd': 
+				apiUrl = baseUrl() + '/transaction/transpublic/get_user_commodity/';
+				break;
+			case 'transRequest': 
+				apiUrl = baseUrl() + '/transaction/transrequest/';
+				break;
+			case 'transOrderEvaluate': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_evaluate/';
+				break;
+			case 'transOrderReceipt': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_receipt/';
+				break;
+			case 'transOrderLogustics': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_logistics/';
+				break;
+			case 'transSubmitOrder': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_submit_order/';
+				break;
+			case 'transRequestOrder': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_request_order/';
+				break;
+			case 'transChangePrice': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_change_price/';
+				break;
+			case 'transStop': 
+				apiUrl = baseUrl() + '/transaction/transoperation/transaction_stop/';
+				break;
+			case 'transEdite': 
+				apiUrl = baseUrl() + '/transaction/transoperation/transaction_show/';
+				break;
+			case 'transUrgeDelive': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_deliver/';
+				break;
+			case 'transUrgeReceipt': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_receipt/';
+				break;
+		}
+		return apiUrl;
+	}
+	Api.getApiUrl = getApiUrl;
 })(Api || (Api = {}));
 var Repository;
 (function(Repository) {
@@ -799,6 +855,11 @@ var Repository;
 	Repository.Commodity = Commodity;
 	var Transaction;
 	(function(Transaction) {
+		function trans(flag,params,callback){
+			apiUrl = Api.getApiUrl(flag);
+			return Api.call(apiUrl, params, callback);
+		}
+		Transaction.trans = trans;
 		function transRequest(params, callback) {
 			return Api.call(Api.url.Trans.transRequest, params, callback);
 		}

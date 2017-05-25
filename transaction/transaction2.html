@@ -30,29 +30,22 @@
 				<div class="tran-page">
 					<div class="tran-body" style="margin-bottom:60px;">
 						<div class="tran-name-middle-status mui-center">
-							<font size="2" color="#ffffff" vertical-align="middle">問い合わせ中</font>
+							<font size="2" color="#ffffff" vertical-align="middle"></font>
 						</div>
-						<ul class="mui-table-view mui-grid-view" style="margin-top:0px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5">
-								<a href="#">
-									<div class="mui-media-body" style="height:35px;margin-top:0px;">
-										<img height="32px" width="32px" src="../../images/sinaweibo.png" />
-										<font size="2" vertical-align="middle">Mary</font>
-									</div>
-									<img height="100%" width="100%" class="mui-media-object" src="../../images/cbd.jpg">
-								</a>
+						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:0px;position: inherit;padding:0 10px 10px 10px">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user">
+
 							</li>
 							<li class="tran-pic-middle" style="margin-left:10px;">
 								<img height="24px" width="24px" src="../../images/xinhuan.png" />
 							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user">
+
+							</li>
+						</ul>
+						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:0px;position: inherit;padding:0 10px 10px 10px">
 							<li class="mui-table-view-cell mui-media mui-col-xs-5">
-								<a href="#">
-									<div class="mui-media-body" style="height:35px;margin-top:0px;">
-										<img height="32px" width="32px" src="../../images/sinaweibo.png" />
-										<font size="2" vertical-align="middle">Mary</font>
-									</div>
-									<img height="100%" width="100%" class="mui-media-object" src="../../images/cbd.jpg">
-								</a>
+
 							</li>
 						</ul>
 						<ul class="tran-button">
@@ -65,8 +58,31 @@
 							</li>
 							<li class="tran-button-buy">
 								<div>
-									<font size="2" color="#FFFFF" vertical-align="middle">交易開始</font>
+									<font size="2" color="#FFFFF" vertical-align="middle"></font>
 								</div>
+							</li>
+						</ul>
+						<input type="hidden" id="trans_status" name="trans_status" value="" />
+						<input type="hidden" id="trans_mode" name="trans_mode" value="" />
+						<input type="hidden" id="trans_type" name="trans_type" value="" />
+						<input type="hidden" id="buyer_flag" name="buyer_flag" value="" />
+						<input type="hidden" id="trans_deliver" name="trans_deliver" value="" />
+						<input type="hidden" id="buyer_deliver" name="buyer_deliver" value="" />
+						<input type="hidden" id="buyer_urge_r" name="buyer_urge_r" value="" />
+						<input type="hidden" id="buyer_urge_d" name="buyer_urge_d" value="" />
+						<input type="hidden" id="buyer_receipt" name="buyer_receipt" value="" />
+						<input type="hidden" id="seller_deliver" name="seller_deliver" value="" />
+						<input type="hidden" id="seller_urge_r" name="seller_urge_r" value="" />
+						<input type="hidden" id="seller_urge_d" name="seller_urge_d" value="" />
+						<input type="hidden" id="seller_receipt" name="seller_receipt" value="" />
+						<ul class="tran-distribution change_price" style="display:none;" onclick="change_price();">
+							<li class="tran-distribution-law">
+								<a href="../main/logisticslist.html">
+									<div class="tran-distribution-call">
+										<font size="2" color="#FFFFF" vertical-align="middle">改价</font>
+										</font>
+									</div>
+								</a>
 							</li>
 						</ul>
 						<ul class="tran-distribution">
@@ -76,7 +92,7 @@
 										<font size="3" color="999999" vertical-align="middle">特定商取引法に基づく表記</font>
 									</a>
 								</div>
-								<a href="../../main/logisticslist.html">
+								<a href="../main/logisticslist.html">
 									<div class="tran-distribution-call">
 										<font size="2" color="#FFFFF" vertical-align="middle">物流と連絡する</font>
 									</div>
@@ -109,8 +125,14 @@
 			mui.init();
 			var trans_id;
 			mui.plusReady(function() {
+				mui.preload({
+					id: 'detail',
+					url: '../main/products/detail.html'
+				});
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
+				var preView = plus.webview.getWebviewById('requestlist');
+				plus.webview.close(preView);
 				showRequestDetail();
 			})
 
@@ -126,7 +148,6 @@
 					};
 					Repository.Transaction.transConversation(params, {
 						ok: function(data) {
-							console.dir(data);
 							Log.i("message send successfully!");
 							$("#msg").val("");
 							var transinfo = data.data.transinfo;
@@ -134,7 +155,9 @@
 							var commdinfo = data.data.commdinfo;
 							var usersinfo = data.data.usersinfo;
 							var cur_user_id = data.data.myid;
-							showChatMsg(usersinfo, messginfo, cur_user_id);
+							if(messginfo) {
+								showChatMsg(usersinfo, messginfo, cur_user_id);
+							}
 						},
 						ng: function(data) {
 							Log.i("message send faild!");
@@ -155,23 +178,44 @@
 				};
 				Repository.Transaction.transEdite(params, {
 					ok: function(data) {
+						console.log("data start -------");
+						console.dir(data);
+						console.log("data end -------");
 						var transinfo = data.data.transinfo;
 						var messginfo = data.data.messginfo;
 						var commdinfo = data.data.commdinfo;
 						var usersinfo = data.data.usersinfo;
+						var buyer_flag = false;
 						var tranStatusVal = getTransStatus(transinfo.status);
-						console.log("========商品信息显示====== start");
-						console.dir(commdinfo);
-						console.log("========商品信息显示====== end");
 						$(".tran-name-middle-status font").html(tranStatusVal);
-						showTranCommodMsg(usersinfo, commdinfo, messginfo);
-						var buyer_id = transinfo.issue_user_id;
-						var seller_id = transinfo.accept_user_id;
-						var cur_user_id = data.data.myid;
-						showChatMsg(usersinfo, messginfo, cur_user_id);
+						//showTranCommodMsg(usersinfo, commdinfo, messginfo);
+						var buyer_id = transinfo[0].issue_user_id;
+						var seller_id = transinfo[0].accept_user_id;
+						var cur_user_id = data.myid;
+						var trans_mode = transinfo[0].trans_mode;
+						var trans_status = transinfo[0].status;
+						var trans_deliver = transinfo[0].deliver;
+						var trans_type = transinfo[0].trans_type;
+						if(buyer_id == cur_user_id) buyer_flag = 'true';
+
+						if(trans_mode > 0) {
+							$(".exchange").hide();
+							$(".other").show();
+						} else {
+							$(".exchange").show();
+							$(".other").hide();
+						}
+						setHidVal(transinfo, usersinfo, cur_user_id);
+						showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id);
+						if(messginfo) {
+							showChatMsg(usersinfo, messginfo, cur_user_id);
+						}
+						tranStatusVal = trans_type == 0 ? "请求中" : "订单中"
+						alert(trans_type);
+						$(".tran-name-middle-status font").html(tranStatusVal);
+						showRequestStaus(transinfo, buyer_flag, usersinfo);
 					},
 					ng: function(data) {
-						Log.i("message send faild!");
 						if(data == "1000") {
 							alert(TextMessage.test);
 						}
@@ -187,10 +231,53 @@
 				return tranStatusVal;
 			}
 
-			function showTranCommodMsg(cur_user_id, usersinfo, commdinfo, messginfo) {
-				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, tranGoodMsg, userRole;
+			function setHidVal(transinfo, usersinfo, cur_user_id) {
+				var buyer_id = transinfo[0].issue_user_id;
+				var seller_id = transinfo[0].accept_user_id;
+				var trans_mode = transinfo[0].trans_mode;
+				var trans_status = transinfo[0].status;
+				var trans_deliver = transinfo[0].deliver;
+				var trans_type = transinfo[0].trans_type;
+				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
+				var buyer_flag = false;
+				console.log(" set hidden value start ----");
+				console.dir(transinfo);
+				console.dir(usersinfo);
+				console.log(" set hidden value end ----");
+				for(var u in usersinfo) {
+					if(usersinfo[u].user_id == buyer_id) {
+						buyer_deliver = usersinfo[u].deliver_flag;
+						buyer_urge_r = usersinfo[u].urge_r_flag;
+						buyer_urge_d = usersinfo[u].urge_d_flag;
+						buyer_receipt = usersinfo[u].receipt_flag;
+					} else {
+						seller_deliver = usersinfo[u].deliver_flag;
+						seller_urge_r = usersinfo[u].urge_r_flag;
+						seller_urge_d = usersinfo[u].urge_d_flag;
+						seller_receipt = usersinfo[u].receipt_flag;
+					}
+				}
+				if(buyer_id == cur_user_id) buyer_flag = 'true';
+
+				$("#trans_status").val(trans_status);
+				$("#trans_mode").val(trans_mode);
+				$("#trans_deliver").val(trans_deliver);
+				$("#buyer_flag").val(buyer_flag);
+				$("#buyer_deliver").val(buyer_deliver);
+				$("#buyer_urge_r").val(buyer_urge_r);
+				$("#buyer_urge_d").val(buyer_urge_d);
+				$("#buyer_receipt").val(buyer_receipt);
+				$("#seller_deliver").val(seller_deliver);
+				$("#seller_urge_r").val(seller_urge_r);
+				$("#seller_urge_d").val(seller_urge_d);
+				$("#seller_receipt").val(seller_receipt);
+			}
+
+			function showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id) {
+				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, trans_mode, buyer_msg = '',
+					seller_msg = '';
 				for(var user in usersinfo) {
-					if(usersinfo[user].user_role == 'issue') {
+					if(usersinfo[user].user_role == "issue") {
 						buyer_photo = usersinfo[user].photo;
 						buyer_nickname = usersinfo[user].nick_name;
 						buyer_id = usersinfo[user].user_id;
@@ -201,16 +288,168 @@
 					}
 				}
 
-				if(cur_user_id == buyer_id) userRole = 'buyer';
-				if(cur_user_id == buyer_id) userRole = 'seller';
 				for(var goods in commdinfo) {
 					if(commdinfo[goods].user_id == buyer_id) {
-
-					} else if(commdinfo[goods].user_id == seller_id) {
-
+						buyer_comm_id = commdinfo[goods].commodity_id;
+						buyer_comm_img = commdinfo[goods].img_flg;
+						buyer_comm_name = commdinfo[goods].comm_name;
+					} else {
+						seller_comm_id = commdinfo[goods].commodity_id;
+						seller_comm_img = commdinfo[goods].img_flg;
+						seller_comm_name = commdinfo[goods].comm_name;
 					}
 				}
+				var buyer_flag = false;
+				if(cur_user_id == buyer_id) buyer_flag = true;
+				var trans_mode = transinfo[0].trans_mode;
+				if(trans_mode == 0) {
+					seller_msg += '<a href="#">';
+					seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+					seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
+					seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
+					seller_msg += '</div>';
+					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
+					seller_msg += '</a>';
+					seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
+					seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
+					buyer_msg += '<a href="#">';
+					buyer_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+					buyer_msg += '<img height="32px" width="32px" src="' + buyer_photo + '" />';
+					buyer_msg += '<font size="2" vertical-align="middle">' + buyer_nickname + '</font>';
+					buyer_msg += '</div>';
+					buyer_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + buyer_comm_img + '">';
+					buyer_msg += '</a>';
+					buyer_msg += '<input type="hidden" name="buyer_commodity_id" value="' + buyer_comm_id + '">';
+					buyer_msg += '<input type="hidden" name="buyer_user_id" value="' + buyer_id + '">';
+
+					if(buyer_flag) {
+						$(".cur-user").html(buyer_msg);
+						$(".request-user").html(seller_msg);
+					} else {
+						$(".request-user").html(buyer_msg);
+						$(".cur-user").html(seller_msg);
+					}
+					$(".cur-user").append("<input type='hidden' name='myid' id='myid' value='" + cur_user_id + "'>");
+				} else {
+					seller_msg += '<a href="#">';
+					seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+					seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
+					seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
+					seller_msg += '</div>';
+					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
+					seller_msg += '</a>';
+					$(".other li").html(seller_msg);
+				}
+
 			}
+
+			function goods_detail(cur_user_id, comminfo,flag) {
+				var detailPage = null;
+				alert(comminfo.length);
+				var cur_comm_arr = new Array();
+				var request_user_arr = new Array();
+				var cur_commid = '';
+				for(var c in comminfo) {
+					if(cur_user_id == comminfo[c].user_id) {
+						cur_comm_arr.push(comminfo[c]);
+						cur_commid += comminfo[c].commodity_id+',';
+					} else {
+						request_user_arr.push(comminfo[c]);
+					}
+				}
+				cur_commid = cur_commid.substr(0, cur_commid.length - 1);
+				if(flag != 'my'){
+				if(request_user_arr.length == 1) {
+					var commid = request_user_arr[0].commodity_id;
+					if(!detailPage) {
+						detailPage = plus.webview.getWebviewById('detail');
+					}
+					mui.fire(detailPage, 'cid', {
+						id: commid
+					});
+					setTimeout(function() {
+						mui.openWindow({
+							id: 'detail',
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+					}, 300);
+				} else {
+					mui.openWindow({
+						url: "./request_item.html?transid=" + trans_id,
+						id: "requestitem",
+						extras: {
+							"transid": trans_id
+						}
+					})
+				}
+				}else{
+					mui.openWindow({
+						url: "./change_item.html",
+						id: "changeitem",
+						extras: {
+							"transid": trans_id,
+							"choice":cur_commid,
+							'mode':'exchange',
+							'commodity_id':comminfo[0].commodity_id
+						}
+					})
+				}
+			}
+
+			function show_request_comm() {
+
+			}
+			mui(".exchange").on('tap', '.request-user', function() {
+				var cur_user_id = $("#myid").val();
+				var params = {
+					"transid": trans_id
+				};
+				Repository.Transaction.transEdite(params, {
+					ok: function(data) {
+						var transinfo = data.data.transinfo;
+						var messginfo = data.data.messginfo;
+						var commdinfo = data.data.commdinfo;
+						var usersinfo = data.data.usersinfo;
+						goods_detail(cur_user_id, commdinfo,'request');
+					},
+					ng: function(data) {
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+					}
+				})
+			})
+			mui(".exchange").on('tap', '.cur-user', function() {
+				var cur_user_id = $("#myid").val();
+				var params = {
+					"transid": trans_id
+				};
+				Repository.Transaction.transEdite(params, {
+					ok: function(data) {
+						var transinfo = data.data.transinfo;
+						var messginfo = data.data.messginfo;
+						var commdinfo = data.data.commdinfo;
+						var usersinfo = data.data.usersinfo;
+						goods_detail(cur_user_id, commdinfo,'my');
+					},
+					ng: function(data) {
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+					}
+				})
+			})
 
 			function showChatMsg(usersinfo, messginfo, cur_user_id) {
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg;
@@ -229,34 +468,27 @@
 				for(var chat in messginfo) {
 					if(cur_user_id == buyer_id) {
 						if(messginfo[chat].user_id == buyer_id) {
-							//chatMsg += '<li class="tran-chat-word" style="width:75%;">'+messginfo[chat].msg_detail+'</li>';
-							//chatMsg += '<li class="tran-chat-face"><img height="32px" width="32px" src="' + buyer_photo + '"></li>';
 							chatMsg += '<div class="comtent mui-pull-left">';
-							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
-							chatMsg += '<div class="mui-pull-left"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '</div>';
-						} else {
-							//chatMsg += '<li class="tran-chat-face" style="float:right;"><img height="32px" width="32px" src="' + seller_photo + '"></li>';
-							//chatMsg += '<li class="tran-chat-word" style="float:right;width:75%;word-break:break-all;">'+messginfo[chat].msg_detail+'</li>';
-							chatMsg += '<div class="comtent mui-pull-left">';
-							chatMsg += '<div class="mui-pull-right"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
+							chatMsg += '<div class="mui-pull-right"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
+
 							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
 							chatMsg += '</div>';
-						}
-					} else {
-						if(messginfo[chat].user_id == seller_id) {
-							//chatMsg += '<li class="tran-chat-word" style="width:75%;">'+messginfo[chat].msg_detail + '</li>';
-							//chatMsg += '<li class="tran-chat-face"><img height="32px" width="32px" src="' + seller_photo +'"></li>';
+						} else {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-left"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
 							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
 							chatMsg += '</div>';
-						} else {
-							//chatMsg += '<li class="tran-chat-face" style="float:right;width:20%;"><img height="32px" width="32px" src="' + buyer_photo + '"></li>';
-							//chatMsg += '<li class="tran-chat-word" style="float:right;width:70%;min-height:20px;word-break:break-all;">' + messginfo[chat].msg_detail + '</li>';
+						}
+					} else {
+						if(messginfo[chat].user_id == seller_id) {
 							chatMsg += '<div class="comtent mui-pull-left">';
-							chatMsg += '<div class="mui-pull-right"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
+							chatMsg += '<div class="mui-pull-right"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
 							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
+							chatMsg += '</div>';
+						} else {
+							chatMsg += '<div class="comtent mui-pull-left">';
+							chatMsg += '<div class="mui-pull-left"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
+							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
 							chatMsg += '</div>';
 						}
 					}
@@ -264,13 +496,214 @@
 				$("#msgArea").html(chatMsg);
 			}
 
-			function showRequestCommodity() {
+			function showRequestStaus(transinfo, buyer_flag, userinfo) {
+				var status = transinfo[0].status;
+				var trans_mode = transinfo[0].trans_mode;
+				var trans_type = transinfo[0].trans_type;
+				var deliver = transinfo[0].deliver;
 				var params = {
 					"transid": trans_id
 				};
-				Repository.Transaction.transShowRequest(params, {
+				var buyer_id = $("input[name='buyer_user_id']").val();
+				if(trans_type == 0) {
+					$(".tran-button-sell font").text("请求终止");
+				} else {
+					$(".tran-button-sell font").text("交易终止");
+				}
+
+				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
+				for(var u in userinfo) {
+					if(userinfo[u].user_id == buyer_id) {
+						buyer_deliver = userinfo[u].deliver_flag;
+						buyer_urge_r = userinfo[u].urge_r_flag;
+						buyer_urge_d = userinfo[u].urge_d_flag;
+						buyer_receipt = userinfo[u].receipt_flag;
+					} else {
+						seller_deliver = userinfo[u].deliver_flag;
+						seller_urge_r = userinfo[u].urge_r_flag;
+						seller_urge_d = userinfo[u].urge_d_flag;
+						seller_receipt = userinfo[u].receipt_flag;
+					}
+				}
+				if(status == 8) {
+					mui.alert('已终止交易，不能继续交易。如果要继续交易请重新请求！！');
+				} else if(status == 3) {
+					mui.alert('交易已完成！！');
+					//var curView = plus.webview.currentWebview();
+					//plus.webview.close(curView);
+					mui.openWindow({
+						url: "./transevaluate.html?transid=" + trans_id,
+						id: "transevaluate",
+						extras: {
+							"transid": trans_id
+						}
+					})
+				} else if(status == 0) {
+					if(trans_mode > 0) {
+						if(buyer_flag == false) {
+							//$(".tran-button-buy").hide();
+							$(".tran-button-buy font").text("确认交易");
+						} else {
+							if(trans_mode == 1) {
+								$(".tran-button-buy font").text("等待对方确认");
+							} else {
+								$(".tran-button-buy font").text("确认交易");
+								//$(".tran-button-buy font").hide();
+							}
+						}
+					} else {
+						$(".tran-button-buy font").text("确认交易");
+					}
+				} else if(status == 1) {
+					if(buyer_flag) {
+						if(trans_type == 0) {
+							$(".tran-button-buy font").text("订单生成");
+						} else {
+							if(buyer_deliver == 1 && seller_deliver == 0) {
+								$(".tran-button-buy font").text("催促卖家发货");
+							} else if(buyer_deliver == 1 && seller_deliver == 1) {
+								$(".tran-button-buy font").text("确认收货");
+							} else {
+								$(".tran-button-buy font").text("确认发货");
+							}
+						}
+					} else {
+						if(trans_type == 0) {
+							$(".tran-button-buy font").text("等待买家下单");
+						} else {
+							if(seller_deliver == 1 && buyer_deliver == 0) {
+								$(".tran-button-buy font").text("催促买家发货");
+							} else if(buyer_deliver == 1 && seller_deliver == 1) {
+								$(".tran-button-buy font").text("确认收货");
+							} else {
+								$(".tran-button-buy font").text("确认发货");
+							}
+						}
+					}
+				} else if(status == 2) {
+					if(buyer_flag) {
+						if(trans_type != 0) {
+							$(".tran-button-buy font").text("订单生成");
+						} else {
+							if(buyer_deliver == 1 && seller_deliver == 0) {
+								$(".tran-button-buy font").text("催促卖家发货");
+							} else if(buyer_deliver == 1 && seller_deliver == 1) {
+								if(buyer_receipt == 0) {
+									$(".tran-button-buy font").text("确认收货");
+								} else if(buyer_receipt == 1 && seller_receipt == 0) {
+									$(".tran-button-buy font").text("催促卖家收货");
+								} else {
+									$(".tran-button-buy font").text("交易完成");
+								}
+							} else {
+								$(".tran-button-buy font").text("确认发货");
+							}
+						}
+					} else {
+						if(trans_type != 0) {
+							$(".tran-button-buy font").text("等待买家下单");
+						} else {
+							if(seller_deliver == 1 && buyer_deliver == 0) {
+								$(".tran-button-buy font").text("催促买家发货");
+							} else if(buyer_deliver == 1 && seller_deliver == 1) {
+								if(seller_receipt == 0) {
+									$(".tran-button-buy font").text("确认收货");
+								} else if(buyer_receipt == 1 && seller_receipt == 0) {
+									$(".tran-button-buy font").text("催促买家收货");
+								} else {
+									$(".tran-button-buy font").text("交易完成");
+								}
+							} else {
+								$(".tran-button-buy font").text("确认发货");
+							}
+						}
+					}
+				}
+			}
+
+			mui(".tran-button-buy").on('tap', 'div', function() {
+				var params = {
+					"transid": trans_id
+				};
+				//showRequestDetail();
+				var status = $("#trans_status").val();
+				var mode = $("#trans_mode").val();
+				var deliver = $("#trans_deliver").val();
+				var buyer_flag = $("#buyer_flag").val();
+				var buyer_deliver = $("#buyer_deliver").val();
+				var buyer_urge_r = $("#buyer_urge_r").val();
+				var buyer_urge_d = $("#buyer_urge_d").val();
+				var buyer_receipt = $("#buyer_receipt").val();
+				var seller_deliver = $("#seller_deliver").val();
+				var seller_urge_r = $("#seller_urge_r").val();
+				var seller_urge_d = $("#seller_urge_d").val();
+				var seller_receipt = $("#seller_receipt").val();
+				if(status == 0) {
+					trans_flow('transRequestOrder', params);
+				} else if(status == 1) {
+					trans_flow('transSubmitOrder', params);
+				} else if(status == 2) {
+					if(buyer_flag) {
+						if(buyer_deliver == 1 && seller_deliver == 0) {
+							trans_flow('transUrgeDelive', params);
+						} else if(buyer_deliver == 1 && seller_deliver == 1) {
+							if(buyer_receipt == 0) {
+								trans_flow('transOrderReceipt', params);
+							} else if(buyer_receipt == 1 && seller_receipt == 0) {
+								trans_flow('transUrgeReceipt', params);
+							} else {
+								gotoEvaluate(trans_id);
+							}
+						} else if(buyer_deliver == 0) {
+							trans_flow('transOrderLogustics', params);
+						}
+					} else {
+						if(buyer_deliver == 0 && seller_deliver == 1) {
+							trans_flow('transUrgeDelive', params);
+						} else if(buyer_deliver == 1 && seller_deliver == 1) {
+							if(seller_receipt == 0) {
+								trans_flow('transOrderReceipt', params);
+							} else if(buyer_receipt == 1 && seller_receipt == 0) {
+								trans_flow('transUrgeReceipt', params);
+							} else {
+								gotoEvaluate(trans_id);
+							}
+						} else if(buyer_deliver == 0) {
+							trans_flow('transOrderLogustics', params);
+						}
+					}
+				} else if(status == 3) {
+					gotoEvaluate(trans_id);
+				} else if(status == 7) {
+					gotoEvaluate(trans_id);
+				} else if(status == 8) {
+					gotoMain();
+				} else if(status == 9) {
+					gotoEvaluate(trans_id);
+				}
+			})
+
+			function trans_flow(flag, params) {
+				Repository.Transaction.trans(flag, params, {
 					ok: function(data) {
-						console.dir(data);
+						Log.i("message send successfully!");
+						var transinfo = data.data.transinfo;
+						var messginfo = data.data.messginfo;
+						var commdinfo = data.data.commdinfo;
+						var usersinfo = data.data.usersinfo;
+						var tranStatusVal = getTransStatus(transinfo.status);
+						alert(tranStatusVal);
+						$(".tran-name-middle-status font").html(tranStatusVal);
+						//showTranCommodMsg(usersinfo, commdinfo, messginfo);
+						var buyer_id = transinfo.issue_user_id;
+						var seller_id = transinfo.accept_user_id;
+						var cur_user_id = data.data.myid;
+						var trans_mode = transinfo[0].trans_mode;
+						var trans_status = transinfo[0].status;
+						var trans_deliver = transinfo[0].deliver;
+						setHidVal(transinfo, usersinfo, cur_user_id);
+						showRequestStaus(transinfo, buyer_flag, usersinfo);
+
 					},
 					ng: function(data) {
 						Log.i("message send faild!");
@@ -284,18 +717,81 @@
 				});
 			}
 
-			function stopTransaction() {
-				var btnArray = ['否', '是'];
-				mui.confirm('确认交易终止？', 'Hello MUI', btnArray, function(e) {
-					if (e.index == 1) {
-						return false;
-					} else {
-						
-					}
-				})
+			function change_price() {
+				var new_price = '';
 				var params = {
 					"transid": trans_id
 				};
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请输修改后的价格：', '', '改价', btnArray, function(e) {
+					if(e.index == 1) {
+						new_price = e.value;
+						params.price = new_price;
+						Repository.Transaction.transChangePrice(params, {
+							ok: function(data) {
+								Log.i("message send successfully!");
+								mui.alert('价格改变成功');
+								$(".change_price").hide();
+							},
+							ng: function(data) {
+								Log.i("message send faild!");
+								if(data == "1000") {
+									alert(TextMessage.test);
+								}
+								if(data == "2004") {
+									alert(TextMessage.operation_error);
+								}
+							}
+						});
+					} else {
+						info.innerText = '确认不变更？';
+					}
+				})
+			}
+
+			function gotoEvaluate(transid) {
+				mui.openWindow({
+					url: "./transevaluate.html?transid=" + trans_id,
+					id: "transevaluate",
+					extras: {
+						"transid": transid
+					}
+				})
+			}
+
+			function gotoMain() {
+				mui.plusReady(function() {
+					var requestView = plus.webview.getWebviewById('request');
+					plus.webview.close(requestView);
+					var requestlistView = plus.webview.getWebviewById('requestlist');
+					plus.webview.close(requestlistView);
+					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+					mui.back();
+					mui.fire(mainpage, 'refresh', {
+						refresh: "canRefresh"
+					});
+				});
+			}
+
+			function stopTransaction() {
+				var params = {
+					"transid": trans_id
+				};
+				var btnArray = ['否', '是'];
+				mui.confirm('确认交易终止？', 'kankan', btnArray, function(e) {
+					if(e.index == 1) {
+						mui.openWindow({
+							url: "./transevaluate.html?transid=" + trans_id,
+							id: "transevaluate",
+							extras: {
+								"transid": trans_id
+							}
+						})
+					} else {
+						alert("继续交易");
+					}
+				})
+
 				Repository.Transaction.transStop(params, {
 					ok: function(data) {
 						Log.i("message send successfully!");
@@ -310,6 +806,16 @@
 						}
 					}
 				});
+			}
+
+			function err_callback(data) {
+				Log.i("message send faild!");
+				if(data == "1000") {
+					alert(TextMessage.test);
+				}
+				if(data == "2004") {
+					alert(TextMessage.operation_error);
+				}
 			}
 		</script>
 	</body>

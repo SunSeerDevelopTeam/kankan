@@ -125,10 +125,13 @@
 					ok: function(data) {
 						Log.i("message send successfully!");
 						mui.plusReady(function() {
-							var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
-							alert(mainpage.getURL());
-							mui.fire(mainpage, 'gohome');
-						});
+								alert("aaaa");
+								var preView = plus.webview.getWebviewById('transaction');
+								plus.webview.close(preView);
+								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+								mui.back();
+								mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
+							});
 					},
 					ng: function(data) {
 						Log.i("message send faild!");
@@ -141,7 +144,6 @@
 						if(data == "2019") {
 							alert("不能重复评论");
 							mui.plusReady(function() {
-								alert("aaaa");
 								var preView = plus.webview.getWebviewById('transaction');
 								plus.webview.close(preView);
 								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
