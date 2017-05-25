@@ -60,7 +60,12 @@
 		window.addEventListener("updateUserImgEvent", function(event){
 			$('#user img').attr('src', event.detail.userImgURL);
 		});
-		
+		mui("header").on("tap","#offCanvasShow",function(){
+			mui.openWindow({
+					id: 'news',
+					url: 'news.html',
+				});
+		});
 		(function(mui, doc) {
 			mui.init({
 				gestureConfig: {

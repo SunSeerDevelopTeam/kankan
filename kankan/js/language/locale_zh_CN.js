@@ -141,7 +141,9 @@ var JSLocale = {
 	"upimgtext":"上传图片",
 	"nametext":"姓名",
 	"contenttext":"申诉内容",
-	"suretext":"确 认"
+	"suretext":"确 认",
+	"writeemail":"完善邮箱",
+	"emailwtext":"请完善邮箱信息"
 }
 
 $(function() {

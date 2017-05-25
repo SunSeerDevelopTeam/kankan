@@ -141,7 +141,9 @@ var JSLocale = {
 	"upimgtext":"画像をアップロード",
 	"nametext":"姓名",
 	"contenttext":"お問い合わせ内容",
-	"suretext":"確    認"
+	"suretext":"確    認",
+	"writeemail":"郵便箱",
+	"emailwtext":"どうぞ完全メールアドレス情報"
 	
 }
 

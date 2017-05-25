@@ -1,5 +1,5 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
-var DEBUG = true;
+var DEBUG = false;
 var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
@@ -491,7 +491,12 @@ var Api;
 			userupimage: baseUrl() + '/user/Usercomplaint/uploadImg/',
 			Usercomplaint: baseUrl() + '/user/Usercomplaint/',
 			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/',
-			setImg: baseUrl() + '/user/setting/setImg/'
+			setImg: baseUrl() + '/user/setting/setImg/',
+			email_rgister_check: baseUrl() + '/user/Setemail/',
+			set_message: baseUrl() + '/user/usersystemmsg/set_message/',
+			del_message: baseUrl() + '/user/usersystemmsg/del_message/',
+			get_message: baseUrl() + '/user/usersystemmsg/get_message/'
+			
 		},
 		Commodity: {
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
@@ -757,6 +762,26 @@ var Repository;
 			return Api.call(Api.url.User.addComplaint, params, callback);
 		}
 		User.addComplaint = addComplaint;
+		
+		function email_rgister_check(params, callback) {
+			return Api.call(Api.url.User.email_rgister_check, params, callback);
+		}
+		User.email_rgister_check = email_rgister_check;
+		
+		function set_message(params, callback) {
+			return Api.call(Api.url.User.set_message, params, callback);
+		}
+		User.set_message = set_message;
+		
+		function del_message(params, callback) {
+			return Api.call(Api.url.User.del_message, params, callback);
+		}
+		User.del_message = del_message;
+		
+		function get_message(params, callback) {
+			return Api.call(Api.url.User.get_message, params, callback);
+		}
+		User.get_message = get_message;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -1037,6 +1062,10 @@ var TextMessage;
 	TextMessage.ticketng = language ? "チケット数が不足" : "Ticket数量不足";
 	TextMessage.yes = language ? "はい" : "好的";
 	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请补充邮箱信息";
+	TextMessage.updatemailng = language ? "失敗を更新、未知のエラー！" : "更新失败,未知错误!";
+	TextMessage.emailnull = language ? "メールボックスは空っぽにならない!" : "邮箱不能为空！";
+	TextMessage.codenull = language ? "検証コードは空っぽにならない!" : "验证码不能为空！";
+	
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
