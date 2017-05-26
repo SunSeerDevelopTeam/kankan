@@ -638,6 +638,139 @@ var Api;
 	}
 	Api.setToken = setToken;
 	
+	function callback_ng(data){
+		if(Validator.isObj(data)) {
+			for(var i in data) {
+				//var property = data.result.statuscode[i];
+				//description += i + " = " + property + "\n";
+			}
+		} else {
+			switch(data) {
+				case '1000':
+					alert('请登录APP');
+					break;
+				case '1001':
+					alert(TextMessage.test);
+					break;				
+				case '1002':
+					alert(TextMessage.test);
+					break;				
+				case '1003':
+					alert(TextMessage.test);
+					break;				
+				case '1004':
+					alert(TextMessage.test);
+					break;				
+				case '1005':
+					alert(TextMessage.test);
+					break;				
+				case '1006':
+					alert(TextMessage.test);
+					break;				
+				case '1007':
+					alert(TextMessage.test);
+					break;
+				case '0001':
+					alert(TextMessage.operation_error);
+					break;
+				case '0100':
+					alert(TextMessage.operation_error);
+					break;					
+				case '2001':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2002':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2003':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2004':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2005':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2006':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2007':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2008':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2009':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2011':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2012':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2013':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2014':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2015':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2016':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2017':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2018':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2019':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2020':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2021':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3001':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3003':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3004':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3005':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3006':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3008':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3009':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3010':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3011':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3020':
+					alert(TextMessage.operation_error);
+					break;
+			}
+		}
+	}
+	Api.callback_ng = callback_ng;
+	
 	function getApiUrl(flag){
 		var apiUrl = '';
 		switch(flag){
