@@ -1194,11 +1194,14 @@ var TextMessage;
 	TextMessage.noopen = language ? "開通していない、お楽しみに" : "暂未开通，敬请期待";
 	TextMessage.ticketng = language ? "チケット数が不足" : "Ticket数量不足";
 	TextMessage.yes = language ? "はい" : "好的";
-	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请补充邮箱信息";
+	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请完善邮箱信息";
 	TextMessage.updatemailng = language ? "失敗を更新、未知のエラー！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールボックスは空っぽにならない!" : "邮箱不能为空！";
 	TextMessage.codenull = language ? "検証コードは空っぽにならない!" : "验证码不能为空！";
-	
+	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
+	TextMessage.loading = language ? "ローディング…" : "正在加载...";
+	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
+	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
