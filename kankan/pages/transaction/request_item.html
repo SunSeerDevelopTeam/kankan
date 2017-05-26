@@ -44,10 +44,8 @@
 			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
 				</button>
-			<h1 class="mui-center mui-title user-title-center maintitle">商品リスト</h1>
-			<span class="mui-right mui-pull-right">
-					<font class="mui-icon goods-list-btn maintitle user-title-center" onclick="select_goods();" style="font-size:15px">確定</font>
-				</span>
+			<h1 class="mui-center mui-title user-title-center maintitle"></h1>
+			
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
@@ -86,7 +84,7 @@
 
 			function showRequestItem() {
 				var params = {
-					"transid": trans_id
+					"transid": transid
 				};
 				Repository.Transaction.transEdite(params, {
 					ok: function(data) {
@@ -148,6 +146,46 @@
 					});
 				}, 300);
 			})
+			function select_goods() {
+				var choice = '';
+				$("input[name='commodity_id']:checked").each(function() {
+					choice += $(this).val() + ',';
+				})
+				choice = choice.substr(0, choice.length - 1);
+				//alert(comm_id);
+				var params = {
+					'transid':trans_id,
+					'choice': choice
+				}
+				params.choice = choice;
+				alert(choice  + "====" + choice);
+				Repository.Transaction.transCommdChange(params, {
+					ok: function(data) {
+						var trans_id = data.data.transinfo[0].trans_id;
+							mui.openWindow({
+								url: "./transaction2.html?transid=" + trans_id,
+								id: "transaction",
+								extras: {
+									"transid": trans_id
+								}
+							})
+					},
+					ng: function(data) {
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+						if(data == "2004") {
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+					}
+				});
+			}
 		</script>
 	</body>
 
