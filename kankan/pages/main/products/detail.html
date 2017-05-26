@@ -10,6 +10,22 @@
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<style>
+			.Arrow {
+				font-size: 4em;
+				/*margin-top: 30%;*/
+				color: #B6B6B6;
+				filter: alpha(Opacity=80);
+				-moz-opacity: 0.6;
+				opacity: 0.6;
+				position: absolute;
+				top:160px; left:0; z-index:2;
+			}
+			#slider{
+				position: relative;z-index:1;
+			}
+			
+		</style>
 	</head>
 
 	<body>
@@ -19,20 +35,22 @@
 		</header>
 		<div id="loading" class="mui-content ka_userbox">
 			<div class="spinner">
-			  <div class="double-bounce1"></div>
-			  <div class="double-bounce2"></div>
+				<div class="double-bounce1"></div>
+				<div class="double-bounce2"></div>
 			</div>
 		</div>
 		<div class="mui-content" style="display: none;">
+			<div class="mui-icon mui-icon-back mui-pull-left Arrow" id="leftarrow"></div>
+			<div class="mui-icon mui-icon-forward mui-pull-left Arrow" style="margin-left: 80%;" id="rightarrow"></div>
 			<div id="slider" class="mui-slider">
 				<div class="mui-slider-group mui-slider-loop">
 					<!-- last -->
-					<div class="mui-slider-item mui-slider-item-duplicate firstimage">
-						<img src="" style="max-height: 239px;" onerror="this.src='../../../images/nopic.jpg'">
+					<div class="mui-slider-item mui-slider-item-duplicate firstimage" align="center" style="width: 100%;overflow: hidden;">
+						<img src="" onerror="this.src='../../../images/nopic.jpg'">
 					</div>
 					<!-- first -->
-					<div class="mui-slider-item mui-slider-item-duplicate lastimage">
-						<img src="" style="max-height: 239px;" onerror="this.src='../../../images/nopic.jpg'">
+					<div class="mui-slider-item mui-slider-item-duplicate lastimage" align="center" style="width: 100%;overflow: hidden;">
+						<img src="" onerror="this.src='../../../images/nopic.jpg'">
 					</div>
 				</div>
 				<div class="mui-slider-indicator">
@@ -112,54 +130,54 @@
 			</li>
 			</ul>
 			<!--Produce goods of concern-->
-		<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
-		<div class="mui-slider">
-			<div class="mui-slider-group mui-slider-loop">
-				<!--last-->
-				<div class="mui-slider-item mui-slider-item-duplicate" id="lastconcenered">
-					<ul class="mui-table-view mui-grid-view" id="lastconcerul">
+			<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
+			<div class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!--last-->
+					<div class="mui-slider-item mui-slider-item-duplicate" id="lastconcenered">
+						<ul class="mui-table-view mui-grid-view" id="lastconcerul">
 
-					</ul>
-				</div>
-				<!--first-->
-				<div class="mui-slider-item mui-slider-item-duplicate">
-					<ul class="mui-table-view mui-grid-view" id="firstconcerul">
-					</ul>
+						</ul>
+					</div>
+					<!--first-->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<ul class="mui-table-view mui-grid-view" id="firstconcerul">
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-		<!--Recommended products-->
-		<h5 class="ka_h5backcolor lang" data-locale="det_recommends"></h5>
-		<div class="mui-slider">
-			<div class="mui-slider-group mui-slider-loop">
-				<!--last-->
-				<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
-					<ul class="mui-table-view mui-grid-view" id="lastremmondul">
-					</ul>
-				</div>
-				<!--first-->
-				<div class="mui-slider-item mui-slider-item-duplicate">
-					<ul class="mui-table-view mui-grid-view" id="firstremmondul">
-					</ul>
+			<!--Recommended products-->
+			<h5 class="ka_h5backcolor lang" data-locale="det_recommends"></h5>
+			<div class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!--last-->
+					<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
+						<ul class="mui-table-view mui-grid-view" id="lastremmondul">
+						</ul>
+					</div>
+					<!--first-->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<ul class="mui-table-view mui-grid-view" id="firstremmondul">
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<!--Commodity exchange, white send, point exchange information button-->
-		<div class="ka_buyway">
-			<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
+			<!--Commodity exchange, white send, point exchange information button-->
+			<div class="ka_buyway">
+				<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
 			<b><span class="lang" data-locale="det_pointexch"></span>(<span class="comdprice"></span>)</b>
 		</button>
-			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;"></a>
+				<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;"></a>
 			<span class="lang" data-locale="det_exchange"><b></b></span>
 		</button>
-			<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;"></a>
+					<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;"></a>
 			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
+			</div>
+			<input type="hidden" name="userid" id="userid" value="" />
 		</div>
-		<input type="hidden" name="userid" id="userid" value="" />
-	</div>
-		
+
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
@@ -167,7 +185,7 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			var commodity_id;
-			mui.init({			    
+			mui.init({
 				swipeBack: false,
 				preloadPages: [{
 						id: 'pro_commentslist.html',
@@ -180,11 +198,12 @@
 					{
 						id: 'detail.html',
 						url: 'detail.html'
-					}/*,
-					{
-						id:'../../transaction/transaction2.html',
-						url:'../../transaction/transaction2.html'
-					}*/
+					}
+					/*,
+										{
+											id:'../../transaction/transaction2.html',
+											url:'../../transaction/transaction2.html'
+										}*/
 				]
 			});
 			window.addEventListener('cid', function(event) {
@@ -267,9 +286,9 @@
 				});
 			}
 			//share end***********/
-			function emptyhtml(){
+			function emptyhtml() {
 				$(".mui-slider-indicator").empty();
-				$(".firstimage img").attr("src","");
+				$(".firstimage img").attr("src", "");
 				$(".lastimage img").attr("src", "");
 				$(".sliderimg").remove();
 				$("#lastremmondul").empty();
@@ -279,6 +298,7 @@
 				$(".mui-title").empty();
 				$("#userid").val("");
 			}
+
 			function getinfo(pid) {
 				emptyhtml();
 				var params = {
@@ -292,14 +312,15 @@
 					},
 					ng: function(data) {
 						Log.d(data);
-						if(data=="2001"){
+						if(data == "2001") {
 							$("#loading").show();
 							$(".mui-content").hide();
 						}
 					}
 				});
 			}
-			function clickprocomment(){
+
+			function clickprocomment() {
 				//commodity comments list
 				var comdcommentpage = null;
 				mui('.kankan_det_comment').on('tap', 'a', function(e) {
@@ -330,22 +351,32 @@
 				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
 				var imgsarr = commodity.commodity_imgs;
 				var htmlimg = "";
-				var htmlfocus="";
+				var htmlfocus = "";
+				var imglength = imgsarr.length;
+				var la = imgsarr.length - 1 * 1;
+				var first = '<img src="' + imgsarr[0] + '"  style="height: 320px; width: auto;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				var last = '<img src="' + imgsarr[la] + '"  style="height: 320px; width: auto;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				$(".firstimage").html(last);
+				$(".lastimage").html(first);
+				if(imglength>1){
+					$("#leftarrow").show();
+					$("#rightarrow").show();
+				}else{
+					$("#leftarrow").hide();
+					$("#rightarrow").hide();
+				}
 				for(i = 0; i < imgsarr.length; i++) {
-					var la = imgsarr.length - 1 * 1;
-					var imgurl=imgsarr[i];
-					if(imgsarr[i]==""){
-						imgurl="../../../images/nopic.jpg";
+					var imgurl = imgsarr[i];
+					if(imgsarr[i] == "") {
+						imgurl = "../../../images/nopic.jpg";
 					}
-					$(".firstimage img").attr("src", imgsarr[0]);
-					$(".lastimage img").attr("src", imgsarr[la]);
-					htmlimg += '<div class="mui-slider-item sliderimg">';
-					htmlimg += '<img src="' + imgurl + '" style="max-height: 239px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+					htmlimg += '<div class="mui-slider-item sliderimg" align="center" style="width: 100%;overflow: hidden;">';
+					htmlimg += '<img src="' + imgurl + '" style="height: 320px; width: auto;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					htmlimg += '</div>';
-					if(i==0){
-						var htmlfocus='<div class="mui-indicator mui-active"></div>';
-					}else{
-						var htmlfocus='<div class="mui-indicator"></div>';
+					if(i == 0) {
+						var htmlfocus = '<div class="mui-indicator mui-active"></div>';
+					} else {
+						var htmlfocus = '<div class="mui-indicator"></div>';
 					}
 					$(".mui-slider-indicator").append(htmlfocus);
 				}
@@ -408,7 +439,7 @@
 				var recomdlenght = recomendsarrs.length;
 				var recomendsobj = {};
 				var recomendaddhtml = ""; //add dom
-				var recomendaddfirsthtml="";
+				var recomendaddfirsthtml = "";
 				var c = 0;
 				for(var j = 0; j < recomdlenght; j++) {
 					var k = j + 1 * 1;
@@ -419,7 +450,7 @@
 					var advflag = recomendsobj.is_ad;
 					recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 					recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-					recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+					recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					recomendhtml += '</a></li>';
 					var vall = k % 4;
 					if(vall == 0 || j == recomdlenght - 1) {
@@ -429,18 +460,18 @@
 						recomendhtml += '<div class="mui-slider-item sliderimg">';
 						recomendhtml += '<ul class="mui-table-view mui-grid-view">';
 					}
-					
+
 					if(j < 4) {
 						recomendaddfirsthtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddfirsthtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						recomendaddfirsthtml += '</a></li>';
 						$("#firstremmondul").html(recomendaddfirsthtml);
 					}
 					if(j > recomdlenght - 4) {
 						recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						recomendaddhtml += '</a></li>';
 						$("#lastremmondul").html(recomendaddhtml);
 					}
@@ -456,7 +487,7 @@
 				var concernlenght = concernarrs.length;
 				var concernsobj = {};
 				var concernaddhtml = ""; //add dom
-				var concernlastaddhtml="";
+				var concernlastaddhtml = "";
 				for(var l = 0; l < concernlenght; l++) {
 					var m = l + 1 * 1;
 					var concernobj1 = JSON.stringify(concernarrs[l]);
@@ -465,7 +496,7 @@
 					var concernid = concernsobj.commodity_id;
 					concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 					concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-					concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+					concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					concernhtml += '</a></li>';
 					var vallm = m % 4;
 					if(vallm == 0 || l == concernlenght - 1) {
@@ -478,14 +509,14 @@
 					if(l < 4) {
 						concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}
 					if(l > concernlenght - 4) {
 						concernlastaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernlastaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernlastaddhtml += '</a></li>';
 						$("#lastconcerul").html(concernlastaddhtml);
 					}
@@ -508,7 +539,7 @@
 					$("#zanqian").hide();
 					$("#zanhou").show();
 				}
-				
+
 				//detail page
 				var detailPage = null;
 				mui('.detail').on('tap', 'a', function(e) {
@@ -528,13 +559,14 @@
 				//Carousel figure
 				var slider = mui("#slider");
 				slider.slider({
-					interval: 1000
+					interval: 0,
+					gotoItem: 0
 				});
 			}
 			//products list
 			var prolistpage = null;
 			mui('.productlist').on('tap', 'a', function(e) {
-				var uid=$("#userid").val();
+				var uid = $("#userid").val();
 				if(!prolistpage) {
 					prolistpage = plus.webview.getWebviewById('productslist.html');
 				}
@@ -567,13 +599,23 @@
 							});
 							mui.openWindow({
 								id: 'login',
-								url:"../../login/login.html"
+								url: "../../login/login.html"
 							});
 						}
 						if(data == "2004") {
 							mui.toast(TextMessage.operation_error, {
 								duration: 'long',
 								type: 'div'
+							});
+						}
+						if(data == "3020") {
+							mui.toast(TextMessage.input_email, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'emai_summate',
+								url: "../../login/emai_summate.html"
 							});
 						}
 					}
@@ -596,19 +638,19 @@
 					document.getElementById("zanshu").innerHTML = gooafter;
 				}
 			}
-			
+
 			//
-			
-			function transRequest(params){
+
+			function transRequest(params) {
 				Repository.Transaction.transRequest(params, {
 					ok: function(data) {
 						var trans_id = data.data.transinfo[0].trans_id;
 						//alert(trans_id);
 						mui.openWindow({
-							url:"../../transaction/transaction2.html?transid=" + trans_id,
-							id:"transaction",
-							extras:{
-								"transid":trans_id
+							url: "../../transaction/transaction2.html?transid=" + trans_id,
+							id: "transaction",
+							extras: {
+								"transid": trans_id
 							}
 						})
 					},
@@ -628,29 +670,29 @@
 					}
 				});
 			}
-			mui(".ka_buyway").on('tap','.mui-btn',function(){
+			mui(".ka_buyway").on('tap', '.mui-btn', function() {
 				var change_name = $(this).attr("id");
 				var mode;
 				var codid = $(".kankan_zanbox").attr("id");
 				var params = {
 					"commodity_id": codid
 				};
-				if(change_name == 'switchp'){
+				if(change_name == 'switchp') {
 					mode = 'business';
 					params.mode = mode;
 					transRequest(params);
-				}else if(change_name == 'switchex'){
+				} else if(change_name == 'switchex') {
 					mode = 'exchange';
 					params.mode = mode;
 					mui.openWindow({
-							url: "../../transaction/select_item.html",
-							id: "selectitem",
-							extras:{
-								"commodity_id":codid,
-								"mode":mode
-							}
-						})
-				}else{
+						url: "../../transaction/select_item.html",
+						id: "selectitem",
+						extras: {
+							"commodity_id": codid,
+							"mode": mode
+						}
+					})
+				} else {
 					mode = 'gratis';
 					params.mode = mode;
 					transRequest(params);
