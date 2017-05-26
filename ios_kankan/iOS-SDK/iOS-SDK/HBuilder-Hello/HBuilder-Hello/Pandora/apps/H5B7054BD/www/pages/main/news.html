@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>news</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
+		<style>
+			.message{
+				text-align: left;padding:10px 28px 10px 15px;width: 100%;word-wrap: break-word;
+				font-size: 14px;
+			}
+			.newsbox{
+				float:right;margin-right: -28px;
+			}
+			.lines{
+				border: 0.06em #cccccc solid;
+			}
+			.newsb{
+				background-color: #FFFFFF; 
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">站内信一览</h1>
+		</header>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+  			<div class="mui-scroll">
+  				<div class="messagelist">
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../js/language.js"></script>
+		<script src="../../js/sha256.js"></script>
+		<script src="../../js/common.js"></script>
+		<script type="text/javascript">
+			var count = 0;
+			var page="";
+			var max=10;
+			 mui.init({
+			    pullRefresh: 
+			    {
+			      container: '#pullrefresh',
+			      down: {
+			        callback: pullupRefresh
+			      },
+			      up: {
+			        contentrefresh: '正在加载...',
+			        callback: pullupRefresh
+			      }
+			    }
+		  });      
+			//show message
+			function showmessage(results){
+				var messarr=results.data.message;
+				page=results.data.page.page;
+				count=results.data.page.cnt;
+				max=results.data.page.max;
+				var num=page*max;
+				var htmls='';
+				for(var j=0; j<messarr.length;j++){
+					var mess=messarr[j].message;
+				      mui('#pullrefresh').pullRefresh().endPullupToRefresh((num >= count)); //参数为true代表没有更多数据了。
+				      var table = document.body.querySelector('.messagelist');
+				      var cells = document.body.querySelectorAll('.newsb');
+			        var div = document.createElement('div');
+			        div.className = 'newsb';
+			        div.innerHTML = '<div class="message">'+mess+'<div class="newsbox"> <img src="../../images/clear.png"  width="25" height="25"/></div></div><div class="lines"></div>';
+			        table.appendChild(div);
+				}
+				page=page+1;
+				click();
+			}
+		  //load
+		  function pullupRefresh() 
+		  {
+		  	getmessage(page);
+		//get message
+		function getmessage(page){
+		  	mui.plusReady(function() {
+			  	var params2={};
+				if(max!=null){
+					params2.max=max;
+				}
+				if(page!=null){
+					params2.page=page;
+				}
+				Repository.User.get_message(params2, {
+					ok: function(data) {
+						console.log(data);
+						showmessage(data);
+					},
+					ng: function(data) {
+						console.log(data);
+						switch(data) {
+							case "1000":
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
+								default:
+							mui.toast(TextMessage.updatemailng, {
+								duration: 'long',
+								type: 'div'
+							})
+								break;
+						}
+					},
+				});
+			});
+		}
+			
+//		    setTimeout(function() {
+//		      mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+//		      var table = document.body.querySelector('.messagelist');
+//		      var cells = document.body.querySelectorAll('.newsb');
+//		      
+//		      for (var i = cells.length, len = i + 5; i < len; i++) {
+//		        var div = document.createElement('div');
+//		        div.className = 'newsb';
+//		        div.innerHTML = '<div class="message">你有新的短消息，请查看请查看请查看请查看查看<div class="newsbox"> <img src="../../images/clear.png"  width="25" height="25"/></div></div><div class="lines"></div>';
+//		        table.appendChild(div);
+//		      }
+//		      
+//		    }, 1500);
+		  }    
+		 if (mui.os.plus) {
+		    mui.plusReady(function() {
+		      setTimeout(function() {
+		        mui('#pullrefresh').pullRefresh().pullupLoading();
+		      }, 1000);
+		
+		    });
+		 } else { 
+		    mui.ready(function() {
+		      mui('#pullrefresh').pullRefresh().pullupLoading();
+		    });
+		 }
+		 //click delt
+		 function click(){
+		 	mui(".newsb").on("tap",".newsbox",function() {
+		 		alert("sss");
+			});
+		 }
+		
+		//update message staute
+	mui.plusReady(function(){
+		var params={};
+		Repository.User.set_message(params, {
+			ok: function(data) {
+				console.log(data);
+			},
+			ng: function(data) {
+				console.log(data);
+				switch(data) {
+					case "1000":
+						mui.toast(TextMessage.test, {
+							duration: 'long',
+							type: 'div'
+						})
+						break;
+						default:
+					mui.toast(TextMessage.updatemailng, {
+						duration: 'long',
+						type: 'div'
+					})
+						break;
+				}
+			},
+		});
+		//getmessage("1");
+		
+		
+		
+		
+	});
+		</script>
+	</body>
+
+</html>

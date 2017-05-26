@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>transevaluate</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
+		<link rel="stylesheet" href="../../css/wu.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">交易完了</h1>
+		</header>
+		<div class="mui-pages">
+			<!--main content start-->
+			<form name="transevaluate" id="transevaluate">
+				<div class="mui-page-content">
+					<div class="mui-scroll-wrapper">
+						<div class="tran-page">
+							<div style="font-size:1.2rem;;background:#F3F3F3;height:45px;width:100%;padding:15px 5px;">
+								<span>評価</span>
+							</div>
+							<ul class="mui-table-view" style="margin-top:0px;">
+								<li class="head-img-box">
+									<ul class="user-comment-list">
+										<li class="user-comment-grid">
+											<img height="30%" width="30%" src="../../images/Good.PNG" />
+										</li>
+										<li class="user-comment-grid2">
+											<img height="30%" width="30%" src="../../images/Normal.PNG" />
+										</li>
+										<li class="user-comment-grid2">
+											<img height="30%" width="30%" src="../../images/Bad.PNG" />
+										</li>
+									</ul>
+									<ul class="user-comment-list">
+										<li class="user-comment-grid">
+											好评
+										</li>
+										<li class="user-comment-grid2">
+											中评
+										</li>
+										<li class="user-comment-grid2">
+											差评
+										</li>
+									</ul>
+									<ul class="user-comment-list ">
+										<li class="user-comment-grid">
+											<input name="evalueate" value="0" type="radio">
+										</li>
+										<li class="user-comment-grid2">
+											<input name="evalueate" value="1" type="radio">
+										</li>
+										<li class="user-comment-grid2">
+											<input name="evalueate" value="2" type="radio">
+										</li>
+									</ul>
+								</li>
+								<li style="padding:5px;">評価のコメントを記入しましょう</li>
+								<li>
+									<div class="mui-input-row" style="margin: 10px 5px;">
+										<textarea name="evaluate_msg" style="background:#eee;" id="evaluate_msg" rows="5" placeholder="このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに交易確認画面で伝えましょう。"></textarea>
+										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined">評価する</button>
+									</div>
+								</li>
+							</ul>
+							<!--<div style="margin-top:-10px;background:#F3F3F3;height:45px;width:100%;padding:15px 5px;">
+							<span>社会貢献 </span>
+						</div>
+						<ul  class="mui-table-view" style="margin:-4px;padding:15px 5px;">
+							<li style="margin:5px;">
+								<input name="checkbox" value="Item 1" type="checkbox">
+								<span>会社貢献金を○○○○寄付する</span>	
+							</li>
+							<li style="font-size:10px;color:red;margin:5px;">
+								<span>＊社会貢献金とは交易金ではなく、交易手続き金中での1%を○○○○に寄付することです。ご安心ください</span>	
+							</li>
+						</ul>-->
+							<div style="text-align:center;margin-top:-5px;background:#F3F3F3;height:40px;width:100%;padding-top:20px;">
+								<a href="../main/main.html" style="background:#6ACB9A;"><span>ホームに戻る</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				beforeback: function() {
+					//var list = plus.webview.getWebviewById('pullrefresh_with_tab');
+					var list = plus.webview.currentWebview().opener();
+					mui.fire(list, 'refresh', {
+						refresh: "canRefresh"
+					});
+					return true;
+				}
+			});
+			var trans_id;
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				trans_id = self.transid;
+			});
+
+			function evaluate_submit() {
+				var evaluate_flg = $("input[name='evalueate']:checked").val();
+				var evaluate_msg = $("#evaluate_msg").val();
+				var params = {
+					"transid": trans_id,
+					"message": evaluate_msg,
+					"flag": evaluate_flg
+				};
+				Repository.Transaction.transOrderEvaluate(params, {
+					ok: function(data) {
+						Log.i("message send successfully!");
+						mui.plusReady(function() {
+								alert("aaaa");
+								var preView = plus.webview.getWebviewById('transaction');
+								plus.webview.close(preView);
+								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+								mui.back();
+								mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
+							});
+					},
+					ng: function(data) {
+						Log.i("message send faild!");
+						if(data == "1000") {
+							alert(TextMessage.test);
+						}
+						if(data == "2004") {
+							alert(TextMessage.operation_error);
+						}
+						if(data == "2019") {
+							alert("不能重复评论");
+							mui.plusReady(function() {
+								var preView = plus.webview.getWebviewById('transaction');
+								plus.webview.close(preView);
+								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+								mui.back();
+								mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
+							});
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

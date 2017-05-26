@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/icons-extra.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			a#user img {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				margin-top: -0.2em;
+			}
+			
+			header a.mui-icon-extra-notice {
+				margin-top: 0.5em;
+				margin-right: 0.25em;
+			}
+			
+			header a.mui-icon-search {
+				width: 60px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-pull-left" id="user">
+				<img src="../../images/default.jpg"/>
+			</a>
+			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
+			<a class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../js/language.js"></script>
+	<script src="../../js/common.js"></script>
+	<script type="text/javascript" charset="UTF-8">
+		
+		window.addEventListener("updateUserImgEvent", function(event){
+			$('#user img').attr('src', event.detail.userImgURL);
+		});
+		mui("header").on("tap","#offCanvasShow",function(){
+			mui.openWindow({
+					id: 'news',
+					url: 'news.html',
+				});
+		});
+		(function(mui, doc) {
+			mui.init({
+				gestureConfig: {
+					doubletap: true
+				},
+				preloadPages: [{
+					id: 'search',
+					url: 'search.html',
+					show: {
+						aniShow: 'slide-in-bottom',
+						duration: 200
+					},
+					waiting: {
+						autoShow: false
+					}
+				}],
+				preloadLimit: 3,
+				subpages: [{
+					url: 'pullrefresh_with_tab.html',
+					id: 'pullrefresh_with_tab',
+					styles: {
+						top: '45px',
+						bottom: '0px'
+					}
+				}]
+			});
+
+			var searchBtn = $('.mui-icon-search').first();
+			searchBtn.click(function() {
+				mui.openWindow({
+					id: 'search',
+					url: 'search.html',
+					show: {
+						aniShow: 'slide-in-bottom',
+						duration: 200
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			});
+			network = false;
+			mui.plusReady(function() {
+				Log.i("home.html plusReady...");
+
+				if(plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_NONE) {
+					network = true;
+				}
+
+				var userPhoto = document.getElementById("user");
+				userPhoto.addEventListener('click', function(event) {
+					console.log("userPhoto clicked.");
+					if(!network) {
+						console.log(TextMessage.not_network);
+						mui.toast(TextMessage.not_network);
+					}
+					var isLogin = plus.storage.getItem("LoginFlag");
+					if(isLogin == "isLogin") {
+						mui.openWindow({
+							id:"user",
+							url:"user/user.html",
+							waiting: {
+								autoShow:false
+							}
+						});
+					} else {
+						mui.fire(plus.webview.getWebviewById('pullrefresh_with_tab'), 'showMenu', {});
+					}
+				});
+			});
+		})(mui, document);
+	</script>
+
+</html>
