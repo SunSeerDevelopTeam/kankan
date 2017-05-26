@@ -1,5 +1,5 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
-var DEBUG = true;
+var DEBUG = false;
 var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
@@ -491,7 +491,12 @@ var Api;
 			userupimage: baseUrl() + '/user/Usercomplaint/uploadImg/',
 			Usercomplaint: baseUrl() + '/user/Usercomplaint/',
 			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/',
-			setImg: baseUrl() + '/user/setting/setImg/'
+			setImg: baseUrl() + '/user/setting/setImg/',
+			email_rgister_check: baseUrl() + '/user/Setemail/',
+			set_message: baseUrl() + '/user/usersystemmsg/set_message/',
+			del_message: baseUrl() + '/user/usersystemmsg/del_message/',
+			get_message: baseUrl() + '/user/usersystemmsg/get_message/'
+			
 		},
 		Commodity: {
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
@@ -632,6 +637,195 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
+	
+	function callback_ng(data){
+		if(Validator.isObj(data)) {
+			for(var i in data) {
+				//var property = data.result.statuscode[i];
+				//description += i + " = " + property + "\n";
+			}
+		} else {
+			switch(data) {
+				case '1000':
+					alert('请登录APP');
+					break;
+				case '1001':
+					alert(TextMessage.test);
+					break;				
+				case '1002':
+					alert(TextMessage.test);
+					break;				
+				case '1003':
+					alert(TextMessage.test);
+					break;				
+				case '1004':
+					alert(TextMessage.test);
+					break;				
+				case '1005':
+					alert(TextMessage.test);
+					break;				
+				case '1006':
+					alert(TextMessage.test);
+					break;				
+				case '1007':
+					alert(TextMessage.test);
+					break;
+				case '0001':
+					alert(TextMessage.operation_error);
+					break;
+				case '0100':
+					alert(TextMessage.operation_error);
+					break;					
+				case '2001':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2002':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2003':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2004':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2005':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2006':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2007':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2008':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2009':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2011':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2012':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2013':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2014':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2015':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2016':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2017':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2018':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2019':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2020':
+					alert(TextMessage.operation_error);
+					break;				
+				case '2021':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3001':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3003':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3004':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3005':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3006':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3008':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3009':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3010':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3011':
+					alert(TextMessage.operation_error);
+					break;				
+				case '3020':
+					alert(TextMessage.operation_error);
+					break;
+			}
+		}
+	}
+	Api.callback_ng = callback_ng;
+	
+	function getApiUrl(flag){
+		var apiUrl = '';
+		switch(flag){
+			case 'transConversation':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/';
+				break;
+			case 'transConversation': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/'; //请求/订单对话API:
+				break;
+			case 'transCommdChange': 
+				apiUrl = baseUrl() + '/transaction/transcommdchange/'; //提交请求商品变更API:
+				break;
+			case 'transShowRequest': 
+				apiUrl = baseUrl() + '/transaction/transrequest/show_request_detail/'; //显示当前交易请求/订单API
+				break;
+			case 'transGetUserCommd': 
+				apiUrl = baseUrl() + '/transaction/transpublic/get_user_commodity/';
+				break;
+			case 'transRequest': 
+				apiUrl = baseUrl() + '/transaction/transrequest/';
+				break;
+			case 'transOrderEvaluate': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_evaluate/';
+				break;
+			case 'transOrderReceipt': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_receipt/';
+				break;
+			case 'transOrderLogustics': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_logistics/';
+				break;
+			case 'transSubmitOrder': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_submit_order/';
+				break;
+			case 'transRequestOrder': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_request_order/';
+				break;
+			case 'transChangePrice': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_change_price/';
+				break;
+			case 'transStop': 
+				apiUrl = baseUrl() + '/transaction/transoperation/transaction_stop/';
+				break;
+			case 'transEdite': 
+				apiUrl = baseUrl() + '/transaction/transoperation/transaction_show/';
+				break;
+			case 'transUrgeDelive': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_deliver/';
+				break;
+			case 'transUrgeReceipt': 
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_receipt/';
+				break;
+		}
+		return apiUrl;
+	}
+	Api.getApiUrl = getApiUrl;
 })(Api || (Api = {}));
 var Repository;
 (function(Repository) {
@@ -701,6 +895,26 @@ var Repository;
 			return Api.call(Api.url.User.addComplaint, params, callback);
 		}
 		User.addComplaint = addComplaint;
+		
+		function email_rgister_check(params, callback) {
+			return Api.call(Api.url.User.email_rgister_check, params, callback);
+		}
+		User.email_rgister_check = email_rgister_check;
+		
+		function set_message(params, callback) {
+			return Api.call(Api.url.User.set_message, params, callback);
+		}
+		User.set_message = set_message;
+		
+		function del_message(params, callback) {
+			return Api.call(Api.url.User.del_message, params, callback);
+		}
+		User.del_message = del_message;
+		
+		function get_message(params, callback) {
+			return Api.call(Api.url.User.get_message, params, callback);
+		}
+		User.get_message = get_message;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -774,6 +988,11 @@ var Repository;
 	Repository.Commodity = Commodity;
 	var Transaction;
 	(function(Transaction) {
+		function trans(flag,params,callback){
+			apiUrl = Api.getApiUrl(flag);
+			return Api.call(apiUrl, params, callback);
+		}
+		Transaction.trans = trans;
 		function transRequest(params, callback) {
 			return Api.call(Api.url.Trans.transRequest, params, callback);
 		}
@@ -975,7 +1194,14 @@ var TextMessage;
 	TextMessage.noopen = language ? "開通していない、お楽しみに" : "暂未开通，敬请期待";
 	TextMessage.ticketng = language ? "チケット数が不足" : "Ticket数量不足";
 	TextMessage.yes = language ? "はい" : "好的";
-	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请补充邮箱信息";
+	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请完善邮箱信息";
+	TextMessage.updatemailng = language ? "失敗を更新、未知のエラー！" : "更新失败,未知错误!";
+	TextMessage.emailnull = language ? "メールボックスは空っぽにならない!" : "邮箱不能为空！";
+	TextMessage.codenull = language ? "検証コードは空っぽにならない!" : "验证码不能为空！";
+	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
+	TextMessage.loading = language ? "ローディング…" : "正在加载...";
+	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
+	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

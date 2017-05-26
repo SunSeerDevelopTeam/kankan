@@ -25,13 +25,13 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init({
+			mui.init(/*{
 				swipeBack: false,
 				preloadPages: [{
 						id:"transaction",
 						url:"../../transaction/transaction2.html"
 				}]
-			});
+			}*/);
 			function showhistory(results){
 				var data=results.data;
 				var datalen=data.length;
@@ -59,14 +59,15 @@
 					var translatepage=null;
 					mui('.transli').on('tap','a',function(e) {
 						var tid = this.getAttribute('id');
-						if(!translatepage) {
-							translatepage = plus.webview.getWebviewById('translatelist');
-						}
-						mui.fire(translatepage, 'traid', {
-							id: tid
-						});
+						var preView = plus.webview.getWebviewById('request');
+						plus.webview.close(preView);
 						mui.openWindow({
-							id: 'translatelist'
+							//id: 'transaction'
+							url: "../../transaction/transaction2.html?transid=" + trans_id,
+						id: "transaction",
+						extras: {
+							"transid": tid
+						}
 						});
 					});
 				}
