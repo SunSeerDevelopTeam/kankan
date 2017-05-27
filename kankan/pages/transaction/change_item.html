@@ -80,7 +80,6 @@
 				transid = self.transid;
 				comm_id = self.commodity_id;
 				mode = self.mode;
-				//alert(transid + "====" + choice);
 				get_goods_list();
 			})
 
@@ -108,20 +107,28 @@
 						$(".goods-list").html(goods_list);
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
-						if(data == "2004") {
-							mui.toast(TextMessage.operation_error, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
+						Api.callback_ng(data);
 					}
 				});
+			}
+			
+			function select_goods() {
+				var choice = '';
+				$("input[name='commodity_id']:checked").each(function() {
+					choice += $(this).val() + ',';
+				})
+				choice = choice.substr(0, choice.length - 1);
+				if(choice == '') {
+					alert("请至少原则一个商品");
+					return false;
+				}
+				var params = {
+					'commodity_id': comm_id,
+					'mode': mode,
+					'choice': choice
+				}
+				params.choice = choice;
+				transRequest(params, 'second');
 			}
 		</script>
 	</body>

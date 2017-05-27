@@ -95,7 +95,10 @@
 					choice += $(this).val() + ',';
 				})
 				choice = choice.substr(0, choice.length - 1);
-				alert(comm_id);
+				if(choice == '') {
+					alert("请至少原则一个商品");
+					return false;
+				}
 				var params = {
 					'commodity_id': comm_id,
 					'mode': mode,
@@ -132,18 +135,7 @@
 						}
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
-						if(data == "2004") {
-							mui.toast(TextMessage.operation_error, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}

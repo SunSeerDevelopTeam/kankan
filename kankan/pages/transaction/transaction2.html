@@ -211,12 +211,7 @@
 						showRequestStaus(transinfo, buyer_flag, usersinfo);
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}
@@ -235,10 +230,6 @@
 				var trans_type = transinfo[0].trans_type;
 				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
 				var buyer_flag = false;
-				console.log(" set hidden value start ----");
-				console.dir(transinfo);
-				console.dir(usersinfo);
-				console.log(" set hidden value end ----");
 				for(var u in usersinfo) {
 					if(usersinfo[u].user_id == buyer_id) {
 						buyer_deliver = usersinfo[u].deliver_flag;
@@ -258,6 +249,7 @@
 				$("#trans_mode").val(trans_mode);
 				$("#trans_deliver").val(trans_deliver);
 				$("#buyer_flag").val(buyer_flag);
+				$("#trans_type").val(trans_type);
 				$("#buyer_deliver").val(buyer_deliver);
 				$("#buyer_urge_r").val(buyer_urge_r);
 				$("#buyer_urge_d").val(buyer_urge_d);
@@ -284,7 +276,8 @@
 						seller_id = usersinfo[user].user_id;
 					}
 				}
-
+				var buyer_comm_id,buyer_comm_img,buyer_comm_name,seller_comm_id,seller_comm_id,seller_comm_name;
+				
 				for(var goods in commdinfo) {
 					if(commdinfo[goods].user_id == buyer_id) {
 						buyer_comm_id = commdinfo[goods].commodity_id;
@@ -302,7 +295,7 @@
 				var buyer_flag = false;
 				if(cur_user_id == buyer_id) buyer_flag = true;
 				var trans_mode = transinfo[0].trans_mode;
-				
+				//alert(seller_comm_img);
 				if(trans_mode == 0) {
 					seller_msg += '<a href="#">';
 					seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
@@ -404,9 +397,6 @@
 				}
 			}
 
-			function show_request_comm() {
-
-			}
 			mui(".exchange").on('tap', '.request-user', function() {
 				var cur_user_id = $("#myid").val();
 				var params = {
@@ -421,17 +411,14 @@
 						goods_detail(cur_user_id, commdinfo,'request');
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
+						Api.callback_ng(data);
 					}
 				})
 			})
 			mui(".exchange").on('tap', '.cur-user', function() {
 				var cur_user_id = $("#myid").val();
+				var trans_type = $("#trans_type").val();
+				if(trans_type == 1) return false;
 				var params = {
 					"transid": trans_id
 				};
@@ -444,12 +431,7 @@
 						goods_detail(cur_user_id, commdinfo,'my');
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
+						Api.callback_ng(data);
 					}
 				})
 			})
@@ -709,12 +691,7 @@
 					},
 					ng: function(data) {
 						Log.i("message send faild!");
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}
@@ -799,25 +776,9 @@
 						Log.i("message send successfully!");
 					},
 					ng: function(data) {
-						Log.i("message send faild!");
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
+						Api.callback_ng(data);
 					}
 				});
-			}
-
-			function err_callback(data) {
-				Log.i("message send faild!");
-				if(data == "1000") {
-					alert(TextMessage.test);
-				}
-				if(data == "2004") {
-					alert(TextMessage.operation_error);
-				}
 			}
 		</script>
 	</body>

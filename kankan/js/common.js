@@ -496,7 +496,7 @@ var Api;
 			set_message: baseUrl() + '/user/usersystemmsg/set_message/',
 			del_message: baseUrl() + '/user/usersystemmsg/del_message/',
 			get_message: baseUrl() + '/user/usersystemmsg/get_message/'
-			
+
 		},
 		Commodity: {
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
@@ -637,189 +637,359 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
-	
-	function callback_ng(data){
+
+	function callback_ng(data) {
 		if(Validator.isObj(data)) {
-			for(var i in data) {
-				//var property = data.result.statuscode[i];
-				//description += i + " = " + property + "\n";
-			}
+			$.each(data, function(key, value) {
+				error_msg(value,key);
+			});
 		} else {
-			switch(data) {
-				case '1000':
-					alert('请登录APP');
-					break;
-				case '1001':
-					alert(TextMessage.test);
-					break;				
-				case '1002':
-					alert(TextMessage.test);
-					break;				
-				case '1003':
-					alert(TextMessage.test);
-					break;				
-				case '1004':
-					alert(TextMessage.test);
-					break;				
-				case '1005':
-					alert(TextMessage.test);
-					break;				
-				case '1006':
-					alert(TextMessage.test);
-					break;				
-				case '1007':
-					alert(TextMessage.test);
-					break;
-				case '0001':
-					alert(TextMessage.operation_error);
-					break;
-				case '0100':
-					alert(TextMessage.operation_error);
-					break;					
-				case '2001':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2002':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2003':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2004':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2005':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2006':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2007':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2008':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2009':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2011':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2012':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2013':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2014':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2015':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2016':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2017':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2018':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2019':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2020':
-					alert(TextMessage.operation_error);
-					break;				
-				case '2021':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3001':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3003':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3004':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3005':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3006':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3008':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3009':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3010':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3011':
-					alert(TextMessage.operation_error);
-					break;				
-				case '3020':
-					alert(TextMessage.operation_error);
-					break;
-			}
+			error_msg(data);
 		}
 	}
 	Api.callback_ng = callback_ng;
-	
-	function getApiUrl(flag){
+
+	function error_msg(err_code,key) {
+		Log.i("message send faild!");
+		
+		var err_msg = '';
+		switch(err_code) {
+			case '1000':
+				alert(TextMessage.test);;
+				break;
+			case '1001':
+				if(key == Api.Params.vCode) err_msg = TextMessage.verificationCode + TextMessage.errorCode_1001;
+				else err_msg = TextMessage.errorCode_1001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1002':
+				if(key == Api.Params.username) err_msg = TextMessage.username + TextMessage.errorCode_1002;
+				else err_msg = TextMessage.errorCode_1002;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1003':
+				err_msg = TextMessage.errorCode_1003;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1004':
+				err_msg = TextMessage.errorCode_1004;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1005':
+				err_msg = TextMessage.errorCode_1005;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1006':
+				err_msg = TextMessage.errorCode_1006;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1007':
+				err_msg = TextMessage.errorCode_1007;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '0001':
+				err_msg = TextMessage.errorCode_0001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '0100':
+				err_msg = TextMessage.errorCode_0100;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2001':
+				err_msg = TextMessage.errorCode_2001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2002':
+				err_msg = TextMessage.errorCode_2002;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2003':
+				err_msg = TextMessage.errorCode_2003;
+				mui.alert(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2004':
+				err_msg = TextMessage.errorCode_2004;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2005':
+				err_msg = TextMessage.errorCode_2005;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2006':
+				err_msg = TextMessage.errorCode_2006;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2007':
+				err_msg = TextMessage.errorCode_2007;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2008':
+				err_msg = TextMessage.errorCode_2008;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2009':
+				err_msg = TextMessage.errorCode_2009;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2011':
+				err_msg = TextMessage.errorCode_2011;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2012':
+				err_msg = TextMessage.errorCode_2012;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2013':
+				err_msg = TextMessage.email_error;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2014':
+				err_msg = TextMessage.errorCode_2014;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2015':
+				err_msg = TextMessage.errorCode_2015;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2016':
+				err_msg = TextMessage.errorCode_2016;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2017':
+				err_msg = TextMessage.errorCode_2017;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2018':
+				err_msg = TextMessage.errorCode_2018;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2019':
+				mui.plusReady(function() {
+					var preView = plus.webview.getWebviewById('transaction');
+					plus.webview.close(preView);
+					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+					mui.back();
+					mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
+				});
+				break;
+			case '2020':
+				err_msg = TextMessage.errorCode_2020;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2021':
+				err_msg = TextMessage.errorCode_2021;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3001':
+				err_msg = TextMessage.errorCode_3001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3003':
+				err_msg = TextMessage.errorCode_3003;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3004':
+				err_msg = TextMessage.errorCode_3004;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3005':
+				err_msg = TextMessage.errorCode_3005;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3006':
+				err_msg = TextMessage.errorCode_3006;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3008':
+				err_msg = TextMessage.errorCode_3008;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3009':
+				err_msg = TextMessage.errorCode_3009;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3010':
+				err_msg = TextMessage.errorCode_3010;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3011':
+				err_msg = TextMessage.errorCode_3011;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3020':
+				err_msg = TextMessage.errorCode_3020;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			default:
+				break;
+		}
+
+	}
+	Api.error_msg = error_msg;
+
+	function getApiUrl(flag) {
 		var apiUrl = '';
-		switch(flag){
+		switch(flag) {
 			case 'transConversation':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/';
 				break;
-			case 'transConversation': 
+			case 'transConversation':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/'; //请求/订单对话API:
 				break;
-			case 'transCommdChange': 
+			case 'transCommdChange':
 				apiUrl = baseUrl() + '/transaction/transcommdchange/'; //提交请求商品变更API:
 				break;
-			case 'transShowRequest': 
+			case 'transShowRequest':
 				apiUrl = baseUrl() + '/transaction/transrequest/show_request_detail/'; //显示当前交易请求/订单API
 				break;
-			case 'transGetUserCommd': 
+			case 'transGetUserCommd':
 				apiUrl = baseUrl() + '/transaction/transpublic/get_user_commodity/';
 				break;
-			case 'transRequest': 
+			case 'transRequest':
 				apiUrl = baseUrl() + '/transaction/transrequest/';
 				break;
-			case 'transOrderEvaluate': 
+			case 'transOrderEvaluate':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_evaluate/';
 				break;
-			case 'transOrderReceipt': 
+			case 'transOrderReceipt':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_receipt/';
 				break;
-			case 'transOrderLogustics': 
+			case 'transOrderLogustics':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_logistics/';
 				break;
-			case 'transSubmitOrder': 
+			case 'transSubmitOrder':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_submit_order/';
 				break;
-			case 'transRequestOrder': 
+			case 'transRequestOrder':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_request_order/';
 				break;
-			case 'transChangePrice': 
+			case 'transChangePrice':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_change_price/';
 				break;
-			case 'transStop': 
+			case 'transStop':
 				apiUrl = baseUrl() + '/transaction/transoperation/transaction_stop/';
 				break;
-			case 'transEdite': 
+			case 'transEdite':
 				apiUrl = baseUrl() + '/transaction/transoperation/transaction_show/';
 				break;
-			case 'transUrgeDelive': 
+			case 'transUrgeDelive':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_deliver/';
 				break;
-			case 'transUrgeReceipt': 
+			case 'transUrgeReceipt':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_receipt/';
 				break;
 		}
@@ -895,22 +1065,22 @@ var Repository;
 			return Api.call(Api.url.User.addComplaint, params, callback);
 		}
 		User.addComplaint = addComplaint;
-		
+
 		function email_rgister_check(params, callback) {
 			return Api.call(Api.url.User.email_rgister_check, params, callback);
 		}
 		User.email_rgister_check = email_rgister_check;
-		
+
 		function set_message(params, callback) {
 			return Api.call(Api.url.User.set_message, params, callback);
 		}
 		User.set_message = set_message;
-		
+
 		function del_message(params, callback) {
 			return Api.call(Api.url.User.del_message, params, callback);
 		}
 		User.del_message = del_message;
-		
+
 		function get_message(params, callback) {
 			return Api.call(Api.url.User.get_message, params, callback);
 		}
@@ -988,11 +1158,12 @@ var Repository;
 	Repository.Commodity = Commodity;
 	var Transaction;
 	(function(Transaction) {
-		function trans(flag,params,callback){
+		function trans(flag, params, callback) {
 			apiUrl = Api.getApiUrl(flag);
 			return Api.call(apiUrl, params, callback);
 		}
 		Transaction.trans = trans;
+
 		function transRequest(params, callback) {
 			return Api.call(Api.url.Trans.transRequest, params, callback);
 		}
@@ -1062,15 +1233,17 @@ var Repository;
 			return Api.call(Api.url.Trans.transEdite, params, callback);
 		}
 		Transaction.transEdite = transEdite;
+
 		function transUrgeDelive(params, callback) {
 			return Api.call(Api.url.Trans.transUrgeDelive, params, callback);
 		}
 		Transaction.transUrgeDelive = transUrgeDelive;
+
 		function transUrgeReceipt(params, callback) {
 			return Api.call(Api.url.Trans.transUrgeReceipt, params, callback);
 		}
 		Transaction.transUrgeReceipt = transUrgeReceipt;
-		
+
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
@@ -1150,6 +1323,45 @@ var TextMessage;
 	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
 	TextMessage.errorCode_1001 = language ? "検証番号の有効期限が切れて、再び試みて下さい " : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "空白できません、再入力してください" : "不能为空，请重新输入";
+	TextMessage.errorCode_1000 = language ? "先にログインしてください": "请先登录";
+	TextMessage.errorCode_1003 = language ? "商品の選択はお供にならない": "您没有商品可供选择了";
+	TextMessage.errorCode_1004 = language ? "不一緻、再入力して下さい": "不一致，请重新输入";
+	TextMessage.errorCode_1005  = language ? "すでに存在し、再入力して下さい": "已存在，请重新输入";
+	TextMessage.errorCode_1006 = language ? "長さは正しくありません、再入力して下さい": "长度不正确，请重新输入";
+	TextMessage.errorCode_1007 = language ? "画像サイズまたはフォーマットは正しくありません、再登録ください！": "图片大小或格式不正确，请重新登录！";
+	TextMessage.errorCode_0001 = language ? "再登録ください": "请重新登录！";
+	TextMessage.errorCode_0100 = language ? "ミスとか、後にしてくださいリトライ": "出错啦，请稍后重试";
+	TextMessage.errorCode_2001 = language ? "データや商品がないと表示しない": "表示没有数据或者商品下架";
+	TextMessage.errorCode_2002 = language ? "すでに凍結または削除されているユーザ": "已冻结或已删除的用户";
+	TextMessage.errorCode_2003 = language ? "操作の商品が存在しない": "要操作的商品不存在";
+	TextMessage.errorCode_2004 = language ? "自分の商品に対して操作することは許されない": "不允许对自己的商品操作";
+	TextMessage.errorCode_2005 = language ? "相関操作がない": "没有相关操作";
+	TextMessage.errorCode_2006 = language ? "全部でユーザーは同じ商品に対して何度も取引を提出することはできません": "一共用户不能对同一个商品多次提出交易申请";
+	TextMessage.errorCode_2007 = language ? "ユーザーのチケット不足": "用户ticket不足";
+	TextMessage.errorCode_2008 = language ? "商品はこの取引方式を支持しない": "该商品不支持这种交易方式";
+	TextMessage.errorCode_2009 = language ? "選択した商品は間違っている": "选择的商品有误";
+	TextMessage.errorCode_2011 = language ? "取引方式の選択が誤りを選択します": "交易方式选择有误";
+	TextMessage.errorCode_2012 = language ? "アップロードしていない": "没有上传画像";
+	TextMessage.errorCode_2013 = language ? "登録メールボックス/ユーザー名のエラー、または存在している": "注册邮箱/用户名 错误，或已存在";
+	TextMessage.errorCode_2014 = language ? "検証番号は無効": "验证码失效";
+	TextMessage.errorCode_2015 = language ? "簽到を繰り返すことはできない": "不能重复签到";
+	TextMessage.errorCode_2016 = language ? "この商品はお問い合わせに、繰り返し提出できません。": "该商品正在问合中，不能重复提交请求";
+	TextMessage.errorCode_2017 = language ? "あなたが今point不足": "您当前point不足";
+	TextMessage.errorCode_2018 = language ? "取引の注文が存在しないか、削除されていません": "交易订单不存在或被删除";
+	TextMessage.errorCode_2019 = language ? "コメントを発表し、繰り返し発表しないでください": "已发布评论，请勿重复发布";
+	TextMessage.errorCode_2020 = language ? "すでに催促出荷しないで、繰り返し催促": "已催促发货，请勿重复催促";
+	TextMessage.errorCode_2021 = language ? "品物を督促催促して、繰り返し催促してはならない": "已催促收货，请勿重复催促";
+	TextMessage.errorCode_3001 = language ? "ユーザー名またはパスワードが間違って": "用户名或者密码错误";
+	TextMessage.errorCode_3002 = language ? "注文が存在しない": "订单不存在";
+	TextMessage.errorCode_3003 = language ? "注文書の提出": "订单未提交";
+	TextMessage.errorCode_3004 = language ? "注文が中止になった": "订单已中止";
+	TextMessage.errorCode_3005 = language ? "注文が完成した": "订单已完成";
+	TextMessage.errorCode_3006 = language ? "請求者は存在しない": "请求者不存在";
+	TextMessage.errorCode_3008 = language ? "完備自分の情報をください": "请完善自己的信息";
+	TextMessage.errorCode_3009 = language ? "注文が存在しない又は失効": "订单不存在或者失效";
+	TextMessage.errorCode_3010 = language ? "操作故障": "操作失效";
+	TextMessage.errorCode_3011 = language ? "登録後に操作してください": "请登录后操作";
+	TextMessage.errorCode_3020 = language ? "メールの情報を完全にしてください": "请完善邮箱信息";
 	TextMessage.prostaute0 = language ? "新品・未使用" : "未使用过";
 	TextMessage.prostaute1 = language ? "未使用に近い" : "几乎未使用过";
 	TextMessage.prostaute2 = language ? "目立った傷や汚れなし " : "无使用痕迹";

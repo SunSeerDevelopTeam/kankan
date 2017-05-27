@@ -99,7 +99,6 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
 				beforeback: function() {
-					//var list = plus.webview.getWebviewById('pullrefresh_with_tab');
 					var list = plus.webview.currentWebview().opener();
 					mui.fire(list, 'refresh', {
 						refresh: "canRefresh"
@@ -134,23 +133,7 @@
 							});
 					},
 					ng: function(data) {
-						Log.i("message send faild!");
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
-						if(data == "2019") {
-							alert("不能重复评论");
-							mui.plusReady(function() {
-								var preView = plus.webview.getWebviewById('transaction');
-								plus.webview.close(preView);
-								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
-								mui.back();
-								mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
-							});
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}

@@ -96,12 +96,7 @@
 						goods_detail(cur_user_id, commdinfo);
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}
@@ -171,18 +166,7 @@
 							})
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
-						if(data == "2004") {
-							mui.toast(TextMessage.operation_error, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}
