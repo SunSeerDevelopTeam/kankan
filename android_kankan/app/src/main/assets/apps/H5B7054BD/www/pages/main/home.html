@@ -36,6 +36,17 @@
 			header a.mui-icon-search {
 				width: 60px;
 			}
+			
+			i {
+				display:block;
+				background:#f00;
+				border-radius:50%;
+				width:5px;
+				height:5px;
+				top:0px;
+				right:0px;
+				position:absolute;
+			}
 		</style>
 	</head>
 
@@ -45,7 +56,9 @@
 				<img src="../../images/default.jpg"/>
 			</a>
 			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
-			<a class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow"></a>
+			<a style="position:relative;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
+				<i></i>
+			</a>
 			<a class="mui-icon mui-icon-search mui-pull-right"></a>
 		</header>
 		<div class="mui-content">
@@ -58,9 +71,29 @@
 	<script type="text/javascript" charset="UTF-8">
 		
 		window.addEventListener("updateUserImgEvent", function(event){
+			if (DEBUG) {
+				alert("updateUserImgEvent[imgURL=" + event.detail.userImgURL + "]");
+			}
 			$('#user img').attr('src', event.detail.userImgURL);
 		});
 		
+		window.addEventListener("updateNoticeStatusEvent", function(event){
+			if (DEBUG) {
+				alert("updateNoticeStatusEvent[flg=" + event.detail.flg + "]");
+			}
+			if (event.detail.flg === "1") {
+				$('i').show();
+			} else {
+				$('i').hide();
+			}
+		});
+		
+		mui("header").on("tap","#offCanvasShow",function(){
+			mui.openWindow({
+					id: 'news',
+					url: 'news.html',
+				});
+		});
 		(function(mui, doc) {
 			mui.init({
 				gestureConfig: {
