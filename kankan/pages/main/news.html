@@ -49,9 +49,6 @@
 		<script src="../../js/sha256.js"></script>
 		<script src="../../js/common.js"></script>
 		<script type="text/javascript">
-			$(function(){
-				
-			});
 			var count = 0;
 			var page="";
 			var max=10;
@@ -116,6 +113,9 @@
 		  })(mui)
 			//show message
 			function showmessage(results){
+				if(results.data.message==""){
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+				}
 				var messarr=results.data.message;
 				page=results.data.page.page;
 				count=results.data.page.cnt;

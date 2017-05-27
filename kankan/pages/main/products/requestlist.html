@@ -41,9 +41,11 @@
 					var trans_id=trans.trans_id;
 					var trstatus=trans.status;
 					if(trstatus=="3"){
-						var status="交易成功";
+						var status="取引が成功する";
+					}else if(trstatus=="8"){
+						var status="中止を請求する";
 					}else{
-						var status="交易中止";
+						var status="取引の中止";
 					}
 					if(trans[0].comm_img==""){
 						var comm_img ="../../../images/nopic.jpg";
