@@ -14,15 +14,15 @@ var JSLocale = {
 
 	/*user login page message begin*/
 	"user-login": "ユーザー登録",
-	"email": "メールアドレス",
-	"username": "ユーザー名",
-	"password": "パスワード",
-	"new_password": "新しいパスワード",
-	"password-confirm": "パスワード再入力",
-	"address": "都通府県",
+	"email": "<span style='color:red;'>*</span>メールアドレス",
+	"username": "<span style='color:red;'>*</span>ユーザー名",
+	"password": "<span style='color:red;'>*</span>パスワード",
+	"new_password": "<span style='color:red;'>*</span>新しいパスワード",
+	"password-confirm": "<span style='color:red;'>*</span>パスワード再入力",
+	"address": "<span style='color:red;'>*</span>都通府県",
 	"address-details": "未設定",
 	"introduction-code": "招待コード(任意)",
-	"verification-code": "確認コード",
+	"verification-code": "<span style='color:red;'>*</span>確認コード",
 	"register": "確定",
 	"register-tips": "あとからプロフィールは変更可能です",
 	"please-input-email": "メールアドレス",
@@ -150,7 +150,7 @@ var JSLocale = {
 $(function() {
 	$('.lang').not('input').each(function(e) {
 		var msg_key = $(this).attr('data-locale');
-		$(this).text(JSLocale[msg_key]);
+		$(this).html(JSLocale[msg_key]);
 	});
 
 	$('input.lang').each(function(e) {

@@ -14,15 +14,15 @@ var JSLocale = {
 
 	/*user login page message begin*/
 	"user-login": "用户注册",
-	"email": "邮箱",
-	"username": "用户名",
-	"password": "密码",
-	"new_password": "新密码",
-	"password-confirm": "确认密码",
-	"address": "地址",
+	"email": "<span style='color:red;'>*</span>邮箱",
+	"username": "<span style='color:red;'>*</span>用户名",
+	"password": "<span style='color:red;'>*</span>密码",
+	"new_password": "<span style='color:red;'>*</span>新密码",
+	"password-confirm": "<span style='color:red;'>*</span>确认密码",
+	"address": "<span style='color:red;'>*</span>地址",
 	"address-details": "未设定",
 	"introduction-code": "介绍码",
-	"verification-code": "验证码",
+	"verification-code": "<span style='color:red;'>*</span>验证码",
 	"register": "确定",
 	"register-tips": "注册真实可用，注册成功后的用户可用于登录。",
 	"please-input-email": "请输入邮箱",
@@ -149,7 +149,7 @@ var JSLocale = {
 $(function() {
 	$('.lang').not('input').each(function(e) {
 		var msg_key = $(this).attr('data-locale');
-		$(this).text(JSLocale[msg_key]);
+		$(this).html(JSLocale[msg_key]);
 	});
 
 	$('input.lang').each(function(e) {

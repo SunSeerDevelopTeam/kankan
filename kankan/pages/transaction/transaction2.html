@@ -161,12 +161,7 @@
 						},
 						ng: function(data) {
 							Log.i("message send faild!");
-							if(data == "1000") {
-								alert(TextMessage.test);
-							}
-							if(data == "2004") {
-								alert(TextMessage.operation_error);
-							}
+							Api.callback_ng(data);
 						}
 					});
 				}
@@ -206,7 +201,7 @@
 						if(messginfo) {
 							showChatMsg(usersinfo, messginfo, cur_user_id);
 						}
-						tranStatusVal = trans_type == 0 ? "请求中" : "订单中"
+						tranStatusVal = trans_type == 0 ? "请求中" : "交易成立"
 						$(".tran-name-middle-status font").html(tranStatusVal);
 						showRequestStaus(transinfo, buyer_flag, usersinfo);
 					},
@@ -276,8 +271,8 @@
 						seller_id = usersinfo[user].user_id;
 					}
 				}
-				var buyer_comm_id,buyer_comm_img,buyer_comm_name,seller_comm_id,seller_comm_id,seller_comm_name;
-				
+				var buyer_comm_id, buyer_comm_img, buyer_comm_name, seller_comm_id, seller_comm_id, seller_comm_name;
+
 				for(var goods in commdinfo) {
 					if(commdinfo[goods].user_id == buyer_id) {
 						buyer_comm_id = commdinfo[goods].commodity_id;
@@ -291,18 +286,17 @@
 						seller_comm_info.push(commdinfo[goods]);
 					}
 				}
-				
+
 				var buyer_flag = false;
 				if(cur_user_id == buyer_id) buyer_flag = true;
 				var trans_mode = transinfo[0].trans_mode;
-				//alert(seller_comm_img);
 				if(trans_mode == 0) {
 					seller_msg += '<a href="#">';
 					seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
 					seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
 					seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
 					seller_msg += '</div>';
-					if(seller_comm_info.length > 1){
+					if(seller_comm_info.length > 1) {
 						seller_msg += '<img src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 					}
 					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
@@ -314,7 +308,7 @@
 					buyer_msg += '<img height="32px" width="32px" src="' + buyer_photo + '" />';
 					buyer_msg += '<font size="2" vertical-align="middle">' + buyer_nickname + '</font>';
 					buyer_msg += '</div>';
-					if(buyer_comm_info.length > 1){
+					if(buyer_comm_info.length > 1) {
 						buyer_msg += '<img id="moreicon" src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 					}
 					buyer_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + buyer_comm_img + '">';
@@ -343,7 +337,7 @@
 
 			}
 
-			function goods_detail(cur_user_id, comminfo,flag) {
+			function goods_detail(cur_user_id, comminfo, flag) {
 				var detailPage = null;
 				var cur_comm_arr = new Array();
 				var request_user_arr = new Array();
@@ -351,42 +345,42 @@
 				for(var c in comminfo) {
 					if(cur_user_id == comminfo[c].user_id) {
 						cur_comm_arr.push(comminfo[c]);
-						cur_commid += comminfo[c].commodity_id+',';
+						cur_commid += comminfo[c].commodity_id + ',';
 					} else {
 						request_user_arr.push(comminfo[c]);
 					}
 				}
 				cur_commid = cur_commid.substr(0, cur_commid.length - 1);
-				if(flag != 'my'){
-				if(request_user_arr.length == 1) {
-					var commid = request_user_arr[0].commodity_id;
-					if(!detailPage) {
-						detailPage = plus.webview.getWebviewById('detail');
-					}
-					mui.fire(detailPage, 'cid', {
-						id: commid
-					});
-					setTimeout(function() {
-						mui.openWindow({
-							id: 'detail',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-					}, 300);
-				} else {
-					mui.openWindow({
-						url: "./request_item.html?transid=" + trans_id,
-						id: "requestitem",
-						extras: {
-							"transid": trans_id
+				if(flag != 'my') {
+					if(request_user_arr.length == 1) {
+						var commid = request_user_arr[0].commodity_id;
+						if(!detailPage) {
+							detailPage = plus.webview.getWebviewById('detail');
 						}
-					})
-				}
-				}else{
+						mui.fire(detailPage, 'cid', {
+							id: commid
+						});
+						setTimeout(function() {
+							mui.openWindow({
+								id: 'detail',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								}
+							});
+						}, 300);
+					} else {
+						mui.openWindow({
+							url: "./request_item.html?transid=" + trans_id,
+							id: "requestitem",
+							extras: {
+								"transid": trans_id
+							}
+						})
+					}
+				} else {
 					mui.openWindow({
 						url: "./change_item.html",
 						id: "change_item",
@@ -408,7 +402,7 @@
 						var messginfo = data.data.messginfo;
 						var commdinfo = data.data.commdinfo;
 						var usersinfo = data.data.usersinfo;
-						goods_detail(cur_user_id, commdinfo,'request');
+						goods_detail(cur_user_id, commdinfo, 'request');
 					},
 					ng: function(data) {
 						Api.callback_ng(data);
@@ -428,7 +422,7 @@
 						var messginfo = data.data.messginfo;
 						var commdinfo = data.data.commdinfo;
 						var usersinfo = data.data.usersinfo;
-						goods_detail(cur_user_id, commdinfo,'my');
+						goods_detail(cur_user_id, commdinfo, 'my');
 					},
 					ng: function(data) {
 						Api.callback_ng(data);
@@ -514,8 +508,6 @@
 					mui.alert('已终止交易，不能继续交易。如果要继续交易请重新请求！！');
 				} else if(status == 3) {
 					mui.alert('交易已完成！！');
-					//var curView = plus.webview.currentWebview();
-					//plus.webview.close(curView);
 					mui.openWindow({
 						url: "./transevaluate.html?transid=" + trans_id,
 						id: "transevaluate",
@@ -526,14 +518,12 @@
 				} else if(status == 0) {
 					if(trans_mode > 0) {
 						if(buyer_flag == false) {
-							//$(".tran-button-buy").hide();
 							$(".tran-button-buy font").text("确认交易");
 						} else {
 							if(trans_mode == 1) {
 								$(".tran-button-buy font").text("等待对方确认");
 							} else {
 								$(".tran-button-buy font").text("确认交易");
-								//$(".tran-button-buy font").hide();
 							}
 						}
 					} else {
@@ -713,13 +703,7 @@
 								$(".change_price").hide();
 							},
 							ng: function(data) {
-								Log.i("message send faild!");
-								if(data == "1000") {
-									alert(TextMessage.test);
-								}
-								if(data == "2004") {
-									alert(TextMessage.operation_error);
-								}
+								Api.callback_ng(data);
 							}
 						});
 					} else {
@@ -757,28 +741,33 @@
 					"transid": trans_id
 				};
 				var btnArray = ['否', '是'];
+				var trans_type = $("#trans_type").val();
+
 				mui.confirm('确认交易终止？', 'kankan', btnArray, function(e) {
 					if(e.index == 1) {
-						mui.openWindow({
-							url: "./transevaluate.html?transid=" + trans_id,
-							id: "transevaluate",
-							extras: {
-								"transid": trans_id
+						Repository.Transaction.transStop(params, {
+							ok: function(data) {
+								Log.i("message send successfully!");
+								if(trans_type == 1) {
+									mui.openWindow({
+										url: "./transevaluate.html?transid=" + trans_id,
+										id: "transevaluate",
+										extras: {
+											"transid": trans_id
+										}
+									})
+								} else {
+									gotoMain();
+								}
+							},
+							ng: function(data) {
+								Api.callback_ng(data);
 							}
-						})
+						});
 					} else {
 						alert("继续交易");
 					}
 				})
-
-				Repository.Transaction.transStop(params, {
-					ok: function(data) {
-						Log.i("message send successfully!");
-					},
-					ng: function(data) {
-						Api.callback_ng(data);
-					}
-				});
 			}
 		</script>
 	</body>

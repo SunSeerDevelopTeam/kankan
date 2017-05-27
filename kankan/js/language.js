@@ -1,5 +1,4 @@
 (function(mui, doc) {
-
 	function isInclude(filepath) {
 		var  js =  /js$/i.test(filepath);
 		var es = doc.getElementsByTagName(js ? 'script' : 'link');
