@@ -118,6 +118,13 @@
 	<script src="../../../js/common.js"></script>
 	<script src="../../../js/pro_uploadimg.js"></script>
 	<script>
+//		mui.init({
+//			swipeBack: false,
+//			preloadPages: [{
+//					id: 'imagecut',
+//					url: 'imgcut/imagecut.html'
+//			}]
+//		});
 	$(function() {
 		$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
 	});
@@ -432,10 +439,9 @@
 })(mui, document);
 //submit form
 function publishs() {
-	//return confirm(TextMessage.publishsure);
 	var buy_sell_flag = "0";
-	var comm_name = $("#comm_name").val();
-	var comm_detail = $("#comm_detail").val();
+	var comm_name = HTMLEncode($("#comm_name").val());
+	var comm_detail = HTMLEncode($("#comm_detail").val());
 	var classify_id = $("#classify_id").val();
 	var comm_state = $("#comm_state").val();
 	var exchange = $("#exchange").val();

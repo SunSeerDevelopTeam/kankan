@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1260,3 +1260,19 @@ var Entity;
 	}());
 	Entity.Category = Category;
 })(Entity || (Entity = {}));
+	//Translate html
+	function HTMLDecode(text) { 
+	    var temp = document.createElement("div"); 
+	    temp.innerHTML = text; 
+	    var output = temp.innerText || temp.textContent; 
+	    temp = null; 
+	    return output; 
+   }
+	//Translate text
+	function HTMLEncode(html) {
+	    var temp = document.createElement("div");
+	    (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+	    var output = temp.innerHTML;
+	    temp = null;
+	    return output;
+	}
