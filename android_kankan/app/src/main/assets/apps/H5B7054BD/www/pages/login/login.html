@@ -156,7 +156,6 @@
 							var waiting = plus.nativeUI.showWaiting();
 							auth.login(function() {
 								auth.getUserInfo(function() {
-									alert("getUserInfo");
 									var name = auth.userInfo.nickname || auth.userInfo.name;
 									var params = {};
 									params[Api.Params.loginType] = LOGIN_TYPE.OAUTH;
@@ -179,8 +178,8 @@
 											if(data === "3020") {
 												plus.nativeUI.alert(TextMessage.input_email, function(event) {
 													mui.openWindow({
-														id: "emai_summate",
-														url: "emai_summate.html",
+														id: "reg",
+														url: "reg.html",
 														waiting: {
 															autoShow: false
 														},
@@ -195,19 +194,8 @@
 											waiting.close();
 										}
 									});
-								}, function(e) {
-									alert("eee");
-								});
+								}, function(e) {});
 							}, function(e) {
-								var description = "";
-								if(Validator.isObj(e)) {
-									for(var i in e) {
-										var property = e[i];
-										description += i + " = " + property + "\n";
-									}
-								}
-								var alertInfo = Validator.isObj(e) ? description : e;
-								alert(alertInfo);
 								waiting.close();
 							});
 						});

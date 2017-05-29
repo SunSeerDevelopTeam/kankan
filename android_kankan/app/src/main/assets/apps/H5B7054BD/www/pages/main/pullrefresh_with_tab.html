@@ -575,7 +575,6 @@
 				var search = "";
 				var page = "";
 				var pageInfo = {};
-				var keyword = "";
 				//阻尼系数
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
 				mui('.mui-scroll-wrapper').scroll({
@@ -595,7 +594,7 @@
 								getDataFromServer(
 									$('.mui-slider-group .mui-scroll:eq(' + i + ') .mui-table-view')[0],
 									0,
-									16,
+									6,
 									$($('.mui-slider-group .mui-scroll:eq(' + i + ') .mui-table-view')[0]).parent().attr('data-category-id'),
 									null,
 									null,
@@ -625,7 +624,7 @@
 						if (DEBUG) {
 							alert("getDataFromServer 3");
 						}
-						keyword = event.detail.keyword;
+						
 						getDataFromServer(
 							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
 							0,
@@ -648,7 +647,7 @@
 						getDataFromServer(
 							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
 							0,
-							16,
+							6,
 							$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
 							null,
 							null,
@@ -699,7 +698,7 @@
 										if (DEBUG) {
 											alert("getDataFromServer 5");
 										}
-										getDataFromServer(ul, index, 16, catalog, keyword, null, true, self);
+										getDataFromServer(ul, index, 6, catalog, null, null, true, self);
 									}, 1000);
 								}
 							},
@@ -716,7 +715,7 @@
 											if (DEBUG) {
 												alert("getDataFromServer 6");
 											}
-											getDataFromServer(ul, index, 16, catalog, keyword, ++pageInfo.page, false, self);
+											getDataFromServer(ul, index, 6, catalog, null, ++pageInfo.page, false, self);
 										}
 									}, 1000);
 								}
@@ -738,7 +737,7 @@
 						if(max != null) {
 							params.max = max;
 						}
-						if(search != null && search != "") {
+						if(search != null) {
 							params.search = search;
 						}
 						if(page != null) {
@@ -747,8 +746,7 @@
 						Repository.Commodity.commodityList(params, {
 							ok: function(data) {
 								createFragment(data.data.commd, ul, index, reverse, self);
-								updateUserPhoto(data.data.users.photo);
-								updateNoticeStatus(data.data.users.sys_msg_flg);
+								updateUserPhoto(data.data.users);
 								savePageInfo(data.data.pages);
 							},
 							ng: function(statuscode) {
@@ -787,16 +785,6 @@
 						var homePage = plus.webview.getWebviewById('home.html');
 						mui.fire(homePage, 'updateUserImgEvent', {
 							userImgURL: userImgURL
-						});
-					}
-					
-					var updateNoticeStatus = function(flg) {
-						if(typeof(plus) == "undefined") {
-							return;
-						}
-						var homePage = plus.webview.getWebviewById('home.html');
-						mui.fire(homePage, 'updateNoticeStatusEvent', {
-							flg: flg
 						});
 					}
 
@@ -883,7 +871,7 @@
 						getDataFromServer(
 							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
 							0,
-							16,
+							6,
 							$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
 							null,
 							null,
@@ -938,15 +926,15 @@
 							};
 							Repository.Commodity.praise(params, {
 								ok: function(result) {
-									var praise_flag = result.data[0].p_flg;
+									var praise_flag = result.data[0].praise_flag;
 									if(praise_flag == "0") {
 										_self.prev().addClass('comm-like-gray');
 										_self.prev().removeClass('comm-like-red');
-										_self.text(result.data[0].p_cnt);
+										_self.text(parseInt(_self.text()) - 1);
 									} else if(praise_flag == "1") {
 										_self.prev().addClass('comm-like-red');
 										_self.prev().removeClass('comm-like-gray');
-										_self.text(result.data[0].p_cnt);
+										_self.text(parseInt(_self.text()) + 1);
 									} else {
 										if(DEBUG) {
 											alert("praise_flag is error.");

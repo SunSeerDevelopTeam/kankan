@@ -103,14 +103,14 @@
 									</li>
 								</ul>
 								<ul class="user-comment-list">
-									<li class="user-point-grid" style="display: none;">
+									<li class="user-point-grid">
 										<a href="#">
 											<font color="#AAAAAA" size="1">
 												<span class="mui-icon-extra mui-icon-extra-share lang" data-locale="userpointtext" style="font-size: 16px;"></span>　
 											</font>
 										</a>
 									</li>
-									<li class="user-point-grid2" style="display: none;">
+									<li class="user-point-grid2">
 											<font size="2" class="point"></font>
 									</li>
 									<li class="user-point-grid" id="area">
@@ -786,16 +786,6 @@
 									mui.toast(TextMessage.userng, {
 										duration: 'long',
 										type: 'div'
-									});
-								}
-								if(data == "3020") {
-									mui.toast(TextMessage.input_email, {
-										duration: 'long',
-										type: 'div'
-									});
-									mui.openWindow({
-										id: 'emai_summate',
-										url:"../../login/emai_summate.html"
 									});
 								}
 								console.log("other error code:" + data);

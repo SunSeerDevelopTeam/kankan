@@ -132,22 +132,12 @@
 							mui.toast(TextMessage.test, {
 								duration: 'long',
 								type: 'div'
-							});
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/login.html"
-							});
+							})
 						}
-						if(data == "3020") {
-							mui.toast(TextMessage.input_email, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'emai_summate',
-								url:"../../login/emai_summate.html"
-							});
-						}
+						mui.openWindow({
+							id: 'login',
+							url:"../../login/login.html"
+						});
 					}
 				});
 			}

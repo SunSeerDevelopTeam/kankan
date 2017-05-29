@@ -133,17 +133,13 @@ var JSLocale = {
 	"overview":"公司概要",
 	"logout":"退出登录",
 	"version":"版本号",
-	"moneycla":"金钱决算",
-	"speciallow":"特商法",
 	//question page
 	"Appeal":"申诉",
 	"musttext":"标记为必填项",
 	"upimgtext":"上传图片",
 	"nametext":"姓名",
 	"contenttext":"申诉内容",
-	"suretext":"确 认",
-	"writeemail":"完善邮箱",
-	"emailwtext":"请完善邮箱信息"
+	"suretext":"确 认"
 }
 
 $(function() {
