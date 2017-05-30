@@ -42,10 +42,13 @@
 					var trstatus=trans.status;
 					if(trstatus=="3"){
 						var status="取引が成功する";
+						var status = TextMessage.transSuccess;
 					}else if(trstatus=="8"){
-						var status="中止を請求する";
+						//var status="中止を請求する";
+						var status = TextMessage.requestStop;
 					}else{
-						var status="取引の中止";
+						//var status="取引の中止";
+						var status = TextMessage.transStop;
 					}
 					if(trans[0].comm_img==""){
 						var comm_img ="../../../images/nopic.jpg";

@@ -21,8 +21,9 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav"></a>
-			<a class="lang" data-locale="back">戻る</a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+				<font size="3" class="lang" data-locale="back"></font>
+			</a>
 			<h1 class="mui-title"><span class="lang" data-locale="change">Tran</span></h1>
 		</header>
 		<div class="mui-content">
@@ -112,13 +113,14 @@
 				</li>
 				<li class="tran-foot-submit">
 					<button type="button" onclick="submitChat();" class="mui-btn-link mui-btn-nav mui-pull-left">
-						<span><font size="4">送信<font size="4"></span>
+						<span><font size="4" class="lang" >送信<font size="4"></span>
 					</button>
 				</li>
 			</ul>
 		</nav>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
@@ -196,14 +198,16 @@
 							$(".exchange").show();
 							$(".other").hide();
 						}
-						setHidVal(transinfo, usersinfo, cur_user_id);
+						alert("aaa");
+						showRequestStaus(transinfo, buyer_flag, usersinfo);
 						showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id);
+						setHidVal(transinfo, usersinfo, cur_user_id);
 						if(messginfo) {
 							showChatMsg(usersinfo, messginfo, cur_user_id);
 						}
 						tranStatusVal = trans_type == 0 ? "请求中" : "交易成立"
 						$(".tran-name-middle-status font").html(tranStatusVal);
-						showRequestStaus(transinfo, buyer_flag, usersinfo);
+
 					},
 					ng: function(data) {
 						Api.callback_ng(data);
@@ -272,7 +276,7 @@
 					}
 				}
 				var buyer_comm_id, buyer_comm_img, buyer_comm_name, seller_comm_id, seller_comm_id, seller_comm_name;
-
+				var seller_comm_exist = false;
 				for(var goods in commdinfo) {
 					if(commdinfo[goods].user_id == buyer_id) {
 						buyer_comm_id = commdinfo[goods].commodity_id;
@@ -280,6 +284,7 @@
 						buyer_comm_name = commdinfo[goods].comm_name;
 						buyer_comm_info.push(commdinfo[goods]);
 					} else {
+						seller_comm_exist = true;
 						seller_comm_id = commdinfo[goods].commodity_id;
 						seller_comm_img = commdinfo[goods].img_flg;
 						seller_comm_name = commdinfo[goods].comm_name;
@@ -291,18 +296,20 @@
 				if(cur_user_id == buyer_id) buyer_flag = true;
 				var trans_mode = transinfo[0].trans_mode;
 				if(trans_mode == 0) {
-					seller_msg += '<a href="#">';
-					seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
-					seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
-					seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
-					seller_msg += '</div>';
-					if(seller_comm_info.length > 1) {
-						seller_msg += '<img src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
+					if(seller_comm_exist) {
+						seller_msg += '<a href="#">';
+						seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+						seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
+						seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
+						seller_msg += '</div>';
+						if(seller_comm_info.length > 1) {
+							seller_msg += '<img src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
+						}
+						seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
+						seller_msg += '</a>';
+						seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
+						seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
 					}
-					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
-					seller_msg += '</a>';
-					seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
-					seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
 					buyer_msg += '<a href="#">';
 					buyer_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
 					buyer_msg += '<img height="32px" width="32px" src="' + buyer_photo + '" />';
@@ -489,7 +496,6 @@
 				} else {
 					$(".tran-button-sell font").text("交易终止");
 				}
-
 				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
 				for(var u in userinfo) {
 					if(userinfo[u].user_id == buyer_id) {
@@ -506,6 +512,9 @@
 				}
 				if(status == 8) {
 					mui.alert('已终止交易，不能继续交易。如果要继续交易请重新请求！！');
+					var preView = plus.webview.getWebviewById('selectitem');
+					plus.webview.close(preView);
+					gotoMain();
 				} else if(status == 3) {
 					mui.alert('交易已完成！！');
 					mui.openWindow({
@@ -523,7 +532,9 @@
 							if(trans_mode == 1) {
 								$(".tran-button-buy font").text("等待对方确认");
 							} else {
-								$(".tran-button-buy font").text("确认交易");
+								//$(".tran-button-buy font").text("订单申请");
+								$(".tran-button-buy").hide();
+								$(".tran-button").css('text-align', 'center');
 							}
 						}
 					} else {
@@ -558,7 +569,11 @@
 				} else if(status == 2) {
 					if(buyer_flag) {
 						if(trans_type != 0) {
-							$(".tran-button-buy font").text("订单生成");
+							if(deliver == 0) {
+								$(".tran-button-buy font").text("催促卖家发货");
+							} else {
+								$(".tran-button-buy font").text("确认收货");
+							}
 						} else {
 							if(buyer_deliver == 1 && seller_deliver == 0) {
 								$(".tran-button-buy font").text("催促卖家发货");
@@ -576,7 +591,11 @@
 						}
 					} else {
 						if(trans_type != 0) {
-							$(".tran-button-buy font").text("等待买家下单");
+							if(deliver == 0) {
+								$(".tran-button-buy font").text("确认发货");
+							} else {
+								$(".tran-button-buy font").text("等待买家收货");
+							}
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
 								$(".tran-button-buy font").text("催促买家发货");
@@ -589,6 +608,7 @@
 									$(".tran-button-buy font").text("交易完成");
 								}
 							} else {
+								alert("确认收货");
 								$(".tran-button-buy font").text("确认发货");
 							}
 						}
@@ -619,32 +639,49 @@
 					trans_flow('transSubmitOrder', params);
 				} else if(status == 2) {
 					if(buyer_flag) {
-						if(buyer_deliver == 1 && seller_deliver == 0) {
-							trans_flow('transUrgeDelive', params);
-						} else if(buyer_deliver == 1 && seller_deliver == 1) {
-							if(buyer_receipt == 0) {
-								trans_flow('transOrderReceipt', params);
-							} else if(buyer_receipt == 1 && seller_receipt == 0) {
-								trans_flow('transUrgeReceipt', params);
+						if(trans_type != 0) {
+							if(deliver == 0) {
+								trans_flow('transUrgeDelive', params);
 							} else {
-								gotoEvaluate(trans_id);
+								params.charity = 0;
+								trans_flow('transOrderReceipt', params);
 							}
-						} else if(buyer_deliver == 0) {
-							trans_flow('transOrderLogustics', params);
+						} else {
+							if(buyer_deliver == 1 && seller_deliver == 0) {
+								trans_flow('transUrgeDelive', params);
+							} else if(buyer_deliver == 1 && seller_deliver == 1) {
+								if(buyer_receipt == 0) {
+									trans_flow('transOrderReceipt', params);
+								} else if(buyer_receipt == 1 && seller_receipt == 0) {
+									trans_flow('transUrgeReceipt', params);
+								} else {
+									gotoEvaluate(trans_id);
+								}
+							} else if(buyer_deliver == 0) {
+								trans_flow('transOrderLogustics', params);
+							}
 						}
 					} else {
-						if(buyer_deliver == 0 && seller_deliver == 1) {
-							trans_flow('transUrgeDelive', params);
-						} else if(buyer_deliver == 1 && seller_deliver == 1) {
-							if(seller_receipt == 0) {
-								trans_flow('transOrderReceipt', params);
-							} else if(buyer_receipt == 1 && seller_receipt == 0) {
-								trans_flow('transUrgeReceipt', params);
+						if(trans_type != 0) {
+							if(deliver == 0) {
+								
 							} else {
-								gotoEvaluate(trans_id);
+								//trans_flow('transOrderReceipt', params);
 							}
-						} else if(buyer_deliver == 0) {
-							trans_flow('transOrderLogustics', params);
+						} else {
+							if(buyer_deliver == 0 && seller_deliver == 1) {
+								trans_flow('transUrgeDelive', params);
+							} else if(buyer_deliver == 1 && seller_deliver == 1) {
+								if(seller_receipt == 0) {
+									trans_flow('transOrderReceipt', params);
+								} else if(buyer_receipt == 1 && seller_receipt == 0) {
+									trans_flow('transUrgeReceipt', params);
+								} else {
+									gotoEvaluate(trans_id);
+								}
+							} else if(buyer_deliver == 0) {
+								trans_flow('transOrderLogustics', params);
+							}
 						}
 					}
 				} else if(status == 3) {
@@ -652,6 +689,8 @@
 				} else if(status == 7) {
 					gotoEvaluate(trans_id);
 				} else if(status == 8) {
+					var preView = plus.webview.getWebviewById('selectitem');
+					plus.webview.close(preView);
 					gotoMain();
 				} else if(status == 9) {
 					gotoEvaluate(trans_id);

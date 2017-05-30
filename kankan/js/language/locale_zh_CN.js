@@ -143,7 +143,8 @@ var JSLocale = {
 	"contenttext":"申诉内容",
 	"suretext":"确 认",
 	"writeemail":"完善邮箱",
-	"emailwtext":"请完善邮箱信息"
+	"emailwtext":"请完善邮箱信息",
+	"new_user_login":"注册"
 }
 
 $(function() {

@@ -32,7 +32,7 @@
 				text-align: center;
 			}
 			
-			#forget_password {
+			#forget_password,#new_user_login {
 				color: #FF0000;
 			}
 			
@@ -98,6 +98,7 @@
 					</form>
 				</li>
 				<div class="mui-text-right lang" id="forget_password" data-locale="forget_password"></div>
+				<div class="mui-text-right lang" id="new_user_login" data-locale="new_user_login"></div>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -134,6 +135,7 @@
 					var authBtns = ['weixin'];
 					var auths = {};
 					var oauthArea = doc.getElementById('weixin-oauth');
+					alert(TextMessage.register);
 					plus.oauth.getServices(function(services) {
 						for(var i in services) {
 							var service = services[i];
@@ -274,6 +276,14 @@
 							waiting: {
 								autoShow: false
 							}
+						});
+					});
+					
+					var newUserLogin = doc.getElementById('new_user_login');
+					newUserLogin.addEventListener('tap', function(event) {
+						$.openWindow({
+							id: 'reg',
+							url:"/pages/login/reg.html"
 						});
 					});
 				});

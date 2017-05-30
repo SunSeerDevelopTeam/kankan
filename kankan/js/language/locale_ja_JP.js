@@ -143,7 +143,8 @@ var JSLocale = {
 	"contenttext":"お問い合わせ内容",
 	"suretext":"確    認",
 	"writeemail":"郵便箱",
-	"emailwtext":"どうぞ完全メールアドレス情報"
+	"emailwtext":"どうぞ完全メールアドレス情報",
+	"new_user_login":"新しいはじめる方はこちら"
 	
 }
 

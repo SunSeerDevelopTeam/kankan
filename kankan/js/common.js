@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1414,6 +1414,9 @@ var TextMessage;
 	TextMessage.loading = language ? "ローディング…" : "正在加载...";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
 	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
+	TextMessage.requestStop = language ? "中止を請求する" : "请求终止";
+	TextMessage.transSuccess = language ? "交易成功する" : "交易成功";
+	TextMessage.transStop = language ? "交易中止する" : "交易终止";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
