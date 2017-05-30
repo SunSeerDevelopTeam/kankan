@@ -123,7 +123,7 @@
 							<div class="mui-pull-left">
 								<img src="" width="40" height="40" class="ka_touxiangimg"></div>
 							<div class="ka_authorname"><b></b></div>
-							<div>
+							<div class="ka_language">
 								<img src="../../../images/china.png" width="20" height="20" class="lanch" style="display: none;">
 								<img src="../../../images/jp.png" width="20" height="20" class="lanjp" style="display: none;">
 								<img src="../../../images/hk.png" width="20" height="20" class="lanhk" style="display: none;">
@@ -174,9 +174,9 @@
 
 			<!--Commodity exchange, white send, point exchange information button-->
 			<div class="ka_buyway">
-				<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
+				<!--<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
 			<b><span class="lang" data-locale="det_pointexch"></span>(<span class="comdprice"></span>)</b>
-		</button>
+		</button>-->
 				<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;"></a>
 			<span class="lang" data-locale="det_exchange"><b></b></span>
 		</button>
@@ -429,17 +429,20 @@
 				$(".authcomdnum").html(ucomeditynum);
 				$(".kankan_det_locationinfo").html(uadress);
 				var authlang = commodity.user_basic.talk_flag;
-				if(authlang.indexOf("0") > 0) {
-					$(".lanjp").show();
-				}
-				if(authlang.indexOf("1") > 0) {
-					$(".lanch").show();
-				}
-				if(authlang.indexOf("2") > 0) {
-					$(".lanen").show();
-				}
-				if(authlang.indexOf("3") > 0) {
-					$(".lanhk").show();
+				authlang = authlang.split(',');
+				for(var i=0;i<authlang.length;i++){
+					if(authlang[i] == 0){
+						$(".lanjp").show();
+					}
+					if(authlang[i] == 1){
+						$(".lanch").show();
+					}
+					if(authlang[i] == 2){
+						$(".lanen").show();
+					}
+					if(authlang[i] == 3){
+						$(".lanhk").show();
+					}					
 				}
 				//buy way
 				var exchange = commodity.commodity_buy_way.exchange;
@@ -686,18 +689,7 @@
 						})
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
-						if(data == "2004") {
-							mui.toast(TextMessage.operation_error, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}
@@ -716,12 +708,14 @@
 					mode = 'exchange';
 					params.mode = mode;
 					mui.openWindow({
-						url: "../../transaction/select_item.html",
+						/*url: "../../transaction/select_item.html",
 						id: "selectitem",
 						extras: {
 							"commodity_id": codid,
 							"mode": mode
-						}
+						}*/
+						url:"/pages/login/emai_summate.html",
+						id:"emaisummate"
 					})
 				} else {
 					mode = 'gratis';

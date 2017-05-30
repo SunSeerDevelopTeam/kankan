@@ -76,7 +76,7 @@
 						<input type="hidden" id="seller_urge_r" name="seller_urge_r" value="" />
 						<input type="hidden" id="seller_urge_d" name="seller_urge_d" value="" />
 						<input type="hidden" id="seller_receipt" name="seller_receipt" value="" />
-						<ul class="tran-distribution change_price" style="display:none;" onclick="change_price();">
+						<!--<ul class="tran-distribution change_price" style="display:none;" onclick="change_price();">
 							<li class="tran-distribution-law">
 								<a href="../main/logisticslist.html">
 									<div class="tran-distribution-call">
@@ -85,7 +85,7 @@
 									</div>
 								</a>
 							</li>
-						</ul>
+						</ul>-->
 						<ul class="tran-distribution">
 							<li class="tran-distribution-law">
 								<div class="tran-distribution-law-detail">
@@ -705,9 +705,8 @@
 						var messginfo = data.data.messginfo;
 						var commdinfo = data.data.commdinfo;
 						var usersinfo = data.data.usersinfo;
-						var tranStatusVal = getTransStatus(transinfo.status);
-						$(".tran-name-middle-status font").html(tranStatusVal);
-						//showTranCommodMsg(usersinfo, commdinfo, messginfo);
+						var tranStatusVal = getTransStatus(transinfo[0].status);
+						$(".tran-name-middle-status font").html(tranStatusVal);						//showTranCommodMsg(usersinfo, commdinfo, messginfo);
 						var buyer_id = transinfo.issue_user_id;
 						var seller_id = transinfo.accept_user_id;
 						var cur_user_id = data.data.myid;

@@ -22,11 +22,14 @@
 		var language = navigator.language;
 		console.log("language is " + language);
 		if(!language || language == "ja-jp" || language == "ja-JP") {
-			appendJS("../../js/language/locale_ja_JP.js");
-			appendJS("../../../js/language/locale_ja_JP.js");
+			//appendJS("../../js/language/locale_ja_JP.js");
+			//appendJS("../../../js/language/locale_ja_JP.js");
+			//appendJs("/js/langage/locale_ja_JP.js");
+			appendJS("file:///storage/emulated/0/Android/data/io.dcloud.HBuilder/.HBuilder/apps/HBuilder/www/js/language/locale_ja_JP.js");
 		} else {
-			appendJS("../../js/language/locale_zh_CN.js");
-			appendJS("../../../js/language/locale_zh_CN.js");
+			//appendJS("../../js/language/locale_zh_CN.js");
+			//appendJS("../../../js/language/locale_zh_CN.js");
+			appendJS("file:///storage/emulated/0/Android/data/io.dcloud.HBuilder/.HBuilder/apps/HBuilder/www/js/language/locale_zh_CN.js");
 		}
 	});
 

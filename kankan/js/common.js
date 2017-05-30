@@ -933,6 +933,13 @@ var Api;
 					duration: 'long',
 					type: 'div'
 				});
+				mui.openWindow({
+							url: "/pages/login/emai_summate.html",
+							id: "emaisummate",
+							extras: {
+								"transid": trans_id
+							}
+						})
 				break;
 			default:
 				break;
@@ -942,7 +949,7 @@ var Api;
 	Api.error_msg = error_msg;
 
 	function getApiUrl(flag) {
-		var apiUrl = '';
+		var apiUrl = "";
 		switch(flag) {
 			case 'transConversation':
 				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/';
