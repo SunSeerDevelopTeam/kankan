@@ -19,21 +19,25 @@
 				-moz-opacity: 0.6;
 				opacity: 0.6;
 				position: absolute;
-				top:160px; left:0; z-index:2;
+				top: 160px;
+				left: 0;
+				z-index: 2;
 			}
-			#slider{
-				position: relative;z-index:1;
+			
+			#slider {
+				position: relative;
+				z-index: 1;
 			}
-			.imgboxs{
+			
+			.imgboxs {
 				width: 100%;
 				height: 320px;
-				vertical-align:middle;
+				vertical-align: middle;
 				display: inline-block;
 				text-align: center;
 				overflow: hidden;
 				line-height: 320px;
 			}
-			
 		</style>
 	</head>
 
@@ -330,16 +334,16 @@
 				});
 			}
 			//Picture processing
-			function imageshow(){
-				var _w = parseInt($(window).width());//获取浏览器的宽度
+			function imageshow() {
+				var _w = parseInt($(window).width()); //获取浏览器的宽度
 				//console.log(_w);
-				$("#slider img").each(function(i){
+				$("#slider img").each(function(i) {
 					var img = $(this);
-					var realWidth=$(this).width();//图片真实的宽度
-					var realHeight=$(this).height();//图片真实的高度
-					var cha=realWidth-_w*1;
-					var bival=cha/2;
-					$(this).attr("style","height: 320px; width: auto;vertical-align:middle;margin-left:-"+bival+"px;");
+					var realWidth = $(this).width(); //图片真实的宽度
+					var realHeight = $(this).height(); //图片真实的高度
+					var cha = realWidth - _w * 1;
+					var bival = cha / 2;
+					$(this).attr("style", "height: 320px; width: auto;vertical-align:middle;margin-left:-" + bival + "px;");
 				});
 			}
 
@@ -360,13 +364,13 @@
 				});
 			}
 			//translate html
-			function HTMLDecode(text) { 
-			    var temp = document.createElement("div"); 
-			    temp.innerHTML = text; 
-			    var output = temp.innerText || temp.textContent; 
-			    temp = null; 
-			    return output; 
-		   }
+			function HTMLDecode(text) {
+				var temp = document.createElement("div");
+				temp.innerHTML = text;
+				var output = temp.innerText || temp.textContent;
+				temp = null;
+				return output;
+			}
 			//message show
 			function messageshow(results) {
 				$(".mui-slider-indicator").empty();
@@ -389,10 +393,10 @@
 				var last = '<img src="' + imgsarr[la] + '"  style="height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
 				$(".firstimage").html(last);
 				$(".lastimage").html(first);
-				if(imglength>1){
+				if(imglength > 1) {
 					$("#leftarrow").show();
 					$("#rightarrow").show();
-				}else{
+				} else {
 					$("#leftarrow").hide();
 					$("#rightarrow").hide();
 				}
@@ -430,19 +434,19 @@
 				$(".kankan_det_locationinfo").html(uadress);
 				var authlang = commodity.user_basic.talk_flag;
 				authlang = authlang.split(',');
-				for(var i=0;i<authlang.length;i++){
-					if(authlang[i] == 0){
+				for(var i = 0; i < authlang.length; i++) {
+					if(authlang[i] == 0) {
 						$(".lanjp").show();
 					}
-					if(authlang[i] == 1){
+					if(authlang[i] == 1) {
 						$(".lanch").show();
 					}
-					if(authlang[i] == 2){
+					if(authlang[i] == 2) {
 						$(".lanen").show();
 					}
-					if(authlang[i] == 3){
+					if(authlang[i] == 3) {
 						$(".lanhk").show();
-					}					
+					}
 				}
 				//buy way
 				var exchange = commodity.commodity_buy_way.exchange;
@@ -700,25 +704,37 @@
 				var params = {
 					"commodity_id": codid
 				};
-				if(change_name == 'switchp') {
-					mode = 'business';
-					params.mode = mode;
-					transRequest(params);
-				} else if(change_name == 'switchex') {
-					mode = 'exchange';
-					params.mode = mode;
+				var login_flag = plus.storage.getItem("LoginFlag");
+				if(login_flag != 'isLogin') {
+					mui.toast(TextMessage.test, {
+						duration: 'long',
+						type: 'div'
+					});
 					mui.openWindow({
-						url: "../../transaction/select_item.html",
-						id: "selectitem",
-						extras: {
-							"commodity_id": codid,
-							"mode": mode
-						}
-					})
+						id: 'login',
+						url: "../../login/login.html"
+					});
 				} else {
-					mode = 'gratis';
-					params.mode = mode;
-					transRequest(params);
+					if(change_name == 'switchp') {
+						mode = 'business';
+						params.mode = mode;
+						transRequest(params);
+					} else if(change_name == 'switchex') {
+						mode = 'exchange';
+						params.mode = mode;
+						mui.openWindow({
+							url: "../../transaction/select_item.html",
+							id: "selectitem",
+							extras: {
+								"commodity_id": codid,
+								"mode": mode
+							}
+						})
+					} else {
+						mode = 'gratis';
+						params.mode = mode;
+						transRequest(params);
+					}
 				}
 			})
 		</script>
