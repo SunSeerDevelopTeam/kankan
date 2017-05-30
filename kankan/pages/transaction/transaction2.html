@@ -487,7 +487,6 @@
 				var trans_type = transinfo[0].trans_type;
 				var deliver = transinfo[0].deliver;
 				var buyer_flag = $("#buyer_flag").val();
-				alert(buyer_flag);
 				var params = {
 					"transid": trans_id
 				};
@@ -546,12 +545,16 @@
 						if(trans_type == 0) {
 							$(".tran-button-buy font").text("订单生成");
 						} else {
-							if(buyer_deliver == 1 && seller_deliver == 0) {
-								$(".tran-button-buy font").text("催促卖家发货");
-							} else if(buyer_deliver == 1 && seller_deliver == 1) {
-								$(".tran-button-buy font").text("确认收货");
+							if(trans_mode == 0) {
+								if(buyer_deliver == 1 && seller_deliver == 0) {
+									$(".tran-button-buy font").text("催促卖家发货");
+								} else if(buyer_deliver == 1 && seller_deliver == 1) {
+									$(".tran-button-buy font").text("确认收货");
+								} else {
+									$(".tran-button-buy font").text("确认发货");
+								}
 							} else {
-								$(".tran-button-buy font").text("确认发货");
+								$(".tran-button-buy font").text("确认收货");
 							}
 						}
 					} else {
@@ -568,7 +571,6 @@
 						}
 					}
 				} else if(status == 2) {
-					alert(status);
 					if(buyer_flag == 'true') {
 						if(trans_type != 0) {
 							if(deliver == 0) {
@@ -666,9 +668,7 @@
 						if(trans_type != 0) {
 							if(deliver == 0) {
 								trans_flow('transOrderLogustics', params);
-							} else {
-								alert("bbbb");
-							}
+							} 
 						} else {
 							if(buyer_deliver == 0 && seller_deliver == 1) {
 								trans_flow('transUrgeDelive', params);
@@ -686,7 +686,6 @@
 						}
 					}
 				} else if(status == 3) {
-					alert("status is 3333");
 					gotoEvaluate(trans_id);
 				} else if(status == 7) {
 					gotoEvaluate(trans_id);
@@ -702,23 +701,24 @@
 			function trans_flow(flag, params) {
 				Repository.Transaction.trans(flag, params, {
 					ok: function(data) {
-						Log.i("message send successfully!");
-						var transinfo = data.data.transinfo;
-						var messginfo = data.data.messginfo;
-						var commdinfo = data.data.commdinfo;
-						var usersinfo = data.data.usersinfo;
-						var tranStatusVal = getTransStatus(transinfo[0].status);
-						$(".tran-name-middle-status font").html(tranStatusVal);						//showTranCommodMsg(usersinfo, commdinfo, messginfo);
-						var buyer_id = transinfo.issue_user_id;
-						var seller_id = transinfo.accept_user_id;
-						var cur_user_id = data.data.myid;
-						var trans_mode = transinfo[0].trans_mode;
-						var trans_status = transinfo[0].status;
-						var trans_deliver = transinfo[0].deliver;
-						setHidVal(transinfo, usersinfo, cur_user_id);
-						showRequestStaus(transinfo, usersinfo);
-						if(flag == 'transOrderReceipt'){
+						if(flag == 'transOrderReceipt') {
 							gotoEvaluate(params.transid);
+						} else {
+							Log.i("message send successfully!");
+							var transinfo = data.data.transinfo;
+							var messginfo = data.data.messginfo;
+							var commdinfo = data.data.commdinfo;
+							var usersinfo = data.data.usersinfo;
+							var tranStatusVal = getTransStatus(transinfo[0].status);
+							$(".tran-name-middle-status font").html(tranStatusVal); //showTranCommodMsg(usersinfo, commdinfo, messginfo);
+							var buyer_id = transinfo.issue_user_id;
+							var seller_id = transinfo.accept_user_id;
+							var cur_user_id = data.data.myid;
+							var trans_mode = transinfo[0].trans_mode;
+							var trans_status = transinfo[0].status;
+							var trans_deliver = transinfo[0].deliver;
+							setHidVal(transinfo, usersinfo, cur_user_id);
+							showRequestStaus(transinfo, usersinfo);
 						}
 					},
 					ng: function(data) {
