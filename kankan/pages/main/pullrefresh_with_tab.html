@@ -629,7 +629,7 @@
 						getDataFromServer(
 							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
 							0,
-							5,
+							16,
 							$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
 							event.detail.keyword,
 							null,
@@ -938,15 +938,15 @@
 							};
 							Repository.Commodity.praise(params, {
 								ok: function(result) {
-									var praise_flag = result.data[0].p_flg;
+									var praise_flag = result.data.p_flg;
 									if(praise_flag == "0") {
 										_self.prev().addClass('comm-like-gray');
 										_self.prev().removeClass('comm-like-red');
-										_self.text(result.data[0].p_cnt);
+										_self.text(result.data.p_cnt);
 									} else if(praise_flag == "1") {
 										_self.prev().addClass('comm-like-red');
 										_self.prev().removeClass('comm-like-gray');
-										_self.text(result.data[0].p_cnt);
+										_self.text(result.data.p_cnt);
 									} else {
 										if(DEBUG) {
 											alert("praise_flag is error.");
