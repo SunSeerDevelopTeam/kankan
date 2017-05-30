@@ -32,7 +32,8 @@
 				text-align: center;
 			}
 			
-			#forget_password,#new_user_login {
+			#forget_password,
+			#new_user_login {
 				color: #FF0000;
 			}
 			
@@ -135,7 +136,6 @@
 					var authBtns = ['weixin'];
 					var auths = {};
 					var oauthArea = doc.getElementById('weixin-oauth');
-					alert(TextMessage.register);
 					plus.oauth.getServices(function(services) {
 						for(var i in services) {
 							var service = services[i];
@@ -158,7 +158,6 @@
 							var waiting = plus.nativeUI.showWaiting();
 							auth.login(function() {
 								auth.getUserInfo(function() {
-									alert("getUserInfo");
 									var name = auth.userInfo.nickname || auth.userInfo.name;
 									var params = {};
 									params[Api.Params.loginType] = LOGIN_TYPE.OAUTH;
@@ -170,10 +169,25 @@
 										ok: function(data) {
 											app.createState(name, function() {
 												plus.storage.setItem('LoginFlag', 'isLogin');
+												waiting.close();
+												plus.nativeUI.alert(TextMessage.input_email, function(event) {
+													mui.openWindow({
+														id: "emai_summate",
+														url: "emai_summate.html",
+														waiting: {
+															autoShow: false
+														},
+														show: {
+															duration: 200
+														}
+													});
+												}, TextMessage.sharetitle, TextMessage.yes);
+												/**
 												setTimeout(function() {
 													waiting.close();
 													mui.back();
 												}, 500);
+												**/
 											});
 										},
 										ng: function(data) {
@@ -278,12 +292,12 @@
 							}
 						});
 					});
-					
+
 					var newUserLogin = doc.getElementById('new_user_login');
 					newUserLogin.addEventListener('tap', function(event) {
 						$.openWindow({
 							id: 'reg',
-							url:"/pages/login/reg.html"
+							url: "/pages/login/reg.html"
 						});
 					});
 				});

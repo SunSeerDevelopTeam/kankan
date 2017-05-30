@@ -65,7 +65,7 @@
 
 			//Create subpage, first tab page display, others are hidden;
 			mui.plusReady(function() {
-				plus.webview.create("products/request.html","request.html");
+				plus.webview.create("products/request.html", "request.html");
 				Log.i("main.html plusReady...");
 				var self = plus.webview.currentWebview();
 				for(var i = 0; i < 4; i++) {
@@ -88,6 +88,21 @@
 			//Tab click event
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
+				var isLogin = plus.storage.getItem("LoginFlag");
+				if(isLogin != "isLogin") {
+					plus.nativeUI.alert(TextMessage.test, function(e) {
+						mui.openWindow({
+							id: "login",
+							url: "../login/login.html",
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+					}, TextMessage.sharetitle, TextMessage.yes);
+				}
 				if(targetTab == activeTab) {
 					return;
 				}
