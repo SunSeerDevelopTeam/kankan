@@ -124,7 +124,6 @@
 					ok: function(data) {
 						Log.i("message send successfully!");
 						mui.plusReady(function() {
-								alert("aaaa");
 								var preView = plus.webview.getWebviewById('transaction');
 								plus.webview.close(preView);
 								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
