@@ -821,8 +821,8 @@
 							var listItemHTML = new Util.StringBuilder();
 							listItemHTML.append('<div class="li-content">')
 								.append('<div class="comm-item">')
-								.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}" style="text-align:center;background-color: #cccccc;overflow: hidden;vertical-align:middle;display: inline-block;">', item.commodity_id)
-								.appendFormat('<img class="lazy" src="../../images/nopic.jpg" data-original="{0}"  style="height:100%;width:auto;vertical-align:middle;">', item.img_flag)
+								.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
+								.appendFormat('<div class="item-img-box"><img class="lazy" src="../../images/nopic.jpg" data-original="{0}"></div>', item.img_flag)
 								//.appendFormat('<img src="{0}">', item.img_flag)
 								.appendFormat('<span>{0}</span>', item.address)
 								.append('</div>')
@@ -845,6 +845,18 @@
 							fragment.appendChild(li);
 						});
 						updateListView(fragment, ul, index, reverse, self);
+						$(".item-img-box img").each(function(i){
+							var img = $(this);
+							var realWidth = $(this).width(); //图片真实的宽度
+							var realHeight = $(this).height(); //图片真实的高度
+							var cha = realHeight - 160 * 1;
+							if(cha>0){
+								var bival = cha / 2;
+								//alert($(this).attr("src"));
+								$(this).attr("style", "margin-top: -"+bival+"px;");
+							}
+							
+						});
 					};
 
 					var updateListView = function(fragment, ul, index, reverse, self) {
