@@ -1,19 +1,25 @@
 .li-content {
-	background-color: gray;
+	background-color: #FFFFFF;
 	padding: 2px;
 }
 
 .comm-item {
-	height: 140px;
+	height: 200px;
 }
 
 .item-tap {
-	height: 70%;
+	height: 80%;
+	text-align:center;
+	background-color: #FFFFFF;
+	overflow: hidden;
+	vertical-align:middle;
+	display: inline-block;
+	/*line-height: 160px;*/
 }
 
 .item-tap img {
-	width: 100%;
-	height: 100%;
+	/*width: 100%;
+	height: 100%;*/
 }
 
 .item-tap span {
@@ -24,7 +30,7 @@
 	padding-top: 4px;
 	width: 100px;
 	font-size: 14px;
-	margin-top: -92px;
+	margin-top: -130px;
 	text-align: center;
 	vertical-align: middle;
 	text-overflow: ellipsis;
@@ -32,7 +38,7 @@
 }
 
 .item-buttom {
-	height: 30%;
+	height: 20%;
 	background-color: white;
 }
 
@@ -87,4 +93,10 @@
 	width: 50px;
 	margin-top: 90%;
 	margin-left: 10%;
+}
+.item-img-box{
+	line-height: 160px;
+}
+.item-img-box img{
+	height:auto;width:100%;vertical-align:middle;
 }

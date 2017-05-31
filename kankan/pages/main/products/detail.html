@@ -342,8 +342,10 @@
 					var realWidth = $(this).width(); //图片真实的宽度
 					var realHeight = $(this).height(); //图片真实的高度
 					var cha = realWidth - _w * 1;
-					var bival = cha / 2;
-					$(this).attr("style", "height: 320px; width: auto;vertical-align:middle;margin-left:-" + bival + "px;");
+					if(cha>0){
+						var bival = cha / 2;
+						$(this).attr("style", "height: 320px; width: auto;vertical-align:middle;margin-left:-" + bival + "px;");
+					}
 				});
 			}
 
