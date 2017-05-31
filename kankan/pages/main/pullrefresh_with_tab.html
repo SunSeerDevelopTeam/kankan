@@ -589,7 +589,7 @@
 						var sliderItemCount = $('.mui-slider-group .mui-slider-item').length;
 						for(var i = 0; i < sliderItemCount; i++) {
 							if(e.detail.slideNumber === i) {
-								if (DEBUG) {
+								if(DEBUG) {
 									alert("getDataFromServer 2");
 								}
 								getDataFromServer(
@@ -619,18 +619,19 @@
 						if(DEBUG) {
 							alert("search event.");
 						}
-						if (event.detail.keyword === "") {
+						if(event.detail.keyword === "") {
 							return;
 						}
-						if (DEBUG) {
+						if(DEBUG) {
 							alert("getDataFromServer 3");
 						}
 						keyword = event.detail.keyword;
+						var index = $('#sliderSegmentedControl .mui-scroll a.mui-active').index();
 						getDataFromServer(
-							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
-							0,
+							$('.mui-slider-group .mui-scroll:eq(' + index + ') .mui-table-view')[0],
+							index,
 							16,
-							$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
+							$($('.mui-slider-group .mui-scroll:eq(' + index + ') .mui-table-view')[0]).parent().attr('data-category-id'),
 							event.detail.keyword,
 							null,
 							true,
@@ -639,10 +640,10 @@
 					});
 
 					window.addEventListener("refresh", function(event) {
-						if (event.detail.refresh != "canRefresh") {
+						if(event.detail.refresh != "canRefresh") {
 							return;
 						}
-						if (DEBUG) {
+						if(DEBUG) {
 							alert("getDataFromServer 4");
 						}
 						getDataFromServer(
@@ -696,7 +697,7 @@
 									setTimeout(function() {
 										var ul = self.element.querySelector('.mui-table-view');
 										var catalog = $(ul).parent().attr("data-category-id");
-										if (DEBUG) {
+										if(DEBUG) {
 											alert("getDataFromServer 5");
 										}
 										getDataFromServer(ul, index, 16, catalog, keyword, null, true, self);
@@ -713,7 +714,7 @@
 										if(pageInfo.list * pageInfo.page >= pageInfo.cnt) {
 											self.endPullUpToRefresh(true);
 										} else {
-											if (DEBUG) {
+											if(DEBUG) {
 												alert("getDataFromServer 6");
 											}
 											getDataFromServer(ul, index, 16, catalog, keyword, ++pageInfo.page, false, self);
@@ -789,7 +790,7 @@
 							userImgURL: userImgURL
 						});
 					}
-					
+
 					var updateNoticeStatus = function(flg) {
 						if(typeof(plus) == "undefined") {
 							return;
@@ -815,17 +816,17 @@
 							}
 							return;
 						}
-						var stylimg="";
-						var imgwidth=parseInt($(window).width())/2-34;
+						var stylimg = "";
+						var imgwidth = parseInt($(window).width()) / 2 - 34;
 						data.forEach(function(item) {
-							var heightim=item.img_flag.height;
-							var widthim=item.img_flag.width;
-							if(heightim > widthim){
-								var orginbi=heightim/widthim;
-								var actuheight=imgwidth*orginbi;
-								var heicha=actuheight-160;
-								var toppx=heicha/2;
-								stylimg="margin-top:-"+toppx+"px;";
+							var heightim = item.img_flag.height;
+							var widthim = item.img_flag.width;
+							if(heightim > widthim) {
+								var orginbi = heightim / widthim;
+								var actuheight = imgwidth * orginbi;
+								var heicha = actuheight - 160;
+								var toppx = heicha / 2;
+								stylimg = "margin-top:-" + toppx + "px;";
 							}
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
@@ -846,7 +847,7 @@
 								.append('<div class="height-max mui-col-sm-4 mui-col-xs-4">')
 								.appendFormat('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled ' + "{0}" + '">', item.praise_flg == 0 ? "comm-like-gray" : "comm-like-red")
 								.append('</span>')
-								.appendFormat('<span class="comm-like-num">{0}</span>', item.praise_cnt)
+								.appendFormat('<span data-click="0" class="comm-like-num">{0}</span>', item.praise_cnt)
 								.append('</div>')
 								.append('</div>')
 								.append('</div>')
@@ -873,7 +874,7 @@
 						}
 						//lazyLoadImg.start();
 						$("img.lazy").lazyload({
-							threshold : 200,
+							threshold: 200,
 							placeholder: "../../images/nopic.jpg",
 							effect: "fadeIn",
 							failure_limit : 10
@@ -888,8 +889,8 @@
 						});
 
 						getCategory();
-							
-						if (DEBUG) {
+
+						if(DEBUG) {
 							alert("getDataFromServer 1");
 						}
 						getDataFromServer(
@@ -928,22 +929,23 @@
 							}, 300);
 
 						});
-						
-						var isClickLikeBtn = false;
+
 						$(".comm-like-num").on("tap", function(event) {
-							if (isClickLikeBtn) {
-								return false;
+							var _self = $(this);
+							var clickFlag = _self.attr('data-click');
+							if(clickFlag === "1") {
+								_self.attr('data-click', '0');
+								return;
 							}
-							isClickLikeBtn = true;
+							_self.attr('data-click', '1');
 							if(DEBUG) {
 								alert("首页商品点赞事件被触发。");
 							}
 							var isLogin = plus.storage.getItem("LoginFlag");
 							if(!isLogin) {
 								toggleMenu();
-								return false;
+								return;
 							}
-							var _self = $(this);
 							var commId = _self.closest("li").find('.item-tap').attr('data-comm-id');
 							var params = {
 								commid: commId
@@ -964,7 +966,6 @@
 											alert("praise_flag is error.");
 										}
 									}
-									isClickLikeBtn = false;
 								},
 								ng: function(result) {
 									if(result === "2004") {
@@ -983,10 +984,8 @@
 											}
 										});
 									}
-									isClickLikeBtn = false;
 								},
 								error: function() {
-									isClickLikeBtn = false;
 								}
 							});
 							return false;
