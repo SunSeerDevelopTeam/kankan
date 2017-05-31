@@ -833,7 +833,7 @@
 							listItemHTML.append('<div class="li-content">')
 								.append('<div class="comm-item">')
 								.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
-								.appendFormat('<div class="item-img-box"><img class="lazy" src="../../images/nopic.jpg" data-original="{0}" style="{1}"></div>', item.img_flag.url,stylimg)
+								.appendFormat('<div class="item-img-box"><img class="lazy" data-original="{0}" style="{1}"></div>', item.img_flag.url,stylimg)
 								//.appendFormat('<img src="{0}">', item.img_flag)
 								.appendFormat('<span>{0}</span>', item.address)
 								.append('</div>')
@@ -875,7 +875,8 @@
 						$("img.lazy").lazyload({
 							threshold : 200,
 							placeholder: "../../images/nopic.jpg",
-							effect: "fadeIn"
+							effect: "fadeIn",
+							failure_limit : 10
 						});
 						bindEventOnListViewItem();
 					};
