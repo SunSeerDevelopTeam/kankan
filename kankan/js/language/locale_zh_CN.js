@@ -144,7 +144,11 @@ var JSLocale = {
 	"suretext":"确 认",
 	"writeemail":"完善邮箱",
 	"emailwtext":"请完善邮箱信息",
-	"new_user_login":"注册"
+	"new_user_login":"注册",
+	"transaction":"交易",
+	"trans_criterion":"特定商交易法为准的显示内容",
+	"trans_logistic":"联系物流",
+	"send_mail":"送信"
 }
 
 $(function() {

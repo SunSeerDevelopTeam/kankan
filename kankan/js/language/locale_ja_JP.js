@@ -144,7 +144,10 @@ var JSLocale = {
 	"suretext":"確    認",
 	"writeemail":"郵便箱",
 	"emailwtext":"どうぞ完全メールアドレス情報",
-	"new_user_login":"新しいはじめる方はこちら"
+	"new_user_login":"新しいはじめる方はこちら",
+	"transaction":"交易",
+	"trans_criterion":"特定商取引法に基づく表記",
+	"trans_logistic":"物流と連絡する"
 	
 }
 

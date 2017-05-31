@@ -24,7 +24,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
 				<font size="3" class="lang" data-locale="back"></font>
 			</a>
-			<h1 class="mui-title"><span class="lang" data-locale="change">Tran</span></h1>
+			<h1 class="mui-title"><span class="lang" data-locale="transaction"></span></h1>
 		</header>
 		<div class="mui-content">
 			<div id="mui-page-content">
@@ -90,12 +90,12 @@
 							<li class="tran-distribution-law">
 								<div class="tran-distribution-law-detail">
 									<a href="#tradeLaw">
-										<font size="3" color="999999" vertical-align="middle">特定商取引法に基づく表記</font>
+										<font size="3" class="lang" color="999999" data-locale="trans_criterion" vertical-align="middle"></font>
 									</a>
 								</div>
 								<a href="../main/logisticslist.html">
 									<div class="tran-distribution-call">
-										<font size="2" color="#FFFFF" vertical-align="middle">物流と連絡する</font>
+										<font size="2" class="lang" color="#FFFFF" data-locale="trans_logistic" vertical-align="middle"></font>
 									</div>
 								</a>
 							</li>
@@ -113,7 +113,7 @@
 				</li>
 				<li class="tran-foot-submit">
 					<button type="button" onclick="submitChat();" class="mui-btn-link mui-btn-nav mui-pull-left">
-						<span><font size="4" class="lang" >送信<font size="4"></span>
+						<span><font size="4" class="lang"  data-locale="send_mail"></font></span>
 					</button>
 				</li>
 			</ul>
@@ -141,7 +141,7 @@
 			function submitChat() {
 				var chatMsg = $("#msg").val();
 				if(chatMsg == '') {
-					mui.toast("内容はありませんね");
+					mui.toast(TextMessage.transContact);
 					$("#msg").focus();
 				} else {
 					var params = {
@@ -204,7 +204,7 @@
 						if(messginfo) {
 							showChatMsg(usersinfo, messginfo, cur_user_id);
 						}
-						tranStatusVal = trans_type == 0 ? "请求中" : "交易成立"
+						tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
 						$(".tran-name-middle-status font").html(tranStatusVal);
 
 					},
@@ -492,9 +492,9 @@
 				};
 				var buyer_id = transinfo[0].issue_user_id;
 				if(trans_type == 0) {
-					$(".tran-button-sell font").text("请求终止");
+					$(".tran-button-sell font").text(TextMessage.requestStop);
 				} else {
-					$(".tran-button-sell font").text("交易终止");
+					$(".tran-button-sell font").text(TextMessage.transStop);
 				}
 				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
 				for(var u in userinfo) {
@@ -511,12 +511,12 @@
 					}
 				}
 				if(status == 8) {
-					mui.alert('已终止交易，不能继续交易。如果要继续交易请重新请求！！');
+					mui.alert(TextMessage.transStopMsg);
 					var preView = plus.webview.getWebviewById('selectitem');
 					plus.webview.close(preView);
 					gotoMain();
 				} else if(status == 3) {
-					mui.alert('交易已完成！！');
+					mui.alert(TextMessage.transSuccessMsg);
 					mui.openWindow({
 						url: "./transevaluate.html?transid=" + trans_id,
 						id: "transevaluate",
@@ -527,10 +527,10 @@
 				} else if(status == 0) {
 					if(trans_mode > 0) {
 						if(buyer_flag == 'false') {
-							$(".tran-button-buy font").text("确认交易");
+							$(".tran-button-buy font").text(TextMessage.transConfirm);
 						} else {
 							if(trans_mode == 1) {
-								$(".tran-button-buy font").text("等待对方确认");
+								$(".tran-button-buy font").text(TextMessage.transWaitConfirm);
 							} else {
 								//$(".tran-button-buy font").text("订单申请");
 								$(".tran-button-buy").hide();
@@ -539,39 +539,39 @@
 						}
 					} else {
 						if(buyer_flag == 'false') {
-							$(".tran-button-buy font").text("确认交易");
+							$(".tran-button-buy font").text(TextMessage.transConfirm);
 						}else{
-							$(".tran-button-buy font").text("等待卖家确认");
+							$(".tran-button-buy font").text(TextMessage.transWaitConfirm);
 						}
 						
 					}
 				} else if(status == 1) {
 					if(buyer_flag == 'true') {
 						if(trans_type == 0) {
-							$(".tran-button-buy font").text("订单生成");
+							$(".tran-button-buy font").text(TextMessage.transOrder);
 						} else {
 							if(trans_mode == 0) {
 								if(buyer_deliver == 1 && seller_deliver == 0) {
-									$(".tran-button-buy font").text("催促卖家发货");
+									$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 								} else if(buyer_deliver == 1 && seller_deliver == 1) {
-									$(".tran-button-buy font").text("确认收货");
+									$(".tran-button-buy font").text(TextMessage.transReceipt);
 								} else {
-									$(".tran-button-buy font").text("确认发货");
+									$(".tran-button-buy font").text(TextMessage.transDelive );
 								}
 							} else {
-								$(".tran-button-buy font").text("确认收货");
+								$(".tran-button-buy font").text(TextMessage.transReceipt);
 							}
 						}
 					} else {
 						if(trans_type == 0) {
-							$(".tran-button-buy font").text("等待买家下单");
+							$(".tran-button-buy font").text(TextMessage.transWaitOrder );
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
-								$(".tran-button-buy font").text("催促买家发货");
+								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
-								$(".tran-button-buy font").text("确认收货");
+								$(".tran-button-buy font").text(TextMessage.transReceipt);
 							} else {
-								$(".tran-button-buy font").text("确认发货");
+								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
 						}
 					}
@@ -580,45 +580,45 @@
 						if(trans_mode != 0) {
 							if(deliver == 0) {
 								alert("aaaa");
-								$(".tran-button-buy font").text("催促卖家发货");
+								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else {
-								$(".tran-button-buy font").text("确认收货");
+								$(".tran-button-buy font").text(TextMessage.transReceipt);
 							}
 						} else {
 							if(buyer_deliver == 1 && seller_deliver == 0) {
-								$(".tran-button-buy font").text("催促卖家发货");
+								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
 								if(buyer_receipt == 0) {
-									$(".tran-button-buy font").text("确认收货");
+									$(".tran-button-buy font").text(TextMessage.transReceipt);
 								} else if(buyer_receipt == 1 && seller_receipt == 0) {
-									$(".tran-button-buy font").text("催促卖家收货");
+									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
 								} else {
-									$(".tran-button-buy font").text("交易完成");
+									$(".tran-button-buy font").text(TextMessage.transFinish);
 								}
 							} else {
-								$(".tran-button-buy font").text("确认发货");
+								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
 						}
 					} else {
 						if(trans_mode != 0) {
 							if(deliver == 0) {
-								$(".tran-button-buy font").text("确认发货");
+								$(".tran-button-buy font").text(TextMessage.transDelive);
 							} else {
-								$(".tran-button-buy font").text("等待买家收货");
+								$(".tran-button-buy font").text(TextMessage.transWaitReceipt);
 							}
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
-								$(".tran-button-buy font").text("催促买家发货");
+								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
 								if(seller_receipt == 0) {
-									$(".tran-button-buy font").text("确认收货");
+									$(".tran-button-buy font").text(TextMessage.transReceipt);
 								} else if(buyer_receipt == 1 && seller_receipt == 0) {
-									$(".tran-button-buy font").text("催促买家收货");
+									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
 								} else {
-									$(".tran-button-buy font").text("交易完成");
+									$(".tran-button-buy font").text(TextMessage.transFinish);
 								}
 							} else {
-								$(".tran-button-buy font").text("确认发货");
+								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
 						}
 					}
