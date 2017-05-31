@@ -30,7 +30,7 @@
 	padding-top: 4px;
 	width: 100px;
 	font-size: 14px;
-	margin-top: -120px;
+	margin-top: -130px;
 	text-align: center;
 	vertical-align: middle;
 	text-overflow: ellipsis;
@@ -98,5 +98,5 @@
 	line-height: 160px;
 }
 .item-img-box img{
-	max-height:auto;width:100%;vertical-align:middle;
+	height:auto;width:100%;vertical-align:middle;
 }

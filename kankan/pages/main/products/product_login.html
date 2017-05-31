@@ -118,13 +118,6 @@
 	<script src="../../../js/common.js"></script>
 	<script src="../../../js/pro_uploadimg.js"></script>
 	<script>
-//		mui.init({
-//			swipeBack: false,
-//			preloadPages: [{
-//					id: 'imagecut',
-//					url: 'imgcut/imagecut.html'
-//			}]
-//		});
 	$(function() {
 		$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
 	});
@@ -171,8 +164,8 @@
 		var classify_id=results.data.classify_id;
 		var price=results.data.price;
 		var state=results.data.state;
-		document.getElementById('comm_name').value=name;
-		document.getElementById('comm_detail').value=detail;
+		document.getElementById('comm_name').value=name.replace(/\s/g,'');
+		document.getElementById('comm_detail').value=detail.replace(/\s/g,'');
 		document.getElementById('business').value=business;
 		document.getElementById('exchange').value=exchange;
 		document.getElementById('gratis').value=gratis;
@@ -456,12 +449,12 @@ function publishs() {
 		alert(TextMessage.pro_imagetest);
 		return false;
 	}
-	if(comm_name == "") {
+	if(comm_name.replace(/\s/g,'') == "") {
 		alert(TextMessage.pro_nametest);
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
-	if(comm_detail == "") {
+	if(comm_detail.replace(/\s/g,'') == "") {
 		alert(TextMessage.pro_descriptiontest);
 		document.publishcomodity.comm_detail.focus();
 		return false;

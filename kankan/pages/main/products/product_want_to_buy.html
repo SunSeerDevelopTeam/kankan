@@ -79,12 +79,12 @@ function publishs() {
 	var imges1 = $("#1").val();
 	var imges2 = $("#2").val();
 	var imges3 = $("#3").val();
-	if(comm_name == "") {
+	if(comm_name.replace(/\s/g,'') == "") {
 		alert(TextMessage.pro_nametest);
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
-	if(comm_detail == "") {
+	if(comm_detail.replace(/\s/g,'') == "") {
 		alert(TextMessage.pro_descriptiontest);
 		document.publishcomodity.comm_detail.focus();
 		return false;
