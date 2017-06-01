@@ -224,6 +224,7 @@
 				commodity_id = event.detail.id;
 				mui.plusReady(function() {
 					getinfo(id);
+					clickshare(id);
 				});
 			});
 			//*********************share start
@@ -243,61 +244,67 @@
 			});
 
 			//onclick share
-			document.getElementById("share").addEventListener('tap', function() {
-				var ids = [{
-						id: "weixin",
-						ex: "WXSceneSession"
-					}, {
-						id: "weixin",
-						ex: "WXSceneTimeline"
-					}],
-					bts = [{
-						title: TextMessage.towchatfrind
-					}, {
-						title: TextMessage.towchatcircle
-					}];
-				plus.nativeUI.actionSheet({
-					cancel: TextMessage.cancel,
-					buttons: bts
-				}, function(e) {
-					var i = e.index;
-					if(i > 0) {
-						var s_id = ids[i - 1].id;
-						var share = shares[s_id];
-						if(share) {
-							if(share.authenticated) {
-								shareMessage(share, ids[i - 1].ex);
-							} else {
-								share.authorize(function() {
+			function clickshare(shareid){
+				document.getElementById("share").addEventListener('tap', function() {
+					var ids = [{
+							id: "weixin",
+							ex: "WXSceneSession"
+						}, {
+							id: "weixin",
+							ex: "WXSceneTimeline"
+						}],
+						bts = [{
+							title: TextMessage.towchatfrind
+						}, {
+							title: TextMessage.towchatcircle
+						}];
+					plus.nativeUI.actionSheet({
+						cancel: TextMessage.cancel,
+						buttons: bts
+					}, function(e) {
+						var i = e.index;
+						if(i > 0) {
+							var s_id = ids[i - 1].id;
+							var share = shares[s_id];
+							if(share) {
+								if(share.authenticated) {
 									shareMessage(share, ids[i - 1].ex);
-								}, function(e) {
-									console.log("error：" + e.code + " - " + e.message);
-								});
+								} else {
+									share.authorize(function() {
+										shareMessage(share, ids[i - 1].ex);
+									}, function(e) {
+										console.log("error：" + e.code + " - " + e.message);
+									});
+								}
+							} else {
+								mui.toast("can not get share server")
 							}
-						} else {
-							mui.toast("can not get share server")
 						}
-					}
+					});
 				});
-			});
-
-			function shareMessage(share, ex) {
-				var msg = {
-					extra: {
-						scene: ex
-					}
-				};
-				msg.href = "http://www.baidu.com";
-				msg.title = TextMessage.sharetitle;
-				msg.content = TextMessage.sharecontent;
-				msg.thumbs = ["../../../images/muwu.jpg"];
-				share.send(msg, function() {
-					alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
-					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
-				}, function(e) {
-					console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
-				});
+				//share message
+				//var shareid=$(".kankan_zanbox").attr("id");
+				//console.log("Api.baseUrl"+Api.url.Commodity.shareurl+shareid);
+				function shareMessage(share, ex) {
+					var msg = {
+						extra: {
+							scene: ex
+						}
+					};
+					msg.href = Api.url.Commodity.shareurl+shareid;
+					msg.title = TextMessage.sharetitle;
+					msg.content = TextMessage.sharecontent;
+					msg.thumbs = ["../../../images/muwu.jpg"];
+					share.send(msg, function() {
+						alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+					}, function(e) {
+						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
+					});
+				}
 			}
+				
+			
 			//share end***********/
 			function emptyhtml() {
 				$(".mui-slider-indicator").empty();

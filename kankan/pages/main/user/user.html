@@ -544,8 +544,8 @@
 				var k = ex + 1 * 1;
 				var commexid=exhibit_commdata[ex].commodity_id;
 				var commeximg_url=exhibit_commdata[ex].img_url;
-				var realwidth=exhibit_commdata[ex].img_url_width;
-				var realheight=exhibit_commdata[ex].img_url_height;
+				var realwidth=exhibit_commdata[ex].comm_img_width;
+				var realheight=exhibit_commdata[ex].comm_img_height;
 				var oribi=realheight/realwidth;
 				var showheight=imgwidth*oribi;
 				var cha1=showheight-72;
@@ -576,10 +576,11 @@
 				var ki = pi + 1 * 1;
 				var praisepid=praise_commdata[pi].commodity_id;
 				var praiseimg_url=praise_commdata[pi].img_url;
-				var realwidthpra=praise_commdata[pi].img_url_width;
-				var realheightpra=praise_commdata[pi].img_url_height;
+				var realwidthpra=praise_commdata[pi].comm_img_width;
+				var realheightpra=praise_commdata[pi].comm_img_height;
 				var oribipra=realheightpra/realwidthpra;
 				var showheightpra=oribipra*imgwidth;
+				console.log("showheightpra"+showheightpra);
 				var cha2=showheightpra-72;
 				if(cha2>0){
 					toppxpra=cha2/2;
