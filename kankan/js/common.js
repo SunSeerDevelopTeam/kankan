@@ -511,7 +511,8 @@ var Api;
 			Commoditypublish: baseUrl() + '/commodity/release/',
 			Commodityedite: baseUrl() + '/commodity/release/update/',
 			logisticslist: baseUrl() + '/logistics/',
-			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/'
+			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
+			shareurl:baseUrl()+'/share.php?id='
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:

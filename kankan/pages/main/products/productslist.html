@@ -142,7 +142,7 @@
 					var html = new Util.StringBuilder();
 					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">')
 						.appendFormat('<a href="detail.html" id="{0}">', commodityid)
-						.appendFormat('<img class="mui-media-object" src="{0}" style="height: 120px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
+						.appendFormat('<img class="mui-media-object" src="{0}" style="height: auto;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
 						.append('</a>')
 						.append('</li>');
 					$(".comditylists").append(html.toString());

@@ -22,7 +22,7 @@ body .mui-table-view-cell.mui-active{
 	font-size: 12px;
 }
 .kankan_morecoin {
-	margin-top: -10.5em;
+	margin-top: -14em;
 	position: absolute;
 	opacity: 1;
 	padding: 0 1.2em;
@@ -71,6 +71,13 @@ body .mui-table-view-cell.mui-active{
 
 .ka_imgoption {
 	max-height: 100px;
+	margin-bottom:3em;
+	line-height: 100px;
+	vertical-align: middle;
+	display: inline;
+}
+.ka_imgoption img{
+	vertical-align: middle;
 }
 .ka_exchangeheadimage{
 	border-radius: 50%; width: 20px; height: 20px;
@@ -166,11 +173,12 @@ body .mui-table-view-cell.mui-active{
 
 .kankan_jyimgbox {
 	margin-top: 1em;
+	margin-left: 1em;
 }
 
 .kankan_jhjiantou {
-	max-height: 15px;
-	max-width: 20px;
+	max-height: 20px;
+	max-width: 25px;
 }
 
 .kankan_requestimg img {

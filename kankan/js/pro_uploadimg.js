@@ -118,27 +118,43 @@ function imgRemove() {
 //compressImage
 function compressImg(path) {
 	var currenttime = Date.parse(new Date());
-	plus.zip.compressImage({
-			src: path,
-			dst: "_doc/" + currenttime + ".jpg",
-			quality: 20,
-			overwrite: true,
-			format: "jpg",
-			width: "auto",
-			height: "auto"
-		},
-		function(event) {
-			console.log("Compress success!");
-			var target = event.target;
-			var size = event.size; // （Byte）
-			var width = event.width; // px
-			var height = event.height; // px
-			console.log("compress size is (byte):"+size);
-			uploadimage(target);
-		},
-		function(error) {
-			alert("Compress error!" + error.message);
-		});
+	var imgcm = new Image(); 
+	imgcm.src = path+"?"+currenttime;
+	imgcm.onload=function(){
+		console.log("width:"+imgcm.width+"</br>height:"+imgcm.height);
+		var rwidth=imgcm.width;
+		var rheight=imgcm.height;
+		if(rwidth>=1000 & rheight>=1000){
+			var presswidth=rwidth/10;
+			var pressheight=rheight/10;
+			zipcom(presswidth,pressheight);
+		}else{
+			zipcom(rwidth,rheight);
+		}
+		function zipcom(presswidth,pressheight){
+			plus.zip.compressImage({
+				src: path,
+				dst: "_doc/" + currenttime + ".jpg",
+				quality: 70,
+				overwrite: true,
+				format: "jpg",
+				width: presswidth,
+				height: pressheight
+			},
+			function(event) {
+				console.log("Compress success!");
+				var target = event.target;
+				var size = event.size; // （Byte）
+				var width = event.width; // px
+				var height = event.height; // px
+				console.log("compress size is (byte):"+size);
+				uploadimage(target);
+			},
+			function(error) {
+				alert("Compress error!" + error.message);
+			});
+		}
+	};
 }
 
 function uploadimage(path) {
