@@ -341,6 +341,18 @@ body .mui-table-view-cell.mui-active{
 .ka_sendbutton{
 	color:#007AFF; border: 1px #FFFFFF solid;
 }
+.ka_imgoption2 {
+	height: 120px;
+	/*margin-bottom:3em;*/
+	line-height: 120px;
+	vertical-align: middle;
+	display: inline;
+	overflow: hidden;
+	margin-top: 1em;
+}
+.ka_imgoption2 img{
+	vertical-align: middle;
+}
 /***comment list*****/
 
 .ka_commentsort {
