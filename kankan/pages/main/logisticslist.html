@@ -211,10 +211,14 @@
 					.appendFormat('<div class="delivery-detail-call" onclick="showDialog(' + "'{0}'" + ",'{1}'" + ",'{2}'" + ');">', l_com_name, l_com_phone, l_com_id)
 					.append('<font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.sendmailbutext + '</font></div></li>')
 					.appendFormat('<li class="delivery-grid2"><div class="delivery-detail-call2" onclick="showCallDialog(' + "'{0}'" + ",'{1}'" + ',null);"><font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.calbutext + '</font></div></li>', l_com_name, l_com_phone)
-					.append('<li class="delivery-grid3"><div class="delivery-detail-call3"><font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.homebutext + '</font></div></li></ul>');
+					.append('<li class="delivery-grid3 homepage"><div class="delivery-detail-call3"><font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.homebutext + '</font></div></li></ul>');
 				$(".tran-body").append(html.toString());
 				$("#goback").html(TextMessage.back);
 			}
+			mui(".homepage").on("tap","div",function(){
+				var mainpage=plus.webview.getLaunchWebview();
+					mui.fire(mainpage,'gohome');
+			});
 		}
 		mui.plusReady(function() {
 			var params = {};
