@@ -160,7 +160,7 @@
 									params[Api.Params.loginType] = LOGIN_TYPE.OAUTH;
 									params[Api.Params.nickName] = auth.userInfo.nickname;
 									//params.[Api.Params.nickName] = name;
-									params[Api.Params.openId] = auth.userInfo.openid;
+									params[Api.Params.openId] = auth.userInfo.unionid;
 									params[Api.Params.headimgUrl] = auth.userInfo.headimgurl;
 									Repository.User.login(params, {
 										ok: function(data) {
