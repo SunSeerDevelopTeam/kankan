@@ -942,6 +942,13 @@ var Api;
 							}
 						})
 				break;
+			case '5000':
+				err_msg = TextMessage.errorCode_5000;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
 			default:
 				break;
 		}
@@ -1370,6 +1377,7 @@ var TextMessage;
 	TextMessage.errorCode_3010 = language ? "操作故障": "操作失效";
 	TextMessage.errorCode_3011 = language ? "登録後に操作してください": "请登录后操作";
 	TextMessage.errorCode_3020 = language ? "メールの情報を完全にしてください": "请完善邮箱信息";
+	TextMessage.errorCode_5000 = language ? "ページ間違えて": "页面出错啦";
 	TextMessage.prostaute0 = language ? "新品・未使用" : "未使用过";
 	TextMessage.prostaute1 = language ? "未使用に近い" : "几乎未使用过";
 	TextMessage.prostaute2 = language ? "目立った傷や汚れなし " : "无使用痕迹";
@@ -1441,7 +1449,10 @@ var TextMessage;
 	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
 	TextMessage.transFinish = language ? "交易完成" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
-	
+	TextMessage.transStopTips = language ? "":"确认终止交易吗?";
+	TextMessage.confirmBtnYes = language ? "はい":"确认";
+	TextMessage.confirmBtnNo = language ? "いいえ":"取消";
+	TextMessage.evaluateMsg = language ? "このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに交易確認画面で伝えましょう。":"";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

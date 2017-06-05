@@ -148,7 +148,11 @@ var JSLocale = {
 	"transaction":"交易",
 	"trans_criterion":"特定商交易法为准的显示内容",
 	"trans_logistic":"联系物流",
-	"send_mail":"送信"
+	"send_mail":"送信",
+	'trans_finish':"交易终止",
+	'eve_comment':"请填写评价的评语 ",
+	'eve_btn':"评价",
+	"home_return":"返回首页",
 }
 
 $(function() {

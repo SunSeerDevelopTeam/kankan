@@ -148,24 +148,7 @@
 						"message": chatMsg,
 						"transid": trans_id
 					};
-					Repository.Transaction.transConversation(params, {
-						ok: function(data) {
-							Log.i("message send successfully!");
-							$("#msg").val("");
-							var transinfo = data.data.transinfo;
-							var messginfo = data.data.messginfo;
-							var commdinfo = data.data.commdinfo;
-							var usersinfo = data.data.usersinfo;
-							var cur_user_id = data.data.myid;
-							if(messginfo) {
-								showChatMsg(usersinfo, messginfo, cur_user_id);
-							}
-						},
-						ng: function(data) {
-							Log.i("message send faild!");
-							Api.callback_ng(data);
-						}
-					});
+					trans_flow('transConversation', params,'');
 				}
 			}
 
@@ -173,45 +156,7 @@
 				var params = {
 					"transid": trans_id
 				};
-				Repository.Transaction.transEdite(params, {
-					ok: function(data) {
-						var transinfo = data.data.transinfo;
-						var messginfo = data.data.messginfo;
-						var commdinfo = data.data.commdinfo;
-						var usersinfo = data.data.usersinfo;
-						var buyer_flag = false;
-						var tranStatusVal = getTransStatus(transinfo.status);
-						$(".tran-name-middle-status font").html(tranStatusVal);
-						var buyer_id = transinfo[0].issue_user_id;
-						var seller_id = transinfo[0].accept_user_id;
-						var cur_user_id = data.myid;
-						var trans_mode = transinfo[0].trans_mode;
-						var trans_status = transinfo[0].status;
-						var trans_deliver = transinfo[0].deliver;
-						var trans_type = transinfo[0].trans_type;
-						if(buyer_id == cur_user_id) buyer_flag = 'true';
-
-						if(trans_mode > 0) {
-							$(".exchange").hide();
-							$(".other").show();
-						} else {
-							$(".exchange").show();
-							$(".other").hide();
-						}
-						setHidVal(transinfo, usersinfo, cur_user_id);
-						showRequestStaus(transinfo, usersinfo);
-						showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id);
-						if(messginfo) {
-							showChatMsg(usersinfo, messginfo, cur_user_id);
-						}
-						tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
-						$(".tran-name-middle-status font").html(tranStatusVal);
-
-					},
-					ng: function(data) {
-						Api.callback_ng(data);
-					}
-				});
+				trans_flow('transEdite', params,'');
 			}
 
 			function getTransStatus(status) {
@@ -227,7 +172,7 @@
 				var trans_deliver = transinfo[0].deliver;
 				var trans_type = transinfo[0].trans_type;
 				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
-				
+
 				for(var u in usersinfo) {
 					if(usersinfo[u].user_id == buyer_id) {
 						buyer_deliver = usersinfo[u].deliver_flag;
@@ -298,13 +243,12 @@
 					if(seller_comm_exist) {
 						seller_msg += '<a href="#">';
 						seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
-						seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
 						seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
 						seller_msg += '</div>';
 						if(seller_comm_info.length > 1) {
 							seller_msg += '<img src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 						}
-						seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
+						seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 						seller_msg += '</a>';
 						seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
 						seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
@@ -317,7 +261,7 @@
 					if(buyer_comm_info.length > 1) {
 						buyer_msg += '<img id="moreicon" src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 					}
-					buyer_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + buyer_comm_img + '">';
+					buyer_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + buyer_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 					buyer_msg += '</a>';
 					buyer_msg += '<input type="hidden" name="buyer_commodity_id" value="' + buyer_comm_id + '">';
 					buyer_msg += '<input type="hidden" id="buyer_user_id" name="buyer_user_id" value="' + buyer_id + '">';
@@ -336,7 +280,7 @@
 					seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
 					seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
 					seller_msg += '</div>';
-					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '">';
+					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 					seller_msg += '</a>';
 					$(".other li").html(seller_msg);
 				}
@@ -378,22 +322,10 @@
 							});
 						}, 300);
 					} else {
-						mui.openWindow({
-							url: "./request_item.html?transid=" + trans_id,
-							id: "requestitem",
-							extras: {
-								"transid": trans_id
-							}
-						})
+						jumpToOtherPage('./request_item.html','requestitem',trans_id);
 					}
 				} else {
-					mui.openWindow({
-						url: "./change_item.html",
-						id: "change_item",
-						extras: {
-							"transid": trans_id
-						}
-					})
+					jumpToOtherPage('./change_item.html','change_item',trans_id);
 				}
 			}
 
@@ -402,19 +334,9 @@
 				var params = {
 					"transid": trans_id
 				};
-				Repository.Transaction.transEdite(params, {
-					ok: function(data) {
-						var transinfo = data.data.transinfo;
-						var messginfo = data.data.messginfo;
-						var commdinfo = data.data.commdinfo;
-						var usersinfo = data.data.usersinfo;
-						goods_detail(cur_user_id, commdinfo, 'request');
-					},
-					ng: function(data) {
-						Api.callback_ng(data);
-					}
-				})
+				trans_flow('transEdite', params,'request');
 			})
+			
 			mui(".exchange").on('tap', '.cur-user', function() {
 				var cur_user_id = $("#myid").val();
 				var trans_type = $("#trans_type").val();
@@ -422,18 +344,7 @@
 				var params = {
 					"transid": trans_id
 				};
-				Repository.Transaction.transEdite(params, {
-					ok: function(data) {
-						var transinfo = data.data.transinfo;
-						var messginfo = data.data.messginfo;
-						var commdinfo = data.data.commdinfo;
-						var usersinfo = data.data.usersinfo;
-						goods_detail(cur_user_id, commdinfo, 'my');
-					},
-					ng: function(data) {
-						Api.callback_ng(data);
-					}
-				})
+				trans_flow('transEdite', params,'my');
 			})
 
 			function showChatMsg(usersinfo, messginfo, cur_user_id) {
@@ -517,13 +428,7 @@
 					gotoMain();
 				} else if(status == 3) {
 					mui.alert(TextMessage.transSuccessMsg);
-					mui.openWindow({
-						url: "./transevaluate.html?transid=" + trans_id,
-						id: "transevaluate",
-						extras: {
-							"transid": trans_id
-						}
-					})
+					jumpToOtherPage('./transevaluate.html','transevaluate',trans_id);
 				} else if(status == 0) {
 					if(trans_mode > 0) {
 						if(buyer_flag == 'false') {
@@ -540,10 +445,10 @@
 					} else {
 						if(buyer_flag == 'false') {
 							$(".tran-button-buy font").text(TextMessage.transConfirm);
-						}else{
+						} else {
 							$(".tran-button-buy font").text(TextMessage.transWaitConfirm);
 						}
-						
+
 					}
 				} else if(status == 1) {
 					if(buyer_flag == 'true') {
@@ -556,7 +461,7 @@
 								} else if(buyer_deliver == 1 && seller_deliver == 1) {
 									$(".tran-button-buy font").text(TextMessage.transReceipt);
 								} else {
-									$(".tran-button-buy font").text(TextMessage.transDelive );
+									$(".tran-button-buy font").text(TextMessage.transDelive);
 								}
 							} else {
 								$(".tran-button-buy font").text(TextMessage.transReceipt);
@@ -564,7 +469,7 @@
 						}
 					} else {
 						if(trans_type == 0) {
-							$(".tran-button-buy font").text(TextMessage.transWaitOrder );
+							$(".tran-button-buy font").text(TextMessage.transWaitOrder);
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
@@ -642,53 +547,53 @@
 				var seller_urge_d = $("#seller_urge_d").val();
 				var seller_receipt = $("#seller_receipt").val();
 				if(status == 0) {
-					trans_flow('transRequestOrder', params);
+					trans_flow('transRequestOrder', params,'');
 				} else if(status == 1) {
-					trans_flow('transSubmitOrder', params);
+					trans_flow('transSubmitOrder', params,'');
 				} else if(status == 2) {
 					if(buyer_flag == 'true') {
 						if(trans_mode != 0) {
 							if(deliver == 0) {
-								trans_flow('transUrgeDelive', params);
+								trans_flow('transUrgeDelive', params,'');
 							} else {
 								params.charity = 0;
-								trans_flow('transOrderReceipt', params);
+								trans_flow('transOrderReceipt', params,'');
 							}
 						} else {
 							if(buyer_deliver == 1 && seller_deliver == 0) {
-								trans_flow('transUrgeDelive', params);
+								trans_flow('transUrgeDelive', params,'');
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
 								if(buyer_receipt == 0) {
 									params.charity = 0;
-									trans_flow('transOrderReceipt', params);
+									trans_flow('transOrderReceipt', params,'');
 								} else if(buyer_receipt == 1 && seller_receipt == 0) {
-									trans_flow('transUrgeReceipt', params);
+									trans_flow('transUrgeReceipt', params,'');
 								} else {
 									gotoEvaluate(trans_id);
 								}
 							} else if(buyer_deliver == 0) {
-								trans_flow('transOrderLogustics', params);
+								trans_flow('transOrderLogustics', params,'');
 							}
 						}
 					} else {
 						if(trans_mode != 0) {
 							if(deliver == 0) {
-								trans_flow('transOrderLogustics', params);
-							} 
+								trans_flow('transOrderLogustics', params,'');
+							}
 						} else {
 							if(buyer_deliver == 0 && seller_deliver == 1) {
-								trans_flow('transUrgeDelive', params);
+								trans_flow('transUrgeDelive', params,'');
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
 								if(seller_receipt == 0) {
 									params.charity = 0;
-									trans_flow('transOrderReceipt', params);
+									trans_flow('transOrderReceipt', params,'');
 								} else if(buyer_receipt == 1 && seller_receipt == 0) {
-									trans_flow('transUrgeReceipt', params);
+									trans_flow('transUrgeReceipt', params,'');
 								} else {
 									gotoEvaluate(trans_id);
 								}
 							} else if(seller_deliver == 0) {
-								trans_flow('transOrderLogustics', params);
+								trans_flow('transOrderLogustics', params,'');
 							}
 						}
 					}
@@ -705,10 +610,10 @@
 				}
 			})
 
-			function trans_flow(flag, params) {
-				Repository.Transaction.trans(flag, params, {
+			function trans_flow(api_url_flag, params,flag) {
+				Repository.Transaction.trans(api_url_flag, params, {
 					ok: function(data) {
-						if(flag == 'transOrderReceipt') {
+						if(api_url_flag == 'transOrderReceipt') {
 							gotoEvaluate(params.transid);
 						} else {
 							Log.i("message send successfully!");
@@ -716,16 +621,41 @@
 							var messginfo = data.data.messginfo;
 							var commdinfo = data.data.commdinfo;
 							var usersinfo = data.data.usersinfo;
-							var tranStatusVal = getTransStatus(transinfo[0].status);
-							$(".tran-name-middle-status font").html(tranStatusVal); //showTranCommodMsg(usersinfo, commdinfo, messginfo);
-							var buyer_id = transinfo.issue_user_id;
-							var seller_id = transinfo.accept_user_id;
+							var buyer_flag = false;
+							
+							var tranStatusVal = getTransStatus(transinfo.status);
+							$(".tran-name-middle-status font").html(tranStatusVal);
+							var buyer_id = transinfo[0].issue_user_id;
+							var seller_id = transinfo[0].accept_user_id;
 							var cur_user_id = data.myid;
 							var trans_mode = transinfo[0].trans_mode;
 							var trans_status = transinfo[0].status;
 							var trans_deliver = transinfo[0].deliver;
+							var trans_type = transinfo[0].trans_type;
+							if(buyer_id == cur_user_id) buyer_flag = 'true';
+							if(flag == 'my') goods_detail(cur_user_id, commdinfo, 'my');
+							else if(flag == 'request') goods_detail(cur_user_id, commdinfo, 'request');
+							if(api_url_flag == 'transConversation'){
+								if(messginfo) {
+									showChatMsg(usersinfo, messginfo, cur_user_id);
+								}
+							}
+							if(trans_mode > 0) {
+								$(".exchange").hide();
+								$(".other").show();
+							} else {
+								$(".exchange").show();
+								$(".other").hide();
+							}
 							setHidVal(transinfo, usersinfo, cur_user_id);
 							showRequestStaus(transinfo, usersinfo);
+							showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id);
+							if(messginfo) {
+								showChatMsg(usersinfo, messginfo, cur_user_id);
+							}
+							tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
+							$(".tran-name-middle-status font").html(tranStatusVal);
+
 						}
 					},
 					ng: function(data) {
@@ -770,7 +700,17 @@
 					}
 				})
 			}
-
+			
+			function jumpToOtherPage(pageurl,pageid,transid){
+				mui.openWindow({
+					url:pageurl,
+					id:pageid,
+					extras: {
+						"transid": transid
+					}
+				})
+			}
+			
 			function gotoMain() {
 				mui.plusReady(function() {
 					var requestView = plus.webview.getWebviewById('request');
@@ -789,22 +729,16 @@
 				var params = {
 					"transid": trans_id
 				};
-				var btnArray = ['否', '是'];
+				var btnArray = [TextMessage.confirmBtnNo, TextMessage.confirmBtnYes];
 				var trans_type = $("#trans_type").val();
 
-				mui.confirm('确认交易终止？', 'kankan', btnArray, function(e) {
+				mui.confirm(TextMessage.transStopTips, 'kankan', btnArray, function(e) {
 					if(e.index == 1) {
 						Repository.Transaction.transStop(params, {
 							ok: function(data) {
 								Log.i("message send successfully!");
 								if(trans_type == 1) {
-									mui.openWindow({
-										url: "./transevaluate.html?transid=" + trans_id,
-										id: "transevaluate",
-										extras: {
-											"transid": trans_id
-										}
-									})
+									gotoEvaluate(trans_id);
 								} else {
 									gotoMain();
 								}

@@ -15,7 +15,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">交易完了</h1>
+			<h1 class="mui-title" class="lang" data-locale="trans_finish"></h1>
 		</header>
 		<div class="mui-pages">
 			<!--main content start-->
@@ -24,7 +24,7 @@
 					<div class="mui-scroll-wrapper">
 						<div class="tran-page">
 							<div style="font-size:1.2rem;;background:#F3F3F3;height:45px;width:100%;padding:15px 5px;">
-								<span>評価</span>
+								<span class="lang" data-locale="det_pcercomment"></span>
 							</div>
 							<ul class="mui-table-view" style="margin-top:0px;">
 								<li class="head-img-box">
@@ -40,14 +40,11 @@
 										</li>
 									</ul>
 									<ul class="user-comment-list">
-										<li class="user-comment-grid">
-											好评
+										<li class="user-comment-grid lang" data-locale="det_goodcomments">
 										</li>
-										<li class="user-comment-grid2">
-											中评
+										<li class="user-comment-grid2 lang" data-locale="det_normalcomments">
 										</li>
-										<li class="user-comment-grid2">
-											差评
+										<li class="user-comment-grid2 lang" data-locale="det_badcomments">
 										</li>
 									</ul>
 									<ul class="user-comment-list ">
@@ -62,28 +59,16 @@
 										</li>
 									</ul>
 								</li>
-								<li style="padding:5px;">評価のコメントを記入しましょう</li>
+								<li style="padding:5px;" class="lang" data-locale="eve_comment"></li>
 								<li>
 									<div class="mui-input-row" style="margin: 10px 5px;">
 										<textarea name="evaluate_msg" style="background:#eee;" id="evaluate_msg" rows="5" placeholder="このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに交易確認画面で伝えましょう。"></textarea>
-										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined">評価する</button>
+										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined lang" data-locale="eve_btn"></button>
 									</div>
 								</li>
-							</ul>
-							<!--<div style="margin-top:-10px;background:#F3F3F3;height:45px;width:100%;padding:15px 5px;">
-							<span>社会貢献 </span>
-						</div>
-						<ul  class="mui-table-view" style="margin:-4px;padding:15px 5px;">
-							<li style="margin:5px;">
-								<input name="checkbox" value="Item 1" type="checkbox">
-								<span>会社貢献金を○○○○寄付する</span>	
-							</li>
-							<li style="font-size:10px;color:red;margin:5px;">
-								<span>＊社会貢献金とは交易金ではなく、交易手続き金中での1%を○○○○に寄付することです。ご安心ください</span>	
-							</li>
-						</ul>-->
+							</ul>s
 							<div style="text-align:center;margin-top:-5px;background:#F3F3F3;height:40px;width:100%;padding-top:20px;">
-								<a href="../main/main.html" style="background:#6ACB9A;"><span>ホームに戻る</span></a>
+								<a href="javascript:gotoMain();" style="background:#6ACB9A;"><span class="lang" data-locale="home_return"></span></a>
 							</div>
 						</div>
 					</div>
@@ -110,8 +95,22 @@
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
+				$("#evaluate_msg").val(TextMessage.evaluateMsg);
 			});
 
+			function gotoMain(){
+				mui.plusReady(function() {
+					var requestView = plus.webview.getWebviewById('request');
+					plus.webview.close(requestView);
+					var requestlistView = plus.webview.getWebviewById('requestlist');
+					plus.webview.close(requestlistView);
+					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+					mui.back();
+					mui.fire(mainpage, 'refresh', {
+						refresh: "canRefresh"
+					});
+				});
+			}
 			function evaluate_submit() {
 				var evaluate_flg = $("input[name='evalueate']:checked").val();
 				var evaluate_msg = $("#evaluate_msg").val();
