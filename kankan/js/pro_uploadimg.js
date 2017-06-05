@@ -127,15 +127,15 @@ function compressImg(path) {
 		if(rwidth>=1000 & rheight>=1000){
 			var presswidth=rwidth/10;
 			var pressheight=rheight/10;
-			zipcom(presswidth,pressheight);
+			zipcom(presswidth,pressheight,90);
 		}else{
-			zipcom(rwidth,rheight);
+			zipcom(rwidth,rheight,20);
 		}
-		function zipcom(presswidth,pressheight){
+		function zipcom(presswidth,pressheight,quality){
 			plus.zip.compressImage({
 				src: path,
 				dst: "_doc/" + currenttime + ".jpg",
-				quality: 70,
+				quality: quality,
 				overwrite: true,
 				format: "jpg",
 				width: presswidth,

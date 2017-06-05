@@ -224,7 +224,7 @@
 				commodity_id = event.detail.id;
 				mui.plusReady(function() {
 					getinfo(id);
-					clickshare(id);
+					
 				});
 			});
 			//*********************share start
@@ -244,7 +244,7 @@
 			});
 
 			//onclick share
-			function clickshare(shareid){
+			function clickshare(shareid,imgurl){
 				document.getElementById("share").addEventListener('tap', function() {
 					var ids = [{
 							id: "weixin",
@@ -292,9 +292,9 @@
 						}
 					};
 					msg.href = Api.url.Commodity.shareurl+shareid;
-					msg.title = TextMessage.sharetitle;
+					msg.title =TextMessage.sharetitle;
 					msg.content = TextMessage.sharecontent;
-					msg.thumbs = ["../../../images/muwu.jpg"];
+					msg.thumbs = [imgurl];
 					share.send(msg, function() {
 						alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
@@ -609,6 +609,8 @@
 					interval: 0,
 					gotoItem: 0
 				});
+				var imgurl0=imgsarr[0];
+				clickshare(comdityid,imgurl0);
 			}
 			//products list
 			var prolistpage = null;
