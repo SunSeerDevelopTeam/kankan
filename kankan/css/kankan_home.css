@@ -173,7 +173,7 @@ body .mui-table-view-cell.mui-active{
 
 .kankan_jyimgbox {
 	margin-top: 1em;
-	margin-left: 1em;
+	margin-left: 0em;
 }
 
 .kankan_jhjiantou {
@@ -342,13 +342,13 @@ body .mui-table-view-cell.mui-active{
 	color:#007AFF; border: 1px #FFFFFF solid;
 }
 .ka_imgoption2 {
-	height: 120px;
-	/*margin-bottom:3em;*/
-	line-height: 120px;
+	height: 130px;
+	line-height: 130px;
 	vertical-align: middle;
 	display: inline;
 	overflow: hidden;
 	margin-top: 1em;
+	text-align: center;
 }
 .ka_imgoption2 img{
 	vertical-align: middle;

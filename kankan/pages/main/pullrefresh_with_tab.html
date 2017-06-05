@@ -755,9 +755,13 @@
 							ng: function(statuscode) {
 								if(statuscode == "0100") {
 									if(reverse) {
-										self.endPullDownToRefresh(true);
+										if(self != null) {
+											self.endPullDownToRefresh(true);
+										}
 									} else {
-										self.endPullUpToRefresh(true);
+										if(self != null) {
+											self.endPullUpToRefresh(true);
+										}
 									}
 								}
 							},
