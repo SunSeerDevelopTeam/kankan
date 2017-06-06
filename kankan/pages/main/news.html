@@ -93,13 +93,14 @@
 							console.log("delete success!");
 						},
 						ng: function(data) {
-							console.log(data);
+							/*console.log(data);
 							if(data=="1000"){
 								mui.toast(TextMessage.test, {
 									duration: 'long',
 									type: 'div'
 								})
-							}
+							}*/
+							Api.callback_ng(data);
 						},
 					});
 					} else {
@@ -157,13 +158,14 @@
 							showmessage(data);
 						},
 						ng: function(data) {
-							console.log(data);
+							/*console.log(data);
 							if(data=="1000"){
 								mui.toast(TextMessage.test, {
 									duration: 'long',
 									type: 'div'
 								})
-							}
+							}*/
+							Api.callback_ng(data);
 						},
 					});
 				});
@@ -203,13 +205,14 @@
 				console.log(data);
 			},
 			ng: function(data) {
-				console.log(data);
+				/*console.log(data);
 				if(data=="1000"){
 					mui.toast(TextMessage.test, {
 						duration: 'long',
 						type: 'div'
 					})
-				}
+				}*/
+				Api.callback_ng(data);
 			},
 		});
 		//getmessage("1");

@@ -45,15 +45,15 @@
 					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
 				</button>
 			<h1 class="mui-center mui-title user-title-center maintitle">商品リスト</h1>
-			<span class="mui-right mui-pull-right">
-					<font class="mui-icon goods-list-btn maintitle user-title-center" onclick="select_goods();" style="font-size:15px">確定</font>
-				</span>
+			<div onclick="select_goods();" class="mui-right mui-pull-right  user-title-center" style="margin-top:13px;">
+					確定
+				</div>
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div class="mui-slider-group">
 					<div class="mui-slider-item ">
-						<ul class="mui-table-view mui-grid-view goods-list">
+						<ul class="mui-table-view mui-grid-view goods-list" style="padding-top:10px;">
 
 						</ul>
 					</div>
@@ -80,6 +80,7 @@
 				mode = self.mode;
 				get_goods_list();
 			})
+			var imgwidth = parseInt($(window).width()) / 3 - 17;
 
 			function get_goods_list(params) {
 				var params = {
@@ -96,7 +97,8 @@
 				})
 				choice = choice.substr(0, choice.length - 1);
 				if(choice == '') {
-					alert("请至少原则一个商品");
+					alert(TextMessage.commdSelect);
+					
 					return false;
 				}
 				var params = {
@@ -111,16 +113,34 @@
 			function transRequest(params, flag) {
 				Repository.Transaction.transRequest(params, {
 					ok: function(data) {
+						if(data.data.data.length < 1) {
+							alert(TextMessage.commdNo);
+							return false;
+						};
 						if(flag == 'first') {
 							var comm_info = data.data.data;
 							var goods_list = '';
 							for(var gds in comm_info) {
+								var imgWidth = comm_info[gds].width;
+								var imgHeight = comm_info[gds].height;
+								var hwhpercent = imgHeight / imgWidth;
+								var top_marign = 0;
+								var showheight = imgwidth * hwhpercent;
+								var cha1 = showheight - 100;
+								if(cha1 > 0) {
+									top_marign = cha1 / 2;
+								} else {
+									top_marign = 0;
+								}
+								var checkboxstyle = 'position: fixed;margin-top:-10px;margin-top:2px;z-index:1;margin-left:27%;';
+								var imgstyle = 'height: auto;width:100%;margin-top:-' + top_marign + 'px;';
+								goods_list += '<input id="' + comm_info[gds].commodity_id + '" style="'+checkboxstyle+'" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
 								goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail" >';
 								goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
-								goods_list += '<img class="" width="30%"  height="98px;" src="' + comm_info[gds].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
-								goods_list += '<input  style="float:right;position: fixed;margin-left:-13px;" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
-								goods_list += '</label>';
+								goods_list += '<img class="mui-media-object" style="'+imgstyle+'" src="' + comm_info[gds].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+								goods_list += '</label>';				
 								goods_list += '</li>';
+								
 							}
 							$(".goods-list").html(goods_list);
 						} else {
