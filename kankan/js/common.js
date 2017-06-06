@@ -1453,6 +1453,8 @@ var TextMessage;
 	TextMessage.confirmBtnYes = language ? "はい":"确认";
 	TextMessage.confirmBtnNo = language ? "いいえ":"取消";
 	TextMessage.evaluateMsg = language ? "このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに交易確認画面で伝えましょう。":"";
+	TextMessage.confirmcodeng = language ? "検証コードエラー":"验证码错误";
+	TextMessage.det_concerneds= language ? "気になってる商品":"关注商品";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

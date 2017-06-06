@@ -108,7 +108,9 @@
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell kankan_det_description" id="share">
 					<span class="lang" data-locale="det_spahare"></span>
-					<img src="../../../images/weixin.png" width="30" height="30">
+					<div id="weixinimgbox">
+						<img src="../../../images/weixin2.png">
+					</div>
 					<!--<img src="../../../images/facebook.png" width="40" height="30">
 					<img src="../../../images/line.png" width="30" height="30">
 					<img src="../../../images/twitter.png" width="30" height="30">-->
@@ -143,7 +145,7 @@
 			</li>
 			</ul>
 			<!--Produce goods of concern-->
-			<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
+			<h5 class="ka_h5backcolor lang concerned" data-locale=""></h5>
 			<div class="mui-slider">
 				<div class="mui-slider-group mui-slider-loop">
 					<!--last-->
@@ -372,14 +374,6 @@
 					});
 				});
 			}
-			//translate html
-			function HTMLDecode(text) {
-				var temp = document.createElement("div");
-				temp.innerHTML = text;
-				var output = temp.innerText || temp.textContent;
-				temp = null;
-				return output;
-			}
 			//message show
 			function messageshow(results) {
 				$(".mui-slider-indicator").empty();
@@ -398,8 +392,8 @@
 				var htmlfocus = "";
 				var imglength = imgsarr.length;
 				var la = imgsarr.length - 1 * 1;
-				var first = '<img src="' + imgsarr[0] + '"  style="height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
-				var last = '<img src="' + imgsarr[la] + '"  style="height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				var first = '<img src="' + imgsarr[0] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				var last = '<img src="' + imgsarr[la] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
 				$(".firstimage").html(last);
 				$(".lastimage").html(first);
 				if(imglength > 1) {
@@ -415,7 +409,7 @@
 						imgurl = "../../../images/nopic.jpg";
 					}
 					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center">';
-					htmlimg += '<img src="' + imgurl + '" style="height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					htmlimg += '</div>';
 					if(i == 0) {
 						var htmlfocus = '<div class="mui-indicator mui-active"></div>';
@@ -435,6 +429,8 @@
 				var ucomentnum = commodity.user_basic.user_comment_count;
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
+				var concernedtitle=uname+TextMessage.det_concerneds;
+				$(".concerned").html(concernedtitle);
 				$("#userid").val(userid);
 				$(".ka_authorname b").html(uname);
 				$(".ka_touxiangimg").attr("src", uimage);

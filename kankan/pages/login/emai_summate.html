@@ -121,18 +121,28 @@
 							duration: 'long',
 							type: 'div'
 						});
-						mui.back;
+						//mui.back;
+						mui.openWindow({
+							id: 'user',
+							url:"../main/user/user.html"
+						});
 					},
 					ng: function(data) {
 						console.log(data);
 						switch(data) {
 							case "1000":
-								mui.toast(TextMessage.test, {
-									duration: 'long',
-									type: 'div'
-								})
-								break;
-								default:
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							})
+							break;
+							case "2014":
+							mui.toast(TextMessage.confirmcodeng, {
+								duration: 'long',
+								type: 'div'
+							})
+							break;
+							default:
 							mui.toast(TextMessage.updatemailng, {
 								duration: 'long',
 								type: 'div'
