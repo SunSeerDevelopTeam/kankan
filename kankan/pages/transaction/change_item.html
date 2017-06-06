@@ -73,34 +73,41 @@
 		<script src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
-			var  transid;
+			var transid;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				choice1 = self.choice;
+				var preView = plus.webview.getWebviewById('transaction');
+				plus.webview.close(preView);
 				transid = self.transid;
-				comm_id = self.commodity_id;
-				mode = self.mode;
-				get_goods_list();
+				get_goods_list(transid);
 			})
 
-			function get_goods_list(params) {
+			function get_goods_list(transid) {
 				var params = {
-					'commodity_id': comm_id,
-					'mode': mode
+					'transid': transid
 				}
 				transRequest(params);
 			}
 
 			function transRequest(params) {
-				Repository.Transaction.transRequest(params, {
+				Repository.Transaction.trans('transGetUserCommd', params, {
 					ok: function(data) {
 						var comm_info = data.data.data;
+						console.dir(comm_info);
 						var goods_list = '';
 						for(var gds in comm_info) {
 							goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail" >';
 							goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
-							goods_list += '<img class="" width="30%"  height="98px;" src="' + comm_info[gds].img_flg + '">';
-							goods_list += '<input  style="float:right;position: fixed;margin-left:-13px;" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+							goods_list += '<img class="" width="30%"  height="98px;" src="' + comm_info[gds].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+							if(comm_info[gds].trans_flag == 1) {
+								if(comm_info[gds].main_flag == '1'){
+									goods_list += '<input disabled=true checked style="float:right;position: fixed;margin-left:-13px;" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+								}else{
+									goods_list += '<input checked style="float:right;position: fixed;margin-left:-13px;" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';									
+								}
+							} else {
+								goods_list += '<input  style="float:right;position: fixed;margin-left:-13px;" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+							}
 							goods_list += '</label>';
 							goods_list += '</li>';
 						}
@@ -111,11 +118,14 @@
 					}
 				});
 			}
-			
+
 			function select_goods() {
 				var choice = '';
+				var main_comm = $("input[name='commodity_id']:disabled").val();
 				$("input[name='commodity_id']:checked").each(function() {
-					choice += $(this).val() + ',';
+					if($(this).val() != main_comm){
+						choice += $(this).val() + ',';
+					}
 				})
 				choice = choice.substr(0, choice.length - 1);
 				if(choice == '') {
@@ -123,12 +133,24 @@
 					return false;
 				}
 				var params = {
-					'commodity_id': comm_id,
-					'mode': mode,
-					'choice': choice
+					'transid': transid
 				}
 				params.choice = choice;
-				transRequest(params, 'second');
+				Repository.Transaction.trans('transCommdChange', params, {
+					ok: function(data) {
+						var trans_id = data.data.transinfo[0].trans_id;
+						mui.openWindow({
+							url: "./transaction2.html?transid=" + trans_id,
+							id: "transaction",
+							extras: {
+								"transid": trans_id
+							}
+						})
+					},
+					ng: function(data) {
+						Api.callback_ng(data);
+					}
+				});
 			}
 		</script>
 	</body>

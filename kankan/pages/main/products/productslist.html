@@ -131,18 +131,30 @@
 				$(".badnum").html(badcoment);
 				var commodityarr = commodity.commoditys;
 				var commoditylength = commodityarr.length;
+				var imgwidth=parseInt($(window).width())/3-17;
 				for(i = 0; i < commoditylength; i++) {
 					var ucommodityobj = JSON.stringify(commodityarr[i]);
 					var ucommodityinfo = $.parseJSON(ucommodityobj);
 					var commodityid = ucommodityinfo.commodity_id;
 					var comdityimage = ucommodityinfo.commodity_photo_url;
+					var realwidth=ucommodityinfo.comm_img_width;
+					var realheight=ucommodityinfo.comm_img_height;
+					var leftpx=0;
+					var oribi=realheight/realwidth;
+					var showwidth=130/oribi;
+					var cha1=showwidth-imgwidth;
+					if(cha1>0){
+						leftpx=cha1/2;
+					}else{
+						leftpx=0;
+					}
 					if(comdityimage==""){
 						comdityimage="./../../images/nopic.jpg";
 					}
 					var html = new Util.StringBuilder();
-					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">')
+					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail ka_imgoption2">')
 						.appendFormat('<a href="detail.html" id="{0}">', commodityid)
-						.appendFormat('<img class="mui-media-object" src="{0}" style="height: 120px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
+						.appendFormat('<img class="mui-media-object" src="{0}" style="height: 130px;width:auto;vertical-align: middle;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
 						.append('</a>')
 						.append('</li>');
 					$(".comditylists").append(html.toString());

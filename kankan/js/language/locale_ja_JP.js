@@ -147,8 +147,11 @@ var JSLocale = {
 	"new_user_login":"新しいはじめる方はこちら",
 	"transaction":"交易",
 	"trans_criterion":"特定商取引法に基づく表記",
-	"trans_logistic":"物流と連絡する"
-	
+	"trans_logistic":"物流と連絡する",
+	'trans_finish':"交易終止 ",
+	'eve_comment':"評価のコメントを記入しましょう ",
+	'eve_btn':"評価する",
+	"home_return":"ホームに戻る",
 }
 
 $(function() {

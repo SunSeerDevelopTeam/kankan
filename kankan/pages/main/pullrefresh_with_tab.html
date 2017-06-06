@@ -755,9 +755,13 @@
 							ng: function(statuscode) {
 								if(statuscode == "0100") {
 									if(reverse) {
-										self.endPullDownToRefresh(true);
+										if(self != null) {
+											self.endPullDownToRefresh(true);
+										}
 									} else {
-										self.endPullUpToRefresh(true);
+										if(self != null) {
+											self.endPullUpToRefresh(true);
+										}
 									}
 								}
 							},
@@ -821,12 +825,15 @@
 						data.forEach(function(item) {
 							var heightim = item.img_flag.height;
 							var widthim = item.img_flag.width;
-							if(heightim > widthim) {
-								var orginbi = heightim / widthim;
-								var actuheight = imgwidth * orginbi;
-								var heicha = actuheight - 160;
+							
+							var orginbi = heightim / widthim;
+							var actuheight = imgwidth * orginbi;
+							var heicha = actuheight - 160;
+							if(heicha > 0) {
 								var toppx = heicha / 2;
 								stylimg = "margin-top:-" + toppx + "px;";
+							}else{
+								stylimg="";
 							}
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
