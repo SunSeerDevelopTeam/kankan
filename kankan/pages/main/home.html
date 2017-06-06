@@ -107,47 +107,33 @@
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
-						<a class="mui-control-item mui-active" href="#item1mobile" data-wid="category/tab-top-subpage-1.html">
-							すべて
+						<a class="mui-control-item mui-active lang" data-locale="category_top_1" href="#item1mobile" data-wid="category/tab-top-subpage-1.html">
 						</a>
-						<a class="mui-control-item" href="#item2mobile" data-wid="category/tab-top-subpage-2.html">
-							求购
+						<a class="mui-control-item lang" data-locale="category_top_2" href="#item2mobile" data-wid="category/tab-top-subpage-2.html">
 						</a>
-						<a class="mui-control-item" href="#item3mobile" data-wid="category/tab-top-subpage-3.html">
-							レディース
+						<a class="mui-control-item lang" data-locale="category_top_3" href="#item3mobile" data-wid="category/tab-top-subpage-3.html">
 						</a>
-						<a class="mui-control-item" href="#item4mobile" data-wid="category/tab-top-subpage-4.html">
-							メンズ
+						<a class="mui-control-item lang" data-locale="category_top_4" href="#item4mobile" data-wid="category/tab-top-subpage-4.html">
 						</a>
-						<a class="mui-control-item" href="#item5mobile" data-wid="category/tab-top-subpage-5.html">
-							ベビー・キッズ
+						<a class="mui-control-item lang" data-locale="category_top_5" href="#item5mobile" data-wid="category/tab-top-subpage-5.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-6.html">
-							インテリア・住まい・小物
+						<a class="mui-control-item lang" data-locale="category_top_6" href="#item6mobile" data-wid="category/tab-top-subpage-6.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-7.html">
-							エンタメ・ホビー
+						<a class="mui-control-item lang" data-locale="category_top_7" href="#item7mobile" data-wid="category/tab-top-subpage-7.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-8.html">
-							コスメ・香水・美容
+						<a class="mui-control-item lang" data-locale="category_top_8" href="#item8mobile" data-wid="category/tab-top-subpage-8.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-9.html">
-							家電・スマホ・カメラ
+						<a class="mui-control-item lang" data-locale="category_top_9" href="#item9mobile" data-wid="category/tab-top-subpage-9.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-10.html">
-							スポーツ・レジャー
+						<a class="mui-control-item lang" data-locale="category_top_10" href="#item10mobile" data-wid="category/tab-top-subpage-10.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-11.html">
-							ハンドメイド
+						<a class="mui-control-item lang" data-locale="category_top_11" href="#item11mobile" data-wid="category/tab-top-subpage-11.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-12.html">
-							チケット
+						<a class="mui-control-item lang" data-locale="category_top_12" href="#item12mobile" data-wid="category/tab-top-subpage-12.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-13.html">
-							自動車・オートバイ
+						<a class="mui-control-item lang" data-locale="category_top_13" href="#item13mobile" data-wid="category/tab-top-subpage-13.html">
 						</a>
-						<a class="mui-control-item" href="#item6mobile" data-wid="category/tab-top-subpage-14.html">
-							その他
+						<a class="mui-control-item lang" data-locale="category_top_14" href="#item14mobile" data-wid="category/tab-top-subpage-14.html">
 						</a>
 					</div>
 				</div>
@@ -155,16 +141,18 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js" ></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
+		<script type="text/javascript" src="../../js/language.js" ></script>
 		<script type="text/javascript" src="../../js/webviewGroup.js"></script>
 		<script>
 			mui.init();
 			mui('.mui-scroll-wrapper').scroll({
-				indicators: false,
-				bounce: false,
-				scrollY: false,
-				scrollX: true
+				deceleration: 0.0005
 			});
 			mui.plusReady(function() {
+				var offset = 0;
+				var index = 0;
 				var group = new webviewGroup("home.html", {
 					items: [{
 						id: "tab-top-subpage-1.html",
@@ -230,6 +218,15 @@
 						}
 						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
 						activeTab.classList.add("mui-active");
+						console.dir(mui(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")"));
+						if(index < obj.index) {
+							var width = mui(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index)) + ")")[0].scrollWidth;
+							offset += width;
+						} else {
+							offset -= width;
+						}
+						index = obj.index;
+						mui('.mui-scroll-wrapper').scroll().scrollTo(-offset, 0);
 					}
 				});
 				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
@@ -238,7 +235,6 @@
 				});
 				document.querySelector('.mui-scroll-wrapper').addEventListener('scroll', function(e) {
 					var curscroll = e.detail.x;
-					console.log("curscroll is " + curscroll);
 				});
 			});
 			mui.back = function() {

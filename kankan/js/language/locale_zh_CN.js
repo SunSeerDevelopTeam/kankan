@@ -153,6 +153,21 @@ var JSLocale = {
 	'eve_comment':"请填写评价的评语 ",
 	'eve_btn':"评价",
 	"home_return":"返回首页",
+	//category
+	"category_top_1":"全部",
+	"category_top_2":"求购商品",
+	"category_top_3":"女士用品",
+	"category_top_4":"男士用品",
+	"category_top_5":"儿童用品",
+	"category_top_6":"室内装修/小物品",
+	"category_top_7":"娱乐/爱好",
+	"category_top_8":"化妆品/香水/美容",
+	"category_top_9":"家电/智能手机/照相机",
+	"category_top_10":"运动休闲",
+	"category_top_11":"手工品",
+	"category_top_12":"票/优惠券",
+	"category_top_13":"汽车/摩托车",
+	"category_top_14":"其他"
 }
 
 $(function() {
