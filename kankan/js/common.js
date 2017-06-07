@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1427,7 +1427,7 @@ var TextMessage;
 	TextMessage.emailnull = language ? "メールボックスは空っぽにならない!" : "邮箱不能为空！";
 	TextMessage.codenull = language ? "検証コードは空っぽにならない!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
-	TextMessage.loading = language ? "ローディング…" : "正在加载...";
+	TextMessage.loading = language ? "更新中…" : "正在加载...";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
 	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
 	TextMessage.requestStop = language ? "中止を請求する" : "请求终止";
