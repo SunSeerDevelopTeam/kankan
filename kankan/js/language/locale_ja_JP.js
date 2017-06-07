@@ -56,7 +56,7 @@ var JSLocale = {
 	"det_badcomments": "悪い",
 	"det_all": "全て",
 	"comdity_null": "暫時データ",
-	"contentlength": "レビューの内容（300字を超えない）",
+	"contentlength": "レビューの内容(300字以内)",
 	"contentsend": "送 信",
 
 	// Home Page
@@ -72,7 +72,7 @@ var JSLocale = {
 	"commodity_photodet": "この画像を削除しますか？",
 	"commodity_name": "商品名と説明",
 	"commodity_namelength": "商品名（必須４０文字まで）",
-	"commodity_descriptionlength": "商品説明（1000文字まで）",
+	"commodity_descriptionlength": "商品説明(必須：300文字まで)",
 	"commodity_detail": "商品詳細",
 	"commodity_sorts": "カテゴリー",
 	"commodity_must": "必須",
@@ -84,7 +84,7 @@ var JSLocale = {
 	"commodity_buttonsure": "出品する",
 	"commodity_price": "価  格",
 	"commodity_forbidentext": "出品が禁止されている商品、禁止されている行為を必ず確認してください。またブランド品でシリアルナンバー等がある場合はご記載ください。偽ブランド品の販売は犯罪であり処罰される可能性があります。",
-	"commodity_want":"物探す登録",
+	"commodity_want":"欲しい物登録",
 	"commodity_want_butonsure":"投稿する",
 	"commodity_want_forbidentext":"法律で禁止されているもの或いは非常識なものを登録しないでください、投稿した情報の有効期限は一か月間となりますので、ご了承ください。",
 	//user page
