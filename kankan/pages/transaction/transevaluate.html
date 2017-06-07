@@ -15,7 +15,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title" class="lang" data-locale="trans_finish"></h1>
+			<h1 class="mui-title"><span class="lang" data-locale="trans_finish"></span></h1>
 		</header>
 		<div class="mui-pages">
 			<!--main content start-->
@@ -66,9 +66,9 @@
 										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined lang" data-locale="eve_btn"></button>
 									</div>
 								</li>
-							</ul>s
+							</ul>
 							<div style="text-align:center;margin-top:-5px;background:#F3F3F3;height:40px;width:100%;padding-top:20px;">
-								<a href="javascript:gotoMain();" style="background:#6ACB9A;"><span class="lang" data-locale="home_return"></span></a>
+								<a href="javascript:gotoMain();" style="background:#6ACB9A;margin-bottom:10px;"><span class="lang" data-locale="home_return"></span></a>
 							</div>
 						</div>
 					</div>
@@ -79,6 +79,7 @@
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
@@ -103,6 +104,8 @@
 					var requestView = plus.webview.getWebviewById('request');
 					plus.webview.close(requestView);
 					var requestlistView = plus.webview.getWebviewById('requestlist');
+					plus.webview.close(requestlistView);
+					var requestlistView = plus.webview.getWebviewById('transaction');
 					plus.webview.close(requestlistView);
 					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
 					mui.back();
