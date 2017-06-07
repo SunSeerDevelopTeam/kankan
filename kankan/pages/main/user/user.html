@@ -714,6 +714,16 @@
 								url:"../../login/login.html"
 							});
 						}
+						if(data == "3020") {
+							mui.toast(TextMessage.errorCode_3020, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/emai_summate.html"
+							});
+						}
 						console.log("other error code:" + data);
 						
 					}
@@ -732,14 +742,29 @@
 					$(".tran-page").show();
 				},
 				ng: function(data) {
-					if(data == "2002") {
+					if(data == "2002" || data == "1000") {
 						mui.toast(TextMessage.userng, {
 							duration: 'long',
 							type: 'div'
 						});
+						mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+					}else if(data == "3020") {
+						mui.toast(TextMessage.errorCode_3020, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.openWindow({
+							id: 'login',
+							url:"../../login/emai_summate.html"
+						});
+					}else{
+							mui.back();
 					}
 					console.log("other error code:" + data);
-					mui.back();
+					
 				}
 			});
 		});

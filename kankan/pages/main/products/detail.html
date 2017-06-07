@@ -97,9 +97,9 @@
 
 					<div class="kankan_det_goodsnum" id="zanshu"></div>
 				</li>
-				<li class="mui-table-view-cell kankan_det_description">
-					<div class="mui-pull-left lang" data-locale="det_spdescription"></div>
-				</li>
+				</ul>
+				<h5 class="ka_h5backcolor lang" data-locale="det_spdescription"></h5>
+				<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<div class="kankan_det_information"></div>
 				</li>
@@ -107,7 +107,7 @@
 			<!--share-->
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell kankan_det_description" id="share">
-					<span class="lang" data-locale="det_spahare"></span>
+					<span class="lang sharetext" data-locale="det_spahare"></span>
 					<div id="weixinimgbox">
 						<img src="../../../images/weixin2.png">
 					</div>
@@ -570,9 +570,6 @@
 				//concenered end**************************************/
 				//buy way
 				var buy_sell_flag = comdbasic[0].buy_sell_flag;
-				if(buy_sell_flag == "1") {
-					$(".ka_buyway").hide();
-				}
 				//praise staute
 				var user_praise_status = commodity.commodity_praise.user_praise_status;
 				if(user_praise_status == "0") {
