@@ -446,46 +446,73 @@ function publishs() {
 	var imges3 = $("#3").val();
 	var price = $("#price").val();
 	if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
-		alert(TextMessage.pro_imagetest);
+		mui.toast(TextMessage.pro_imagetest, {
+			duration: 'long',
+			type: 'div'
+		});
 		return false;
 	}
 	if(comm_name.replace(/\s/g,'') == "") {
-		alert(TextMessage.pro_nametest);
+		mui.toast(TextMessage.pro_nametest, {
+			duration: 'long',
+			type: 'div'
+		});
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
 	if(comm_detail.replace(/\s/g,'') == "") {
-		alert(TextMessage.pro_descriptiontest);
+		mui.toast(TextMessage.pro_descriptiontest, {
+			duration: 'long',
+			type: 'div'
+		});
 		document.publishcomodity.comm_detail.focus();
 		return false;
 	}
 	if(classify_id == "") {
-		alert(TextMessage.pro_sorttest);
+		mui.toast(TextMessage.pro_sorttest, {
+			duration: 'long',
+			type: 'div'
+		});
 		return false;
 	}
 	if(comm_state == "") {
-		alert(TextMessage.pro_stautetest);
+		mui.toast(TextMessage.pro_stautetest, {
+			duration: 'long',
+			type: 'div'
+		});
 		return false;
 	}
 	if(business== "1") {
 		if(price==""){
-			alert(TextMessage.pro_pricenulltest);
+			mui.toast(TextMessage.pro_pricenulltest, {
+				duration: 'long',
+				type: 'div'
+			});
 			document.publishcomodity.price.focus();
 			return false;
 		}
 		if(isNaN(price)) {
-			alert(TextMessage.pro_pricetest);
+			mui.toast(TextMessage.pro_pricetest, {
+				duration: 'long',
+				type: 'div'
+			});
 			document.publishcomodity.price.focus();
 			return false;
 		}
 		if(price < 0) {
-			alert(TextMessage.pro_pricenumbtest);
+			mui.toast(TextMessage.pro_pricenumbtest, {
+				duration: 'long',
+				type: 'div'
+			});
 			document.publishcomodity.price.focus();
 			return false;
 		}
 	}
 	if(exchange == "0" & business == "0" & gratis == "0") {
-		alert(TextMessage.pro_buywaytest);
+		mui.toast(TextMessage.pro_buywaytest, {
+			duration: 'long',
+			type: 'div'
+		});
 		return false;
 	}
 	var params = {
@@ -512,7 +539,10 @@ function publishs() {
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
 			Log.d("success");
-			alert(TextMessage.pro_logininfo);
+			mui.toast(TextMessage.pro_logininfo, {
+				duration: 'long',
+				type: 'div'
+			});
 			if(commodity_id==""){
 				location.reload();
 				mui.plusReady(function() {
