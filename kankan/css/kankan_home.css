@@ -295,7 +295,14 @@ body .mui-table-view-cell.mui-active{
 	width: 95px;
     height: 81px;
 }
-
+#weixinimgbox{
+	width: 80%;
+	float: right;
+}
+#weixinimgbox img{
+	width: 30px;
+	height: 25px;
+}
 /***productlist page***/
 
 .ka_comlevnumber {
@@ -595,11 +602,11 @@ body .mui-table-view-cell.mui-active{
 }
 
 .z_alert {
-	width: 3rem;
+	width: 4rem;
 	height: 2rem;
 	border-radius: .2rem;
 	background: #fff;
-	font-size: .24rem;
+	font-size: .22rem;
 	text-align: center;
 	position: absolute;
 	left: 50%;

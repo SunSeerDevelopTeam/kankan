@@ -55,7 +55,7 @@
 					}else{
 						var comm_img=trans[0].comm_img;
 					}
-					var comm_name=trans[0].comm_name;
+					var comm_name=HTMLDecode(trans[0].comm_name);
 					var html = new Util.StringBuilder();
 					html.appendFormat('<li class="mui-table-view-cell transli"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img src="{1}" style="width: 60px;max-height: 60px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>',trans_id,comm_img)
 						.appendFormat('<div class="mui-pull-left requestbox"><span>{0}</span><div><font color="#0062CC" style="display:none;">{1}P</font></div></div>',comm_name,price)

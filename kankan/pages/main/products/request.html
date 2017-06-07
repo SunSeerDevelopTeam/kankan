@@ -86,7 +86,7 @@
 				}
 				for(var ot=0;ot<others.length;ot++){
 					var transid=others[ot].trans.trans_id;
-					var comm_name=others[ot].trans[0].comm_name;
+					var comm_name=HTMLDecode(others[ot].trans[0].comm_name);
 					var comm_img=others[ot].trans[0].comm_img;
 					var trans_type=others[ot].trans.trans_type;
 					if(trans_type=="0"){

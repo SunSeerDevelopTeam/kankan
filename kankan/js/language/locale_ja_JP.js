@@ -103,7 +103,7 @@ var JSLocale = {
 	"korean_user":"韓国語",
 	"infoeditetitle":"プロフィール編集",
 	//logisticslist page
-	"sendmes":"は",
+	"sendmes":"はい",
 	"logistic":"物流",
 	
 	//point change to ticket page
@@ -152,6 +152,8 @@ var JSLocale = {
 	'eve_comment':"評価のコメントを記入しましょう ",
 	'eve_btn':"評価する",
 	"home_return":"ホームに戻る",
+	//message
+	"messagetitle":"構内信",
 }
 
 $(function() {

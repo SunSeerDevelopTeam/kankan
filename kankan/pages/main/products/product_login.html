@@ -152,8 +152,8 @@
 		$("#1").val("0");
 		$("#2").val("0");
 		$("#3").val("0");
-		var name=results.data.comm_name;
-		var detail=results.data.comm_detail;
+		var name=HTMLDecode(HTMLDecode(results.data.comm_name));
+		var detail=HTMLDecode(HTMLDecode(results.data.comm_detail));
 		var business=results.data.business;
 		var exchange=results.data.exchange;
 		var gratis=results.data.gratis;
@@ -164,8 +164,8 @@
 		var classify_id=results.data.classify_id;
 		var price=results.data.price;
 		var state=results.data.state;
-		document.getElementById('comm_name').value=name.replace(/\s/g,'');
-		document.getElementById('comm_detail').value=detail.replace(/\s/g,'');
+		document.getElementById('comm_name').value=name;
+		document.getElementById('comm_detail').value=detail;
 		document.getElementById('business').value=business;
 		document.getElementById('exchange').value=exchange;
 		document.getElementById('gratis').value=gratis;

@@ -127,7 +127,13 @@ function compressImg(path) {
 		if(rwidth>=1000 & rheight>=1000){
 			var presswidth=rwidth/10;
 			var pressheight=rheight/10;
-			zipcom(presswidth,pressheight,90);
+			if(pressheight>300){
+				zipcom(presswidth,pressheight,80);
+			}else{
+				var cutwidth="auto";
+				var cutheight=500;
+				zipcom(cutwidth,cutheight,70);
+			}
 		}else{
 			zipcom(rwidth,rheight,20);
 		}

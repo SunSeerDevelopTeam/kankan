@@ -1447,15 +1447,15 @@ var TextMessage;
 	TextMessage.transDelive = language ? "出荷確認確認":"确认发货";
 	TextMessage.transWaitOrder = language ? "相手の注文を待つ":"等待对方下单";
 	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
-	TextMessage.transFinish = language ? "取引完成" : "交易完成";
+	TextMessage.transFinish = language ? "交易完成" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
 	TextMessage.transStopTips = language ? "取引中止しますか？":"确认终止交易吗?";
 	TextMessage.transContinue =  language ? "取引継続します。":"继续交易!";
 	TextMessage.confirmBtnYes = language ? "はい":"确认";
 	TextMessage.confirmBtnNo = language ? "いいえ":"取消";
 	TextMessage.evaluateMsg = language ? "このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに交易確認画面で伝えましょう。":"";
-	TextMessage.commdSelect = language ? "商品が一つも選択されていません。商品を選択してください。":"请至少选择一个商品!";
-	TextMessage.commdNo = language ? "":"您没有可供选择的商品,请出品商品!";
+	TextMessage.confirmcodeng = language ? "検証コードエラー":"验证码错误";
+	TextMessage.det_concerneds= language ? "気になってる商品":"关注商品";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

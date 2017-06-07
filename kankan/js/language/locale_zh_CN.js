@@ -153,6 +153,8 @@ var JSLocale = {
 	'eve_comment':"请填写评价的评语 ",
 	'eve_btn':"评价",
 	"home_return":"返回首页",
+	//message 
+	"messagetitle":"站内信",
 }
 
 $(function() {
