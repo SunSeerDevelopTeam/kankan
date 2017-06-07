@@ -219,21 +219,25 @@
 											id:'../../transaction/transaction2.html',
 											url:'../../transaction/transaction2.html'
 										}*/
-				]
+				],
+				beforeback: function() {
+					location.reload();
+			    }
 			});
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
 				commodity_id = event.detail.id;
 				mui.plusReady(function() {
 					getinfo(id);
-					
 				});
+				
 			});
 			//*********************share start
 			
 
 			//onclick share
-			function clickshare(shareid,imgurl){
+			function clickshare(shareid,imgurl0){
+				
 				var shares = {};
 				mui.plusReady(function() {
 					TextMessage.language = plus.os.language;
@@ -297,7 +301,7 @@
 					msg.href = Api.url.Commodity.shareurl+shareid;
 					msg.title =TextMessage.sharetitle;
 					msg.content = TextMessage.sharecontent;
-					msg.thumbs = [imgurl];
+					msg.thumbs = [imgurl0];
 					share.send(msg, function() {
 						alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
@@ -323,7 +327,7 @@
 			}
 
 			function getinfo(pid) {
-				emptyhtml();
+				//emptyhtml();
 				var params = {
 					"commodity_id": pid
 				};
@@ -383,6 +387,7 @@
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail);
 				var comdityid = comdbasic[0].commodity_id;
+				//alert(comdityid);
 				$("#comodityid").val(comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
@@ -604,8 +609,7 @@
 					gotoItem: 0
 				});
 				var imgurl0=imgsarr[0];
-				var shareidval=$(".kankan_zanbox").attr("id");
-				clickshare(shareidval,imgurl0);
+				clickshare(comdityid,imgurl0);
 			}
 			//products list
 			var prolistpage = null;

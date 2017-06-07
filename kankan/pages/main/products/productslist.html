@@ -83,7 +83,10 @@
 						id: 'detail.html',
 						url: 'detail.html'
 					}
-				]
+				],
+				beforeback: function() {
+					location.reload();
+			    }
 			});
 			window.addEventListener('prolid', function(event) {
 				var uid = event.detail.id;
@@ -107,11 +110,11 @@
 			}
 
 			function messageshow(results) {
-				$(".comditylists").empty();
-				$(".ka_touxiangimg").empty();
-				$(".uname").empty();
-				$(".uproducts").empty();
-				$(".ucomment").empty();
+//				$(".comditylists").empty();
+//				$(".ka_touxiangimg").empty();
+//				$(".uname").empty();
+//				$(".uproducts").empty();
+//				$(".ucomment").empty();
 				var commodity = results.data;
 				var uname = commodity.user_name;
 				var uimage = commodity.user_photo;

@@ -36,7 +36,11 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init();
+			mui.init({
+				beforeback: function() {
+					location.reload();
+			    }
+			});
 			window.addEventListener('comid', function(event) {
 				var id = event.detail.id;
 				//var id="19";
@@ -74,7 +78,7 @@
 				});
 			}
 			function showpcomehts(results) {
-				$("#comments").empty();
+				//$("#comments").empty();
 				var datas = results.data;
 				var dataslengh = datas.length;
 				for(var i = 0; i < dataslengh; i++) {
