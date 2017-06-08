@@ -125,13 +125,14 @@
 				Repository.Transaction.transOrderEvaluate(params, {
 					ok: function(data) {
 						Log.i("message send successfully!");
-						mui.plusReady(function() {
+						gotoMain();
+						/*mui.plusReady(function() {
 								var preView = plus.webview.getWebviewById('transaction');
 								plus.webview.close(preView);
 								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
 								mui.back();
 								mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
-							});
+							});*/
 					},
 					ng: function(data) {
 						Api.callback_ng(data);

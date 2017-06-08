@@ -28,7 +28,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="requesttitle"></h1>
 			<div id="history">
-				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right jiaoyihitext"><span style="font-size: 14px;">交易履历</span></a>
+				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right jiaoyihitext"><span style="font-size: 14px;" class="lang" data-locale="requesthistory"></span></a>
 			</div>
 		</header>
 		<div class="mui-content">
@@ -44,7 +44,7 @@
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scrolls">
-								<ul class="mui-table-view mui-grid-view want-sell">
+								<ul class="mui-table-view mui-grid-view want-sell" style="padding-top:10px;">
 								</ul>
 							</div>
 						</div>
@@ -129,7 +129,7 @@
 					});
 					//request
 					var own=data.other;
-					var html2='<ul class="mui-table-view mui-grid-view want-sell">';
+					var html2='<ul class="mui-table-view mui-grid-view want-sell" style="padding-top:10px;">';
 					for(var ow=0;ow<own.length;ow++){
 						var otransid=own[ow].trans.trans_id;
 						var ocomm_name=own[ow].trans[0].comm_name;
