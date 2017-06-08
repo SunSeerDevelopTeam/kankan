@@ -80,12 +80,18 @@ function publishs() {
 	var imges2 = $("#2").val();
 	var imges3 = $("#3").val();
 	if(comm_name.replace(/\s/g,'') == "") {
-		alert(TextMessage.pro_nametest);
+		mui.toast(TextMessage.pro_nametest, {
+			duration: 'long',
+			type: 'div'
+		});
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
 	if(comm_detail.replace(/\s/g,'') == "") {
-		alert(TextMessage.pro_descriptiontest);
+		mui.toast(TextMessage.pro_descriptiontest, {
+			duration: 'long',
+			type: 'div'
+		});
 		document.publishcomodity.comm_detail.focus();
 		return false;
 	}
@@ -102,7 +108,10 @@ function publishs() {
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
 			Log.d("success");
-			alert(TextMessage.pro_logininfo);
+			mui.toast(TextMessage.pro_logininfo, {
+				duration: 'long',
+				type: 'div'
+			});
 			location.reload();
 			mui.plusReady(function() {
 				var mainpage=plus.webview.getLaunchWebview();

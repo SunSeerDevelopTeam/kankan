@@ -22,10 +22,10 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;">
 				<font size="3" class="lang" data-locale="back"></font>
 			</a>
-			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>-->
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="logistic"></h1>
 		</header>
 		<div class="mui-content">
@@ -69,7 +69,6 @@
 	<script>
 		var timer;
 		mui.init();
-
 		function showDialog(msg, tel, l_com_id) {
 			var dialog = document.getElementById('dialog');
 			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
@@ -80,8 +79,8 @@
 			// create content into innerHTML
 			content += "<font color=\"white\">";
 			content += msg;
-			content += "<br>";
-			content += tel;
+			//content += "<br>";
+			//content += tel;
 			content += TextMessage.sendtextrequest + "？</font>";
 			content += "<input type='hidden' id='l_com_idval' value='" + l_com_id + "' />";
 			deliveryMsgDialog.innerHTML = content;
@@ -166,8 +165,8 @@
 				content += "<font size=\"2\" color=\"white\">";
 				content += TextMessage.sedsuccseetext;
 				content += "<br>";
-				content += msg + "<br>";
-				content += tel + TextMessage.mailsucetext + "<br>";
+				//content += msg + "<br>";
+				content += TextMessage.mailsucetext + "<br>";
 				content += TextMessage.requestmailtext + "<br><br></font>";
 				content += "<a onclick=\"gook();\">";
 				content += "<font color=\"white\">OK</font>";

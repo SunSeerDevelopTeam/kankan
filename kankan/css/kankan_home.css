@@ -284,9 +284,14 @@ body .mui-table-view-cell.mui-active{
 }
 
 .ka_h5backcolor {
-	background-color: #efeff4
+	background-color: #efeff4;
+	margin-left: 1em;
+	margin-top: 1em;
+	margin-bottom: -1em;
 }
-
+.sharetext{
+	font-size: 14px;
+}
 .ka_buyway {
 	margin: 1em 0;
 	text-align: center;

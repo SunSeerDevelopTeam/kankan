@@ -97,9 +97,9 @@
 
 					<div class="kankan_det_goodsnum" id="zanshu"></div>
 				</li>
-				<li class="mui-table-view-cell kankan_det_description">
-					<div class="mui-pull-left lang" data-locale="det_spdescription"></div>
-				</li>
+				</ul>
+				<h5 class="ka_h5backcolor lang" data-locale="det_spdescription"></h5>
+				<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<div class="kankan_det_information" style="word-break:break-word;"></div>
 				</li>
@@ -107,7 +107,7 @@
 			<!--share-->
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell kankan_det_description" id="share">
-					<span class="lang" data-locale="det_spahare"></span>
+					<span class="lang sharetext" data-locale="det_spahare"></span>
 					<div id="weixinimgbox">
 						<img src="../../../images/weixin2.png">
 					</div>
@@ -219,34 +219,39 @@
 											id:'../../transaction/transaction2.html',
 											url:'../../transaction/transaction2.html'
 										}*/
-				]
+				],
+				beforeback: function() {
+					location.reload();
+			    }
 			});
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
 				commodity_id = event.detail.id;
 				mui.plusReady(function() {
 					getinfo(id);
-					
 				});
+				
 			});
 			//*********************share start
-			var shares = {};
-			mui.plusReady(function() {
-				TextMessage.language = plus.os.language;
-				plus.share.getServices(function(s) {
-					if(s && s.length > 0) {
-						for(var i = 0; i < s.length; i++) {
-							var t = s[i];
-							shares[t.id] = t;
-						}
-					}
-				}, function() {
-					console.log("share server fail");
-				});
-			});
+			
 
 			//onclick share
-			function clickshare(shareid,imgurl){
+			function clickshare(shareid,imgurl0){
+				
+				var shares = {};
+				mui.plusReady(function() {
+					TextMessage.language = plus.os.language;
+					plus.share.getServices(function(s) {
+						if(s && s.length > 0) {
+							for(var i = 0; i < s.length; i++) {
+								var t = s[i];
+								shares[t.id] = t;
+							}
+						}
+					}, function() {
+						console.log("share server fail");
+					});
+				});
 				document.getElementById("share").addEventListener('tap', function() {
 					var ids = [{
 							id: "weixin",
@@ -296,7 +301,7 @@
 					msg.href = Api.url.Commodity.shareurl+shareid;
 					msg.title =TextMessage.sharetitle;
 					msg.content = TextMessage.sharecontent;
-					msg.thumbs = [imgurl];
+					msg.thumbs = [imgurl0];
 					share.send(msg, function() {
 						alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
@@ -322,7 +327,7 @@
 			}
 
 			function getinfo(pid) {
-				emptyhtml();
+				//emptyhtml();
 				var params = {
 					"commodity_id": pid
 				};
@@ -382,6 +387,7 @@
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail);
 				var comdityid = comdbasic[0].commodity_id;
+				//alert(comdityid);
 				$("#comodityid").val(comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
@@ -570,9 +576,6 @@
 				//concenered end**************************************/
 				//buy way
 				var buy_sell_flag = comdbasic[0].buy_sell_flag;
-				if(buy_sell_flag == "1") {
-					$(".ka_buyway").hide();
-				}
 				//praise staute
 				var user_praise_status = commodity.commodity_praise.user_praise_status;
 				if(user_praise_status == "0") {
