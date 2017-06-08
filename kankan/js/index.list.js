@@ -163,6 +163,63 @@ function bindEventOnListViewItem() {
 			});
 		}, 300);
 	});
+
+	$(".logistics").on("tap", "a", function(event) {
+		var isLogin = plus.storage.getItem("LoginFlag");
+		if(!isLogin) {
+			var btnArray = [{
+				title: TextMessage.login
+			}, {
+				title: TextMessage.register
+			}];
+			plus.nativeUI.actionSheet({
+				title: TextMessage.sharetitle,
+				cancel: TextMessage.skip,
+				buttons: btnArray
+			}, function(e) {
+				switch(e.index) {
+					case 1:
+						mui.openWindow({
+							id: 'login',
+							url: '/pages/login/login.html',
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+						break;
+					case 2:
+						mui.openWindow({
+							id: 'reg',
+							url: '/pages/login/reg.html',
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+						break;
+					default:
+						break;
+				}
+			});
+			return;
+		}
+		mui.openWindow({
+			id: 'logisticslist',
+			url:"/pages/main/products/request.html",
+			waiting: {
+				autoShow: false
+			},
+			show: {
+				duration: 200
+			}
+		});
+	});
+
 	//$(".comm-like-num").off("tap");
 	$(".comm-like-num").on("tap", function(event) {
 		var _self = $(this);
@@ -344,6 +401,5 @@ window.addEventListener("refresh", function(event) {
 		return;
 	}
 	var params = {};
-	getDataFromServer(params, function(data) {
-	});
+	getDataFromServer(params, function(data) {});
 });

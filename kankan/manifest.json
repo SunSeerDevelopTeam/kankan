@@ -426,7 +426,8 @@
 					"js/sha256.js",
 					"js/common.js",
 					"js/language.js",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"js/pro_uploadimg.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -448,13 +449,17 @@
 					"js/language/locale_ja_JP.js",
 					"images/default.jpg",
 					"js/webviewGroup.js",
-					"js/index.list.js"
+					"js/index.list.js",
+					"pages/main/category/tab-top-subpage-1.html",
+					"js/sha256.js"
 				],
 				"refer": [
 					"pages/login/login.html",
 					"pages/login/reg.html",
 					"pages/main/search.html",
-					"pages/main/user/user.html"
+					"pages/main/user/user.html",
+					"pages/main/products/detail.html",
+					"pages/main/category/tab-top-subpage-2.html"
 				],
 				"priority": 0
 			},
@@ -578,9 +583,18 @@
 					"images/iconfont-tianjia.png",
 					"fonts/mui.ttf",
 					"js/sha256.js",
-					"js/pro_uploadimg.js"
+					"js/pro_uploadimg.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js",
+					"css/kankan_home.css"
 				],
-				"refer": [],
+				"refer": [
+					"pages/login/login.html"
+				],
 				"priority": 0
 			},
 			"pages/main/user/user.html": {
@@ -687,6 +701,39 @@
 					"images/sinaweibo.png",
 					"images/xinhuan.png",
 					"pages/main/logisticslist.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-1.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_1.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/pullrefresh_sub_1.html": {
+				"resources": [
+					"js/jquery.lazyload.min.js",
+					"css/listitem.css",
+					"fonts/mui-icons-extra.ttf",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/sha256.js",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"js/index.list.js",
+					"images/request.png"
+				],
+				"refer": [
+					"pages/main/products/request.html"
+				],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-2.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_2.html"
 				],
 				"refer": [],
 				"priority": 0
