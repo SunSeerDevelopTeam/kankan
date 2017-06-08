@@ -43,7 +43,7 @@
 			        </li>
 			        <li class="mui-table-view-cell" id="normalcommentlist">
 			        </li>
-			         <li class="mui-table-view-cell" id="allcommentlist">
+			         <li class="mui-table-view-cell" id="allcommentlist"></li>
 			         	<!--<div class="mui-pull-left ka_userbox">
 			           	<img src="../../../images/yuantiao.jpg" width="40" height="40" class="ka_touxiangimg" />
 			           	<div class="ka_userbox ka_userboxtext"><b>muiusdfdsfsdfsdfsdfsdf</b></div>
@@ -71,7 +71,6 @@
 			mui.init();
 			window.addEventListener('ucid', function(event) {
 				var id = event.detail.id;
-				//alert(id);
 				showcomments(id);
 			});
 			mui.plusReady(function() {
@@ -83,15 +82,23 @@
 				$("#goodcommentlist").hide();
 				$(".ka_commentsort").html(TextMessage.allshowmes);
 			});
+			$(".ka_commentsort").click(function(){
+				$("#badcommentlist").hide();
+				$("#normalcommentlist").hide();
+				$("#goodcommentlist").hide();
+				$("#allcommentlist").show();
+				$(".ka_commentfonts").removeClass("ka_clickcs");
+				$(".ka_commentsort").addClass("ka_clickcs");
+			});
 			$("#normalcomment").click(
 				function(){
 					$("#badcommentlist").hide();
 					$("#normalcommentlist").show();
 					$("#goodcommentlist").hide();
 					$("#allcommentlist").hide();
-					$(".ka_commentsort").html(TextMessage.normalshowmes);
 					$(".ka_commentfonts").removeClass("ka_clickcs");
 					$("#normalcomment .ka_commentfonts").addClass("ka_clickcs");
+					$(".ka_commentsort").removeClass("ka_clickcs");
 				}
 			);
 			$("#badcomment").click(
@@ -100,9 +107,9 @@
 					$("#normalcommentlist").hide();
 					$("#goodcommentlist").hide();
 					$("#allcommentlist").hide();
-					$(".ka_commentsort").html(TextMessage.badshowmes);
 					$(".ka_commentfonts").removeClass("ka_clickcs");
 					$("#badcomment .ka_commentfonts").addClass("ka_clickcs");
+					$(".ka_commentsort").removeClass("ka_clickcs");
 				}
 			);
 			$("#goodcomment").click(
@@ -111,9 +118,10 @@
 					$("#badcommentlist").hide();
 					$("#normalcommentlist").hide();
 					$("#allcommentlist").hide();
-					$(".ka_commentsort").html(TextMessage.goodshowmes);
+					//$(".ka_commentsort").html(TextMessage.goodshowmes);
 					$(".ka_commentfonts").removeClass("ka_clickcs");
 					$("#goodcomment .ka_commentfonts").addClass("ka_clickcs");
+					$(".ka_commentsort").removeClass("ka_clickcs");
 				}
 			);
 			function showcomments(uid){

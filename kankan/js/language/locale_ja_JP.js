@@ -154,6 +154,8 @@ var JSLocale = {
 	"home_return":"ホームに戻る",
 	//message
 	"messagetitle":"お知らせ",
+	"stautestext":"商品取引中",
+	"thistorytext":"取引履歴",
 }
 
 $(function() {

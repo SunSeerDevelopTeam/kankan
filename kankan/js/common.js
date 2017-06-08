@@ -652,7 +652,7 @@ var Api;
 
 	function error_msg(err_code,key) {
 		Log.i("message send faild!");
-
+		
 		var err_msg = '';
 		switch(err_code) {
 			case '1000':
@@ -1311,8 +1311,8 @@ var TextMessage;
 	TextMessage.login = language ? "登録済みの方はこちら" : "登录";
 	TextMessage.register = language ? "新しいはじめる方はこちら" : "注册";
 	TextMessage.cancel = language ? "キャンセル" : "取消";
-	TextMessage.towchatfrind = language ? "WeChatでシェア" : "发送给微信好友";
-	TextMessage.towchatcircle = language ? "WeChatモーメンツで共有" : "分享到微信朋友圈";
+	TextMessage.towchatfrind = language ? "WeChatのチャットに送信" : "发送给微信好友";
+	TextMessage.towchatcircle = language ? "WeChatのモーメンツ上で共有" : "分享到微信朋友圈";
 	TextMessage.allshowmes = language ? "全て" : "全部";
 	TextMessage.goodshowmes = language ? "良い" : "好评";
 	TextMessage.normalshowmes = language ? "普通" : "中评";
@@ -1438,17 +1438,17 @@ var TextMessage;
 	TextMessage.tranStatusDeal = language ? "取引成立" : "交易成立";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
 	TextMessage.transStopMsg = language ? "取引を中止しました。継続したい場合は再度取引をしてください。" : "已终止交易，不能继续交易。如果要继续交易请重新请求!!!";
-	TextMessage.transSuccessMsg = language ? "取引が完成した" : "交易已完成";
+	TextMessage.transSuccessMsg = language ? "取引が完了しました。" : "交易已完成";
 	TextMessage.transConfirm = language ? "取引を確認する" : "确认交易";
-	TextMessage.transWaitConfirm = language ? "相手の確認待つ" : "等待对方确认";
-	TextMessage.transOrder = language ? "注文生成" : "订单生成";
-	TextMessage.transUrgeDelive = language ? "出荷催促します" : "催促对方发货";
-	TextMessage.transReceipt = language ? "受取します":"确认收货";
-	TextMessage.transDelive = language ? "出荷確認":"确认发货";
-	TextMessage.transWaitOrder = language ? "注文待ち":"等待对方下单";
-	TextMessage.transUrgeReceipt = language ? "出荷催促" : "催促对方收货";
-	TextMessage.transFinish = language ? "取引完成" : "交易完成";
-	TextMessage.transWaitReceipt = language ? "受取待ち" : "等待对方收货";
+	TextMessage.transWaitConfirm = language ? "相手の確認を待つ" : "等待对方确认";
+	TextMessage.transOrder = language ? "注文の生成" : "订单生成";
+	TextMessage.transUrgeDelive = language ? "相手の出荷を催促する" : "催促对方发货";
+	TextMessage.transReceipt = language ? "品物を確認する":"确认收货";
+	TextMessage.transDelive = language ? "出荷確認確認":"确认发货";
+	TextMessage.transWaitOrder = language ? "相手の注文を待つ":"等待对方下单";
+	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
+	TextMessage.transFinish = language ? "交易完成" : "交易完成";
+	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
 	TextMessage.transStopTips = language ? "取引中止しますか？":"确认终止交易吗?";
 	TextMessage.transContinue =  language ? "取引継続します。":"继续交易!";
 	TextMessage.confirmBtnYes = language ? "はい":"确认";

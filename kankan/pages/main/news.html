@@ -82,7 +82,6 @@
 				mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
 					if (e.index == 0) {
 						li.parentNode.removeChild(li);
-						console.log(li.getAttribute("id"));
 						var mid=li.getAttribute("id");
 						var parms3={
 							"msg_ids":mid,

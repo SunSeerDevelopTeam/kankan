@@ -190,7 +190,9 @@
 			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
 			</div>
+			<div  id="traslateing" class="lang" data-locale="stautestext"></div>
 			<input type="hidden" name="userid" id="userid" value="" />
+			<input type="hidden" name="myid" id="myid" value="" />
 		</div>
 
 		<script src="../../../js/mui.min.js"></script>
@@ -221,7 +223,7 @@
 										}*/
 				],
 				beforeback: function() {
-					location.reload();
+					self.location.reload();
 			    }
 			});
 			window.addEventListener('cid', function(event) {
@@ -303,7 +305,12 @@
 					msg.content = TextMessage.sharecontent;
 					msg.thumbs = [imgurl0];
 					share.send(msg, function() {
-						alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+						var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
+						mui.toast(sharesuccesstext, {
+							duration: 'long',
+							type: 'div'
+						});
+						//mui.alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 					}, function(e) {
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
@@ -387,12 +394,21 @@
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail);
 				var comdityid = comdbasic[0].commodity_id;
-				//alert(comdityid);
+				var traslatestautes=comdbasic[0].status;
+				var myid=results.myid;
+				$("#myid").val(myid);
 				$("#comodityid").val(comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
 				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
+				if(traslatestautes=="0"){
+					$(".ka_buyway").show();
+					$("#traslateing").hide();
+				}else{
+					$(".ka_buyway").hide();
+					$("#traslateing").show();
+				}
 				var imgsarr = commodity.commodity_imgs;
 				var htmlimg = "";
 				var htmlfocus = "";
@@ -636,7 +652,7 @@
 				Repository.Commodity.praise(params1, {
 					ok: function(data) {
 						Log.d("success");
-						praise(bid);
+						praise(data);
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -671,19 +687,16 @@
 
 			}
 			//praise css controll
-			function praise(aid) {
-				if(aid == "zanqian") {
-					document.getElementById(aid).style.display = "none";
-					document.getElementById("zanhou").style.display = "block";
-					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
-					var gooafter = goodbefor + 1 * 1;
-					document.getElementById("zanshu").innerHTML = gooafter;
+			function praise(data) {
+				var counts=data.data.p_cnt;
+				var pflag=data.data.p_flg;
+				$("#zanshu").html(counts);
+				if(pflag == "1") {
+					$("#zanqian").hide();
+					$("#zanhou").show();
 				} else {
-					document.getElementById(aid).style.display = "none";
-					document.getElementById("zanqian").style.display = "block";
-					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
-					var gooafter = goodbefor - 1 * 1;
-					document.getElementById("zanshu").innerHTML = gooafter;
+					$("#zanhou").hide();
+					$("#zanqian").show();
 				}
 			}
 
@@ -714,6 +727,15 @@
 				var params = {
 					"commodity_id": codid
 				};
+				var comduid=$("#userid").val();
+				var myuid=$("#myid").val();
+				if(comduid==myuid){
+					mui.toast(TextMessage.operation_error, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
 				var login_flag = plus.storage.getItem("LoginFlag");
 				if(login_flag != 'isLogin') {
 					mui.toast(TextMessage.test, {

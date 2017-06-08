@@ -17,7 +17,7 @@
 				background-color: #efeff4;
 			}
 			.pimgbox{
-				width:113px;height:76px;text-align:center;border:1px solid #cccccc;overflow:hidden;
+				width:113px;max-height:76px;text-align:center;border:1px solid #ffffff;overflow:hidden;
 			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
@@ -307,7 +307,7 @@
 				}
 			],
 			beforeback: function() {
-		        var homePage = plus.webview.getWebviewById('pullrefresh_with_tab');
+		        var homePage = plus.webview.getWebviewById('home.html');
 				mui.fire(homePage, 'refresh',{refresh:"canRefresh"});
 		    }
 		});
@@ -498,7 +498,6 @@
 		function showuser(results){
 			$(".myfavourateshow").empty();
 			$(".myproductshow").empty();
-			var uaddress=results.data.address;
 			var ucomentnum=results.data.comment_cnt;
 			var unick_name=results.data.nick_name;
 			if(results.data.user_photo==""){
@@ -512,7 +511,11 @@
 			var unormalnum=results.data.user_opinion_m_count;
 			var badnum=results.data.user_opinion_l_count;
 			var uname=results.data.user_name;
-			var address=results.data.address;
+			if(results.data.address=="" || results.data.address=="undefined"){
+				var address="全国";
+			}else{
+				var address=results.data.address;
+			}
 			var uintroduce=results.data.introduce;
 			var uticknum=results.data.user_ticket;
 			$(".headimg").attr("src",user_photo);
