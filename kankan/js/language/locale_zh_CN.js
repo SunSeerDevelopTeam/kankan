@@ -155,6 +155,8 @@ var JSLocale = {
 	"home_return":"返回首页",
 	//message 
 	"messagetitle":"站内信",
+	"stautestext":"该商品交易中",
+	"thistorytext":"交易历史",
 }
 
 $(function() {

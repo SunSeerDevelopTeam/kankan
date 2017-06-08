@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1349,7 +1349,7 @@ var TextMessage;
 	TextMessage.errorCode_2001 = language ? "データや商品がないと表示しない": "表示没有数据或者商品下架";
 	TextMessage.errorCode_2002 = language ? "すでに凍結または削除されているユーザ": "已冻结或已删除的用户";
 	TextMessage.errorCode_2003 = language ? "操作の商品が存在しない": "要操作的商品不存在";
-	TextMessage.errorCode_2004 = language ? "自分の商品に対して操作することは許されない": "不允许对自己的商品操作";
+	TextMessage.errorCode_2004 = language ? "自分の出品した商品に対しては操作できません": "不允许对自己的商品操作";
 	TextMessage.errorCode_2005 = language ? "相関操作がない": "没有相关操作";
 	TextMessage.errorCode_2006 = language ? "全部でユーザーは同じ商品に対して何度も取引を提出することはできません": "一共用户不能对同一个商品多次提出交易申请";
 	TextMessage.errorCode_2007 = language ? "ユーザーのチケット不足": "用户ticket不足";
@@ -1437,8 +1437,8 @@ var TextMessage;
 	TextMessage.tranStatusRequest = language ? "取引中" : "请求中";
 	TextMessage.tranStatusDeal = language ? "交易成立" : "交易成立";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
-	TextMessage.transStopMsg = language ? "取引を中止にし、継続取引を続けることはできません。お取引を継続する場合は再請求する場合!!!" : "已终止交易，不能继续交易。如果要继续交易请重新请求!!!";
-	TextMessage.transSuccessMsg = language ? "取引が完成した" : "交易已完成";
+	TextMessage.transStopMsg = language ? "取引を中止しました。継続したい場合は再度取引をしてください。" : "已终止交易，不能继续交易。如果要继续交易请重新请求!!!";
+	TextMessage.transSuccessMsg = language ? "取引が完了しました。" : "交易已完成";
 	TextMessage.transConfirm = language ? "取引を確認する" : "确认交易";
 	TextMessage.transWaitConfirm = language ? "相手の確認を待つ" : "等待对方确认";
 	TextMessage.transOrder = language ? "注文の生成" : "订单生成";
