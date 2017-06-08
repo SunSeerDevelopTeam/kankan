@@ -115,10 +115,10 @@
         <!-- 微信分享 配置begin -->
         <meta-data
             android:name="WX_SECRET"
-            android:value="b136008481192a032c36f5bfc91ebc39" />
+            android:value="965c63ce5c9150a26234c5f73cdc788c" />
         <meta-data
             android:name="WX_APPID"
-            android:value="wx321b171a15b31c63" />
+            android:value="wx1915653b1958f7d6" />
 
         <activity
             android:name="com.sunseer.kankan.wxapi.WXEntryActivity"
@@ -131,7 +131,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="wx321b171a15b31c63" />
+                <data android:scheme="wx1915653b1958f7d6" />
             </intent-filter>
         </activity>
 
