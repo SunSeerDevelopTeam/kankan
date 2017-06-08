@@ -102,20 +102,20 @@
 				"payment": {
 					"weixin": {
 						"description": "微信支付",
-						"appid": "wxa305a32371b65619"
+						"appid": "wx1915653b1958f7d6"
 					}
 				},
 				"share": {
 					"weixin": {
-						"appid": "wxa305a32371b65619",
-						"appsecret": "0010a787ec3751c355681d1b9aaede73",
+						"appid": "wx1915653b1958f7d6",
+						"appsecret": "965c63ce5c9150a26234c5f73cdc788c",
 						"description": "可选，微信分享"
 					}
 				},
 				"oauth": {
 					"weixin": {
-						"appid": "wxa305a32371b65619",
-						"appsecret": "0010a787ec3751c355681d1b9aaede73"
+						"appid": "wx1915653b1958f7d6",
+						"appsecret": "965c63ce5c9150a26234c5f73cdc788c"
 					}
 				}
 			},
