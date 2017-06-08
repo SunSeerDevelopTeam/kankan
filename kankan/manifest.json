@@ -446,7 +446,9 @@
 					"js/jquery-3.2.0.min.js",
 					"pages/main/pullrefresh_with_tab.html",
 					"js/language/locale_ja_JP.js",
-					"images/default.jpg"
+					"images/default.jpg",
+					"js/webviewGroup.js",
+					"js/index.list.js"
 				],
 				"refer": [
 					"pages/login/login.html",
