@@ -22,8 +22,9 @@
 	height: 100%;*/
 }
 
-.item-tap span {
-	position: relative;
+.item-tap p {
+	position: absolute;
+	top:150px;
 	float: left;
 	background-color: rgba(105, 105, 105, 0.6);
 	color: white;
@@ -88,15 +89,28 @@
 	width: 100%;
 }
 
+.logistics {
+	position: fixed;
+    top: 75%;
+    left: 5%;
+}
+
 .logistics img {
 	position: relative;
-	width: 50px;
-	margin-top: 90%;
-	margin-left: 10%;
+    width: 50px;
+    height: auto;
 }
 .item-img-box{
 	line-height: 160px;
 }
 .item-img-box img{
 	height:auto;width:100%;vertical-align:middle;
+}
+
+.no-data {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
 }

@@ -156,6 +156,21 @@ var JSLocale = {
 	"messagetitle":"お知らせ",
 	"stautestext":"商品取引中",
 	"thistorytext":"取引履歴",
+	//category
+	"category_top_1":"すべて",
+	"category_top_2":"求める商品",
+	"category_top_3":"レディース",
+	"category_top_4":"メンズ",
+	"category_top_5":"ベビー・キッズ",
+	"category_top_6":"インテリア・住まい・小物",
+	"category_top_7":"エンタメ・ホビー",
+	"category_top_8":"コスメ・香水・美容",
+	"category_top_9":"家電・スマホ・カメラ",
+	"category_top_10":"スポーツ・レジャー",
+	"category_top_11":"ハンドメイド",
+	"category_top_12":"チケット・クーポン",
+	"category_top_13":"自動車・オートバイ",
+	"category_top_14":"その他"
 }
 
 $(function() {

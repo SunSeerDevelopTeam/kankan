@@ -7,8 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" href="../../css/mui.min.css">
-		<link rel="stylesheet" href="../../css/icons-extra.css">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<style>
 			html,
 			body {
@@ -36,25 +35,12 @@
 				<span class="mui-tab-label lang" data-locale="tab_4"></span>
 			</a>
 		</nav>
-		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
-		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			//			if(!mui.os.android) {
-			//				//The overall slide temporarily support android phone, because the two pages of mobile animation, can not guarantee synchronization;
-			//				document.getElementById("move-togger").classList.remove('mui-hidden');
-			//				var spans = document.querySelectorAll('.android-only');
-			//				for(var i = 0, len = spans.length; i < len; i++) {
-			//					spans[i].style.display = "none";
-			//				}
-			//			}
-			//mui initialization
-			mui.init({
-				swipeBack: false
-				//beforeback: back
-			});
-
+			//mui初始化
+			mui.init();
 			var subpages = ['home.html', 'products/product_login.html', 'products/product_want_to_buy.html', 'logisticslist.html'];
 			var subpage_style = {
 				top: '0px',
@@ -63,10 +49,8 @@
 
 			var aniShow = {};
 
-			//Create subpage, first tab page display, others are hidden;
+			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
-				plus.webview.create("products/request.html", "request.html");
-				Log.i("main.html plusReady...");
 				var self = plus.webview.currentWebview();
 				for(var i = 0; i < 4; i++) {
 					var temp = {};
@@ -79,57 +63,40 @@
 					}
 					self.append(sub);
 				}
-				main = plus.webview.currentWebview();
 			});
-
-			//Current activation option
+			//当前激活选项
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
-			//Tab click event
+			//选项卡点击事件
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
-				var isLogin = plus.storage.getItem("LoginFlag");
-				if(isLogin != "isLogin") {
-					plus.nativeUI.alert(TextMessage.test, function(e) {
-						mui.openWindow({
-							id: "login",
-							url: "../login/login.html",
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-					}, TextMessage.sharetitle, TextMessage.yes);
-				}
 				if(targetTab == activeTab) {
 					return;
 				}
-				//Replace the title
+				//更换标题
 				//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
-				//The Target tab is displayed
-				//If the iOS platform or non-first display, it is displayed directly
+				//显示目标选项卡
+				//若为iOS平台或非首次显示，则直接显示
 				if(mui.os.ios || aniShow[targetTab]) {
 					plus.webview.show(targetTab);
 				} else {
-					//Otherwise, use the fade-in animation and save the variable
+					//否则，使用fade-in动画，且保存变量
 					var temp = {};
 					temp[targetTab] = "true";
 					mui.extend(aniShow, temp);
 					plus.webview.show(targetTab, "fade-in", 300);
 				}
-				//Hide the current
+				//隐藏当前;
 				plus.webview.hide(activeTab);
-				//Change the currently active tab
+				//更改当前活跃的选项卡
 				activeTab = targetTab;
 			});
-			//Custom Events, Simulation Click "Home Tab"
+			//自定义事件，模拟点击“首页选项卡”
 			document.addEventListener('gohome', function() {
 				var defaultTab = document.getElementById("defaultTab");
-				//Simulation home page click
+				//模拟首页点击
 				mui.trigger(defaultTab, 'tap');
-				//The Toggle tab is highlighted
+				//切换选项卡高亮
 				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
 				if(defaultTab !== current) {
 					current.classList.remove('mui-active');
