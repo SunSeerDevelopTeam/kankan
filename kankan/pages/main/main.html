@@ -8,7 +8,6 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../css/mui.min.css" />
-		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<style>
 			html,
 			body {
@@ -44,7 +43,7 @@
 			mui.init();
 			var subpages = ['home.html', 'products/product_login.html', 'products/product_want_to_buy.html', 'logisticslist.html'];
 			var subpage_style = {
-				top: '45px',
+				top: '0px',
 				bottom: '51px'
 			};
 
@@ -73,11 +72,6 @@
 				var targetTab = this.getAttribute('href');
 				if(targetTab == activeTab) {
 					return;
-				}
-				if(targetTab != "home.html") {
-					$(".main-tab-show").hide();
-				} else {
-					$(".main-tab-show").show();
 				}
 				//更换标题
 				//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;

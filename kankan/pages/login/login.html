@@ -113,9 +113,8 @@
 				$.init({
 					statusBarBackground: '#FFFFFF',
 					beforeback: function() {
-						//var list = plus.webview.getWebviewById('pullrefresh_with_tab');
-						var list = plus.webview.currentWebview().opener();
-						mui.fire(list, 'refresh', {
+						var homeWebView = plus.webview.getWebviewById('home.html');
+						mui.fire(homeWebView, 'refresh', {
 							refresh: "canRefresh"
 						});
 						return true;

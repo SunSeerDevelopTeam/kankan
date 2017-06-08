@@ -232,7 +232,7 @@ _proto.createWebview = function(from) {
 	var options = this.options;
 	options.styles = options.styles || {
 		//top: "82px",
-		top:"42px",
+		top:"82px",
 		bottom: "0px",
 		render: "always"
 	};

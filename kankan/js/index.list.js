@@ -29,7 +29,7 @@ function pulldownRefresh() {
 		var imgwidth = parseInt($(window).width()) / 2 - 34;
 		if(Validator.isEmpty(data.data.commd)) {
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-			document.body.querySelector("#pullrefresh").innerHTML = '<p class="no-data">' + TextMessage.nodata + '</p>';
+			plus.nativeUI.toast(TextMessage.no_data);
 			return;
 		}
 		data.data.commd.forEach(function(item) {
@@ -79,38 +79,38 @@ function getDataFromServer(params, callback) {
 	Repository.Commodity.commodityList(params, {
 		ok: function(data) {
 			callback(data);
-			//updateUserPhoto(data.data.users.photo);
-			//updateNoticeStatus(data.data.users.sys_msg_flg);
+			updateUserPhoto(data.data.users.photo);
+			updateNoticeStatus(data.data.users.sys_msg_flg);
 			savePageInfo(data.data.pages);
 		},
 		ng: function(statuscode) {
-			/**
-			if(statuscode == "0100") {
-				if(reverse) {
-					if(self != null) {
-						self.endPullDownToRefresh(true);
-					}
-				} else {
-					if(self != null) {
-						self.endPullUpToRefresh(true);
-					}
-				}
-			}
-			**/
+			mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+			mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 		},
 		error: function() {
-			/**
-			if(reverse) {
-				if(self != null) {
-					self.endPullDownToRefresh(true);
-				}
-			} else {
-				if(self != null) {
-					self.endPullUpToRefresh(true);
-				}
-			}
-			**/
+			mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+			mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 		}
+	});
+}
+
+function updateUserPhoto(photo) {
+	if(typeof(plus) == "undefined") {
+		return;
+	}
+	var homePage = plus.webview.getWebviewById('home.html');
+	mui.fire(homePage, 'updateUserImgEvent', {
+		userImgURL: photo
+	});
+}
+
+function updateNoticeStatus(msgFlg) {
+	if(typeof(plus) == "undefined") {
+		return;
+	}
+	var homePage = plus.webview.getWebviewById('home.html');
+	mui.fire(homePage, 'updateNoticeStatusEvent', {
+		flg: msgFlg
 	});
 }
 
@@ -122,9 +122,12 @@ function savePageInfo(pages) {
 
 function createListView(data) {
 	var table = document.body.querySelector('.mui-table-view');
+	if(Validator.isEmpty(table)) {
+		return;
+	}
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
-		document.body.querySelector("#pullrefresh").innerHTML = '<p class="no-data">' + TextMessage.nodata + '</p>';
+		plus.nativeUI.toast(TextMessage.no_data);
 		return;
 	}
 	data.data.commd.forEach(function(item) {
@@ -138,7 +141,7 @@ function createListView(data) {
 }
 
 function bindEventOnListViewItem() {
-	$(".li-content").off("tap", ".item-tap");
+	//$(".li-content").off("tap", ".item-tap");
 	$(".li-content").on("tap", ".item-tap", function(event) {
 		//if(isShowMenu) return;
 		var id = $(this).attr("data-comm-id");
@@ -160,7 +163,7 @@ function bindEventOnListViewItem() {
 			});
 		}, 300);
 	});
-	$(".comm-like-num").off("tap");
+	//$(".comm-like-num").off("tap");
 	$(".comm-like-num").on("tap", function(event) {
 		var _self = $(this);
 		var clickFlag = _self.attr('data-click');
@@ -169,12 +172,47 @@ function bindEventOnListViewItem() {
 			return;
 		}
 		_self.attr('data-click', '1');
-		if(DEBUG) {
-			alert("首页商品点赞事件被触发。");
-		}
 		var isLogin = plus.storage.getItem("LoginFlag");
 		if(!isLogin) {
-			toggleMenu();
+			var btnArray = [{
+				title: TextMessage.login
+			}, {
+				title: TextMessage.register
+			}];
+			plus.nativeUI.actionSheet({
+				title: TextMessage.sharetitle,
+				cancel: TextMessage.skip,
+				buttons: btnArray
+			}, function(e) {
+				switch(e.index) {
+					case 1:
+						mui.openWindow({
+							id: 'login',
+							url: '/pages/login/login.html',
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+						break;
+					case 2:
+						mui.openWindow({
+							id: 'reg',
+							url: '/pages/login/reg.html',
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+						break;
+					default:
+						break;
+				}
+			});
 			return;
 		}
 		var commId = _self.closest("li").find('.item-tap').attr('data-comm-id');
@@ -287,3 +325,25 @@ mui.plusReady(function() {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
 })
+
+window.addEventListener("search", function(event) {
+	if(event.detail.keyword === "") {
+		return;
+	}
+	keyword = event.detail.keyword;
+	var params = {};
+	params.search = keyword;
+	getDataFromServer(params, function(data) {
+		document.body.querySelector('.mui-table-view').innerHTML = "";
+		createListView(data);
+	});
+});
+
+window.addEventListener("refresh", function(event) {
+	if(event.detail.refresh != "canRefresh") {
+		return;
+	}
+	var params = {};
+	getDataFromServer(params, function(data) {
+	});
+});

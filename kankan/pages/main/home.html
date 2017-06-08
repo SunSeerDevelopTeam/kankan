@@ -8,6 +8,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<style>
 			html,
 			body {
@@ -132,7 +133,7 @@
 			<a style="position:relative;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
 				<i></i>
 			</a>
-			<a class="mui-icon mui-icon-search mui-pull-right"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right" style="margin-right: 0px;"></a>
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
@@ -172,17 +173,37 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/common.js" ></script>
-		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
-		<script type="text/javascript" src="../../js/language.js" ></script>
-		<script type="text/javascript" src="../../js/index.list.js" ></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/index.list.js"></script>
 		<script type="text/javascript" src="../../js/webviewGroup.js"></script>
 		<script>
+			window.addEventListener("updateUserImgEvent", function(event) {
+				if(DEBUG) {
+					alert("updateUserImgEvent[imgURL=" + event.detail.userImgURL + "]");
+				}
+				$('#user img').attr('src', event.detail.userImgURL);
+			});
+
+			window.addEventListener("updateNoticeStatusEvent", function(event) {
+				if(DEBUG) {
+					alert("updateNoticeStatusEvent[flg=" + event.detail.flg + "]");
+				}
+				if(event.detail.flg == "1") {
+					$('i').show();
+				} else {
+					$('i').hide();
+				}
+			});
 			mui.init();
 			mui('.mui-scroll-wrapper').scroll({
 				deceleration: 0.0005
 			});
 			mui.plusReady(function() {
+				var userPhoto = document.getElementById("user");
+				var searchBtn = $('.mui-icon-search').first();
 				var offset = 0;
 				var index = 0;
 				var group = new webviewGroup("home.html", {
@@ -265,8 +286,129 @@
 					var wid = this.getAttribute("data-wid");
 					group.switchTab(wid);
 				});
+				/**
 				document.querySelector('.mui-scroll-wrapper').addEventListener('scroll', function(e) {
 					var curscroll = e.detail.x;
+				});
+				**/
+				userPhoto.addEventListener('click', function(event) {
+					var isLogin = plus.storage.getItem("LoginFlag");
+					if(isLogin == "isLogin") {
+						mui.openWindow({
+							id: "user",
+							url: "user/user.html",
+							waiting: {
+								autoShow: false
+							}
+						});
+					} else {
+						var btnArray = [{
+							title: TextMessage.login
+						}, {
+							title: TextMessage.register
+						}];
+						plus.nativeUI.actionSheet({
+							title: TextMessage.sharetitle,
+							cancel: TextMessage.skip,
+							buttons: btnArray
+						}, function(e) {
+							switch(e.index) {
+								case 1:
+									mui.openWindow({
+										id: 'login',
+										url: '../login/login.html',
+										waiting: {
+											autoShow: false
+										},
+										show: {
+											duration: 200
+										}
+									});
+									break;
+								case 2:
+									mui.openWindow({
+										id: 'reg',
+										url: '../login/reg.html',
+										waiting: {
+											autoShow: false
+										},
+										show: {
+											duration: 200
+										}
+									});
+									break;
+								default:
+									break;
+							}
+						});
+					}
+				});
+
+				searchBtn.click(function() {
+					mui.openWindow({
+						id: 'search',
+						url: 'search.html',
+						extras: {
+							wid: $('.mui-scroll .mui-active').index() + 1
+						},
+						show: {
+							aniShow: 'slide-in-bottom',
+							duration: 200
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				});
+
+				mui("header").on("tap", "#offCanvasShow", function() {
+					var isLogin = plus.storage.getItem("LoginFlag");
+					if(!isLogin) {
+						var btnArray = [{
+							title: TextMessage.login
+						}, {
+							title: TextMessage.register
+						}];
+						plus.nativeUI.actionSheet({
+							title: TextMessage.sharetitle,
+							cancel: TextMessage.skip,
+							buttons: btnArray
+						}, function(e) {
+							switch(e.index) {
+								case 1:
+									mui.openWindow({
+										id: 'login',
+										url: '../login/login.html',
+										waiting: {
+											autoShow: false
+										},
+										show: {
+											duration: 200
+										}
+									});
+									break;
+								case 2:
+									mui.openWindow({
+										id: 'reg',
+										url: '../login/reg.html',
+										waiting: {
+											autoShow: false
+										},
+										show: {
+											duration: 200
+										}
+									});
+									break;
+								default:
+									break;
+							}
+						});
+					} else {
+						mui.openWindow({
+							id: 'news',
+							url: 'news.html',
+						});
+					}
 				});
 			});
 			mui.back = function() {
