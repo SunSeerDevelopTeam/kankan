@@ -399,7 +399,8 @@
 					"js/sha256.js",
 					"js/language/locale_ja_JP.js",
 					"js/language/locale_zh_CN.js",
-					"images/nopic.jpg"
+					"images/nopic.jpg",
+					"images/weixin2.png"
 				],
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
@@ -574,7 +575,8 @@
 				"resources": [
 					"images/iconfont-tianjia.png",
 					"fonts/mui.ttf",
-					"js/sha256.js"
+					"js/sha256.js",
+					"js/pro_uploadimg.js"
 				],
 				"refer": [],
 				"priority": 0
