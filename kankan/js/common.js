@@ -1427,9 +1427,14 @@ var TextMessage;
 	TextMessage.emailnull = language ? "メールボックスは空っぽにならない!" : "邮箱不能为空！";
 	TextMessage.codenull = language ? "検証コードは空っぽにならない!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
+	
 	TextMessage.loading = language ? "ローディング…" : "正在加载...";
-	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
-	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
+	TextMessage.no_data = language ? "該当カテゴリーのデーターがありません。" : "当前分类下没有数据";
+	TextMessage.pull_down = language ? "引っ張って更新" : "下拉可以刷新";
+	TextMessage.pull_up = language ? "スクロールで更新" : "上拉显示更多";
+	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
+	TextMessage.update = language ? "更新中" : "正在刷新";
+	
 	TextMessage.requestStop = language ? "中止を請求する" : "请求终止";
 	TextMessage.transSuccess = language ? "交易成功する" : "交易成功";
 	TextMessage.transStop = language ? "交易中止する" : "交易终止";

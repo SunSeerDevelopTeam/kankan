@@ -93,47 +93,78 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #efeff4;
 			}
+			
+			a#user img {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				margin-top: -0.2em;
+			}
+			
+			header a.mui-icon-extra-notice {
+				margin-top: 0.5em;
+				margin-right: 0.25em;
+			}
+			
+			header a.mui-icon-search {
+				width: 60px;
+			}
+			
+			i {
+				display: block;
+				background: #f00;
+				border-radius: 50%;
+				width: 5px;
+				height: 5px;
+				top: 0px;
+				right: 0px;
+				position: absolute;
+			}
 		</style>
 	</head>
 
 	<body>
-		<!--
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">顶部选项卡-可左右拖动(webview)</h1>
+			<a class="mui-icon mui-pull-left" id="user">
+				<img src="../../images/default.jpg" />
+			</a>
+			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
+			<a style="position:relative;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
+				<i></i>
+			</a>
+			<a class="mui-icon mui-icon-search mui-pull-right"></a>
 		</header>
-		-->
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
-						<a class="mui-control-item mui-active lang" data-locale="category_top_1" href="#item1mobile" data-wid="category/tab-top-subpage-1.html">
+						<a class="mui-control-item mui-active lang" data-locale="category_top_1" href="#item1mobile" data-wid="tab-top-subpage-1" data-cid="0">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_2" href="#item2mobile" data-wid="category/tab-top-subpage-2.html">
+						<a class="mui-control-item lang" data-locale="category_top_2" href="#item2mobile" data-wid="tab-top-subpage-2" data-cid="-1">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_3" href="#item3mobile" data-wid="category/tab-top-subpage-3.html">
+						<a class="mui-control-item lang" data-locale="category_top_3" href="#item3mobile" data-wid="tab-top-subpage-3" data-cid="3">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_4" href="#item4mobile" data-wid="category/tab-top-subpage-4.html">
+						<a class="mui-control-item lang" data-locale="category_top_4" href="#item4mobile" data-wid="tab-top-subpage-4" data-cid="33">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_5" href="#item5mobile" data-wid="category/tab-top-subpage-5.html">
+						<a class="mui-control-item lang" data-locale="category_top_5" href="#item5mobile" data-wid="tab-top-subpage-5" data-cid="40">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_6" href="#item6mobile" data-wid="category/tab-top-subpage-6.html">
+						<a class="mui-control-item lang" data-locale="category_top_6" href="#item6mobile" data-wid="tab-top-subpage-6" data-cid="41">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_7" href="#item7mobile" data-wid="category/tab-top-subpage-7.html">
+						<a class="mui-control-item lang" data-locale="category_top_7" href="#item7mobile" data-wid="tab-top-subpage-7" data-cid="42">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_8" href="#item8mobile" data-wid="category/tab-top-subpage-8.html">
+						<a class="mui-control-item lang" data-locale="category_top_8" href="#item8mobile" data-wid="tab-top-subpage-8" data-cid="6">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_9" href="#item9mobile" data-wid="category/tab-top-subpage-9.html">
+						<a class="mui-control-item lang" data-locale="category_top_9" href="#item9mobile" data-wid="tab-top-subpage-9" data-cid="44">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_10" href="#item10mobile" data-wid="category/tab-top-subpage-10.html">
+						<a class="mui-control-item lang" data-locale="category_top_10" href="#item10mobile" data-wid="tab-top-subpage-10" data-cid="45">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_11" href="#item11mobile" data-wid="category/tab-top-subpage-11.html">
+						<a class="mui-control-item lang" data-locale="category_top_11" href="#item11mobile" data-wid="tab-top-subpage-11" data-cid="46">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_12" href="#item12mobile" data-wid="category/tab-top-subpage-12.html">
+						<a class="mui-control-item lang" data-locale="category_top_12" href="#item12mobile" data-wid="tab-top-subpage-12" data-cid="2">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_13" href="#item13mobile" data-wid="category/tab-top-subpage-13.html">
+						<a class="mui-control-item lang" data-locale="category_top_13" href="#item13mobile" data-wid="tab-top-subpage-13" data-cid="48">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_14" href="#item14mobile" data-wid="category/tab-top-subpage-14.html">
+						<a class="mui-control-item lang" data-locale="category_top_14" href="#item14mobile" data-wid="tab-top-subpage-14" data-cid="32">
 						</a>
 					</div>
 				</div>
@@ -144,6 +175,7 @@
 		<script type="text/javascript" src="../../js/common.js" ></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
 		<script type="text/javascript" src="../../js/language.js" ></script>
+		<script type="text/javascript" src="../../js/index.list.js" ></script>
 		<script type="text/javascript" src="../../js/webviewGroup.js"></script>
 		<script>
 			mui.init();
@@ -155,59 +187,59 @@
 				var index = 0;
 				var group = new webviewGroup("home.html", {
 					items: [{
-						id: "tab-top-subpage-1.html",
+						id: "tab-top-subpage-1",
 						url: "category/tab-top-subpage-1.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-2.html",
+						id: "tab-top-subpage-2",
 						url: "category/tab-top-subpage-2.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-3.html",
+						id: "tab-top-subpage-3",
 						url: "category/tab-top-subpage-3.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-4.html",
+						id: "tab-top-subpage-4",
 						url: "category/tab-top-subpage-4.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-5.html",
+						id: "tab-top-subpage-5",
 						url: "category/tab-top-subpage-5.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-6.html",
+						id: "tab-top-subpage-6",
 						url: "category/tab-top-subpage-6.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-7.html",
+						id: "tab-top-subpage-7",
 						url: "category/tab-top-subpage-7.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-8.html",
+						id: "tab-top-subpage-8",
 						url: "category/tab-top-subpage-8.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-9.html",
+						id: "tab-top-subpage-9",
 						url: "category/tab-top-subpage-9.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-10.html",
+						id: "tab-top-subpage-10",
 						url: "category/tab-top-subpage-10.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-11.html",
+						id: "tab-top-subpage-11",
 						url: "category/tab-top-subpage-11.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-12.html",
+						id: "tab-top-subpage-12",
 						url: "category/tab-top-subpage-12.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-13.html",
+						id: "tab-top-subpage-13",
 						url: "category/tab-top-subpage-13.html",
 						extras: {}
 					}, {
-						id: "tab-top-subpage-14.html",
+						id: "tab-top-subpage-14",
 						url: "category/tab-top-subpage-14.html",
 						extras: {}
 					}],
@@ -217,8 +249,8 @@
 							c.classList.remove("mui-active");
 						}
 						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
+						localStorage.cid = activeTab.dataset.cid;
 						activeTab.classList.add("mui-active");
-						console.dir(mui(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")"));
 						if(index < obj.index) {
 							var width = mui(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index)) + ")")[0].scrollWidth;
 							offset += width;

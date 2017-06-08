@@ -22,9 +22,10 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-				<font size="3" class="lang" data-locale="back"></font>
-			</a>
+			<!--<a class="mui-icon-back mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+				<font size="4" id="goback">
+					<font size="4">
+			</a>-->
 			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>-->
 			<h1 class="mui-title lang" data-locale="logistic"></h1>
 		</header>
@@ -215,9 +216,9 @@
 				$(".tran-body").append(html.toString());
 				$("#goback").html(TextMessage.back);
 			}
-			mui(".homepage").on("tap","div",function(){
-				var mainpage=plus.webview.getLaunchWebview();
-					mui.fire(mainpage,'gohome');
+			mui(".homepage").on("tap", "div", function() {
+				var mainpage = plus.webview.getLaunchWebview();
+				mui.fire(mainpage, 'gohome');
 			});
 		}
 		mui.plusReady(function() {

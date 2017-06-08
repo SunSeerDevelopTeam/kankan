@@ -22,8 +22,9 @@
 	height: 100%;*/
 }
 
-.item-tap span {
-	position: relative;
+.item-tap p {
+	position: absolute;
+	top:150px;
 	float: left;
 	background-color: rgba(105, 105, 105, 0.6);
 	color: white;
@@ -99,4 +100,12 @@
 }
 .item-img-box img{
 	height:auto;width:100%;vertical-align:middle;
+}
+
+.no-data {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
 }
