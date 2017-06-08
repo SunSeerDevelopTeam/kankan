@@ -1430,7 +1430,7 @@ var TextMessage;
 	TextMessage.loading = language ? "更新中…" : "正在加载...";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
 	TextMessage.nomore = language ? "データがありません" : "没有更多数据了";
-	TextMessage.requestStop = language ? "取引を中止する" : "请求终止";
+	TextMessage.requestStop = language ? "中止を請求する" : "请求终止";
 	TextMessage.transSuccess = language ? "交易成功する" : "交易成功";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
 	TextMessage.transContact = language ? "内容はありませんね" : "交谈内容不能未空";
