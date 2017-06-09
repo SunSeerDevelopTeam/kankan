@@ -113,7 +113,7 @@
 				</li>
 				<li class="tran-foot-submit">
 					<button type="button" onclick="submitChat();" class="mui-btn-link mui-btn-nav mui-pull-left">
-						<span><font size="4" class="lang"  data-locale="send_mail"></font></span>
+						<span><font size="4" class="lang"  data-locale="contentsend"></font></span>
 					</button>
 				</li>
 			</ul>
@@ -149,6 +149,7 @@
 						"transid": trans_id
 					};
 					trans_flow('transConversation', params,'');
+					$("#msg").val('');
 				}
 			}
 
