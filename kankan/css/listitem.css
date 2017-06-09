@@ -90,7 +90,7 @@
 }
 
 .logistics {
-	position: fixed;
+	position: absolute;
     top: 75%;
     left: 5%;
 }
@@ -99,6 +99,7 @@
 	position: relative;
     width: 50px;
     height: auto;
+    z-index:999;
 }
 .item-img-box{
 	line-height: 160px;
