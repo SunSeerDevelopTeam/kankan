@@ -69,6 +69,17 @@
 	<script>
 		var timer;
 		mui.init();
+		window.onload = function(){
+            mui.plusReady(function(){
+                var self = plus.webview.currentWebview();
+                var flag = self.flag;
+               // alert(flag);
+                //关闭等待框
+                plus.nativeUI.closeWaiting();
+                //显示当前页面
+                mui.currentWebview.show();
+            });
+        }
 		function showDialog(msg, tel, l_com_id) {
 			var dialog = document.getElementById('dialog');
 			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
@@ -142,11 +153,16 @@
 					};
 					Repository.Commodity.logisticssendmail(params, {
 						ok: function(data) {
-							Log.d("success");
-							console.log("send mail success!");
+							if (!Repository.User.isEmptyEmail()) {
+								 //alert("没有登录");
+								 return;
+							} else {
+								Log.d("success");
+								console.log("send mail success!");
+							}
 						},
 						ng: function(data) {
-							Log.d(data);
+							console.log(data);
 							if(data == "1000") {
 								alert(TextMessage.test);
 								mui.openWindow({
@@ -227,7 +243,7 @@
 					showlogisticslist(data);
 				},
 				ng: function(data) {
-					Log.d(data);
+					console.log(data);
 					if(data == "1000") {
 						alert(TextMessage.test);
 						mui.openWindow({
