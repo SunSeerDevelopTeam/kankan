@@ -66,7 +66,9 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-						<a class="mui-action-back mui-icon mui-icon-left-nav"><font class="lang" data-locale="back" size="3"></font></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav">
+				<font class="lang" data-locale="back" size="3"></font>
+			</a>
 			<h1 class="mui-title"><span class="lang" data-locale="login"></span></h1>
 		</header>
 		<div class="mui-content">
@@ -166,7 +168,10 @@
 											app.createState(name, function() {
 												plus.storage.setItem('LoginFlag', 'isLogin');
 												waiting.close();
+											});
+											if(data.email == "") {
 												plus.nativeUI.alert(TextMessage.input_email, function(event) {
+													mui.back();
 													mui.openWindow({
 														id: "emai_summate",
 														url: "emai_summate.html",
@@ -178,30 +183,12 @@
 														}
 													});
 												}, TextMessage.sharetitle, TextMessage.yes);
-												/**
-												setTimeout(function() {
-													waiting.close();
-													mui.back();
-												}, 500);
-												**/
-											});
+											} else {
+												mui.back();
+											}
 										},
 										ng: function(data) {
 											waiting.close();
-											if(data === "3020") {
-												plus.nativeUI.alert(TextMessage.input_email, function(event) {
-													mui.openWindow({
-														id: "emai_summate",
-														url: "emai_summate.html",
-														waiting: {
-															autoShow: false
-														},
-														show: {
-															duration: 200
-														}
-													});
-												}, TextMessage.sharetitle, TextMessage.yes);
-											}
 										},
 										error: function() {
 											waiting.close();

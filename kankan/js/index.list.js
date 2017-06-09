@@ -1,5 +1,6 @@
 var pageInfo = {};
 var detailPage = null;
+var __back__first = null;
 mui.init({
 	pullRefresh: {
 		container: '#pullrefresh',
@@ -19,6 +20,20 @@ mui.init({
 		}
 	}
 });
+
+mui.back = function() {
+	if(!$.__back__first) {
+		$.__back__first = new Date().getTime();
+		mui.toast(TextMessage.exit_app);
+		setTimeout(function() {
+			$.__back__first = null;
+		}, 2000);
+	} else {
+		if(new Date().getTime() - $.__back__first < 2000) {
+			plus.runtime.quit();
+		}
+	}
+}
 /**
  * 下拉刷新具体业务实现
  */
@@ -165,52 +180,12 @@ function bindEventOnListViewItem() {
 	});
 
 	$(".logistics").on("tap", "a", function(event) {
-		var isLogin = plus.storage.getItem("LoginFlag");
-		if(!isLogin) {
-			var btnArray = [{
-				title: TextMessage.login
-			}, {
-				title: TextMessage.register
-			}];
-			plus.nativeUI.actionSheet({
-				title: TextMessage.sharetitle,
-				cancel: TextMessage.skip,
-				buttons: btnArray
-			}, function(e) {
-				switch(e.index) {
-					case 1:
-						mui.openWindow({
-							id: 'login',
-							url: '/pages/login/login.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-						break;
-					case 2:
-						mui.openWindow({
-							id: 'reg',
-							url: '/pages/login/reg.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-						break;
-					default:
-						break;
-				}
-			});
+		if (!Repository.User.isLogin()) {
 			return;
 		}
 		mui.openWindow({
 			id: 'logisticslist',
-			url:"/pages/main/products/request.html",
+			url: "/pages/main/products/request.html",
 			waiting: {
 				autoShow: false
 			},
@@ -229,47 +204,7 @@ function bindEventOnListViewItem() {
 			return;
 		}
 		_self.attr('data-click', '1');
-		var isLogin = plus.storage.getItem("LoginFlag");
-		if(!isLogin) {
-			var btnArray = [{
-				title: TextMessage.login
-			}, {
-				title: TextMessage.register
-			}];
-			plus.nativeUI.actionSheet({
-				title: TextMessage.sharetitle,
-				cancel: TextMessage.skip,
-				buttons: btnArray
-			}, function(e) {
-				switch(e.index) {
-					case 1:
-						mui.openWindow({
-							id: 'login',
-							url: '/pages/login/login.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-						break;
-					case 2:
-						mui.openWindow({
-							id: 'reg',
-							url: '/pages/login/reg.html',
-							waiting: {
-								autoShow: false
-							},
-							show: {
-								duration: 200
-							}
-						});
-						break;
-					default:
-						break;
-				}
-			});
+		if (!Repository.User.isLogin()) {
 			return;
 		}
 		var commId = _self.closest("li").find('.item-tap').attr('data-comm-id');

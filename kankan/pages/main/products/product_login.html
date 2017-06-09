@@ -119,144 +119,143 @@
 	<script src="../../../js/common.js"></script>
 	<script src="../../../js/pro_uploadimg.js"></script>
 	<script>
-		$(function() {
-			$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
-		});
-		window.addEventListener('eid', function(event) {
-			var id = event.detail.id;
-			//alert(id);
-			$(".z_addImg").remove();
-			$(".mui-title").html(TextMessage.commodity_edit);
-			$(".mui-action-back").show();
-			document.getElementById('codid').value = id;
-			getcomdinfo(id);
-		});
-		window.addEventListener("refresh", function(event) {
-			location.reload();
-		});
-		//edite image show
-		function imagepull(im, srcval) {
-			var img = document.createElement("img");
-			img.setAttribute("src", srcval);
-			img.setAttribute("alt", im);
-			img.setAttribute("class", "z_images");
-			var imgAdd = document.createElement("div");
-			imgAdd.setAttribute("class", "z_addImg");
-			imgAdd.appendChild(img);
-			$(".z_photo").append(imgAdd);
-			imglength();
-			imgRemove();
+	$(function() {
+		$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
+	});
+	window.addEventListener('eid', function(event) {
+		var id = event.detail.id;
+		//alert(id);
+		$(".z_addImg").remove();
+		$(".mui-title").html(TextMessage.commodity_edit);
+		$(".mui-action-back").show();
+		document.getElementById('codid').value=id;
+		getcomdinfo(id);
+	});
+	window.addEventListener("refresh", function(event) {
+		location.reload();
+	});
+	//edite image show
+	function imagepull(im,srcval){
+		var img = document.createElement("img");
+		img.setAttribute("src", srcval);
+		img.setAttribute("alt", im);
+		img.setAttribute("class", "z_images");
+		var imgAdd = document.createElement("div");
+		imgAdd.setAttribute("class", "z_addImg");
+		imgAdd.appendChild(img);
+		$(".z_photo").append(imgAdd);
+		imglength();
+		imgRemove();
+	}
+	//edite information show
+	function messages(results){
+		$("#0").val("0");
+		$("#1").val("0");
+		$("#2").val("0");
+		$("#3").val("0");
+		var name=HTMLDecode(HTMLDecode(results.data.comm_name));
+		var detail=HTMLDecode(HTMLDecode(results.data.comm_detail));
+		var business=results.data.business;
+		var exchange=results.data.exchange;
+		var gratis=results.data.gratis;
+		var image0=results.data.imges[0];
+		var image1=results.data.imges[1];
+		var image2=results.data.imges[2];
+		var image3=results.data.imges[3];
+		var classify_id=results.data.classify_id;
+		var price=results.data.price;
+		var state=results.data.state;
+		document.getElementById('comm_name').value=name;
+		document.getElementById('comm_detail').value=detail;
+		document.getElementById('business').value=business;
+		document.getElementById('exchange').value=exchange;
+		document.getElementById('gratis').value=gratis;
+		document.getElementById('classify_id').value=classify_id;
+		document.getElementById('price').value=price;
+		document.getElementById('comm_state').value=state;
+		if(image0!=""){
+			document.getElementById('0').value=image0;
+			imagepull(0,image0);
 		}
-		//edite information show
-		function messages(results) {
-			$("#0").val("0");
-			$("#1").val("0");
-			$("#2").val("0");
-			$("#3").val("0");
-			var name = results.data.comm_name;
-			var detail = results.data.comm_detail;
-			var business = results.data.business;
-			var exchange = results.data.exchange;
-			var gratis = results.data.gratis;
-			var image0 = results.data.imges[0];
-			var image1 = results.data.imges[1];
-			var image2 = results.data.imges[2];
-			var image3 = results.data.imges[3];
-			var classify_id = results.data.classify_id;
-			var price = results.data.price;
-			var state = results.data.state;
-			document.getElementById('comm_name').value = name.replace(/\s/g, '');
-			document.getElementById('comm_detail').value = detail.replace(/\s/g, '');
-			document.getElementById('business').value = business;
-			document.getElementById('exchange').value = exchange;
-			document.getElementById('gratis').value = gratis;
-			document.getElementById('classify_id').value = classify_id;
-			document.getElementById('price').value = price;
-			document.getElementById('comm_state').value = state;
-			if(image0 != "") {
-				document.getElementById('0').value = image0;
-				imagepull(0, image0);
-			}
-			if(image1 != "") {
-				document.getElementById('1').value = image1;
-				imagepull(1, image1);
-			}
-			if(image2 != "") {
-				document.getElementById('2').value = image2;
-				imagepull(2, image2);
-			}
-			if(image3 != "") {
-				document.getElementById('3').value = image3;
-				imagepull(3, image3);
-			}
-			if(business == "1") {
-				$("#pointbuybtn").removeClass("ka_exchangegrey");
-				$("#pointbuybtn").addClass("ka_exchangered");
-			}
-			if(exchange == "1") {
-				$("#exchbuybtn").removeClass("ka_exchangegrey");
-				$("#exchbuybtn").addClass("ka_exchangered");
-			}
-			if(gratis == "1") {
-				$("#freebuybtn").removeClass("ka_exchangegrey");
-				$("#freebuybtn").addClass("ka_exchangered");
-			}
+		if(image1!=""){
+			document.getElementById('1').value=image1;
+			imagepull(1,image1);
 		}
-		//edite show
-		function getcomdinfo(dataid) {
-			mui.plusReady(function() {
-				var param3 = {
-					"commodity_id": dataid
-				}
-				Repository.Commodity.Commodityedite(param3, {
-					ok: function(data) {
-						console.log("success");
-						messages(data);
-					},
-					ng: function(data) {
-						console.log("error:" + data);
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'login',
-								url: "../../login/login.html"
-							});
+		if(image2!=""){
+			document.getElementById('2').value=image2;
+			imagepull(2,image2);
+		}
+		if(image3!=""){
+			document.getElementById('3').value=image3;
+			imagepull(3,image3);
+		}
+		if(business=="1"){
+			$("#pointbuybtn").removeClass("ka_exchangegrey");
+			$("#pointbuybtn").addClass("ka_exchangered");
+		}
+		if(exchange=="1"){
+			$("#exchbuybtn").removeClass("ka_exchangegrey");
+			$("#exchbuybtn").addClass("ka_exchangered");
+		}
+		if(gratis=="1"){
+			$("#freebuybtn").removeClass("ka_exchangegrey");
+			$("#freebuybtn").addClass("ka_exchangered");
+		}
+	}
+	//edite show
+	function getcomdinfo(dataid){
+		mui.plusReady(function() {
+			var param3={
+				"commodity_id":dataid
+			}
+			Repository.Commodity.Commodityedite(param3, {
+						ok: function(data) {
+							console.log("success");
+							messages(data);
+						},
+						ng: function(data) {
+							console.log("error:"+data);
+							if(data == "1000") {
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+							}
+							if(data == "3020") {
+								mui.toast(TextMessage.input_email, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.openWindow({
+									id: 'emai_summate',
+									url:"../../login/emai_summate.html"
+								});
+							}
+							if(data=="2002"){
+								mui.toast(TextMessage.userng, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+							}
 						}
-						if(data == "3020") {
-							mui.toast(TextMessage.input_email, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'emai_summate',
-								url: "../../login/emai_summate.html"
-							});
-						}
-						if(data == "2002") {
-							mui.toast(TextMessage.userng, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'login',
-								url: "../../login/login.html"
-							});
-						}
-					}
-				});
 			});
-
-		}
-		//get classfiy 
-		var testarr = [];
-
-		function categorypush(results) {
-			var catedata = results.data;
-			for(var c = 0; c < catedata.length; c++) {
-				var categoryadd = {
+		});
+		
+	}
+	//get classfiy 
+	var testarr=[];
+	function categorypush(results){
+		var catedata=results.data;
+		for(var c=0;c<catedata.length;c++){
+			var categoryadd={
 					value: catedata[c].catalog_id,
 					text: catedata[c].catalog_detail,
 					children: []
@@ -408,238 +407,268 @@
 									});
 								}
 							}
-						});
-					});
-					//category click picker
-					var showCatePickerButton = doc.getElementById('showCityPicker');
-					var cateResult = doc.getElementById('sortResult');
-					showCatePickerButton.addEventListener('tap', function(event) {
-						categoryPicker.show(function(items) {
-							cateResult.innerText = items[0].text + " " + items[1].text;
-							document.getElementById("classify_id").value = items[1].value;
-							document.getElementById("bitian1").style.display = "none";
-						});
-					}, false);
-					//staute click picker
-					var showstatePickerButton = doc.getElementById('prostuat');
-					var stauteResult = doc.getElementById('stauteResult');
-					showstatePickerButton.addEventListener('tap', function(event) {
-						statePicker.show(function(items) {
-							stauteResult.innerText = items[0].text;
-							document.getElementById('comm_state').value = items[0].value;
-							document.getElementById("bitian2").style.display = "none";
-						});
-					}, false);
-
-				}
+				});
 			});
-		})(mui, document);
-		//submit form
-		function publishs() {
-			var buy_sell_flag = "0";
-			var comm_name = HTMLEncode($("#comm_name").val());
-			var comm_detail = HTMLEncode($("#comm_detail").val());
-			var classify_id = $("#classify_id").val();
-			var comm_state = $("#comm_state").val();
-			var exchange = $("#exchange").val();
-			var business = $("#business").val();
-			var gratis = $("#gratis").val();
-			var imges0 = $("#0").val();
-			var imges1 = $("#1").val();
-			var imges2 = $("#2").val();
-			var imges3 = $("#3").val();
-			var price = $("#price").val();
-			if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
-				alert(TextMessage.pro_imagetest);
-				return false;
-			}
-			if(comm_name.replace(/\s/g, '') == "") {
-				alert(TextMessage.pro_nametest);
-				document.publishcomodity.comm_name.focus();
-				return false;
-			}
-			if(comm_detail.replace(/\s/g, '') == "") {
-				alert(TextMessage.pro_descriptiontest);
-				document.publishcomodity.comm_detail.focus();
-				return false;
-			}
-			if(classify_id == "") {
-				alert(TextMessage.pro_sorttest);
-				return false;
-			}
-			if(comm_state == "") {
-				alert(TextMessage.pro_stautetest);
-				return false;
-			}
-			if(business == "1") {
-				if(price == "") {
-					alert(TextMessage.pro_pricenulltest);
-					document.publishcomodity.price.focus();
-					return false;
-				}
-				if(isNaN(price)) {
-					alert(TextMessage.pro_pricetest);
-					document.publishcomodity.price.focus();
-					return false;
-				}
-				if(price < 0) {
-					alert(TextMessage.pro_pricenumbtest);
-					document.publishcomodity.price.focus();
-					return false;
-				}
-			}
-			if(exchange == "0" & business == "0" & gratis == "0") {
-				alert(TextMessage.pro_buywaytest);
-				return false;
-			}
-			var params = {
-				"buy_sell_flag": buy_sell_flag,
-				"comm_name": comm_name,
-				"comm_detail": comm_detail,
-				"classify_id": classify_id,
-				"comm_state": comm_state,
-				"exchange": exchange,
-				"business": business,
-				"gratis": gratis,
-				"imges[0]": imges0,
-				"imges[1]": imges1,
-				"imges[2]": imges2,
-				"imges[3]": imges3
-			};
-			if(price != "") {
-				params.price = price;
-			}
-			var commodity_id = $("#codid").val();
-			if(commodity_id != "") {
-				params.commodity_id = commodity_id;
-			}
-			Repository.Commodity.Commoditypublish(params, {
-				ok: function(data) {
-					Log.d("success");
-					alert(TextMessage.pro_logininfo);
-					if(commodity_id == "") {
-						location.reload();
-						mui.plusReady(function() {
-							var mainpage = plus.webview.getLaunchWebview();
-							mui.fire(mainpage, 'gohome');
-						});
-
-					} else {
-						mui.back();
-					}
-				},
-				ng: function(data) {
-					Log.d(data);
-					if(data == "1000") {
-						mui.toast(TextMessage.test, {
-							duration: 'long',
-							type: 'div'
-						});
-						mui.openWindow({
-							id: 'login',
-							url: "../../login/login.html"
-						});
-					}
-					if(data == "3020") {
-						mui.toast(TextMessage.input_email, {
-							duration: 'long',
-							type: 'div'
-						});
-						mui.openWindow({
-							id: 'emai_summate',
-							url: "../../login/emai_summate.html"
-						});
-					}
-					if(data == "2002") {
-						mui.toast(TextMessage.userng, {
-							duration: 'long',
-							type: 'div'
-						});
-						mui.openWindow({
-							id: 'login',
-							url: "../../login/login.html"
-						});
-					}
-					if(data == "2007") {
-						mui.toast(TextMessage.ticketng, {
-							duration: 'long',
-							type: 'div'
-						});
-						location.reload();
-						mui.openWindow({
-							id: 'point_to_ticket',
-							url: "../sttting/point_to_ticket.html"
-						});
-					}
-					console.log("other error code:" + data);
-
-				}
-			});
-
+			//category click picker
+			var showCatePickerButton = doc.getElementById('showCityPicker');
+			var cateResult = doc.getElementById('sortResult');
+			showCatePickerButton.addEventListener('tap', function(event) {
+				categoryPicker.show(function(items) {
+					cateResult.innerText = items[0].text + " " + items[1].text;
+					document.getElementById("classify_id").value = items[1].value;
+					document.getElementById("bitian1").style.display = "none";
+				});
+			}, false);
+			//staute click picker
+			var showstatePickerButton = doc.getElementById('prostuat');
+			var stauteResult = doc.getElementById('stauteResult');
+			showstatePickerButton.addEventListener('tap', function(event) {
+				statePicker.show(function(items) {
+					stauteResult.innerText = items[0].text;
+					document.getElementById('comm_state').value = items[0].value;
+					document.getElementById("bitian2").style.display = "none";
+				});
+			}, false);
+			
 		}
-
-		//************************buy way choose*****************************
-		/*exchange*/
-		document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
-			var exchangeval = $("#exchange").val();
-			if(exchangeval == "0") {
-				$("#exchange").val("1");
-				$("#exchbuybtn").removeClass("ka_exchangegrey");
-				$("#exchbuybtn").addClass("ka_exchangered");
-			} else {
-				$("#exchange").val("0");
-				$("#exchbuybtn").removeClass("ka_exchangered");
-				$("#exchbuybtn").addClass("ka_exchangegrey");
-			}
-			if($("#gratis").val() == "1") {
-				$("#gratis").val("0");
-				$("#freebuybtn").removeClass("ka_exchangered");
-				$("#freebuybtn").addClass("ka_exchangegrey");
-			}
+	});
+})(mui, document);
+//submit form
+function publishs() {
+	var buy_sell_flag = "0";
+	var comm_name = HTMLEncode($("#comm_name").val());
+	var comm_detail = HTMLEncode($("#comm_detail").val());
+	var classify_id = $("#classify_id").val();
+	var comm_state = $("#comm_state").val();
+	var exchange = $("#exchange").val();
+	var business = $("#business").val();
+	var gratis = $("#gratis").val();
+	var imges0 = $("#0").val();
+	var imges1 = $("#1").val();
+	var imges2 = $("#2").val();
+	var imges3 = $("#3").val();
+	var price = $("#price").val();
+	if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
+		mui.toast(TextMessage.pro_imagetest, {
+			duration: 'long',
+			type: 'div'
 		});
-		/*point*/
-		document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
-			var businessval = $("#business").val();
-			if(businessval == "0") {
-				$("#business").val("1");
-				$("#pointbuybtn").removeClass("ka_exchangegrey");
-				$("#pointbuybtn").addClass("ka_exchangered");
-			} else {
-				$("#business").val("0");
-				$("#pointbuybtn").removeClass("ka_exchangered");
-				$("#pointbuybtn").addClass("ka_exchangegrey");
-			}
-
-			if($("#gratis").val() == "1") {
-				$("#gratis").val("0");
-				$("#freebuybtn").removeClass("ka_exchangered");
-				$("#freebuybtn").addClass("ka_exchangegrey");
-			}
+		return false;
+	}
+	if(comm_name.replace(/\s/g,'') == "") {
+		mui.toast(TextMessage.pro_nametest, {
+			duration: 'long',
+			type: 'div'
 		});
-		/*free*/
-		document.getElementById('freebuybtn').addEventListener('tap', function(e) {
-			var gratisval = $("#gratis").val();
-			if(gratisval == "0") {
-				$("#gratis").val("1");
-				$("#freebuybtn").removeClass("ka_exchangegrey");
-				$("#freebuybtn").addClass("ka_exchangered");
-			} else {
-				$("#gratis").val("0");
-				$("#freebuybtn").removeClass("ka_exchangered");
-				$("#freebuybtn").addClass("ka_exchangegrey");
-			}
-
-			if($("#business").val() == "1") {
-				$("#business").val("0");
-				$("#pointbuybtn").removeClass("ka_exchangered");
-				$("#pointbuybtn").addClass("ka_exchangegrey");
-			}
-			if($("#exchange").val() == "1") {
-				$("#exchange").val("0");
-				$("#exchbuybtn").removeClass("ka_exchangered");
-				$("#exchbuybtn").addClass("ka_exchangegrey");
-			}
+		document.publishcomodity.comm_name.focus();
+		return false;
+	}
+	if(comm_detail.replace(/\s/g,'') == "") {
+		mui.toast(TextMessage.pro_descriptiontest, {
+			duration: 'long',
+			type: 'div'
 		});
-	</script>
+		document.publishcomodity.comm_detail.focus();
+		return false;
+	}
+	if(classify_id == "") {
+		mui.toast(TextMessage.pro_sorttest, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
+	if(comm_state == "") {
+		mui.toast(TextMessage.pro_stautetest, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
+	if(business== "1") {
+		if(price==""){
+			mui.toast(TextMessage.pro_pricenulltest, {
+				duration: 'long',
+				type: 'div'
+			});
+			document.publishcomodity.price.focus();
+			return false;
+		}
+		if(isNaN(price)) {
+			mui.toast(TextMessage.pro_pricetest, {
+				duration: 'long',
+				type: 'div'
+			});
+			document.publishcomodity.price.focus();
+			return false;
+		}
+		if(price < 0) {
+			mui.toast(TextMessage.pro_pricenumbtest, {
+				duration: 'long',
+				type: 'div'
+			});
+			document.publishcomodity.price.focus();
+			return false;
+		}
+	}
+	if(exchange == "0" & business == "0" & gratis == "0") {
+		mui.toast(TextMessage.pro_buywaytest, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
+	var params = {
+		"buy_sell_flag": buy_sell_flag,
+		"comm_name": comm_name,
+		"comm_detail": comm_detail,
+		"classify_id": classify_id,
+		"comm_state": comm_state,
+		"exchange": exchange,
+		"business": business,
+		"gratis": gratis,
+		"imges[0]": imges0,
+		"imges[1]": imges1,
+		"imges[2]": imges2,
+		"imges[3]": imges3
+	};
+	if(price!=""){
+		params.price=price;
+	}
+	var commodity_id=$("#codid").val();
+	if(commodity_id!=""){
+		params.commodity_id=commodity_id;
+	}
+	Repository.Commodity.Commoditypublish(params, {
+		ok: function(data) {
+			Log.d("success");
+			mui.toast(TextMessage.pro_logininfo, {
+				duration: 'long',
+				type: 'div'
+			});
+			if(commodity_id==""){
+				location.reload();
+				mui.plusReady(function() {
+					var mainpage=plus.webview.getLaunchWebview();
+					 mui.fire(mainpage,'gohome');
+				});
+				
+			}else{
+				mui.back();
+			}
+		},
+		ng: function(data) {
+			Log.d(data);
+			if(data == "1000") {
+				mui.toast(TextMessage.test, {
+					duration: 'long',
+					type: 'div'
+				});
+				mui.openWindow({
+					id: 'login',
+					url:"../../login/login.html"
+				});
+			} 
+			if(data == "3020") {
+				mui.toast(TextMessage.input_email, {
+					duration: 'long',
+					type: 'div'
+				});
+				mui.openWindow({
+					id: 'emai_summate',
+					url:"../../login/emai_summate.html"
+				});
+			}
+			if(data=="2002"){
+				mui.toast(TextMessage.userng, {
+					duration: 'long',
+					type: 'div'
+				});
+				mui.openWindow({
+					id: 'login',
+					url:"../../login/login.html"
+				});
+			}
+			if(data=="2007"){
+				mui.toast(TextMessage.ticketng, {
+					duration: 'long',
+					type: 'div'
+				});
+				location.reload();
+				mui.openWindow({
+					id: 'point_to_ticket',
+					url:"../sttting/point_to_ticket.html"
+				});
+			}
+			console.log("other error code:" + data);
+			
+		}
+	});
+
+}
+
+//************************buy way choose*****************************
+/*exchange*/
+document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
+	var exchangeval=$("#exchange").val();
+	if(exchangeval=="0"){
+		$("#exchange").val("1");
+		$("#exchbuybtn").removeClass("ka_exchangegrey");
+		$("#exchbuybtn").addClass("ka_exchangered");
+	}else{
+		$("#exchange").val("0");
+		$("#exchbuybtn").removeClass("ka_exchangered");
+		$("#exchbuybtn").addClass("ka_exchangegrey");
+	}
+	if($("#gratis").val() == "1") {
+		$("#gratis").val("0");
+		$("#freebuybtn").removeClass("ka_exchangered");
+		$("#freebuybtn").addClass("ka_exchangegrey");
+	}
+});
+/*point*/
+document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
+	var businessval=$("#business").val();
+	if(businessval=="0"){
+		$("#business").val("1");
+		$("#pointbuybtn").removeClass("ka_exchangegrey");
+		$("#pointbuybtn").addClass("ka_exchangered");
+	}else{
+		$("#business").val("0");
+		$("#pointbuybtn").removeClass("ka_exchangered");
+		$("#pointbuybtn").addClass("ka_exchangegrey");
+	}
+	
+	if($("#gratis").val() == "1") {
+		$("#gratis").val("0");
+		$("#freebuybtn").removeClass("ka_exchangered");
+		$("#freebuybtn").addClass("ka_exchangegrey");
+	}
+});
+/*free*/
+document.getElementById('freebuybtn').addEventListener('tap', function(e) {
+	var gratisval=$("#gratis").val();
+	if(gratisval=="0"){
+		$("#gratis").val("1");
+		$("#freebuybtn").removeClass("ka_exchangegrey");
+		$("#freebuybtn").addClass("ka_exchangered");
+	}else{
+		$("#gratis").val("0");
+		$("#freebuybtn").removeClass("ka_exchangered");
+		$("#freebuybtn").addClass("ka_exchangegrey");
+	}
+	
+	if($("#business").val() == "1") {
+		$("#business").val("0");
+		$("#pointbuybtn").removeClass("ka_exchangered");
+		$("#pointbuybtn").addClass("ka_exchangegrey");
+	}
+	if($("#exchange").val() == "1") {
+		$("#exchange").val("0");
+		$("#exchbuybtn").removeClass("ka_exchangered");
+		$("#exchbuybtn").addClass("ka_exchangegrey");
+	}
+});
+</script>
 
 </html>

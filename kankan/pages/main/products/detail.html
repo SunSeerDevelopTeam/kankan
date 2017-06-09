@@ -97,18 +97,20 @@
 
 					<div class="kankan_det_goodsnum" id="zanshu"></div>
 				</li>
-				<li class="mui-table-view-cell kankan_det_description">
-					<div class="mui-pull-left lang" data-locale="det_spdescription"></div>
-				</li>
+				</ul>
+				<h5 class="ka_h5backcolor lang" data-locale="det_spdescription"></h5>
+				<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<div class="kankan_det_information"></div>
+					<div class="kankan_det_information" style="word-break:break-word;"></div>
 				</li>
 			</ul>
 			<!--share-->
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell kankan_det_description" id="share">
-					<span class="lang" data-locale="det_spahare"></span>
-					<img src="../../../images/weixin.png" width="30" height="30">
+					<span class="lang sharetext" data-locale="det_spahare"></span>
+					<div id="weixinimgbox">
+						<img src="../../../images/weixin2.png">
+					</div>
 					<!--<img src="../../../images/facebook.png" width="40" height="30">
 					<img src="../../../images/line.png" width="30" height="30">
 					<img src="../../../images/twitter.png" width="30" height="30">-->
@@ -143,7 +145,7 @@
 			</li>
 			</ul>
 			<!--Produce goods of concern-->
-			<h5 class="ka_h5backcolor lang" data-locale="det_concerneds"></h5>
+			<h5 class="ka_h5backcolor lang concerned" data-locale=""></h5>
 			<div class="mui-slider">
 				<div class="mui-slider-group mui-slider-loop">
 					<!--last-->
@@ -188,7 +190,9 @@
 			<span class="lang" data-locale="det_send"><b></b></span>
 		</button>
 			</div>
+			<div  id="traslateing" class="lang" data-locale="stautestext"></div>
 			<input type="hidden" name="userid" id="userid" value="" />
+			<input type="hidden" name="myid" id="myid" value="" />
 		</div>
 
 		<script src="../../../js/mui.min.js"></script>
@@ -217,34 +221,39 @@
 											id:'../../transaction/transaction2.html',
 											url:'../../transaction/transaction2.html'
 										}*/
-				]
+				],
+				beforeback: function() {
+					self.location.reload();
+			    }
 			});
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
 				commodity_id = event.detail.id;
 				mui.plusReady(function() {
 					getinfo(id);
-					
 				});
+				
 			});
 			//*********************share start
-			var shares = {};
-			mui.plusReady(function() {
-				TextMessage.language = plus.os.language;
-				plus.share.getServices(function(s) {
-					if(s && s.length > 0) {
-						for(var i = 0; i < s.length; i++) {
-							var t = s[i];
-							shares[t.id] = t;
-						}
-					}
-				}, function() {
-					console.log("share server fail");
-				});
-			});
+			
 
 			//onclick share
-			function clickshare(shareid,imgurl){
+			function clickshare(shareid,imgurl0){
+				
+				var shares = {};
+				mui.plusReady(function() {
+					TextMessage.language = plus.os.language;
+					plus.share.getServices(function(s) {
+						if(s && s.length > 0) {
+							for(var i = 0; i < s.length; i++) {
+								var t = s[i];
+								shares[t.id] = t;
+							}
+						}
+					}, function() {
+						console.log("share server fail");
+					});
+				});
 				document.getElementById("share").addEventListener('tap', function() {
 					var ids = [{
 							id: "weixin",
@@ -294,9 +303,14 @@
 					msg.href = Api.url.Commodity.shareurl+shareid;
 					msg.title =TextMessage.sharetitle;
 					msg.content = TextMessage.sharecontent;
-					msg.thumbs = [imgurl];
+					msg.thumbs = [imgurl0];
 					share.send(msg, function() {
-						alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+						var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
+						mui.toast(sharesuccesstext, {
+							duration: 'long',
+							type: 'div'
+						});
+						//mui.alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 					}, function(e) {
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
@@ -320,7 +334,7 @@
 			}
 
 			function getinfo(pid) {
-				emptyhtml();
+				//emptyhtml();
 				var params = {
 					"commodity_id": pid
 				};
@@ -372,14 +386,6 @@
 					});
 				});
 			}
-			//translate html
-			function HTMLDecode(text) {
-				var temp = document.createElement("div");
-				temp.innerHTML = text;
-				var output = temp.innerText || temp.textContent;
-				temp = null;
-				return output;
-			}
 			//message show
 			function messageshow(results) {
 				$(".mui-slider-indicator").empty();
@@ -388,18 +394,28 @@
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail);
 				var comdityid = comdbasic[0].commodity_id;
+				var traslatestautes=comdbasic[0].status;
+				var myid=results.myid;
+				$("#myid").val(myid);
 				$("#comodityid").val(comdityid);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
 				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
+				if(traslatestautes=="0"){
+					$(".ka_buyway").show();
+					$("#traslateing").hide();
+				}else{
+					$(".ka_buyway").hide();
+					$("#traslateing").show();
+				}
 				var imgsarr = commodity.commodity_imgs;
 				var htmlimg = "";
 				var htmlfocus = "";
 				var imglength = imgsarr.length;
 				var la = imgsarr.length - 1 * 1;
-				var first = '<img src="' + imgsarr[0] + '"  style="height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
-				var last = '<img src="' + imgsarr[la] + '"  style="height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				var first = '<img src="' + imgsarr[0] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				var last = '<img src="' + imgsarr[la] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
 				$(".firstimage").html(last);
 				$(".lastimage").html(first);
 				if(imglength > 1) {
@@ -415,7 +431,7 @@
 						imgurl = "../../../images/nopic.jpg";
 					}
 					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center">';
-					htmlimg += '<img src="' + imgurl + '" style="height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					htmlimg += '</div>';
 					if(i == 0) {
 						var htmlfocus = '<div class="mui-indicator mui-active"></div>';
@@ -435,6 +451,8 @@
 				var ucomentnum = commodity.user_basic.user_comment_count;
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
+				var concernedtitle=uname+TextMessage.det_concerneds;
+				$(".concerned").html(concernedtitle);
 				$("#userid").val(userid);
 				$(".ka_authorname b").html(uname);
 				$(".ka_touxiangimg").attr("src", uimage);
@@ -574,9 +592,6 @@
 				//concenered end**************************************/
 				//buy way
 				var buy_sell_flag = comdbasic[0].buy_sell_flag;
-				if(buy_sell_flag == "1") {
-					$(".ka_buyway").hide();
-				}
 				//praise staute
 				var user_praise_status = commodity.commodity_praise.user_praise_status;
 				if(user_praise_status == "0") {
@@ -637,7 +652,7 @@
 				Repository.Commodity.praise(params1, {
 					ok: function(data) {
 						Log.d("success");
-						praise(bid);
+						praise(data);
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -672,19 +687,16 @@
 
 			}
 			//praise css controll
-			function praise(aid) {
-				if(aid == "zanqian") {
-					document.getElementById(aid).style.display = "none";
-					document.getElementById("zanhou").style.display = "block";
-					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
-					var gooafter = goodbefor + 1 * 1;
-					document.getElementById("zanshu").innerHTML = gooafter;
+			function praise(data) {
+				var counts=data.data.p_cnt;
+				var pflag=data.data.p_flg;
+				$("#zanshu").html(counts);
+				if(pflag == "1") {
+					$("#zanqian").hide();
+					$("#zanhou").show();
 				} else {
-					document.getElementById(aid).style.display = "none";
-					document.getElementById("zanqian").style.display = "block";
-					var goodbefor = document.getElementById("zanshu").innerHTML * 1;
-					var gooafter = goodbefor - 1 * 1;
-					document.getElementById("zanshu").innerHTML = gooafter;
+					$("#zanhou").hide();
+					$("#zanqian").show();
 				}
 			}
 
@@ -715,6 +727,15 @@
 				var params = {
 					"commodity_id": codid
 				};
+				var comduid=$("#userid").val();
+				var myuid=$("#myid").val();
+				if(comduid==myuid){
+					mui.toast(TextMessage.operation_error, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
 				var login_flag = plus.storage.getItem("LoginFlag");
 				if(login_flag != 'isLogin') {
 					mui.toast(TextMessage.test, {

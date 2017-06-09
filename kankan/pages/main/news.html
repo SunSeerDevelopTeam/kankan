@@ -27,7 +27,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">站内信一览</h1>
+		    <h1 class="mui-title lang" data-locale="messagetitle">站内信一览</h1>
 		</header>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
   			<div class="mui-scroll">
@@ -82,7 +82,6 @@
 				mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
 					if (e.index == 0) {
 						li.parentNode.removeChild(li);
-						console.log(li.getAttribute("id"));
 						var mid=li.getAttribute("id");
 						var parms3={
 							"msg_ids":mid,
@@ -93,13 +92,14 @@
 							console.log("delete success!");
 						},
 						ng: function(data) {
-							console.log(data);
+							/*console.log(data);
 							if(data=="1000"){
 								mui.toast(TextMessage.test, {
 									duration: 'long',
 									type: 'div'
 								})
-							}
+							}*/
+							Api.callback_ng(data);
 						},
 					});
 					} else {
@@ -157,13 +157,14 @@
 							showmessage(data);
 						},
 						ng: function(data) {
-							console.log(data);
+							/*console.log(data);
 							if(data=="1000"){
 								mui.toast(TextMessage.test, {
 									duration: 'long',
 									type: 'div'
 								})
-							}
+							}*/
+							Api.callback_ng(data);
 						},
 					});
 				});
@@ -203,13 +204,14 @@
 				console.log(data);
 			},
 			ng: function(data) {
-				console.log(data);
+				/*console.log(data);
 				if(data=="1000"){
 					mui.toast(TextMessage.test, {
 						duration: 'long',
 						type: 'div'
 					})
-				}
+				}*/
+				Api.callback_ng(data);
 			},
 		});
 		//getmessage("1");

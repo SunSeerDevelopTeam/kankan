@@ -153,6 +153,10 @@ var JSLocale = {
 	'eve_comment':"请填写评价的评语 ",
 	'eve_btn':"评价",
 	"home_return":"返回首页",
+	//message 
+	"messagetitle":"站内信",
+	"stautestext":"该商品交易中",
+	"thistorytext":"交易历史",
 	//category
 	"category_top_1":"全部",
 	"category_top_2":"求购商品",
