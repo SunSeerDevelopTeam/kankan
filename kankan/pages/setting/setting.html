@@ -344,7 +344,9 @@
 						Repository.User.logout(params,{
 							ok: function(data) {
 								plus.storage.setItem('token','');//clear locale token
-								plus.storage.setItem('LoginFlag', '');//clear LoginFlag
+								plus.storage.setItem('LoginFlag','');//clear LoginFlag
+								plus.storage.setItem('email','');//clear login user email
+								plus.storage.setItem('myid','');//clear login user Id
 								mui.toast(TextMessage.logoutsuccess, {
 									duration: 'long',
 									type: 'div'

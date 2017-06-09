@@ -689,12 +689,19 @@
 				};
 				Repository.User.userinfo(params4, {
 					ok: function(data) {
-						console.log("success");
-						mui.toast(TextMessage.updatesuccessinfo, {
-							duration: 'long',
-							type: 'div'
-						});
-						mui.back();
+						if (!Repository.User.isEmptyEmail()) {
+								 //alert("没有登录");
+								 return;
+						} else {
+							//console.log("success");
+						 	console.log("success");
+							mui.toast(TextMessage.updatesuccessinfo, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.back();
+						}
+						
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -718,16 +725,6 @@
 								url:"../../login/login.html"
 							});
 						}
-						if(data == "3020") {
-							mui.toast(TextMessage.errorCode_3020, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/emai_summate.html"
-							});
-						}
 						console.log("other error code:" + data);
 						
 					}
@@ -739,11 +736,16 @@
 			var params={};
 			Repository.User.Usershow(params, {
 				ok: function(data) {
-					console.log("success");
-					//console.dir(data);
-					showuser(data);
-					$("#loading").hide();
-					$(".tran-page").show();
+					if (!Repository.User.isEmptyEmail()) {
+						 //alert("没有登录");
+						 return;
+					} else {
+						console.log("success");
+						//console.dir(data);
+						showuser(data);
+						$("#loading").hide();
+						$(".tran-page").show();
+					}
 				},
 				ng: function(data) {
 					if(data == "2002") {
@@ -811,7 +813,13 @@
 						};
 						Repository.User.userinfo(parms2, {
 							ok: function(data) {
-								console.log("success");
+								if (!Repository.User.isEmptyEmail()) {
+								 //alert("没有登录");
+								 return;
+								} else {
+								 console.log("success");
+								}
+								//console.log("success");
 								//console.dir(data);
 //								mui.toast(TextMessage.updatesuccessinfo, {
 //									duration: 'long',
@@ -838,16 +846,6 @@
 									mui.openWindow({
 										id: 'login',
 										url:"../../login/login.html"
-									});
-								}
-								if(data == "3020") {
-									mui.toast(TextMessage.input_email, {
-										duration: 'long',
-										type: 'div'
-									});
-									mui.openWindow({
-										id: 'emai_summate',
-										url:"../../login/emai_summate.html"
 									});
 								}
 								console.log("other error code:" + data);
