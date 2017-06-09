@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1398,9 +1398,9 @@ var TextMessage;
 	TextMessage.edite_headimage = language ? "アイコンを更新します" : "修改头像";
 	TextMessage.sendtextrequest = language ? "メールを送りますか" : "发送电子邮件";
 	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
-	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";
-	TextMessage.mailsucetext = language ? "にメールを送りました。" : "给我发送了邮件";
-	TextMessage.requestmailtext = language ? "返事してください" : "请回复";
+	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "感谢您使用";
+	TextMessage.mailsucetext = language ? "にメールを送りました。" : "邮件已发送";
+	TextMessage.requestmailtext = language ? "返事してください" : "请注意查收回信";
 	TextMessage.sendmailbutext = language ? "メール送信" : "发送邮件";
 	TextMessage.calbutext = language ? "電話" : "电话";
 	TextMessage.homebutext = language ? "ホームページへ" : "主页";
