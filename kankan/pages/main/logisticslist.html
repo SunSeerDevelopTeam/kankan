@@ -146,7 +146,7 @@
 							console.log("send mail success!");
 						},
 						ng: function(data) {
-							Log.d(data);
+							console.log(data);
 							if(data == "1000") {
 								alert(TextMessage.test);
 								mui.openWindow({
@@ -227,7 +227,7 @@
 					showlogisticslist(data);
 				},
 				ng: function(data) {
-					Log.d(data);
+					console.log(data);
 					if(data == "1000") {
 						alert(TextMessage.test);
 						mui.openWindow({
