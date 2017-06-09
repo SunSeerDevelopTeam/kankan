@@ -512,7 +512,7 @@ var Api;
 			Commodityedite: baseUrl() + '/commodity/release/update/',
 			logisticslist: baseUrl() + '/logistics/',
 			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
-			shareurl:baseUrl()+'/share.php?id='
+			shareurl: baseUrl() + '/share.php?id='
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -563,6 +563,7 @@ var Api;
 			success: function(data) {
 				Log.i(data);
 				setToken(data.result.tokencheck);
+				saveLoginStatus(data);
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng)) {
@@ -642,7 +643,7 @@ var Api;
 	function callback_ng(data) {
 		if(Validator.isObj(data)) {
 			$.each(data, function(key, value) {
-				error_msg(value,key);
+				error_msg(value, key);
 			});
 		} else {
 			error_msg(data);
@@ -650,9 +651,16 @@ var Api;
 	}
 	Api.callback_ng = callback_ng;
 
-	function error_msg(err_code,key) {
+	function saveLoginStatus(data) {
+		if(typeof(plus) != "undefined") {
+			plus.storage.setItem('email', data.email);
+			plus.storage.setItem('myid', data.myid);
+		}
+	}
+
+	function error_msg(err_code, key) {
 		Log.i("message send faild!");
-		
+
 		var err_msg = '';
 		switch(err_code) {
 			case '1000':
@@ -848,7 +856,9 @@ var Api;
 					plus.webview.close(preView);
 					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
 					mui.back();
-					mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
+					mui.fire(mainpage, 'refresh', {
+						refresh: "canRefresh"
+					});
 				});
 				break;
 			case '2020':
@@ -935,12 +945,12 @@ var Api;
 					type: 'div'
 				});
 				mui.openWindow({
-							url: "/pages/login/emai_summate.html",
-							id: "emaisummate",
-							extras: {
-								"transid": trans_id
-							}
-						})
+					url: "/pages/login/emai_summate.html",
+					id: "emaisummate",
+					extras: {
+						"transid": trans_id
+					}
+				})
 				break;
 			case '5000':
 				err_msg = TextMessage.errorCode_5000;
@@ -1100,6 +1110,75 @@ var Repository;
 			return Api.call(Api.url.User.get_message, params, callback);
 		}
 		User.get_message = get_message;
+
+		function isLogin() {
+			var myid = plus.storage.getItem("myid");
+			if(myid == "" || myid == null) {
+				var btnArray = [{
+					title: TextMessage.login
+				}, {
+					title: TextMessage.register
+				}];
+				plus.nativeUI.actionSheet({
+					title: TextMessage.sharetitle,
+					cancel: TextMessage.skip,
+					buttons: btnArray
+				}, function(e) {
+					switch(e.index) {
+						case 1:
+							mui.openWindow({
+								id: 'login',
+								url: '/pages/login/login.html',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								}
+							});
+							break;
+						case 2:
+							mui.openWindow({
+								id: 'reg',
+								url: '/pages/login/reg.html',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								}
+							});
+							break;
+						default:
+							break;
+					}
+				});
+				return false;
+			}
+			return true;
+		}
+		User.isLogin = isLogin;
+
+		function isEmptyEmail() {
+			var email = plus.storage.getItem("email");
+			if(email == "" || email == null) {
+				plus.nativeUI.alert(TextMessage.input_email, function(event) {
+					mui.openWindow({
+						id: "emai_summate",
+						url: "/pages/login/emai_summate.html",
+						waiting: {
+							autoShow: false
+						},
+						show: {
+							duration: 200
+						}
+					});
+				}, TextMessage.sharetitle, TextMessage.yes);
+				return false;
+			}
+			return true;
+		}
+		User.isEmptyEmail = isEmptyEmail;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -1338,46 +1417,46 @@ var TextMessage;
 	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
 	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れた為、再び試みて下さい " : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "入力してください" : "不能为空，请重新输入";
-	TextMessage.errorCode_1000 = language ? "ログインしてください": "请先登录";
-	TextMessage.errorCode_1003 = language ? "フォーマットは正しくありません、再入力してください": "格式不正确,请重新输入";
-	TextMessage.errorCode_1004 = language ? "入力が間違っていますが、再入力して下さい": "不一致，请重新输入";
-	TextMessage.errorCode_1005  = language ? "すでに存在しましたので、再入力して下さい": "已存在，请重新输入";
-	TextMessage.errorCode_1006 = language ? "入力した文字列の長さは正しくなく、再入力して下さい": "长度不正确，请重新输入";
-	TextMessage.errorCode_1007 = language ? "画像サイズまたはフォーマットは正しくありません、再登録ください！": "图片大小或格式不正确，请重新登录！";
-	TextMessage.errorCode_0001 = language ? "再登録ください": "请重新登录！";
-	TextMessage.errorCode_0100 = language ? "通信失敗しましたが、リトライを行ってください": "系统出错啦，请稍后重试";
-	TextMessage.errorCode_2001 = language ? "データーがありません": "表示没有数据或者商品下架";
-	TextMessage.errorCode_2002 = language ? "該当ユーザーが凍結、もしくは削除されました。": "已冻结或已删除的用户";
-	TextMessage.errorCode_2003 = language ? "商品が存在していません": "要操作的商品不存在";
-	TextMessage.errorCode_2004 = language ? "自分の商品に対して操作できません": "不允许对自己的商品操作";
-	TextMessage.errorCode_2005 = language ? "該当操作ができません": "没有相关操作";
-	TextMessage.errorCode_2006 = language ? "同じ商品に多重リクエストができません": "不能对同一个商品多次提出交易申请";
-	TextMessage.errorCode_2007 = language ? "チケットが不足です": "用户ticket不足";
-	TextMessage.errorCode_2008 = language ? "この商品はこの取引方法で引き取れません": "该商品不支持这种交易方式";
-	TextMessage.errorCode_2009 = language ? "選択した商品が不適切です": "选择的商品有误";
-	TextMessage.errorCode_2011 = language ? "選択した取引方法が間違っています": "交易方式选择有误";
-	TextMessage.errorCode_2012 = language ? "画像がありません": "没有上传画像";
-	TextMessage.errorCode_2013 = language ? "メール/ユーザー名が間違っています、もしくは存在しています": "注册邮箱/用户名 错误，或已存在";
-	TextMessage.errorCode_2014 = language ? "認証コードは無効になりました": "验证码失效";
-	TextMessage.errorCode_2015 = language ? "多重チェックインができません": "不能重复签到";
-	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません": "该商品正在问合中，不能重复提交请求";
-	TextMessage.errorCode_2017 = language ? "ポイント不足になっています": "您当前point不足";
-	TextMessage.errorCode_2018 = language ? "取引の注文が存在しなく、もしくは削除されました": "交易订单不存在或被删除";
-	TextMessage.errorCode_2019 = language ? "コメントを発表したので、再度発表ができません": "已发布评论，请勿重复发布";
-	TextMessage.errorCode_2020 = language ? "催促出荷はすでに行いましたので、再度リクエストできません": "已催促发货，请勿重复催促";
-	TextMessage.errorCode_2021 = language ? "引取催促がすでに行ったので、再度操作できません": "已催促收货，请勿重复催促";
-	TextMessage.errorCode_3001 = language ? "ユーザー名またはパスワードが間違って": "用户名或者密码错误";
-	TextMessage.errorCode_3002 = language ? "注文が存在しません": "订单不存在";
-	TextMessage.errorCode_3003 = language ? "注文未提出": "订单未提交";
-	TextMessage.errorCode_3004 = language ? "注文が中止しました": "订单已中止";
-	TextMessage.errorCode_3005 = language ? "注文が完成しました": "订单已完成";
-	TextMessage.errorCode_3006 = language ? "請求者は存在していません": "请求者不存在";
-	TextMessage.errorCode_3008 = language ? "完備自分の情報をください": "请完善自己的信息";
-	TextMessage.errorCode_3009 = language ? "注文が存在していません": "订单不存在或者失效";
-	TextMessage.errorCode_3010 = language ? "操作故障": "操作失效";
-	TextMessage.errorCode_3011 = language ? "登録後に操作してください": "请登录后操作";
-	TextMessage.errorCode_3020 = language ? "メールの情報を完全にしてください": "请完善邮箱信息";
-	TextMessage.errorCode_5000 = language ? "ページエラー": "页面出错啦";
+	TextMessage.errorCode_1000 = language ? "ログインしてください" : "请先登录";
+	TextMessage.errorCode_1003 = language ? "フォーマットは正しくありません、再入力してください" : "格式不正确,请重新输入";
+	TextMessage.errorCode_1004 = language ? "入力が間違っていますが、再入力して下さい" : "不一致，请重新输入";
+	TextMessage.errorCode_1005 = language ? "すでに存在しましたので、再入力して下さい" : "已存在，请重新输入";
+	TextMessage.errorCode_1006 = language ? "入力した文字列の長さは正しくなく、再入力して下さい" : "长度不正确，请重新输入";
+	TextMessage.errorCode_1007 = language ? "画像サイズまたはフォーマットは正しくありません、再登録ください！" : "图片大小或格式不正确，请重新登录！";
+	TextMessage.errorCode_0001 = language ? "再登録ください" : "请重新登录！";
+	TextMessage.errorCode_0100 = language ? "通信失敗しましたが、リトライを行ってください" : "系统出错啦，请稍后重试";
+	TextMessage.errorCode_2001 = language ? "データーがありません" : "表示没有数据或者商品下架";
+	TextMessage.errorCode_2002 = language ? "該当ユーザーが凍結、もしくは削除されました。" : "已冻结或已删除的用户";
+	TextMessage.errorCode_2003 = language ? "商品が存在していません" : "要操作的商品不存在";
+	TextMessage.errorCode_2004 = language ? "自分の商品に対して操作できません" : "不允许对自己的商品操作";
+	TextMessage.errorCode_2005 = language ? "該当操作ができません" : "没有相关操作";
+	TextMessage.errorCode_2006 = language ? "同じ商品に多重リクエストができません" : "不能对同一个商品多次提出交易申请";
+	TextMessage.errorCode_2007 = language ? "チケットが不足です" : "用户ticket不足";
+	TextMessage.errorCode_2008 = language ? "この商品はこの取引方法で引き取れません" : "该商品不支持这种交易方式";
+	TextMessage.errorCode_2009 = language ? "選択した商品が不適切です" : "选择的商品有误";
+	TextMessage.errorCode_2011 = language ? "選択した取引方法が間違っています" : "交易方式选择有误";
+	TextMessage.errorCode_2012 = language ? "画像がありません" : "没有上传画像";
+	TextMessage.errorCode_2013 = language ? "メール/ユーザー名が間違っています、もしくは存在しています" : "注册邮箱/用户名 错误，或已存在";
+	TextMessage.errorCode_2014 = language ? "認証コードは無効になりました" : "验证码失效";
+	TextMessage.errorCode_2015 = language ? "多重チェックインができません" : "不能重复签到";
+	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません" : "该商品正在问合中，不能重复提交请求";
+	TextMessage.errorCode_2017 = language ? "ポイント不足になっています" : "您当前point不足";
+	TextMessage.errorCode_2018 = language ? "取引の注文が存在しなく、もしくは削除されました" : "交易订单不存在或被删除";
+	TextMessage.errorCode_2019 = language ? "コメントを発表したので、再度発表ができません" : "已发布评论，请勿重复发布";
+	TextMessage.errorCode_2020 = language ? "催促出荷はすでに行いましたので、再度リクエストできません" : "已催促发货，请勿重复催促";
+	TextMessage.errorCode_2021 = language ? "引取催促がすでに行ったので、再度操作できません" : "已催促收货，请勿重复催促";
+	TextMessage.errorCode_3001 = language ? "ユーザー名またはパスワードが間違って" : "用户名或者密码错误";
+	TextMessage.errorCode_3002 = language ? "注文が存在しません" : "订单不存在";
+	TextMessage.errorCode_3003 = language ? "注文未提出" : "订单未提交";
+	TextMessage.errorCode_3004 = language ? "注文が中止しました" : "订单已中止";
+	TextMessage.errorCode_3005 = language ? "注文が完成しました" : "订单已完成";
+	TextMessage.errorCode_3006 = language ? "請求者は存在していません" : "请求者不存在";
+	TextMessage.errorCode_3008 = language ? "完備自分の情報をください" : "请完善自己的信息";
+	TextMessage.errorCode_3009 = language ? "注文が存在していません" : "订单不存在或者失效";
+	TextMessage.errorCode_3010 = language ? "操作故障" : "操作失效";
+	TextMessage.errorCode_3011 = language ? "登録後に操作してください" : "请登录后操作";
+	TextMessage.errorCode_3020 = language ? "メールの情報を完全にしてください" : "请完善邮箱信息";
+	TextMessage.errorCode_5000 = language ? "ページエラー" : "页面出错啦";
 	TextMessage.prostaute0 = language ? "新品・未使用" : "未使用过";
 	TextMessage.prostaute1 = language ? "未使用に近い" : "几乎未使用过";
 	TextMessage.prostaute2 = language ? "目立った傷や汚れなし " : "无使用痕迹";
@@ -1427,7 +1506,7 @@ var TextMessage;
 	TextMessage.emailnull = language ? "メールを入力してください!" : "邮箱不能为空！";
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
-	
+
 	TextMessage.loading = language ? "ローディング…" : "正在加载...";
 	TextMessage.no_data = language ? "該当カテゴリーのデーターがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
@@ -1451,19 +1530,22 @@ var TextMessage;
 	TextMessage.transWaitConfirm = language ? "相手の確認を待つ" : "等待对方确认";
 	TextMessage.transOrder = language ? "注文の生成" : "订单生成";
 	TextMessage.transUrgeDelive = language ? "相手の出荷を催促する" : "催促对方发货";
-	TextMessage.transReceipt = language ? "品物を確認する":"确认收货";
-	TextMessage.transDelive = language ? "出荷確認確認":"确认发货";
-	TextMessage.transWaitOrder = language ? "相手の注文を待つ":"等待对方下单";
+	TextMessage.transReceipt = language ? "品物を確認する" : "确认收货";
+	TextMessage.transDelive = language ? "出荷確認確認" : "确认发货";
+	TextMessage.transWaitOrder = language ? "相手の注文を待つ" : "等待对方下单";
 	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
 	TextMessage.transFinish = language ? "交易完成" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
-	TextMessage.transStopTips = language ? "取引中止しますか？":"确认终止交易吗?";
-	TextMessage.transContinue =  language ? "取引継続します。":"继续交易!";
-	TextMessage.confirmBtnYes = language ? "はい":"确认";
-	TextMessage.confirmBtnNo = language ? "いいえ":"取消";
-	TextMessage.evaluateMsg = language ? "このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。":"";
-	TextMessage.confirmcodeng = language ? "認証コードエラー":"验证码错误";
-	TextMessage.det_concerneds= language ? "気になる商品":"关注商品";
+	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
+	TextMessage.transContinue = language ? "取引継続します。" : "继续交易!";
+	TextMessage.confirmBtnYes = language ? "はい" : "确认";
+	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
+	TextMessage.evaluateMsg = language ? "このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
+	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
+	TextMessage.det_concerneds = language ? "気になる商品" : "关注商品";
+	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
+	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
+	TextMessage.confirmPwd_error = language ? "確認用文字列は最初と不一致なので、再入力してください。" : "确认密码与密码输入不一致,请重新输入";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
@@ -1522,19 +1604,19 @@ var Entity;
 	}());
 	Entity.Category = Category;
 })(Entity || (Entity = {}));
-	//Translate html
-	function HTMLDecode(text) {
-	    var temp = document.createElement("div");
-	    temp.innerHTML = text;
-	    var output = temp.innerText || temp.textContent;
-	    temp = null;
-	    return output;
-   }
-	//Translate text
-	function HTMLEncode(html) {
-	    var temp = document.createElement("div");
-	    (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
-	    var output = temp.innerHTML;
-	    temp = null;
-	    return output;
-	}
+//Translate html
+function HTMLDecode(text) {
+	var temp = document.createElement("div");
+	temp.innerHTML = text;
+	var output = temp.innerText || temp.textContent;
+	temp = null;
+	return output;
+}
+//Translate text
+function HTMLEncode(html) {
+	var temp = document.createElement("div");
+	(temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+	var output = temp.innerHTML;
+	temp = null;
+	return output;
+}

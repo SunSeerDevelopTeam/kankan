@@ -252,11 +252,21 @@
 					var regBtn = doc.getElementById('reg');
 					regBtn.addEventListener('tap', function(event) {
 						console.log("click regBtn");
+						var password = doc.getElementById('password').value.trim();
+						if (6 > password.length || password.length > 16) {
+							plus.nativeUI.toast(TextMessage.password_error);
+							return;
+						}
+						var passwordConfirm = doc.getElementById('passwordConfirm').value.trim();
+						if (password != passwordConfirm) {
+							plus.nativeUI.toast(TextMessage.confirmPwd_error);
+							return;
+						}
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value.trim();
 						params[Api.Params.username] = doc.getElementById('username').value.trim();
-						params[Api.Params.password] = hex_sha1(hex_md5(doc.getElementById('password').value.trim()));
+						params[Api.Params.password] = hex_sha1(hex_md5(password));
 						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');
 						params[Api.Params.vCode] = doc.getElementById('verificationCode').value.trim();
 						params[Api.Params.rCode] = doc.getElementById('introduction-code').value.trim();
