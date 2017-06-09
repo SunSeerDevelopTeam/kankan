@@ -204,8 +204,10 @@
 			mui.plusReady(function() {
 				var userPhoto = document.getElementById("user");
 				var searchBtn = $('.mui-icon-search').first();
-				var offset = 0;
-				var index = 0;
+				var _offset = 0;
+				var currentIndex = 0;
+				var lastIndex = 0;
+				var isLeft = true;
 				var group = new webviewGroup("home.html", {
 					items: [{
 						id: "tab-top-subpage-1",
@@ -268,29 +270,40 @@
 						var c = document.querySelector(".mui-control-item.mui-active");
 						if(c) {
 							c.classList.remove("mui-active");
+							currentIndex = $(c).index();
 						}
 						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
 						localStorage.cid = activeTab.dataset.cid;
 						activeTab.classList.add("mui-active");
-						if(index < obj.index) {
-							var width = mui(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index)) + ")")[0].scrollWidth;
-							offset += width;
-						} else {
-							offset -= width;
+						lastIndex = $(activeTab).index();
+						if(lastIndex > currentIndex) {
+							isLeft = true;
+						} else if(lastIndex < currentIndex) {
+							isLeft = false;
 						}
-						index = obj.index;
-						mui('.mui-scroll-wrapper').scroll().scrollTo(-offset, 0);
+						if(isLeft) {
+							var availWidth = window.screen.availWidth;
+							var lastOffset = document.querySelector(".mui-scroll").offsetWidth;
+							if(_offset + availWidth < lastOffset) {
+								_offset += c.offsetWidth;
+							}
+							mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
+						} else {
+							_offset -= c.offsetWidth;
+							if(_offset < 0) {
+								_offset = 0;
+							}
+							mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
+						}
 					}
 				});
 				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
 					var wid = this.getAttribute("data-wid");
 					group.switchTab(wid);
 				});
-				/**
 				document.querySelector('.mui-scroll-wrapper').addEventListener('scroll', function(e) {
 					var curscroll = e.detail.x;
 				});
-				**/
 				userPhoto.addEventListener('click', function(event) {
 					var isLogin = plus.storage.getItem("LoginFlag");
 					if(isLogin == "isLogin") {
