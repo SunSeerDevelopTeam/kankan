@@ -62,7 +62,7 @@
 								<li style="padding:5px;" class="lang" data-locale="eve_comment"></li>
 								<li>
 									<div class="mui-input-row" style="margin: 10px 5px;">
-										<textarea name="evaluate_msg" style="background:#eee;" id="evaluate_msg" rows="5" placeholder="このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに交易確認画面で伝えましょう。"></textarea>
+										<textarea name="evaluate_msg" style="background:#eee;" id="evaluate_msg" rows="5" placeholder=""></textarea>
 										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined lang" data-locale="eve_btn"></button>
 									</div>
 								</li>
@@ -96,18 +96,18 @@
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
-				$("#evaluate_msg").val(TextMessage.evaluateMsg);
+				$("#evaluate_msg").attr('placeholder',TextMessage.evaluateMsg);
 			});
 
 			function gotoMain(){
 				mui.plusReady(function() {
+					var preViewTrans = plus.webview.getWebviewById('transaction');
+					plus.webview.close(preViewTrans);
 					var requestView = plus.webview.getWebviewById('request');
 					plus.webview.close(requestView);
 					var requestlistView = plus.webview.getWebviewById('requestlist');
 					plus.webview.close(requestlistView);
-					var requestlistView = plus.webview.getWebviewById('transaction');
-					plus.webview.close(requestlistView);
-					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+					var mainpage = plus.webview.getWebviewById('home');
 					mui.back();
 					mui.fire(mainpage, 'refresh', {
 						refresh: "canRefresh"
@@ -126,13 +126,6 @@
 					ok: function(data) {
 						Log.i("message send successfully!");
 						gotoMain();
-						/*mui.plusReady(function() {
-								var preView = plus.webview.getWebviewById('transaction');
-								plus.webview.close(preView);
-								var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
-								mui.back();
-								mui.fire(mainpage, 'refresh', { refresh: "canRefresh" });
-							});*/
 					},
 					ng: function(data) {
 						Api.callback_ng(data);
