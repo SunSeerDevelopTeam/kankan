@@ -1120,7 +1120,6 @@ var Repository;
 					title: TextMessage.register
 				}];
 				plus.nativeUI.actionSheet({
-					title: TextMessage.sharetitle,
 					cancel: TextMessage.skip,
 					buttons: btnArray
 				}, function(e) {

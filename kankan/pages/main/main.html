@@ -37,6 +37,7 @@
 		</nav>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js" ></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
@@ -72,6 +73,11 @@
 				var targetTab = this.getAttribute('href');
 				if(targetTab == activeTab) {
 					return;
+				}
+				if (targetTab == "products/product_login.html" || targetTab == "products/product_want_to_buy.html") {
+					if (!Repository.User.isLogin()) {
+						return;
+					}
 				}
 				//更换标题
 				//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;

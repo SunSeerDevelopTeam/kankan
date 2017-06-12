@@ -305,53 +305,12 @@
 					var curscroll = e.detail.x;
 				});
 				userPhoto.addEventListener('click', function(event) {
-					var isLogin = plus.storage.getItem("LoginFlag");
-					if(isLogin == "isLogin") {
+					if(Repository.User.isLogin()) {
 						mui.openWindow({
 							id: "user",
 							url: "user/user.html",
 							waiting: {
 								autoShow: false
-							}
-						});
-					} else {
-						var btnArray = [{
-							title: TextMessage.login
-						}, {
-							title: TextMessage.register
-						}];
-						plus.nativeUI.actionSheet({
-							title: TextMessage.sharetitle,
-							cancel: TextMessage.skip,
-							buttons: btnArray
-						}, function(e) {
-							switch(e.index) {
-								case 1:
-									mui.openWindow({
-										id: 'login',
-										url: '../login/login.html',
-										waiting: {
-											autoShow: false
-										},
-										show: {
-											duration: 200
-										}
-									});
-									break;
-								case 2:
-									mui.openWindow({
-										id: 'reg',
-										url: '../login/reg.html',
-										waiting: {
-											autoShow: false
-										},
-										show: {
-											duration: 200
-										}
-									});
-									break;
-								default:
-									break;
 							}
 						});
 					}
