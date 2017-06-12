@@ -203,6 +203,11 @@
 						if(!canClick) return;
 						console.log("click sendVCodeBtn");
 						canClick = false;
+						var email = doc.getElementById('email').value.trim();
+						if (email == "") {
+							plus.nativeUI.alert(TextMessage.emailnull);
+							return;
+						}
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value;

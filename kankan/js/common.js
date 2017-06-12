@@ -18,6 +18,7 @@ var TRANS_STATUS = {
 	8: "请求终止",
 	9: "订单终止"
 }
+var isAlert = false;
 var Validator;
 (function(Validator) {
 	Validator.types = {
@@ -588,6 +589,12 @@ var Api;
 				Log.e(errorThrown);
 				if(DEBUG) {
 					alert("ajax error callback. error type is " + type);
+				}
+				if (!isAlert) {
+					plus.nativeUI.alert(TextMessage.not_network, function(e){
+						isAlert = false;
+					});
+					isAlert = true;
 				}
 				plus.nativeUI.alert(TextMessage.not_network);
 				if(Validator.isFunc(callback.error)) callback.error();
@@ -1502,12 +1509,12 @@ var TextMessage;
 	TextMessage.yes = language ? "はい" : "好的";
 	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请完善邮箱信息";
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
-	TextMessage.emailnull = language ? "メールを入力してください!" : "邮箱不能为空！";
+	TextMessage.emailnull = language ? "メールアドレスが未入力です。" : "邮箱不能为空！";
 	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
 	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
-
+	TextMessage.email_error1 = language ? "メールアドレスが入力されていません。" : "邮箱输入不正确。";
 	TextMessage.loading = language ? "ローディング…" : "正在加载...";
 	TextMessage.no_data = language ? "該当カテゴリーのデーターがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
