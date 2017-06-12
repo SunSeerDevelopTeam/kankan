@@ -8,23 +8,43 @@
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<style>
+			.wrapper{
+		        position:absolute;
+		       top:1px;
+		        left:0px;
+		        right:0px;
+		        bottom:0px;
+		        overflow:auto;
+		        -webkit-overflow-scrolling : touch;
+		    }
+		    .input-bottom{
+		        position:fixed;
+		        bottom:0px;
+		        left:0px;
+		        width:100%;
+		        border-top:1px solid #ccc;
+		        background-color:#fff;
+		        z-index:1;
+		    }
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-icon-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title lang" data-locale="det_procoment"></h1>
 		</header>
-		<div class="mui-content ka_mainbox" style="position: absolute;">
+		<div class="mui-content ka_mainbox wrapper" >
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell ka_userbox" id="comments">
 				</li>
 			</ul>
 		</div>
-		<div class="" style="position: fixed;z-index: 999;width: 100%; bottom:0;padding-bottom: 1em;">
+		<div class="input-bottom">
 			<form id="commodity_comments" name="commodity_comments" method="post">
 				<div class="ka_sendmesbox ka_userbox">
 					<input  type="hidden" id="commodity_id" name="commodity_id"/>
-					<textarea type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="leave_msg_detail" name="leave_msg_detail" onfocus="keyboard()"></textarea>
+					<textarea type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="leave_msg_detail" name="leave_msg_detail"></textarea>
 					<button type="button" class="mui-btn ka_sendbutton lang"  data-locale="contentsend" onclick="formSubmit()"></button>
 				</div>
 			</form>
@@ -37,11 +57,6 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
 			mui.init();
-			//var keyset=self.setInterval("keyboard()",50);
-			function keyboard(){
-				// window.scrollTo(0,467);
-				//alert("tan");
-			}
 			window.addEventListener('comid', function(event) {
 				var id = event.detail.id;
 				//var id="19";
