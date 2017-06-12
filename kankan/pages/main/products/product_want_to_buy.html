@@ -88,7 +88,7 @@ function publishs() {
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
-	if(comm_detail.replace(/\s/g,'') == "") {
+	if(comm_detail == "") {
 		mui.toast(TextMessage.pro_descriptiontest, {
 			duration: 'long',
 			type: 'div'
@@ -122,40 +122,6 @@ function publishs() {
 		ng: function(data) {
 			Log.d(data);
 			Api.callback_ng(data);
-			/*if(data == "1000" || data=="2002") {
-				mui.toast(TextMessage.test, {
-					duration: 'long',
-					type: 'div'
-				});
-				mui.openWindow({
-					id: 'login',
-					url:"../../login/login.html"
-				});
-			} 
-//			if(data=="2002"){
-//				mui.toast(TextMessage.userng, {
-//					duration: 'long',
-//					type: 'div'
-//				});
-//				mui.openWindow({
-//					id: 'login',
-//					url:"../../login/login.html"
-//				});
-//			}
-			if(data=="2007"){
-				mui.toast(TextMessage.ticketng, {
-					duration: 'long',
-					type: 'div'
-				});
-				location.reload();
-				mui.openWindow({
-					id: 'point_to_ticket',
-					url:"../sttting/point_to_ticket.html"
-				});
-			}*/
-			Api.callback_ng(data);
-			//alert("other error code:" + data);
-			
 		}
 	});
 

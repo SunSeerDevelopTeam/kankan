@@ -463,7 +463,7 @@ function publishs() {
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
-	if(comm_detail.replace(/\s/g,'') == "") {
+	if(comm_detail== "") {
 		mui.toast(TextMessage.pro_descriptiontest, {
 			duration: 'long',
 			type: 'div'
