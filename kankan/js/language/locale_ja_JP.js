@@ -9,7 +9,7 @@ var JSLocale = {
 	"facebook_login": "Facebookでログイン",
 	"twitter_login": "Twitterでログイン",
 	"email_login": "メールアドレスでログイン",
-	"forget_password": "パスワードを忘れました",
+	"forget_password": "パスワードを忘れてしまった方はこちら",
 	/*login page message end*/
 
 	/*user login page message begin*/
@@ -33,7 +33,7 @@ var JSLocale = {
 	"please-input-verification-code": "コードを入力",
 	"send-verification-code": "認証コードを発信",
 	"retrieve_password":"パスワード再発行",
-	"forget_password_msg": "登録済みE-mailを入力してください 新しいパスワードを送信します",
+	"forget_password_msg": "カンカンで登録しているメールアドレスを入力してください。登録されているメールアドレスに新しいパスワード情報のメールを送信します。",
 	/*user login page message end*/
 	/*detail page*/
 	"det_spdescription": "商品詳細 ",
@@ -64,7 +64,7 @@ var JSLocale = {
 	"tab_1": "ホーム",
 	"tab_2": "出品",
 	"tab_3": "求める商品",
-	"tab_4": "物流",
+	"tab_4": "運送",
 
 	//commodity login page
 	"commodity_login": "商品登録",
@@ -144,7 +144,7 @@ var JSLocale = {
 	"suretext":"確    認",
 	"writeemail":"メール",
 	"emailwtext":"正しいメールアドレスを入力してください",
-	"new_user_login":"新しいはじめる方はこちら",
+	"new_user_login":"会員登録はこちら",
 	"transaction":"取引",
 	"trans_criterion":"特定商取引法に基づく表記",
 	"trans_logistic":"運送会社に連絡する",

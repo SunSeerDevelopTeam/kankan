@@ -589,7 +589,7 @@ var Api;
 				if(DEBUG) {
 					alert("ajax error callback. error type is " + type);
 				}
-				plus.ui.alert(TextMessage.not_network);
+				plus.nativeUI.alert(TextMessage.not_network);
 				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}
@@ -1405,7 +1405,7 @@ var TextMessage;
 	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
 	TextMessage.username = language ? "ユーザー名" : "用户名";
 	TextMessage.verificationCode = language ? "認証コード" : "验证码";
-	TextMessage.login_error = language ? "登録名もしくはパスワードが間違っています。" : "用户名或者密码错误";
+	TextMessage.login_error = language ? "メールアドレスまたはパスワードが間違っています。" : "用户名或者密码错误";
 	TextMessage.send_verification_code = language ? "認証コードを発信" : "发送验证码";
 	TextMessage.commodity_descriptionlength = language ? "商品詳細(必須：1000文字まで)" : "商品说明（必须:1000字以内）";
 	TextMessage.publishsure = language ? "出品しますか？" : "确认出品展出吗?";
@@ -1503,7 +1503,8 @@ var TextMessage;
 	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请完善邮箱信息";
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールを入力してください!" : "邮箱不能为空！";
-	TextMessage.addressnull = language ? "アドレスを入力してください!" : "邮箱不能为空！";
+	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
+	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
 
