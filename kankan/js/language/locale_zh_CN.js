@@ -14,7 +14,7 @@ var JSLocale = {
 
 	/*user login page message begin*/
 	"user-login": "用户注册",
-	"email": "<span style='color:red;'>*</span>邮箱",
+	"email": "<span style='color:red;display:inline;padding:0px'>*</span>邮箱",
 	"username": "<span style='color:red;'>*</span>用户名",
 	"password": "<span style='color:red;'>*</span>密码",
 	"new_password": "<span style='color:red;'>*</span>新密码",
