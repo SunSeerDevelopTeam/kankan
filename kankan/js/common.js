@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1402,10 +1402,11 @@ var TextMessage;
 	TextMessage.goodshowmes = language ? "良い" : "好评";
 	TextMessage.normalshowmes = language ? "普通" : "中评";
 	TextMessage.badshowmes = language ? "悪い" : "差评";
-	TextMessage.datanull = language ? "データなし" : "暂无数据";
+	TextMessage.datanull = language ? "データがありません。" : "暂无数据";
+	TextMessage.commentsnull = language ? "コメントがありません。" : "暂无评论";
 	TextMessage.not_network = language ? "接続がタイムアウトしました。このサイトが一時的に利用できなくなっていたり、サーバーの負荷が高すぎて接続できなくなっている可能性があります。しばらくしてから再度お試しください。" : "当前网络不给力，请稍后再试";
 	TextMessage.contentlength = language ? "レビュー内容(300字以内)" : "评论内容（不超过三百字）";
-	TextMessage.commenttestnull = language ? "コメントを入力してください" : "评论内容不能为空!";
+	TextMessage.commenttestnull = language ? "コメントが未入力です。" : "评论内容不能为空!";
 	TextMessage.commenttestlength = language ? "レビューの内容(300字以内)!" : "评论内容不能超过三百字！!";
 	TextMessage.send_code_ok = language ? "認証コードが入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
 	TextMessage.send_code_ng = language ? "認証コード発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
@@ -1480,7 +1481,7 @@ var TextMessage;
 	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 	TextMessage.updatesuccessinfo = language ? "更新が成功しました!" : "更新成功!";
-	TextMessage.edite_headimage = language ? "アイコンを更新します" : "修改头像";
+	TextMessage.edite_headimage = language ? "プロフィール画像の変更" : "修改头像";
 	TextMessage.sendtextrequest = language ? "メールを送りますか" : "发送电子邮件";
 	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
 	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";

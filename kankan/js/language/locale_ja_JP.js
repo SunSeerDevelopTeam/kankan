@@ -94,7 +94,7 @@ var JSLocale = {
 	"onshowingtext":"出品中アイテム",
 	"praiseprotext":"いいねしたアイテム",
 	"favoriteprotext":"気になる",
-	"uinfousername":"ユーザ名",
+	"uinfousername":"ユーザー名",
 	"introducetext":"紹介文",
 	"userlanguage":"言語",
 	"jpanese_user":"日本語",
@@ -104,7 +104,7 @@ var JSLocale = {
 	"infoeditetitle":"プロフィール編集",
 	//logisticslist page
 	"sendmes":"はい",
-	"logistic":"物流",
+	"logistic":"運送会社",
 
 	//point change to ticket page
 	"point_to_ticket_title":"チケット購入",
@@ -134,12 +134,12 @@ var JSLocale = {
 	"logout":"ログアウト",
 	"version":"バージョン",
 	"moneycla":"資金決済法",
-	"speciallow":"特定商取引",
+	"speciallow":"特定商取引法",
 	//question page
 	"Appeal":"お問い合わせ",
 	"musttext":"印がある項目は必須項目となります。",
 	"upimgtext":"画像をアップロード",
-	"nametext":"名前",
+	"nametext":"氏名",
 	"contenttext":"お問い合わせ内容",
 	"suretext":"確    認",
 	"writeemail":"メール",
@@ -153,7 +153,7 @@ var JSLocale = {
 	'eve_btn':"評価する",
 	"home_return":"ホームに戻る",
 	//message
-	"messagetitle":"お知らせ",
+	"messagetitle":"あなたへのお知らせ",
 	"stautestext":"商品取引中",
 	"thistorytext":"取引履歴",
 	//category
