@@ -22,10 +22,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;">
-				<font size="3" class="lang" data-locale="back"></font>
-			</a>
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="logistic"></h1>
 		</header>
 		<div class="mui-content">
@@ -69,17 +66,17 @@
 	<script>
 		var timer;
 		mui.init();
-//		window.onload = function(){
-//          mui.plusReady(function(){
-//              var self = plus.webview.currentWebview();
-//              var flag = self.flag;
-//             // alert(flag);
-//              //关闭等待框
-//              plus.nativeUI.closeWaiting();
-//              //显示当前页面
-//              mui.currentWebview.show();
-//          });
-//      }
+        mui.plusReady(function(){
+            var self = plus.webview.currentWebview();
+            var flag = self.flag;
+            //colse waiting
+            plus.nativeUI.closeWaiting();
+            //show current page
+            mui.currentWebview.show();
+            if(flag=="tra"){
+            	$(".mui-action-back").show();
+            }
+        });
 		function showDialog(msg, tel, l_com_id) {
 			var dialog = document.getElementById('dialog');
 			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
