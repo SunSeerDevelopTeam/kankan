@@ -6,7 +6,6 @@
 		<title>change item</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../css/kankan_home.css" />
 	</head>
 
@@ -17,29 +16,14 @@
 				</button>
 			<h1 class="mui-center mui-title user-title-center maintitle">商品リスト</h1>
 			<div onclick="select_goods();" class="mui-right mui-pull-right  user-title-center" style="margin-top:13px;">
-					確定
+				確定
 			</div>
 		</header>
-		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-slider-group mui-scroll-wrapper">
-					<div class="mui-slider-item mui-scrolls">
-						<ul class="mui-table-view mui-grid-view goods-list" style="padding-top:10px;">
+		<div class="mui-content" style="padding-top:30px;">
+			<ul class="mui-table-view mui-grid-view goods-list" style="padding-top:10px;">
 
-						</ul>
-					</div>
-				</div>
-
-				<div class="spinner">
-					<div class="bounce1"></div>
-					<div class="bounce2"></div>
-					<div class="bounce3"></div>
-				</div>
-			</div>
+			</ul>
 		</div>
-		<nav class="mui-bar mui-bar-tab">
-				
-			</nav>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../js/language.js"></script>
@@ -55,7 +39,8 @@
 				transid = self.transid;
 				get_goods_list(transid);
 			})
-			var imgwidth=parseInt($(window).width())/3-17;
+			var imgwidth = parseInt($(window).width()) / 3 - 17;
+
 			function get_goods_list(transid) {
 				var params = {
 					'transid': transid
@@ -75,38 +60,38 @@
 						for(var gds in comm_info) {
 							var imgWidth = comm_info[gds].width;
 							var imgHeight = comm_info[gds].height;
-							var hwhpercent = imgHeight/imgWidth;
+							var hwhpercent = imgHeight / imgWidth;
 							var top_marign = 0;
-							var showheight = imgwidth*hwhpercent;
-							var cha1=showheight-100;
-							if(cha1>0){
-								top_marign=cha1/2;
-							}else{
-								top_marign=0;
+							var showheight = imgwidth * hwhpercent;
+							var cha1 = showheight - 100;
+							if(cha1 > 0) {
+								top_marign = cha1 / 2;
+							} else {
+								top_marign = 0;
 							}
-							var checkboxstyle = 'position:absolute;top:7px;left:85%;z-index:999;';
+							var checkboxstyle = 'position:absolute;top:7px;left:85%;';
 							var imgstyle = 'height: auto;width:100%;margin-top:-' + top_marign + 'px;';
-							
+
 							//var styleVal = 'height: auto;width:100%;margin-top:-'+top_marign+'px;';
-							goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail"  style="position:relative;height:160px;">';							
+							goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail"  style="position:relative;height:160px;">';
 							if(comm_info[gds].trans_flag == 1) {
-								if(comm_info[gds].main_flag == '1'){
-									goods_list += '<input id="'+comm_info[gds].commodity_id+'" disabled=true checked style="'+checkboxstyle+'" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
-								}else{
-									goods_list += '<input id="'+comm_info[gds].commodity_id+'" checked style="'+checkboxstyle+'" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';									
+								if(comm_info[gds].main_flag == '1') {
+									goods_list += '<input id="' + comm_info[gds].commodity_id + '" disabled=true checked style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+								} else {
+									goods_list += '<input id="' + comm_info[gds].commodity_id + '" checked style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
 								}
 							} else {
-								goods_list += '<input id="'+comm_info[gds].commodity_id+'" style="'+checkboxstyle+'" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+								goods_list += '<input id="' + comm_info[gds].commodity_id + '" style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
 							}
 							goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
 							goods_list += '<div style="line-height:160px;vertical-align: middle;">';
 							goods_list += '<img class="mui-media-object" style="' + imgstyle + '" src="' + comm_info[gds].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
-							
+
 							//goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
 							goods_list += '</div>';
 							goods_list += '</label>';
 							goods_list += '</li>';
-							
+
 						}
 						$(".goods-list").html(goods_list);
 					},
@@ -120,7 +105,7 @@
 				var choice = '';
 				var main_comm = $("input[name='commodity_id']:disabled").val();
 				$("input[name='commodity_id']:checked").each(function() {
-					if($(this).val() != main_comm){
+					if($(this).val() != main_comm) {
 						choice += $(this).val() + ',';
 					}
 				})

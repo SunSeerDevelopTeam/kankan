@@ -15,7 +15,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title"><span class="lang" data-locale="trans_finish"></span></h1>
+			<h1 class="mui-title"><span class="lang" data-locale="evalute_finish"></span></h1>
 		</header>
 		<div class="mui-pages">
 			<!--main content start-->
@@ -117,6 +117,14 @@
 			function evaluate_submit() {
 				var evaluate_flg = $("input[name='evalueate']:checked").val();
 				var evaluate_msg = $("#evaluate_msg").val();
+				if(evaluate_msg == ''){
+					var err_msg = TextMessage.commenttestnull;
+					mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+					});
+					return false;
+				}
 				var params = {
 					"transid": trans_id,
 					"message": evaluate_msg,

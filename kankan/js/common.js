@@ -653,8 +653,8 @@ var Api;
 
 	function saveLoginStatus(data) {
 		if(typeof(plus) != "undefined") {
-			plus.storage.setItem('email', data.email);
-			plus.storage.setItem('myid', data.myid);
+			plus.storage.setItem('email', data.result.email);
+			plus.storage.setItem('myid', data.result.myid);
 		}
 	}
 
@@ -1388,7 +1388,7 @@ var TextMessage;
 	TextMessage.sharecontent = language ? "カンカンをシェアする" : "看看的分享";
 	TextMessage.sharetitle = language ? "カンカン" : "看看";
 	TextMessage.login = language ? "登録済みの方はこちら" : "登录";
-	TextMessage.register = language ? "新しいはじめる方はこちら" : "注册";
+	TextMessage.register = language ? "未登録の方はこちら" : "注册";
 	TextMessage.cancel = language ? "キャンセル" : "取消";
 	TextMessage.towchatfrind = language ? "WeChatのチャットに送信" : "发送给微信好友";
 	TextMessage.towchatcircle = language ? "WeChatのモーメンツ上で共有" : "分享到微信朋友圈";
@@ -1477,9 +1477,9 @@ var TextMessage;
 	TextMessage.edite_headimage = language ? "アイコンを更新します" : "修改头像";
 	TextMessage.sendtextrequest = language ? "メールを送りますか" : "发送电子邮件";
 	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
-	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "感谢您使用";
-	TextMessage.mailsucetext = language ? "にメールを送りました。" : "邮件已发送";
-	TextMessage.requestmailtext = language ? "返事してください" : "请注意查收回信";
+	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";
+	TextMessage.mailsucetext = language ? "にメールを送りました。" : "给我发送了邮件";
+	TextMessage.requestmailtext = language ? "返事してください" : "请回复";
 	TextMessage.sendmailbutext = language ? "メール送信" : "发送邮件";
 	TextMessage.calbutext = language ? "電話" : "电话";
 	TextMessage.homebutext = language ? "ホームページへ" : "主页";
@@ -1492,7 +1492,7 @@ var TextMessage;
 	TextMessage.buywaynot = language ? "購入方法が無効になっています" : "购买方式无效";
 	TextMessage.buyyes = language ? "購入成功" : "购买成功";
 	TextMessage.sure = language ? "確認" : "确认";
-	TextMessage.logoutconfirm = language ? "ログアウトしますか？" : "确定要退出登录吗?";
+	TextMessage.logoutconfirm = language ? "本当にログアウトしますか？" : "确定要退出登录吗?";
 	TextMessage.logouttitle = language ? "ログアウト" : "退出登录";
 	TextMessage.logoutsuccess = language ? "ログアウトしました" : "退出成功";
 	TextMessage.requiresuccess = language ? "クレーム提出しました" : "申述成功提出";
@@ -1504,6 +1504,7 @@ var TextMessage;
 	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请完善邮箱信息";
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールを入力してください!" : "邮箱不能为空！";
+	TextMessage.addressnull = language ? "アドレスを入力してください!" : "邮箱不能为空！";
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
 
@@ -1540,7 +1541,7 @@ var TextMessage;
 	TextMessage.transContinue = language ? "取引継続します。" : "继续交易!";
 	TextMessage.confirmBtnYes = language ? "はい" : "确认";
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
-	TextMessage.evaluateMsg = language ? "このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
+	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
 	TextMessage.det_concerneds = language ? "気になる商品" : "关注商品";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";

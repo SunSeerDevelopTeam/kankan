@@ -58,7 +58,7 @@ var JSLocale = {
 	"comdity_null": "暂无数据",
 	"contentlength": "评论内容（不超过三百字）",
 	"contentsend": "发 送",
-
+	"evalute_finish":"交易完成",
 	// Home Page
 	"app_name": "看看",
 	"tab_1": "首页",

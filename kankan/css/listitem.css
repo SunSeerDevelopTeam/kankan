@@ -96,7 +96,7 @@
 }
 
 .logistics img {
-	position: relative;
+	position: fixed;
     width: 50px;
     height: auto;
     z-index:999;

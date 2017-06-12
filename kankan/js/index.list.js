@@ -94,6 +94,9 @@ function getDataFromServer(params, callback) {
 	Repository.Commodity.commodityList(params, {
 		ok: function(data) {
 			callback(data);
+			console.log("data start -----");
+			console.dir(data);
+			console.log("data end -------");
 			updateUserPhoto(data.data.users.photo);
 			updateNoticeStatus(data.data.users.sys_msg_flg);
 			savePageInfo(data.data.pages);

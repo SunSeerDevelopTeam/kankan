@@ -22,12 +22,12 @@ var JSLocale = {
 	"address": "<span style='color:red;'>*</span>都通府県",
 	"address-details": "未設定",
 	"introduction-code": "招待コード(任意)",
-	"verification-code": "<span style='color:red;'>*</span>確認コード",
+	"verification-code": "<span style='color:red;'>*</span>パスワード再入力",
 	"register": "確定",
 	"register-tips": "あとからプロフィールは変更可能です",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
-	"please-input-password": "半角英文字6文字以上16文字以内",
+	"please-input-password": "パスワードを設定用文字列の長さは6桁以上、16桁以下してください",
 	"please-confirm-password": "パスワード確認",
 	"please-input-introduction-code": "半角英数字6位",
 	"please-input-verification-code": "コードを入力",
@@ -58,7 +58,7 @@ var JSLocale = {
 	"comdity_null": "データなし",
 	"contentlength": "レビュー内容(300文字以内)",
 	"contentsend": "送 信",
-
+	"evalute_finish":"取引完了",
 	// Home Page
 	"app_name": "カンカン",
 	"tab_1": "ホーム",

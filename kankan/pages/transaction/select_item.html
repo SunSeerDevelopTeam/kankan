@@ -2,41 +2,11 @@
 <html>
 
 	<head>
-		<meta charset="utf-8">
-		<title>select item</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" href="../../css/mui.min.css">
-		<link rel="stylesheet" href="../../css/icons-extra.css">
-		<style>
-			html,
-			body {
-				background-color: #efeff4;
-			}
-			
-			.title {
-				margin: 20px 15px 10px;
-				color: #6d6d72;
-				font-size: 15px;
-			}
-			
-			a#user img {
-				width: 35px;
-				height: 35px;
-				border-radius: 50%;
-				margin-top: -0.2em;
-			}
-			
-			header a.mui-icon-extra-notice {
-				margin-top: 0.5em;
-				margin-right: 0.25em;
-			}
-			
-			header a.mui-icon-search {
-				width: 60px;
-			}
-		</style>
+		<meta charset="UTF-8">
+		<title>change item</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
 	</head>
 
 	<body>
@@ -46,25 +16,13 @@
 				</button>
 			<h1 class="mui-center mui-title user-title-center maintitle">商品リスト</h1>
 			<div onclick="select_goods();" class="mui-right mui-pull-right  user-title-center" style="margin-top:13px;">
-					確定
-				</div>
-		</header>
-		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-slider-group">
-					<div class="mui-slider-item ">
-						<ul class="mui-table-view mui-grid-view goods-list" style="padding-top:10px;">
-
-						</ul>
-					</div>
-				</div>
-
-				<div class="spinner">
-					<div class="bounce1"></div>
-					<div class="bounce2"></div>
-					<div class="bounce3"></div>
-				</div>
+				確定
 			</div>
+		</header>
+		<div class="mui-content" style="padding-top:30px;">
+			<ul class="mui-table-view mui-grid-view goods-list" style="padding-top:10px;">
+
+			</ul>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
@@ -98,7 +56,7 @@
 				choice = choice.substr(0, choice.length - 1);
 				if(choice == '') {
 					alert(TextMessage.commdSelect);
-					
+
 					return false;
 				}
 				var params = {
@@ -132,20 +90,20 @@
 								} else {
 									top_marign = 0;
 								}
-								var checkboxstyle = 'position:absolute;top:7px;left:85%;z-index:999;';
+								var checkboxstyle = 'position:absolute;top:7px;left:85%;';
 								var imgstyle = 'height: auto;width:100%;margin-top:-' + top_marign + 'px;';
-								
+
 								goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail"  style="position:relative;height:160px;">';
-								
-								goods_list += '<input id="' + comm_info[gds].commodity_id + '" style="'+checkboxstyle+'" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+
+								goods_list += '<input id="' + comm_info[gds].commodity_id + '" style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
 								goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
 								goods_list += '<div style="line-height:160px;vertical-align: middle;">';
-								goods_list += '<img class="mui-media-object" style="'+imgstyle+'" src="' + comm_info[gds].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
-								
+								goods_list += '<img class="mui-media-object" style="' + imgstyle + '" src="' + comm_info[gds].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+
 								goods_list += '</div>';
 								goods_list += '</label>';
 								goods_list += '</li>';
-								
+
 							}
 							$(".goods-list").html(goods_list);
 						} else {
