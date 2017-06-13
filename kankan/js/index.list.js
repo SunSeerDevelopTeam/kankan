@@ -186,7 +186,7 @@ function bindEventOnListViewItem() {
 			return;
 		}
 		mui.openWindow({
-			id: 'logisticslist',
+			id: 'request',
 			url: "/pages/main/products/request.html",
 			waiting: {
 				autoShow: false
