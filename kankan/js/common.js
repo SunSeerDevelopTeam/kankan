@@ -966,6 +966,13 @@ var Api;
 					type: 'div'
 				});
 				break;
+			case '5001':
+				err_msg = TextMessage.emailsenderror;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
 			default:
 				break;
 		}
@@ -1554,9 +1561,11 @@ var TextMessage;
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
 	TextMessage.det_concerneds = language ? "気になる商品" : "关注商品";
+	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
+	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
 	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
-	TextMessage.confirmPwd_error = language ? "確認用文字列は最初と不一致なので、再入力してください。" : "确认密码与密码输入不一致,请重新输入";
+	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

@@ -318,7 +318,7 @@
 			});
 		}
 		//back refresh
-		window.addEventListener('refreshlist', function(e){//执行刷新
+		window.addEventListener('refreshlist', function(e){
 		    location.reload();
 		});
 		var viewApi = mui('#app').view({
@@ -689,10 +689,10 @@
 				};
 				Repository.User.userinfo(params4, {
 					ok: function(data) {
-						if (!Repository.User.isEmptyEmail()) {
-								 //alert("没有登录");
-								 return;
-						} else {
+//						if (!Repository.User.isEmptyEmail()) {
+//								 //alert("没有登录");
+//								 return;
+//						} else {
 							//console.log("success");
 						 	console.log("success");
 							mui.toast(TextMessage.updatesuccessinfo, {
@@ -700,7 +700,7 @@
 								type: 'div'
 							});
 							mui.back();
-						}
+						//}
 						
 					},
 					ng: function(data) {
@@ -736,19 +736,18 @@
 			var params={};
 			Repository.User.Usershow(params, {
 				ok: function(data) {
-					if (!Repository.User.isEmptyEmail()) {
-						 //alert("没有登录");
-						 return;
-					} else {
+//					if (!Repository.User.isEmptyEmail()) {
+//						 return;
+//					}else{
 						console.log("success");
 						//console.dir(data);
 						showuser(data);
 						$("#loading").hide();
 						$(".tran-page").show();
-					}
+					//}
 				},
 				ng: function(data) {
-					if(data == "2002") {
+					if(data == "2002" || data == "1000") {
 						mui.toast(TextMessage.test, {
 							duration: 'long',
 							type: 'div'
@@ -764,6 +763,7 @@
 					
 				}
 			});
+			
 		});
 	//address picker
 	(function($, doc) {
@@ -813,11 +813,11 @@
 						};
 						Repository.User.userinfo(parms2, {
 							ok: function(data) {
-								if (!Repository.User.isEmptyEmail()) {
-								 return;
-								} else {
+//								if (!Repository.User.isEmptyEmail()) {
+//								 return;
+//								} else {
 								 console.log("success");
-								}
+								//}
 								//console.log("success");
 								//console.dir(data);
 //								mui.toast(TextMessage.updatesuccessinfo, {

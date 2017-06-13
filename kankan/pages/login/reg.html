@@ -149,7 +149,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="address"></label>
-						<input id="city" name="city" type="text" class="mui-input-clear mui-input lang" data-locale="address-details" readonly="readonly">
+						<input id="city" name="city" type="text" value="" class="mui-input-clear mui-input lang" data-locale="address-details" readonly="readonly">
 						<a id="showCityPicker" class="mui-navigate-right"></a>
 					</div>
 				</div>
@@ -267,17 +267,11 @@
 							plus.nativeUI.toast(TextMessage.username_null);
 							return;
 						}
-						var city = doc.getElementById('city').getAttribute('data-val');
-						if (city == "") {
-							plus.nativeUI.toast(TextMessage.addressnull);
-							return;
-						}
-						var verificationCode = doc.getElementById('verificationCode').value.trim();
-						if (verificationCode == "") {
-							plus.nativeUI.toast(TextMessage.codenull);
-							return;
-						}
 						var password = doc.getElementById('password').value.trim();
+						if(password==""){
+							plus.nativeUI.toast(TextMessage.password_notnull);
+							return;
+						}
 						if (6 > password.length || password.length > 16) {
 							plus.nativeUI.toast(TextMessage.password_error);
 							return;
@@ -285,6 +279,16 @@
 						var passwordConfirm = doc.getElementById('passwordConfirm').value.trim();
 						if (password != passwordConfirm) {
 							plus.nativeUI.toast(TextMessage.confirmPwd_error);
+							return;
+						}
+						var city = doc.getElementById('city').getAttribute('data-val');
+						if (city == null) {
+							plus.nativeUI.toast(TextMessage.addressnull);
+							return;
+						}
+						var verificationCode = doc.getElementById('verificationCode').value.trim();
+						if (verificationCode == "") {
+							plus.nativeUI.toast(TextMessage.codenull);
 							return;
 						}
 						
@@ -306,6 +310,12 @@
 							},
 							ng: function(data) {
 								waiting.close();
+								if(data.email=="1003"){
+									mui.toast("email"+TextMessage.errorCode_1003, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
 								$.each(data, function(key, value) {
 									console.log(key, value);
 									switch(value) {
