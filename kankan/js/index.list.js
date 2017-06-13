@@ -198,14 +198,9 @@ function bindEventOnListViewItem() {
 	});
 
 	//$(".comm-like-num").off("tap");
-	$(".comm-like-num").on("tap", function(event) {
-		var _self = $(this);
-		var clickFlag = _self.attr('data-click');
-		if(clickFlag === "1") {
-			_self.attr('data-click', '0');
-			return;
-		}
-		_self.attr('data-click', '1');
+	$(".like-area").on("click", function(event) {
+		console.log("click like");
+		var _self = $(this).find(".comm-like-num");
 		if (!Repository.User.isLogin()) {
 			return;
 		}
@@ -280,10 +275,10 @@ function createListItem(item, imgwidth) {
 		.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', HTMLDecode(item.comm_name))
 		//.appendFormat('<div class="comm-price mui-col-sm-12">{0} P</div>', item.price)
 		.append('</div>')
-		.append('<div class="height-max mui-col-sm-4 mui-col-xs-4">')
+		.append('<div class="like-area height-max mui-col-sm-4 mui-col-xs-4">')
 		.appendFormat('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled ' + "{0}" + '">', item.praise_flg == 0 ? "comm-like-gray" : "comm-like-red")
 		.append('</span>')
-		.appendFormat('<span data-click="0" class="comm-like-num">{0}</span>', item.praise_cnt)
+		.appendFormat('<span class="comm-like-num">{0}</span>', item.praise_cnt)
 		.append('</div>')
 		.append('</div>')
 		.append('</div>')
