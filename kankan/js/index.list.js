@@ -47,6 +47,7 @@ function pulldownRefresh() {
 			plus.nativeUI.toast(TextMessage.no_data);
 			return;
 		}
+		table.innerHTML = "";
 		data.data.commd.forEach(function(item) {
 			var li = document.createElement('li');
 			li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';

@@ -1516,7 +1516,7 @@ var TextMessage;
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
 	TextMessage.email_error1 = language ? "メールアドレスが入力されていません。" : "邮箱输入不正确。";
 	TextMessage.loading = language ? "ローディング…" : "正在加载...";
-	TextMessage.no_data = language ? "該当カテゴリーのデーターがありません。" : "当前分类下没有数据";
+	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
 	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
 	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
