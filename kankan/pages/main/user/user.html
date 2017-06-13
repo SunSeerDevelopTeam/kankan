@@ -283,6 +283,7 @@
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
+	<script src="../../../js/common.js"></script>
 	<script src="../../../js/picker/city.data.js"></script>
 	<script src="../../../js/picker/mui.picker.js"></script>
 	<script src="../../../js/picker/mui.poppicker.js"></script>
@@ -290,7 +291,6 @@
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
-	<script src="../../../js/common.js"></script>
 	<script>
 		mui.init({
 			swipeBack: false,
@@ -814,7 +814,6 @@
 						Repository.User.userinfo(parms2, {
 							ok: function(data) {
 								if (!Repository.User.isEmptyEmail()) {
-								 //alert("没有登录");
 								 return;
 								} else {
 								 console.log("success");
