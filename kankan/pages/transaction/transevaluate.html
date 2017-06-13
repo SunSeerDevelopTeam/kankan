@@ -107,7 +107,7 @@
 					plus.webview.close(requestView);
 					var requestlistView = plus.webview.getWebviewById('requestlist');
 					plus.webview.close(requestlistView);
-					var mainpage = plus.webview.getWebviewById('home');
+					//var mainpage = plus.webview.getWebviewById('home');
 					mui.back();
 					mui.fire(mainpage, 'refresh', {
 						refresh: "canRefresh"
@@ -118,7 +118,7 @@
 				var evaluate_flg = $("input[name='evalueate']:checked").val();
 				var evaluate_msg = $("#evaluate_msg").val();
 				if(evaluate_msg == ''){
-					var err_msg = TextMessage.commenttestnull;
+					var err_msg = TextMessage.evecommenttestnull;
 					mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'
