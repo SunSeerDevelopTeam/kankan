@@ -50,7 +50,12 @@
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init();
+			mui.init({
+				beforeback: function() {
+			        var homePage = plus.webview.currentWebview().opener();
+					mui.fire(homePage, 'refreshlist');
+			    }
+			});
 			mui.plusReady(function(){
 				var sendVCodeBtn = document.getElementById('send-verification-code');
 				var canClick = true;
@@ -81,6 +86,8 @@
 						ng: function(data) {
 							waiting.close();
 							canClick = true;
+							Api.callback_ng(data);
+							return false;
 							switch(data) {
 								case "2013":
 									mui.toast(TextMessage.email_error, {
@@ -107,12 +114,20 @@
 				var email=$("#email").val();
 				var code=$("#verificationCode").val();
 				if(email==""){
-					alert(TextMessage.emailnull);
+					mui.toast(TextMessage.emailnull, {
+						duration: 'long',
+						type: 'div'
+					});
+					//alert(TextMessage.emailnull);
 					document.form1.email.focus();
 					return false;
 				}
 				if(code==""){
-					alert(TextMessage.codenull);
+					mui.toast(TextMessage.codenull, {
+						duration: 'long',
+						type: 'div'
+					});
+					//alert(TextMessage.codenull);
 					document.form1.verificationCode.focus();
 					return false;
 				}

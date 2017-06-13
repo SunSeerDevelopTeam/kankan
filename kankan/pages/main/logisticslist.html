@@ -137,27 +137,27 @@
 					var params = {
 						"l_com_id": loid
 					};
-					Repository.Commodity.logisticssendmail(params, {
-						ok: function(data) {
-							if (!Repository.User.isEmptyEmail()) {
-								 //alert("没有登录");
-								 return;
-							} else {
+					if (!Repository.User.isEmptyEmail()) {
+						 //alert("没有登录");
+						 return;
+					} else {
+						Repository.Commodity.logisticssendmail(params, {
+							ok: function(data) {
 								Log.d("success");
 								console.log("send mail success!");
+							},
+							ng: function(data) {
+								console.log(data);
+								if(data == "1000") {
+									alert(TextMessage.test);
+									mui.openWindow({
+										id: 'login',
+										url: '../login/login.html'
+									});
+								}
 							}
-						},
-						ng: function(data) {
-							console.log(data);
-							if(data == "1000") {
-								alert(TextMessage.test);
-								mui.openWindow({
-									id: 'login',
-									url: '../login/login.html'
-								});
-							}
-						}
-					});
+						});
+					}
 				}
 
 				// show dialog OK

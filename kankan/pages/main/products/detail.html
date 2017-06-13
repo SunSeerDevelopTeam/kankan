@@ -306,11 +306,10 @@
 					msg.thumbs = [imgurl0];
 					share.send(msg, function() {
 						var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
-						mui.toast(sharesuccesstext, {
-							duration: 'long',
-							type: 'div'
-						});
-						//mui.alert(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+//						mui.toast(sharesuccesstext, {
+//							duration: 'long',
+//							type: 'div'
+//						});
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
 					}, function(e) {
 						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
@@ -392,7 +391,7 @@
 				var commodity = results.data;
 				var comdbasic = commodity.commodity_basic;
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
-				var comdmesage = HTMLDecode(comdbasic[0].comm_detail);
+				var comdmesage = HTMLDecode(comdbasic[0].comm_detail).replace(/\n/g,"<br />");
 				var comdityid = comdbasic[0].commodity_id;
 				var traslatestautes=comdbasic[0].status;
 				var myid=results.myid;

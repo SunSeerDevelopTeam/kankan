@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -966,6 +966,13 @@ var Api;
 					type: 'div'
 				});
 				break;
+			case '5001':
+				err_msg = TextMessage.emailsenderror;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
 			default:
 				break;
 		}
@@ -1422,7 +1429,7 @@ var TextMessage;
 	TextMessage.comdity_takepic = language ? "撮ります" : "拍摄";
 	TextMessage.gallerychoose = language ? "アルバムから写真を選択する" : "从手机相册中选择";
 	TextMessage.chooseimage = language ? "写真を選択します" : "选择照片";
-	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
+	TextMessage.operation_error = language ? "自分で出品した商品は操作できません。" : "不允许对自己的商品操作";
 	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れた為、再び試みて下さい " : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "入力してください" : "不能为空，请重新输入";
 	TextMessage.errorCode_1000 = language ? "ログインしてください" : "请先登录";
@@ -1471,6 +1478,8 @@ var TextMessage;
 	TextMessage.prostaute3 = language ? "傷や汚れあり " : "有使用过痕迹";
 	TextMessage.pro_imagetest = language ? "商品を出品する為には、少なくとも一枚は画像が必要です!" : "请为商品至少选择一张图片!";
 	TextMessage.pro_nametest = language ? "商品名称を入力してください。" : "商品名称不能为空";
+	TextMessage.pro_namelength = language ? "商品名が40文字以内入力できます" : "商品名称必须在40字以内";
+	TextMessage.pro_detaillength = language ? "商品詳細が1000文字以内入力できます" : "商品详情必须在1000字以内";
 	TextMessage.pro_descriptiontest = language ? "商品の説明文を入力してください。" : "商品描述不能为空";
 	TextMessage.pro_sorttest = language ? "商品のカテゴリを選択してください。" : "请选择商品分类";
 	TextMessage.pro_stautetest = language ? "商品の状態を選択してください。" : "请选择商品状态";
@@ -1553,9 +1562,11 @@ var TextMessage;
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
 	TextMessage.det_concerneds = language ? "気になる商品" : "关注商品";
+	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
+	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
 	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
-	TextMessage.confirmPwd_error = language ? "確認用文字列は最初と不一致なので、再入力してください。" : "确认密码与密码输入不一致,请重新输入";
+	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

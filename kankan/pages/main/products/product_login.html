@@ -111,12 +111,12 @@
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
+	<script src="../../../js/common.js"></script>
 	<script src="../../../js/mui.picker.js"></script>
-	<script src="../../../js/mui.poppicker.js"></script>
+	<script src="../../../js/picker/mui.poppicker.js"></script>
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
-	<script src="../../../js/common.js"></script>
 	<script src="../../../js/pro_uploadimg.js"></script>
 	<script>
 	$(function() {
@@ -223,16 +223,6 @@
 								mui.openWindow({
 									id: 'login',
 									url:"../../login/login.html"
-								});
-							}
-							if(data == "3020") {
-								mui.toast(TextMessage.input_email, {
-									duration: 'long',
-									type: 'div'
-								});
-								mui.openWindow({
-									id: 'emai_summate',
-									url:"../../login/emai_summate.html"
 								});
 							}
 							if(data=="2002"){
@@ -463,6 +453,13 @@ function publishs() {
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
+	if(comm_name.length>40){
+		mui.toast(TextMessage.TextMessage.pro_namelength, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
 	if(comm_detail== "") {
 		mui.toast(TextMessage.pro_descriptiontest, {
 			duration: 'long',
@@ -470,6 +467,12 @@ function publishs() {
 		});
 		document.publishcomodity.comm_detail.focus();
 		return false;
+	}
+	if(comm_detail.length >1000) {
+		mui.toast(TextMessage.TextMessage.pro_detaillength, {
+			duration: 'long',
+			type: 'div'
+		});
 	}
 	if(classify_id == "") {
 		mui.toast(TextMessage.pro_sorttest, {
