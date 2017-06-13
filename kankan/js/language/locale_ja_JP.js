@@ -27,7 +27,7 @@ var JSLocale = {
 	"register-tips": "あとからプロフィールは変更可能です",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
-	"please-input-password": "パスワード",
+	"please-input-password": "パスワードを設定用文字列の長さは6桁以上、16桁以下してください",
 	"please-confirm-password": "パスワード確認",
 	"please-input-introduction-code": "半角英数字6位",
 	"please-input-verification-code": "コードを入力",

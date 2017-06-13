@@ -208,6 +208,8 @@
 				var currentIndex = 0;
 				var lastIndex = 0;
 				var isLeft = true;
+				var curScroll = 0;
+				var isOnTap = false;
 				var group = new webviewGroup("home.html", {
 					items: [{
 						id: "tab-top-subpage-1",
@@ -287,22 +289,33 @@
 							if(_offset + availWidth < lastOffset) {
 								_offset += c.offsetWidth;
 							}
-							mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
+							if (isOnTap) {
+								mui('.mui-scroll-wrapper').scroll().scrollTo(curScroll, 0);
+								isOnTap = false;
+							} else {
+								mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
+							}
 						} else {
 							_offset -= c.offsetWidth;
 							if(_offset < 0) {
 								_offset = 0;
 							}
-							mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
+							if (isOnTap) {
+								mui('.mui-scroll-wrapper').scroll().scrollTo(curScroll, 0);
+								isOnTap = false;
+							} else {
+								mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
+							}
 						}
 					}
 				});
 				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
+					isOnTap = true;
 					var wid = this.getAttribute("data-wid");
 					group.switchTab(wid);
 				});
 				document.querySelector('.mui-scroll-wrapper').addEventListener('scroll', function(e) {
-					var curscroll = e.detail.x;
+					curScroll = e.detail.x;
 				});
 				userPhoto.addEventListener('click', function(event) {
 					if(Repository.User.isLogin()) {
@@ -383,14 +396,6 @@
 					}
 				});
 			});
-			mui.back = function() {
-				var btn = ["确定", "取消"];
-				mui.confirm('您要退出GMIS管理软件吗？', '提示', btn, function(e) {
-					if(e.index == 0) {
-						plus.runtime.quit();
-					}
-				});
-			}
 		</script>
 	</body>
 

@@ -41,17 +41,19 @@ function pulldownRefresh() {
 	var params = {};
 	getDataFromServer(params, function(data) {
 		var table = document.body.querySelector('.mui-table-view');
+		console.dir(table);
 		var imgwidth = parseInt($(window).width()) / 2 - 34;
 		if(Validator.isEmpty(data.data.commd)) {
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 			plus.nativeUI.toast(TextMessage.no_data);
 			return;
 		}
+		table.innerHTML = "";
 		data.data.commd.forEach(function(item) {
 			var li = document.createElement('li');
 			li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
 			li.innerHTML = createListItem(item, imgwidth);
-			table.insertBefore(li, table.firstChild);
+			table.appendChild(li);
 		});
 		bindEventOnListViewItem();
 		lazyload();
@@ -94,9 +96,6 @@ function getDataFromServer(params, callback) {
 	Repository.Commodity.commodityList(params, {
 		ok: function(data) {
 			callback(data);
-			console.log("data start -----");
-			console.dir(data);
-			console.log("data end -------");
 			updateUserPhoto(data.data.users.photo);
 			updateNoticeStatus(data.data.users.sys_msg_flg);
 			savePageInfo(data.data.pages);
