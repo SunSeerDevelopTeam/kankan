@@ -88,12 +88,26 @@ function publishs() {
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
+	if(comm_name.length>40){
+		mui.toast(TextMessage.TextMessage.pro_namelength, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
 	if(comm_detail == "") {
 		mui.toast(TextMessage.pro_descriptiontest, {
 			duration: 'long',
 			type: 'div'
 		});
 		document.publishcomodity.comm_detail.focus();
+		return false;
+	}
+	if(comm_detail.length >1000) {
+		mui.toast(TextMessage.TextMessage.pro_detaillength, {
+			duration: 'long',
+			type: 'div'
+		});
 		return false;
 	}
 	var params = {

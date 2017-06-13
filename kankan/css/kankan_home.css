@@ -393,15 +393,14 @@ body .mui-table-view-cell.mui-active{
 	text-align: center;
 	font-size: 14px;
 }
-
 #normalcomment {
-	margin-left: 8em;
-	margin-top: -4.6em;
+	margin-left: 8.2em;
+	margin-top: -4.5em;
 }
 
 #badcomment {
 	margin-left: 15em;
-	margin-top: -4.6em;
+	margin-top: -4.4em;
 }
 
 .ka_commentinfobox {
@@ -831,6 +830,7 @@ body .mui-table-view-cell.mui-active{
 	height: 30px;
 	font-size: 14px;
 	padding-top: 7px;
+	text-align: center;
 }
 
 .mui-icon-extra-gold {

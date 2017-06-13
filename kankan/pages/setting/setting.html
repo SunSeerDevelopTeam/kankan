@@ -256,28 +256,28 @@
 		$(function(){
 			var language=navigator.language;
 			console.log("lan"+language);
-			if(language=="zh-CN"){
+			if(language=="zh-CN" || language=="zh-TW" || language=="zh-HK"){
 				$("#rule_jptext").hide();
 				$("#rule_zhtext").show();
 				$("#forbiden_jptext").hide();
 				$("#forbiden_zhtext").show();
 				$("#Privacy_jptext").hide();
 				$("#Privacy_zhtext").show();
-				$("#commerciallaw_zhtext").show();
 				$("#commerciallaw_jptext").hide();
+				$("#commerciallaw_zhtext").show();
 				$("#moneyCalculat_zhtext").show();
 				$("#moneyCalculat_jptext").hide();
 				$("#Summary_jptext").hide();
 				$("#Summary_zhtext").show();
-			}else if(language=="ja-JP" || language=="ja-JP"){
+			}else if(language=="ja-JP" || language=="Ja-JP"){
 				$("#rule_jptext").show();
 				$("#rule_zhtext").hide();
 				$("#forbiden_jptext").show();
 				$("#forbiden_zhtext").hide();
 				$("#Privacy_jptext").show();
 				$("#Privacy_zhtext").hide();
-				$("#commerciallaw_zhtext").hide();
 				$("#commerciallaw_jptext").show();
+				$("#commerciallaw_zhtext").hide();
 				$("#moneyCalculat_zhtext").hide();
 				$("#moneyCalculat_jptext").show();
 				$("#Summary_jptext").show();

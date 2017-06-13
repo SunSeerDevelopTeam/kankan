@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1421,7 +1421,7 @@ var TextMessage;
 	TextMessage.comdity_takepic = language ? "撮ります" : "拍摄";
 	TextMessage.gallerychoose = language ? "アルバムから写真を選択する" : "从手机相册中选择";
 	TextMessage.chooseimage = language ? "写真を選択します" : "选择照片";
-	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
+	TextMessage.operation_error = language ? "自分で出品した商品は操作できません。" : "不允许对自己的商品操作";
 	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れた為、再び試みて下さい " : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "入力してください" : "不能为空，请重新输入";
 	TextMessage.errorCode_1000 = language ? "ログインしてください" : "请先登录";
@@ -1470,6 +1470,8 @@ var TextMessage;
 	TextMessage.prostaute3 = language ? "傷や汚れあり " : "有使用过痕迹";
 	TextMessage.pro_imagetest = language ? "商品を出品する為には、少なくとも一枚は画像が必要です!" : "请为商品至少选择一张图片!";
 	TextMessage.pro_nametest = language ? "商品名称を入力してください。" : "商品名称不能为空";
+	TextMessage.pro_namelength = language ? "商品名が40文字以内入力できます" : "商品名称必须在40字以内";
+	TextMessage.pro_detaillength = language ? "商品詳細が1000文字以内入力できます" : "商品详情必须在1000字以内";
 	TextMessage.pro_descriptiontest = language ? "商品の説明文を入力してください。" : "商品描述不能为空";
 	TextMessage.pro_sorttest = language ? "商品のカテゴリを選択してください。" : "请选择商品分类";
 	TextMessage.pro_stautetest = language ? "商品の状態を選択してください。" : "请选择商品状态";
