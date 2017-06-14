@@ -102,20 +102,20 @@
 				"payment": {
 					"weixin": {
 						"description": "微信支付",
-						"appid": "wx321b171a15b31c63"
+						"appid": "wx1915653b1958f7d6"
 					}
 				},
 				"share": {
 					"weixin": {
-						"appid": "wx321b171a15b31c63",
-						"appsecret": "b136008481192a032c36f5bfc91ebc39",
+						"appid": "wx1915653b1958f7d6",
+						"appsecret": "965c63ce5c9150a26234c5f73cdc788c",
 						"description": "可选，微信分享"
 					}
 				},
 				"oauth": {
 					"weixin": {
-						"appid": "wx321b171a15b31c63",
-						"appsecret": "b136008481192a032c36f5bfc91ebc39"
+						"appid": "wx1915653b1958f7d6",
+						"appsecret": "965c63ce5c9150a26234c5f73cdc788c"
 					}
 				}
 			},
@@ -399,11 +399,15 @@
 					"js/sha256.js",
 					"js/language/locale_ja_JP.js",
 					"js/language/locale_zh_CN.js",
-					"images/nopic.jpg"
+					"images/nopic.jpg",
+					"images/weixin2.png"
 				],
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
-					"pages/main/products/productslist.html"
+					"pages/main/products/productslist.html",
+					"pages/transaction/select_item.html",
+					"pages/transaction/transaction2.html",
+					"pages/login/login.html"
 				],
 				"priority": 0
 			},
@@ -425,7 +429,9 @@
 					"js/sha256.js",
 					"js/common.js",
 					"js/language.js",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"js/pro_uploadimg.js",
+					"js/picker/mui.poppicker.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -445,13 +451,19 @@
 					"js/jquery-3.2.0.min.js",
 					"pages/main/pullrefresh_with_tab.html",
 					"js/language/locale_ja_JP.js",
-					"images/default.jpg"
+					"images/default.jpg",
+					"js/webviewGroup.js",
+					"js/index.list.js",
+					"pages/main/category/tab-top-subpage-1.html",
+					"js/sha256.js"
 				],
 				"refer": [
 					"pages/login/login.html",
 					"pages/login/reg.html",
 					"pages/main/search.html",
-					"pages/main/user/user.html"
+					"pages/main/user/user.html",
+					"pages/main/products/detail.html",
+					"pages/main/category/tab-top-subpage-2.html"
 				],
 				"priority": 0
 			},
@@ -466,12 +478,15 @@
 					"js/jquery-3.2.0.min.js",
 					"js/language/locale_ja_JP.js",
 					"js/common.js",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
 					"pages/main/products/request.html",
-					"pages/main/products/product_want_to_buy.html"
+					"pages/main/products/product_want_to_buy.html",
+					"pages/main/logisticslist.html",
+					"pages/login/login.html"
 				],
 				"priority": 0
 			},
@@ -507,7 +522,13 @@
 					"images/cbd.jpg",
 					"js/sha256.js",
 					"images/morebut.png",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"fonts/mui.ttf",
+					"js/common.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"images/nopic.jpg",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
 					"pages/login/login.html",
@@ -536,7 +557,8 @@
 					"js/lazy-load-img.min.js",
 					"images/nopic.jpg",
 					"js/language/locale_zh_CN.js",
-					"images/request.png"
+					"images/request.png",
+					"js/jquery.lazyload.min.js"
 				],
 				"refer": [
 					"pages/main/products/detail.html",
@@ -553,14 +575,32 @@
 					"images/Bad.PNG",
 					"images/Normal.PNG",
 					"images/Good.PNG",
-					"images/shuijiao.jpg"
+					"images/shuijiao.jpg",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"js/language/locale_zh_CN.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
 			"pages/main/products/pro_commentslist.html": {
 				"resources": [
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -568,9 +608,21 @@
 			"pages/main/products/product_want_to_buy.html": {
 				"resources": [
 					"images/iconfont-tianjia.png",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/sha256.js",
+					"js/pro_uploadimg.js",
+					"css/kankan_home.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js",
+					"css/kankan_home.css"
 				],
-				"refer": [],
+				"refer": [
+					"pages/login/login.html"
+				],
 				"priority": 0
 			},
 			"pages/main/user/user.html": {
@@ -586,12 +638,28 @@
 					"images/Good.PNG",
 					"images/userPhoto.png",
 					"js/feedback.js",
-					"js/picker/city.data.js"
+					"js/picker/city.data.js",
+					"fonts/mui.ttf",
+					"js/language/locale_zh_CN.js",
+					"css/mui.picker.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"js/mui.view.js",
+					"images/nopic.jpg",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"pages/setting/setting.html"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
 					"pages/main/products/detail.html",
-					"pages/main/products/commentlist.html"
+					"pages/main/products/commentlist.html",
+					"pages/login/login.html"
 				],
 				"priority": 0
 			},
@@ -603,7 +671,16 @@
 					"images/car.png",
 					"js/language/locale_zh_CN.js",
 					"fonts/mui.ttf",
-					"pages/transaction/transaction2.html"
+					"pages/transaction/transaction2.html",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"js/mui.view.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -626,17 +703,34 @@
 			},
 			"pages/main/search.html": {
 				"resources": [
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
 			"pages/main/products/requestlist.html": {
 				"resources": [
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/kankan_home.css"
 				],
 				"refer": [
-					"pages/main/products/translatelist.html"
+					"pages/main/products/translatelist.html",
+					"pages/transaction/transaction2.html"
 				],
 				"priority": 0
 			},
@@ -658,7 +752,156 @@
 					"images/muwu.jpg",
 					"images/sinaweibo.png",
 					"images/xinhuan.png",
-					"pages/main/logisticslist.html"
+					"pages/main/logisticslist.html",
+					"css/icons-extra.css",
+					"fonts/mui.ttf",
+					"js/language/locale_zh_CN.js",
+					"css/kankan_home.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/sha256.js",
+					"css/mui.min.css",
+					"js/language.js",
+					"images/morebut.png",
+					"images/nopic.jpg"
+				],
+				"refer": [
+					"pages/transaction/transevaluate.html",
+					"pages/transaction/change_item.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/transevaluate.html": {
+				"resources": [
+					"images/Bad.PNG",
+					"images/Normal.PNG",
+					"images/Good.PNG",
+					"css/wu.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"js/language/locale_zh_CN.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/products/commentlist.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js",
+					"css/kankan_home.css",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/transaction/select_item.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js",
+					"fonts/mui.ttf",
+					"css/icons-extra.css"
+				],
+				"refer": [
+					"pages/transaction/transaction2.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/change_item.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js",
+					"css/icons-extra.css",
+					"images/nopic.jpg",
+					"fonts/mui.ttf",
+					"css/kankan_home.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/setting/setting.html": {
+				"resources": [
+					"pages/main/user/user.html",
+					"css/wu.css",
+					"css/feedback.css",
+					"js/feedback.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js",
+					"js/mui.view.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/news.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-1.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_1.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/pullrefresh_sub_1.html": {
+				"resources": [
+					"js/jquery.lazyload.min.js",
+					"css/listitem.css",
+					"fonts/mui-icons-extra.ttf",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/sha256.js",
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"js/index.list.js",
+					"images/request.png"
+				],
+				"refer": [
+					"pages/main/products/request.html"
+				],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-2.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_2.html"
 				],
 				"refer": [],
 				"priority": 0

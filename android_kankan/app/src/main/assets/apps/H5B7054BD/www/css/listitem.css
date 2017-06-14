@@ -1,30 +1,37 @@
 .li-content {
-	background-color: gray;
+	background-color: #FFFFFF;
 	padding: 2px;
 }
 
 .comm-item {
-	height: 140px;
+	height: 200px;
 }
 
 .item-tap {
-	height: 70%;
+	height: 80%;
+	text-align:center;
+	background-color: #FFFFFF;
+	overflow: hidden;
+	vertical-align:middle;
+	display: inline-block;
+	/*line-height: 160px;*/
 }
 
 .item-tap img {
-	width: 100%;
-	height: 100%;
+	/*width: 100%;
+	height: 100%;*/
 }
 
-.item-tap span {
-	position: relative;
+.item-tap p {
+	position: absolute;
+	top:150px;
 	float: left;
 	background-color: rgba(105, 105, 105, 0.6);
 	color: white;
 	padding-top: 4px;
 	width: 100px;
 	font-size: 14px;
-	margin-top: -92px;
+	margin-top: -130px;
 	text-align: center;
 	vertical-align: middle;
 	text-overflow: ellipsis;
@@ -32,7 +39,7 @@
 }
 
 .item-buttom {
-	height: 30%;
+	height: 20%;
 	background-color: white;
 }
 
@@ -82,9 +89,29 @@
 	width: 100%;
 }
 
+.logistics {
+	position: absolute;
+    top: 75%;
+    left: 5%;
+}
+
 .logistics img {
-	position: relative;
-	width: 50px;
-	margin-top: 90%;
-	margin-left: 10%;
+	position: fixed;
+    width: 50px;
+    height: auto;
+    z-index:999;
+}
+.item-img-box{
+	line-height: 160px;
+}
+.item-img-box img{
+	height:auto;width:100%;vertical-align:middle;
+}
+
+.no-data {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
 }

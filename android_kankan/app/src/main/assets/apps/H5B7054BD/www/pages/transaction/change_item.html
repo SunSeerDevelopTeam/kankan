@@ -2,41 +2,11 @@
 <html>
 
 	<head>
-		<meta charset="utf-8">
+		<meta charset="UTF-8">
 		<title>change item</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" href="../../css/mui.min.css">
-		<link rel="stylesheet" href="../../css/icons-extra.css">
-		<style>
-			html,
-			body {
-				background-color: #efeff4;
-			}
-			
-			.title {
-				margin: 20px 15px 10px;
-				color: #6d6d72;
-				font-size: 15px;
-			}
-			
-			a#user img {
-				width: 35px;
-				height: 35px;
-				border-radius: 50%;
-				margin-top: -0.2em;
-			}
-			
-			header a.mui-icon-extra-notice {
-				margin-top: 0.5em;
-				margin-right: 0.25em;
-			}
-			
-			header a.mui-icon-search {
-				width: 60px;
-			}
-		</style>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
 	</head>
 
 	<body>
@@ -45,26 +15,14 @@
 					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
 				</button>
 			<h1 class="mui-center mui-title user-title-center maintitle">商品リスト</h1>
-			<span class="mui-right mui-pull-right">
-					<font class="mui-icon goods-list-btn maintitle user-title-center" onclick="select_goods();" style="font-size:15px">確定</font>
-				</span>
-		</header>
-		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div class="mui-slider-group">
-					<div class="mui-slider-item ">
-						<ul class="mui-table-view mui-grid-view goods-list">
-
-						</ul>
-					</div>
-				</div>
-
-				<div class="spinner">
-					<div class="bounce1"></div>
-					<div class="bounce2"></div>
-					<div class="bounce3"></div>
-				</div>
+			<div onclick="select_goods();" class="mui-right mui-pull-right  user-title-center" style="margin-top:13px;">
+				確定
 			</div>
+		</header>
+		<div class="mui-content" style="padding-top:30px;">
+			<ul class="mui-table-view mui-grid-view goods-list" style="padding-top:10px;">
+
+			</ul>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
@@ -73,53 +31,106 @@
 		<script src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
-			var  transid;
+			var transid;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				choice1 = self.choice;
+				var preView = plus.webview.getWebviewById('transaction');
+				plus.webview.close(preView);
 				transid = self.transid;
-				comm_id = self.commodity_id;
-				mode = self.mode;
-				//alert(transid + "====" + choice);
-				get_goods_list();
+				get_goods_list(transid);
 			})
+			var imgwidth = parseInt($(window).width()) / 3 - 17;
 
-			function get_goods_list(params) {
+			function get_goods_list(transid) {
 				var params = {
-					'commodity_id': comm_id,
-					'mode': mode
+					'transid': transid
 				}
 				transRequest(params);
 			}
 
 			function transRequest(params) {
-				Repository.Transaction.transRequest(params, {
+				Repository.Transaction.trans('transGetUserCommd', params, {
 					ok: function(data) {
 						var comm_info = data.data.data;
+						if(comm_info.length < 1) {
+							alert(TextMessage.commdNo);
+							return false;
+						};
 						var goods_list = '';
 						for(var gds in comm_info) {
-							goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail" >';
+							var imgWidth = comm_info[gds].width;
+							var imgHeight = comm_info[gds].height;
+							var hwhpercent = imgHeight / imgWidth;
+							var top_marign = 0;
+							var showheight = imgwidth * hwhpercent;
+							var cha1 = showheight - 100;
+							if(cha1 > 0) {
+								top_marign = cha1 / 2;
+							} else {
+								top_marign = 0;
+							}
+							var checkboxstyle = 'position:absolute;top:7px;left:85%;';
+							var imgstyle = 'height: auto;width:100%;margin-top:-' + top_marign + 'px;';
+
+							//var styleVal = 'height: auto;width:100%;margin-top:-'+top_marign+'px;';
+							goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail"  style="position:relative;height:160px;">';
+							if(comm_info[gds].trans_flag == 1) {
+								if(comm_info[gds].main_flag == '1') {
+									goods_list += '<input id="' + comm_info[gds].commodity_id + '" disabled=true checked style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+								} else {
+									goods_list += '<input id="' + comm_info[gds].commodity_id + '" checked style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+								}
+							} else {
+								goods_list += '<input id="' + comm_info[gds].commodity_id + '" style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+							}
 							goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
-							goods_list += '<img class="" width="30%"  height="98px;" src="' + comm_info[gds].img_flg + '">';
-							goods_list += '<input  style="float:right;position: fixed;margin-left:-13px;" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
+							goods_list += '<div style="line-height:160px;vertical-align: middle;">';
+							goods_list += '<img class="mui-media-object" style="' + imgstyle + '" src="' + comm_info[gds].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+
+							//goods_list += '<label  for="' + comm_info[gds].commodity_id + '">';
+							goods_list += '</div>';
 							goods_list += '</label>';
 							goods_list += '</li>';
+
 						}
 						$(".goods-list").html(goods_list);
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
-						if(data == "2004") {
-							mui.toast(TextMessage.operation_error, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
+						Api.callback_ng(data);
+					}
+				});
+			}
+
+			function select_goods() {
+				var choice = '';
+				var main_comm = $("input[name='commodity_id']:disabled").val();
+				$("input[name='commodity_id']:checked").each(function() {
+					if($(this).val() != main_comm) {
+						choice += $(this).val() + ',';
+					}
+				})
+				choice = choice.substr(0, choice.length - 1);
+				if(choice == '') {
+					alert(TextMessage.commdSelect);
+					return false;
+				}
+				var params = {
+					'transid': transid
+				}
+				params.choice = choice;
+				Repository.Transaction.trans('transCommdChange', params, {
+					ok: function(data) {
+						var trans_id = data.data.transinfo[0].trans_id;
+						mui.openWindow({
+							url: "./transaction2.html?transid=" + trans_id,
+							id: "transaction",
+							extras: {
+								"transid": trans_id
+							}
+						})
+					},
+					ng: function(data) {
+						Api.callback_ng(data);
 					}
 				});
 			}

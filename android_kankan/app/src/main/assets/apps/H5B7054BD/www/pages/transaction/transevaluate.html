@@ -15,7 +15,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">交易完了</h1>
+			<h1 class="mui-title"><span class="lang" data-locale="evalute_finish"></span></h1>
 		</header>
 		<div class="mui-pages">
 			<!--main content start-->
@@ -24,7 +24,7 @@
 					<div class="mui-scroll-wrapper">
 						<div class="tran-page">
 							<div style="font-size:1.2rem;;background:#F3F3F3;height:45px;width:100%;padding:15px 5px;">
-								<span>評価</span>
+								<span class="lang" data-locale="det_pcercomment"></span>
 							</div>
 							<ul class="mui-table-view" style="margin-top:0px;">
 								<li class="head-img-box">
@@ -40,14 +40,11 @@
 										</li>
 									</ul>
 									<ul class="user-comment-list">
-										<li class="user-comment-grid">
-											好评
+										<li class="user-comment-grid lang" data-locale="det_goodcomments">
 										</li>
-										<li class="user-comment-grid2">
-											中评
+										<li class="user-comment-grid2 lang" data-locale="det_normalcomments">
 										</li>
-										<li class="user-comment-grid2">
-											差评
+										<li class="user-comment-grid2 lang" data-locale="det_badcomments">
 										</li>
 									</ul>
 									<ul class="user-comment-list ">
@@ -62,28 +59,16 @@
 										</li>
 									</ul>
 								</li>
-								<li style="padding:5px;">評価のコメントを記入しましょう</li>
+								<li style="padding:5px;" class="lang" data-locale="eve_comment"></li>
 								<li>
 									<div class="mui-input-row" style="margin: 10px 5px;">
-										<textarea name="evaluate_msg" style="background:#eee;" id="evaluate_msg" rows="5" placeholder="このコメントは、引き取り完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに交易確認画面で伝えましょう。"></textarea>
-										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined">評価する</button>
+										<textarea name="evaluate_msg" style="background:#eee;" id="evaluate_msg" rows="5" placeholder=""></textarea>
+										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined lang" data-locale="eve_btn"></button>
 									</div>
 								</li>
 							</ul>
-							<!--<div style="margin-top:-10px;background:#F3F3F3;height:45px;width:100%;padding:15px 5px;">
-							<span>社会貢献 </span>
-						</div>
-						<ul  class="mui-table-view" style="margin:-4px;padding:15px 5px;">
-							<li style="margin:5px;">
-								<input name="checkbox" value="Item 1" type="checkbox">
-								<span>会社貢献金を○○○○寄付する</span>	
-							</li>
-							<li style="font-size:10px;color:red;margin:5px;">
-								<span>＊社会貢献金とは交易金ではなく、交易手続き金中での1%を○○○○に寄付することです。ご安心ください</span>	
-							</li>
-						</ul>-->
 							<div style="text-align:center;margin-top:-5px;background:#F3F3F3;height:40px;width:100%;padding-top:20px;">
-								<a href="../main/main.html" style="background:#6ACB9A;"><span>ホームに戻る</span></a>
+								<a href="javascript:gotoMain();" style="background:#6ACB9A;margin-bottom:10px;"><span class="lang" data-locale="home_return"></span></a>
 							</div>
 						</div>
 					</div>
@@ -94,21 +79,52 @@
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			mui.init();
+			mui.init({
+				beforeback: function() {
+					var list = plus.webview.currentWebview().opener();
+					mui.fire(list, 'refresh', {
+						refresh: "canRefresh"
+					});
+					return true;
+				}
+			});
 			var trans_id;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
+				$("#evaluate_msg").attr('placeholder',TextMessage.evaluateMsg);
 			});
-			//mui(".mui-input-row").on('tap','#evaluate_btn',function(){
-			//	evaluate_submit();
-			//});
+
+			function gotoMain(){
+				mui.plusReady(function() {
+					var preViewTrans = plus.webview.getWebviewById('transaction');
+					plus.webview.close(preViewTrans);
+					var requestView = plus.webview.getWebviewById('request');
+					plus.webview.close(requestView);
+					var requestlistView = plus.webview.getWebviewById('requestlist');
+					plus.webview.close(requestlistView);
+					//var mainpage = plus.webview.getWebviewById('home');
+					mui.back();
+					mui.fire(mainpage, 'refresh', {
+						refresh: "canRefresh"
+					});
+				});
+			}
 			function evaluate_submit() {
 				var evaluate_flg = $("input[name='evalueate']:checked").val();
 				var evaluate_msg = $("#evaluate_msg").val();
+				if(evaluate_msg == ''){
+					var err_msg = TextMessage.evecommenttestnull;
+					mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+					});
+					return false;
+				}
 				var params = {
 					"transid": trans_id,
 					"message": evaluate_msg,
@@ -117,32 +133,10 @@
 				Repository.Transaction.transOrderEvaluate(params, {
 					ok: function(data) {
 						Log.i("message send successfully!");
-						mui.openWindow({
-							url: "../main/main.html",
-							id: "main.html",
-							extras: {
-								"transid": trans_id
-							}
-						});
+						gotoMain();
 					},
 					ng: function(data) {
-						Log.i("message send faild!");
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
-						if(data == "2019") {
-							alert("不能重复评论");
-							mui.openWindow({
-								url: "../main/main.html",
-								id: "main.html",
-								extras: {
-									"transid": trans_id
-								}
-							});
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}

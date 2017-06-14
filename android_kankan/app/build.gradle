@@ -4,6 +4,10 @@ android {
     compileSdkVersion 20
     buildToolsVersion "25.0.3"
 
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     defaultConfig {
         applicationId "com.sunseer.kankan"
         minSdkVersion 8

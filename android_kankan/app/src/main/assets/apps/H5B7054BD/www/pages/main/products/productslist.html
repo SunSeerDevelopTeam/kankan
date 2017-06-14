@@ -13,7 +13,6 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title lang" data-locale="detli_title"></h1>
-			<a class="mui-icon mui-icon-more mui-icon-right-nav mui-pull-right"></a>
 		</header>
 		<div id="loading" class="mui-content ka_userbox">
 			<div class="spinner">
@@ -38,16 +37,16 @@
 					<a href="commentlist.html">
 						<div class="mui-navigate-right ka_userbox commentlists">
 							<div class="mui-pull-right ka_commentlevelbox">
-								<img src="../../../images/Good.PNG" width="30" height="30">
-								<div class="ka_comlevnumber goodnum"></div>
+								<img src="../../../images/Bad.PNG" width="30" height="30">
+								<div class="ka_comlevnumber badnum"></div>
 							</div>
 							<div class="mui-pull-right ka_commentlevelbox">
 								<img src="../../../images/Normal.PNG" width="30" height="30">
 								<div class="ka_comlevnumber normalnum"></div>
 							</div>
 							<div class="mui-pull-right ka_commentlevelbox">
-								<img src="../../../images/Bad.PNG" width="30" height="30">
-								<div class="ka_comlevnumber badnum"></div>
+								<img src="../../../images/Good.PNG" width="30" height="30">
+								<div class="ka_comlevnumber goodnum"></div>
 							</div>
 						</div>
 						<input type="hidden" value="" id="commid" name="commid" />
@@ -83,11 +82,14 @@
 						id: 'detail.html',
 						url: 'detail.html'
 					}
-				]
+				],
+				beforeback: function() {
+					location.reload();
+			    }
 			});
 			window.addEventListener('prolid', function(event) {
 				var uid = event.detail.id;
-				console.log(uid);
+				//console.log(uid);
 				getmessage(uid);
 			});
 			//get message
@@ -107,11 +109,11 @@
 			}
 
 			function messageshow(results) {
-				$(".comditylists").empty();
-				$(".ka_touxiangimg").empty();
-				$(".uname").empty();
-				$(".uproducts").empty();
-				$(".ucomment").empty();
+//				$(".comditylists").empty();
+//				$(".ka_touxiangimg").empty();
+//				$(".uname").empty();
+//				$(".uproducts").empty();
+//				$(".ucomment").empty();
 				var commodity = results.data;
 				var uname = commodity.user_name;
 				var uimage = commodity.user_photo;
@@ -131,18 +133,30 @@
 				$(".badnum").html(badcoment);
 				var commodityarr = commodity.commoditys;
 				var commoditylength = commodityarr.length;
+				var imgwidth=parseInt($(window).width())/3-17;
 				for(i = 0; i < commoditylength; i++) {
 					var ucommodityobj = JSON.stringify(commodityarr[i]);
 					var ucommodityinfo = $.parseJSON(ucommodityobj);
 					var commodityid = ucommodityinfo.commodity_id;
 					var comdityimage = ucommodityinfo.commodity_photo_url;
+					var realwidth=ucommodityinfo.comm_img_width;
+					var realheight=ucommodityinfo.comm_img_height;
+					var leftpx=0;
+					var oribi=realheight/realwidth;
+					var showwidth=130/oribi;
+					var cha1=showwidth-imgwidth;
+					if(cha1>0){
+						leftpx=cha1/2;
+					}else{
+						leftpx=0;
+					}
 					if(comdityimage==""){
 						comdityimage="./../../images/nopic.jpg";
 					}
 					var html = new Util.StringBuilder();
-					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail">')
+					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail ka_imgoption2">')
 						.appendFormat('<a href="detail.html" id="{0}">', commodityid)
-						.appendFormat('<img class="mui-media-object" src="{0}" style="height: 81px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
+						.appendFormat('<img class="mui-media-object" src="{0}" style="height: 130px;width:auto;vertical-align: middle;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
 						.append('</a>')
 						.append('</li>');
 					$(".comditylists").append(html.toString());
