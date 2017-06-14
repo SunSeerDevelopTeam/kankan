@@ -217,13 +217,13 @@
 						id: 'detail.html',
 						url: 'detail.html'
 					}
-					/*,
-										{
-											id:'../../transaction/transaction2.html',
-											url:'../../transaction/transaction2.html'
-										}*/
 				],
 				beforeback: function() {
+					var view = plus.webview.currentWebview().opener();
+			    	var cmid=$(".kankan_zanbox").attr("id");
+					mui.fire(view,'praiseid',{
+					    praiseid:cmid
+					});
 					self.location.reload();
 			    }
 			});

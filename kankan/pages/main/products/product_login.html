@@ -445,7 +445,7 @@ function publishs() {
 		});
 		return false;
 	}
-	if(comm_name.replace(/\s/g,'') == "") {
+	if(comm_name.trim()== "") {
 		mui.toast(TextMessage.pro_nametest, {
 			duration: 'long',
 			type: 'div'
@@ -453,14 +453,14 @@ function publishs() {
 		document.publishcomodity.comm_name.focus();
 		return false;
 	}
-	if(comm_name.length>40){
+	if(comm_name.trim().length>40){
 		mui.toast(TextMessage.TextMessage.pro_namelength, {
 			duration: 'long',
 			type: 'div'
 		});
 		return false;
 	}
-	if(comm_detail== "") {
+	if(comm_detail.trim()== "") {
 		mui.toast(TextMessage.pro_descriptiontest, {
 			duration: 'long',
 			type: 'div'
@@ -468,7 +468,7 @@ function publishs() {
 		document.publishcomodity.comm_detail.focus();
 		return false;
 	}
-	if(comm_detail.length >1000) {
+	if(comm_detail.trim().length >1000) {
 		mui.toast(TextMessage.TextMessage.pro_detaillength, {
 			duration: 'long',
 			type: 'div'

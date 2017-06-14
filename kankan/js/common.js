@@ -1537,7 +1537,7 @@ var TextMessage;
 	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
 	TextMessage.update = language ? "更新中" : "正在刷新";
 	TextMessage.requestStop = language ? "取引を中止する" : "请求终止";
-	TextMessage.transSuccess = language ? "取引成功する" : "交易成功";
+	TextMessage.transSuccess = language ? "取引を成立する" : "交易成功";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
 	TextMessage.transContact = language ? "内容はありませんね" : "交谈内容不能未空";
 	TextMessage.tranStatusRequest = language ? "取引中" : "请求中";
@@ -1567,6 +1567,7 @@ var TextMessage;
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
 	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
 	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
+	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
 	TextMessage.evelevel = language ? "評価レベルをご選択ください。" : "请选择评价等级";
 	
