@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
-var DEBUG = true;
-var DEVELOPMENT = true;
+var DEBUG = false;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -18,6 +18,7 @@ var TRANS_STATUS = {
 	8: "请求终止",
 	9: "订单终止"
 }
+var isAlert = false;
 var Validator;
 (function(Validator) {
 	Validator.types = {
@@ -491,7 +492,12 @@ var Api;
 			userupimage: baseUrl() + '/user/Usercomplaint/uploadImg/',
 			Usercomplaint: baseUrl() + '/user/Usercomplaint/',
 			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/',
-			setImg: baseUrl() + '/user/setting/setImg/'
+			setImg: baseUrl() + '/user/setting/setImg/',
+			email_rgister_check: baseUrl() + '/user/Setemail/',
+			set_message: baseUrl() + '/user/usersystemmsg/set_message/',
+			del_message: baseUrl() + '/user/usersystemmsg/del_message/',
+			get_message: baseUrl() + '/user/usersystemmsg/get_message/'
+
 		},
 		Commodity: {
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
@@ -506,7 +512,8 @@ var Api;
 			Commoditypublish: baseUrl() + '/commodity/release/',
 			Commodityedite: baseUrl() + '/commodity/release/update/',
 			logisticslist: baseUrl() + '/logistics/',
-			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/'
+			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
+			shareurl: baseUrl() + '/share.php?id='
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -557,6 +564,7 @@ var Api;
 			success: function(data) {
 				Log.i(data);
 				setToken(data.result.tokencheck);
+				saveLoginStatus(data);
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
 					callback.ok(data.result)
 				else if(data.result.status == STATUS.NG && Validator.isFunc(callback.ng)) {
@@ -582,7 +590,13 @@ var Api;
 				if(DEBUG) {
 					alert("ajax error callback. error type is " + type);
 				}
-				plus.ui.alert(TextMessage.not_network);
+				if (!isAlert) {
+					plus.nativeUI.alert(TextMessage.not_network, function(e){
+						isAlert = false;
+					});
+					isAlert = true;
+				}
+				plus.nativeUI.alert(TextMessage.not_network);
 				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}
@@ -632,6 +646,395 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
+
+	function callback_ng(data) {
+		if(Validator.isObj(data)) {
+			$.each(data, function(key, value) {
+				error_msg(value, key);
+			});
+		} else {
+			error_msg(data);
+		}
+	}
+	Api.callback_ng = callback_ng;
+
+	function saveLoginStatus(data) {
+		if(typeof(plus) != "undefined") {
+			plus.storage.setItem('email', data.result.email);
+			plus.storage.setItem('myid', data.result.myid);
+		}
+	}
+
+	function error_msg(err_code, key) {
+		Log.i("message send faild!");
+
+		var err_msg = '';
+		switch(err_code) {
+			case '1000':
+				alert(TextMessage.test);;
+				break;
+			case '1001':
+				if(key == Api.Params.vCode) err_msg = TextMessage.verificationCode + TextMessage.errorCode_1001;
+				else err_msg = TextMessage.errorCode_1001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1002':
+				if(key == Api.Params.username) err_msg = TextMessage.username + TextMessage.errorCode_1002;
+				else err_msg = TextMessage.errorCode_1002;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1003':
+				err_msg = TextMessage.errorCode_1003;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1004':
+				err_msg = TextMessage.errorCode_1004;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1005':
+				err_msg = TextMessage.errorCode_1005;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1006':
+				err_msg = TextMessage.errorCode_1006;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '1007':
+				err_msg = TextMessage.errorCode_1007;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '0001':
+				err_msg = TextMessage.errorCode_0001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '0100':
+				err_msg = TextMessage.errorCode_0100;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2001':
+				err_msg = TextMessage.errorCode_2001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2002':
+				err_msg = TextMessage.errorCode_2002;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2003':
+				err_msg = TextMessage.errorCode_2003;
+				mui.alert(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2004':
+				err_msg = TextMessage.errorCode_2004;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2005':
+				err_msg = TextMessage.errorCode_2005;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2006':
+				err_msg = TextMessage.errorCode_2006;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2007':
+				err_msg = TextMessage.errorCode_2007;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2008':
+				err_msg = TextMessage.errorCode_2008;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2009':
+				err_msg = TextMessage.errorCode_2009;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2011':
+				err_msg = TextMessage.errorCode_2011;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2012':
+				err_msg = TextMessage.errorCode_2012;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2013':
+				err_msg = TextMessage.email_error;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2014':
+				err_msg = TextMessage.errorCode_2014;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2015':
+				err_msg = TextMessage.errorCode_2015;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2016':
+				err_msg = TextMessage.errorCode_2016;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2017':
+				err_msg = TextMessage.errorCode_2017;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2018':
+				err_msg = TextMessage.errorCode_2018;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2019':
+				mui.plusReady(function() {
+					var preView = plus.webview.getWebviewById('transaction');
+					plus.webview.close(preView);
+					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+					mui.back();
+					mui.fire(mainpage, 'refresh', {
+						refresh: "canRefresh"
+					});
+				});
+				break;
+			case '2020':
+				err_msg = TextMessage.errorCode_2020;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2021':
+				err_msg = TextMessage.errorCode_2021;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3001':
+				err_msg = TextMessage.errorCode_3001;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3003':
+				err_msg = TextMessage.errorCode_3003;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3004':
+				err_msg = TextMessage.errorCode_3004;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3005':
+				err_msg = TextMessage.errorCode_3005;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3006':
+				err_msg = TextMessage.errorCode_3006;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3008':
+				err_msg = TextMessage.errorCode_3008;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3009':
+				err_msg = TextMessage.errorCode_3009;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3010':
+				err_msg = TextMessage.errorCode_3010;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3011':
+				err_msg = TextMessage.errorCode_3011;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '3020':
+				err_msg = TextMessage.errorCode_3020;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				mui.openWindow({
+					url: "/pages/login/emai_summate.html",
+					id: "emaisummate",
+					extras: {
+						"transid": trans_id
+					}
+				})
+				break;
+			case '5000':
+				err_msg = TextMessage.errorCode_5000;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '5001':
+				err_msg = TextMessage.emailsenderror;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			default:
+				break;
+		}
+
+	}
+	Api.error_msg = error_msg;
+
+	function getApiUrl(flag) {
+		var apiUrl = "";
+		switch(flag) {
+			case 'transConversation':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/';
+				break;
+			case 'transConversation':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_conversation/'; //请求/订单对话API:
+				break;
+			case 'transCommdChange':
+				apiUrl = baseUrl() + '/transaction/transcommdchange/'; //提交请求商品变更API:
+				break;
+			case 'transShowRequest':
+				apiUrl = baseUrl() + '/transaction/transrequest/show_request_detail/'; //显示当前交易请求/订单API
+				break;
+			case 'transGetUserCommd':
+				apiUrl = baseUrl() + '/transaction/transpublic/get_user_commodity/';
+				break;
+			case 'transRequest':
+				apiUrl = baseUrl() + '/transaction/transrequest/';
+				break;
+			case 'transOrderEvaluate':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_evaluate/';
+				break;
+			case 'transOrderReceipt':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_receipt/';
+				break;
+			case 'transOrderLogustics':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_order_logistics/';
+				break;
+			case 'transSubmitOrder':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_submit_order/';
+				break;
+			case 'transRequestOrder':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_request_order/';
+				break;
+			case 'transChangePrice':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_change_price/';
+				break;
+			case 'transStop':
+				apiUrl = baseUrl() + '/transaction/transoperation/transaction_stop/';
+				break;
+			case 'transEdite':
+				apiUrl = baseUrl() + '/transaction/transoperation/transaction_show/';
+				break;
+			case 'transUrgeDelive':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_deliver/';
+				break;
+			case 'transUrgeReceipt':
+				apiUrl = baseUrl() + '/transaction/transoperation/trans_urge_receipt/';
+				break;
+		}
+		return apiUrl;
+	}
+	Api.getApiUrl = getApiUrl;
 })(Api || (Api = {}));
 var Repository;
 (function(Repository) {
@@ -701,6 +1104,94 @@ var Repository;
 			return Api.call(Api.url.User.addComplaint, params, callback);
 		}
 		User.addComplaint = addComplaint;
+
+		function email_rgister_check(params, callback) {
+			return Api.call(Api.url.User.email_rgister_check, params, callback);
+		}
+		User.email_rgister_check = email_rgister_check;
+
+		function set_message(params, callback) {
+			return Api.call(Api.url.User.set_message, params, callback);
+		}
+		User.set_message = set_message;
+
+		function del_message(params, callback) {
+			return Api.call(Api.url.User.del_message, params, callback);
+		}
+		User.del_message = del_message;
+
+		function get_message(params, callback) {
+			return Api.call(Api.url.User.get_message, params, callback);
+		}
+		User.get_message = get_message;
+
+		function isLogin() {
+			var myid = plus.storage.getItem("myid");
+			if(myid == "" || myid == null) {
+				var btnArray = [{
+					title: TextMessage.login
+				}, {
+					title: TextMessage.register
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: TextMessage.skip,
+					buttons: btnArray
+				}, function(e) {
+					switch(e.index) {
+						case 1:
+							mui.openWindow({
+								id: 'login',
+								url: '/pages/login/login.html',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								}
+							});
+							break;
+						case 2:
+							mui.openWindow({
+								id: 'reg',
+								url: '/pages/login/reg.html',
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								}
+							});
+							break;
+						default:
+							break;
+					}
+				});
+				return false;
+			}
+			return true;
+		}
+		User.isLogin = isLogin;
+
+		function isEmptyEmail() {
+			var email = plus.storage.getItem("email");
+			if(email == "" || email == null) {
+				plus.nativeUI.alert(TextMessage.input_email, function(event) {
+					mui.openWindow({
+						id: "emai_summate",
+						url: "/pages/login/emai_summate.html",
+						waiting: {
+							autoShow: false
+						},
+						show: {
+							duration: 200
+						}
+					});
+				}, TextMessage.sharetitle, TextMessage.yes);
+				return false;
+			}
+			return true;
+		}
+		User.isEmptyEmail = isEmptyEmail;
 	})(User = Repository.User || (Repository.User = {}));
 	Repository.User = User;
 
@@ -774,6 +1265,12 @@ var Repository;
 	Repository.Commodity = Commodity;
 	var Transaction;
 	(function(Transaction) {
+		function trans(flag, params, callback) {
+			apiUrl = Api.getApiUrl(flag);
+			return Api.call(apiUrl, params, callback);
+		}
+		Transaction.trans = trans;
+
 		function transRequest(params, callback) {
 			return Api.call(Api.url.Trans.transRequest, params, callback);
 		}
@@ -843,15 +1340,17 @@ var Repository;
 			return Api.call(Api.url.Trans.transEdite, params, callback);
 		}
 		Transaction.transEdite = transEdite;
+
 		function transUrgeDelive(params, callback) {
 			return Api.call(Api.url.Trans.transUrgeDelive, params, callback);
 		}
 		Transaction.transUrgeDelive = transUrgeDelive;
+
 		function transUrgeReceipt(params, callback) {
 			return Api.call(Api.url.Trans.transUrgeReceipt, params, callback);
 		}
 		Transaction.transUrgeReceipt = transUrgeReceipt;
-		
+
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
@@ -895,87 +1394,179 @@ var TextMessage;
 	var language = (navigator.language == "ja-JP" || navigator.language == "ja-jp");
 	TextMessage.back = language ? "戻る" : "返回";
 	TextMessage.skip = language ? "スキップ" : "跳过";
-	TextMessage.test = language ? "まずはログインしてください。" : "请先登录!";
-	TextMessage.share = language ? "共有" : "分享到";
+	TextMessage.test = language ? "ログインしてください。" : "请先登录!";
+	TextMessage.share = language ? "シェア" : "分享到";
 	TextMessage.success = language ? "成功!" : "成功!";
 	TextMessage.faile = language ? "失敗:" : "失败:";
-	TextMessage.sharecontent = language ? "カンカンからの共有" : "看看的分享";
+	TextMessage.sharecontent = language ? "カンカンをシェアする" : "看看的分享";
 	TextMessage.sharetitle = language ? "カンカン" : "看看";
 	TextMessage.login = language ? "登録済みの方はこちら" : "登录";
-	TextMessage.register = language ? "新しいはじめる方はこちら" : "注册";
+	TextMessage.register = language ? "未登録の方はこちら" : "注册";
 	TextMessage.cancel = language ? "キャンセル" : "取消";
-	TextMessage.towchatfrind = language ? "微信の友を送る" : "发送给微信好友";
-	TextMessage.towchatcircle = language ? "友達の輪に分けて、友達の" : "分享到微信朋友圈";
+	TextMessage.towchatfrind = language ? "WeChatのチャットに送信" : "发送给微信好友";
+	TextMessage.towchatcircle = language ? "WeChatのモーメンツ上で共有" : "分享到微信朋友圈";
 	TextMessage.allshowmes = language ? "全て" : "全部";
 	TextMessage.goodshowmes = language ? "良い" : "好评";
 	TextMessage.normalshowmes = language ? "普通" : "中评";
 	TextMessage.badshowmes = language ? "悪い" : "差评";
-	TextMessage.datanull = language ? "暫時データ" : "暂无数据";
-	TextMessage.not_network = language ? "申し訳ございません。ただ今ネットワークが問題がありますが、1分間立ってもう一度お試してください。" : "当前网络不给力，请稍后再试";
-	TextMessage.contentlength = language ? "レビューの内容（300字を超えない）" : "评论内容（不超过三百字）";
-	TextMessage.commenttestnull = language ? "コメントの内容は空っぽにならない!" : "评论内容不能为空!";
-	TextMessage.commenttestlength = language ? "レビューの内容300字を超えない!" : "评论内容不能超过三百字！!";
-	TextMessage.send_code_ok = language ? "認証コードは入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
+	TextMessage.datanull = language ? "データがありません。" : "暂无数据";
+	TextMessage.commentsnull = language ? "コメントがありません。" : "暂无评论";
+	TextMessage.not_network = language ? "接続がタイムアウトしました。このサイトが一時的に利用できなくなっていたり、サーバーの負荷が高すぎて接続できなくなっている可能性があります。しばらくしてから再度お試しください。" : "当前网络不给力，请稍后再试";
+	TextMessage.contentlength = language ? "レビュー内容(300字以内)" : "评论内容（不超过三百字）";
+	TextMessage.commenttestnull = language ? "コメントが未入力です。" : "评论内容不能为空!";
+	TextMessage.evecommenttestnull = language ? "評価のコメントが未入力です。" : "评价内容不能为空!";
+	TextMessage.commenttestlength = language ? "レビューの内容(300字以内)!" : "评论内容不能超过三百字！!";
+	TextMessage.send_code_ok = language ? "認証コードが入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
 	TextMessage.send_code_ng = language ? "認証コード発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
 	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
 	TextMessage.username = language ? "ユーザー名" : "用户名";
-	TextMessage.verificationCode = language ? "確認コード" : "验证码";
-	TextMessage.login_error = language ? "登録名もしくはパスワードが間違っています。" : "用户名或者密码错误";
+	TextMessage.verificationCode = language ? "認証コード" : "验证码";
+	TextMessage.login_error = language ? "メールアドレスまたはパスワードが間違っています。" : "用户名或者密码错误";
 	TextMessage.send_verification_code = language ? "認証コードを発信" : "发送验证码";
-	TextMessage.commodity_descriptionlength = language ? "商品説明（1000文字まで）" : "商品说明（1000字以内）";
-	TextMessage.publishsure = language ? "確認出品する？" : "确认出品展出吗?";
-	TextMessage.tackpicture = language ? "写真撮影" : "拍照";
-	TextMessage.comdity_takepic = language ? "撮影" : "拍摄";
-	TextMessage.gallerychoose = language ? "携帯電話からアルバムを選ぶ" : "从手机相册中选择";
-	TextMessage.chooseimage = language ? "写真を選択する" : "选择照片";
-	TextMessage.operation_error = language ? "自分出品した商品が操作できません。" : "不允许对自己的商品操作";
-	TextMessage.errorCode_1001 = language ? "検証番号の有効期限が切れて、再び試みて下さい " : "您输入的验证码已过期，请重试！";
-	TextMessage.errorCode_1002 = language ? "空白できません、再入力してください" : "不能为空，请重新输入";
+	TextMessage.commodity_descriptionlength = language ? "商品詳細(必須：1000文字まで)" : "商品说明（必须:1000字以内）";
+	TextMessage.publishsure = language ? "出品しますか？" : "确认出品展出吗?";
+	TextMessage.tackpicture = language ? "写真をとります" : "拍照";
+	TextMessage.comdity_takepic = language ? "撮ります" : "拍摄";
+	TextMessage.gallerychoose = language ? "アルバムから写真を選択する" : "从手机相册中选择";
+	TextMessage.chooseimage = language ? "写真を選択します" : "选择照片";
+	TextMessage.operation_error = language ? "自分で出品した商品は操作できません。" : "不允许对自己的商品操作";
+	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れた為、再び試みて下さい " : "您输入的验证码已过期，请重试！";
+	TextMessage.errorCode_1002 = language ? "入力してください" : "不能为空，请重新输入";
+	TextMessage.errorCode_1000 = language ? "ログインしてください" : "请先登录";
+	TextMessage.errorCode_1003 = language ? "フォーマットは正しくありません、再入力してください" : "格式不正确,请重新输入";
+	TextMessage.errorCode_1004 = language ? "入力が間違っていますが、再入力して下さい" : "不一致，请重新输入";
+	TextMessage.errorCode_1005 = language ? "すでに存在しましたので、再入力して下さい" : "已存在，请重新输入";
+	TextMessage.errorCode_1006 = language ? "入力した文字列の長さは正しくなく、再入力して下さい" : "长度不正确，请重新输入";
+	TextMessage.errorCode_1007 = language ? "画像サイズまたはフォーマットは正しくありません、再登録ください！" : "图片大小或格式不正确，请重新登录！";
+	TextMessage.errorCode_0001 = language ? "再登録ください" : "请重新登录！";
+	TextMessage.errorCode_0100 = language ? "通信失敗しましたが、リトライを行ってください" : "系统出错啦，请稍后重试";
+	TextMessage.errorCode_2001 = language ? "データーがありません" : "表示没有数据或者商品下架";
+	TextMessage.errorCode_2002 = language ? "該当ユーザーが凍結、もしくは削除されました。" : "已冻结或已删除的用户";
+	TextMessage.errorCode_2003 = language ? "商品が存在していません" : "要操作的商品不存在";
+	TextMessage.errorCode_2004 = language ? "自分の商品に対して操作できません" : "不允许对自己的商品操作";
+	TextMessage.errorCode_2005 = language ? "該当操作ができません" : "没有相关操作";
+	TextMessage.errorCode_2006 = language ? "同じ商品に多重リクエストができません" : "不能对同一个商品多次提出交易申请";
+	TextMessage.errorCode_2007 = language ? "チケットが不足です" : "用户ticket不足";
+	TextMessage.errorCode_2008 = language ? "この商品はこの取引方法で引き取れません" : "该商品不支持这种交易方式";
+	TextMessage.errorCode_2009 = language ? "選択した商品が不適切です" : "选择的商品有误";
+	TextMessage.errorCode_2011 = language ? "選択した取引方法が間違っています" : "交易方式选择有误";
+	TextMessage.errorCode_2012 = language ? "画像がありません" : "没有上传画像";
+	TextMessage.errorCode_2013 = language ? "メール/ユーザー名が間違っています、もしくは存在しています" : "注册邮箱/用户名 错误，或已存在";
+	TextMessage.errorCode_2014 = language ? "認証コードは無効になりました" : "验证码失效";
+	TextMessage.errorCode_2015 = language ? "多重チェックインができません" : "不能重复签到";
+	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません" : "该商品正在问合中，不能重复提交请求";
+	TextMessage.errorCode_2017 = language ? "ポイント不足になっています" : "您当前point不足";
+	TextMessage.errorCode_2018 = language ? "相手側の対応をお待ちください。" : "交易订单不存在或被删除";
+	TextMessage.errorCode_2019 = language ? "コメントを発表したので、再度発表ができません" : "已发布评论，请勿重复发布";
+	TextMessage.errorCode_2020 = language ? "既にリクエスト済みです。" : "已催促发货，请勿重复催促";
+	TextMessage.errorCode_2021 = language ? "引取催促がすでに行ったので、再度操作できません" : "已催促收货，请勿重复催促";
+	TextMessage.errorCode_3001 = language ? "ユーザー名またはパスワードが間違って" : "用户名或者密码错误";
+	TextMessage.errorCode_3002 = language ? "注文が存在しません" : "订单不存在";
+	TextMessage.errorCode_3003 = language ? "注文未提出" : "订单未提交";
+	TextMessage.errorCode_3004 = language ? "注文が中止しました" : "订单已中止";
+	TextMessage.errorCode_3005 = language ? "注文が完成しました" : "订单已完成";
+	TextMessage.errorCode_3006 = language ? "請求者は存在していません" : "请求者不存在";
+	TextMessage.errorCode_3008 = language ? "完備自分の情報をください" : "请完善自己的信息";
+	TextMessage.errorCode_3009 = language ? "注文が存在していません" : "订单不存在或者失效";
+	TextMessage.errorCode_3010 = language ? "操作故障" : "操作失效";
+	TextMessage.errorCode_3011 = language ? "登録後に操作してください" : "请登录后操作";
+	TextMessage.errorCode_3020 = language ? "メールの情報を完全にしてください" : "请完善邮箱信息";
+	TextMessage.errorCode_5000 = language ? "ページエラー" : "页面出错啦";
 	TextMessage.prostaute0 = language ? "新品・未使用" : "未使用过";
 	TextMessage.prostaute1 = language ? "未使用に近い" : "几乎未使用过";
 	TextMessage.prostaute2 = language ? "目立った傷や汚れなし " : "无使用痕迹";
 	TextMessage.prostaute3 = language ? "傷や汚れあり " : "有使用过痕迹";
-	TextMessage.pro_imagetest = language ? "出品したい商品のため少なくとも一枚画像を選択してください!" : "请为商品至少选择一张图片!";
-	TextMessage.pro_nametest = language ? "商品名称を設定してください。" : "商品名称不能为空";
-	TextMessage.pro_descriptiontest = language ? "商品の簡単な説明文を入力" : "商品描述不能为空";
+	TextMessage.pro_imagetest = language ? "商品を出品する為には、少なくとも一枚は画像が必要です!" : "请为商品至少选择一张图片!";
+	TextMessage.pro_nametest = language ? "商品名称を入力してください。" : "商品名称不能为空";
+	TextMessage.pro_namelength = language ? "商品名が40文字以内入力できます" : "商品名称必须在40字以内";
+	TextMessage.pro_detaillength = language ? "商品詳細が1000文字以内入力できます" : "商品详情必须在1000字以内";
+	TextMessage.pro_descriptiontest = language ? "商品の説明文を入力してください。" : "商品描述不能为空";
 	TextMessage.pro_sorttest = language ? "商品のカテゴリを選択してください。" : "请选择商品分类";
-	TextMessage.pro_stautetest = language ? "商品の状態を設定してください。" : "请选择商品状态";
+	TextMessage.pro_stautetest = language ? "商品の状態を選択してください。" : "请选择商品状态";
 	TextMessage.pro_pricetest = language ? "価格は数字のみを設定してください" : "价格只能是数字";
 	TextMessage.pro_pricenumbtest = language ? "有効な数字（0円以上）を設定してください" : "价格必须大于0";
-	TextMessage.pro_buywaytest = language ? "取引手段を設定してください。" : "请选择交易手段";
-	TextMessage.pro_logininfo = language ? "登録う成功" : "发布成功";
+	TextMessage.pro_buywaytest = language ? "取引手段を選択してください。" : "请选择交易手段";
+	TextMessage.pro_logininfo = language ? "登録が完了しました。" : "发布成功";
 	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
 	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
-	TextMessage.updatesuccessinfo = language ? "更新が成功する!" : "更新成功!";
-	TextMessage.edite_headimage = language ? "改正頭像" : "修改头像";
-	TextMessage.sendtextrequest = language ? "にメールを送りますか" : "发送电子邮件";
-	TextMessage.telrequesttext = language ? "に電話を送りますか" : "拨打电话";
-	TextMessage.sedsuccseetext = language ? "ご利用ありがとうございます。" : "谢谢您的使用";
-	TextMessage.mailsucetext = language ? "ににメールを送りました。" : "给我发送了邮件";
-	TextMessage.requestmailtext = language ? "返信お待ちください。" : "请回复";
+	TextMessage.updatesuccessinfo = language ? "更新が成功しました!" : "更新成功!";
+	TextMessage.edite_headimage = language ? "プロフィール画像の変更" : "修改头像";
+	TextMessage.sendtextrequest = language ? "メールを送りますか" : "发送电子邮件";
+	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
+	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";
+	TextMessage.mailsucetext = language ? "にメールを送りました。" : "给我发送了邮件";
+	TextMessage.requestmailtext = language ? "返事してください" : "请回复";
 	TextMessage.sendmailbutext = language ? "メール送信" : "发送邮件";
 	TextMessage.calbutext = language ? "電話" : "电话";
 	TextMessage.homebutext = language ? "ホームページへ" : "主页";
-	TextMessage.comdity_null = language ? "暫時データ" : "暂无数据";
-	TextMessage.email_error = language ? "メール、ユーザー名が間違っています、もしくはすでに存在しています、" : "注册邮箱/用户名 错误，或已存在";
+	TextMessage.comdity_null = language ? "データなし" : "暂无数据";
+	TextMessage.email_error = language ? "メール、ユーザー名が間違っていますが、もしくはすでに存在しています、" : "注册邮箱/用户名 错误，或已存在";
 	TextMessage.requireing = language ? "問い合わせ中" : "请求中";
-	TextMessage.requresuces = language ? "交易成立" : "交易成立";
-	TextMessage.userng = language ? "この口座利用できない" : "该账户不可用";
-	TextMessage.pointnot = language ? "ポイントポイント不足" : "Point点数不足";
-	TextMessage.buywaynot = language ? "購入方は無効" : "购买方式无效";
+	TextMessage.requresuces = language ? "取引成立" : "交易成立";
+	TextMessage.userng = language ? "この口座利用できません" : "该账户不可用";
+	TextMessage.pointnot = language ? "ポイントが不足です" : "Point点数不足";
+	TextMessage.buywaynot = language ? "購入方法が無効になっています" : "购买方式无效";
 	TextMessage.buyyes = language ? "購入成功" : "购买成功";
 	TextMessage.sure = language ? "確認" : "确认";
-	TextMessage.logoutconfirm = language ? "確定して登録するかな？" : "确定要退出登录吗?";
-	TextMessage.logouttitle = language ? "登録するかな" : "退出登录";
-	TextMessage.logoutsuccess = language ? "成功する" : "退出成功";
-	TextMessage.requiresuccess = language ? "クレーム提出が成功しました" : "申述成功提出";
+	TextMessage.logoutconfirm = language ? "本当にログアウトしますか？" : "确定要退出登录吗?";
+	TextMessage.logouttitle = language ? "ログアウト" : "退出登录";
+	TextMessage.logoutsuccess = language ? "ログアウトしました" : "退出成功";
+	TextMessage.requiresuccess = language ? "クレーム提出しました" : "申述成功提出";
 	TextMessage.namenotnull = language ? "ユーザー名を入力してください" : "姓名不能为空";
 	TextMessage.contentnotnull = language ? "内容を入力してください" : "内容不能为空";
-	TextMessage.noopen = language ? "開通していない、お楽しみに" : "暂未开通，敬请期待";
-	TextMessage.ticketng = language ? "チケット数が不足" : "Ticket数量不足";
+	TextMessage.noopen = language ? "サービー提供までお楽しみに" : "暂未开通，敬请期待";
+	TextMessage.ticketng = language ? "チケット数が不足です" : "Ticket数量不足";
 	TextMessage.yes = language ? "はい" : "好的";
-	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请补充邮箱信息";
+	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请完善邮箱信息";
+	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
+	TextMessage.emailnull = language ? "メールアドレスが未入力です。" : "邮箱不能为空！";
+	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
+	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
+	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
+	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
+	TextMessage.email_error1 = language ? "メールアドレスが入力されていません。" : "邮箱输入不正确。";
+	TextMessage.loading = language ? "ローディング…" : "正在加载...";
+	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
+	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
+	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
+	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
+	TextMessage.update = language ? "更新中" : "正在刷新";
+	TextMessage.pull_down = language ? "引っ張って更新" : "下拉可以刷新";
+	TextMessage.pull_up = language ? "スクロールで更新" : "上拉显示更多";
+	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
+	TextMessage.update = language ? "更新中" : "正在刷新";
+	TextMessage.requestStop = language ? "取引を中止する" : "请求终止";
+	TextMessage.transSuccess = language ? "取引成功する" : "交易成功";
+	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
+	TextMessage.transContact = language ? "内容はありませんね" : "交谈内容不能未空";
+	TextMessage.tranStatusRequest = language ? "取引中" : "请求中";
+	TextMessage.tranStatusDeal = language ? "取引成立" : "交易成立";
+	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
+	TextMessage.transStopMsg = language ? "取引を中止しました。継続したい場合は再度取引をしてください。" : "已终止交易，不能继续交易。如果要继续交易请重新请求!!!";
+	TextMessage.transSuccessMsg = language ? "取引が完了しました。" : "交易已完成";
+	TextMessage.transConfirm = language ? "取引を確認する" : "确认交易";
+	TextMessage.transWaitConfirm = language ? "相手の確認を待つ" : "等待对方确认";
+	TextMessage.transOrder = language ? "注文の生成" : "订单生成";
+	TextMessage.transUrgeDelive = language ? "相手に出荷をリクエストする" : "催促对方发货";
+	TextMessage.transReceipt = language ? "品物を確認する" : "确认收货";
+	TextMessage.transDelive = language ? "出荷確認" : "确认发货";
+	TextMessage.transWaitOrder = language ? "相手の注文を待つ" : "等待对方下单";
+	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
+	TextMessage.transFinish = language ? "交易完成" : "交易完成";
+	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
+	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
+	TextMessage.transContinue = language ? "取引継続します。" : "继续交易!";
+	TextMessage.confirmBtnYes = language ? "はい" : "确认";
+	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
+	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
+	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
+	TextMessage.det_concerneds = language ? "気になる商品" : "关注商品";
+	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
+	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
+	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
+	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
+	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
@@ -1034,3 +1625,19 @@ var Entity;
 	}());
 	Entity.Category = Category;
 })(Entity || (Entity = {}));
+//Translate html
+function HTMLDecode(text) {
+	var temp = document.createElement("div");
+	temp.innerHTML = text;
+	var output = temp.innerText || temp.textContent;
+	temp = null;
+	return output;
+}
+//Translate text
+function HTMLEncode(html) {
+	var temp = document.createElement("div");
+	(temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+	var output = temp.innerHTML;
+	temp = null;
+	return output;
+}

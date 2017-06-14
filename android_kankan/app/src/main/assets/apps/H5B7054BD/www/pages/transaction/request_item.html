@@ -96,12 +96,7 @@
 						goods_detail(cur_user_id, commdinfo);
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							alert(TextMessage.test);
-						}
-						if(data == "2004") {
-							alert(TextMessage.operation_error);
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}
@@ -120,7 +115,7 @@
 
 				for(var r in request_user_arr) {
 					goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail" id="' + request_user_arr[r].commodity_id + '">';
-					goods_list += '<img class="" width="30%"  height="98px;" src="' + request_user_arr[r].img_flg + '">';
+					goods_list += '<img class="" width="30%"  height="98px;" src="' + request_user_arr[r].img_flg + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 					goods_list += '</li>';
 				}
 				$(".goods-list").html(goods_list);
@@ -171,18 +166,7 @@
 							})
 					},
 					ng: function(data) {
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
-						if(data == "2004") {
-							mui.toast(TextMessage.operation_error, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
+						Api.callback_ng(data);
 					}
 				});
 			}
