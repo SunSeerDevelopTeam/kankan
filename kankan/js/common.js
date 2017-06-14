@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1567,6 +1567,9 @@ var TextMessage;
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
 	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
 	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
+	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
+	TextMessage.evelevel = language ? "評価レベルをご選択ください。" : "请选择评价等级";
+	
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

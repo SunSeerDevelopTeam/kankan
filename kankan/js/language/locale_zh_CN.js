@@ -80,6 +80,7 @@ var JSLocale = {
 	"commodity_buyway": "交换手段",
 	"commodity_switch": "交  换",
 	"commodity_free": "白 送",
+	"commodity_select": "商品选择",
 	"commodity_pointbuy": "point",
 	"commodity_buttonsure": "发	布",
 	"commodity_price": "价格",

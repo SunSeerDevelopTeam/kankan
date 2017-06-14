@@ -80,6 +80,7 @@ var JSLocale = {
 	"commodity_buyway": "交換手段",
 	"commodity_switch": "交 換",
 	"commodity_free": "あげる",
+	"commodity_select": "商品選択",
 	"commodity_pointbuy": "ポイント",
 	"commodity_buttonsure": "出品する",
 	"commodity_price": "価  格",

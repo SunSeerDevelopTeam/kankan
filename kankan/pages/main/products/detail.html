@@ -193,6 +193,7 @@
 			<div  id="traslateing" class="lang" data-locale="stautestext"></div>
 			<input type="hidden" name="userid" id="userid" value="" />
 			<input type="hidden" name="myid" id="myid" value="" />
+			<input type="hidden" name="comm_num" id="comm_num" value="" />
 		</div>
 
 		<script src="../../../js/mui.min.js"></script>
@@ -390,13 +391,16 @@
 				$(".mui-slider-indicator").empty();
 				var commodity = results.data;
 				var comdbasic = commodity.commodity_basic;
+				var userbasic = commodity.user_basic;
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail).replace(/\n/g,"<br />");
 				var comdityid = comdbasic[0].commodity_id;
 				var traslatestautes=comdbasic[0].status;
 				var myid=results.myid;
+				var tradeablenum = userbasic.user_comm_tradable_count;
 				$("#myid").val(myid);
 				$("#comodityid").val(comdityid);
+				$("#comm_num").val(tradeablenum);
 				$(".kankan_productname").html(comdname); //name
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
@@ -728,6 +732,7 @@
 				};
 				var comduid=$("#userid").val();
 				var myuid=$("#myid").val();
+				var tradeablenum = $("#comm_num").val();
 				if(comduid==myuid){
 					mui.toast(TextMessage.operation_error, {
 						duration: 'long',
@@ -751,6 +756,12 @@
 						params.mode = mode;
 						transRequest(params);
 					} else if(change_name == 'switchex') {
+						if(tradeablenum == 0){
+							mui.toast(TextMessage.commdNo, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
 						mode = 'exchange';
 						params.mode = mode;
 						mui.openWindow({
