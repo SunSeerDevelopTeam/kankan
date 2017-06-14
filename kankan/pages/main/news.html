@@ -27,7 +27,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title lang" data-locale="messagetitle">站内信一览</h1>
+		    <h1 class="mui-title lang" data-locale="messagetitle"></h1>
 		</header>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
   			<div class="mui-scroll">
@@ -50,7 +50,7 @@
 		<script src="../../js/common.js"></script>
 		<script type="text/javascript">
 			var count = 0;
-			var page="";
+			var page=1;
 			var max=10;
 			 mui.init({
 			    pullRefresh: 
@@ -80,8 +80,8 @@
 				
 				var elem = this;
 				var li = elem.parentNode.parentNode;
-				mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
-					if (e.index == 0) {
+//				mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
+//					if (e.index == 0) {
 						li.parentNode.removeChild(li);
 						var mid=li.getAttribute("id");
 						var parms3={
@@ -103,12 +103,12 @@
 							Api.callback_ng(data);
 						},
 					});
-					} else {
-						setTimeout(function() {
-							$.swipeoutClose(li);
-						}, 0);
-					}
-				});
+//					} else {
+//						setTimeout(function() {
+//							$.swipeoutClose(li);
+//						}, 0);
+//					}
+//				});
 			});
 				
 		  })(mui)
@@ -132,18 +132,25 @@
 			        var li = document.createElement('li');
 			        li.className = 'mui-table-view-cell';
 			        li.id=mesid;
-			        li.innerHTML = '<div class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red">删除</a></div><div class="mui-slider-handle">'+mess+'</div>';
+			        li.innerHTML = '<div class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red deletenewstext"></a></div><div class="mui-slider-handle">'+mess+'</div>';
 			        table.appendChild(li);
 				}
-				page=page+1;
+				page=page*1+1;
 				//$(".mui-pull-caption-down").hide();
 			}
 		  //up
 		  function pullupRefresh(){
-		  	getmessage(page);
+		  	setTimeout(function(){
+		  		getmessage(page);
+		  	},500);
 		  }   
+		  //down
 		  function downRefresh(){
-		  		mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+		  		$("#OA_task_1").empty();
+		  		setTimeout(function(){
+		  			getmessage(0);
+		  			mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+		  		},500);
 		  }
 		  //get message
 		function getmessage(page){
@@ -159,6 +166,7 @@
 					ok: function(data) {
 						console.log(data);
 						showmessage(data);
+						$(".deletenewstext").html(TextMessage.deletenewstext);
 					},
 					ng: function(data) {
 						Api.callback_ng(data);

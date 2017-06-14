@@ -20,7 +20,6 @@ mui.init({
 		}
 	}
 });
-
 mui.back = function() {
 	if(!$.__back__first) {
 		$.__back__first = new Date().getTime();
@@ -262,7 +261,7 @@ function createListItem(item, imgwidth) {
 		stylimg = "";
 	}
 	var listItemHTML = new Util.StringBuilder();
-	listItemHTML.append('<div class="li-content">')
+	listItemHTML.appendFormat('<div class="li-content" id="{0}">',item.commodity_id)
 		.append('<div class="comm-item">')
 		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
 		.appendFormat('<div class="item-img-box"><img class="lazy" data-original="{0}" style="{1}"></div>', item.img_flag.url, stylimg)
@@ -335,3 +334,33 @@ window.addEventListener("refresh", function(event) {
 	var params = {};
 	getDataFromServer(params, function(data) {});
 });
+window.addEventListener("good", function(event) {
+	var prid= event.detail.prid;
+	if(prid!="undefined"){
+		parise(prid);
+	}
+	
+});
+function parise(comid){
+	var params = {
+		"commodity_id": comid
+	};
+	Repository.Commodity.commodityDetail(params, {
+		ok: function(data) {
+			var praisenum=data.data.commodity_praise.praise_count;
+			var praistaute=data.data.commodity_praise.user_praise_status;
+			$("#"+comid+" .comm-like-num").html(praisenum);
+			if(praistaute=="0"){
+				$("#"+comid+" .comm-like").removeClass("comm-like-red");
+				$("#"+comid+" .comm-like").addClass("comm-like-gray");
+			}else{
+				$("#"+comid+" .comm-like").removeClass("comm-like-gray");
+				$("#"+comid+" .comm-like").addClass("comm-like-red");
+			}
+			Log.d("success");
+		},
+		ng: function(data) {
+			Log.d(data);
+		}
+	});
+}
