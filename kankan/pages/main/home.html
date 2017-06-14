@@ -130,7 +130,7 @@
 				<img src="../../images/default.jpg" />
 			</a>
 			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
-			<a style="position:relative;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
+			<a style="position:relative;width: 30px;height: 100%;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
 				<i></i>
 			</a>
 			<a class="mui-icon mui-icon-search mui-pull-right" style="margin-right: 0px;"></a>
@@ -356,8 +356,7 @@
 						}
 					});
 				});
-
-				mui("header").on("tap", "#offCanvasShow", function() {
+				mui("header").on("tap","#offCanvasShow", function() {
 					var isLogin = plus.storage.getItem("LoginFlag");
 					if(!isLogin) {
 						var btnArray = [{
