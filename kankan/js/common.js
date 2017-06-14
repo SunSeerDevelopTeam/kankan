@@ -1127,7 +1127,8 @@ var Repository;
 
 		function isLogin() {
 			var myid = plus.storage.getItem("myid");
-			if(myid == "" || myid == null) {
+			if((myid == "" || myid == null) && !isAlert) {
+				isAlert = true;
 				var btnArray = [{
 					title: TextMessage.login
 				}, {
@@ -1149,6 +1150,7 @@ var Repository;
 									duration: 200
 								}
 							});
+							isAlert = false;
 							break;
 						case 2:
 							mui.openWindow({
@@ -1161,8 +1163,10 @@ var Repository;
 									duration: 200
 								}
 							});
+							isAlert = false;
 							break;
 						default:
+							isAlert = false;
 							break;
 					}
 				});
