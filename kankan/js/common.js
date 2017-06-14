@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -596,7 +596,6 @@ var Api;
 					});
 					isAlert = true;
 				}
-				plus.nativeUI.alert(TextMessage.not_network);
 				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}

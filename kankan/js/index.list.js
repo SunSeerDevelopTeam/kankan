@@ -7,7 +7,7 @@ mui.init({
 		down: {
 			callback: pulldownRefresh,
 			contentinit: TextMessage.pull_down,
-			contentdown: TextMessage.pull_down,
+			contentdown: "",
 			contentover: TextMessage.release,
 			contentrefresh: TextMessage.update
 		},
