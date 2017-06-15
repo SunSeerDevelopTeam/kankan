@@ -301,7 +301,8 @@
 							scene: ex
 						}
 					};
-					msg.href = Api.url.Commodity.shareurl+shareid;
+					pwdshareid=shareid;
+					msg.href = Api.url.Commodity.shareurl+pwdshareid;
 					msg.title =TextMessage.sharetitle;
 					msg.content = TextMessage.sharecontent;
 					msg.thumbs = [imgurl0];
@@ -536,7 +537,7 @@
 						recomendaddfirsthtml += '</a></li>';
 						$("#firstremmondul").html(recomendaddfirsthtml);
 					}
-					if(j > recomdlenght - 4) {
+					if(j >= recomdlenght - 4) {
 						recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
 						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
@@ -581,7 +582,7 @@
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}
-					if(l > concernlenght - 4) {
+					if(l >= concernlenght - 4) {
 						concernlastaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernlastaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
 						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';

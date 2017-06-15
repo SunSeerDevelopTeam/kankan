@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -472,7 +472,7 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			return "http://210.189.72.25:7998";
+			return "http://www.kankann.jp:7998/";
 		}
 	}
 
@@ -593,7 +593,7 @@ var Api;
 				if (!isAlert) {
 					plus.nativeUI.alert(TextMessage.not_network, function(e){
 						isAlert = false;
-					});
+					},TextMessage.sharetitle,TextMessage.sure);
 					isAlert = true;
 				}
 				if(Validator.isFunc(callback.error)) callback.error();
@@ -1564,7 +1564,7 @@ var TextMessage;
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
-	TextMessage.det_concerneds = language ? "気になる商品" : "关注商品";
+	TextMessage.det_concerneds = language ? "さんが気になる商品" : "关注商品";
 	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
@@ -1574,7 +1574,10 @@ var TextMessage;
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
 	TextMessage.evelevel = language ? "評価レベルをご選択ください。" : "请选择评价等级";
 	TextMessage.transEve = language ? "取引評価" : "去评价";
-	
+	TextMessage.nicknamenull = language ? "ユーザー名未入力です。" : "用户名不能为空";
+	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
+	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
+
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

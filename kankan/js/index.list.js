@@ -195,9 +195,8 @@ function bindEventOnListViewItem() {
 			}
 		});
 	});
-
 	//$(".comm-like-num").off("tap");
-	$(".like-area").on("click", function(event) {
+	$(".contentbottom").on("tap",".like-area", function(event) {
 		console.log("click like");
 		var _self = $(this).find(".comm-like-num");
 		if (!Repository.User.isLogin()) {
@@ -269,7 +268,7 @@ function createListItem(item, imgwidth) {
 		.appendFormat('<p>{0}</p>', item.address)
 		.append('</div>')
 		.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
-		.append('<div class="height-max mui-row">')
+		.append('<div class="height-max mui-row contentbottom">')
 		.append('<div class="height-max mui-col-sm-8 mui-col-xs-8">')
 		.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', HTMLDecode(item.comm_name))
 		//.appendFormat('<div class="comm-price mui-col-sm-12">{0} P</div>', item.price)
