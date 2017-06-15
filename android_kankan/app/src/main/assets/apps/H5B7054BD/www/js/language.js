@@ -19,6 +19,8 @@
 	}
 
 	mui.plusReady(function() {
+		//竖屏
+		plus.screen.lockOrientation("portrait-primary");
 		var language = navigator.language;
 		console.log("language is " + language);
 		if(!language || language == "ja-jp" || language == "ja-JP") {

@@ -80,6 +80,7 @@ var JSLocale = {
 	"commodity_buyway": "交換手段",
 	"commodity_switch": "交 換",
 	"commodity_free": "あげる",
+	"commodity_select": "商品選択",
 	"commodity_pointbuy": "ポイント",
 	"commodity_buttonsure": "出品する",
 	"commodity_price": "価  格",
@@ -99,9 +100,10 @@ var JSLocale = {
 	"userlanguage":"言語",
 	"jpanese_user":"日本語",
 	"chinese_user":"中国語",
-	"english_user":"Enlish",
+	"english_user":"English",
 	"korean_user":"한국의",
 	"infoeditetitle":"プロフィール編集",
+	"user_buttonsure":"適用",
 	//logisticslist page
 	"sendmes":"はい",
 	"logistic":"運送会社",
@@ -118,7 +120,7 @@ var JSLocale = {
 	"change":"チャージ",
 	//request
 	"requesttitle":"リクエスト",
-	"requesthistory":"取引履历",
+	"requesthistory":"取引履歴",
 	"requestedpro":"リクエストされた",
 	"requestpro":"リスエストした",
 	//setting page
@@ -170,7 +172,7 @@ var JSLocale = {
 	"category_top_11":"ハンドメイド",
 	"category_top_12":"チケット・クーポン",
 	"category_top_13":"自動車・オートバイ",
-	"category_top_14":"その他"
+	"category_top_14":"その他",
 }
 
 $(function() {

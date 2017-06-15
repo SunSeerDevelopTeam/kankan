@@ -118,9 +118,9 @@
 }
 .tran-button-sell {
 	padding-top:0px; 
-	padding-left:14px;
-	margin-right:-4px;
-	width:45%;
+	/*padding-left:14px;*/
+	margin-right:-1.6em;
+	width:46%;
 	font-size:17px;
 	display:inline-block;
 	text-align:center;
@@ -130,11 +130,18 @@
 	overflow:hidden;
 	
 }
+.tran-button-sell font{
+	font-size: 11px;
+}
+.tran-distribution-call font{
+	font-size: 11px;
+}
 .tran-button-sell div {
 	height:32px;
 	background-color:#CCCCCC; 
 	text-align:center; 
 	padding-top:5px;
+	margin: 0 auto;
 }
 .tran-button-middle {
 	padding-top:0px; 
@@ -160,6 +167,9 @@
 	position:relative;
 	background:0 0;
 	overflow:hidden;
+}
+.tran-button-buy font{
+	font-size: 11px;
 }
 .tran-button-buy div {
 	height:32px; 

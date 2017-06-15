@@ -130,7 +130,7 @@
 				<img src="../../images/default.jpg" />
 			</a>
 			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
-			<a style="position:relative;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
+			<a style="position:relative;width: 30px;height: 100%;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
 				<i></i>
 			</a>
 			<a class="mui-icon mui-icon-search mui-pull-right" style="margin-right: 0px;"></a>
@@ -197,6 +197,17 @@
 					$('i').hide();
 				}
 			});
+			window.addEventListener('praiseid', function(event) {
+				var praiseid = event.detail.praiseid;
+				if(praiseid!="undefined"){
+					var wids=$('.mui-scroll .mui-active').index() + 1;
+					var page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
+					mui.fire(page, 'good', {
+						prid: praiseid
+					});
+				}
+				
+			});
 			mui.init();
 			mui('.mui-scroll-wrapper').scroll({
 				deceleration: 0.0005
@@ -204,12 +215,7 @@
 			mui.plusReady(function() {
 				var userPhoto = document.getElementById("user");
 				var searchBtn = $('.mui-icon-search').first();
-				var _offset = 0;
-				var currentIndex = 0;
-				var lastIndex = 0;
-				var isLeft = true;
 				var curScroll = 0;
-				var isOnTap = false;
 				var group = new webviewGroup("home.html", {
 					items: [{
 						id: "tab-top-subpage-1",
@@ -272,45 +278,14 @@
 						var c = document.querySelector(".mui-control-item.mui-active");
 						if(c) {
 							c.classList.remove("mui-active");
-							currentIndex = $(c).index();
 						}
 						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
 						localStorage.cid = activeTab.dataset.cid;
 						activeTab.classList.add("mui-active");
-						lastIndex = $(activeTab).index();
-						if(lastIndex > currentIndex) {
-							isLeft = true;
-						} else if(lastIndex < currentIndex) {
-							isLeft = false;
-						}
-						if(isLeft) {
-							var availWidth = window.screen.availWidth;
-							var lastOffset = document.querySelector(".mui-scroll").offsetWidth;
-							if(_offset + availWidth < lastOffset) {
-								_offset += c.offsetWidth;
-							}
-							if (isOnTap) {
-								mui('.mui-scroll-wrapper').scroll().scrollTo(curScroll, 0);
-								isOnTap = false;
-							} else {
-								mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
-							}
-						} else {
-							_offset -= c.offsetWidth;
-							if(_offset < 0) {
-								_offset = 0;
-							}
-							if (isOnTap) {
-								mui('.mui-scroll-wrapper').scroll().scrollTo(curScroll, 0);
-								isOnTap = false;
-							} else {
-								mui('.mui-scroll-wrapper').scroll().scrollTo(-_offset, 0);
-							}
-						}
+						mui('.mui-scroll-wrapper').scroll().scrollTo(-activeTab.offsetLeft, 0);
 					}
 				});
 				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
-					isOnTap = true;
 					var wid = this.getAttribute("data-wid");
 					group.switchTab(wid);
 				});
@@ -345,8 +320,7 @@
 						}
 					});
 				});
-
-				mui("header").on("tap", "#offCanvasShow", function() {
+				mui("header").on("tap","#offCanvasShow", function() {
 					var isLogin = plus.storage.getItem("LoginFlag");
 					if(!isLogin) {
 						var btnArray = [{
