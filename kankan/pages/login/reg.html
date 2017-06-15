@@ -272,6 +272,10 @@
 							plus.nativeUI.toast(TextMessage.username_null);
 							return;
 						}
+						if (username.length > 10) {
+							plus.nativeUI.toast(TextMessage.username_error);
+							return;
+						}
 						var password = doc.getElementById('password').value.trim();
 						if(password==""){
 							plus.nativeUI.toast(TextMessage.password_notnull);

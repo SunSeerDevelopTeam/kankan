@@ -1525,6 +1525,7 @@ var TextMessage;
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールアドレスが未入力です。" : "邮箱不能为空！";
 	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
+	TextMessage.username_error = language ? "ユーザー名が10桁以内に設定してください" : "用户名长度不能超过10位字符";
 	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
