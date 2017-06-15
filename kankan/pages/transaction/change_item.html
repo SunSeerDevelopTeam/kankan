@@ -22,6 +22,7 @@
 
 			</ul>
 		</div>
+		<input name="main_flag" id="main_flag" type="hidden" value="" > 
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../js/language.js"></script>
@@ -55,6 +56,7 @@
 							return false;
 						};
 						var goods_list = '';
+						var main_flag = 0;
 						for(var gds in comm_info) {
 							var imgWidth = comm_info[gds].width;
 							var imgHeight = comm_info[gds].height;
@@ -74,6 +76,7 @@
 							goods_list += '<li class="mui-table-view-cell mui-media mui-col-xs-4 detail"  style="position:relative;height:160px;">';
 							if(comm_info[gds].trans_flag == 1) {
 								if(comm_info[gds].main_flag == '1') {
+									main_flag = 1;
 									goods_list += '<input id="' + comm_info[gds].commodity_id + '" disabled=true checked style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
 								} else {
 									goods_list += '<input id="' + comm_info[gds].commodity_id + '" checked style="' + checkboxstyle + '" name="commodity_id" value="' + comm_info[gds].commodity_id + '" type="checkbox" >';
@@ -91,6 +94,7 @@
 							goods_list += '</li>';
 
 						}
+						$("main_flag").val(main_flag);
 						$(".goods-list").html(goods_list);
 					},
 					ng: function(data) {
@@ -101,6 +105,7 @@
 
 			function select_goods() {
 				var choice = '';
+				var main_flag = $("#main_flag").val();
 				var main_comm = $("input[name='commodity_id']:disabled").val();
 				$("input[name='commodity_id']:checked").each(function() {
 					if($(this).val() != main_comm) {
@@ -108,7 +113,7 @@
 					}
 				})
 				choice = choice.substr(0, choice.length - 1);
-				if(choice == '') {
+				if(main_flag != 1 && choice == '') {
 					alert(TextMessage.commdSelect);
 					return false;
 				}

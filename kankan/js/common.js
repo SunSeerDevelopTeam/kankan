@@ -1580,6 +1580,7 @@ var TextMessage;
 	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
 	TextMessage.evelevel = language ? "評価レベルをご選択ください。" : "请选择评价等级";
+	TextMessage.commdSelect = language ? "１つ以上の商品を選択してください。" : "请至少选择一个商品";
 	TextMessage.transEve = language ? "取引評価" : "去评价";
 	TextMessage.nicknamenull = language ? "ユーザー名未入力です。" : "用户名不能为空";
 	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
