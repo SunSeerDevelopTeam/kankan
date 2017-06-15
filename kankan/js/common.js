@@ -513,7 +513,8 @@ var Api;
 			Commodityedite: baseUrl() + '/commodity/release/update/',
 			logisticslist: baseUrl() + '/logistics/',
 			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
-			shareurl: baseUrl() + '/share.php?id='
+			shareurl: baseUrl() + '/share.php?wxparms=',
+			shareid: baseUrl() + '/commodity/Encryption/'
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -1264,6 +1265,11 @@ var Repository;
 			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
 		}
 		Commodity.logisticssendmail = logisticssendmail;
+		
+		function shareid(params, callback) {
+			return Api.call(Api.url.Commodity.shareid, params, callback);
+		}
+		Commodity.shareid = shareid;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 	var Transaction;

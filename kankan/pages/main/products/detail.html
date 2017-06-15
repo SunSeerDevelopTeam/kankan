@@ -240,7 +240,6 @@
 
 			//onclick share
 			function clickshare(shareid,imgurl0){
-				
 				var shares = {};
 				mui.plusReady(function() {
 					TextMessage.language = plus.os.language;
@@ -293,29 +292,43 @@
 					});
 				});
 				//share message
-				//var shareid=$(".kankan_zanbox").attr("id");
-				//console.log("Api.baseUrl"+Api.url.Commodity.shareurl+shareid);
 				function shareMessage(share, ex) {
 					var msg = {
 						extra: {
 							scene: ex
 						}
 					};
-					pwdshareid=shareid;
-					msg.href = Api.url.Commodity.shareurl+pwdshareid;
-					msg.title =TextMessage.sharetitle;
-					msg.content = TextMessage.sharecontent;
-					msg.thumbs = [imgurl0];
-					share.send(msg, function() {
-						var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
-//						mui.toast(sharesuccesstext, {
-//							duration: 'long',
-//							type: 'div'
-//						});
-						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
-					}, function(e) {
-						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
+					var paramshareid = {
+						"commodity_id": shareid
+					};
+					Repository.Commodity.shareid(paramshareid, {
+						ok: function(data) {
+							console.log(data.data.commodity_id);
+							var outid=data.data.commodity_id;
+							shareout(outid)
+							console.log("success");
+						},
+						ng: function(data) {
+							console.log(data);
+						}
 					});
+					function shareout(shareids){
+						msg.href = Api.url.Commodity.shareurl+shareids;
+						msg.title =TextMessage.sharetitle;
+						msg.content = TextMessage.sharecontent;
+						msg.thumbs = [imgurl0];
+						share.send(msg, function() {
+							var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
+	//						mui.toast(sharesuccesstext, {
+	//							duration: 'long',
+	//							type: 'div'
+	//						});
+							console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+						}, function(e) {
+							console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
+						});
+					}
+					
 				}
 			}
 				
