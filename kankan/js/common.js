@@ -472,7 +472,7 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			return "http://www.kankann.jp:7998/";
+			return "http://www.kankann.jp:7998";
 		}
 	}
 
