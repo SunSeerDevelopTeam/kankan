@@ -571,9 +571,13 @@
 				var seller_receipt = $("#seller_receipt").val();
 				var appraise = $("#appraise").val();
 				if(status == 0) {
-					trans_flow('transRequestOrder', params,'');
+					if(buyer_flag != 'true') {
+						trans_flow('transRequestOrder', params,'');
+					}
 				} else if(status == 1) {
-					trans_flow('transSubmitOrder', params,'');
+					if(buyer_flag == 'true') {
+						trans_flow('transSubmitOrder', params,'');
+					}
 				} else if(status == 2) {
 					if(buyer_flag == 'true') {
 						if(trans_mode != 0) {
