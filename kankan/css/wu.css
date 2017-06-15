@@ -119,9 +119,10 @@
 }
 .tran-button-sell {
 	padding-top:0px; 
-	padding-left:1%;
-	padding-right:9%;
-	width:46%;
+	/*padding-left:14px;*/
+	/*margin-right:-1.6em;*/
+	/*margin: 0 2%;*/
+	width:45%;
 	font-size:17px;
 	display:inline-block;
 	text-align:center;
@@ -158,9 +159,9 @@
 }
 .tran-button-buy {
 	padding-top:0px; 
-	padding-left:5%; 
-	padding-right:1%;
-	width:45%;
+	padding-left:1em; 
+	/*margin-right:-4px;*/
+	width:50%;
 	font-size:17px;
 	display:inline-block;
 	text-align:center;
@@ -177,7 +178,7 @@
 	background-color:#FF0000; 
 	text-align:center; 
 	padding-top:5px; 
-	margin-right:10px;
+	/*margin-right:10px;*/
 }
 .tran-distribution {
 	padding-left:0px;

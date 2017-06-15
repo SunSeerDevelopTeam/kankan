@@ -421,6 +421,8 @@
 					$(".tran-button-sell font").text(TextMessage.transStop);
 				}
 				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
+				
+							
 				for(var u in userinfo) {
 					if(userinfo[u].user_id == buyer_id) {
 						buyer_deliver = userinfo[u].deliver_flag;
@@ -662,9 +664,6 @@
 							var commdinfo = data.data.commdinfo;
 							var usersinfo = data.data.usersinfo;
 							var buyer_flag = false;
-							
-							var tranStatusVal = getTransStatus(transinfo.status);
-							$(".tran-name-middle-status font").html(tranStatusVal);
 							var buyer_id = transinfo[0].issue_user_id;
 							var seller_id = transinfo[0].accept_user_id;
 							var cur_user_id = data.myid;
@@ -693,7 +692,21 @@
 							if(messginfo) {
 								showChatMsg(usersinfo, messginfo, cur_user_id);
 							}
-							tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
+							//tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
+							var tranStatusVal = '';
+							if(trans_status == 0){
+								tranStatusVal = TextMessage.requireing;
+							}else if(trans_status == 1){
+								tranStatusVal = TextMessage.requireing;								
+							}else if(trans_status == 2){
+								tranStatusVal = TextMessage.requresuces;
+							}else if(trans_status == 3){
+								tranStatusVal = TextMessage.transFinish;
+							}else if(trans_status == 7){
+								tranStatusVal = TextMessage.transStop;
+							}else if(trans_status == 9){
+								tranStatusVal = TextMessage.transStop;								
+							}
 							$(".tran-name-middle-status font").html(tranStatusVal);
 
 						}
