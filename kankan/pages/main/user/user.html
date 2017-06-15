@@ -710,6 +710,7 @@
 				};
 				Repository.User.userinfo(params4, {
 					ok: function(data) {
+						$(".maintitle").html(nickname.trim());
 //						if (!Repository.User.isEmptyEmail()) {
 //								 //alert("没有登录");
 //								 return;
