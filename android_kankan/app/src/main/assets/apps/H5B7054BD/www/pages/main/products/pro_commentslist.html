@@ -112,7 +112,7 @@
 					if(pcommentinfo.nick_name==""){
 						var uname = pcommentinfo.user_name;
 					}
-					var content = pcommentinfo.msg_detail;
+					var content = pcommentinfo.msg_detail.replace(/\n/g,"<br />");
 					var time = pcommentinfo.ins_date;
 					var html = new Util.StringBuilder();
 					html.append('<div class="comtent mui-pull-left"><div class="mui-pull-left">')
@@ -130,7 +130,7 @@
 			}
 			function formSubmit(){
 				var contents=document.commodity_comments.leave_msg_detail.value;
-				if(contents==""){
+				if(contents.trim()==""){
 					mui.toast(TextMessage.commenttestnull, {
 						duration: 'long',
 						type: 'div'
@@ -138,7 +138,7 @@
 					document.commodity_comments.leave_msg_detail.focus();
 					return false;
 				}
-				if(contents.length>300){
+				if(contents.trim().length>300){
 					mui.toast(TextMessage.commenttestlength, {
 						duration: 'long',
 						type: 'div'
@@ -204,7 +204,7 @@
 			} 
 			function addcomment(results){
 				var time2=getNowFormatDate();
-				var contents2=document.commodity_comments.leave_msg_detail.value;
+				var contents2=document.commodity_comments.leave_msg_detail.value.replace(/\n/g,"<br />");
 				var headimg2=results.data[0].photo;
 				console.log(headimg2);
 				var uname2=results.data[0].nick_name;

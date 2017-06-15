@@ -13,6 +13,16 @@
 			body {
 				background-color: #efeff4;
 			}
+			
+			.input-bottom{
+		        position:fixed;
+		        bottom:0px;
+		        left:0px;
+		        width:100%;
+		        border-top:1px solid #ccc;
+		        background-color:#fff;
+		        z-index:1;
+		    }
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
 		<link rel="stylesheet" href="../../css/kankan_home.css">
@@ -89,8 +99,8 @@
 						<ul class="tran-distribution">
 							<li class="tran-distribution-law logisticli">
 								<div class="tran-distribution-law-detail">
-									<a href="#tradeLaw">
-										<font size="3" class="lang" color="999999" data-locale="trans_criterion" vertical-align="middle"></font>
+									<a href="../setting/specialbus.html">
+										<font size="2" class="lang" color="999999" data-locale="trans_criterion" vertical-align="middle"></font>
 									</a>
 								</div>
 								<a href="../main/logisticslist2.html" class="logistica">
@@ -106,18 +116,15 @@
 				</div>
 			</div>
 		</div>
-		<nav class="mui-bar mui-bar-tab">
-			<ul class="tran-foot">
-				<li class="tran-foot-input">
-					<input id="msg" type="text" value="" />
-				</li>
-				<li class="tran-foot-submit">
-					<button type="button" onclick="submitChat();" class="mui-btn-link mui-btn-nav mui-pull-left">
-						<span><font size="4" class="lang"  data-locale="contentsend"></font></span>
-					</button>
-				</li>
-			</ul>
-		</nav>
+		<div class="input-bottom">
+			<form id="commodity_comments" name="commodity_comments" method="post">
+				<div class="ka_sendmesbox ka_userbox">
+					<input  type="hidden" id="commodity_id" name="commodity_id"/>
+					<textarea type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="msg" name="leave_msg_detail"></textarea>
+					<button type="button" class="mui-btn ka_sendbutton lang"  data-locale="contentsend" onclick="submitChat()"></button>
+				</div>
+			</form>
+		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
