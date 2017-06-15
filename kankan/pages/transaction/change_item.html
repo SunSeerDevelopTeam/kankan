@@ -32,8 +32,8 @@
 			var transid;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				var preView = plus.webview.getWebviewById('transaction');
-				plus.webview.close(preView);
+				//var preView = plus.webview.getWebviewById('transaction');
+				//plus.webview.close(preView);
 				transid = self.transid;
 				get_goods_list(transid);
 			})
@@ -50,7 +50,7 @@
 				Repository.Transaction.trans('transGetUserCommd', params, {
 					ok: function(data) {
 						var comm_info = data.data.data;
-						if(comm_info.length < 1) {
+						if(comm_info == '') {
 							alert(TextMessage.commdNo);
 							return false;
 						};
