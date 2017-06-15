@@ -114,13 +114,13 @@
 			(function($, doc) {
 				$.init({
 					statusBarBackground: '#FFFFFF',
-					beforeback: function() {
-						var homeWebView = plus.webview.getWebviewById('home.html');
-						mui.fire(homeWebView, 'refresh', {
-							refresh: "canRefresh"
-						});
-						return true;
-					}
+					//					beforeback: function() {
+					//						var homeWebView = plus.webview.getWebviewById('home.html');
+					//						mui.fire(homeWebView, 'refresh', {
+					//							refresh: "canRefresh"
+					//						});
+					//						return true;
+					//					}
 				});
 				$.plusReady(function() {
 					var webviewArray = plus.webview.all();
@@ -180,11 +180,28 @@
 														},
 														show: {
 															duration: 200
+														},
+														extras: {
+															formPageName: "login"
 														}
 													});
 												}, TextMessage.sharetitle, TextMessage.yes);
 											} else {
-												mui.back();
+												//mui.back();
+												var homeWebView = plus.webview.getWebviewById('home.html');
+												mui.fire(homeWebView, 'refresh', {
+													refresh: "canRefresh"
+												});
+												mui.openWindow({
+													id: "main",
+													url: "/main/main.html",
+													waiting: {
+														autoShow: false
+													},
+													show: {
+														duration: 200
+													}
+												});
 											}
 										},
 										ng: function(data) {
@@ -194,18 +211,9 @@
 											waiting.close();
 										}
 									});
-								}, function(e) {
-								});
+								}, function(e) {});
 							}, function(e) {
-								var description = "";
-								if(Validator.isObj(e)) {
-									for(var i in e) {
-										var property = e[i];
-										description += i + " = " + property + "\n";
-									}
-								}
-								var alertInfo = Validator.isObj(e) ? description : e;
-								alert(alertInfo);
+								console.dir(e);
 								waiting.close();
 							});
 						});
@@ -223,7 +231,7 @@
 						console.log("click login btn");
 						var email = doc.getElementById('email').value.trim();
 						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-						if (email == "" || !reg.test(email)) {
+						if(email == "" || !reg.test(email)) {
 							plus.nativeUI.toast(TextMessage.email_error1);
 							return;
 						}
@@ -240,7 +248,21 @@
 								loginFlg = true;
 								setTimeout(function() {
 									waiting.close();
-									mui.back();
+									//mui.back();
+									var homeWebView = plus.webview.getWebviewById('home.html');
+									mui.fire(homeWebView, 'refresh', {
+										refresh: "canRefresh"
+									});
+									mui.openWindow({
+										id: "main",
+										url: "/main/main.html",
+										waiting: {
+											autoShow: false
+										},
+										show: {
+											duration: 200
+										}
+									});
 									//plus.webview.currentWebview().close();
 								}, 500);
 							},
