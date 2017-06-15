@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sunseer.kankan"
-    android:versionCode="1"
-    android:versionName="0.0.1" >
+    android:versionCode="2"
+    android:versionName="0.0.2" >
 
     <supports-screens
         android:anyDensity="true"
@@ -115,10 +115,10 @@
         <!-- 微信分享 配置begin -->
         <meta-data
             android:name="WX_SECRET"
-            android:value="965c63ce5c9150a26234c5f73cdc788c" />
+            android:value="0010a787ec3751c355681d1b9aaede73" />
         <meta-data
             android:name="WX_APPID"
-            android:value="wx1915653b1958f7d6" />
+            android:value="wxa305a32371b65619" />
 
         <activity
             android:name="com.sunseer.kankan.wxapi.WXEntryActivity"
@@ -131,7 +131,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="wx1915653b1958f7d6" />
+                <data android:scheme="wxa305a32371b65619" />
             </intent-filter>
         </activity>
 

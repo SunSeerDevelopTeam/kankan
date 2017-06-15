@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1531,6 +1531,7 @@ var TextMessage;
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールアドレスが未入力です。" : "邮箱不能为空！";
 	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
+	TextMessage.username_error = language ? "ユーザー名が10桁以内に設定してください" : "用户名长度不能超过10位字符";
 	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
@@ -1557,7 +1558,7 @@ var TextMessage;
 	TextMessage.transConfirm = language ? "取引を確認する" : "确认交易";
 	TextMessage.transWaitConfirm = language ? "相手の確認を待つ" : "等待对方确认";
 	TextMessage.transOrder = language ? "注文の生成" : "订单生成";
-	TextMessage.transUrgeDelive = language ? "相手に出荷をリクエストする" : "催促对方发货";
+	TextMessage.transUrgeDelive = language ? "出荷をリクエストする" : "催促对方发货";
 	TextMessage.transReceipt = language ? "品物を確認する" : "确认收货";
 	TextMessage.transDelive = language ? "出荷確認" : "确认发货";
 	TextMessage.transWaitOrder = language ? "相手の注文を待つ" : "等待对方下单";
@@ -1579,6 +1580,7 @@ var TextMessage;
 	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
 	TextMessage.evelevel = language ? "評価レベルをご選択ください。" : "请选择评价等级";
+	TextMessage.transEve = language ? "取引評価" : "去评价";
 	TextMessage.nicknamenull = language ? "ユーザー名未入力です。" : "用户名不能为空";
 	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
 	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
