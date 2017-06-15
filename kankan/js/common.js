@@ -1573,7 +1573,7 @@ var TextMessage;
 	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
 	TextMessage.evelevel = language ? "評価レベルをご選択ください。" : "请选择评价等级";
-	TextMessage.transEve = language ? "評価する" : "去评价";
+	TextMessage.transEve = language ? "取引評価" : "去评价";
 	
 })(TextMessage || (TextMessage = {}));
 var Entity;
