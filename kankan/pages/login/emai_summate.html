@@ -53,6 +53,7 @@
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
+			var formPageName;
 			mui.init({
 //				beforeback: function() {
 //					var homePage = plus.webview.currentWebview().opener();
@@ -60,7 +61,7 @@
 //				}
 			});
 			mui.plusReady(function() {
-				var formPageName = plus.webview.currentWebview().formPageName;
+				formPageName = plus.webview.currentWebview().formPageName;
 				var sendVCodeBtn = document.getElementById('send-verification-code');
 				var canClick = true;
 				sendVCodeBtn.addEventListener('tap', function(event) {
@@ -82,6 +83,7 @@
 								i++;
 								sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
 								if(180 - i == 0) {
+									sendVCodeBtn.innerText = TextMessage.send_verification_code;
 									canClick = true;
 									clearInterval(updateText);
 								}
@@ -147,9 +149,11 @@
 							type: 'div'
 						});
 						if (formPageName === "login") {
-							mui.openWindow({
-								id: 'main',
-								url: "../main/main.html"
+							var mainPage = plus.webview.getLaunchWebview();
+							mainPage.show();
+							var homeWebView = plus.webview.getWebviewById('home.html');
+							mui.fire(homeWebView, 'refresh', {
+								refresh: "canRefresh"
 							});
 						} else {
 							mui.back();
