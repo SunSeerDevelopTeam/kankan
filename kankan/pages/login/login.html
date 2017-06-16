@@ -184,7 +184,13 @@
 													});
 												}, TextMessage.sharetitle, TextMessage.yes);
 											} else {
-												mui.back();
+												//mui.back();
+												var mainPage = plus.webview.getLaunchWebview();
+			       								mainPage.show();
+			       								var homepageWebView = plus.webview.getWebviewById('home.html');
+												mui.fire(homepageWebView, 'refresh', {
+													refresh: "canRefresh"
+												});
 											}
 										},
 										ng: function(data) {
@@ -240,8 +246,13 @@
 								loginFlg = true;
 								setTimeout(function() {
 									waiting.close();
-									mui.back();
-									//plus.webview.currentWebview().close();
+									//mui.back();
+									var mainPage = plus.webview.getLaunchWebview();
+       								mainPage.show();
+       								var homepageWebView = plus.webview.getWebviewById('home.html');
+										mui.fire(homepageWebView, 'refresh', {
+											refresh: "canRefresh"
+										});
 								}, 500);
 							},
 							ng: function(data) {
