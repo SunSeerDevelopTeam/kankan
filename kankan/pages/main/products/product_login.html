@@ -383,7 +383,10 @@
 									});
 									mui.openWindow({
 										id: 'emai_summate',
-										url: "../../login/emai_summate.html"
+										url: "../../login/emai_summate.html",
+										extras: {
+											formPageName: "product_login"
+										}
 									});
 								}
 								if(data == "2002") {
@@ -409,7 +412,7 @@
 					document.getElementById("bitian1").style.display = "none";
 				});
 			}, false);
-			//staute click picker
+			//staute click Picker
 			var showstatePickerButton = doc.getElementById('prostuat');
 			var stauteResult = doc.getElementById('stauteResult');
 			showstatePickerButton.addEventListener('tap', function(event) {

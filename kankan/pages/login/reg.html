@@ -223,6 +223,7 @@
 									i++;
 									sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
 									if(180 - i == 0) {
+										sendVCodeBtn.innerText = TextMessage.send_verification_code;
 										canClick = true;
 										clearInterval(updateText);
 									}
