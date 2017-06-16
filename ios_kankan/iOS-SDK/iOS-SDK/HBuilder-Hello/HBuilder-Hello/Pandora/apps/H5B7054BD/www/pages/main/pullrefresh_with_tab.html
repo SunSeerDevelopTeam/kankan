@@ -575,6 +575,7 @@
 				var search = "";
 				var page = "";
 				var pageInfo = {};
+				var keyword = "";
 				//阻尼系数
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
 				mui('.mui-scroll-wrapper').scroll({
@@ -588,7 +589,7 @@
 						var sliderItemCount = $('.mui-slider-group .mui-slider-item').length;
 						for(var i = 0; i < sliderItemCount; i++) {
 							if(e.detail.slideNumber === i) {
-								if (DEBUG) {
+								if(DEBUG) {
 									alert("getDataFromServer 2");
 								}
 								getDataFromServer(
@@ -618,18 +619,19 @@
 						if(DEBUG) {
 							alert("search event.");
 						}
-						if (event.detail.keyword === "") {
+						if(event.detail.keyword === "") {
 							return;
 						}
-						if (DEBUG) {
+						if(DEBUG) {
 							alert("getDataFromServer 3");
 						}
-						
+						keyword = event.detail.keyword;
+						var index = $('#sliderSegmentedControl .mui-scroll a.mui-active').index();
 						getDataFromServer(
-							$('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0],
-							0,
-							5,
-							$($('.mui-slider-group .mui-scroll:eq(0) .mui-table-view')[0]).parent().attr('data-category-id'),
+							$('.mui-slider-group .mui-scroll:eq(' + index + ') .mui-table-view')[0],
+							index,
+							16,
+							$($('.mui-slider-group .mui-scroll:eq(' + index + ') .mui-table-view')[0]).parent().attr('data-category-id'),
 							event.detail.keyword,
 							null,
 							true,
@@ -638,10 +640,10 @@
 					});
 
 					window.addEventListener("refresh", function(event) {
-						if (event.detail.refresh != "canRefresh") {
+						if(event.detail.refresh != "canRefresh") {
 							return;
 						}
-						if (DEBUG) {
+						if(DEBUG) {
 							alert("getDataFromServer 4");
 						}
 						getDataFromServer(
@@ -695,10 +697,10 @@
 									setTimeout(function() {
 										var ul = self.element.querySelector('.mui-table-view');
 										var catalog = $(ul).parent().attr("data-category-id");
-										if (DEBUG) {
+										if(DEBUG) {
 											alert("getDataFromServer 5");
 										}
-										getDataFromServer(ul, index, 16, catalog, null, null, true, self);
+										getDataFromServer(ul, index, 16, catalog, keyword, null, true, self);
 									}, 1000);
 								}
 							},
@@ -712,10 +714,10 @@
 										if(pageInfo.list * pageInfo.page >= pageInfo.cnt) {
 											self.endPullUpToRefresh(true);
 										} else {
-											if (DEBUG) {
+											if(DEBUG) {
 												alert("getDataFromServer 6");
 											}
-											getDataFromServer(ul, index, 16, catalog, null, ++pageInfo.page, false, self);
+											getDataFromServer(ul, index, 16, catalog, keyword, ++pageInfo.page, false, self);
 										}
 									}, 1000);
 								}
@@ -737,7 +739,7 @@
 						if(max != null) {
 							params.max = max;
 						}
-						if(search != null) {
+						if(search != null && search != "") {
 							params.search = search;
 						}
 						if(page != null) {
@@ -746,15 +748,20 @@
 						Repository.Commodity.commodityList(params, {
 							ok: function(data) {
 								createFragment(data.data.commd, ul, index, reverse, self);
-								updateUserPhoto(data.data.users);
+								updateUserPhoto(data.data.users.photo);
+								updateNoticeStatus(data.data.users.sys_msg_flg);
 								savePageInfo(data.data.pages);
 							},
 							ng: function(statuscode) {
 								if(statuscode == "0100") {
 									if(reverse) {
-										self.endPullDownToRefresh(true);
+										if(self != null) {
+											self.endPullDownToRefresh(true);
+										}
 									} else {
-										self.endPullUpToRefresh(true);
+										if(self != null) {
+											self.endPullUpToRefresh(true);
+										}
 									}
 								}
 							},
@@ -788,6 +795,16 @@
 						});
 					}
 
+					var updateNoticeStatus = function(flg) {
+						if(typeof(plus) == "undefined") {
+							return;
+						}
+						var homePage2 = plus.webview.getWebviewById('home.html');
+						mui.fire(homePage2, 'updateNoticeStatusEvent', {
+							flg: flg
+						});
+					}
+
 					var createFragment = function(data, ul, index, reverse, self) {
 						var fragment = document.createDocumentFragment();
 						var li;
@@ -803,27 +820,41 @@
 							}
 							return;
 						}
+						var stylimg = "";
+						var imgwidth = parseInt($(window).width()) / 2 - 34;
 						data.forEach(function(item) {
+							var heightim = item.img_flag.height;
+							var widthim = item.img_flag.width;
+							
+							var orginbi = heightim / widthim;
+							var actuheight = imgwidth * orginbi;
+							var heicha = actuheight - 160;
+							if(heicha > 0) {
+								var toppx = heicha / 2;
+								stylimg = "margin-top:-" + toppx + "px;";
+							}else{
+								stylimg="";
+							}
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
 							var listItemHTML = new Util.StringBuilder();
 							listItemHTML.append('<div class="li-content">')
 								.append('<div class="comm-item">')
 								.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
-								.appendFormat('<img class="lazy" src="../../images/nopic.jpg" data-original="{0}">', item.img_flag)
+								.appendFormat('<div class="item-img-box"><img class="lazy" data-original="{0}" style="{1}"></div>', item.img_flag.url,stylimg)
 								//.appendFormat('<img src="{0}">', item.img_flag)
 								.appendFormat('<span>{0}</span>', item.address)
 								.append('</div>')
 								.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
 								.append('<div class="height-max mui-row">')
 								.append('<div class="height-max mui-col-sm-8 mui-col-xs-8">')
-								.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', item.comm_name)
-								.appendFormat('<div class="comm-price mui-col-sm-12">{0} P</div>', item.price)
+								.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', HTMLDecode(item.comm_name))
+								//.appendFormat('<div class="comm-price mui-col-sm-12">{0} P</div>', item.price)
 								.append('</div>')
 								.append('<div class="height-max mui-col-sm-4 mui-col-xs-4">')
 								.appendFormat('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled ' + "{0}" + '">', item.praise_flg == 0 ? "comm-like-gray" : "comm-like-red")
 								.append('</span>')
-								.appendFormat('<span class="comm-like-num">{0}</span>', item.praise_cnt)
+								.appendFormat('<span data-click="0" class="comm-like-num">{0}</span>', item.praise_cnt)
 								.append('</div>')
 								.append('</div>')
 								.append('</div>')
@@ -850,9 +881,10 @@
 						}
 						//lazyLoadImg.start();
 						$("img.lazy").lazyload({
-							threshold : 200,
+							threshold: 200,
 							placeholder: "../../images/nopic.jpg",
-							effect: "fadeIn"
+							effect: "fadeIn",
+							failure_limit : 10
 						});
 						bindEventOnListViewItem();
 					};
@@ -864,8 +896,8 @@
 						});
 
 						getCategory();
-							
-						if (DEBUG) {
+
+						if(DEBUG) {
 							alert("getDataFromServer 1");
 						}
 						getDataFromServer(
@@ -904,43 +936,43 @@
 							}, 300);
 
 						});
-						
-						var isClickLikeBtn = false;
+
 						$(".comm-like-num").on("tap", function(event) {
-							if (isClickLikeBtn) {
-								return false;
+							var _self = $(this);
+							var clickFlag = _self.attr('data-click');
+							if(clickFlag === "1") {
+								_self.attr('data-click', '0');
+								return;
 							}
-							isClickLikeBtn = true;
+							_self.attr('data-click', '1');
 							if(DEBUG) {
 								alert("首页商品点赞事件被触发。");
 							}
 							var isLogin = plus.storage.getItem("LoginFlag");
 							if(!isLogin) {
 								toggleMenu();
-								return false;
+								return;
 							}
-							var _self = $(this);
 							var commId = _self.closest("li").find('.item-tap').attr('data-comm-id');
 							var params = {
 								commid: commId
 							};
 							Repository.Commodity.praise(params, {
 								ok: function(result) {
-									var praise_flag = result.data[0].praise_flag;
+									var praise_flag = result.data.p_flg;
 									if(praise_flag == "0") {
 										_self.prev().addClass('comm-like-gray');
 										_self.prev().removeClass('comm-like-red');
-										_self.text(parseInt(_self.text()) - 1);
+										_self.text(result.data.p_cnt);
 									} else if(praise_flag == "1") {
 										_self.prev().addClass('comm-like-red');
 										_self.prev().removeClass('comm-like-gray');
-										_self.text(parseInt(_self.text()) + 1);
+										_self.text(result.data.p_cnt);
 									} else {
 										if(DEBUG) {
 											alert("praise_flag is error.");
 										}
 									}
-									isClickLikeBtn = false;
 								},
 								ng: function(result) {
 									if(result === "2004") {
@@ -959,10 +991,8 @@
 											}
 										});
 									}
-									isClickLikeBtn = false;
 								},
 								error: function() {
-									isClickLikeBtn = false;
 								}
 							});
 							return false;

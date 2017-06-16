@@ -173,7 +173,8 @@ var JSLocale = {
 	"category_top_11":"手工品",
 	"category_top_12":"票/优惠券",
 	"category_top_13":"汽车/摩托车",
-	"category_top_14":"其他"
+	"category_top_14":"其他",
+	"quesreset":"重置"
 }
 
 $(function() {

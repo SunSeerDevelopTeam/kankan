@@ -16,6 +16,9 @@
 			body {
 				background-color: #efeff4;
 			}
+			.pimgbox{
+				width:100%;height:76px;text-align:center;border:1px solid #ffffff;overflow:hidden;
+			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
@@ -78,9 +81,9 @@
 										<li class="user-num-sell">
 											<font size="2"><span class="lang" data-locale="det_producednum"></span><span class="sellnum"></span></font>	
 										</li>
-										<li class="user-num-sell2">
+										<!--<li class="user-num-sell2">
 											<font size="2"><span class="lang" data-locale="ticknumber"></span><span class="ticknum"></span></font>											
-										</li>
+										</li>-->
 									</ul>
 								</div>
 								<ul class="user-comment-list">
@@ -103,14 +106,14 @@
 									</li>
 								</ul>
 								<ul class="user-comment-list">
-									<li class="user-point-grid">
+									<li class="user-point-grid" style="display: none;">
 										<a href="#">
 											<font color="#AAAAAA" size="1">
 												<span class="mui-icon-extra mui-icon-extra-share lang" data-locale="userpointtext" style="font-size: 16px;"></span>　
 											</font>
 										</a>
 									</li>
-									<li class="user-point-grid2">
+									<li class="user-point-grid2" style="display: none;">
 											<font size="2" class="point"></font>
 									</li>
 									<li class="user-point-grid" id="area">
@@ -269,7 +272,7 @@
 									    <input name="userlanageval" type="checkbox" value="3">
 									</div>
 				    	     </div>
-								<button type="button" class="mui-btn mui-btn-red ka_usersubmitbtn lang" data-locale="commodity_buttonsure" onclick="userinfosubmit()"></button>
+								<button type="button" class="mui-btn mui-btn-red ka_usersubmitbtn lang" data-locale="user_buttonsure" onclick="userinfosubmit()"></button>
 						</div>
 						</form>
 						
@@ -280,6 +283,7 @@
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
+	<script src="../../../js/common.js"></script>
 	<script src="../../../js/picker/city.data.js"></script>
 	<script src="../../../js/picker/mui.picker.js"></script>
 	<script src="../../../js/picker/mui.poppicker.js"></script>
@@ -287,7 +291,6 @@
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
-	<script src="../../../js/common.js"></script>
 	<script>
 		mui.init({
 			swipeBack: false,
@@ -304,7 +307,7 @@
 				}
 			],
 			beforeback: function() {
-		        var homePage = plus.webview.getWebviewById('pullrefresh_with_tab');
+		        var homePage = plus.webview.getWebviewById('home.html');
 				mui.fire(homePage, 'refresh',{refresh:"canRefresh"});
 		    }
 		});
@@ -315,7 +318,7 @@
 			});
 		}
 		//back refresh
-		window.addEventListener('refreshlist', function(e){//执行刷新
+		window.addEventListener('refreshlist', function(e){
 		    location.reload();
 		});
 		var viewApi = mui('#app').view({
@@ -490,11 +493,11 @@
 				});
 			});
 		}
+		var imgwidth=parseInt($(window).width())/3-9;
 		//show user information
 		function showuser(results){
 			$(".myfavourateshow").empty();
 			$(".myproductshow").empty();
-			var uaddress=results.data.address;
 			var ucomentnum=results.data.comment_cnt;
 			var unick_name=results.data.nick_name;
 			if(results.data.user_photo==""){
@@ -508,7 +511,11 @@
 			var unormalnum=results.data.user_opinion_m_count;
 			var badnum=results.data.user_opinion_l_count;
 			var uname=results.data.user_name;
-			var address=results.data.address;
+			if(results.data.address=="" || results.data.address=="undefined"){
+				var uaddress="全国";
+			}else{
+				var uaddress=results.data.address;
+			}
 			var uintroduce=results.data.introduce;
 			var uticknum=results.data.user_ticket;
 			$(".headimg").attr("src",user_photo);
@@ -517,10 +524,11 @@
 			$(".good").html(ugoodnum);
 			$(".normal").html(unormalnum);
 			$(".bad").html(badnum);
-			$(".address").html(address);
-			$("#nickname").val(unick_name);
+			$(".address").html(uaddress);
+			$("#nickname").val(uname);
 			$(".point").html(user_point);
 			$(".maintitle").html(uname);
+			$(".maintitle").attr("style","margin-left:-51px;");
 			$("#introduce").val(uintroduce);
 			$(".ticknum").html(uticknum);
 			var language=results.data.talk_flag;
@@ -531,6 +539,8 @@
 					userlanageval[ukey].checked="checked";
 				}
 			}
+			var toppx=0;
+			var toppxpra=0;
 			var exhibit_commdata=results.data.exhibit_comm;
 			var exhibit_html='<div class="mui-slider-item" style="height:25%">';
 				exhibit_html+='<ul class="user-item-list">';
@@ -538,9 +548,20 @@
 				var k = ex + 1 * 1;
 				var commexid=exhibit_commdata[ex].commodity_id;
 				var commeximg_url=exhibit_commdata[ex].img_url;
+				var realwidth=exhibit_commdata[ex].comm_img_width;
+				var realheight=exhibit_commdata[ex].comm_img_height;
+				var oribi=realheight/realwidth;
+				var showheight=imgwidth*oribi;
+				var cha1=showheight-76;
+				if(cha1>0){
+					toppx=cha1/2;
+				}else{
+					toppx=0;
+				}
+				
 				exhibit_html+='<li class="user-goods-grid codedite">';
 				exhibit_html+='<a id="'+commexid+'" href="#">';
-				exhibit_html+='<img style="width: 113px;height: 76px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+				exhibit_html+='<div class="pimgbox"><img style="width: 100%;margin-top:-'+toppx+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
 				var yunum=k%6;
@@ -561,9 +582,19 @@
 				var ki = pi + 1 * 1;
 				var praisepid=praise_commdata[pi].commodity_id;
 				var praiseimg_url=praise_commdata[pi].img_url;
+				var realwidthpra=praise_commdata[pi].comm_img_width;
+				var realheightpra=praise_commdata[pi].comm_img_height;
+				var oribipra=realheightpra/realwidthpra;
+				var showheightpra=oribipra*imgwidth;
+				var cha2=showheightpra-76;
+				if(cha2>0){
+					toppxpra=cha2/2;
+				}else{
+					toppxpra=0;
+				}
 				praise_html+='<li class="user-goods-grid detail">';
 				praise_html+='<a id="'+praisepid+'" href="#">';
-				praise_html+='<img style="width: 113px;height: 76px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'">';
+				praise_html+='<div class="pimgbox"><img style="width: 100%;margin-top:-'+toppxpra+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				praise_html+='</a>';
 				praise_html+='</li>';
 				var kiunum=ki%6;
@@ -646,24 +677,53 @@
 				}
 			}
 			var talk_flagtru=talk_flag.substr(1);
+			if(nickname.trim()==""){
+				mui.toast(TextMessage.nicknamenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(nickname.trim().length>10){
+				mui.toast(TextMessage.username_error, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(talk_flagtru==""){
+				mui.toast(TextMessage.ulanguagenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
 			mui.plusReady(function() {
 				//compress Image
 				var path=$("#headimgupdate").val();
 				var serverimg=$(".headimg").attr("src");
 				var params4={
 					"flag":"info",
-					"nick_name":nickname,
+					"nick_name":nickname.trim(),
 					"talk_flag":talk_flagtru,
 					"introduce":introduce
 				};
 				Repository.User.userinfo(params4, {
 					ok: function(data) {
-						console.log("success");
-						mui.toast(TextMessage.updatesuccessinfo, {
-							duration: 'long',
-							type: 'div'
-						});
-						mui.back();
+						$(".maintitle").html(nickname.trim());
+//						if (!Repository.User.isEmptyEmail()) {
+//								 //alert("没有登录");
+//								 return;
+//						} else {
+							//console.log("success");
+						 	console.log("success");
+							mui.toast(TextMessage.updatesuccessinfo, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.back();
+						//}
+						
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -698,23 +758,34 @@
 			var params={};
 			Repository.User.Usershow(params, {
 				ok: function(data) {
-					console.log("success");
-					//console.dir(data);
-					showuser(data);
-					$("#loading").hide();
-					$(".tran-page").show();
+//					if (!Repository.User.isEmptyEmail()) {
+//						 return;
+//					}else{
+						console.log("success");
+						//console.dir(data);
+						showuser(data);
+						$("#loading").hide();
+						$(".tran-page").show();
+					//}
 				},
 				ng: function(data) {
 					if(data == "2002") {
-						mui.toast(TextMessage.userng, {
+						mui.toast(TextMessage.test, {
 							duration: 'long',
 							type: 'div'
 						});
+						mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+					}else{
+							mui.back();
 					}
 					console.log("other error code:" + data);
-					mui.back();
+					
 				}
 			});
+			
 		});
 	//address picker
 	(function($, doc) {
@@ -730,6 +801,7 @@
 						addresspicker(address);
 					},
 					ng: function(data) {
+						mui.back;
 						console.log(data);
 						console.log("other error code:" + data);
 						
@@ -763,12 +835,17 @@
 						};
 						Repository.User.userinfo(parms2, {
 							ok: function(data) {
-								console.log("success");
+//								if (!Repository.User.isEmptyEmail()) {
+//								 return;
+//								} else {
+								 console.log("success");
+								//}
+								//console.log("success");
 								//console.dir(data);
-								mui.toast(TextMessage.updatesuccessinfo, {
-									duration: 'long',
-									type: 'div'
-								});
+//								mui.toast(TextMessage.updatesuccessinfo, {
+//									duration: 'long',
+//									type: 'div'
+//								});
 							},
 							ng: function(data) {
 								Log.d(data);
@@ -786,6 +863,10 @@
 									mui.toast(TextMessage.userng, {
 										duration: 'long',
 										type: 'div'
+									});
+									mui.openWindow({
+										id: 'login',
+										url:"../../login/login.html"
 									});
 								}
 								console.log("other error code:" + data);

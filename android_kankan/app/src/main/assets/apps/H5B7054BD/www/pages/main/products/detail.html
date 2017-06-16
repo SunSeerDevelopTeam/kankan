@@ -240,7 +240,6 @@
 
 			//onclick share
 			function clickshare(shareid,imgurl0){
-				
 				var shares = {};
 				mui.plusReady(function() {
 					TextMessage.language = plus.os.language;
@@ -293,28 +292,43 @@
 					});
 				});
 				//share message
-				//var shareid=$(".kankan_zanbox").attr("id");
-				//console.log("Api.baseUrl"+Api.url.Commodity.shareurl+shareid);
 				function shareMessage(share, ex) {
 					var msg = {
 						extra: {
 							scene: ex
 						}
 					};
-					msg.href = Api.url.Commodity.shareurl+shareid;
-					msg.title =TextMessage.sharetitle;
-					msg.content = TextMessage.sharecontent;
-					msg.thumbs = [imgurl0];
-					share.send(msg, function() {
-						var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
-//						mui.toast(sharesuccesstext, {
-//							duration: 'long',
-//							type: 'div'
-//						});
-						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
-					}, function(e) {
-						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
+					var paramshareid = {
+						"commodity_id": shareid
+					};
+					Repository.Commodity.shareid(paramshareid, {
+						ok: function(data) {
+							console.log(data.data.commodity_id);
+							var outid=data.data.commodity_id;
+							shareout(outid)
+							console.log("success");
+						},
+						ng: function(data) {
+							console.log(data);
+						}
 					});
+					function shareout(shareids){
+						msg.href = Api.url.Commodity.shareurl+shareids;
+						msg.title =TextMessage.sharetitle;
+						msg.content = TextMessage.sharecontent;
+						msg.thumbs = [imgurl0];
+						share.send(msg, function() {
+							var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
+	//						mui.toast(sharesuccesstext, {
+	//							duration: 'long',
+	//							type: 'div'
+	//						});
+							console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+						}, function(e) {
+							console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
+						});
+					}
+					
 				}
 			}
 				
@@ -334,7 +348,7 @@
 			}
 
 			function getinfo(pid) {
-				//emptyhtml();
+				emptyhtml();
 				var params = {
 					"commodity_id": pid
 				};
@@ -536,7 +550,7 @@
 						recomendaddfirsthtml += '</a></li>';
 						$("#firstremmondul").html(recomendaddfirsthtml);
 					}
-					if(j > recomdlenght - 4) {
+					if(j >= recomdlenght - 4) {
 						recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
 						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
@@ -581,7 +595,7 @@
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}
-					if(l > concernlenght - 4) {
+					if(l >= concernlenght - 4) {
 						concernlastaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernlastaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
 						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
@@ -761,6 +775,7 @@
 								duration: 'long',
 								type: 'div'
 							});
+							return false;
 						}
 						mode = 'exchange';
 						params.mode = mode;
