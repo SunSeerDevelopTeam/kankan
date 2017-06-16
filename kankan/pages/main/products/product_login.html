@@ -100,7 +100,7 @@
 				</div>
 				<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
 				<div class="ka_userbox">
-					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="commodity_buttonsure" onclick="publishs()"></button>
+					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="commodity_buttonsure" onclick="publishscheck()"></button>
 				</div>
 				<br/>
 				<div class="showimg"></div>
@@ -423,6 +423,14 @@
 		}
 	});
 })(mui, document);
+//email check
+function publishscheck(){
+	if (!Repository.User.isEmptyEmail()) {
+		 return;
+	}else{
+		publishs();
+	}
+}
 //submit form
 function publishs() {
 	var buy_sell_flag = "0";
