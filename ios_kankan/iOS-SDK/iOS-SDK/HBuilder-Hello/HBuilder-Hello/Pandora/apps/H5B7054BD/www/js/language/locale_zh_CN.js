@@ -14,15 +14,15 @@ var JSLocale = {
 
 	/*user login page message begin*/
 	"user-login": "用户注册",
-	"email": "邮箱",
-	"username": "用户名",
-	"password": "密码",
-	"new_password": "新密码",
-	"password-confirm": "确认密码",
-	"address": "地址",
+	"email": "<span style='color:red;display:inline;padding:0px'>*</span>邮箱",
+	"username": "<span style='color:red;'>*</span>用户名",
+	"password": "<span style='color:red;'>*</span>密码",
+	"new_password": "<span style='color:red;'>*</span>新密码",
+	"password-confirm": "<span style='color:red;'>*</span>确认密码",
+	"address": "<span style='color:red;'>*</span>地址",
 	"address-details": "未设定",
 	"introduction-code": "介绍码",
-	"verification-code": "验证码",
+	"verification-code": "<span style='color:red;'>*</span>验证码",
 	"register": "确定",
 	"register-tips": "注册真实可用，注册成功后的用户可用于登录。",
 	"please-input-email": "请输入邮箱",
@@ -58,7 +58,7 @@ var JSLocale = {
 	"comdity_null": "暂无数据",
 	"contentlength": "评论内容（不超过三百字）",
 	"contentsend": "发 送",
-
+	"evalute_finish":"交易完成",
 	// Home Page
 	"app_name": "看看",
 	"tab_1": "首页",
@@ -80,6 +80,7 @@ var JSLocale = {
 	"commodity_buyway": "交换手段",
 	"commodity_switch": "交  换",
 	"commodity_free": "白 送",
+	"commodity_select": "商品选择",
 	"commodity_pointbuy": "point",
 	"commodity_buttonsure": "发	布",
 	"commodity_price": "价格",
@@ -102,6 +103,7 @@ var JSLocale = {
 	"english_user":"英语",
 	"korean_user":"韩语",
 	"infoeditetitle":"信息编辑",
+	"user_buttonsure":"提交",
 	//logisticslist page
 	"sendmes":"是",
 	"logistic":"物流",
@@ -143,13 +145,42 @@ var JSLocale = {
 	"contenttext":"申诉内容",
 	"suretext":"确 认",
 	"writeemail":"完善邮箱",
-	"emailwtext":"请完善邮箱信息"
+	"emailwtext":"请完善邮箱信息",
+	"new_user_login":"注册",
+	"transaction":"交易",
+	"trans_criterion":"特定商交易法为准的显示内容",
+	"trans_logistic":"联系物流",
+	"send_mail":"送信",
+	'trans_finish':"交易终止",
+	'eve_comment':"请填写评价的评语 ",
+	'eve_btn':"评价",
+	"home_return":"返回首页",
+	//message 
+	"messagetitle":"站内信",
+	"stautestext":"该商品交易中",
+	"thistorytext":"交易历史",
+	//category
+	"category_top_1":"全部",
+	"category_top_2":"求购商品",
+	"category_top_3":"女士用品",
+	"category_top_4":"男士用品",
+	"category_top_5":"儿童用品",
+	"category_top_6":"室内装修/小物品",
+	"category_top_7":"娱乐/爱好",
+	"category_top_8":"化妆品/香水/美容",
+	"category_top_9":"家电/智能手机/照相机",
+	"category_top_10":"运动休闲",
+	"category_top_11":"手工品",
+	"category_top_12":"票/优惠券",
+	"category_top_13":"汽车/摩托车",
+	"category_top_14":"其他",
+	"quesreset":"重置"
 }
 
 $(function() {
 	$('.lang').not('input').each(function(e) {
 		var msg_key = $(this).attr('data-locale');
-		$(this).text(JSLocale[msg_key]);
+		$(this).html(JSLocale[msg_key]);
 	});
 
 	$('input.lang').each(function(e) {

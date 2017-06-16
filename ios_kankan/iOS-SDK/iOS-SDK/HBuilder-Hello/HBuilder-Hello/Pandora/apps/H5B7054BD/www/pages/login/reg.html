@@ -149,7 +149,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="address"></label>
-						<input id="city" name="city" type="text" class="mui-input-clear mui-input lang" data-locale="address-details" readonly="readonly">
+						<input id="city" name="city" type="text" value="" class="mui-input-clear mui-input lang" data-locale="address-details" readonly="readonly">
 						<a id="showCityPicker" class="mui-navigate-right"></a>
 					</div>
 				</div>
@@ -185,13 +185,13 @@
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
-		<script type="text/javascript" src="../../js/picker/mui.picker.js"></script>
-		<script type="text/javascript" src="../../js/picker/mui.poppicker.js"></script>
-		<script type="text/javascript" src="../../js/picker/city.data.js"></script>
 		<script type="text/javascript" src="../../js/sha1.js"></script>
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/md5.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/picker/mui.picker.js"></script>
+		<script type="text/javascript" src="../../js/picker/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../../js/picker/city.data.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			(function(mui, doc) {
 				mui.init();
@@ -203,6 +203,11 @@
 						if(!canClick) return;
 						console.log("click sendVCodeBtn");
 						canClick = false;
+						var email = doc.getElementById('email').value.trim();
+						if (email == "") {
+							plus.nativeUI.alert(TextMessage.emailnull);
+							return;
+						}
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value;
@@ -252,11 +257,55 @@
 					var regBtn = doc.getElementById('reg');
 					regBtn.addEventListener('tap', function(event) {
 						console.log("click regBtn");
+						var email = doc.getElementById('email').value.trim();
+						if (email == "") {
+							plus.nativeUI.toast(TextMessage.emailnull);
+							return;
+						}
+						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
+						if (!reg.test(email)) {
+							plus.nativeUI.toast(TextMessage.email_error1);
+							return;
+						}
+						var username = doc.getElementById('username').value.trim();
+						if (username == "") {
+							plus.nativeUI.toast(TextMessage.username_null);
+							return;
+						}
+						if (username.length > 10) {
+							plus.nativeUI.toast(TextMessage.username_error);
+							return;
+						}
+						var password = doc.getElementById('password').value.trim();
+						if(password==""){
+							plus.nativeUI.toast(TextMessage.password_notnull);
+							return;
+						}
+						if (6 > password.length || password.length > 16) {
+							plus.nativeUI.toast(TextMessage.password_error);
+							return;
+						}
+						var passwordConfirm = doc.getElementById('passwordConfirm').value.trim();
+						if (password != passwordConfirm) {
+							plus.nativeUI.toast(TextMessage.confirmPwd_error);
+							return;
+						}
+						var city = doc.getElementById('city').getAttribute('data-val');
+						if (city == null) {
+							plus.nativeUI.toast(TextMessage.addressnull);
+							return;
+						}
+						var verificationCode = doc.getElementById('verificationCode').value.trim();
+						if (verificationCode == "") {
+							plus.nativeUI.toast(TextMessage.codenull);
+							return;
+						}
+						
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value.trim();
 						params[Api.Params.username] = doc.getElementById('username').value.trim();
-						params[Api.Params.password] = hex_sha1(hex_md5(doc.getElementById('password').value.trim()));
+						params[Api.Params.password] = hex_sha1(hex_md5(password));
 						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');
 						params[Api.Params.vCode] = doc.getElementById('verificationCode').value.trim();
 						params[Api.Params.rCode] = doc.getElementById('introduction-code').value.trim();
@@ -270,6 +319,12 @@
 							},
 							ng: function(data) {
 								waiting.close();
+								if(data.email=="1003"){
+									mui.toast("email"+TextMessage.errorCode_1003, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
 								$.each(data, function(key, value) {
 									console.log(key, value);
 									switch(value) {

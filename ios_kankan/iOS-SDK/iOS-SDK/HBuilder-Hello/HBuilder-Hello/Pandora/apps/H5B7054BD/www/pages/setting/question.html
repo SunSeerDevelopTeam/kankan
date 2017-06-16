@@ -9,18 +9,18 @@
 		<link href="../../css/style.css" rel="stylesheet" />
 		<link href="../../css/kankan_home.css" rel="stylesheet" />
 		<style>
-			.mui-icon {
-				margin-top:10px;
+			/*.mui-icon {
+				/*margin-top:10px;
 				padding-left:10px;
-			}
+			}*/
 			
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-				<font class="lang" data-locale="back" size="3"></font>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="margin-bottom: 2em;">
+				<font class="lang" data-locale="back" size="4"></font>
 			</a>
 			<h1 class="mui-center mui-title lang" data-locale="Appeal"></h1>
 		</header>
@@ -45,7 +45,7 @@
 				</div>
 				<div class="mui-button-row" style="margin-bottom: 1em;">
 					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="submitvals()" data-locale="suretext"></button>&nbsp;&nbsp;
-					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="clearallval()" data-locale="det_goodconcel"></button>
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="clearallval()" data-locale="quesreset"></button>
 				</div>
 				<!--mask-->
 		        <div class="z_mask">
@@ -114,20 +114,24 @@
 					"images[3]":img3
 				};
 				mui.plusReady(function() {
-					Repository.User.addComplaint(params2,{
-						ok: function(data) {
-							console.log("success");
-							mui.toast(TextMessage.requiresuccess, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.back();
-						},
-						ng: function(data) {
-							console.log("error:"+data);
-							Log.d(data);
-						}
-					});
+					if (!Repository.User.isEmptyEmail()) {
+						 return;
+					} else {
+						Repository.User.addComplaint(params2,{
+							ok: function(data) {
+								console.log("success");
+								mui.toast(TextMessage.requiresuccess, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.back();
+							},
+							ng: function(data) {
+								console.log("error:"+data);
+								Log.d(data);
+							}
+						});
+					}
 				});
 			}
 			function clearallval(){
