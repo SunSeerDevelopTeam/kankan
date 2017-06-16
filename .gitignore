@@ -4,5 +4,14 @@
 /android_kankan/.idea
 /android_kankan/.gradle
 /android_kankan/*.iml
-/android_kankan/*
 /kankan/.settings
+/android_kankan/app/src/main/assets/apps/H5B7054BD/www/unpackage
+/android_kankan/app/src/main/assets/apps/H5B7054BD/www/.settings
+/android_kankan/app/src/main/.settings
+/android_kankan/app/src/main/gen
+/android_kankan/app/src/main/bin
+/android_kankan/app/build
+/android_kankan/gradle
+/android_kankan/build
+/android_kankan/keystore.keystore
+/android_kankan/app/*.iml
