@@ -6,6 +6,11 @@
 		<title>email_summate</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style>
+			#form1 label {
+				font-size: smaller;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -19,7 +24,7 @@
 	        	<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label for="email" class="lang" data-locale="email"></label>
-						<input id='email' name="email" type="email" class="mui-input lang" data-locale="please-input-email">
+						<input id='email' name="email" type="email" class="mui-input mui-input-clear lang" data-locale="please-input-email">
 					</div>
 				</div>
 				<!-- send verification code button -->
@@ -45,7 +50,12 @@
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init();
+			mui.init({
+				beforeback: function() {
+			        var homePage = plus.webview.currentWebview().opener();
+					mui.fire(homePage, 'refreshlist');
+			    }
+			});
 			mui.plusReady(function(){
 				var sendVCodeBtn = document.getElementById('send-verification-code');
 				var canClick = true;
@@ -76,6 +86,8 @@
 						ng: function(data) {
 							waiting.close();
 							canClick = true;
+							Api.callback_ng(data);
+							return false;
 							switch(data) {
 								case "2013":
 									mui.toast(TextMessage.email_error, {
@@ -102,12 +114,20 @@
 				var email=$("#email").val();
 				var code=$("#verificationCode").val();
 				if(email==""){
-					alert(TextMessage.emailnull);
+					mui.toast(TextMessage.emailnull, {
+						duration: 'long',
+						type: 'div'
+					});
+					//alert(TextMessage.emailnull);
 					document.form1.email.focus();
 					return false;
 				}
 				if(code==""){
-					alert(TextMessage.codenull);
+					mui.toast(TextMessage.codenull, {
+						duration: 'long',
+						type: 'div'
+					});
+					//alert(TextMessage.codenull);
 					document.form1.verificationCode.focus();
 					return false;
 				}
@@ -121,18 +141,28 @@
 							duration: 'long',
 							type: 'div'
 						});
-						mui.back;
+						//mui.back;
+						mui.openWindow({
+							id: 'user',
+							url:"../main/user/user.html"
+						});
 					},
 					ng: function(data) {
 						console.log(data);
 						switch(data) {
 							case "1000":
-								mui.toast(TextMessage.test, {
-									duration: 'long',
-									type: 'div'
-								})
-								break;
-								default:
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							})
+							break;
+							case "2014":
+							mui.toast(TextMessage.confirmcodeng, {
+								duration: 'long',
+								type: 'div'
+							})
+							break;
+							default:
 							mui.toast(TextMessage.updatemailng, {
 								duration: 'long',
 								type: 'div'
