@@ -70,8 +70,11 @@
 		<script>
 			mui.init();
 			var imgwidth=parseInt($(window).width())/3-17;
+			var transpro="";
+			var otranspro="";
 			function showcommodity(results){
 				var data=results.data;
+				var myid=results.myid;
 				//requested
 				var htmlnull='<div style="text-align: center;"><p>'+TextMessage.datanull+'</p></div>';
 				var others=data.own;
@@ -80,8 +83,15 @@
 				}
 				for(var ot=0;ot<others.length;ot++){
 					var transid=others[ot].trans.trans_id;
-					var comm_name=HTMLDecode(others[ot].trans[0].comm_name);
-					var comm_img=others[ot].trans[0].comm_img;
+					var comditylength=others[ot].trans.commodity.length;
+					for(var vi=0;vi<comditylength;vi++){
+						if(others[ot].trans.commodity[vi].comm_user_id==myid){
+							transpro=others[ot].trans.commodity[vi];
+							break;
+						}
+					}
+					var comm_name=HTMLDecode(transpro.comm_name);
+					var comm_img=transpro.comm_img;
 					var trans_type=others[ot].trans.trans_type;
 					if(trans_type=="0"){
 						var trans_typetext=TextMessage.requireing;
@@ -94,8 +104,8 @@
 					var price=others[ot].trans.price;
 					var trans_mode=others[ot].trans.trans_mode;
 					var transprocount=others[ot].trans.trans_comm_nums;
-					var realwidth=others[ot].trans[0].comm_img_width;
-					var realheight=others[ot].trans[0].comm_img_height;
+					var realwidth=transpro.comm_img_width;
+					var realheight=transpro.comm_img_height;
 					var toppx=0;
 					var oribi=realheight/realwidth;
 					var showheight=imgwidth*oribi;
@@ -126,9 +136,16 @@
 					var html2='<ul class="mui-table-view mui-grid-view want-sell" style="padding-top:10px;">';
 					for(var ow=0;ow<own.length;ow++){
 						var otransid=own[ow].trans.trans_id;
-						var ocomm_name=own[ow].trans[0].comm_name;
-						var ocomm_img=own[ow].trans[0].comm_img;
-						if(own[ow].trans[0].comm_img==""){
+						var ocomditylength=own[ow].trans.commodity.length;
+						for(var wi=0;wi<ocomditylength;wi++){
+							if(own[ow].trans.commodity[wi].comm_user_id!=myid){
+								var otranspro=own[ow].trans.commodity[wi];
+								break;
+							}
+						}
+						var ocomm_name=otranspro.comm_name;
+						var ocomm_img=otranspro.comm_img;
+						if(otranspro.comm_img==""){
 							var ocomm_img="../../../images/nopic.jpg";
 						}
 						var otrans_type=own[ow].trans.trans_type;
@@ -149,8 +166,8 @@
 						var oprice=own[ow].trans.price;
 						var otrans_mode=own[ow].trans.trans_mode;
 						var otransprocount=own[ow].trans.trans_comm_nums;
-						var orealwidth=own[ow].trans[0].comm_img_width;
-						var orealheight=own[ow].trans[0].comm_img_height;
+						var orealwidth=otranspro.comm_img_width;
+						var orealheight=otranspro.comm_img_height;
 						var otoppx=0;
 						var ooribi=orealheight/orealwidth;
 						var oshowheight=imgwidth*ooribi;
@@ -222,11 +239,12 @@
 						showcommodity(data);
 					},
 					ng: function(data) {
-						console.log("error");
-						Log.d(data);
+						console.log(data);
 						if(data=="1000"|| data=="2002"){
 							$(".jiaoyihitext").hide();
 						}
+						Api.callback_ng(data);
+						
 					}
 				});
 			});

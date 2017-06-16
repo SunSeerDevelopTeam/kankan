@@ -472,7 +472,7 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			return "http://210.189.72.25:7998";
+			return "http://www.kankann.jp:7998/";
 		}
 	}
 
@@ -513,7 +513,8 @@ var Api;
 			Commodityedite: baseUrl() + '/commodity/release/update/',
 			logisticslist: baseUrl() + '/logistics/',
 			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
-			shareurl: baseUrl() + '/share.php?id='
+			shareurl: baseUrl() + '/share.php?wxparms=',
+			shareid: baseUrl() + '/commodity/Encryption/'
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -593,7 +594,7 @@ var Api;
 				if (!isAlert) {
 					plus.nativeUI.alert(TextMessage.not_network, function(e){
 						isAlert = false;
-					});
+					},TextMessage.sharetitle,TextMessage.sure);
 					isAlert = true;
 				}
 				if(Validator.isFunc(callback.error)) callback.error();
@@ -1264,6 +1265,11 @@ var Repository;
 			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
 		}
 		Commodity.logisticssendmail = logisticssendmail;
+		
+		function shareid(params, callback) {
+			return Api.call(Api.url.Commodity.shareid, params, callback);
+		}
+		Commodity.shareid = shareid;
 	})(Commodity = Repository.Commodity || (Repository.Commodity = {}));
 	Repository.Commodity = Commodity;
 	var Transaction;
@@ -1525,6 +1531,7 @@ var TextMessage;
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールアドレスが未入力です。" : "邮箱不能为空！";
 	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
+	TextMessage.username_error = language ? "ユーザー名が10桁以内に設定してください" : "用户名长度不能超过10位字符";
 	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
@@ -1551,7 +1558,7 @@ var TextMessage;
 	TextMessage.transConfirm = language ? "取引を確認する" : "确认交易";
 	TextMessage.transWaitConfirm = language ? "相手の確認を待つ" : "等待对方确认";
 	TextMessage.transOrder = language ? "注文の生成" : "订单生成";
-	TextMessage.transUrgeDelive = language ? "相手に出荷をリクエストする" : "催促对方发货";
+	TextMessage.transUrgeDelive = language ? "出荷をリクエストする" : "催促对方发货";
 	TextMessage.transReceipt = language ? "品物を確認する" : "确认收货";
 	TextMessage.transDelive = language ? "出荷確認" : "确认发货";
 	TextMessage.transWaitOrder = language ? "相手の注文を待つ" : "等待对方下单";
@@ -1564,7 +1571,7 @@ var TextMessage;
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
-	TextMessage.det_concerneds = language ? "気になる商品" : "关注商品";
+	TextMessage.det_concerneds = language ? "さんが気になる商品" : "关注商品";
 	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
@@ -1573,7 +1580,12 @@ var TextMessage;
 	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
 	TextMessage.evelevel = language ? "評価レベルをご選択ください。" : "请选择评价等级";
-	
+	TextMessage.commdSelect = language ? "１つ以上の商品を選択してください。" : "请至少选择一个商品";
+	TextMessage.transEve = language ? "取引評価" : "去评价";
+	TextMessage.nicknamenull = language ? "ユーザー名未入力です。" : "用户名不能为空";
+	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
+	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
+
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

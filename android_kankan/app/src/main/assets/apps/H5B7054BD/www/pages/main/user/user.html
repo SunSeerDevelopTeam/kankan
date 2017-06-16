@@ -677,18 +677,40 @@
 				}
 			}
 			var talk_flagtru=talk_flag.substr(1);
+			if(nickname.trim()==""){
+				mui.toast(TextMessage.nicknamenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(nickname.trim().length>10){
+				mui.toast(TextMessage.username_error, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(talk_flagtru==""){
+				mui.toast(TextMessage.ulanguagenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
 			mui.plusReady(function() {
 				//compress Image
 				var path=$("#headimgupdate").val();
 				var serverimg=$(".headimg").attr("src");
 				var params4={
 					"flag":"info",
-					"nick_name":nickname,
+					"nick_name":nickname.trim(),
 					"talk_flag":talk_flagtru,
 					"introduce":introduce
 				};
 				Repository.User.userinfo(params4, {
 					ok: function(data) {
+						$(".maintitle").html(nickname.trim());
 //						if (!Repository.User.isEmptyEmail()) {
 //								 //alert("没有登录");
 //								 return;
