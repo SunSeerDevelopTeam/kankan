@@ -49,9 +49,11 @@
     <!-- 发短信权限 -->
     <!-- 读/写短/彩信箱权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    -->
     <!-- Messaging end -->
 
 
@@ -113,12 +115,27 @@
         </activity>
 
         <!-- 微信分享 配置begin -->
+        <!--旧的WX_SECRET-->
+        <!--
         <meta-data
             android:name="WX_SECRET"
             android:value="0010a787ec3751c355681d1b9aaede73" />
+        -->
+        <!--新的WX_SECRET-->
+        <meta-data
+            android:name="WX_SECRET"
+            android:value="965c63ce5c9150a26234c5f73cdc788c" />
+        <!--旧的WX_APPID-->
+        <!--
         <meta-data
             android:name="WX_APPID"
             android:value="wxa305a32371b65619" />
+        -->
+
+        <!--新的WX_APPID-->
+        <meta-data
+            android:name="WX_APPID"
+            android:value="wx1915653b1958f7d6"/>
 
         <activity
             android:name="com.sunseer.kankan.wxapi.WXEntryActivity"
@@ -130,8 +147,10 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="wxa305a32371b65619" />
+                <!--旧的scheme设置-->
+                <!--<data android:scheme="wxa305a32371b65619" />-->
+                <!--新的scheme设置-->
+                <data android:scheme="wx1915653b1958f7d6" />
             </intent-filter>
         </activity>
 
