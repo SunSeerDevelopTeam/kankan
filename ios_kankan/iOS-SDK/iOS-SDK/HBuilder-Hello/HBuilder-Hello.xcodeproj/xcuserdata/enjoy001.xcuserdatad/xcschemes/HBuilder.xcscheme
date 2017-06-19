@@ -69,9 +69,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      debugDocumentVersioning = "YES"
+      launchAutomaticallySubstyle = "2">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Users/enjoy001/Library/Developer/Xcode/DerivedData/HBuilder-Hello-aqnqelpxyxqrrngbwmdljntvyjcx/Build/Products/HBuilder">
+      </PathRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8EED6297198A1D13000A4449"
@@ -79,13 +83,14 @@
             BlueprintName = "HBuilder"
             ReferencedContainer = "container:HBuilder-Hello.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "KanKan"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
