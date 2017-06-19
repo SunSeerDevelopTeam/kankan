@@ -165,12 +165,14 @@
 					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
 				</div>
 				<!-- introduction code -->
+				<!--
 				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="lang" data-locale="introduction-code"></label>
 						<input id='introduction-code' name="introduction-code" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
 					</div>
 				</div>
+				-->
 				<!-- submit button -->
 				<div class="mui-content-padded">
 					<button id='reg' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
@@ -223,6 +225,7 @@
 									i++;
 									sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
 									if(180 - i == 0) {
+										sendVCodeBtn.innerText = TextMessage.send_verification_code;
 										canClick = true;
 										clearInterval(updateText);
 									}
@@ -308,7 +311,7 @@
 						params[Api.Params.password] = hex_sha1(hex_md5(password));
 						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');
 						params[Api.Params.vCode] = doc.getElementById('verificationCode').value.trim();
-						params[Api.Params.rCode] = doc.getElementById('introduction-code').value.trim();
+						//params[Api.Params.rCode] = doc.getElementById('introduction-code').value.trim();
 						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
 						Repository.User.register(params, {
 							ok: function(data) {

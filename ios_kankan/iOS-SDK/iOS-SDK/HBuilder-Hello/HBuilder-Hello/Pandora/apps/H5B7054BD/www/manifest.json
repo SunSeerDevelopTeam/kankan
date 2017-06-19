@@ -7,8 +7,8 @@
 	"id": "H5B7054BD",
 	"name": "kankan",
 	"version": {
-		"name": "0.0.4",
-		"code": "4"
+		"name": "0.0.5",
+		"code": "5"
 	},
 	"description": "",
 	"icons": {
@@ -338,7 +338,9 @@
 				],
 				"refer": [
 					"pages/main/main.html",
-					"pages/login/forget_password.html"
+					"pages/login/forget_password.html",
+					"pages/login/reg.html",
+					"pages/login/emai_summate.html"
 				],
 				"priority": 0
 			},
@@ -367,7 +369,8 @@
 					"images/Good.PNG",
 					"images/userPhoto.png",
 					"js/language/locale_ja_JP.js",
-					"js/md5.js"
+					"js/md5.js",
+					"js/sha1.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -430,7 +433,8 @@
 					"js/common.js",
 					"js/language.js",
 					"js/language/locale_zh_CN.js",
-					"js/pro_uploadimg.js"
+					"js/pro_uploadimg.js",
+					"js/picker/mui.poppicker.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -462,7 +466,10 @@
 					"pages/main/search.html",
 					"pages/main/user/user.html",
 					"pages/main/products/detail.html",
-					"pages/main/category/tab-top-subpage-2.html"
+					"pages/main/category/tab-top-subpage-2.html",
+					"pages/main/category/tab-top-subpage-3.html",
+					"pages/main/category/tab-top-subpage-4.html",
+					"pages/main/category/tab-top-subpage-5.html"
 				],
 				"priority": 0
 			},
@@ -617,7 +624,8 @@
 					"js/language.js",
 					"css/mui.min.css",
 					"js/language/locale_zh_CN.js",
-					"css/kankan_home.css"
+					"css/kankan_home.css",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
 					"pages/login/login.html"
@@ -652,7 +660,8 @@
 					"images/nopic.jpg",
 					"css/kankan_home.css",
 					"css/icons-extra.css",
-					"pages/setting/setting.html"
+					"pages/setting/setting.html",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
@@ -802,7 +811,8 @@
 					"js/language/locale_zh_CN.js",
 					"css/kankan_home.css",
 					"css/icons-extra.css",
-					"fonts/mui-icons-extra.ttf"
+					"fonts/mui-icons-extra.ttf",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -854,7 +864,8 @@
 					"js/language.js",
 					"css/mui.min.css",
 					"js/language/locale_zh_CN.js",
-					"js/mui.view.js"
+					"js/mui.view.js",
+					"js/language/locale_ja_JP.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -903,6 +914,44 @@
 					"pages/main/category/pullrefresh_sub_2.html"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-3.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_3.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-5.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_5.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-4.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_4.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/login/emai_summate.html": {
+				"resources": [
+					"js/language/locale_ja_JP.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"js/sha1.js",
+					"js/language.js",
+					"css/mui.min.css",
+					"js/language/locale_zh_CN.js"
+				],
+				"refer": [
+					"pages/main/user/user.html"
+				],
 				"priority": 0
 			}
 		},

@@ -100,7 +100,7 @@
 				</div>
 				<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
 				<div class="ka_userbox">
-					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="commodity_buttonsure" onclick="publishs()"></button>
+					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="commodity_buttonsure" onclick="publishscheck()"></button>
 				</div>
 				<br/>
 				<div class="showimg"></div>
@@ -383,7 +383,10 @@
 									});
 									mui.openWindow({
 										id: 'emai_summate',
-										url: "../../login/emai_summate.html"
+										url: "../../login/emai_summate.html",
+										extras: {
+											formPageName: "product_login"
+										}
 									});
 								}
 								if(data == "2002") {
@@ -409,7 +412,7 @@
 					document.getElementById("bitian1").style.display = "none";
 				});
 			}, false);
-			//staute click picker
+			//staute click Picker
 			var showstatePickerButton = doc.getElementById('prostuat');
 			var stauteResult = doc.getElementById('stauteResult');
 			showstatePickerButton.addEventListener('tap', function(event) {
@@ -423,6 +426,14 @@
 		}
 	});
 })(mui, document);
+//email check
+function publishscheck(){
+	if (!Repository.User.isEmptyEmail()) {
+		 return;
+	}else{
+		publishs();
+	}
+}
 //submit form
 function publishs() {
 	var buy_sell_flag = "0";
