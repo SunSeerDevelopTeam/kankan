@@ -691,6 +691,9 @@ var Api;
 				break;
 			case '1003':
 				err_msg = TextMessage.errorCode_1003;
+				if (key == Api.Params.email) {
+					err_msg = key + err_msg;
+				}
 				mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'
