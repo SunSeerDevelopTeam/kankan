@@ -66,11 +66,15 @@
 			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>icon100</string>
 			<key>CFBundleURLName</key>
 			<string>weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxbe7f03382358338d</string>
+				<string>wx1915653b1958f7d6</string>
 			</array>
 		</dict>
 		<dict>
@@ -90,35 +94,14 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>tencentweiboSdkv2</string>
-		<string>weibosdk2.5</string>
-		<string>sinaweibo</string>
-		<string>sinaweibohd</string>
-		<string>alipay</string>
-		<string>safepay</string>
 		<string>cydia</string>
 		<string>weixin</string>
 		<string>wechat</string>
-		<string>weibosdk</string>
-		<string>mqq</string>
-		<string>mqqapi</string>
-		<string>mqzone</string>
-		<string>wtloginmqq2</string>
-		<string>mqqopensdkapiV3</string>
-		<string>mqqwpa</string>
-		<string>mqqopensdkapiV2</string>
-		<string>mqqOpensdkSSoLogin</string>
 		<string>hbuilder</string>
 		<string>streamapp</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MiSDKAppID</key>
-	<string>2882303761517526143</string>
-	<key>MiSDKAppKey</key>
-	<string>5211752656143</string>
-	<key>MiSDKRun</key>
-	<string>online</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -253,68 +236,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>amap</key>
-	<dict>
-		<key>appkey</key>
-		<string>41c8f3ec724fc03639b804dd6d4d8917</string>
-	</dict>
-	<key>baidu</key>
-	<dict>
-		<key>appkey</key>
-		<string>33sQNaF1czbLgyIgHGw9cpc1</string>
-	</dict>
-	<key>getui</key>
-	<dict>
-		<key>appid</key>
-		<string>bBPiGM1VQ66mhMI3d9tG0A</string>
-		<key>appkey</key>
-		<string>uS09ESNrE46NQgnHmSYjL2</string>
-		<key>appsecret</key>
-		<string>nG809brIPr7aTF7o0VpZM1</string>
-	</dict>
-	<key>iFly</key>
-	<dict>
-		<key>appid</key>
-		<string>535a0afe</string>
-	</dict>
-	<key>sinaweibo</key>
-	<dict>
-		<key>appSecret</key>
-		<string>b8fa3ec4b7e47a152044d9e8265cf593</string>
-		<key>appkey</key>
-		<string>3662743235</string>
-		<key>redirectURI</key>
-		<string>http://www.dcloud.io/</string>
-	</dict>
-	<key>tencentweibo</key>
-	<dict>
-		<key>appSecret</key>
-		<string>0b3ac9d885c09a1f45c0c08304291546</string>
-		<key>appkey</key>
-		<string>801494298</string>
-		<key>redirectURI</key>
-		<string>http://d.m3w.cn/helloh5p/</string>
-	</dict>
-	<key>umeng</key>
-	<dict>
-		<key>appkey</key>
-		<string>51d6a5a856240b66f0005651</string>
-	</dict>
 	<key>weixinoauth</key>
 	<dict>
 		<key>appSecret</key>
-		<string>3e4eaaefe9ab84cd9d2c1a14a5a2cc9d</string>
+		<string>965c63ce5c9150a26234c5f73cdc788c</string>
 		<key>appid</key>
-		<string>wxbe7f03382358338d</string>
-	</dict>
-	<key>xiaomioauth</key>
-	<dict>
-		<key>appid</key>
-		<string>2882303761517526143</string>
-		<key>appsecret</key>
-		<string>RHYzhpJEut+Ijt9tGBhL3g==</string>
-		<key>redirectURI</key>
-		<string>http://www.dcloud.io/</string>
+		<string>wx1915653b1958f7d6</string>
 	</dict>
 </dict>
 </plist>
