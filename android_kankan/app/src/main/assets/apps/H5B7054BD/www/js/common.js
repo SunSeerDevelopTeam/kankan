@@ -472,7 +472,8 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			return "http://www.kankann.jp:7998/";
+			//return "http://www.kankann.jp:7998";
+			return "http://210.189.72.25:7998";
 		}
 	}
 
@@ -691,6 +692,9 @@ var Api;
 				break;
 			case '1003':
 				err_msg = TextMessage.errorCode_1003;
+				if (key == Api.Params.email) {
+					err_msg = key + err_msg;
+				}
 				mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'

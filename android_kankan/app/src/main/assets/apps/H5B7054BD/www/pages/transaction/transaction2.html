@@ -533,7 +533,7 @@
 							if(deliver == 0) {
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							} else {
-								$(".tran-button-buy font").text(TextMessage.transWaitReceipt);
+								$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
 							}
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
@@ -607,7 +607,9 @@
 						}
 					} else {
 						if(trans_mode != 0) {
-							if(deliver == 0) {
+							if(buyer_receipt == 0) {
+								trans_flow('transUrgeReceipt', params,'');
+							}else{
 								trans_flow('transOrderLogustics', params,'');
 							}
 						} else {
@@ -801,7 +803,7 @@
 							}
 						});
 					} else {
-						alert(TextMessage.transContinue);
+						mui.alert(TextMessage.transContinue);
 					}
 				})
 			}
