@@ -227,6 +227,12 @@
 							plus.nativeUI.toast(TextMessage.email_error1);
 							return;
 						}
+						reg = ^[0-9a-zA-Z]{6,16}$
+						var password = doc.getElementById('password').value.trim();
+						if (!reg.test(password)) {
+							plus.nativeUI.toast(TextMessage.password_error);
+							return;
+						}
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
