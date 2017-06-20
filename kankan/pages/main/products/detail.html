@@ -56,16 +56,16 @@
 			<div class="mui-icon mui-icon-back mui-pull-left Arrow" id="leftarrow" onclick="goitem()"></div>
 			<div class="mui-icon mui-icon-forward mui-pull-left Arrow" style="margin-left: 80%;" id="rightarrow"></div>
 			<div id="slider" class="mui-slider">
-				<div class="mui-slider-group mui-slider-loop">
+				<div class="mui-slider-group">
 					
 					<!-- first -->
-					<div class="mui-slider-item mui-slider-item-duplicate lastimage imgboxs" align="center" style="">
+					<!--<div class="mui-slider-item mui-slider-item-duplicate lastimage imgboxs" align="center" style="">
 						<img src="" onerror="this.src='../../../images/nopic.jpg'">
-					</div>
+					</div>-->
 					<!-- last -->
-					<div class="mui-slider-item mui-slider-item-duplicate firstimage imgboxs" align="center" style="">
+					<!--<div class="mui-slider-item mui-slider-item-duplicate firstimage imgboxs" align="center" style="">
 						<img src="" onerror="this.src='../../../images/nopic.jpg'">
-					</div>
+					</div>-->
 				</div>
 				<div class="mui-slider-indicator">
 				</div>
@@ -434,8 +434,8 @@
 				var la = imgsarr.length - 1 * 1;
 				var first = '<img src="' + imgsarr[0] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
 				var last = '<img src="' + imgsarr[la] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
-				$(".firstimage").html(last);
-				$(".lastimage").html(first);
+				//$(".firstimage").html(last);
+				//$(".lastimage").html(first);
 				if(imglength > 1) {
 					$("#leftarrow").show();
 					$("#rightarrow").show();
@@ -458,7 +458,7 @@
 					}
 					$(".mui-slider-indicator").append(htmlfocus);
 				}
-				$(".lastimage").before(htmlimg);
+				$(".mui-slider-group").html(htmlimg);
 				var goodcount = commodity.commodity_praise.praise_count;
 				$("#zanshu").html(goodcount);
 				var comentnum = commodity.commodity_levave_mess.leave_mess_count;
@@ -637,10 +637,15 @@
 				$(".mui-content").show();
 				$("#loading").hide();
 				//Carousel figure
-				var sliders = mui("#slider");
-				sliders.slider({'gotoItem': 0});
 				var imgurl0=imgsarr[0];
 				clickshare(comdityid,imgurl0);
+				mui.plusReady(function(){
+				    //获得slider插件对象
+				    var gallery = mui('.mui-slider');
+				        gallery.slider({
+				  	    interval:0,
+				    });
+				});
 			}
 			//products list
 			var prolistpage = null;
@@ -656,6 +661,7 @@
 					id: 'productslist.html'
 				});
 			});
+			
 			//messageshow end************/
 			//goods
 			function dianzan(bid) {
