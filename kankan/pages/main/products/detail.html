@@ -53,16 +53,17 @@
 			</div>
 		</div>
 		<div class="mui-content" style="display: none;">
-			<div class="mui-icon mui-icon-back mui-pull-left Arrow" id="leftarrow"></div>
+			<div class="mui-icon mui-icon-back mui-pull-left Arrow" id="leftarrow" onclick="goitem()"></div>
 			<div class="mui-icon mui-icon-forward mui-pull-left Arrow" style="margin-left: 80%;" id="rightarrow"></div>
 			<div id="slider" class="mui-slider">
 				<div class="mui-slider-group mui-slider-loop">
-					<!-- last -->
-					<div class="mui-slider-item mui-slider-item-duplicate firstimage imgboxs" align="center" style="">
-						<img src="" onerror="this.src='../../../images/nopic.jpg'">
-					</div>
+					
 					<!-- first -->
 					<div class="mui-slider-item mui-slider-item-duplicate lastimage imgboxs" align="center" style="">
+						<img src="" onerror="this.src='../../../images/nopic.jpg'">
+					</div>
+					<!-- last -->
+					<div class="mui-slider-item mui-slider-item-duplicate firstimage imgboxs" align="center" style="">
 						<img src="" onerror="this.src='../../../images/nopic.jpg'">
 					</div>
 				</div>
@@ -442,7 +443,7 @@
 					$("#leftarrow").hide();
 					$("#rightarrow").hide();
 				}
-				for(i = 0; i < imgsarr.length; i++) {
+				for(var i = 0; i < imgsarr.length; i++) {
 					var imgurl = imgsarr[i];
 					if(imgsarr[i] == "") {
 						imgurl = "../../../images/nopic.jpg";
@@ -457,7 +458,7 @@
 					}
 					$(".mui-slider-indicator").append(htmlfocus);
 				}
-				$(".firstimage").after(htmlimg);
+				$(".lastimage").before(htmlimg);
 				var goodcount = commodity.commodity_praise.praise_count;
 				$("#zanshu").html(goodcount);
 				var comentnum = commodity.commodity_levave_mess.leave_mess_count;
@@ -636,11 +637,8 @@
 				$(".mui-content").show();
 				$("#loading").hide();
 				//Carousel figure
-				var slider = mui("#slider");
-				slider.slider({
-					interval: 0,
-					gotoItem: 0
-				});
+				var sliders = mui("#slider");
+				sliders.slider({'gotoItem': 0});
 				var imgurl0=imgsarr[0];
 				clickshare(comdityid,imgurl0);
 			}
