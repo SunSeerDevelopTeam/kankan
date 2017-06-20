@@ -180,11 +180,20 @@
 														},
 														show: {
 															duration: 200
+														},
+														extras: {
+															formPageName: "login"
 														}
 													});
 												}, TextMessage.sharetitle, TextMessage.yes);
 											} else {
-												mui.back();
+												//mui.back();
+												var mainPage = plus.webview.getLaunchWebview();
+			       								mainPage.show();
+			       								var homepageWebView = plus.webview.getWebviewById('home.html');
+												mui.fire(homepageWebView, 'refresh', {
+													refresh: "canRefresh"
+												});
 											}
 										},
 										ng: function(data) {
@@ -194,18 +203,9 @@
 											waiting.close();
 										}
 									});
-								}, function(e) {
-								});
+								}, function(e) {});
 							}, function(e) {
-								var description = "";
-								if(Validator.isObj(e)) {
-									for(var i in e) {
-										var property = e[i];
-										description += i + " = " + property + "\n";
-									}
-								}
-								var alertInfo = Validator.isObj(e) ? description : e;
-								alert(alertInfo);
+								console.dir(e);
 								waiting.close();
 							});
 						});
@@ -223,7 +223,7 @@
 						console.log("click login btn");
 						var email = doc.getElementById('email').value.trim();
 						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-						if (email == "" || !reg.test(email)) {
+						if(email == "" || !reg.test(email)) {
 							plus.nativeUI.toast(TextMessage.email_error1);
 							return;
 						}
@@ -240,8 +240,13 @@
 								loginFlg = true;
 								setTimeout(function() {
 									waiting.close();
-									mui.back();
-									//plus.webview.currentWebview().close();
+									//mui.back();
+									var mainPage = plus.webview.getLaunchWebview();
+       								mainPage.show();
+       								var homepageWebView = plus.webview.getWebviewById('home.html');
+										mui.fire(homepageWebView, 'refresh', {
+											refresh: "canRefresh"
+										});
 								}, 500);
 							},
 							ng: function(data) {

@@ -15,13 +15,16 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title lang" data-locale="writeemail"></h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title lang" data-locale="writeemail"></h1>
 		</header>
-		<div style="text-align: left;margin-top: 50px;margin-bottom: -2.5em;"><p><font color="red">*</font><span class="lang" data-locale="emailwtext"></span></p></div>
+		<div style="text-align: left;margin-top: 50px;margin-bottom: -2.5em;">
+			<p>
+				<font color="red">*</font><span class="lang" data-locale="emailwtext"></span></p>
+		</div>
 		<div class="mui-content">
 			<form id="form1" name="form1" method="post" action="">
-	        	<div class="mui-input-group">
+				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label for="email" class="lang" data-locale="email"></label>
 						<input id='email' name="email" type="email" class="mui-input mui-input-clear lang" data-locale="please-input-email">
@@ -50,13 +53,15 @@
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
+			var formPageName;
 			mui.init({
-				beforeback: function() {
-			        var homePage = plus.webview.currentWebview().opener();
-					mui.fire(homePage, 'refreshlist');
-			    }
+//				beforeback: function() {
+//					var homePage = plus.webview.currentWebview().opener();
+//					mui.fire(homePage, 'refreshlist');
+//				}
 			});
-			mui.plusReady(function(){
+			mui.plusReady(function() {
+				formPageName = plus.webview.currentWebview().formPageName;
 				var sendVCodeBtn = document.getElementById('send-verification-code');
 				var canClick = true;
 				sendVCodeBtn.addEventListener('tap', function(event) {
@@ -78,6 +83,7 @@
 								i++;
 								sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
 								if(180 - i == 0) {
+									sendVCodeBtn.innerText = TextMessage.send_verification_code;
 									canClick = true;
 									clearInterval(updateText);
 								}
@@ -96,10 +102,10 @@
 									})
 									break;
 								default:
-							mui.toast(TextMessage.send_code_ng, {
-								duration: 'long',
-								type: 'div'
-							})
+									mui.toast(TextMessage.send_code_ng, {
+										duration: 'long',
+										type: 'div'
+									})
 									break;
 							}
 						},
@@ -110,10 +116,11 @@
 					});
 				});
 			});
-			function submits(){
-				var email=$("#email").val();
-				var code=$("#verificationCode").val();
-				if(email==""){
+
+			function submits() {
+				var email = $("#email").val();
+				var code = $("#verificationCode").val();
+				if(email == "") {
 					mui.toast(TextMessage.emailnull, {
 						duration: 'long',
 						type: 'div'
@@ -122,7 +129,7 @@
 					document.form1.email.focus();
 					return false;
 				}
-				if(code==""){
+				if(code == "") {
 					mui.toast(TextMessage.codenull, {
 						duration: 'long',
 						type: 'div'
@@ -131,9 +138,9 @@
 					document.form1.verificationCode.focus();
 					return false;
 				}
-				var params2={
-					"email":email,
-					"vc_code":code
+				var params2 = {
+					"email": email,
+					"vc_code": code
 				};
 				Repository.User.email_rgister_check(params2, {
 					ok: function(data) {
@@ -141,40 +148,45 @@
 							duration: 'long',
 							type: 'div'
 						});
-						//mui.back;
-						mui.openWindow({
-							id: 'user',
-							url:"../main/user/user.html"
-						});
+						if (formPageName === "login") {
+							var mainPage = plus.webview.getLaunchWebview();
+							mainPage.show();
+							var homeWebView = plus.webview.getWebviewById('home.html');
+							mui.fire(homeWebView, 'refresh', {
+								refresh: "canRefresh"
+							});
+						} else {
+							mui.back();
+						}
 					},
 					ng: function(data) {
 						console.log(data);
 						switch(data) {
 							case "1000":
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							})
-							break;
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
 							case "2014":
-							mui.toast(TextMessage.confirmcodeng, {
-								duration: 'long',
-								type: 'div'
-							})
-							break;
+								mui.toast(TextMessage.confirmcodeng, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
 							default:
-							mui.toast(TextMessage.updatemailng, {
-								duration: 'long',
-								type: 'div'
-							})
-									break;
-							}
-						},
-						error: function() {
-							waiting.close();
+								mui.toast(TextMessage.updatemailng, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
 						}
-					});
-				}
+					},
+					error: function() {
+						waiting.close();
+					}
+				});
+			}
 		</script>
 	</body>
 
