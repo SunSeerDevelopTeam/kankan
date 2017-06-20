@@ -21,6 +21,10 @@
 			.newsb{
 				background-color: #FFFFFF; 
 			}
+			.datetime{
+				text-align:right;font-size:14px;color:grey;
+				margin: 0.5em 0 -0.5em 0;
+			}
 		</style>
 	</head>
 
@@ -126,13 +130,14 @@
 				for(var j=0; j<messarr.length;j++){
 					var mess=messarr[j].message;
 					var mesid=messarr[j].msg_id;
+					var mesdate=messarr[j].date;
 				      mui('#pullrefresh').pullRefresh().endPullupToRefresh((num >= count)); //参数为true代表没有更多数据了。
 				      var table = document.body.querySelector('#OA_task_1');
 				      var cells = document.body.querySelectorAll('.mui-table-view');
 			        var li = document.createElement('li');
 			        li.className = 'mui-table-view-cell';
 			        li.id=mesid;
-			        li.innerHTML = '<div class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red deletenewstext"></a></div><div class="mui-slider-handle">'+mess+'</div>';
+			        li.innerHTML = '<div class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red deletenewstext"></a></div><div class="mui-slider-handle">'+mess+'<br/><div class="datetime">'+mesdate+'</div></div>';
 			        table.appendChild(li);
 				}
 				page=page*1+1;
