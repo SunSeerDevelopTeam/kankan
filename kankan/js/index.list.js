@@ -15,7 +15,7 @@ mui.init({
 			contentrefresh: TextMessage.loading,
 			contentdown: TextMessage.pull_up,
 			contentinit: TextMessage.pull_up,
-			contentnomore: TextMessage.no_data,
+			contentnomore: TextMessage.nomore,
 			callback: pullupRefresh
 		}
 	}

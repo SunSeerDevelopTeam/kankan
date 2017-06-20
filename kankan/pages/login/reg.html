@@ -284,7 +284,8 @@
 							plus.nativeUI.toast(TextMessage.password_notnull);
 							return;
 						}
-						if (6 > password.length || password.length > 16) {
+						var reg = ^[0-9a-zA-Z]{6,16}$
+						if (!reg.test(password)) {
 							plus.nativeUI.toast(TextMessage.password_error);
 							return;
 						}
