@@ -265,7 +265,7 @@ function createListItem(item, imgwidth) {
 		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
 		.appendFormat('<div class="item-img-box"><img class="lazy" data-original="{0}" style="{1}"></div>', item.img_flag.url, stylimg)
 		//.appendFormat('<img src="{0}">', item.img_flag)
-		.appendFormat('<p>{0}</p>', item.address)
+		.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
 		.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
 		.append('<div class="height-max mui-row contentbottom">')
