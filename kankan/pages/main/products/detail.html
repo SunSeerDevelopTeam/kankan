@@ -53,17 +53,16 @@
 			</div>
 		</div>
 		<div class="mui-content" style="display: none;">
-			<div class="mui-icon mui-icon-back mui-pull-left Arrow" id="leftarrow" onclick="goitem()"></div>
+			<div class="mui-icon mui-icon-back mui-pull-left Arrow" id="leftarrow"></div>
 			<div class="mui-icon mui-icon-forward mui-pull-left Arrow" style="margin-left: 80%;" id="rightarrow"></div>
 			<div id="slider" class="mui-slider">
-				<div class="mui-slider-group">
-					
-					<!-- first -->
-					<!--<div class="mui-slider-item mui-slider-item-duplicate lastimage imgboxs" align="center" style="">
-						<img src="" onerror="this.src='../../../images/nopic.jpg'">
-					</div>-->
+				<div class="mui-slider-group lunboimgbox">
 					<!-- last -->
 					<!--<div class="mui-slider-item mui-slider-item-duplicate firstimage imgboxs" align="center" style="">
+						<img src="" onerror="this.src='../../../images/nopic.jpg'">
+					</div>-->
+					<!-- first -->
+					<!--<div class="mui-slider-item mui-slider-item-duplicate lastimage imgboxs" align="center" style="">
 						<img src="" onerror="this.src='../../../images/nopic.jpg'">
 					</div>-->
 				</div>
@@ -443,7 +442,7 @@
 					$("#leftarrow").hide();
 					$("#rightarrow").hide();
 				}
-				for(var i = 0; i < imgsarr.length; i++) {
+				for(i = 0; i < imgsarr.length; i++) {
 					var imgurl = imgsarr[i];
 					if(imgsarr[i] == "") {
 						imgurl = "../../../images/nopic.jpg";
@@ -458,7 +457,7 @@
 					}
 					$(".mui-slider-indicator").append(htmlfocus);
 				}
-				$(".mui-slider-group").html(htmlimg);
+				$(".lunboimgbox").html(htmlimg);
 				var goodcount = commodity.commodity_praise.praise_count;
 				$("#zanshu").html(goodcount);
 				var comentnum = commodity.commodity_levave_mess.leave_mess_count;
@@ -637,15 +636,13 @@
 				$(".mui-content").show();
 				$("#loading").hide();
 				//Carousel figure
+				var slider = mui("#slider");
+				slider.slider({
+					interval: 0,
+					gotoItem: 0
+				});
 				var imgurl0=imgsarr[0];
 				clickshare(comdityid,imgurl0);
-				mui.plusReady(function(){
-				    //获得slider插件对象
-				    var gallery = mui('.mui-slider');
-				        gallery.slider({
-				  	    interval:0,
-				    });
-				});
 			}
 			//products list
 			var prolistpage = null;
@@ -661,7 +658,6 @@
 					id: 'productslist.html'
 				});
 			});
-			
 			//messageshow end************/
 			//goods
 			function dianzan(bid) {
@@ -700,10 +696,7 @@
 							});
 							mui.openWindow({
 								id: 'emai_summate',
-								url: "../../login/emai_summate.html",
-								extras: {
-									formPageName: "detail"
-								}
+								url: "../../login/emai_summate.html"
 							});
 						}
 					}
