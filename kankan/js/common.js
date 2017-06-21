@@ -18,7 +18,6 @@ var TRANS_STATUS = {
 	8: "请求终止",
 	9: "订单终止"
 }
-var isAlert = false;
 var Validator;
 (function(Validator) {
 	Validator.types = {
@@ -591,12 +590,6 @@ var Api;
 				if(DEBUG) {
 					alert("ajax error callback. error type is " + type);
 				}
-				if (!isAlert) {
-					plus.nativeUI.alert(TextMessage.not_network, function(e){
-						isAlert = false;
-					},TextMessage.sharetitle,TextMessage.sure);
-					isAlert = true;
-				}
 				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}
@@ -799,6 +792,13 @@ var Api;
 				break;
 			case '2009':
 				err_msg = TextMessage.errorCode_2009;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2010':
+				err_msg = TextMessage.not_exist_email;
 				mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'
@@ -1130,8 +1130,7 @@ var Repository;
 
 		function isLogin() {
 			var myid = plus.storage.getItem("myid");
-			if((myid == "" || myid == null) && !isAlert) {
-				isAlert = true;
+			if((myid == "" || myid == null)) {
 				var btnArray = [{
 					title: TextMessage.login
 				}, {
@@ -1153,7 +1152,6 @@ var Repository;
 									duration: 200
 								}
 							});
-							isAlert = false;
 							break;
 						case 2:
 							mui.openWindow({
@@ -1166,10 +1164,8 @@ var Repository;
 									duration: 200
 								}
 							});
-							isAlert = false;
 							break;
 						default:
-							isAlert = false;
 							break;
 					}
 				});
@@ -1442,7 +1438,7 @@ var TextMessage;
 	TextMessage.gallerychoose = language ? "アルバムから写真を選択する" : "从手机相册中选择";
 	TextMessage.chooseimage = language ? "写真を選択します" : "选择照片";
 	TextMessage.operation_error = language ? "自分で出品した商品は操作できません。" : "不允许对自己的商品操作";
-	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れた為、再び試みて下さい " : "您输入的验证码已过期，请重试！";
+	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れています。" : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "入力してください" : "不能为空，请重新输入";
 	TextMessage.errorCode_1000 = language ? "ログインしてください" : "请先登录";
 	TextMessage.errorCode_1003 = language ? "フォーマットは正しくありません、再入力してください" : "格式不正确,请重新输入";
