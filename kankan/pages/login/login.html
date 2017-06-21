@@ -227,7 +227,7 @@
 							plus.nativeUI.toast(TextMessage.email_error1);
 							return;
 						}
-						reg = ^[0-9a-zA-Z]{6,16}$
+						reg = /^[0-9a-zA-Z]{6,16}$/
 						var password = doc.getElementById('password').value.trim();
 						if (!reg.test(password)) {
 							plus.nativeUI.toast(TextMessage.password_error);
