@@ -583,9 +583,9 @@
 				} else if(status == 2) {
 					if(buyer_flag == 'true') {
 						if(trans_mode != 0) {
-							if(deliver == 0) {
+							if(seller_deliver == 0 ){
 								trans_flow('transUrgeDelive', params,'');
-							} else {
+							}else{
 								params.charity = 0;
 								trans_flow('transOrderReceipt', params,'');
 							}
@@ -607,10 +607,12 @@
 						}
 					} else {
 						if(trans_mode != 0) {
-							if(buyer_receipt == 0) {
+							if(buyer_deliver == 0 && buyer_receipt == 0){
+								trans_flow('transOrderLogustics', params,'');
+							}else if(buyer_deliver == 1 && buyer_receipt == 0) {
 								trans_flow('transUrgeReceipt', params,'');
 							}else{
-								trans_flow('transOrderLogustics', params,'');
+								trans_flow('transUrgeReceipt', params,'');
 							}
 						} else {
 							if(buyer_deliver == 0 && seller_deliver == 1) {

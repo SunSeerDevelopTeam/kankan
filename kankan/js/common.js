@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1542,7 +1542,7 @@ var TextMessage;
 	TextMessage.loading = language ? "ローディング…" : "正在加载...";
 	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
-	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
+	TextMessage.nomore = language ? "データがありません" : "没有更多数据了";
 	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
 	TextMessage.update = language ? "更新中" : "正在刷新";
 	TextMessage.pull_down = language ? "引っ張って更新" : "下拉可以刷新";
@@ -1578,7 +1578,7 @@ var TextMessage;
 	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
-	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
+	TextMessage.password_error = language ? "半角英文字・記号6～16桁で" : "密码长度不正确，请重新输入";
 	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
 	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
