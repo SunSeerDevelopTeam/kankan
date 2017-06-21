@@ -17,7 +17,7 @@ var JSLocale = {
 	"email": "<span style='color:red;display:inline;padding:0px'>*</span>アカウント",
 	"username": "<span style='color:red;'>*</span>ユーザー名",
 	"password": "<span style='color:red;'>*</span>パスワード",
-	"new_password": "<span style='color:red;'>*</span>新しいパスワード",
+	"new_password": "<span style='color:red;'>*</span>新パスワード",
 	"password-confirm": "<span style='color:red;'>*</span>確認パスワード",
 	"address": "<span style='color:red;'>*</span>都通府県",
 	"address-details": "未設定",
