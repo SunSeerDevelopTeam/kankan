@@ -181,19 +181,19 @@ function bindEventOnListViewItem() {
 	});
 
 	$(".logistics").on("tap", "a", function(event) {
-		if (!Repository.User.isLogin()) {
-			return;
+		if (Repository.User.isLogin()) {
+			mui.openWindow({
+				id: 'request',
+				url: "/pages/main/products/request.html",
+				waiting: {
+					autoShow: false
+				},
+				show: {
+					duration: 200
+				}
+			});
 		}
-		mui.openWindow({
-			id: 'request',
-			url: "/pages/main/products/request.html",
-			waiting: {
-				autoShow: false
-			},
-			show: {
-				duration: 200
-			}
-		});
+		
 	});
 	//$(".comm-like-num").off("tap");
 	$(".contentbottom").on("tap",".like-area", function(event) {
