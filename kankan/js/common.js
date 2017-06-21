@@ -1539,7 +1539,7 @@ var TextMessage;
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
 	TextMessage.email_error1 = language ? "メールアドレスが入力されていません。" : "邮箱输入不正确。";
-	TextMessage.loading = language ? "ローディング…" : "正在加载...";
+	TextMessage.loading = language ? "更新中" : "正在加载";
 	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
 	TextMessage.nomore = language ? "データがありません" : "没有更多数据了";

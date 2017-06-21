@@ -173,7 +173,8 @@ var JSLocale = {
 	"category_top_12":"チケット・クーポン",
 	"category_top_13":"自動車・オートバイ",
 	"category_top_14":"その他",
-	"quesreset":"リセット"
+	"quesreset":"リセット",
+	"nameplocder":"ユーザー名"
 }
 
 $(function() {
