@@ -240,11 +240,14 @@
 					},
 					ng: function(data) {
 						console.log(data);
+						Api.callback_ng(data);
 						if(data=="1000"|| data=="2002"){
 							$(".jiaoyihitext").hide();
+							mui.openWindow({
+								url:"../../login/login.html",
+								id:"login",
+							});
 						}
-						Api.callback_ng(data);
-						
 					}
 				});
 			});
