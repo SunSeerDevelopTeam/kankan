@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
