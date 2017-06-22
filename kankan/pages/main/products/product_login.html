@@ -45,10 +45,10 @@
 					<h5 class="ka_proloh5 lang" data-locale="commodity_name"></h5>
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell">
-							<input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40">
+							<input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40" onfocus="closepicker()" onblur="pickershow()">
 						</li>
 						<li class="mui-table-view-cell">
-							<textarea class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail"></textarea>
+							<textarea class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail" onfocus="closepicker()" onblur="pickershow()"></textarea>
 						</li>
 					</ul>
 				</div>
@@ -58,7 +58,7 @@
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell">
 							<div class="mui-navigate-right" id="showCityPicker">
-								<span class="ka_proinfo lang" data-locale="commodity_sorts"></span>
+								<span class="ka_proinfo lang" data-locale="commodity_sorts" ></span>
 								<div class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian1"></div>
 								<div id='sortResult' class="ui-alert mui-pull-right ka_sortname"></div>
 								<input type="hidden" name="classify_id" id="classify_id" value="" />
@@ -134,6 +134,19 @@
 	window.addEventListener("refresh", function(event) {
 		location.reload();
 	});
+	//click inpuit close picker
+	function closepicker(){
+		$(".mui-poppicker").hide();
+	}
+	//input lose focus show picker
+	function pickershow(){
+		$(".mui-poppicker").show();
+	}
+	//make input lose focus
+	function inputblur(){
+		document.getElementById('comm_name').blur();
+		document.getElementById('comm_detail').blur();
+	}
 	//edite image show
 	function imagepull(im,srcval){
 		var img = document.createElement("img");
@@ -406,6 +419,7 @@
 			var showCatePickerButton = doc.getElementById('showCityPicker');
 			var cateResult = doc.getElementById('sortResult');
 			showCatePickerButton.addEventListener('tap', function(event) {
+			  	inputblur();
 				categoryPicker.show(function(items) {
 					cateResult.innerText = items[0].text + " " + items[1].text;
 					document.getElementById("classify_id").value = items[1].value;
@@ -416,13 +430,13 @@
 			var showstatePickerButton = doc.getElementById('prostuat');
 			var stauteResult = doc.getElementById('stauteResult');
 			showstatePickerButton.addEventListener('tap', function(event) {
+				inputblur();
 				statePicker.show(function(items) {
 					stauteResult.innerText = items[0].text;
 					document.getElementById('comm_state').value = items[0].value;
 					document.getElementById("bitian2").style.display = "none";
 				});
 			}, false);
-			
 		}
 	});
 })(mui, document);
@@ -624,6 +638,7 @@ function publishs() {
 //************************buy way choose*****************************
 /*exchange*/
 document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
+	inputblur();
 	var exchangeval=$("#exchange").val();
 	if(exchangeval=="0"){
 		$("#exchange").val("1");
@@ -642,6 +657,7 @@ document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
 });
 /*point*/
 document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
+	inputblur();
 	var businessval=$("#business").val();
 	if(businessval=="0"){
 		$("#business").val("1");
@@ -661,6 +677,7 @@ document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
 });
 /*free*/
 document.getElementById('freebuybtn').addEventListener('tap', function(e) {
+	inputblur();
 	var gratisval=$("#gratis").val();
 	if(gratisval=="0"){
 		$("#gratis").val("1");
