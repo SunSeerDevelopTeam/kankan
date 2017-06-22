@@ -379,6 +379,11 @@
 
 					var showCityPicker = function() {
 						Log.i("click cityPicker");
+						doc.getElementById('email').blur();
+						doc.getElementById('username').blur();
+						doc.getElementById('password').blur();
+						doc.getElementById('passwordConfirm').blur();
+						doc.getElementById('verificationCode').blur();
 						cityPicker.show(function(items) {
 							var cityElement = doc.getElementById('city');
 							cityElement.value = items[0].text;
