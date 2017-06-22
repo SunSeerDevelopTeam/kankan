@@ -13,7 +13,15 @@
 			body {
 				background-color: #efeff4;
 			}
-			
+			.wrapper{
+		        position:absolute;
+		       top:1px;
+		        left:0px;
+		        right:0px;
+		        bottom:0px;
+		        overflow:auto;
+		        -webkit-overflow-scrolling : touch;
+		    }
 			.input-bottom{
 		        position:fixed;
 		        bottom:0px;
@@ -23,6 +31,13 @@
 		        background-color:#fff;
 		        z-index:1;
 		    }
+		    .input-top{
+		        position:relative;
+		        top:0px;
+		        left:0px;
+		        width:100%;
+		        z-index:1;
+		    }
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
 		<link rel="stylesheet" href="../../css/kankan_home.css">
@@ -30,13 +45,13 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header class="mui-bar mui-bar-nav input-top">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-				<font size="3" class="lang" data-locale="back"></font>
+				<font size="3" class="lang" data-locale="back">aaaa</font>
 			</a>
 			<h1 class="mui-title"><span class="lang" data-locale="transaction"></span></h1>
 		</header>
-		<div class="mui-content">
+		<div class="mui-content wrapper">
 			<div id="mui-page-content">
 				<div class="tran-page">
 					<div class="tran-body" style="margin-bottom:60px;">
@@ -60,14 +75,14 @@
 							</li>
 						</ul>
 						<ul class="tran-button">
-							<li class="tran-button-sell">
+							<li class="tran-button-sell" style="display:none;">
 								<div>
-									<font size="2" vertical-align="middle" onclick="stopTransaction();">交易中止</font>
+									<font size="2" vertical-align="middle" onclick="stopTransaction();"></font>
 								</div>
 							</li>
 							<!--<li class="tran-button-middle">
 							</li>-->
-							<li class="tran-button-buy">
+							<li class="tran-button-buy" style="display:none;">
 								<div>
 									<font size="2" color="#FFFFF" vertical-align="middle"></font>
 								</div>
@@ -416,8 +431,10 @@
 				};
 				var buyer_id = transinfo[0].issue_user_id;
 				if(trans_type == 0) {
+					$(".tran-button-sell").show();
 					$(".tran-button-sell font").text(TextMessage.requestStop);
 				} else {
+					$(".tran-button-sell").show();
 					$(".tran-button-sell font").text(TextMessage.transStop);
 				}
 				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
@@ -445,6 +462,7 @@
 					if(appraise == 1){
 						$(".tran-button").hide();
 					}else{
+						$(".tran-button-buy").show();
 						$(".tran-button-buy font").text(TextMessage.transEve);	
 					}
 				} else if(status == 9){
@@ -452,25 +470,31 @@
 						$(".tran-button").hide()
 					}else{
 						$(".tran-button-sell").hide();
+						$(".tran-button-buy").show();
 						$(".tran-button-buy font").text(TextMessage.transEve);	
 					}
 				}else if(status == 0) {
 					if(trans_mode > 0) {
 						if(buyer_flag == 'false') {
+							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transConfirm);
 						} else {
 							if(trans_mode == 1) {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transWaitConfirm);
 							} else {
 								//$(".tran-button-buy font").text("订单申请");
 								$(".tran-button-buy").hide();
+								$(".tran-button-sell").show();
 								$(".tran-button").css('text-align', 'center');
 							}
 						}
 					} else {
 						if(buyer_flag == 'false') {
+							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transConfirm);
 						} else {
+							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transWaitConfirm);
 						}
 
@@ -478,29 +502,38 @@
 				} else if(status == 1) {
 					if(buyer_flag == 'true') {
 						if(trans_type == 0) {
+							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transOrder);
 						} else {
 							if(trans_mode == 0) {
 								if(buyer_deliver == 1 && seller_deliver == 0) {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 								} else if(buyer_deliver == 1 && seller_deliver == 1) {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transReceipt);
 								} else {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transDelive);
 								}
 							} else {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transReceipt);
 							}
 						}
 					} else {
 						if(trans_type == 0) {
+							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transWaitOrder);
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transReceipt);
 							} else {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
 						}
@@ -509,44 +542,58 @@
 					if(buyer_flag == 'true') {
 						if(trans_mode != 0) {
 							if(deliver == 0) {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transReceipt);
 							}
 						} else {
 							if(buyer_deliver == 1 && seller_deliver == 0) {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
 								if(buyer_receipt == 0) {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transReceipt);
 								} else if(buyer_receipt == 1 && seller_receipt == 0) {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
 								} else {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transFinish);
 								}
 							} else {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
 						}
 					} else {
 						if(trans_mode != 0) {
 							if(deliver == 0) {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							} else {
-								$(".tran-button-buy font").text(TextMessage.transWaitReceipt);
+								$(".tran-button-buy").show();
+								$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
 							}
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
 								if(seller_receipt == 0) {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transReceipt);
 								} else if(buyer_receipt == 1 && seller_receipt == 0) {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
 								} else {
+									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transFinish);
 								}
 							} else {
+								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
 						}
@@ -583,9 +630,9 @@
 				} else if(status == 2) {
 					if(buyer_flag == 'true') {
 						if(trans_mode != 0) {
-							if(deliver == 0) {
+							if(seller_deliver == 0 ){
 								trans_flow('transUrgeDelive', params,'');
-							} else {
+							}else{
 								params.charity = 0;
 								trans_flow('transOrderReceipt', params,'');
 							}
@@ -607,8 +654,12 @@
 						}
 					} else {
 						if(trans_mode != 0) {
-							if(deliver == 0) {
+							if(buyer_deliver == 0 && buyer_receipt == 0){
 								trans_flow('transOrderLogustics', params,'');
+							}else if(buyer_deliver == 1 && buyer_receipt == 0) {
+								trans_flow('transUrgeReceipt', params,'');
+							}else{
+								trans_flow('transUrgeReceipt', params,'');
 							}
 						} else {
 							if(buyer_deliver == 0 && seller_deliver == 1) {
@@ -801,7 +852,7 @@
 							}
 						});
 					} else {
-						alert(TextMessage.transContinue);
+						mui.alert(TextMessage.transContinue);
 					}
 				})
 			}

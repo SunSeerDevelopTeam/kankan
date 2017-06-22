@@ -249,7 +249,7 @@
 								</div>
 								<div class="ka_usernicknamebox">
 								<h6 class="lang" data-locale="uinfousername"></h6>
-								<input type="text" name="nickname" id="nickname" value="" placeholder="mary" class="ka_userfontsize" maxlength="50" />
+								<input type="text" name="nickname" id="nickname" value="" placeholder="" data-locale="nameplocder" class="ka_userfontsize lang" maxlength="50" />
 								</div>
 								<h6 class="lang" data-locale="introducetext"></h6>
 								<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500"></textarea>
@@ -377,6 +377,30 @@
 			}
 			
 		});
+		function compressImg(path) {
+			var currenttime = Date.parse(new Date());
+			plus.zip.compressImage({
+					src: path,
+					dst: "_doc/" + currenttime + ".jpg",
+					quality: 20,
+					overwrite: true,
+					format: "jpg",
+					width: "300px",
+					height: "auto"
+				},
+				function(event) {
+					console.log("Compress success!");
+					var target = event.target;
+					var size = event.size; // （Byte）
+					var width = event.width; // px
+					var height = event.height; // px
+					console.log(size);
+					uploadimage(target)
+				},
+				function(error) {
+					alert("Compress error!" + error.message);
+				});
+		}
 		function getImage() {
 			var c = plus.camera.getCamera();
 			c.captureImage(function(e) {
@@ -384,8 +408,8 @@
 					var localurl = entry.toLocalURL();
 					$(".headimg").attr("src",localurl);
 					$("#headimgupdate").val(localurl);
-					uploadimage(localurl);
-					//compressImg(localurl);
+					//uploadimage(localurl);
+					compressImg(localurl);
 				}, function(e) {
 					console.log("Read the picture file error：" + e.message);
 				});
@@ -402,7 +426,8 @@
 					var localURL2 = entry.toLocalURL();
 					$(".headimg").attr("src",localURL2);
 					$("#headimgupdate").val(localURL2);
-					uploadimage(localURL2);
+					compressImg(localURL2);
+					//uploadimage(localURL2);
 		
 				}, function(e) {
 					console.log("Read photo file error：" + e.message);

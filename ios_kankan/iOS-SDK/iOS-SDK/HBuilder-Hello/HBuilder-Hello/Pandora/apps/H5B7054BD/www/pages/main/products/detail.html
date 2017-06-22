@@ -19,7 +19,7 @@
 				-moz-opacity: 0.6;
 				opacity: 0.6;
 				position: absolute;
-				top: 160px;
+				top: 40%;
 				left: 0;
 				z-index: 2;
 			}
@@ -53,18 +53,16 @@
 			</div>
 		</div>
 		<div class="mui-content" style="display: none;">
-			<div class="mui-icon mui-icon-back mui-pull-left Arrow" id="leftarrow"></div>
-			<div class="mui-icon mui-icon-forward mui-pull-left Arrow" style="margin-left: 80%;" id="rightarrow"></div>
 			<div id="slider" class="mui-slider">
-				<div class="mui-slider-group mui-slider-loop">
+				<div class="mui-slider-group lunboimgbox">
 					<!-- last -->
-					<div class="mui-slider-item mui-slider-item-duplicate firstimage imgboxs" align="center" style="">
+					<!--<div class="mui-slider-item mui-slider-item-duplicate firstimage imgboxs" align="center" style="">
 						<img src="" onerror="this.src='../../../images/nopic.jpg'">
-					</div>
+					</div>-->
 					<!-- first -->
-					<div class="mui-slider-item mui-slider-item-duplicate lastimage imgboxs" align="center" style="">
+					<!--<div class="mui-slider-item mui-slider-item-duplicate lastimage imgboxs" align="center" style="">
 						<img src="" onerror="this.src='../../../images/nopic.jpg'">
-					</div>
+					</div>-->
 				</div>
 				<div class="mui-slider-indicator">
 				</div>
@@ -203,6 +201,7 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			var commodity_id;
+			var _w = parseInt($(window).width()); //获取浏览器的宽度
 			mui.init({
 				swipeBack: false,
 				preloadPages: [{
@@ -335,9 +334,10 @@
 			
 			//share end***********/
 			function emptyhtml() {
+				$(".lunboimgbox").empty();
 				$(".mui-slider-indicator").empty();
-				$(".firstimage img").attr("src", "");
-				$(".lastimage img").attr("src", "");
+//				$(".firstimage img").attr("src", "");
+//				$(".lastimage img").attr("src", "");
 				$(".sliderimg").remove();
 				$("#lastremmondul").empty();
 				$("#firstremmondul").empty();
@@ -357,7 +357,7 @@
 						Log.d("success");
 						messageshow(data);
 						clickprocomment();
-						imageshow();
+						//imageshow();
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -370,16 +370,15 @@
 			}
 			//Picture processing
 			function imageshow() {
-				var _w = parseInt($(window).width()); //获取浏览器的宽度
-				//console.log(_w);
-				$("#slider img").each(function(i) {
+				$(".lunboimgbox img").each(function(i) {
 					var img = $(this);
 					var realWidth = $(this).width(); //图片真实的宽度
 					var realHeight = $(this).height(); //图片真实的高度
 					var cha = realWidth - _w * 1;
+					console.log("_w:"+_w+"realWidth:"+realWidth+"i:"+i+"cha:"+cha);
 					if(cha>0){
 						var bival = cha / 2;
-						$(this).attr("style", "height: 320px; width: auto;vertical-align:middle;margin-left:-" + bival + "px;");
+						$(this).attr("style", "max-height: 320px; width: auto;vertical-align:middle;margin-left:-" + bival + "px;");
 					}
 				});
 			}
@@ -431,24 +430,41 @@
 				var htmlfocus = "";
 				var imglength = imgsarr.length;
 				var la = imgsarr.length - 1 * 1;
-				var first = '<img src="' + imgsarr[0] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
-				var last = '<img src="' + imgsarr[la] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
-				$(".firstimage").html(last);
-				$(".lastimage").html(first);
-				if(imglength > 1) {
-					$("#leftarrow").show();
-					$("#rightarrow").show();
-				} else {
-					$("#leftarrow").hide();
-					$("#rightarrow").hide();
-				}
-				for(i = 0; i < imgsarr.length; i++) {
-					var imgurl = imgsarr[i];
+				//var first = '<img src="' + imgsarr[0] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				//var last = '<img src="' + imgsarr[la] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
+				//$(".firstimage").html(last);
+				//$(".lastimage").html(first);
+				var leftpx=0;
+				for(var i = 0; i < imgsarr.length; i++) {
+					var forward=i+1*1;
+					var back=i-1*1;
+					var imgurl = imgsarr[i].url;
+					var realwidth=imgsarr[i].width;
+					var realheight=imgsarr[i].height;
+					if(realheight<320){
+						var biheight=realheight;
+					}else{
+						var biheight=320;
+					}
+					var ribi=realwidth/realheight;
+					var showwidth=biheight*ribi;
+					var cha=showwidth-_w;
+					if(cha>0){
+						leftpx=cha/2;
+					}else{
+						leftpx=0;
+					}
 					if(imgsarr[i] == "") {
 						imgurl = "../../../images/nopic.jpg";
 					}
 					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center">';
-					htmlimg += '<img src="' + imgurl + '" style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					if(i>0){
+						htmlimg +='<div class="mui-icon mui-icon-back mui-pull-left Arrow leftarrow" onclick="goitem('+back+')"></div>';
+					}
+					htmlimg += '<img src="' + imgurl + '" style="max-height: 320px; width: auto;vertical-align:middle;margin-left:-'+leftpx+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					if(i<la){
+						htmlimg +='<div class="mui-icon mui-icon-forward mui-pull-left Arrow rightarrow" style="margin-left: 80%;" onclick="goitem('+forward+')"></div>';
+					}
 					htmlimg += '</div>';
 					if(i == 0) {
 						var htmlfocus = '<div class="mui-indicator mui-active"></div>';
@@ -457,7 +473,14 @@
 					}
 					$(".mui-slider-indicator").append(htmlfocus);
 				}
-				$(".firstimage").after(htmlimg);
+				$(".lunboimgbox").html(htmlimg);
+				if(imglength > 1) {
+					$(".leftarrow").show();
+					$(".rightarrow").show();
+				} else {
+					$(".leftarrow").hide();
+					$(".rightarrow").hide();
+				}
 				var goodcount = commodity.commodity_praise.praise_count;
 				$("#zanshu").html(goodcount);
 				var comentnum = commodity.commodity_levave_mess.leave_mess_count;
@@ -659,6 +682,11 @@
 				});
 			});
 			//messageshow end************/
+			//go item
+			function goitem(index){
+				var gallery = mui('#slider');
+				gallery.slider().gotoItem(index);
+			}
 			//goods
 			function dianzan(bid) {
 				var codid = $(".kankan_zanbox").attr("id");
@@ -696,10 +724,7 @@
 							});
 							mui.openWindow({
 								id: 'emai_summate',
-								url: "../../login/emai_summate.html",
-								extras: {
-									formPageName: "detail"
-								}
+								url: "../../login/emai_summate.html"
 							});
 						}
 					}

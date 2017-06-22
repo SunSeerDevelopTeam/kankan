@@ -15,7 +15,7 @@ mui.init({
 			contentrefresh: TextMessage.loading,
 			contentdown: TextMessage.pull_up,
 			contentinit: TextMessage.pull_up,
-			contentnomore: TextMessage.no_data,
+			contentnomore: TextMessage.nomore,
 			callback: pullupRefresh
 		}
 	}
@@ -181,19 +181,19 @@ function bindEventOnListViewItem() {
 	});
 
 	$(".logistics").on("tap", "a", function(event) {
-		if (!Repository.User.isLogin()) {
-			return;
+		if (Repository.User.isLogin()) {
+			mui.openWindow({
+				id: 'request',
+				url: "/pages/main/products/request.html",
+				waiting: {
+					autoShow: false
+				},
+				show: {
+					duration: 200
+				}
+			});
 		}
-		mui.openWindow({
-			id: 'request',
-			url: "/pages/main/products/request.html",
-			waiting: {
-				autoShow: false
-			},
-			show: {
-				duration: 200
-			}
-		});
+		
 	});
 	//$(".comm-like-num").off("tap");
 	$(".contentbottom").on("tap",".like-area", function(event) {
@@ -265,7 +265,7 @@ function createListItem(item, imgwidth) {
 		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
 		.appendFormat('<div class="item-img-box"><img class="lazy" data-original="{0}" style="{1}"></div>', item.img_flag.url, stylimg)
 		//.appendFormat('<img src="{0}">', item.img_flag)
-		.appendFormat('<p>{0}</p>', item.address)
+		.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
 		.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
 		.append('<div class="height-max mui-row contentbottom">')

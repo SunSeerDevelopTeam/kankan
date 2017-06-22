@@ -7,8 +7,8 @@
 	"id": "H5B7054BD",
 	"name": "kankan",
 	"version": {
-		"name": "0.0.5",
-		"code": "5"
+		"name": "0.0.9",
+		"code": "9"
 	},
 	"description": "",
 	"icons": {
@@ -902,7 +902,8 @@
 					"css/mui.min.css",
 					"css/icons-extra.css",
 					"js/index.list.js",
-					"images/request.png"
+					"images/request.png",
+					"images/nopic.jpg"
 				],
 				"refer": [
 					"pages/main/products/request.html"

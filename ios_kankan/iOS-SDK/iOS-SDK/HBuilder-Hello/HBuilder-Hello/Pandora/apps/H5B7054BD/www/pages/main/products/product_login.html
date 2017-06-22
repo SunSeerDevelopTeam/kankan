@@ -428,11 +428,11 @@
 })(mui, document);
 //email check
 function publishscheck(){
-	if (!Repository.User.isEmptyEmail()) {
-		 return;
-	}else{
+	//if (!Repository.User.isEmptyEmail()) {
+	//	 return;
+	//}else{
 		publishs();
-	}
+	//}
 }
 //submit form
 function publishs() {
@@ -465,7 +465,7 @@ function publishs() {
 		return false;
 	}
 	if(comm_name.trim().length>40){
-		mui.toast(TextMessage.TextMessage.pro_namelength, {
+		mui.toast(TextMessage.pro_namelength, {
 			duration: 'long',
 			type: 'div'
 		});
