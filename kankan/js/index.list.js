@@ -104,6 +104,8 @@ function getDataFromServer(params, callback) {
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 		},
 		error: function() {
+			plus.nativeUI.alert(TextMessage.not_network, function(e){
+			},TextMessage.sharetitle,TextMessage.sure);
 			mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 		}
@@ -143,7 +145,8 @@ function createListView(data) {
 	}
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
-		plus.nativeUI.toast(TextMessage.no_data);
+		var htmlText = "<br/><div style='text-align:center;'>該当する商品がみつかりません。</div><br/><div style='text-align:center;'>これからの出品に期待してくだい。</div><br/>";
+		table.innerHTML = htmlText;
 		return;
 	}
 	data.data.commd.forEach(function(item) {

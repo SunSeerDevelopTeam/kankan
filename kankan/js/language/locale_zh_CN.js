@@ -175,7 +175,9 @@ var JSLocale = {
 	"category_top_13":"汽车/摩托车",
 	"category_top_14":"其他",
 	"quesreset":"重置",
-	"nameplocder":"用户名"
+	"nameplocder":"用户名",
+	"no_data_tips_1":"该分类目前没有商品。",
+	"no_data_tips_2":"敬请期待新品上线。"
 }
 
 $(function() {

@@ -233,6 +233,8 @@
 							plus.nativeUI.toast(TextMessage.password_error);
 							return;
 						}
+						doc.getElementById('email').blur();
+						doc.getElementById('password').blur();
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;

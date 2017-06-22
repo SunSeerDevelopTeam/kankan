@@ -27,7 +27,7 @@ var JSLocale = {
 	"register-tips": "あとからプロフィールは変更可能です",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
-	"please-input-password": "半角英文字・記号6～16桁で",
+	"please-input-password": "半角英字・数字(6～16桁)",
 	"please-confirm-password": "パスワード確認",
 	"please-input-introduction-code": "半角英数字6位",
 	"please-input-verification-code": "認識コードを入力",
@@ -174,7 +174,9 @@ var JSLocale = {
 	"category_top_13":"自動車・オートバイ",
 	"category_top_14":"その他",
 	"quesreset":"リセット",
-	"nameplocder":"ユーザー名"
+	"nameplocder":"ユーザー名",
+	"no_data_tips_1":"該当する商品がみつかりません。",
+	"no_data_tips_2":"これからの出品に期待してくだい。"
 }
 
 $(function() {
