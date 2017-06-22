@@ -1584,6 +1584,7 @@ var TextMessage;
 	TextMessage.nicknamenull = language ? "ユーザー名未入力です。" : "用户名不能为空";
 	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
 	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
+	TextMessage.pwdudsuccess = language ? "パスワードを再発行しました。" : "密码更新成功";
 
 })(TextMessage || (TextMessage = {}));
 var Entity;
