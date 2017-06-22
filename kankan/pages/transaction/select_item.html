@@ -11,18 +11,17 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="commodity_select"></h1>
 			<div onclick="select_goods();">
 				<a class="mui-icon mui-icon  mui-icon-right-nav mui-pull-right jiaoyihitext"><span style="font-size: 14px;" class="lang" data-locale="register"></span></a>
 			</div>
 		</header>
-		</header>
 		<div class="mui-content" style="padding-top:30px;">
 			<ul class="mui-table-view mui-grid-view goods-list" style="padding-top:10px;">
 
 			</ul>
+			<input type="hidden" name="comm_id" value="" id="comm_id" />
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/jquery-3.2.0.min.js"></script>
@@ -36,8 +35,17 @@
 				var self = plus.webview.currentWebview();
 				comm_id = self.commodity_id;
 				mode = self.mode;
+				$("#comm_id").val(comm_id);
 				get_goods_list();
 			})
+			mui(".mui-bar-nav").on("tap",".mui-action-back",function(){
+				var view = plus.webview.currentWebview().opener();
+		    	var cmid=$("#comm_id").val();
+				mui.fire(view,'cid',{
+				    id:cmid
+				});
+				mui.back();
+			});
 			var imgwidth = parseInt($(window).width()) / 3 - 17;
 
 			function get_goods_list(params) {

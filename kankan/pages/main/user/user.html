@@ -19,6 +19,16 @@
 			.pimgbox{
 				width:100%;height:76px;text-align:center;border:1px solid #ffffff;overflow:hidden;
 			}
+			.stautestext{
+				background-color: #F0AD4E;
+				margin-top: 1em;
+				position: absolute;
+				opacity: 0.7;
+				padding: 0 0.5em;
+				color: #FFFFFF;
+				font-size: 12px;
+				
+			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
@@ -251,8 +261,8 @@
 								<h6 class="lang" data-locale="uinfousername"></h6>
 								<input type="text" name="nickname" id="nickname" value="" placeholder="" data-locale="nameplocder" class="ka_userfontsize lang" maxlength="50" />
 								</div>
-								<h6 class="lang" data-locale="introducetext"></h6>
-								<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500"></textarea>
+								<h6 class="lang" data-locale="introducetext" style="display: none;"></h6>
+								<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500" style="display: none;"></textarea>
 								<h6 class="lang" data-locale="userlanguage"></h6>
 								<div class="backgroundwhite">
 									<div class="mui-input-row mui-checkbox ">
@@ -575,6 +585,7 @@
 				var commeximg_url=exhibit_commdata[ex].img_url;
 				var realwidth=exhibit_commdata[ex].comm_img_width;
 				var realheight=exhibit_commdata[ex].comm_img_height;
+				var commstatus=exhibit_commdata[ex].status;
 				var oribi=realheight/realwidth;
 				var showheight=imgwidth*oribi;
 				var cha1=showheight-76;
@@ -583,8 +594,15 @@
 				}else{
 					toppx=0;
 				}
-				
-				exhibit_html+='<li class="user-goods-grid codedite">';
+				if(commstatus==0){
+					var classsort="codedite";
+				}else{
+					var classsort="detail";
+				}
+				exhibit_html+='<li class="user-goods-grid '+classsort+'">';
+				if(commstatus!=0){
+					exhibit_html+='<div class="stautestext">'+TextMessage.tranStatusRequest+'</div>';
+				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
 				exhibit_html+='<div class="pimgbox"><img style="width: 100%;margin-top:-'+toppx+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				exhibit_html+='</a>';

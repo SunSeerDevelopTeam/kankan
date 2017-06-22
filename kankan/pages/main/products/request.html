@@ -69,6 +69,10 @@
 		<script src="../../../js/common.js"></script>
 		<script>
 			mui.init();
+			window.addEventListener('requestpage', function(event) {
+				self.location.reload();
+				
+			});
 			var imgwidth=parseInt($(window).width())/3-17;
 			var transpro="";
 			var otranspro="";

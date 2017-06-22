@@ -55,22 +55,22 @@
 			<div id="mui-page-content">
 				<div class="tran-page">
 					<div class="tran-body" style="margin-bottom:60px;">
-						<div class="tran-name-middle-status mui-center">
+						<div class="tran-name-middle-status mui-center" style="display:none;">
 							<font size="2" color="#ffffff" vertical-align="middle"></font>
 						</div>
-						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:0px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user">
+						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user" style="height:85px;">
 
 							</li>
 							<li class="tran-pic-middle" style="margin-left:10px;">
 								<img height="24px" width="24px" src="../../images/xinhuan.png" />
 							</li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user" style="height:85px;">
 
 							</li>
 						</ul>
-						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:0px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5">
+						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5" style="height:85px;">
 
 							</li>
 						</ul>
@@ -112,7 +112,7 @@
 								</a>
 							</li>
 						</ul>-->
-						<ul class="tran-distribution">
+						<ul class="tran-distribution" style="display:none;">
 							<li class="tran-distribution-law logisticli">
 								<div class="tran-distribution-law-detail">
 									<a href="../setting/specialbus.html">
@@ -160,6 +160,7 @@
 				plus.webview.close(preView);
 				showRequestDetail();
 			})
+			var imgwidth = parseInt($(window).width()) / 2 - 20;
 			//setInterval(showRequestDetail, 10000, "");
 			function submitChat() {
 				var chatMsg = $("#msg").val();
@@ -259,6 +260,18 @@
 						seller_comm_name = commdinfo[goods].comm_name;
 						seller_comm_info.push(commdinfo[goods]);
 					}
+					var imgWidth = commdinfo[goods].width;
+					var imgHeight = commdinfo[goods].height;
+					var hwhpercent = imgHeight / imgWidth;
+					var top_marign = 0;
+					var showheight = imgwidth * hwhpercent;
+					var cha1 = showheight - 100;
+					if(cha1 > 0) {
+						top_marign = cha1 / 2;
+					} else {
+						top_marign = 0;
+					}
+					var imgstyle = 'height: auto;width:100%;margin-top:-' + top_marign + 'px;';
 				}
 
 				var buyer_flag = false;
@@ -274,7 +287,7 @@
 						if(seller_comm_info.length > 1) {
 							seller_msg += '<img src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 						}
-						seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+						seller_msg += '<img style="'+imgstyle+'" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 						seller_msg += '</a>';
 						seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
 						seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
@@ -287,7 +300,7 @@
 					if(buyer_comm_info.length > 1) {
 						buyer_msg += '<img id="moreicon" src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 					}
-					buyer_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + buyer_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+					buyer_msg += '<img style="'+imgstyle+'" class="mui-media-object" src="' + buyer_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 					buyer_msg += '</a>';
 					buyer_msg += '<input type="hidden" name="buyer_commodity_id" value="' + buyer_comm_id + '">';
 					buyer_msg += '<input type="hidden" id="buyer_user_id" name="buyer_user_id" value="' + buyer_id + '">';
@@ -306,7 +319,7 @@
 					seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
 					seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
 					seller_msg += '</div>';
-					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+					seller_msg += '<img style="'+imgstyle+'" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 					seller_msg += '</a>';
 					$(".other li").html(seller_msg);
 					$(".other li").attr("style","margin-right:20px;");
@@ -367,6 +380,7 @@
 			mui(".exchange").on('tap', '.cur-user', function() {
 				var cur_user_id = $("#myid").val();
 				var trans_type = $("#trans_type").val();
+				alert(trans_type);
 				if(trans_type == 1) return false;
 				var params = {
 					"transid": trans_id
@@ -600,7 +614,11 @@
 					}
 				}
 			}
-
+			mui(".mui-bar-nav").on("tap","a",function(){
+				var view = plus.webview.currentWebview().opener();
+				mui.fire(view,'requestpage');
+				mui.back();
+			});
 			mui(".tran-button-buy").on('tap', 'div', function() {
 				var params = {
 					"transid": trans_id
@@ -758,6 +776,8 @@
 							}else if(trans_status == 9){
 								tranStatusVal = TextMessage.transStop;								
 							}
+							$('.tran-distribution').show();
+							$(".tran-name-middle-status").show();
 							$(".tran-name-middle-status font").html(tranStatusVal);
 
 						}

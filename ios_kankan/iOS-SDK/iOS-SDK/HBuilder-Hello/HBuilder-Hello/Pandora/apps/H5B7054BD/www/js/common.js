@@ -18,7 +18,6 @@ var TRANS_STATUS = {
 	8: "请求终止",
 	9: "订单终止"
 }
-var isAlert = false;
 var Validator;
 (function(Validator) {
 	Validator.types = {
@@ -472,7 +471,7 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			return "http://210.189.72.25:7998";
+			return "http://www.kankann.jp:7998";
 		}
 	}
 
@@ -591,12 +590,6 @@ var Api;
 				if(DEBUG) {
 					alert("ajax error callback. error type is " + type);
 				}
-				if (!isAlert) {
-					plus.nativeUI.alert(TextMessage.not_network, function(e){
-						isAlert = false;
-					},TextMessage.sharetitle,TextMessage.sure);
-					isAlert = true;
-				}
 				if(Validator.isFunc(callback.error)) callback.error();
 				$d.reject();
 			}
@@ -691,6 +684,9 @@ var Api;
 				break;
 			case '1003':
 				err_msg = TextMessage.errorCode_1003;
+				if (key == Api.Params.email) {
+					err_msg = key + err_msg;
+				}
 				mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'
@@ -796,6 +792,13 @@ var Api;
 				break;
 			case '2009':
 				err_msg = TextMessage.errorCode_2009;
+				mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+				});
+				break;
+			case '2010':
+				err_msg = TextMessage.not_exist_email;
 				mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'
@@ -1127,8 +1130,7 @@ var Repository;
 
 		function isLogin() {
 			var myid = plus.storage.getItem("myid");
-			if((myid == "" || myid == null) && !isAlert) {
-				isAlert = true;
+			if((myid == "" || myid == null)) {
 				var btnArray = [{
 					title: TextMessage.login
 				}, {
@@ -1150,7 +1152,6 @@ var Repository;
 									duration: 200
 								}
 							});
-							isAlert = false;
 							break;
 						case 2:
 							mui.openWindow({
@@ -1163,10 +1164,8 @@ var Repository;
 									duration: 200
 								}
 							});
-							isAlert = false;
 							break;
 						default:
-							isAlert = false;
 							break;
 					}
 				});
@@ -1439,7 +1438,7 @@ var TextMessage;
 	TextMessage.gallerychoose = language ? "アルバムから写真を選択する" : "从手机相册中选择";
 	TextMessage.chooseimage = language ? "写真を選択します" : "选择照片";
 	TextMessage.operation_error = language ? "自分で出品した商品は操作できません。" : "不允许对自己的商品操作";
-	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れた為、再び試みて下さい " : "您输入的验证码已过期，请重试！";
+	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れています。" : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "入力してください" : "不能为空，请重新输入";
 	TextMessage.errorCode_1000 = language ? "ログインしてください" : "请先登录";
 	TextMessage.errorCode_1003 = language ? "フォーマットは正しくありません、再入力してください" : "格式不正确,请重新输入";
@@ -1501,11 +1500,11 @@ var TextMessage;
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 	TextMessage.updatesuccessinfo = language ? "更新が成功しました!" : "更新成功!";
 	TextMessage.edite_headimage = language ? "プロフィール画像の変更" : "修改头像";
-	TextMessage.sendtextrequest = language ? "メールを送りますか" : "发送电子邮件";
+	TextMessage.sendtextrequest = language ? "にメールを送りますか" : "发送电子邮件";
 	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
 	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";
 	TextMessage.mailsucetext = language ? "にメールを送りました。" : "给我发送了邮件";
-	TextMessage.requestmailtext = language ? "返事してください" : "请回复";
+	TextMessage.requestmailtext = language ? "連絡をお待ちください。" : "请回复";
 	TextMessage.sendmailbutext = language ? "メール送信" : "发送邮件";
 	TextMessage.calbutext = language ? "電話" : "电话";
 	TextMessage.homebutext = language ? "ホームページへ" : "主页";
@@ -1536,10 +1535,10 @@ var TextMessage;
 	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
 	TextMessage.email_error1 = language ? "メールアドレスが入力されていません。" : "邮箱输入不正确。";
-	TextMessage.loading = language ? "ローディング…" : "正在加载...";
+	TextMessage.loading = language ? "更新中" : "正在加载";
 	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
-	TextMessage.nomore = language ? "データがないと" : "没有更多数据了";
+	TextMessage.nomore = language ? "データがありません" : "没有更多数据了";
 	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
 	TextMessage.update = language ? "更新中" : "正在刷新";
 	TextMessage.pull_down = language ? "引っ張って更新" : "下拉可以刷新";
@@ -1575,7 +1574,7 @@ var TextMessage;
 	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
-	TextMessage.password_error = language ? "パスワードを設定用文字列の長さは6桁以上、16桁以下してください" : "密码长度不正确，请重新输入";
+	TextMessage.password_error = language ? "半角英文字・記号6～16桁で" : "密码长度不正确，请重新输入";
 	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
 	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";

@@ -94,20 +94,6 @@
 							canClick = true;
 							Api.callback_ng(data);
 							return false;
-							switch(data) {
-								case "2013":
-									mui.toast(TextMessage.email_error, {
-										duration: 'long',
-										type: 'div'
-									})
-									break;
-								default:
-									mui.toast(TextMessage.send_code_ng, {
-										duration: 'long',
-										type: 'div'
-									})
-									break;
-							}
 						},
 						error: function() {
 							canClick = true;
