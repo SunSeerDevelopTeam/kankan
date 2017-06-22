@@ -14,10 +14,10 @@ var JSLocale = {
 
 	/*user login page message begin*/
 	"user-login": "ログイン",
-	"email": "<span style='color:red;display:inline;padding:0px'>*</span>メールアドレス",
+	"email": "<span style='color:red;display:inline;padding:0px'>*</span>アカウント",
 	"username": "<span style='color:red;'>*</span>ユーザー名",
 	"password": "<span style='color:red;'>*</span>パスワード",
-	"new_password": "<span style='color:red;'>*</span>新しいパスワード",
+	"new_password": "<span style='color:red;'>*</span>新パスワード",
 	"password-confirm": "<span style='color:red;'>*</span>確認パスワード",
 	"address": "<span style='color:red;'>*</span>都通府県",
 	"address-details": "未設定",
@@ -27,7 +27,7 @@ var JSLocale = {
 	"register-tips": "あとからプロフィールは変更可能です",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
-	"please-input-password": "パスワードを設定用文字列の長さは6桁以上、16桁以下してください",
+	"please-input-password": "半角英文字・記号6～16桁で",
 	"please-confirm-password": "パスワード確認",
 	"please-input-introduction-code": "半角英数字6位",
 	"please-input-verification-code": "認識コードを入力",
@@ -173,7 +173,8 @@ var JSLocale = {
 	"category_top_12":"チケット・クーポン",
 	"category_top_13":"自動車・オートバイ",
 	"category_top_14":"その他",
-	"quesreset":"リセット"
+	"quesreset":"リセット",
+	"nameplocder":"ユーザー名"
 }
 
 $(function() {
