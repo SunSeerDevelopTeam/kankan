@@ -22,7 +22,9 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;"><font size="3" class="lang" data-locale="back"></font></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;">
+				<font size="3" class="lang" data-locale="back"></font>
+			</a>
 			<h1 class="mui-title lang" data-locale="logistic"></h1>
 		</header>
 		<div class="mui-content">
@@ -66,7 +68,9 @@
 	<script>
 		var timer;
 		mui.init();
+
 		function showDialog(msg, tel, l_com_id) {
+			contactlogistic(1,l_com_id);
 			var dialog = document.getElementById('dialog');
 			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
 			var content = "";
@@ -90,7 +94,8 @@
 			}, 10);
 		}
 
-		function showCallDialog(msg, tel) {
+		function showCallDialog(msg, tel,id) {
+			contactlogistic(2,id);
 			var dialog = document.getElementById('dialog');
 			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
 			var content = "";
@@ -137,9 +142,9 @@
 					var params = {
 						"l_com_id": loid
 					};
-					if (!Repository.User.isEmptyEmail()) {
-						 //alert("没有登录");
-						 return;
+					if(!Repository.User.isEmptyEmail()) {
+						//alert("没有登录");
+						return;
 					} else {
 						Repository.Commodity.logisticssendmail(params, {
 							ok: function(data) {
@@ -194,6 +199,21 @@
 			dialogOK.style.display = "none";
 		}
 
+		function contactlogistic(contact_mode, id) {
+			var params = {
+				"l_com_id": id,
+				"access_mode": contact_mode
+			};
+			Repository.Commodity.logisticscontact(params, {
+				ok: function(data) {
+					console.log("aaa");
+				},
+				ng: function(data) {
+					//Api.callback_ng(data);
+				}
+			});
+		}
+
 		function showlogisticslist(results) {
 			var datearr = results.data;
 			for(var da = 0; da < datearr.length; da++) {
@@ -206,22 +226,24 @@
 				//console.log("l_com_id:"+l_com_id+"l_com_name"+l_com_name);
 				var html = new Util.StringBuilder();
 				html.append('<ul class="delivery-info"><li class="delivery-icon">')
-					.appendFormat('<a  onclick="gohref('+"'{0}'"+')"><img height="100%" width="100%" src="../../images/car.png"/></a>', l_com_url)
+					.appendFormat('<a  onclick="gohref(' + "'{0}'" +",'{1}'"+ ')"><img height="100%" width="100%" src="../../images/car.png"/></a>', l_com_url,l_com_id)
 					.appendFormat('</li><li class="delivery-detail"><font color="#000000" size="2">{0}<br>{1}<br>{2}</font></li></ul>', l_com_name, l_com_pro, l_com_phone)
 					.append('<ul class="delivery-list"><li class="delivery-grid">')
 					.appendFormat('<div class="delivery-detail-call" onclick="showDialog(' + "'{0}'" + ",'{1}'" + ",'{2}'" + ');">', l_com_name, l_com_phone, l_com_id)
 					.append('<font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.sendmailbutext + '</font></div></li>')
-					.appendFormat('<li class="delivery-grid2"><div class="delivery-detail-call2" onclick="showCallDialog(' + "'{0}'" + ",'{1}'" + ',null);"><font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.calbutext + '</font></div></li>', l_com_name, l_com_phone)
-					.appendFormat('<li class="delivery-grid3 homepage"><div style="display:{0};" class="delivery-detail-call3" onclick="gohref('+"'{1}'"+')"><font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.homebutext + '</font></div></li></ul>',l_com_url=="" ? "none" : "block", l_com_url);
+					.appendFormat('<li class="delivery-grid2"><div class="delivery-detail-call2" onclick="showCallDialog(' + "'{0}'" + ",'{1}'" + ",'{2}'" + ');"><font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.calbutext + '</font></div></li>', l_com_name, l_com_phone,l_com_id)
+					.appendFormat('<li class="delivery-grid3 homepage"><div style="display:{0};" class="delivery-detail-call3" onclick="gohref(' + "'{1}'" + ",'{2}'"+ ')"><font size="2" color="#FFFFFF" vertical-align="middle">' + TextMessage.homebutext + '</font></div></li></ul>', l_com_url == "" ? "none" : "block", l_com_url,l_com_id);
 				$(".tran-body").append(html.toString());
 				$("#goback").html(TextMessage.back);
 			}
-//			mui(".homepage").on("tap","div",function(){
-//				var mainpage=plus.webview.getLaunchWebview();
-//					mui.fire(mainpage,'gohome');
-//			});
+			//			mui(".homepage").on("tap","div",function(){
+			//				var mainpage=plus.webview.getLaunchWebview();
+			//					mui.fire(mainpage,'gohome');
+			//			});
 		}
-		function gohref(urls){
+
+		function gohref(urls,id) {
+			contactlogistic(3,id);
 			plus.runtime.openURL(urls);
 		}
 		mui.plusReady(function() {

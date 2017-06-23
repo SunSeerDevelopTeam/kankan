@@ -471,7 +471,8 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			return "http://www.kankann.jp:7998";
+			//return "http://www.kankann.jp:7998";
+			return "https://www.kankann.jp:442";
 		}
 	}
 
@@ -511,6 +512,7 @@ var Api;
 			Commoditypublish: baseUrl() + '/commodity/release/',
 			Commodityedite: baseUrl() + '/commodity/release/update/',
 			logisticslist: baseUrl() + '/logistics/',
+			logisticscontact:baseUrl() + '/logistics/index/setAccess',
 			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
 			shareurl: baseUrl() + '/share.php?wxparms=',
 			shareid: baseUrl() + '/commodity/Encryption/'
@@ -1260,6 +1262,11 @@ var Repository;
 		}
 		Commodity.logisticslist = logisticslist;
 
+		function logisticscontact(params, callback) {
+			return Api.call(Api.url.Commodity.logisticscontact, params, callback);
+		}
+		Commodity.logisticscontact = logisticscontact;
+		
 		function logisticssendmail(params, callback) {
 			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
 		}
@@ -1565,7 +1572,7 @@ var TextMessage;
 	TextMessage.transFinish = language ? "交易完成" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
 	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
-	TextMessage.transContinue = language ? "取引継続します。" : "继续交易!";
+	TextMessage.transContinue = language ? "取引を継続します。" : "继续交易!";
 	TextMessage.confirmBtnYes = language ? "はい" : "确认";
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";

@@ -47,7 +47,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav input-top">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-				<font size="3" class="lang" data-locale="back">aaaa</font>
+				<font size="3" class="lang" data-locale="back"></font>
 			</a>
 			<h1 class="mui-title"><span class="lang" data-locale="transaction"></span></h1>
 		</header>
@@ -380,7 +380,6 @@
 			mui(".exchange").on('tap', '.cur-user', function() {
 				var cur_user_id = $("#myid").val();
 				var trans_type = $("#trans_type").val();
-				alert(trans_type);
 				if(trans_type == 1) return false;
 				var params = {
 					"transid": trans_id
@@ -468,7 +467,7 @@
 					}
 				}
 				if(status == 8) {
-					mui.alert(TextMessage.transStopMsg);
+					mui.alert(TextMessage.transStopMsg,'kankan',TextMessage.sure);
 					var preView = plus.webview.getWebviewById('selectitem');
 					plus.webview.close(preView);
 					gotoMain();
@@ -872,7 +871,7 @@
 							}
 						});
 					} else {
-						mui.alert(TextMessage.transContinue);
+						mui.alert(TextMessage.transContinue,'kankan',TextMessage.sure);
 					}
 				})
 			}
