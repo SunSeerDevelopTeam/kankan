@@ -13,7 +13,7 @@ var JSLocale = {
 	/*login page message end*/
 
 	/*user login page message begin*/
-	"user-login": "ログイン",
+	"user-login": "新規登録",
 	"email": "<span style='color:red;display:inline;padding:0px'>*</span>アカウント",
 	"username": "<span style='color:red;'>*</span>ユーザー名",
 	"password": "<span style='color:red;'>*</span>パスワード",
