@@ -177,7 +177,7 @@ function bindRequestBtnEvent() {
 }
 
 function bindEventOnListViewItem() {
-	//$(".li-content").off("tap", ".item-tap");
+	$(".li-content").off("tap", ".item-tap");
 	$(".li-content").on("tap", ".item-tap", function(event) {
 		//if(isShowMenu) return;
 		var id = $(this).attr("data-comm-id");
@@ -200,7 +200,7 @@ function bindEventOnListViewItem() {
 		}, 300);
 	});
 
-	//$(".comm-like-num").off("tap");
+	$(".contentbottom").off("tap", ".like-area");
 	$(".contentbottom").on("tap",".like-area", function(event) {
 		console.log("click like");
 		var _self = $(this).find(".comm-like-num");
