@@ -175,8 +175,8 @@ var JSLocale = {
 	"category_top_14":"その他",
 	"quesreset":"リセット",
 	"nameplocder":"ユーザー名",
-	"no_data_tips_1":"該当する商品がみつかりません。",
-	"no_data_tips_2":"これからの出品に期待してくだい。"
+	"no_data_tips_1":"該当する商品がありません。",
+	"no_data_tips_2":"これからの出品にご期待ください。"
 }
 
 $(function() {
