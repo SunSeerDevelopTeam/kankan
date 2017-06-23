@@ -146,7 +146,7 @@ var JSLocale = {
 	"suretext":"確    認",
 	"writeemail":"メール",
 	"emailwtext":"正しいメールアドレスを入力してください",
-	"new_user_login":"会員登録はこちら",
+	"new_user_login":"新規登録はこちら",
 	"transaction":"取引",
 	"trans_criterion":"特定商取引法に基づく表記",
 	"trans_logistic":"運送会社に連絡する",
