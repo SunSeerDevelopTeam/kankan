@@ -67,7 +67,6 @@
 			});
 			//当前激活选项
 			var activeTab = subpages[0];
-			var title = document.getElementById("title");
 			//选项卡点击事件
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
@@ -76,6 +75,10 @@
 				}
 				if (targetTab == "products/product_login.html" || targetTab == "products/product_want_to_buy.html") {
 					if (!Repository.User.isLogin()) {
+						setTimeout(function(){
+							document.querySelector("[href='" + activeTab + "']").classList.add("mui-active");
+							document.querySelector("[href='" + targetTab + "']").classList.remove("mui-active");
+						}, 500);
 						return;
 					}
 				}

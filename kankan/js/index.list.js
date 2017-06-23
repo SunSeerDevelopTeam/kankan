@@ -159,8 +159,25 @@ function createListView(data) {
 	lazyload();
 }
 
+function bindRequestBtnEvent() {
+	$(".logistics").on("tap", "a", function(event) {
+		if (Repository.User.isLogin()) {
+			mui.openWindow({
+				id: 'request',
+				url: "/pages/main/products/request.html",
+				waiting: {
+					autoShow: false
+				},
+				show: {
+					duration: 200
+				}
+			});
+		}
+	});
+}
+
 function bindEventOnListViewItem() {
-	//$(".li-content").off("tap", ".item-tap");
+	$(".li-content").off("tap", ".item-tap");
 	$(".li-content").on("tap", ".item-tap", function(event) {
 		//if(isShowMenu) return;
 		var id = $(this).attr("data-comm-id");
@@ -183,22 +200,7 @@ function bindEventOnListViewItem() {
 		}, 300);
 	});
 
-	$(".logistics").on("tap", "a", function(event) {
-		if (Repository.User.isLogin()) {
-			mui.openWindow({
-				id: 'request',
-				url: "/pages/main/products/request.html",
-				waiting: {
-					autoShow: false
-				},
-				show: {
-					duration: 200
-				}
-			});
-		}
-		
-	});
-	//$(".comm-like-num").off("tap");
+	$(".contentbottom").off("tap", ".like-area");
 	$(".contentbottom").on("tap",".like-area", function(event) {
 		console.log("click like");
 		var _self = $(this).find(".comm-like-num");
@@ -268,13 +270,13 @@ function createListItem(item, imgwidth) {
 		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
 		.appendFormat('<div class="item-img-box"><img class="lazy" data-original="{0}" style="{1}"></div>', item.img_flag.url, stylimg)
 		//.appendFormat('<img src="{0}">', item.img_flag)
-		.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)
+		//.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
 		.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
 		.append('<div class="height-max mui-row contentbottom">')
 		.append('<div class="height-max mui-col-sm-8 mui-col-xs-8">')
 		.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', HTMLDecode(item.comm_name))
-		//.appendFormat('<div class="comm-price mui-col-sm-12">{0} P</div>', item.price)
+		.appendFormat('<div class="comm-price mui-col-sm-12">{0}</div>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
 		.append('<div class="like-area height-max mui-col-sm-4 mui-col-xs-4">')
 		.appendFormat('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled ' + "{0}" + '">', item.praise_flg == 0 ? "comm-like-gray" : "comm-like-red")
@@ -314,6 +316,7 @@ mui.plusReady(function() {
 	} else {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
+	bindRequestBtnEvent();
 })
 
 window.addEventListener("search", function(event) {

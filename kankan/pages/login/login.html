@@ -266,6 +266,8 @@
 								Log.d("email login ok");
 								plus.storage.setItem('LoginFlag', 'isLogin');
 								loginFlg = true;
+								doc.getElementById('email').value = "";
+								doc.getElementById('password').value = "";
 								setTimeout(function() {
 									waiting.close();
 									//mui.back();
