@@ -160,6 +160,9 @@
 				plus.webview.close(preView);
 				showRequestDetail();
 			})
+			function reloadpage(){
+				location.reload();
+			}
 			var imgwidth = parseInt($(window).width()) / 2 - 20;
 			//setInterval(showRequestDetail, 10000, "");
 			function submitChat() {
@@ -784,6 +787,10 @@
 					ng: function(data) {
 						Log.i("message send faild!");
 						Api.callback_ng(data);
+					},
+					error:function(){
+						var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+						$(".mui-content").html(nodata);
 					}
 				});
 			}
@@ -806,6 +813,10 @@
 							},
 							ng: function(data) {
 								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
 							}
 						});
 					} else {
@@ -868,6 +879,10 @@
 							},
 							ng: function(data) {
 								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
 							}
 						});
 					} else {

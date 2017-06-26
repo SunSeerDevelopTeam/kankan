@@ -28,6 +28,8 @@
 			<h1 class="mui-title lang" data-locale="logistic"></h1>
 		</header>
 		<div class="mui-content">
+			     
+	        <div  id="reloadpage" onclick="reloadpage()"  style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>       
 			<!--send message to delivery-->
 			<div id="dialog" class="call-dialog-div">
 				<div id="deliveryMsgDiv" class="call-dialog-msg-div">
@@ -68,7 +70,9 @@
 	<script>
 		var timer;
 		mui.init();
-
+		function reloadpage(){
+			location.reload();
+		}
 		function showDialog(msg, tel, l_com_id) {
 			contactlogistic(1,l_com_id);
 			var dialog = document.getElementById('dialog');
@@ -210,6 +214,9 @@
 				},
 				ng: function(data) {
 					//Api.callback_ng(data);
+				},
+				error:function(){
+					$("#reloadpage").show();
 				}
 			});
 		}
@@ -262,6 +269,9 @@
 							url: '../login/login.html'
 						});
 					}
+				},
+				error:function(){
+					$("#reloadpage").show();
 				}
 			});
 		});

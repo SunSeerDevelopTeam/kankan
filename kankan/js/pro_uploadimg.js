@@ -124,10 +124,10 @@ function compressImg(path) {
 		console.log("width:"+imgcm.width+"</br>height:"+imgcm.height);
 		var rwidth=imgcm.width;
 		var rheight=imgcm.height;
-		if(rwidth>=1000 & rheight>=1000){
+		if(rwidth>=2000 & rheight>=2000){
 			var presswidth=rwidth/10;
 			var pressheight=rheight/10;
-			if(pressheight>300){
+			if(pressheight<=500){
 				zipcom(presswidth,pressheight,80);
 			}else{
 				var cutwidth="auto";
@@ -205,6 +205,8 @@ function Processing(results) {
 		//console.log("sss");
 		$(".z_images").show();
 	} else {
+		$(".z_images").remove();
+		$("#" + nums).val("0");
 		var errorcode = data.result.statuscode;
 		console.log("NG:" + errorcode);
 		if(errorcode == "1000" || errorcode == "2002") {
@@ -215,12 +217,6 @@ function Processing(results) {
 			mui.openWindow({
 				id: 'login',
 				url:"../../login/login.html"
-			});
-		}
-		if(errorcode == "3020"){
-			mui.toast(TextMessage.input_email, {
-				duration: 'long',
-				type: 'div'
 			});
 		}
 	}

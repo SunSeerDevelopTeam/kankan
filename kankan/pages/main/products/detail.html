@@ -46,6 +46,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title"></h1>
 		</header>
+		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerrordetail"></font></div>
 		<div id="loading" class="mui-content ka_userbox">
 			<div class="spinner">
 				<div class="double-bounce1"></div>
@@ -204,14 +205,15 @@
 			var _w = parseInt($(window).width()); //获取浏览器的宽度
 			mui.init({
 				swipeBack: false,
-				preloadPages: [{
-						id: 'pro_commentslist.html',
-						url: 'pro_commentslist.html'
-					},
-					{
-						id: 'productslist.html',
-						url: 'productslist.html'
-					},
+				preloadPages: [
+				//{
+//						id: 'pro_commentslist.html',
+//						url: 'pro_commentslist.html'
+//					},
+//					{
+//						id: 'productslist.html',
+//						url: 'productslist.html'
+//					},
 					{
 						id: 'detail.html',
 						url: 'detail.html'
@@ -333,6 +335,9 @@
 				
 			
 			//share end***********/
+			function reloadpage(){
+				mui.back();
+			}
 			function emptyhtml() {
 				$(".lunboimgbox").empty();
 				$(".mui-slider-indicator").empty();
@@ -365,6 +370,10 @@
 							$("#loading").show();
 							$(".mui-content").hide();
 						}
+					},
+					error:function(){
+						$(".mui-content").hide();
+						$("#reloadpage").show();
 					}
 				});
 			}
@@ -388,14 +397,18 @@
 				var comdcommentpage = null;
 				mui('.kankan_det_comment').on('tap', 'a', function(e) {
 					var cid = $("#comodityid").val();
-					if(!comdcommentpage) {
-						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
-					}
-					mui.fire(comdcommentpage, 'comid', {
-						id: cid
-					});
+//					if(!comdcommentpage) {
+//						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
+//					}
+//					mui.fire(comdcommentpage, 'comid', {
+//						id: cid
+//					});
 					mui.openWindow({
-						id: 'pro_commentslist.html'
+						id: 'pro_commentslist',
+						url:'pro_commentslist.html?comid='+cid,
+						extras: {
+								"comid": cid
+							}
 					});
 				});
 			}
@@ -454,7 +467,7 @@
 					}else{
 						leftpx=0;
 					}
-					if(imgsarr[i] == "") {
+					if(imgsarr[i].url == "") {
 						imgurl = "../../../images/nopic.jpg";
 					}
 					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center">';
@@ -664,21 +677,25 @@
 					interval: 0,
 					gotoItem: 0
 				});
-				var imgurl0=imgsarr[0];
+				var imgurl0=imgsarr[0].url;
 				clickshare(comdityid,imgurl0);
 			}
 			//products list
 			var prolistpage = null;
 			mui('.productlist').on('tap', 'a', function(e) {
 				var uid = $("#userid").val();
-				if(!prolistpage) {
-					prolistpage = plus.webview.getWebviewById('productslist.html');
-				}
-				mui.fire(prolistpage, 'prolid', {
-					id: uid
-				});
+//				if(!prolistpage) {
+//					prolistpage = plus.webview.getWebviewById('productslist.html');
+//				}
+//				mui.fire(prolistpage, 'prolid', {
+//					id: uid
+//				});
 				mui.openWindow({
-					id: 'productslist.html'
+					id: 'productslist',
+					url:'productslist.html?prolid='+uid,
+					extras: {
+								"prolid": uid
+							}
 				});
 			});
 			//messageshow end************/

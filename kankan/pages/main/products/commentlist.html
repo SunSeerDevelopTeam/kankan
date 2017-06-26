@@ -15,6 +15,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title lang" data-locale="det_pcercomment"></h1>
 		</header>
+		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
 		<div class="mui-content ka_mainbox">
 			<ul class="mui-table-view">
 			        <li class="mui-table-view-cell">
@@ -69,12 +70,16 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
 			mui.init();
-			window.addEventListener('ucid', function(event) {
-				var id = event.detail.id;
-				showcomments(id);
-			});
+//			window.addEventListener('ucid', function(event) {
+//				var id = event.detail.id;
+//				showcomments(id);
+//			});
+			var id;
 			mui.plusReady(function() {
 				TextMessage.language = plus.os.language;
+				var self = plus.webview.currentWebview();
+				id = self.ucid;
+				showcomments(id);
 			});
 			$(function(){
 				$("#badcommentlist").hide();
@@ -124,6 +129,9 @@
 					$(".ka_commentsort").removeClass("ka_clickcs");
 				}
 			);
+			function reloadpage(){
+				location.reload();
+			}
 			function showcomments(uid){
 				var params = {
 					"user_id":uid,
@@ -141,6 +149,10 @@
 							//alert(TextMessage.datanull);
 							//$("ul").hide();
 						}
+					},
+					error:function(){
+						$(".mui-content").hide();
+						$("#reloadpage").show();
 					}
 				});
 			}

@@ -442,11 +442,11 @@
 })(mui, document);
 //email check
 function publishscheck(){
-	//if (!Repository.User.isEmptyEmail()) {
-	//	 return;
-	//}else{
+	if (!Repository.User.isEmptyEmail()) {
+		 return;
+	}else{
 		publishs();
-	//}
+	}
 }
 //submit form
 function publishs() {
