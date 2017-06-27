@@ -138,7 +138,8 @@
 	function daojishu(){
 		var delength=$("#comm_detail").val().trim().length;
 		var cha=1000-delength;
-		var texts=TextMessage.inputtext+"<font color='red'>"+cha+"</font>"+TextMessage.inputpoint;
+		//var texts=TextMessage.inputtext+"<font color='red'>"+cha+"</font>"+TextMessage.inputpoint;
+		var texts="<font color='#ACACB4'>"+delength+"/1000</font>";
 		$(".daojishitext").html(texts);
 	}
 	//click inpuit close picker

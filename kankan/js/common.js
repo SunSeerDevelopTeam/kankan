@@ -1596,6 +1596,7 @@ var TextMessage;
 	TextMessage.re_issue = language ? "パスワード発行画面より再度手続きを行ってください。" : "验证码失效,请重新发送验证码.";
 	TextMessage.inputtext = language ? "入力文字数:" : "还能输入";
 	TextMessage.inputpoint = language ? "文字" : "个字";
+	TextMessage.representations = language ? "あなたのアカウントは凍結されています。申告する場合は、問い合わせ画面へ遷移します。" : "你的账户已被冻结,是否要申述?";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
