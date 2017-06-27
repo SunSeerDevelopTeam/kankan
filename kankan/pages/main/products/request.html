@@ -252,6 +252,14 @@
 							$(".jiaoyihitext").hide();
 							var mainPage = plus.webview.getLaunchWebview();
        							mainPage.show();
+   							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url: "../../login/login.html"
+							});
 						}
 						
 					},
