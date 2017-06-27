@@ -131,6 +131,7 @@
 								mui.back();
 							},
 							ng: function(data) {
+								Api.callback_ng(data);
 								console.log("error:"+data);
 								Log.d(data);
 							},

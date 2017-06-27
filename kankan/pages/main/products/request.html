@@ -248,10 +248,18 @@
 					ng: function(data) {
 						console.log(data);
 						Api.callback_ng(data);
-						if(data=="1000"|| data=="2002"){
+						if(data=="1000"|| data=="2002" || data=="2022"){
 							$(".jiaoyihitext").hide();
 							var mainPage = plus.webview.getLaunchWebview();
        							mainPage.show();
+   							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url: "../../login/login.html"
+							});
 						}
 						
 					},
