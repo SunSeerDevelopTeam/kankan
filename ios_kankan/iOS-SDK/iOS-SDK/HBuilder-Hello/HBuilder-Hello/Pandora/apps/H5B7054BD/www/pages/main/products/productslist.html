@@ -14,6 +14,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title lang" data-locale="detli_title"></h1>
 		</header>
+		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
 		<div id="loading" class="mui-content ka_userbox">
 			<div class="spinner">
 			  <div class="double-bounce1"></div>
@@ -74,24 +75,34 @@
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: false,
-				preloadPages: [{
-						id: 'commentlist.html',
-						url: 'commentlist.html'
-					},
+				preloadPages: [
+//				{
+//						id: 'commentlist.html',
+//						url: 'commentlist.html'
+//					},
 					{
 						id: 'detail.html',
 						url: 'detail.html'
 					}
 				],
-				beforeback: function() {
-					location.reload();
-			    }
+//				beforeback: function() {
+//					location.reload();
+//			    }
 			});
-			window.addEventListener('prolid', function(event) {
-				var uid = event.detail.id;
-				//console.log(uid);
+//			window.addEventListener('prolid', function(event) {
+//				var uid = event.detail.id;
+//				//console.log(uid);
+//				getmessage(uid);
+//			});
+			var uid;
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				uid = self.prolid;
 				getmessage(uid);
-			});
+			})
+			function reloadpage(){
+				location.reload();
+			}
 			//get message
 			function getmessage(uid) {
 				var params = {
@@ -104,6 +115,11 @@
 					},
 					ng: function(data) {
 						Log.d(data);
+					},
+					error:function(){
+						$("#reloadpage").show();
+						$(".ka_mainbox").hide();
+						$("#loading").hide();
 					}
 				});
 			}
@@ -182,14 +198,18 @@
 			//go comment list			
 			mui('.commentlist').on('tap', 'a', function(e) {
 				var ucid = $("#commid").val();
-				if(!commentPage) {
-					commentPage = plus.webview.getWebviewById('commentlist.html');
-				}
-				mui.fire(commentPage, 'ucid', {
-					id: ucid
-				});
+//				if(!commentPage) {
+//					commentPage = plus.webview.getWebviewById('commentlist.html');
+//				}
+//				mui.fire(commentPage, 'ucid', {
+//					id: ucid
+//				});
 				mui.openWindow({
-					id: 'commentlist.html'
+					id: 'commentlist',
+					url: 'commentlist.html?ucid='+ucid,
+					extras:{
+						ucid:ucid
+					}
 				});
 			});
 		</script>

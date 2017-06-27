@@ -41,6 +41,7 @@
 			<a class="mui-icon-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title lang" data-locale="det_procoment"></h1>
 		</header>
+		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
 		<div class="mui-content ka_mainbox wrapper" >
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell ka_userbox" id="comments">
@@ -64,14 +65,22 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
 			mui.init();
-			window.addEventListener('comid', function(event) {
-				var id = event.detail.id;
-				//var id="19";
+//			window.addEventListener('comid', function(event) {
+//				var id = event.detail.id;
+//				//var id="19";
+//				$("#commodity_id").val(id);
+//				$("#leave_msg_detail").attr("placeholder",TextMessage.contentlength);
+//				getccomments(id);
+//				
+//			});
+			var id;
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				id = self.comid;
 				$("#commodity_id").val(id);
 				$("#leave_msg_detail").attr("placeholder",TextMessage.contentlength);
 				getccomments(id);
-				
-			});
+			})
 			//back refresh 
 			mui(".mui-bar-nav").on("tap","a",function(){
 				var view = plus.webview.currentWebview().opener();
@@ -82,6 +91,9 @@
 				$("#comments").empty();
 				mui.back();
 			});
+			function reloadpage(){
+				location.reload();
+			}
 			function getccomments(rid) {
 				var params = {
 					"commodity_id": rid
@@ -97,6 +109,10 @@
 							var htmlnull='<p id="null" >'+TextMessage.commentsnull+'</p>';
 							$("#comments").html(htmlnull);
 						}
+					},
+					error:function(){
+						$(".mui-content").hide();
+						$("#reloadpage").show();
 					}
 				});
 			}
@@ -108,10 +124,7 @@
 					var pcommentobj = JSON.stringify(datas[i]);
 					var pcommentinfo = $.parseJSON(pcommentobj);
 					var headimg = pcommentinfo.user_photo;
-					var uname = pcommentinfo.nick_name;
-					if(pcommentinfo.nick_name==""){
-						var uname = pcommentinfo.user_name;
-					}
+					var uname = pcommentinfo.user_name;
 					var content = pcommentinfo.msg_detail.replace(/\n/g,"<br />");
 					var time = pcommentinfo.ins_date;
 					var html = new Util.StringBuilder();
@@ -161,7 +174,7 @@
 					},
 					ng: function(data) {
 						Log.d(data);
-						if(data == "1000") {
+						if(data == "1000" || data == "2002" || data == "2022") {
 							mui.toast(TextMessage.test, {
 								duration: 'long',
 								type: 'div'
@@ -171,19 +184,9 @@
 								url:"../../login/login.html"
 							});
 						}
-						if(data == "3020") {
-							mui.toast(TextMessage.input_email, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'emai_summate',
-								url:"../../login/emai_summate.html",
-								extras: {
-									formPageName: "pro_commentslist"
-								}
-							});
-						}
+					},
+					error:function(){
+						error_tost.message();
 					}
 				});
 			}
@@ -207,9 +210,8 @@
 			} 
 			function addcomment(results){
 				var time2=getNowFormatDate();
-				var contents2=document.commodity_comments.leave_msg_detail.value.replace(/\n/g,"<br />");
+				var contents2=results.data[0].msg_detail.replace(/\n/g,"<br />");
 				var headimg2=results.data[0].photo;
-				console.log(headimg2);
 				var uname2=results.data[0].nick_name;
 				var html2 = new Util.StringBuilder();
 					html2.append('<div class="comtent mui-pull-left"><div class="mui-pull-left">')

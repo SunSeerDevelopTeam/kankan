@@ -13,7 +13,7 @@ var JSLocale = {
 	/*login page message end*/
 
 	/*user login page message begin*/
-	"user-login": "ログイン",
+	"user-login": "新規登録",
 	"email": "<span style='color:red;display:inline;padding:0px'>*</span>アカウント",
 	"username": "<span style='color:red;'>*</span>ユーザー名",
 	"password": "<span style='color:red;'>*</span>パスワード",
@@ -22,16 +22,16 @@ var JSLocale = {
 	"address": "<span style='color:red;'>*</span>都通府県",
 	"address-details": "未設定",
 	"introduction-code": "招待コード(任意)",
-	"verification-code": "<span style='color:red;'>*</span>認識コード",
+	"verification-code": "<span style='color:red;'>*</span>認証番号",
 	"register": "確定",
 	"register-tips": "あとからプロフィールは変更可能です",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
-	"please-input-password": "半角英文字・記号6～16桁で",
+	"please-input-password": "半角英字・数字(6～16桁)",
 	"please-confirm-password": "パスワード確認",
 	"please-input-introduction-code": "半角英数字6位",
-	"please-input-verification-code": "認識コードを入力",
-	"send-verification-code": "認識コードを発信",
+	"please-input-verification-code": "認証番号を入力",
+	"send-verification-code": "認証番号を発信",
 	"retrieve_password":"パスワード再発行",
 	"forget_password_msg": "カンカンで登録しているメールアドレスを入力してください。登録されているメールアドレスに新しいパスワード情報のメールを送信します。",
 	/*user login page message end*/
@@ -46,8 +46,8 @@ var JSLocale = {
 	"det_concerneds": "さんが気になってる商品",
 	"det_recommends": "お勧めの商品",
 	"det_pointexch": "ポイント",
-	"det_exchange": "交換",
-	"det_send": "あげる",
+	"det_exchange": "交換の要望を出す",
+	"det_send": "もらう",
 	"detli_title": "商品リスト",
 	"det_procoment": "商品評価",
 	"det_pcercomment": "評価",
@@ -146,7 +146,7 @@ var JSLocale = {
 	"suretext":"確    認",
 	"writeemail":"メール",
 	"emailwtext":"正しいメールアドレスを入力してください",
-	"new_user_login":"会員登録はこちら",
+	"new_user_login":"新規登録はこちら",
 	"transaction":"取引",
 	"trans_criterion":"特定商取引法に基づく表記",
 	"trans_logistic":"運送会社に連絡する",
@@ -174,7 +174,11 @@ var JSLocale = {
 	"category_top_13":"自動車・オートバイ",
 	"category_top_14":"その他",
 	"quesreset":"リセット",
-	"nameplocder":"ユーザー名"
+	"nameplocder":"ユーザー名",
+	"no_data_tips_1":"該当する商品がありません。",
+	"no_data_tips_2":"これからの出品にご期待ください。",
+	"networkerror":"ネットエラー、再確認してください。",
+	"networkerrordetail":"ネットエラー、ここをクリックし、もう一度試してみてください。"
 }
 
 $(function() {

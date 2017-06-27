@@ -32,6 +32,20 @@
 				text-align: center;
 			}
 			
+			.mui-input-group label {
+				width: 41%;
+			}
+			
+			.mui-input-row {
+				overflow: inherit;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 59%;
+			}
+			
 			#forget_password,
 			#new_user_login {
 				color: #FF0000;
@@ -42,9 +56,15 @@
 			}
 			
 			#email-login-form label {
-				font-size: smaller;
+				font-size: 80%;
 			}
 			
+			#forget_password {
+				font-size: 80%;
+			}
+			#new_user_login {
+				font-size: 80%;
+			}
 			#email-login-form input {
 				font-size: 67%;
 				line-height: 1.5;
@@ -198,6 +218,25 @@
 										},
 										ng: function(data) {
 											waiting.close();
+											if(data == "2022") {
+												plus.nativeUI.confirm(TextMessage.representations, function(event) {
+													if (event.index == 0) {
+														mui.openWindow({
+															id: "question",
+															url: "../setting/question.html",
+															waiting: {
+																autoShow: false
+															},
+															show: {
+																duration: 200
+															}
+														});
+													} else {
+														// cancel
+													}
+													
+												}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
+											}
 										},
 										error: function() {
 											waiting.close();
@@ -233,6 +272,8 @@
 							plus.nativeUI.toast(TextMessage.password_error);
 							return;
 						}
+						doc.getElementById('email').blur();
+						doc.getElementById('password').blur();
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
@@ -244,6 +285,8 @@
 								Log.d("email login ok");
 								plus.storage.setItem('LoginFlag', 'isLogin');
 								loginFlg = true;
+								doc.getElementById('email').value = "";
+								doc.getElementById('password').value = "";
 								setTimeout(function() {
 									waiting.close();
 									//mui.back();
@@ -270,6 +313,25 @@
 										duration: 'long',
 										type: 'div'
 									})
+								}
+								if(data == "2022") {
+									plus.nativeUI.confirm(TextMessage.representations, function(event) {
+										if (event.index == 0) {
+											mui.openWindow({
+												id: "question",
+												url: "../setting/question.html",
+												waiting: {
+													autoShow: false
+												},
+												show: {
+													duration: 200
+												}
+											});
+										} else {
+											// cancel
+										}
+										
+									}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
 								}
 							},
 							error: function() {

@@ -77,6 +77,9 @@
 					});
 				}
 			}
+			function reloadpage(){
+				location.reload();
+			}
 			mui.plusReady(function() {
 				var params = {};
 				Repository.User.mytranshistory(params,{
@@ -113,6 +116,10 @@
 								url:"../../login/login.html"
 							});
 						}
+					},
+					error:function(){
+						var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+						$(".mui-content").html(nodata);
 					}
 				});
 			});

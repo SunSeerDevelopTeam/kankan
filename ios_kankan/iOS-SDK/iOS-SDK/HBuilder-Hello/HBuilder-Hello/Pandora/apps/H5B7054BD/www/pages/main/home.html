@@ -113,6 +113,7 @@
 			
 			i {
 				display: block;
+				visibility: hidden;
 				background: #f00;
 				border-radius: 50%;
 				width: 5px;
@@ -192,6 +193,7 @@
 					alert("updateNoticeStatusEvent[flg=" + event.detail.flg + "]");
 				}
 				if(event.detail.flg == "1") {
+					$('i').css('visibility', 'visible');
 					$('i').show();
 				} else {
 					$('i').hide();
@@ -330,7 +332,6 @@
 							title: TextMessage.register
 						}];
 						plus.nativeUI.actionSheet({
-							title: TextMessage.sharetitle,
 							cancel: TextMessage.skip,
 							buttons: btnArray
 						}, function(e) {
