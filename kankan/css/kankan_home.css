@@ -921,3 +921,7 @@ body .mui-table-view-cell.mui-active{
 	margin-top: 50%;
 	color: #ACACB4;
 }
+.daojishitext{
+	font-size: 14px;color:#555555;
+	text-align: right;
+}

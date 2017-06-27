@@ -1594,6 +1594,8 @@ var TextMessage;
 	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
 	TextMessage.pwdudsuccess = language ? "パスワードを再発行しました。" : "密码更新成功";
 	TextMessage.re_issue = language ? "パスワード発行画面より再度手続きを行ってください。" : "验证码失效,请重新发送验证码.";
+	TextMessage.inputtext = language ? "入力文字数:" : "还能输入";
+	TextMessage.inputpoint = language ? "文字" : "个字";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
@@ -1718,6 +1720,18 @@ var error_tost;
 				});
 	};
 })(error_tost || (error_tost = {}))
+var preventKeyBoardSubmit;
+(function (preventKeyBoardSubmit){
+    preventKeyBoardSubmit.closekeybord=function(){
+    	$("input").keypress(function(e){
+	        if(e.keyCode === 13){
+	            e.preventDefault();
+	            document.activeElement.blur();
+	            $('input').blur();
+	        }
+	    });
+    };
+})(preventKeyBoardSubmit || (preventKeyBoardSubmit={}));
 //Translate html
 function HTMLDecode(text) {
 	var temp = document.createElement("div");

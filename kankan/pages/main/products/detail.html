@@ -362,7 +362,6 @@
 						Log.d("success");
 						messageshow(data);
 						clickprocomment();
-						//imageshow();
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -377,21 +376,6 @@
 					}
 				});
 			}
-			//Picture processing
-			function imageshow() {
-				$(".lunboimgbox img").each(function(i) {
-					var img = $(this);
-					var realWidth = $(this).width(); //图片真实的宽度
-					var realHeight = $(this).height(); //图片真实的高度
-					var cha = realWidth - _w * 1;
-					console.log("_w:"+_w+"realWidth:"+realWidth+"i:"+i+"cha:"+cha);
-					if(cha>0){
-						var bival = cha / 2;
-						$(this).attr("style", "max-height: 320px; width: auto;vertical-align:middle;margin-left:-" + bival + "px;");
-					}
-				});
-			}
-
 			function clickprocomment() {
 				//commodity comments list
 				var comdcommentpage = null;
@@ -422,6 +406,7 @@
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail).replace(/\n/g,"<br />");
 				var comdityid = comdbasic[0].commodity_id;
 				var traslatestautes=comdbasic[0].status;
+				var buy_sell_flag = comdbasic[0].buy_sell_flag;
 				var myid=results.myid;
 				var tradeablenum = userbasic.user_comm_tradable_count;
 				$("#myid").val(myid);
@@ -443,6 +428,14 @@
 				var htmlfocus = "";
 				var imglength = imgsarr.length;
 				var la = imgsarr.length - 1 * 1;
+				if(imgsarr==""){
+					imgurl = "../../../images/nopic.jpg";
+					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: 320px; width: auto;vertical-align:middle; onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					htmlimg += '</div>';
+					var htmlfocus = '<div class="mui-indicator mui-active"></div>';
+					$(".mui-slider-indicator").append(htmlfocus);
+				}
 				//var first = '<img src="' + imgsarr[0] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
 				//var last = '<img src="' + imgsarr[la] + '"  style="max-height: 320px; width: auto;vertical-align:middle;" onerror="this.src=' + "'" + '../../../images/nopic.jpg' + "'" + '">';
 				//$(".firstimage").html(last);
@@ -463,10 +456,15 @@
 					var showwidth=biheight*ribi;
 					var cha=showwidth-_w;
 					if(cha>0){
-						leftpx=cha/2;
+						showwidth="100%";
+						var showheight="";
+						//leftpx=cha/2;
 					}else{
-						leftpx=0;
+						//leftpx=0;
+						showwidth="auto";
+						var showheight="320px";
 					}
+					
 					if(imgsarr[i].url == "") {
 						imgurl = "../../../images/nopic.jpg";
 					}
@@ -474,7 +472,7 @@
 					if(i>0){
 						htmlimg +='<div class="mui-icon mui-icon-back mui-pull-left Arrow leftarrow" onclick="goitem('+back+')"></div>';
 					}
-					htmlimg += '<img src="' + imgurl + '" style="max-height: 320px; width: auto;vertical-align:middle;margin-left:-'+leftpx+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: '+showheight+'; width: '+showwidth+';vertical-align:middle; onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					if(i<la){
 						htmlimg +='<div class="mui-icon mui-icon-forward mui-pull-left Arrow rightarrow" style="margin-left: 80%;" onclick="goitem('+forward+')"></div>';
 					}
@@ -644,7 +642,6 @@
 				$("#lastconcenered").after(concernhtml2);
 				//concenered end**************************************/
 				//buy way
-				var buy_sell_flag = comdbasic[0].buy_sell_flag;
 				//praise staute
 				var user_praise_status = commodity.commodity_praise.user_praise_status;
 				if(user_praise_status == "0") {
@@ -677,7 +674,12 @@
 					interval: 0,
 					gotoItem: 0
 				});
-				var imgurl0=imgsarr[0].url;
+				
+				if(imgsarr==""){
+					var imgurl0="";
+				}else{
+					var imgurl0=imgsarr[0].url;
+				}
 				clickshare(comdityid,imgurl0);
 			}
 			//products list
