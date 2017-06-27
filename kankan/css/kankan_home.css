@@ -907,3 +907,17 @@ body .mui-table-view-cell.mui-active{
     -webkit-transform: scale(1.0);
   }
 }
+#reloadpage{
+	width: 100%;
+	text-align: center;
+	font-size: 1em;
+	margin-top: 50%;
+	color: #ACACB4;
+}
+#reloadpage2{
+	width: 100%;
+	text-align: center;
+	font-size: 1em;
+	margin-top: 50%;
+	color: #ACACB4;
+}

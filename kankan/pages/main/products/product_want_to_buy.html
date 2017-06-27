@@ -144,6 +144,9 @@ function publishs() {
 		ng: function(data) {
 			Log.d(data);
 			Api.callback_ng(data);
+		},
+		error:function(){
+			error_tost.message();
 		}
 	});
 

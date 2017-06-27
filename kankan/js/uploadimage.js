@@ -1,5 +1,6 @@
 ///////////////take picture/////////////////
 	mui(".ka_prologbox0").on("tap", "#takepic", function(e) {
+		inputblur();
 		if(mui.os.plus) {
 			var a = [{
 				title: TextMessage.tackpicture
@@ -120,6 +121,10 @@
 		var targetimg = path;
 		//open loading button
 		var wt = plus.nativeUI.showWaiting();
+		setTimeout(function(){
+			wt.close();
+			error_tost.message();
+		},11*1000);
 		var task = plus.uploader.createUpload(server, {
 			method: "post"
 		}, function(t, status) {
@@ -131,6 +136,7 @@
 			} else {
 				console.log("upload error：" + status);
 				wt.close();
+				error_tost.message();
 			}
 		});
 		//add parameter

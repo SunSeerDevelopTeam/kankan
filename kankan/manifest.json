@@ -436,7 +436,9 @@
 					"js/pro_uploadimg.js",
 					"js/picker/mui.poppicker.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/login/login.html"
+				],
 				"priority": 0
 			},
 			"pages/main/home.html": {
@@ -469,7 +471,10 @@
 					"pages/main/category/tab-top-subpage-2.html",
 					"pages/main/category/tab-top-subpage-3.html",
 					"pages/main/category/tab-top-subpage-4.html",
-					"pages/main/category/tab-top-subpage-5.html"
+					"pages/main/category/tab-top-subpage-5.html",
+					"pages/main/news.html",
+					"pages/main/category/tab-top-subpage-6.html",
+					"pages/main/category/tab-top-subpage-7.html"
 				],
 				"priority": 0
 			},
@@ -592,7 +597,9 @@
 					"css/kankan_home.css",
 					"js/language/locale_zh_CN.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/main/products/commentlist.html"
+				],
 				"priority": 0
 			},
 			"pages/main/products/pro_commentslist.html": {
@@ -606,7 +613,8 @@
 					"css/mui.min.css",
 					"css/kankan_home.css",
 					"css/icons-extra.css",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -706,7 +714,9 @@
 					"css/mui.min.css",
 					"css/style.css"
 				],
-				"refer": [],
+				"refer": [
+					"pages/login/update_password.html"
+				],
 				"priority": 0
 			},
 			"pages/main/search.html": {
@@ -812,7 +822,11 @@
 					"css/kankan_home.css",
 					"css/icons-extra.css",
 					"fonts/mui-icons-extra.ttf",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"images/Bad.PNG",
+					"images/Normal.PNG",
+					"images/Good.PNG",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -865,9 +879,13 @@
 					"css/mui.min.css",
 					"js/language/locale_zh_CN.js",
 					"js/mui.view.js",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"pages/setting/specialbus.html",
+					"fonts/mui.ttf"
 				],
-				"refer": [],
+				"refer": [
+					"pages/setting/question.html"
+				],
 				"priority": 0
 			},
 			"pages/main/news.html": {
@@ -878,7 +896,9 @@
 					"js/jquery-3.2.0.min.js",
 					"js/language.js",
 					"css/mui.min.css",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"fonts/mui.ttf",
+					"css/kankan_home.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -906,7 +926,9 @@
 					"images/nopic.jpg"
 				],
 				"refer": [
-					"pages/main/products/request.html"
+					"pages/main/products/request.html",
+					"pages/login/reg.html",
+					"pages/login/login.html"
 				],
 				"priority": 0
 			},
@@ -953,6 +975,72 @@
 				"refer": [
 					"pages/main/user/user.html"
 				],
+				"priority": 0
+			},
+			"pages/main/category/pullrefresh_sub_3.html": {
+				"resources": [
+					"images/nopic.jpg",
+					"images/request.png",
+					"js/jquery.lazyload.min.js",
+					"css/listitem.css"
+				],
+				"refer": [
+					"pages/main/products/request.html"
+				],
+				"priority": 0
+			},
+			"pages/main/category/pullrefresh_sub_2.html": {
+				"resources": [
+					"fonts/mui-icons-extra.ttf",
+					"images/request.png",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"js/sha256.js",
+					"css/mui.min.css",
+					"js/jquery.lazyload.min.js",
+					"css/listitem.css",
+					"css/icons-extra.css",
+					"js/index.list.js",
+					"images/nopic.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/setting/specialbus.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"pages/setting/setting.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/setting/question.html": {
+				"resources": [
+					"js/uploadimage.js",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-6.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_6.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-7.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_7.html"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

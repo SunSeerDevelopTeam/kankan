@@ -46,8 +46,8 @@ var JSLocale = {
 	"det_concerneds": "さんが気になってる商品",
 	"det_recommends": "お勧めの商品",
 	"det_pointexch": "ポイント",
-	"det_exchange": "交換",
-	"det_send": "あげる",
+	"det_exchange": "交換の要望を出す",
+	"det_send": "もらう",
 	"detli_title": "商品リスト",
 	"det_procoment": "商品評価",
 	"det_pcercomment": "評価",
@@ -176,7 +176,9 @@ var JSLocale = {
 	"quesreset":"リセット",
 	"nameplocder":"ユーザー名",
 	"no_data_tips_1":"該当する商品がありません。",
-	"no_data_tips_2":"これからの出品にご期待ください。"
+	"no_data_tips_2":"これからの出品にご期待ください。",
+	"networkerror":"ネットエラー、再確認してください。",
+	"networkerrordetail":"ネットエラー、ここをクリックし、もう一度試してみてください。"
 }
 
 $(function() {

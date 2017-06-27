@@ -471,8 +471,8 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			//return "http://www.kankann.jp:7998";
-			return "https://www.kankann.jp:442";
+			return "http://www.kankann.jp:7998";
+			//return "https://www.kankann.jp:442";
 		}
 	}
 
@@ -558,6 +558,7 @@ var Api;
 		params[Api.Params.sign] = createSignInfo();
 		Log.i("current API params is ----> ");
 		Log.i(params);
+//		ajax_error.checkNet();
 		mui.ajax(url, {
 			data: params,
 			dataType: 'json',
@@ -1651,6 +1652,72 @@ var Entity;
 	}());
 	Entity.Category = Category;
 })(Entity || (Entity = {}));
+var ajax_error;
+(function (ajax_error){
+	var _check = null;
+	ajax_error.checkNet = function() {
+		_check = (function(){
+			var _curNetType = plus.networkinfo.getCurrentType();
+			switch (_curNetType){
+				case 0:
+				localStorage.setItem("$showConfirm", "1");
+				break;
+				case 1:
+				localStorage.setItem("$showConfirm", "0");
+					var isShow = localStorage.getItem("$showConfirm");
+					if (isShow == null || isShow == "0") {
+						_showConfirm();
+					}
+					break;
+				default:
+					break;
+			}
+		}());
+	}
+	_showConfirm = function() {
+		localStorage.setItem("$showConfirm", "1");
+		plus.nativeUI.confirm("当前网络不可用，请确认设备已连接网络。", function(event){
+			switch (event.index){
+				case 0:
+					_settingNetWork();
+					break;
+//				case 1:
+//					plus.runtime.quit();
+//					break;
+				default:
+					break;
+			}
+			localStorage.setItem("$showConfirm", "0");
+		}, "提示", ["设置网络", "取消"]);
+	}
+	_settingNetWork = function() {
+		if (mui.os.ios) {
+			var UIApplication = plus.ios.import("UIApplication");
+			var NSURL = plus.ios.import("NSURL");
+			var setting = NSURL.URLWithString("prefs:root=WIFI");
+			var application = UIApplication.sharedApplication();
+			application.openURL(setting);
+			plus.ios.deleteObject(setting);
+			plus.ios.deleteObject(application);
+		} else if (mui.os.android) {
+			var main = plus.android.runtimeMainActivity();
+			var Intent = plus.android.importClass("android.content.Intent");
+			var mIntent = new Intent('android.settings.WIFI_SETTINGS');
+			main.startActivity(mIntent);
+		} else {
+			// TODO other os
+		}
+	}
+})(ajax_error || (ajax_error = {}))
+var error_tost;
+(function(){
+	error_tost.message=function(){
+		mui.toast(TextMessage.not_network, {
+					duration: 'long',
+					type: 'div'
+				});
+	};
+})(error_tost || (error_tost = {}))
 //Translate html
 function HTMLDecode(text) {
 	var temp = document.createElement("div");
