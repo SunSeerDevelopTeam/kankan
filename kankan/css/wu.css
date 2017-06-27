@@ -159,7 +159,8 @@
 }
 .tran-button-buy {
 	padding-top:0px; 
-	padding-left:1em; 
+	padding-left:0.6em;
+	padding-right:0.6em;  
 	/*margin-right:-4px;*/
 	width:50%;
 	font-size:17px;
