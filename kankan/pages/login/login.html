@@ -218,6 +218,25 @@
 										},
 										ng: function(data) {
 											waiting.close();
+											if(data == "2022") {
+												plus.nativeUI.confirm(TextMessage.representations, function(event) {
+													if (event.index == 0) {
+														mui.openWindow({
+															id: "question",
+															url: "../setting/question.html",
+															waiting: {
+																autoShow: false
+															},
+															show: {
+																duration: 200
+															}
+														});
+													} else {
+														// cancel
+													}
+													
+												}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
+											}
 										},
 										error: function() {
 											waiting.close();
@@ -294,6 +313,25 @@
 										duration: 'long',
 										type: 'div'
 									})
+								}
+								if(data == "2022") {
+									plus.nativeUI.confirm(TextMessage.representations, function(event) {
+										if (event.index == 0) {
+											mui.openWindow({
+												id: "question",
+												url: "../setting/question.html",
+												waiting: {
+													autoShow: false
+												},
+												show: {
+													duration: 200
+												}
+											});
+										} else {
+											// cancel
+										}
+										
+									}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
 								}
 							},
 							error: function() {
