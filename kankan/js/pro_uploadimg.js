@@ -170,7 +170,6 @@ function uploadimage(path) {
 	var wt = plus.nativeUI.showWaiting();
 	setTimeout(function(){
 		wt.close();
-		error_tost.message();
 	},11*1000);
 	var task = plus.uploader.createUpload(server, {
 		method: "post"
