@@ -33,7 +33,7 @@
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title lang" data-locale="messagetitle"></h1>
 		</header>
-		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin-top: -3em;">
 			<div  id="reloadpage" onclick="reloadpage()"  style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
   			<div class="mui-scroll">
 				<ul id="OA_task_1" class="mui-table-view">
@@ -80,6 +80,9 @@
 					mui.fire(homePage, 'refresh',{refresh:"canRefresh"});
 			    }
 		  });  
+		  mui.plusReady(function() {
+		  	$("#pullrefresh").attr("style","margin-top:-3em");
+		  });
 		  //delete message
 		  (function($) {
 		  	var btnArray = [TextMessage.sure, TextMessage.cancel];
@@ -147,7 +150,6 @@
 			        table.appendChild(li);
 				}
 				page=page*1+1;
-				//$(".mui-pull-caption-down").hide();
 			}
 		  //up
 		  function pullupRefresh(){
@@ -178,8 +180,9 @@
 					ok: function(data) {
 						console.log(data);
 						showmessage(data);
-						$(".deletenewstext").html(TextMessage.deletenewstext);
+						$("#pullrefresh").attr("style","margin-top:-1.1em;");
 						//mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+						$(".deletenewstext").html(TextMessage.deletenewstext);
 					},
 					ng: function(data) {
 						Api.callback_ng(data);

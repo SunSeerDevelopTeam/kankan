@@ -168,6 +168,10 @@ function uploadimage(path) {
 	var server = Api.url.Commodity.imgupload;
 	//open loading button
 	var wt = plus.nativeUI.showWaiting();
+	setTimeout(function(){
+		wt.close();
+		error_tost.message();
+	},11*1000);
 	var task = plus.uploader.createUpload(server, {
 		method: "post"
 	}, function(t, status) {
@@ -177,12 +181,12 @@ function uploadimage(path) {
 			Processing(t.responseText);
 			wt.close();
 		} else {
+			wt.close();
 			mui.toast(TextMessage.not_network, {
 				duration: 'long',
 				type: 'div'
 			});
 			console.log("upload error：" + status);
-			wt.close();
 		}
 	});
 	//add parameter
@@ -209,7 +213,7 @@ function Processing(results) {
 		$("#" + nums).val("0");
 		var errorcode = data.result.statuscode;
 		console.log("NG:" + errorcode);
-		if(errorcode == "1000" || errorcode == "2002") {
+		if(errorcode == "1000" || errorcode == "2002" || errorcode == "2022") {
 			mui.toast(TextMessage.test, {
 				duration: 'long',
 				type: 'div'

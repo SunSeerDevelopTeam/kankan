@@ -174,7 +174,7 @@
 					},
 					ng: function(data) {
 						Log.d(data);
-						if(data == "1000") {
+						if(data == "1000" || data == "2002" || data == "2022") {
 							mui.toast(TextMessage.test, {
 								duration: 'long',
 								type: 'div'
@@ -184,19 +184,9 @@
 								url:"../../login/login.html"
 							});
 						}
-						if(data == "3020") {
-							mui.toast(TextMessage.input_email, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'emai_summate',
-								url:"../../login/emai_summate.html",
-								extras: {
-									formPageName: "pro_commentslist"
-								}
-							});
-						}
+					},
+					error:function(){
+						error_tost.message();
 					}
 				});
 			}

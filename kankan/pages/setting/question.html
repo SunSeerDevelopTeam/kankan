@@ -82,6 +82,10 @@
 				var fullname=info.full_name;
 				$("#email").val(email);
 			}
+			function inputblur(){
+				document.getElementById('full_name').blur();
+				document.getElementById('contents').blur();
+			}
 			function submitvals(){
 				var full_name=$("#full_name").val();
 				var email=$("#email").val();
@@ -129,6 +133,9 @@
 							ng: function(data) {
 								console.log("error:"+data);
 								Log.d(data);
+							},
+							error:function(){
+								error_tost.message();
 							}
 						});
 					}

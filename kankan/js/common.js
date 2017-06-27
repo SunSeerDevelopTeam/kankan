@@ -1709,6 +1709,15 @@ var ajax_error;
 		}
 	}
 })(ajax_error || (ajax_error = {}))
+var error_tost;
+(function(){
+	error_tost.message=function(){
+		mui.toast(TextMessage.not_network, {
+					duration: 'long',
+					type: 'div'
+				});
+	};
+})(error_tost || (error_tost = {}))
 //Translate html
 function HTMLDecode(text) {
 	var temp = document.createElement("div");
