@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>commentlist</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title lang" data-locale="det_pcercomment"></h1>
+		</header>
+		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
+		<div class="mui-content ka_mainbox">
+			<ul class="mui-table-view">
+			        <li class="mui-table-view-cell">
+			            <div class="mui-pull-left ka_commentsort lang" data-locale="det_all"></div>
+			            <div class="ka_userbox">
+				            <div id="goodcomment">
+				            	<img src="../../../images/Good.PNG" width="30" height="30" />
+				            	<div class="ka_commentfonts lang" data-locale="det_goodcomments"></div>
+				            	<div class="ka_commentnum">0</div>
+				             </div>
+				             <div id="normalcomment">
+				            	<img src="../../../images/Normal.PNG" width="30" height="30"/>
+				            	<div class="ka_commentfonts lang" data-locale="det_normalcomments"></div>
+				            	<div class="ka_commentnum">0</div>
+				             </div>
+				             <div id="badcomment">
+				            	<img src="../../../images/Bad.PNG" width="30" height="30"/>
+				            	<div class="ka_commentfonts lang" data-locale="det_badcomments"></div>
+				            	<div class="ka_commentnum">0</div>
+				             </div>
+			            </div>
+			        </li>
+			        <li class="mui-table-view-cell" id="badcommentlist">
+			        </li>
+			        <li class="mui-table-view-cell" id="goodcommentlist">
+			        </li>
+			        <li class="mui-table-view-cell" id="normalcommentlist">
+			        </li>
+			         <li class="mui-table-view-cell" id="allcommentlist"></li>
+			         	<!--<div class="mui-pull-left ka_userbox">
+			           	<img src="../../../images/yuantiao.jpg" width="40" height="40" class="ka_touxiangimg" />
+			           	<div class="ka_userbox ka_userboxtext"><b>muiusdfdsfsdfsdfsdfsdf</b></div>
+			           </div>
+			           <div class="mui-pull-left ka_commentinfobox">
+			           	shdfjshfjskdhfkjd ahsdjkahsdjk ashjkdhasjkd asdkhasjkdhasjkd sadhjkashdjk ashjkdhkasdj 
+			           	ashdjkasdh ashjkdhasd 中文的大小好像太大了dfj sdjfklsdjf jksdlfj jsdklfj jklsdfjsdklfjsdfjs jsdklfj
+				           	<div class="ka_commenttime">
+				           		<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span> 
+				           		2 天前
+				           	</div>
+				           	<div class="ka_commentinfolev">
+				           		<img src="../../../images/Bad.PNG" width="20" height="20" />
+				           	</div>
+			           	</div>
+			        </li>-->
+			    </ul>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+//			window.addEventListener('ucid', function(event) {
+//				var id = event.detail.id;
+//				showcomments(id);
+//			});
+			var id;
+			mui.plusReady(function() {
+				TextMessage.language = plus.os.language;
+				var self = plus.webview.currentWebview();
+				id = self.ucid;
+				showcomments(id);
+			});
+			$(function(){
+				$("#badcommentlist").hide();
+				$("#normalcommentlist").hide();
+				$("#goodcommentlist").hide();
+				$(".ka_commentsort").html(TextMessage.allshowmes);
+			});
+			$(".ka_commentsort").click(function(){
+				$("#badcommentlist").hide();
+				$("#normalcommentlist").hide();
+				$("#goodcommentlist").hide();
+				$("#allcommentlist").show();
+				$(".ka_commentfonts").removeClass("ka_clickcs");
+				$(".ka_commentsort").addClass("ka_clickcs");
+			});
+			$("#normalcomment").click(
+				function(){
+					$("#badcommentlist").hide();
+					$("#normalcommentlist").show();
+					$("#goodcommentlist").hide();
+					$("#allcommentlist").hide();
+					$(".ka_commentfonts").removeClass("ka_clickcs");
+					$("#normalcomment .ka_commentfonts").addClass("ka_clickcs");
+					$(".ka_commentsort").removeClass("ka_clickcs");
+				}
+			);
+			$("#badcomment").click(
+				function(){
+					$("#badcommentlist").show();
+					$("#normalcommentlist").hide();
+					$("#goodcommentlist").hide();
+					$("#allcommentlist").hide();
+					$(".ka_commentfonts").removeClass("ka_clickcs");
+					$("#badcomment .ka_commentfonts").addClass("ka_clickcs");
+					$(".ka_commentsort").removeClass("ka_clickcs");
+				}
+			);
+			$("#goodcomment").click(
+				function(){
+					$("#goodcommentlist").show();
+					$("#badcommentlist").hide();
+					$("#normalcommentlist").hide();
+					$("#allcommentlist").hide();
+					//$(".ka_commentsort").html(TextMessage.goodshowmes);
+					$(".ka_commentfonts").removeClass("ka_clickcs");
+					$("#goodcomment .ka_commentfonts").addClass("ka_clickcs");
+					$(".ka_commentsort").removeClass("ka_clickcs");
+				}
+			);
+			function reloadpage(){
+				location.reload();
+			}
+			function showcomments(uid){
+				var params = {
+					"user_id":uid,
+					"user_comm_flag":""
+				};
+				Repository.Commodity.Usercomment(params, {
+					ok: function(data) {
+						Log.d("success");
+						showall(data);
+					},
+					ng: function(data) {
+						Log.d(data);
+						emptycontent();
+						if(data=="2001"){
+							//alert(TextMessage.datanull);
+							//$("ul").hide();
+						}
+					},
+					error:function(){
+						$(".mui-content").hide();
+						$("#reloadpage").show();
+					}
+				});
+			}
+			function emptycontent(){
+				$("#allcommentlist").empty();
+				$("#normalcommentlist").empty();
+				$("#goodcommentlist").empty();
+				$("#badcommentlist").empty();
+			}
+			function showall(results){
+				emptycontent();
+				var datas=results.data;
+				var goodcount=datas.user_opinion_h_count;
+				var normalcount=datas.user_opinion_m_count;
+				var badcount=datas.user_opinion_l_count;
+				//console.log(goodcount);
+				$("#goodcomment .ka_commentnum").html(goodcount);
+				$("#normalcomment .ka_commentnum").html(normalcount);
+				$("#badcomment .ka_commentnum").html(badcount);
+				var comment_detailarr = datas.comment_detail;
+				var commentlength = comment_detailarr.length;
+				//var html="";
+				for(var i=0;i<commentlength;i++){
+					var comentobj = JSON.stringify(comment_detailarr[i]);
+					var comentinfo = $.parseJSON(comentobj);
+					var comentinfoimg=comentinfo.user_photo;
+					var comentinfoname=comentinfo.user_name;
+					var comentinfotime=comentinfo.ins_date;
+					var comentinfoflag=comentinfo.appraise_flag;
+					var comentinfodetail=comentinfo.appraise_detail;
+					//console.log("comentinfoimg:"+comentinfoimg+"comentinfoname:"+comentinfoname+"comentinfotime:"+comentinfotime+"comentinfoflag:"+comentinfoflag);
+					var html = new Util.StringBuilder();
+					html.append('<div class="comtent mui-pull-left"><div class="mui-pull-left ka_userbox">')
+						.appendFormat('<img src="{0}" width="40" height="40" class="ka_touxiangimg" />',comentinfoimg)
+						.appendFormat('<div class="ka_userbox ka_userboxtext"><b>{0}</b></div>', comentinfoname)
+						.append('</div>')
+						.append('<div class="mui-pull-right ka_commentinfobox">')
+						.appendFormat('{0}',comentinfodetail)
+						.append('<div class="ka_commenttime">')
+						.append('<span class="mui-icon-extra mui-icon-extra-outline ka_cpmmenttimicon"></span>')
+						.appendFormat('{0}',comentinfotime)
+						.append('</div><div class="ka_commentinfolev">');
+						if(comentinfoflag=="0"){
+							html.append('<img src="../../../images/Good.PNG" width="20" height="20" />')
+						}else if(comentinfoflag=="1"){
+							html.append('<img src="../../../images/Normal.PNG" width="20" height="20" />')
+						}else if(comentinfoflag=="2"){
+							html.append('<img src="../../../images/Bad.PNG" width="20" height="20" />')
+						}
+						html.append('</div></div></div>')
+						.append('<!-----end----->');
+					$("#allcommentlist").append(html.toString());
+					//html.clear();
+					if(comentinfoflag=="0"){
+						$("#goodcommentlist").append(html.toString());
+						//html.clear();
+					}
+					if(comentinfoflag=="1"){
+						$("#normalcommentlist").append(html.toString());
+						//html.clear();
+					}
+					if(comentinfoflag=="2"){
+						$("#badcommentlist").append(html.toString());
+						//html.clear();
+					}
+					
+				}
+			}
+		</script>
+	</body>
+
+</html>

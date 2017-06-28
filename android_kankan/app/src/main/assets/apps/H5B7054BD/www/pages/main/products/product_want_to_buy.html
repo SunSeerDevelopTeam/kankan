@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>product_want_to_buy</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link rel="stylesheet" href="../../../css/kankan_home.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<h1 class="mui-center mui-title lang" data-locale="commodity_want"></h1>
+		</header>
+		<div class="mui-content kankan_jyimgbox">
+			<form action="" method="post" name="publishcomodity" id="publishcomodity">
+				<h5 class="ka_proloh5 ka_propicfonts lang" data-locale="commodity_photos"></h5>
+				<div class="ka_prologbox0 z_photo">
+					<div class="z_file" style="background-image: url(../../../images/iconfont-tianjia.png);" id="gallery"></div>
+					<div class="mui-pull-right mui-icon mui-icon-camera takepic" id="takepic"></div>
+				</div>
+				<!--mask-->
+		        <div class="z_mask">
+		            <!--alert box-->
+		            <div class="z_alert">
+		                 <p class="lang" data-locale="commodity_photodet"></p>
+		                <p>
+		                    <span class="z_cancel lang" data-locale="det_goodconcel"></span>
+		                    <span class="z_sure lang" data-locale="register"></span>
+		                </p>
+		            </div>
+		        </div>
+				     <br />
+				  <input type="hidden" name="" id="0" value="0" class="imgname" />
+	        	 <input type="hidden" name="" id="1" value="0" class="imgname" />
+	        	 <input type="hidden" name="" id="2" value="0" class="imgname" />
+	        	 <input type="hidden" name="" id="3" value="0" class="imgname" />
+				     <div class="ka_prologbox">
+					     <h5 class="ka_proloh5 lang" data-locale="commodity_name"></h5>
+					    <ul class="mui-table-view">
+				            <li class="mui-table-view-cell">
+			                   <input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40" onfocus="closekeybord()">
+				            </li>
+				            <li class="mui-table-view-cell">
+				                 <textarea  class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail" onkeyup="daojishu()"></textarea>
+				            	<div class="daojishitext"></div>
+				            </li>
+				        </ul>
+				     </div>
+				     <br />
+					<div class="ka_description lang" data-locale="commodity_want_forbidentext"></div>
+					<div class="ka_userbox">
+						<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_want_butonsure" onclick="publishscheck()"></button>
+					</div>
+					<br/>
+					<div class="showimg"></div>
+			        <div id="deltimg" style="display: none;"></div>
+		        </form>
+			</div>
+	</body>
+	<script src="../../../js/mui.min.js"></script>
+	<script src="../../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../../js/language.js"></script>
+	<script src="../../../js/sha256.js"></script>
+	<script src="../../../js/common.js"></script>
+	<script src="../../../js/pro_uploadimg.js"></script>
+	<script>
+$(function() {
+	$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
+});
+function closekeybord(){
+	preventKeyBoardSubmit.closekeybord();
+}
+function daojishu(){
+	var delength=$("#comm_detail").val().trim().length;
+	var cha=1000-delength;
+	//var texts=TextMessage.inputtext+"<font color='red'>"+cha+"</font>"+TextMessage.inputpoint;
+	var texts="<font color='#ACACB4'>"+delength+"/1000</font>";
+	$(".daojishitext").html(texts);
+}
+//email check
+function publishscheck(){
+	if (!Repository.User.isEmptyEmail()) {
+		 return;
+	}else{
+		publishs();
+	}
+}
+//submit form
+function publishs() {
+	var buy_sell_flag = "1";
+	var comm_name = HTMLEncode($("#comm_name").val());
+	var comm_detail = HTMLEncode($("#comm_detail").val());
+	var imges0 = $("#0").val();
+	var imges1 = $("#1").val();
+	var imges2 = $("#2").val();
+	var imges3 = $("#3").val();
+	if(comm_name.trim() == "") {
+		mui.toast(TextMessage.pro_nametest, {
+			duration: 'long',
+			type: 'div'
+		});
+		document.publishcomodity.comm_name.focus();
+		return false;
+	}
+	if(comm_name.trim().length>40){
+		mui.toast(TextMessage.TextMessage.pro_namelength, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
+	if(comm_detail.trim() == "") {
+		mui.toast(TextMessage.pro_descriptiontest, {
+			duration: 'long',
+			type: 'div'
+		});
+		document.publishcomodity.comm_detail.focus();
+		return false;
+	}
+	if(comm_detail.trim().length >1000) {
+		mui.toast(TextMessage.TextMessage.pro_detaillength, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
+	var params = {
+		"buy_sell_flag":buy_sell_flag,
+		"comm_name":comm_name,
+		"comm_detail":comm_detail,
+		"imges[0]": imges0,
+		"imges[1]": imges1,
+		"imges[2]": imges2,
+		"imges[3]": imges3
+	};
+	console.dir(params);
+	Repository.Commodity.Commoditypublish(params, {
+		ok: function(data) {
+			Log.d("success");
+			mui.toast(TextMessage.pro_logininfo, {
+				duration: 'long',
+				type: 'div'
+			});
+			location.reload();
+			mui.plusReady(function() {
+				var mainpage=plus.webview.getLaunchWebview();
+				 mui.fire(mainpage,'gohome');
+			});
+		},
+		ng: function(data) {
+			Log.d(data);
+			Api.callback_ng(data);
+		},
+		error:function(){
+			error_tost.message();
+		}
+	});
+
+}
+</script>
+
+</html>
