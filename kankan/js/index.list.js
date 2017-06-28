@@ -1,4 +1,6 @@
 var pageInfo = {};
+var network = true;
+var isDown = true;
 var detailPage = null;
 var __back__first = null;
 mui.init({
@@ -37,10 +39,10 @@ mui.back = function() {
  * 下拉刷新具体业务实现
  */
 function pulldownRefresh() {
+	isDown = true;
 	var params = {};
 	getDataFromServer(params, function(data) {
 		var table = document.body.querySelector('.mui-table-view');
-		console.dir(table);
 		var imgwidth = parseInt($(window).width()) / 2 - 34;
 		if(Validator.isEmpty(data.data.commd)) {
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
@@ -64,6 +66,7 @@ function pulldownRefresh() {
  * 上拉加载具体业务实现
  */
 function pullupRefresh() {
+	isDown = false;
 	mui('#pullrefresh').pullRefresh().endPullupToRefresh(pageInfo.list * pageInfo.page >= pageInfo.cnt);
 	var params = {};
 	params.page = ++pageInfo.page;
@@ -86,30 +89,48 @@ function pullupRefresh() {
 }
 
 function getDataFromServer(params, callback) {
-	var cid = localStorage.cid;
-	if(cid == -1) {
-		params.want = 1;
-	} else if(cid != 0) {
-		params.catalog = cid;
+	if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+		network = false;
+	} else {
+		network = true;
 	}
-	Repository.Commodity.commodityList(params, {
-		ok: function(data) {
-			callback(data);
-			updateUserPhoto(data.data.users.photo);
-			updateNoticeStatus(data.data.users.sys_msg_flg);
-			savePageInfo(data.data.pages);
-		},
-		ng: function(statuscode) {
-			mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-			mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-		},
-		error: function() {
-			plus.nativeUI.alert(TextMessage.not_network, function(e){
-			},TextMessage.sharetitle,TextMessage.sure);
-			mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-			mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+	if (network) {
+		var cid = localStorage.cid;
+		console.log("cid is " + cid);
+		if(cid == -1) {
+			params.want = 1;
+		} else if(cid != 0) {
+			params.catalog = cid;
 		}
-	});
+		
+		Repository.Commodity.commodityList(params, {
+			ok: function(data) {
+				callback(data);
+				updateUserPhoto(data.data.users.photo);
+				updateNoticeStatus(data.data.users.sys_msg_flg);
+				savePageInfo(data.data.pages);
+			},
+			ng: function(statuscode) {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+			},
+			error: function() {
+				if (isDown) {
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
+				} else {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+				}
+			}
+		});
+	} else {
+		plus.nativeUI.alert(TextMessage.not_network, function(e){
+			if (isDown) {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
+			} else {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+			}
+		},TextMessage.sharetitle,TextMessage.sure);
+	}
 }
 
 function updateUserPhoto(photo) {
@@ -145,7 +166,7 @@ function createListView(data) {
 	}
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
-		var htmlText = "<br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_1 +"</div><br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_2 +"</div><br/>";
+		var htmlText = "<div class='no-data-tips'><br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_1 +"</div><br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_2 +"</div><br/></div>";
 		table.innerHTML = htmlText;
 		return;
 	}
@@ -301,6 +322,11 @@ function lazyload() {
 
 //当DOM准备就绪时
 mui.plusReady(function() {
+	if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+		network = false;
+	} else {
+		network = true;
+	}
 	var detailWebView = plus.webview.getWebviewById("detail");
 	if(detailWebView == null) {
 		mui.preload({
