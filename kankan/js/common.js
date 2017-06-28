@@ -1597,6 +1597,8 @@ var TextMessage;
 	TextMessage.inputtext = language ? "入力文字数:" : "还能输入";
 	TextMessage.inputpoint = language ? "文字" : "个字";
 	TextMessage.representations = language ? "あなたのアカウントは凍結されています。申告する場合は、問い合わせ画面へ遷移します。" : "你的账户已被冻结,是否要申述?";
+	TextMessage.no_data_tips_1 = language ? "該当する商品がありません。" : "该分类目前没有商品。";
+	TextMessage.no_data_tips_2 = language ? "これからの出品にご期待ください。" : "敬请期待新品上线。";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

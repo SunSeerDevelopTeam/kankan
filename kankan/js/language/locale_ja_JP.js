@@ -175,8 +175,6 @@ var JSLocale = {
 	"category_top_14":"その他",
 	"quesreset":"リセット",
 	"nameplocder":"ユーザー名",
-	"no_data_tips_1":"該当する商品がありません。",
-	"no_data_tips_2":"これからの出品にご期待ください。",
 	"networkerror":"ネットエラー、再確認してください。",
 	"networkerrordetail":"ネットエラー、ここをクリックし、もう一度試してみてください。"
 }

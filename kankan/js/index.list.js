@@ -145,7 +145,7 @@ function createListView(data) {
 	}
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
-		var htmlText = "<br/><div style='text-align:center;'>該当する商品がみつかりません。</div><br/><div style='text-align:center;'>これからの出品に期待してくだい。</div><br/>";
+		var htmlText = "<br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_1 +"</div><br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_2 +"</div><br/>";
 		table.innerHTML = htmlText;
 		return;
 	}

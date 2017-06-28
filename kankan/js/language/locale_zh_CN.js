@@ -176,8 +176,6 @@ var JSLocale = {
 	"category_top_14":"其他",
 	"quesreset":"重置",
 	"nameplocder":"用户名",
-	"no_data_tips_1":"该分类目前没有商品。",
-	"no_data_tips_2":"敬请期待新品上线。",
 	"networkerror":"网络错误，点此重试",
 	"networkerrordetail":"网络错误，点此返回重试"
 }
