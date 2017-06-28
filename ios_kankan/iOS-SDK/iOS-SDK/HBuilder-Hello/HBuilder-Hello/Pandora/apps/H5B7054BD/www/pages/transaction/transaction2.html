@@ -47,7 +47,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav input-top">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
-				<font size="3" class="lang" data-locale="back">aaaa</font>
+				<font size="3" class="lang" data-locale="back"></font>
 			</a>
 			<h1 class="mui-title"><span class="lang" data-locale="transaction"></span></h1>
 		</header>
@@ -55,25 +55,45 @@
 			<div id="mui-page-content">
 				<div class="tran-page">
 					<div class="tran-body" style="margin-bottom:60px;">
-						<div class="tran-name-middle-status mui-center">
+						<div class="tran-name-middle-status mui-center" style="display:none;">
 							<font size="2" color="#ffffff" vertical-align="middle"></font>
 						</div>
-						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:0px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user">
+						
+						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user-img" style="padding:0px;">
+
+							</li>
+							<li class="tran-pic-middle" style="margin-left:10px;">
+								
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user-img" style="padding:0px;">
+
+							</li>
+						</ul>
+						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user" style="height:85px;">
 
 							</li>
 							<li class="tran-pic-middle" style="margin-left:10px;">
 								<img height="24px" width="24px" src="../../images/xinhuan.png" />
 							</li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user" style="height:85px;">
 
 							</li>
 						</ul>
-						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:0px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5">
+						
+						<ul class="mui-table-view mui-grid-view other-img" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5" style="padding:0px;">
 
 							</li>
 						</ul>
+						<center>
+						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5" style="height:85px;padding:0px;">
+
+							</li>
+						</ul>
+						</center>
 						<ul class="tran-button">
 							<li class="tran-button-sell" style="display:none;">
 								<div>
@@ -88,6 +108,7 @@
 								</div>
 							</li>
 						</ul>
+						
 						<input type="hidden" id="trans_status" name="trans_status" value="" />
 						<input type="hidden" id="trans_mode" name="trans_mode" value="" />
 						<input type="hidden" id="trans_type" name="trans_type" value="" />
@@ -112,7 +133,7 @@
 								</a>
 							</li>
 						</ul>-->
-						<ul class="tran-distribution">
+						<ul class="tran-distribution" style="display:none;">
 							<li class="tran-distribution-law logisticli">
 								<div class="tran-distribution-law-detail">
 									<a href="../setting/specialbus.html">
@@ -137,7 +158,7 @@
 				<div class="ka_sendmesbox ka_userbox">
 					<input  type="hidden" id="commodity_id" name="commodity_id"/>
 					<textarea type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="msg" name="leave_msg_detail"></textarea>
-					<button type="button" class="mui-btn ka_sendbutton lang"  data-locale="contentsend" onclick="submitChat()"></button>
+					<button style="margin-top:1%" type="button" class="mui-btn ka_sendbutton lang"  data-locale="contentsend" onclick="submitChat()"></button>
 				</div>
 			</form>
 		</div>
@@ -160,6 +181,10 @@
 				plus.webview.close(preView);
 				showRequestDetail();
 			})
+			function reloadpage(){
+				location.reload();
+			}
+			var imgwidth = parseInt($(window).width()) / 2 - 20;
 			//setInterval(showRequestDetail, 10000, "");
 			function submitChat() {
 				var chatMsg = $("#msg").val();
@@ -246,18 +271,44 @@
 				}
 				var buyer_comm_id, buyer_comm_img, buyer_comm_name, seller_comm_id, seller_comm_id, seller_comm_name;
 				var seller_comm_exist = false;
+				var seller_img='',buyer_img='',buyer_top_margin='',seller_top_margin='';
 				for(var goods in commdinfo) {
 					if(commdinfo[goods].user_id == buyer_id) {
 						buyer_comm_id = commdinfo[goods].commodity_id;
 						buyer_comm_img = commdinfo[goods].img_flg;
 						buyer_comm_name = commdinfo[goods].comm_name;
 						buyer_comm_info.push(commdinfo[goods]);
+						var imgWidth = commdinfo[goods].width;
+						var imgHeight = commdinfo[goods].height;
+						var hwhpercent = imgHeight / imgWidth;
+						var top_marign = 0;
+						var showheight = imgwidth * hwhpercent;
+						var cha1 = showheight - 100;
+						if(cha1 > 0) {
+							top_marign = cha1 / 2;
+						} else {
+							top_marign = 0;
+						}
+						var buyer_top_margin = 'height: auto;width:100%;margin-top:-' + top_marign + 'px;';
+						
 					} else {
 						seller_comm_exist = true;
 						seller_comm_id = commdinfo[goods].commodity_id;
 						seller_comm_img = commdinfo[goods].img_flg;
 						seller_comm_name = commdinfo[goods].comm_name;
 						seller_comm_info.push(commdinfo[goods]);
+						var imgWidth = commdinfo[goods].width;
+						var imgHeight = commdinfo[goods].height;
+						var hwhpercent = imgHeight / imgWidth;
+						var top_marign = 0;
+						var showheight = imgwidth * hwhpercent;
+						var cha1 = showheight - 100;
+						if(cha1 > 0) {
+							top_marign = cha1 / 2;
+						} else {
+							top_marign = 0;
+						}
+						var seller_top_margin = 'height: auto;width:100%;margin-top:-' + top_marign + 'px;';
 					}
 				}
 
@@ -266,50 +317,54 @@
 				var trans_mode = transinfo[0].trans_mode;
 				if(trans_mode == 0) {
 					if(seller_comm_exist) {
-						seller_msg += '<a href="#">';
-						seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
-						seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
-						seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
-						seller_msg += '</div>';
+						seller_msg += '<a>';
+						seller_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+						seller_img += '<img height="32px" class="ka_touxiangimg" width="32px" src="' + seller_photo + '" />';
+						seller_img += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
+						seller_img += '</div>';
 						if(seller_comm_info.length > 1) {
 							seller_msg += '<img src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 						}
-						seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+						seller_msg += '<img  style="'+seller_top_margin+'" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 						seller_msg += '</a>';
 						seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
 						seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
 					}
 					buyer_msg += '<a href="#">';
-					buyer_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
-					buyer_msg += '<img height="32px" width="32px" src="' + buyer_photo + '" />';
-					buyer_msg += '<font size="2" vertical-align="middle">' + buyer_nickname + '</font>';
-					buyer_msg += '</div>';
+					buyer_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+					buyer_img += '<img class="ka_touxiangimg" height="32px" width="32px" src="' + buyer_photo + '" />';
+					buyer_img += '<font size="2" vertical-align="middle">' + buyer_nickname + '</font>';
+					buyer_img += '</div>';
 					if(buyer_comm_info.length > 1) {
 						buyer_msg += '<img id="moreicon" src="../../images/morebut.png" style="position:absolute;float:right;margin-left:72%;width: 25px; height: 25px;">';
 					}
-					buyer_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + buyer_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+					buyer_msg += '<img style="'+buyer_top_margin+'" class="mui-media-object" src="' + buyer_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 					buyer_msg += '</a>';
 					buyer_msg += '<input type="hidden" name="buyer_commodity_id" value="' + buyer_comm_id + '">';
 					buyer_msg += '<input type="hidden" id="buyer_user_id" name="buyer_user_id" value="' + buyer_id + '">';
-
 					if(buyer_flag) {
 						$(".cur-user").html(buyer_msg);
 						$(".request-user").html(seller_msg);
+						$(".cur-user-img").html(buyer_img);
+						$(".request-user-img").html(seller_img);
 					} else {
 						$(".request-user").html(buyer_msg);
 						$(".cur-user").html(seller_msg);
+						$(".request-user-img").html(buyer_img);
+						$(".cur-user-img").html(seller_img);
 					}
 					$(".cur-user").append("<input type='hidden' name='myid' id='myid' value='" + cur_user_id + "'>");
 				} else {
 					seller_msg += '<a href="#">';
-					seller_msg += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
-					seller_msg += '<img height="32px" width="32px" src="' + seller_photo + '" />';
-					seller_msg += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
-					seller_msg += '</div>';
-					seller_msg += '<img style="height:85px;width:128px;" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+					seller_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+					seller_img += '<img class="ka_touxiangimg" height="32px" width="32px" src="' + seller_photo + '" />';
+					seller_img += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
+					seller_img += '</div>';
+					seller_msg += '<img style="'+seller_top_margin+'" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 					seller_msg += '</a>';
 					$(".other li").html(seller_msg);
-					$(".other li").attr("style","margin-right:20px;");
+					$(".other-img li").html(seller_img);
+					//$(".other li").attr("style","margin-right:20px;");
 				}
 
 			}
@@ -375,7 +430,7 @@
 			})
 
 			function showChatMsg(usersinfo, messginfo, cur_user_id) {
-				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg;
+				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg='';
 				for(var user in usersinfo) {
 					if(usersinfo[user].user_role == "issue") {
 						buyer_photo = usersinfo[user].photo;
@@ -454,11 +509,12 @@
 					}
 				}
 				if(status == 8) {
-					mui.alert(TextMessage.transStopMsg);
+					mui.alert(TextMessage.transStopMsg,'kankan',TextMessage.sure);
 					var preView = plus.webview.getWebviewById('selectitem');
 					plus.webview.close(preView);
 					gotoMain();
 				} else if(status == 3) {
+					$(".tran-button-sell").hide();
 					if(appraise == 1){
 						$(".tran-button").hide();
 					}else{
@@ -600,7 +656,11 @@
 					}
 				}
 			}
-
+			mui(".mui-bar-nav").on("tap","a",function(){
+				var view = plus.webview.currentWebview().opener();
+				mui.fire(view,'requestpage');
+				mui.back();
+			});
 			mui(".tran-button-buy").on('tap', 'div', function() {
 				var params = {
 					"transid": trans_id
@@ -733,9 +793,11 @@
 							if(trans_mode > 0) {
 								$(".exchange").hide();
 								$(".other").show();
+								$(".other-img").show();
 							} else {
 								$(".exchange").show();
 								$(".other").hide();
+								$(".other-img").show();
 							}
 							setHidVal(transinfo, usersinfo, cur_user_id);
 							showRequestStaus(transinfo, usersinfo);
@@ -758,6 +820,8 @@
 							}else if(trans_status == 9){
 								tranStatusVal = TextMessage.transStop;								
 							}
+							$('.tran-distribution').show();
+							$(".tran-name-middle-status").show();
 							$(".tran-name-middle-status font").html(tranStatusVal);
 
 						}
@@ -765,6 +829,10 @@
 					ng: function(data) {
 						Log.i("message send faild!");
 						Api.callback_ng(data);
+					},
+					error:function(){
+						var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+						$(".mui-content").html(nodata);
 					}
 				});
 			}
@@ -787,6 +855,10 @@
 							},
 							ng: function(data) {
 								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
 							}
 						});
 					} else {
@@ -849,10 +921,14 @@
 							},
 							ng: function(data) {
 								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
 							}
 						});
 					} else {
-						mui.alert(TextMessage.transContinue);
+						mui.alert(TextMessage.transContinue,'kankan',TextMessage.sure);
 					}
 				})
 			}

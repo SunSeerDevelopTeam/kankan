@@ -472,6 +472,7 @@ var Api;
 			return "http://192.168.1.8:7998";
 		} else {
 			return "http://www.kankann.jp:7998";
+			//return "https://www.kankann.jp:442";
 		}
 	}
 
@@ -511,6 +512,7 @@ var Api;
 			Commoditypublish: baseUrl() + '/commodity/release/',
 			Commodityedite: baseUrl() + '/commodity/release/update/',
 			logisticslist: baseUrl() + '/logistics/',
+			logisticscontact:baseUrl() + '/logistics/index/setAccess',
 			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
 			shareurl: baseUrl() + '/share.php?wxparms=',
 			shareid: baseUrl() + '/commodity/Encryption/'
@@ -556,6 +558,7 @@ var Api;
 		params[Api.Params.sign] = createSignInfo();
 		Log.i("current API params is ----> ");
 		Log.i(params);
+//		ajax_error.checkNet();
 		mui.ajax(url, {
 			data: params,
 			dataType: 'json',
@@ -1260,6 +1263,11 @@ var Repository;
 		}
 		Commodity.logisticslist = logisticslist;
 
+		function logisticscontact(params, callback) {
+			return Api.call(Api.url.Commodity.logisticscontact, params, callback);
+		}
+		Commodity.logisticscontact = logisticscontact;
+		
 		function logisticssendmail(params, callback) {
 			return Api.call(Api.url.Commodity.logisticssendmail, params, callback);
 		}
@@ -1424,13 +1432,13 @@ var TextMessage;
 	TextMessage.commenttestnull = language ? "コメントが未入力です。" : "评论内容不能为空!";
 	TextMessage.evecommenttestnull = language ? "評価のコメントが未入力です。" : "评价内容不能为空!";
 	TextMessage.commenttestlength = language ? "レビューの内容(300字以内)!" : "评论内容不能超过三百字！!";
-	TextMessage.send_code_ok = language ? "認証コードが入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
-	TextMessage.send_code_ng = language ? "認証コード発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
+	TextMessage.send_code_ok = language ? "認証番号が入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
+	TextMessage.send_code_ng = language ? "認証番号発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
 	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
 	TextMessage.username = language ? "ユーザー名" : "用户名";
-	TextMessage.verificationCode = language ? "認証コード" : "验证码";
+	TextMessage.verificationCode = language ? "認証番号" : "验证码";
 	TextMessage.login_error = language ? "メールアドレスまたはパスワードが間違っています。" : "用户名或者密码错误";
-	TextMessage.send_verification_code = language ? "認証コードを発信" : "发送验证码";
+	TextMessage.send_verification_code = language ? "認証番号を発信" : "发送验证码";
 	TextMessage.commodity_descriptionlength = language ? "商品詳細(必須：1000文字まで)" : "商品说明（必须:1000字以内）";
 	TextMessage.publishsure = language ? "出品しますか？" : "确认出品展出吗?";
 	TextMessage.tackpicture = language ? "写真をとります" : "拍照";
@@ -1438,7 +1446,7 @@ var TextMessage;
 	TextMessage.gallerychoose = language ? "アルバムから写真を選択する" : "从手机相册中选择";
 	TextMessage.chooseimage = language ? "写真を選択します" : "选择照片";
 	TextMessage.operation_error = language ? "自分で出品した商品は操作できません。" : "不允许对自己的商品操作";
-	TextMessage.errorCode_1001 = language ? "認証コードの有効期限が切れています。" : "您输入的验证码已过期，请重试！";
+	TextMessage.errorCode_1001 = language ? "認証番号の有効期限が切れています。" : "您输入的验证码已过期，请重试！";
 	TextMessage.errorCode_1002 = language ? "入力してください" : "不能为空，请重新输入";
 	TextMessage.errorCode_1000 = language ? "ログインしてください" : "请先登录";
 	TextMessage.errorCode_1003 = language ? "フォーマットは正しくありません、再入力してください" : "格式不正确,请重新输入";
@@ -1460,7 +1468,7 @@ var TextMessage;
 	TextMessage.errorCode_2011 = language ? "選択した取引方法が間違っています" : "交易方式选择有误";
 	TextMessage.errorCode_2012 = language ? "画像がありません" : "没有上传画像";
 	TextMessage.errorCode_2013 = language ? "メール/ユーザー名が間違っています、もしくは存在しています" : "注册邮箱/用户名 错误，或已存在";
-	TextMessage.errorCode_2014 = language ? "認証コードは無効になりました" : "验证码失效";
+	TextMessage.errorCode_2014 = language ? "認証番号は無効になりました" : "验证码失效";
 	TextMessage.errorCode_2015 = language ? "多重チェックインができません" : "不能重复签到";
 	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません" : "该商品正在问合中，不能重复提交请求";
 	TextMessage.errorCode_2017 = language ? "ポイント不足になっています" : "您当前point不足";
@@ -1532,9 +1540,9 @@ var TextMessage;
 	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
 	TextMessage.username_error = language ? "ユーザー名が10桁以内に設定してください" : "用户名长度不能超过10位字符";
 	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
-	TextMessage.codenull = language ? "認証コードを入力してください!" : "验证码不能为空！";
+	TextMessage.codenull = language ? "認証番号を入力してください!" : "验证码不能为空！";
 	TextMessage.delmessage = language ? "この記録を削除して確認しますか？" : "确认删除该条记录吗?";
-	TextMessage.email_error1 = language ? "メールアドレスが入力されていません。" : "邮箱输入不正确。";
+	TextMessage.email_error1 = language ? "正しいメールアドレスを入力してください。" : "邮箱输入不正确。";
 	TextMessage.loading = language ? "更新中" : "正在加载";
 	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
@@ -1565,16 +1573,16 @@ var TextMessage;
 	TextMessage.transFinish = language ? "交易完成" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
 	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
-	TextMessage.transContinue = language ? "取引継続します。" : "继续交易!";
+	TextMessage.transContinue = language ? "取引を継続します。" : "继续交易!";
 	TextMessage.confirmBtnYes = language ? "はい" : "确认";
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
-	TextMessage.confirmcodeng = language ? "認証コードエラー" : "验证码错误";
+	TextMessage.confirmcodeng = language ? "認証番号エラー" : "验证码错误";
 	TextMessage.det_concerneds = language ? "さんが気になる商品" : "关注商品";
 	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
-	TextMessage.password_error = language ? "半角英文字・記号6～16桁で" : "密码长度不正确，请重新输入";
+	TextMessage.password_error = language ? "半角英字・数字(6～16桁)" : "密码长度不正确，请重新输入";
 	TextMessage.confirmPwd_error = language ? "パスワードと確認パスワードが一致しませんでした。" : "确认密码与密码输入不一致,请重新输入";
 	TextMessage.deletenewstext = language ? "削除" : "删除";
 	TextMessage.commdNo = language ? "選択できる商品がありません。" : "您没有可供选择的商品";
@@ -1584,7 +1592,11 @@ var TextMessage;
 	TextMessage.nicknamenull = language ? "ユーザー名未入力です。" : "用户名不能为空";
 	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
 	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
-
+	TextMessage.pwdudsuccess = language ? "パスワードを再発行しました。" : "密码更新成功";
+	TextMessage.re_issue = language ? "パスワード発行画面より再度手続きを行ってください。" : "验证码失效,请重新发送验证码.";
+	TextMessage.inputtext = language ? "入力文字数:" : "还能输入";
+	TextMessage.inputpoint = language ? "文字" : "个字";
+	TextMessage.representations = language ? "あなたのアカウントは凍結されています。申告する場合は、問い合わせ画面へ遷移します。" : "你的账户已被冻结,是否要申述?";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
@@ -1643,6 +1655,84 @@ var Entity;
 	}());
 	Entity.Category = Category;
 })(Entity || (Entity = {}));
+var ajax_error;
+(function (ajax_error){
+	var _check = null;
+	ajax_error.checkNet = function() {
+		_check = (function(){
+			var _curNetType = plus.networkinfo.getCurrentType();
+			switch (_curNetType){
+				case 0:
+				localStorage.setItem("$showConfirm", "1");
+				break;
+				case 1:
+				localStorage.setItem("$showConfirm", "0");
+					var isShow = localStorage.getItem("$showConfirm");
+					if (isShow == null || isShow == "0") {
+						_showConfirm();
+					}
+					break;
+				default:
+					break;
+			}
+		}());
+	}
+	_showConfirm = function() {
+		localStorage.setItem("$showConfirm", "1");
+		plus.nativeUI.confirm("当前网络不可用，请确认设备已连接网络。", function(event){
+			switch (event.index){
+				case 0:
+					_settingNetWork();
+					break;
+//				case 1:
+//					plus.runtime.quit();
+//					break;
+				default:
+					break;
+			}
+			localStorage.setItem("$showConfirm", "0");
+		}, "提示", ["设置网络", "取消"]);
+	}
+	_settingNetWork = function() {
+		if (mui.os.ios) {
+			var UIApplication = plus.ios.import("UIApplication");
+			var NSURL = plus.ios.import("NSURL");
+			var setting = NSURL.URLWithString("prefs:root=WIFI");
+			var application = UIApplication.sharedApplication();
+			application.openURL(setting);
+			plus.ios.deleteObject(setting);
+			plus.ios.deleteObject(application);
+		} else if (mui.os.android) {
+			var main = plus.android.runtimeMainActivity();
+			var Intent = plus.android.importClass("android.content.Intent");
+			var mIntent = new Intent('android.settings.WIFI_SETTINGS');
+			main.startActivity(mIntent);
+		} else {
+			// TODO other os
+		}
+	}
+})(ajax_error || (ajax_error = {}))
+var error_tost;
+(function(){
+	error_tost.message=function(){
+		mui.toast(TextMessage.not_network, {
+					duration: 'long',
+					type: 'div'
+				});
+	};
+})(error_tost || (error_tost = {}))
+var preventKeyBoardSubmit;
+(function (preventKeyBoardSubmit){
+    preventKeyBoardSubmit.closekeybord=function(){
+    	$("input").keypress(function(e){
+	        if(e.keyCode === 13){
+	            e.preventDefault();
+	            document.activeElement.blur();
+	            $('input').blur();
+	        }
+	    });
+    };
+})(preventKeyBoardSubmit || (preventKeyBoardSubmit={}));
 //Translate html
 function HTMLDecode(text) {
 	var temp = document.createElement("div");

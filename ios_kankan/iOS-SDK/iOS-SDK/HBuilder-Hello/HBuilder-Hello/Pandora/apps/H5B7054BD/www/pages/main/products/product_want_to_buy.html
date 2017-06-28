@@ -43,10 +43,11 @@
 					     <h5 class="ka_proloh5 lang" data-locale="commodity_name"></h5>
 					    <ul class="mui-table-view">
 				            <li class="mui-table-view-cell">
-			                   <input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40">
+			                   <input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40" onfocus="closekeybord()">
 				            </li>
 				            <li class="mui-table-view-cell">
-				                 <textarea  class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail"></textarea>
+				                 <textarea  class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail" onkeyup="daojishu()"></textarea>
+				            	<div class="daojishitext"></div>
 				            </li>
 				        </ul>
 				     </div>
@@ -71,6 +72,16 @@
 $(function() {
 	$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
 });
+function closekeybord(){
+	preventKeyBoardSubmit.closekeybord();
+}
+function daojishu(){
+	var delength=$("#comm_detail").val().trim().length;
+	var cha=1000-delength;
+	//var texts=TextMessage.inputtext+"<font color='red'>"+cha+"</font>"+TextMessage.inputpoint;
+	var texts="<font color='#ACACB4'>"+delength+"/1000</font>";
+	$(".daojishitext").html(texts);
+}
 //email check
 function publishscheck(){
 	if (!Repository.User.isEmptyEmail()) {
@@ -82,8 +93,8 @@ function publishscheck(){
 //submit form
 function publishs() {
 	var buy_sell_flag = "1";
-	var comm_name = $("#comm_name").val();
-	var comm_detail = $("#comm_detail").val();
+	var comm_name = HTMLEncode($("#comm_name").val());
+	var comm_detail = HTMLEncode($("#comm_detail").val());
 	var imges0 = $("#0").val();
 	var imges1 = $("#1").val();
 	var imges2 = $("#2").val();
@@ -144,6 +155,9 @@ function publishs() {
 		ng: function(data) {
 			Log.d(data);
 			Api.callback_ng(data);
+		},
+		error:function(){
+			error_tost.message();
 		}
 	});
 

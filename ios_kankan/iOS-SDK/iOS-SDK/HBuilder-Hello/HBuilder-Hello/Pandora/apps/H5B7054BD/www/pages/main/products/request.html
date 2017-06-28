@@ -69,6 +69,13 @@
 		<script src="../../../js/common.js"></script>
 		<script>
 			mui.init();
+			function reloadpage(){
+				location.reload();
+			}
+			window.addEventListener('requestpage', function(event) {
+				self.location.reload();
+				
+			});
 			var imgwidth=parseInt($(window).width())/3-17;
 			var transpro="";
 			var otranspro="";
@@ -241,12 +248,26 @@
 					ng: function(data) {
 						console.log(data);
 						Api.callback_ng(data);
-						if(data=="1000"|| data=="2002"){
+						if(data=="1000"|| data=="2002" || data=="2022"){
 							$(".jiaoyihitext").hide();
 							var mainPage = plus.webview.getLaunchWebview();
        							mainPage.show();
+   							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url: "../../login/login.html"
+							});
 						}
 						
+					},
+					error:function(){
+						var nodata='<div  id="reloadpage" onclick="reloadpage()"  style="display: ;"><font size="2" class="lang" data-locale="networkerror"></font></div>';
+						//$("#reloadpage").show();
+						$(".mui-scrolls").html(nodata);
+						$(".jiaoyihitext").hide();
 					}
 				});
 			});

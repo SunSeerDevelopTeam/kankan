@@ -350,6 +350,7 @@ body .mui-table-view-cell.mui-active{
 .ka_userboxtext{
 	word-wrap:break-word;
 	width:4em;
+	font-size: 14px;
 }
 .commentlists{
 	margin-right: 4em;
@@ -905,4 +906,22 @@ body .mui-table-view-cell.mui-active{
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+#reloadpage{
+	width: 100%;
+	text-align: center;
+	font-size: 1em;
+	margin-top: 50%;
+	color: #ACACB4;
+}
+#reloadpage2{
+	width: 100%;
+	text-align: center;
+	font-size: 1em;
+	margin-top: 50%;
+	color: #ACACB4;
+}
+.daojishitext{
+	font-size: 14px;color:#555555;
+	text-align: right;
 }

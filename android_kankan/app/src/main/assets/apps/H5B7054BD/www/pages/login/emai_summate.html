@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>email_summate</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style>
+			#form1 label {
+				font-size: smaller;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title lang" data-locale="writeemail"></h1>
+		</header>
+		<div style="text-align: left;margin-top: 50px;margin-bottom: -2.5em;">
+			<p>
+				<font color="red">*</font><span class="lang" data-locale="emailwtext"></span></p>
+		</div>
+		<div class="mui-content">
+			<form id="form1" name="form1" method="post" action="">
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="email" class="lang" data-locale="email"></label>
+						<input id='email' name="email" type="email" class="mui-input mui-input-clear lang" data-locale="please-input-email">
+					</div>
+				</div>
+				<!-- send verification code button -->
+				<div class="mui-content-padded">
+					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
+				</div>
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="verification-code"></label>
+						<input id='verificationCode' name="verificationCode" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+					</div>
+				</div>
+				<!-- submit button -->
+				<div class="mui-content-padded">
+					<button id='submit' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register" onclick="submits()"></button>
+				</div>
+			</form>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/sha1.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript">
+			var formPageName;
+			mui.init({
+//				beforeback: function() {
+//					var homePage = plus.webview.currentWebview().opener();
+//					mui.fire(homePage, 'refreshlist');
+//				}
+			});
+			mui.plusReady(function() {
+				formPageName = plus.webview.currentWebview().formPageName;
+				var sendVCodeBtn = document.getElementById('send-verification-code');
+				var canClick = true;
+				sendVCodeBtn.addEventListener('tap', function(event) {
+					if(!canClick) return;
+					console.log("click sendVCodeBtn");
+					canClick = false;
+					var waiting = plus.nativeUI.showWaiting();
+					var params = {};
+					params[Api.Params.email] = document.getElementById('email').value;
+					Repository.User.checkEmail(params, {
+						ok: function(data) {
+							waiting.close();
+							mui.toast(TextMessage.send_code_ok, {
+								duration: 'long',
+								type: 'div'
+							})
+							var i = 0;
+							var updateText = setInterval(function() {
+								i++;
+								sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
+								if(180 - i == 0) {
+									sendVCodeBtn.innerText = TextMessage.send_verification_code;
+									canClick = true;
+									clearInterval(updateText);
+								}
+							}, 1000);
+						},
+						ng: function(data) {
+							waiting.close();
+							canClick = true;
+							Api.callback_ng(data);
+							return false;
+						},
+						error: function() {
+							canClick = true;
+							waiting.close();
+						}
+					});
+				});
+			});
+
+			function submits() {
+				var email = $("#email").val();
+				var code = $("#verificationCode").val();
+				if(email == "") {
+					mui.toast(TextMessage.emailnull, {
+						duration: 'long',
+						type: 'div'
+					});
+					//alert(TextMessage.emailnull);
+					document.form1.email.focus();
+					return false;
+				}
+				if(code == "") {
+					mui.toast(TextMessage.codenull, {
+						duration: 'long',
+						type: 'div'
+					});
+					//alert(TextMessage.codenull);
+					document.form1.verificationCode.focus();
+					return false;
+				}
+				var params2 = {
+					"email": email,
+					"vc_code": code
+				};
+				Repository.User.email_rgister_check(params2, {
+					ok: function(data) {
+						mui.toast(TextMessage.updatesuccessinfo, {
+							duration: 'long',
+							type: 'div'
+						});
+						if (formPageName === "login") {
+							var mainPage = plus.webview.getLaunchWebview();
+							mainPage.show();
+							var homeWebView = plus.webview.getWebviewById('home.html');
+							mui.fire(homeWebView, 'refresh', {
+								refresh: "canRefresh"
+							});
+						} else {
+							mui.back();
+						}
+					},
+					ng: function(data) {
+						console.log(data);
+						switch(data) {
+							case "1000":
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
+							case "2014":
+								mui.toast(TextMessage.confirmcodeng, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
+							default:
+								mui.toast(TextMessage.updatemailng, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
+						}
+					},
+					error: function() {
+						waiting.close();
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>
