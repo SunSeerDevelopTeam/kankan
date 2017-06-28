@@ -25,6 +25,7 @@ var JSLocale = {
 	"verification-code": "<span style='color:red;'>*</span>認証番号",
 	"register": "確定",
 	"register-tips": "あとからプロフィールは変更可能です",
+	"register-tips-1": "上の確認ボタンを押すことになり、<a href='../setting/terms.html'>利用規約</a> に同意したことになります。",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
 	"please-input-password": "半角英字・数字(6～16桁)",
