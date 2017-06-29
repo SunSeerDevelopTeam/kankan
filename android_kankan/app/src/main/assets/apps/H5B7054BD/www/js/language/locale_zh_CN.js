@@ -24,7 +24,8 @@ var JSLocale = {
 	"introduction-code": "介绍码",
 	"verification-code": "<span style='color:red;'>*</span>验证码",
 	"register": "确定",
-	"register-tips": "注册真实可用，注册成功后的用户可用于登录。",
+	"register-tips": "以上注册信息可在个人信息画面变更。",
+	"register-tips-1": "点击确认按钮之后默认你已经接受<a href='../setting/terms.html'>使用条款</a>",
 	"please-input-email": "请输入邮箱",
 	"please-input-username": "请输入用户名",
 	"please-input-password": "请输入密码",
@@ -176,8 +177,6 @@ var JSLocale = {
 	"category_top_14":"其他",
 	"quesreset":"重置",
 	"nameplocder":"用户名",
-	"no_data_tips_1":"该分类目前没有商品。",
-	"no_data_tips_2":"敬请期待新品上线。",
 	"networkerror":"网络错误，点此重试",
 	"networkerrordetail":"网络错误，点此返回重试"
 }

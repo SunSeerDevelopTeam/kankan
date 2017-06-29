@@ -678,8 +678,21 @@
 				if(imgsarr==""){
 					var imgurl0="";
 				}else{
-					var imgurl0=imgsarr[0].url;
+					var murl=imgsarr[0].url;
+					var imgurlarr=imgsarr[0].url.split("/");
+					var imgurl0="";
+					//console.log(imgsarr[0].url);
+					//var tihuan=murl.splice("/thumb/",murl.lastIndexOf('/'));
+					for(var m=0;m<imgurlarr.length;m++){
+						if(m<=7){
+							imgurl0+=imgurlarr[m]+"/";
+						}else{
+							imgurl0+="thumbnail/"+imgurlarr[8];
+						}
+						//imgurl0=imgurlarr[0]+"/"+imgurlarr[1]+"/"+imgurlarr[2]+"/"+imgurlarr[3]+"/"+imgurlarr[4]+"/"+imgurlarr[5]+"/"+imgurlarr[6]+"/"+imgurlarr[7]+"/thumbnail/"+imgurlarr[8];
+					}
 				}
+				console.log(imgurl0);
 				clickshare(comdityid,imgurl0);
 			}
 			//products list
