@@ -146,15 +146,15 @@
 			<!--Produce goods of concern-->
 			<h5 class="ka_h5backcolor lang concerned" data-locale=""></h5>
 			<div class="mui-slider">
-				<div class="mui-slider-group mui-slider-loop">
+				<div class="mui-slider-group">
 					<!--last-->
-					<div class="mui-slider-item mui-slider-item-duplicate" id="lastconcenered">
+					<!--<div class="mui-slider-item mui-slider-item-duplicate" id="lastconcenered" style="display: none;">
 						<ul class="mui-table-view mui-grid-view" id="lastconcerul">
 
 						</ul>
-					</div>
+					</div>-->
 					<!--first-->
-					<div class="mui-slider-item mui-slider-item-duplicate">
+					<div class="mui-slider-item mui-slider-item-duplicate" id="firstconcerned">
 						<ul class="mui-table-view mui-grid-view" id="firstconcerul">
 						</ul>
 					</div>
@@ -163,14 +163,14 @@
 			<!--Recommended products-->
 			<h5 class="ka_h5backcolor lang" data-locale="det_recommends"></h5>
 			<div class="mui-slider">
-				<div class="mui-slider-group mui-slider-loop">
+				<div class="mui-slider-group">
 					<!--last-->
-					<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
+					<!--<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
 						<ul class="mui-table-view mui-grid-view" id="lastremmondul">
 						</ul>
-					</div>
+					</div>-->
 					<!--first-->
-					<div class="mui-slider-item mui-slider-item-duplicate">
+					<div class="mui-slider-item mui-slider-item-duplicate" id="firstrecommend">
 						<ul class="mui-table-view mui-grid-view" id="firstremmondul">
 						</ul>
 					</div>
@@ -549,14 +549,17 @@
 				}
 				//*************************************recommend
 				var recomendhtml2 = "";
-				var recomendhtml = '<div class="mui-slider-item sliderimg">';
-				recomendhtml += '<ul class="mui-table-view mui-grid-view">';
 				var recomendsarrs = commodity.commodity_recommend;
 				var recomdlenght = recomendsarrs.length;
 				var recomendsobj = {};
 				var recomendaddhtml = ""; //add dom
 				var recomendaddfirsthtml = "";
 				var c = 0;
+				if(recomdlenght>4){
+					var recomendhtml = '<div class="mui-slider-item sliderimg">';
+					recomendhtml += '<ul class="mui-table-view mui-grid-view">';
+				}
+				var recomendhtml="";
 				for(var j = 0; j < recomdlenght; j++) {
 					var k = j + 1 * 1;
 					var recomendsobj1 = JSON.stringify(recomendsarrs[j]);
@@ -564,15 +567,19 @@
 					var recomdimg = recomendsobj.commodity_photo_url;
 					var recomdid = recomendsobj.commodity_id;
 					var advflag = recomendsobj.is_ad;
-					recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-					recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
-					recomendhtml += '</a></li>';
+					if(j>=4){
+						recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+						recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
+						recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						recomendhtml += '</a></li>';
+					}
 					var vall = k % 4;
 					if(vall == 0 || j == recomdlenght - 1) {
-						recomendhtml += '</ul></div>';
+						if(j>4){
+							recomendhtml += '</ul></div>';
+						}
 					}
-					if(vall == 0 && k < recomdlenght) {
+					if(vall == 0 && k < recomdlenght && j!=4) {
 						recomendhtml += '<div class="mui-slider-item sliderimg">';
 						recomendhtml += '<ul class="mui-table-view mui-grid-view">';
 					}
@@ -580,45 +587,52 @@
 					if(j < 4) {
 						recomendaddfirsthtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddfirsthtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						recomendaddfirsthtml += '</a></li>';
 						$("#firstremmondul").html(recomendaddfirsthtml);
 					}
-					if(j >= recomdlenght - 4) {
-						recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-						recomendaddhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
-						recomendaddhtml += '</a></li>';
-						$("#lastremmondul").html(recomendaddhtml);
-					}
+//					if(j > recomdlenght - 4) {
+//						recomendaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+//						recomendaddhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
+//						recomendaddhtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+//						recomendaddhtml += '</a></li>';
+//						$("#lastremmondul").html(recomendaddhtml);
+//					}
 				}
 				recomendhtml2 += recomendhtml;
-				$("#lastrecommend").after(recomendhtml2);
+				$("#firstrecommend").after(recomendhtml);
 				//recommend end*********************************/
 				//*************************************concenered
 				var concernhtml2 = "";
-				var concernhtml = '<div class="mui-slider-item sliderimg">';
-				concernhtml += '<ul class="mui-table-view mui-grid-view">';
 				var concernarrs = commodity.user_praise_commoditys;
 				var concernlenght = concernarrs.length;
 				var concernsobj = {};
 				var concernaddhtml = ""; //add dom
 				var concernlastaddhtml = "";
+				if(concernlenght>4){
+					var concernhtml = '<div class="mui-slider-item sliderimg">';
+					concernhtml += '<ul class="mui-table-view mui-grid-view">';
+				}
+				var concernhtml=""; 
 				for(var l = 0; l < concernlenght; l++) {
 					var m = l + 1 * 1;
 					var concernobj1 = JSON.stringify(concernarrs[l]);
 					concernsobj = $.parseJSON(concernobj1);
 					var concernimg = concernsobj.commodity_photo_url;
 					var concernid = concernsobj.commodity_id;
-					concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-					concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-					concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
-					concernhtml += '</a></li>';
+					if(l >= 4){
+						concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+						concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
+						concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						concernhtml += '</a></li>';
+					}
 					var vallm = m % 4;
 					if(vallm == 0 || l == concernlenght - 1) {
-						concernhtml += '</ul></div>';
+						if(l>4){
+							concernhtml += '</ul></div>';
+						}
 					}
-					if(vallm == 0 && m < concernlenght) {
+					if(vallm == 0 && m < concernlenght && l!=4) {
 						concernhtml += '<div class="mui-slider-item sliderimg">';
 						concernhtml += '<ul class="mui-table-view mui-grid-view">';
 					}
@@ -629,17 +643,17 @@
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}
-					if(l >= concernlenght - 4) {
-						concernlastaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-						concernlastaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
-						concernlastaddhtml += '</a></li>';
-						$("#lastconcerul").html(concernlastaddhtml);
-					}
+//					if(l > concernlenght - 4) {
+//						concernlastaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
+//						concernlastaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
+//						concernlastaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+//						concernlastaddhtml += '</a></li>';
+//						$("#firstconcerul").html(concernlastaddhtml);
+//					}
 
 				}
 				concernhtml2 += concernhtml;
-				$("#lastconcenered").after(concernhtml2);
+				$("#firstconcerned").after(concernhtml2);
 				//concenered end**************************************/
 				//buy way
 				//praise staute
@@ -682,17 +696,16 @@
 					var imgurlarr=imgsarr[0].url.split("/");
 					var imgurl0="";
 					//console.log(imgsarr[0].url);
-					//var tihuan=murl.splice("/thumb/",murl.lastIndexOf('/'));
 					for(var m=0;m<imgurlarr.length;m++){
-						if(m<=7){
+						//console.log(m+":"+imgurlarr[m]);
+						if(m<=8){
 							imgurl0+=imgurlarr[m]+"/";
 						}else{
-							imgurl0+="thumbnail/"+imgurlarr[8];
+							imgurl0+="thumbnail/"+imgurlarr[9];
 						}
-						//imgurl0=imgurlarr[0]+"/"+imgurlarr[1]+"/"+imgurlarr[2]+"/"+imgurlarr[3]+"/"+imgurlarr[4]+"/"+imgurlarr[5]+"/"+imgurlarr[6]+"/"+imgurlarr[7]+"/thumbnail/"+imgurlarr[8];
 					}
 				}
-				console.log(imgurl0);
+				//console.log(imgurl0);
 				clickshare(comdityid,imgurl0);
 			}
 			//products list
