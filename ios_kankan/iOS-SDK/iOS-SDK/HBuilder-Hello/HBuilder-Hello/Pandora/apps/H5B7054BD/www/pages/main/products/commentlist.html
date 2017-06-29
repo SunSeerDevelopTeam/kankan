@@ -70,10 +70,10 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
 			mui.init();
-//			window.addEventListener('ucid', function(event) {
-//				var id = event.detail.id;
-//				showcomments(id);
-//			});
+			window.addEventListener('ucid', function(event) {
+				var id = event.detail.id;
+				showcomments(id);
+			});
 			var id;
 			mui.plusReady(function() {
 				TextMessage.language = plus.os.language;

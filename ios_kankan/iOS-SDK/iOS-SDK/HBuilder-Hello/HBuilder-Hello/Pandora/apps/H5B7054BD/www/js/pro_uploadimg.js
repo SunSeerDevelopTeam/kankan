@@ -1,5 +1,6 @@
 ///////////////take picture/////////////////
 mui(".ka_prologbox0").on("tap", "#takepic", function(e) {
+	inputblur();
 	if(mui.os.plus) {
 		var a = [{
 			title: TextMessage.tackpicture
@@ -24,6 +25,7 @@ mui(".ka_prologbox0").on("tap", "#takepic", function(e) {
 });
 //gallery
 mui(".ka_prologbox0").on("tap", "#gallery", function(e) {
+	inputblur();
 	if(mui.os.plus) {
 		var a = [{
 			title: TextMessage.gallerychoose

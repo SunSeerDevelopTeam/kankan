@@ -189,6 +189,7 @@
 
 			<div class="mui-content-padded">
 				<p class="lang" data-locale="register-tips"></p>
+				<p class="lang" data-locale="register-tips-1"></p>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -216,40 +217,48 @@
 						var email = doc.getElementById('email').value.trim();
 						if (email == "") {
 							plus.nativeUI.toast(TextMessage.emailnull);
+							canClick = true;
 							return;
 						}
 						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
 						if (!reg.test(email)) {
 							plus.nativeUI.toast(TextMessage.email_error1);
+							canClick = true;
 							return;
 						}
 						var username = doc.getElementById('username').value.trim();
 						if (username == "") {
 							plus.nativeUI.toast(TextMessage.username_null);
+							canClick = true;
 							return;
 						}
 						if (username.length > 10) {
 							plus.nativeUI.toast(TextMessage.username_error);
+							canClick = true;
 							return;
 						}
 						var password = doc.getElementById('password').value.trim();
 						if(password == ""){
 							plus.nativeUI.toast(TextMessage.password_notnull);
+							canClick = true;
 							return;
 						}
 						var reg = /^[0-9a-zA-Z]{6,16}$/
 						if (!reg.test(password)) {
 							plus.nativeUI.toast(TextMessage.password_error);
+							canClick = true;
 							return;
 						}
 						var passwordConfirm = doc.getElementById('passwordConfirm').value.trim();
 						if (password != passwordConfirm) {
 							plus.nativeUI.toast(TextMessage.confirmPwd_error);
+							canClick = true;
 							return;
 						}
 						var city = doc.getElementById('city').getAttribute('data-val');
 						if (city == null) {
 							plus.nativeUI.toast(TextMessage.addressnull);
+							canClick = true;
 							return;
 						}
 						var waiting = plus.nativeUI.showWaiting();
@@ -284,10 +293,10 @@
 										})
 										break;
 									default:
-								mui.toast(TextMessage.send_code_ng, {
-									duration: 'long',
-									type: 'div'
-								})
+										mui.toast(TextMessage.send_code_ng, {
+											duration: 'long',
+											type: 'div'
+										})
 										break;
 								}
 							},
