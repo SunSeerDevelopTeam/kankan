@@ -3,9 +3,9 @@
 	padding: 2px;
 }
 
-.comm-item {
+/*.comm-item {
 	height: 200px;
-}
+}*/
 
 .item-tap {
 	height: 80%;
@@ -101,9 +101,9 @@
     height: auto;
     z-index:999;
 }
-.item-img-box{
+/*.item-img-box{
 	line-height: 160px;
-}
+}*/
 .item-img-box img{
 	height:auto;width:100%;vertical-align:middle;
 }

@@ -712,7 +712,8 @@
 	background-color:#FF0000; 
 	text-align:center; 
 	/*padding-top:10%; */
-	padding-top:5%;
+	padding-top:3%;
+	padding-bottom: 3%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }
@@ -720,8 +721,8 @@
 	height:100%; 
 	background-color:gray; 
 	text-align:center; 
-	/*padding-top:10%; */
-	padding-top:5%;
+	padding-top:3%;
+	padding-bottom: 3%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }
@@ -729,8 +730,8 @@
 	height:100%; 
 	background-color:#FF0000; 
 	text-align:center; 
-	/*padding-top:10%;*/
-	padding-top:5%;
+	padding-top:3%;
+	padding-bottom: 3%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }
@@ -738,8 +739,8 @@
 	height:100%; 
 	background-color:gray; 
 	text-align:center; 
-	/*padding-top:10%;*/
-	padding-top:5%;
+	padding-top:3%;
+	padding-bottom: 3%;
 	vertical-align:middle;
 	border:1px #FFFFFF solid;
 }
