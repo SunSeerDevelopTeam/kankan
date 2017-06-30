@@ -240,15 +240,21 @@
 				var myid=results.myid;
 				var htmlnull='<div style="text-align: center;"><p>'+TextMessage.datanull+'</p></div>';
 				var others=data.own;
+				if(others){
+					var otlength=others.length;
+				}else{
+					var otlength=0;
+				}
+				
 				if(index=="0" || index=="all"){
 					//requested
-					if(others=="" || others.length<=10){
+					if(others=="" || otlength<=10 || data==""){
 						$("#item1mobile .mui-pull-loading").html(TextMessage.nomore);
 					}
 					if(flag=="down"){
 						$("#requested").empty();
 					}
-					for(var ot=0;ot<others.length;ot++){
+					for(var ot=0;ot<otlength;ot++){
 						var transid=others[ot].trans.trans_id;
 						var comditylength=others[ot].trans.commodity.length;
 						for(var vi=0;vi<comditylength;vi++){
@@ -300,10 +306,15 @@
 						$("#request").empty();
 					}
 					var own=data.other;
-					if(own=="" || own.length<=10){
+					if(own){
+						var owlength=own.length;
+					}else{
+						var owlength=0;
+					}
+					if(own=="" || owlength<=10 || data==""){
 						$("#item2mobile .mui-pull-loading").html(TextMessage.nomore);
 					}
-					for(var ow=0;ow<own.length;ow++){
+					for(var ow=0;ow<owlength;ow++){
 						var otransid=own[ow].trans.trans_id;
 						var ocomditylength=own[ow].trans.commodity.length;
 						for(var wi=0;wi<ocomditylength;wi++){
