@@ -9,6 +9,11 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
+		<style>
+			h5{
+				margin-left: 0.2em;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -46,7 +51,7 @@
 			                   <input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40" onfocus="closekeybord()">
 				            </li>
 				            <li class="mui-table-view-cell">
-				                 <textarea  class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail" onkeyup="daojishu()"></textarea>
+				                 <textarea  class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail" oninput="daojishu()"></textarea>
 				            	<div class="daojishitext"></div>
 				            </li>
 				        </ul>
@@ -81,6 +86,11 @@ function daojishu(){
 	//var texts=TextMessage.inputtext+"<font color='red'>"+cha+"</font>"+TextMessage.inputpoint;
 	var texts="<font color='#ACACB4'>"+delength+"/1000</font>";
 	$(".daojishitext").html(texts);
+}
+//make input lose focus
+function inputblur(){
+	document.getElementById('comm_name').blur();
+	document.getElementById('comm_detail').blur();
 }
 //email check
 function publishscheck(){

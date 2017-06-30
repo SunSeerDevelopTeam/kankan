@@ -50,7 +50,8 @@
 .comm-name {
 	font-size: 14px;
 	height: 55%;
-	padding: 5%;
+	padding-left: 5%;
+	padding-bottom: 5%;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
