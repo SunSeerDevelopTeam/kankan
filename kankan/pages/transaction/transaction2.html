@@ -71,13 +71,13 @@
 							</li>
 						</ul>
 						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user" style="height:85px;">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user liheight" <!--style="height:85px;"-->>
 
 							</li>
 							<li class="tran-pic-middle" style="margin-left:10px;">
 								<img height="24px" width="24px" src="../../images/xinhuan.png" />
 							</li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user" style="height:85px;">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user liheight" <!--style="height:85px;"-->>
 
 							</li>
 						</ul>
@@ -89,7 +89,7 @@
 						</ul>
 						<center>
 						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5" style="height:85px;padding:0px;">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 liheight" style="padding:0px;">
 
 							</li>
 						</ul>
@@ -184,7 +184,7 @@
 			function reloadpage(){
 				location.reload();
 			}
-			var imgwidth = parseInt($(window).width()) / 2 - 20;
+			var imgwidth = parseInt($(window).width()) / 2 - 52;
 			//setInterval(showRequestDetail, 10000, "");
 			function submitChat() {
 				var chatMsg = $("#msg").val();
@@ -272,6 +272,7 @@
 				var buyer_comm_id, buyer_comm_img, buyer_comm_name, seller_comm_id, seller_comm_id, seller_comm_name;
 				var seller_comm_exist = false;
 				var seller_img='',buyer_img='',buyer_top_margin='',seller_top_margin='';
+				$(".liheight").attr("style","height:"+imgwidth+"px;overflow:hidden;");
 				for(var goods in commdinfo) {
 					if(commdinfo[goods].user_id == buyer_id) {
 						buyer_comm_id = commdinfo[goods].commodity_id;
@@ -283,7 +284,7 @@
 						var hwhpercent = imgHeight / imgWidth;
 						var top_marign = 0;
 						var showheight = imgwidth * hwhpercent;
-						var cha1 = showheight - 100;
+						var cha1 = showheight - imgwidth;
 						if(cha1 > 0) {
 							top_marign = cha1 / 2;
 						} else {
@@ -302,7 +303,7 @@
 						var hwhpercent = imgHeight / imgWidth;
 						var top_marign = 0;
 						var showheight = imgwidth * hwhpercent;
-						var cha1 = showheight - 100;
+						var cha1 = showheight - imgwidth;
 						if(cha1 > 0) {
 							top_marign = cha1 / 2;
 						} else {
