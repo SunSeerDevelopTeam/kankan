@@ -95,8 +95,7 @@ function getDataFromServer(params, callback) {
 		network = true;
 	}
 	if (network) {
-		var cid = localStorage.cid;
-		console.log("cid is " + cid);
+		var cid = localStorage.getItem("cid");
 		if(cid == -1) {
 			params.want = 1;
 		} else if(cid != 0) {
@@ -341,9 +340,11 @@ mui.plusReady(function() {
 	}
 	if(mui('#pullrefresh').length != 0) {
 		var params = {};
-		getDataFromServer(params, function(data) {
-			createListView(data);
-		});
+		setTimeout(function(){
+			getDataFromServer(params, function(data) {
+				createListView(data);
+			});
+		}, 1000);
 	} else {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}

@@ -77,6 +77,9 @@
 $(function() {
 	$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
 });
+	window.addEventListener("refreshtop", function(event) {
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+	});
 function closekeybord(){
 	preventKeyBoardSubmit.closekeybord();
 }
