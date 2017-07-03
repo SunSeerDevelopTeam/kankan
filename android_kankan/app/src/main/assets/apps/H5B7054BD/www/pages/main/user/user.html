@@ -14,11 +14,21 @@
 		<style>
 			html,
 			body {
-				background-color: #efeff4;
+				background-color: #ffffff;
 			}
 			.pimgbox{
-				width:100%;height:76px;text-align:center;border:1px solid #ffffff;overflow:hidden;
+				width:100%;text-align:center;border:1px solid #ffffff;overflow:hidden;
+				/*display:table;*/
 			}
+			#myproducts{
+				background-color: #ffffff;
+			}
+			#myfavourate{
+				background-color: #ffffff;
+			}
+			/*.pimgbox img{
+				display:table-cell; vertical-align:middle;
+				}*/
 			.stautestext{
 				background-color: #F0AD4E;
 				margin-top: 1em;
@@ -37,7 +47,7 @@
 		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />
 	</head>
 
-	<body class="mui-fullscreen">
+	<body>
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar">
@@ -46,41 +56,36 @@
 				</div>
 			</div>
 		</div>
-		<div id="userinfoshow" class="mui-page">
-			<!--title start-->
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
-				</button>
-				<h1 class="mui-center mui-title user-title-center maintitle"></h1>
-				<a href="../../setting/setting.html" class="settingbut">
+			<header class="mui-bar mui-bar-nav">
+			    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="4" class="lang" data-locale="back"></font></a>
+			    <h1 class="mui-title maintitle"></h1>
+			    <a href="../../setting/setting.html" class="settingbut">
 					<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
 						<span class="mui-icon mui-icon-gear"></span>
 					</button>
 				</a>
-			</div>
-			<!--title end-->
+			</header>
 			<!--main content start-->
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<!--<div id="loading" class="mui-content ka_userbox">
+					<div id="loading" class="mui-content ka_userbox">
 						<div class="spinner">
 						  <div class="double-bounce1"></div>
 						  <div class="double-bounce2"></div>
 						</div>
-					</div>-->
+					</div>
 					<div  id="reloadpage" onclick="reloadpage()"  style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div> 
-					<div class="tran-page">
+					<div class="tran-page mui-content" style="display: none;margin-top: -1em;">
 						<ul class="mui-table-view">
 							<li class="head-img-box">
 								<div>
 									<img src="../../../images/userPhoto.png" width="150" height="150" class="headimg">
 									<input type="hidden" name="headimgupdate" id="headimgupdate" value=""/>
 								</div>
-								<div class="mui-pull-caption">
-									<a href="#uinfoedite">
+								<div style="width: 100%;text-align: center;">
+								<div class="mui-pull-caption" id="editemeg">
+									<a href="#">
 										<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton lang" data-locale="userinforbutntext"></button>
 									</a>
+								</div>
 								</div>
 								<br>
 								<div>
@@ -99,15 +104,15 @@
 								</div>
 								<ul class="user-comment-list">
 									<li class="user-comment-grid">
-										<img height="30%" width="30%" src="../../../images/Good.PNG"/>
+										<img height="30" width="30" src="../../../images/Good.PNG"/>
 										<div class="user-comment-num good"></div>
 									</li>
 									<li class="user-comment-grid2">
-										<img height="30%" width="30%"  src="../../../images/Normal.PNG"/>
+										<img height="30" width="30"  src="../../../images/Normal.PNG"/>
 										<div class="user-comment-num normal"></div>
 									</li>
 									<li class="user-comment-grid2">
-										<img height="30%" width="30%" src="../../../images/Bad.PNG"/>
+										<img height="30" width="30" src="../../../images/Bad.PNG"/>
 										<div class="user-comment-num bad"></div>
 									</li>
 									<li class="user-comment-grid3 usercommentlist">
@@ -237,60 +242,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
-			</div>
 			<!--main content end-->
-		</div>
-		<!--child page user information edite page-->
-		<div id="uinfoedite" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
-				</button>
-				<h1 class="mui-center mui-title lang" data-locale="infoeditetitle"></h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<form method="post" name="userinfosub" id="userinfosub">
-							<div class="ka_editebox">
-								<div class="head-img-box ka_userimagebox editeimg">
-									<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg"  />
-								</div>
-								<div class="ka_usernicknamebox">
-								<h6 class="lang" data-locale="uinfousername"></h6>
-								<input type="text" name="nickname" id="nickname" value="" placeholder="" data-locale="nameplocder" class="ka_userfontsize lang" maxlength="50" />
-								</div>
-								<h6 class="lang" data-locale="introducetext" style="display: none;"></h6>
-								<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500" style="display: none;"></textarea>
-								<h6 class="lang" data-locale="userlanguage"></h6>
-								<div class="backgroundwhite">
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="jpanese_user"></label>
-									    <input name="userlanageval" type="checkbox" value="0">
-									</div>
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="chinese_user"></label>
-									    <input name="userlanageval" type="checkbox" value="1">
-									</div>
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="english_user"></label>
-									    <input name="userlanageval" type="checkbox" value="2">
-									</div>
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="korean_user"></label>
-									    <input name="userlanageval" type="checkbox" value="3">
-									</div>
-				    	     </div>
-								<button type="button" class="mui-btn mui-btn-red ka_usersubmitbtn lang" data-locale="user_buttonsure" onclick="userinfosubmit()"></button>
-						</div>
-						</form>
-						
-					</div>
-				</div>
-			</div>
-		</div>
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
@@ -335,33 +288,58 @@
 		window.addEventListener('refreshlist', function(e){
 		    location.reload();
 		});
-		var viewApi = mui('#app').view({
-			defaultPage: '#userinfoshow'
+		window.addEventListener('headimage', function(e){
+			mui.plusReady(function() {
+				//message show
+				var params={};
+				Repository.User.Usershow(params, {
+					ok: function(data) {
+	//					if (!Repository.User.isEmptyEmail()) {
+	//						 return;
+	//					}else{
+							console.log("success");
+							if(data.data.user_photo==""){
+								var user_photo="../../../images/userPhoto.png";
+							}else{
+								var user_photo=data.data.user_photo;
+							}
+							var uname=data.data.user_name;
+							$("#nickname").val(uname);
+							$(".maintitle").html(uname);
+							$(".headimg").attr("src",user_photo);
+						//}
+					},
+					ng: function(data) {
+						if(data == "2002" || data == "2022") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+						}else{
+								mui.back();
+						}
+						console.log("other error code:" + data);
+						
+					},
+					error:function(){
+						$("#reloadpage").show();
+						$(".tran-page").hide();
+						$("#loading").hide();
+					}
+				});
+				
+			});
 		});
-		mui('.mui-scroll-wrapper').scroll();
-		var view = viewApi.view;
-		(function($) {
-			var oldBack = $.back;
-			$.back = function() {
-				if(viewApi.canBack()) { 
-					viewApi.back();
-				} else { 
-					oldBack();
-				}
-			};
-			view.addEventListener('pageBeforeShow', function(e) {
-				//				console.log(e.detail.page.id + ' beforeShow');
+		mui("#editemeg").on("tap", "a", function(e) {
+			mui.openWindow({
+				id: 'useredite',
+				url:"useredite.html"
 			});
-			view.addEventListener('pageShow', function(e) {
-				//				console.log(e.detail.page.id + ' show');
-			});
-			view.addEventListener('pageBeforeBack', function(e) {
-				//				console.log(e.detail.page.id + ' beforeBack');
-			});
-			view.addEventListener('pageBack', function(e) {
-				//				console.log(e.detail.page.id + ' back');
-			});
-		})(mui);
+		});
 		//change head image
 		mui(".editeimg").on("tap", ".headimg", function(e) {
 			if(mui.os.plus){
@@ -567,7 +545,7 @@
 			$("#nickname").val(uname);
 			$(".point").html(user_point);
 			$(".maintitle").html(uname);
-			$(".maintitle").attr("style","margin-left:-51px;");
+			//$(".maintitle").attr("style","margin-left:-10%;");
 			$("#introduce").val(uintroduce);
 			$(".ticknum").html(uticknum);
 			var language=results.data.talk_flag;
@@ -592,11 +570,20 @@
 				var commstatus=exhibit_commdata[ex].status;
 				var oribi=realheight/realwidth;
 				var showheight=imgwidth*oribi;
-				var cha1=showheight-76;
+				var cha1=showheight-imgwidth;
 				if(cha1>0){
-					toppx=cha1/2;
+					toppx=(cha1/2)*-1;
 				}else{
+//					chah=imgwidth-showheight*1;
+//					if(chah=="NaN"){
+//						toppx=72/2;
+//					}else{
+//						toppx=chah/2;
+//					}
 					toppx=0;
+					//console.log(showheight);
+					
+					//console.log(toppx);
 				}
 				if(commstatus==0){
 					var classsort="codedite";
@@ -608,7 +595,7 @@
 					exhibit_html+='<div class="stautestext">'+TextMessage.tranStatusRequest+'</div>';
 				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
-				exhibit_html+='<div class="pimgbox"><img style="width: 100%;margin-top:-'+toppx+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppx+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
 				var yunum=k%6;
@@ -633,15 +620,21 @@
 				var realheightpra=praise_commdata[pi].comm_img_height;
 				var oribipra=realheightpra/realwidthpra;
 				var showheightpra=oribipra*imgwidth;
-				var cha2=showheightpra-76;
+				var cha2=showheightpra-imgwidth;
 				if(cha2>0){
-					toppxpra=cha2/2;
+					toppxpra=(cha2/2)*(-1);
 				}else{
+//					chah2=imgwidth-showheightpra*1;
+//					if(chah2=="NaN"){
+//						toppxpra=72/2;
+//					}else{
+//						toppxpra=chah2/2;
+//					}
 					toppxpra=0;
 				}
 				praise_html+='<li class="user-goods-grid detail">';
 				praise_html+='<a id="'+praisepid+'" href="#">';
-				praise_html+='<div class="pimgbox"><img style="width: 100%;margin-top:-'+toppxpra+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppxpra+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				praise_html+='</a>';
 				praise_html+='</li>';
 				var kiunum=ki%6;
@@ -834,6 +827,7 @@
 				error:function(){
 					$("#reloadpage").show();
 					$(".tran-page").hide();
+					$("#loading").hide();
 				}
 			});
 			

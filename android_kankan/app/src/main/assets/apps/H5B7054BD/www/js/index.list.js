@@ -278,18 +278,21 @@ function createListItem(item, imgwidth) {
 	var widthim = item.img_flag.width;
 	var orginbi = heightim / widthim;
 	var actuheight = imgwidth * orginbi;
-	var heicha = actuheight - 160;
+	var heicha = actuheight - imgwidth;
 	if(heicha > 0) {
 		var toppx = heicha / 2;
 		stylimg = "margin-top:-" + toppx + "px;";
 	} else {
-		stylimg = "";
+		var hecha2=imgwidth-actuheight;
+		var toppx=hecha2 / 2;
+		stylimg = "margin-top:" + toppx + "px;";
 	}
+	var itemheight=imgwidth+40;
 	var listItemHTML = new Util.StringBuilder();
 	listItemHTML.appendFormat('<div class="li-content" id="{0}">',item.commodity_id)
-		.append('<div class="comm-item">')
+		.appendFormat('<div class="comm-item" style="height:{0}px;">',itemheight)
 		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
-		.appendFormat('<div class="item-img-box"><img class="lazy" data-original="{0}" style="{1}"></div>', item.img_flag.url, stylimg)
+		.appendFormat('<div class="item-img-box" style="height:{0}px;"><img class="lazy" src="{1}" onerror="this.src=' + "'../../../images/nopic.jpg'" + '" style="{2}"></div>',imgwidth,item.img_flag.url, stylimg)
 		//.appendFormat('<img src="{0}">', item.img_flag)
 		//.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
@@ -312,12 +315,14 @@ function createListItem(item, imgwidth) {
 }
 
 function lazyload() {
+	/**
 	$("img.lazy").lazyload({
 		threshold: 200,
 		placeholder: "../../../images/nopic.jpg",
 		effect: "fadeIn",
 		failure_limit: 10
 	});
+	**/
 }
 
 //当DOM准备就绪时
