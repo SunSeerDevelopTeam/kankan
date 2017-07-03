@@ -287,9 +287,10 @@ function createListItem(item, imgwidth) {
 		var toppx=hecha2 / 2;
 		stylimg = "margin-top:" + toppx + "px;";
 	}
+	var itemheight=imgwidth+40;
 	var listItemHTML = new Util.StringBuilder();
 	listItemHTML.appendFormat('<div class="li-content" id="{0}">',item.commodity_id)
-		.append('<div class="comm-item">')
+		.appendFormat('<div class="comm-item" style="height:{0}px;">',itemheight)
 		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
 		.appendFormat('<div class="item-img-box" style="height:{0}px;"><img class="lazy" src="{1}" onerror="this.src=' + "'../../../images/nopic.jpg'" + '" style="{2}"></div>',imgwidth,item.img_flag.url, stylimg)
 		//.appendFormat('<img src="{0}">', item.img_flag)

@@ -14,7 +14,7 @@ body .mui-table-view-cell.mui-active{
 
 .kankan_jyz {
 	background-color: #F0AD4E;
-	margin-top: -9em;
+	margin-top: -85%;
 	position: absolute;
 	opacity: 0.6;
 	padding: 0 0.5em;
@@ -22,7 +22,7 @@ body .mui-table-view-cell.mui-active{
 	font-size: 12px;
 }
 .kankan_morecoin {
-	margin-top: -10em;
+	margin-top: -103%;
 	position: absolute;
 	opacity: 1;
 	padding: 0 1.2em;
@@ -33,7 +33,7 @@ body .mui-table-view-cell.mui-active{
 }
 .kankan_jycl {
 	background-color: #C7254E;
-	margin-top: -9em;
+	margin-top: -85%;
 	position: absolute;
 	opacity: 0.6;
 	padding: 0 0.5em;
@@ -70,15 +70,15 @@ body .mui-table-view-cell.mui-active{
 }
 
 .ka_imgoption {
-	height: 100px;
-	line-height: 100px;
-	vertical-align: middle;
-	display: inline;
+	/*height: 100px;*/
+	/*line-height: 100px;*/
+	/*vertical-align: middle;*/
+	/*display: inline;*/
 	overflow: hidden;
 }
 .ka_imgoption img{
-	vertical-align: middle;
-	max-height: 100px;
+	/*vertical-align: middle;*/
+	/*max-height: 100px;*/
 }
 .ka_exchangeheadimage{
 	border-radius: 50%; width: 20px; height: 20px;
@@ -326,7 +326,10 @@ body .mui-table-view-cell.mui-active{
 }
 
 .ka_commentlevelbox {
-	padding-right: 1.8em;
+	text-align: center;
+	width: 33%;
+	/*padding-right: 5%;*/
+	margin-left: -10%;
 }
 
 .kankan_area2 {
@@ -393,6 +396,9 @@ body .mui-table-view-cell.mui-active{
 .ka_commentnum {
 	text-align: center;
 	font-size: 14px;
+}
+#goodcomment {
+	margin-top: 2%;
 }
 #normalcomment {
 	margin-left: 8.2em;
@@ -547,7 +553,6 @@ body .mui-table-view-cell.mui-active{
 	font-size: 14px;
 }
 
-
 /**take picture***/
 
 .container {
@@ -563,7 +568,7 @@ body .mui-table-view-cell.mui-active{
 	padding: 0.3rem;
 	overflow: auto;
 	clear: both;
-	margin: 1rem auto;
+	margin: 3.4em auto -0.1rem;
 	border: 1px solid #cccccc;
 }
 
@@ -827,10 +832,10 @@ body .mui-table-view-cell.mui-active{
 }
 
 .editebutton {
-	width: 150px;
-	height: 30px;
-	font-size: 14px;
-	padding-top: 7px;
+	width: 12em;
+	height: 2.5em;
+	font-size: 1em;
+	padding-top: 0.5em;
 	text-align: center;
 }
 
@@ -851,7 +856,7 @@ body .mui-table-view-cell.mui-active{
 	width: 30%;text-align: left;margin-left: -1em;
 }
 .ka_usernicknamebox{
-	width: 78%;float: right;margin-top: -4.5em;
+	width: 85%;float: right;margin-top: -4.5em;
 }
 .ka_userfontsize{
 	font-size: 14px;
