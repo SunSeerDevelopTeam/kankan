@@ -80,6 +80,16 @@
 							document.querySelector("[href='" + targetTab + "']").classList.remove("mui-active");
 						}, 500);
 						return;
+					}else{
+						// var homePage = plus.webview.currentWebview();
+						if(targetTab == "products/product_login.html"){
+							var homePage =plus.webview.getWebviewById('products/product_login.html');
+							mui.fire(homePage, 'refreshtop');
+						}else if(targetTab == "products/product_want_to_buy.html"){
+							var homePage =plus.webview.getWebviewById('products/product_want_to_buy.html');
+							mui.fire(homePage, 'refreshtop');
+						}
+						
 					}
 				}
 				//更换标题
