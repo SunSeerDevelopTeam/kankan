@@ -140,6 +140,9 @@
 	window.addEventListener("refresh", function(event) {
 		location.reload();
 	});
+	window.addEventListener("refreshtop", function(event) {
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+	});
 	function daojishu(){
 		var delength=$("#comm_detail").val().trim().length;
 		var cha=1000-delength;
@@ -166,6 +169,7 @@
 		var img = document.createElement("img");
 		img.setAttribute("src", srcval);
 		img.setAttribute("alt", im);
+		img.setAttribute("onerror", "this.src='../../../images/nopic.jpg'");
 		img.setAttribute("class", "z_images");
 		var imgAdd = document.createElement("div");
 		imgAdd.setAttribute("class", "z_addImg");
