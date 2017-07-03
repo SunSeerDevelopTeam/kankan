@@ -14,11 +14,17 @@
 		<style>
 			html,
 			body {
-				background-color: #efeff4;
+				background-color: #ffffff;
 			}
 			.pimgbox{
 				width:100%;text-align:center;border:1px solid #ffffff;overflow:hidden;
 				/*display:table;*/
+			}
+			#myproducts{
+				background-color: #ffffff;
+			}
+			#myfavourate{
+				background-color: #ffffff;
 			}
 			/*.pimgbox img{
 				display:table-cell; vertical-align:middle;
@@ -98,15 +104,15 @@
 								</div>
 								<ul class="user-comment-list">
 									<li class="user-comment-grid">
-										<img height="30%" width="30%" src="../../../images/Good.PNG"/>
+										<img height="30" width="30" src="../../../images/Good.PNG"/>
 										<div class="user-comment-num good"></div>
 									</li>
 									<li class="user-comment-grid2">
-										<img height="30%" width="30%"  src="../../../images/Normal.PNG"/>
+										<img height="30" width="30"  src="../../../images/Normal.PNG"/>
 										<div class="user-comment-num normal"></div>
 									</li>
 									<li class="user-comment-grid2">
-										<img height="30%" width="30%" src="../../../images/Bad.PNG"/>
+										<img height="30" width="30" src="../../../images/Bad.PNG"/>
 										<div class="user-comment-num bad"></div>
 									</li>
 									<li class="user-comment-grid3 usercommentlist">
@@ -236,58 +242,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-			<!--main content end-->
-		</div>
-		<!--child page user information edite page-->
-		<div id="uinfoedite" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
-				</button>
-				<h1 class="mui-center mui-title lang" data-locale="infoeditetitle"></h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<form method="post" name="userinfosub" id="userinfosub">
-							<div class="ka_editebox">
-								<div class="head-img-box ka_userimagebox editeimg">
-									<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg"  />
-								</div>
-								<div class="ka_usernicknamebox">
-								<h6 class="lang" data-locale="uinfousername"></h6>
-								<input type="text" name="nickname" id="nickname" value="" placeholder="" data-locale="nameplocder" class="ka_userfontsize lang" maxlength="50" />
-								</div>
-								<h6 class="lang" data-locale="introducetext" style="display: none;"></h6>
-								<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500" style="display: none;"></textarea>
-								<h6 class="lang" data-locale="userlanguage"></h6>
-								<div class="backgroundwhite">
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="jpanese_user"></label>
-									    <input name="userlanageval" type="checkbox" value="0">
-									</div>
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="chinese_user"></label>
-									    <input name="userlanageval" type="checkbox" value="1">
-									</div>
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="english_user"></label>
-									    <input name="userlanageval" type="checkbox" value="2">
-									</div>
-									<div class="mui-input-row mui-checkbox ">
-									    <label class="lang" data-locale="korean_user"></label>
-									    <input name="userlanageval" type="checkbox" value="3">
-									</div>
-				    	     </div>
-								<button type="button" class="mui-btn mui-btn-red ka_usersubmitbtn lang" data-locale="user_buttonsure" onclick="userinfosubmit()"></button>
-						</div>
-						</form>
-						
-					</div>
 				</div>
-			</div>
-		</div>
+			<!--main content end-->
 	</body>
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
