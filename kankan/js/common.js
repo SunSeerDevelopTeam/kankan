@@ -1570,7 +1570,7 @@ var TextMessage;
 	TextMessage.transDelive = language ? "出荷確認" : "确认发货";
 	TextMessage.transWaitOrder = language ? "相手の注文を待つ" : "等待对方下单";
 	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
-	TextMessage.transFinish = language ? "交易完成" : "交易完成";
+	TextMessage.transFinish = language ? "取引完了" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
 	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
 	TextMessage.transContinue = language ? "取引を継続します。" : "继续交易!";
@@ -1599,6 +1599,7 @@ var TextMessage;
 	TextMessage.representations = language ? "あなたのアカウントは凍結されています。申告する場合は、問い合わせ画面へ遷移します。" : "你的账户已被冻结,是否要申述?";
 	TextMessage.no_data_tips_1 = language ? "該当する商品がありません。" : "该分类目前没有商品。";
 	TextMessage.no_data_tips_2 = language ? "これからの出品にご期待ください。" : "敬请期待新品上线。";
+	TextMessage.noemjoy = language ? "入力表情文字入力できない" : "不能输入表情符号";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

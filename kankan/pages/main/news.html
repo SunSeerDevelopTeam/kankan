@@ -83,6 +83,9 @@
 		  mui.plusReady(function() {
 		  	$("#pullrefresh").attr("style","margin-top:-3em");
 		  });
+		 $('#reloadpage').on('tap', 'font', function(event) {
+				location.reload();
+			});
 		  //delete message
 		  (function($) {
 		  	var btnArray = [TextMessage.sure, TextMessage.cancel];
@@ -122,9 +125,6 @@
 			});
 				
 		  })(mui)
-		  function reloadpage(){
-				location.reload();
-			}
 			//show message
 			function showmessage(results){
 				if(results.data.message==""){

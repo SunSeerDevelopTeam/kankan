@@ -176,8 +176,8 @@ var JSLocale = {
 	"category_top_14":"その他",
 	"quesreset":"リセット",
 	"nameplocder":"ユーザー名",
-	"networkerror":"ネットエラー、再確認してください。",
-	"networkerrordetail":"ネットエラー、ここをクリックし、もう一度試してみてください。"
+	"networkerror":"通信エラーが発生しました。しばらくしてからお試しください。",
+	"networkerrordetail":"通信エラーが発生しました、ここをクリックし、もう一度試してみてください。"
 }
 
 $(function() {
