@@ -22,38 +22,40 @@
 			</div>
 		</div>
 		<div class="mui-content ka_mainbox" style="display: none;">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<div class="ka_userbox">
-						<img src="" class="ka_touxiangimg" width="50" height="50" />
-						<div><b class="uname"></b></div>
-						<font color="#808080" size="2"><span class="lang" data-locale="det_coments"></span>:
-							<font color="#007AFF" class="ucomment"></font>&nbsp;&nbsp;&nbsp;
-							<span class="lang" data-locale="det_producednum"></span>:
-							<font color="#007AFF" class="uproducts"></font>
-						</font>
-					</div>
-				</li>
-				<li class="mui-table-view-cell commentlist">
-					<a href="commentlist.html">
-						<div class="mui-navigate-right ka_userbox commentlists">
-								<div class="mui-pull-right ka_commentlevelbox">
-									<img src="../../../images/Bad.PNG" width="30" height="30">
-									<div class="ka_comlevnumber badnum"></div>
-								</div>
-								<div class="mui-pull-right ka_commentlevelbox">
-									<img src="../../../images/Normal.PNG" width="30" height="30">
-									<div class="ka_comlevnumber normalnum"></div>
-								</div>
-								<div class="mui-pull-right ka_commentlevelbox">
-									<img src="../../../images/Good.PNG" width="30" height="30">
-									<div class="ka_comlevnumber goodnum"></div>
-								</div>
+		<div id="pullrefresh" class="mui-scroll-wrapper">
+			<div class="mui-scroll" style="margin-top: 1.1em;">
+				<ul class="mui-table-view" >
+					<li class="mui-table-view-cell">
+						<div class="ka_userbox">
+							<img src="" class="ka_touxiangimg" width="50" height="50" />
+							<div><b class="uname"></b></div>
+							<font color="#808080" size="2"><span class="lang" data-locale="det_coments"></span>:
+								<font color="#007AFF" class="ucomment"></font>&nbsp;&nbsp;&nbsp;
+								<span class="lang" data-locale="det_producednum"></span>:
+								<font color="#007AFF" class="uproducts"></font>
+							</font>
 						</div>
-						<input type="hidden" value="" id="commid" name="commid" />
-					</a>
-				</li>
-			</ul>
+					</li>
+					<li class="mui-table-view-cell commentlist">
+						<a href="commentlist.html">
+							<div class="mui-navigate-right ka_userbox commentlists">
+									<div class="mui-pull-right ka_commentlevelbox">
+										<img src="../../../images/Bad.PNG" width="30" height="30">
+										<div class="ka_comlevnumber badnum"></div>
+									</div>
+									<div class="mui-pull-right ka_commentlevelbox">
+										<img src="../../../images/Normal.PNG" width="30" height="30">
+										<div class="ka_comlevnumber normalnum"></div>
+									</div>
+									<div class="mui-pull-right ka_commentlevelbox">
+										<img src="../../../images/Good.PNG" width="30" height="30">
+										<div class="ka_comlevnumber goodnum"></div>
+									</div>
+							</div>
+							<input type="hidden" value="" id="commid" name="commid" />
+						</a>
+					</li>
+				</ul>
 			<!---author say---->
 			<!--<ul class="mui-table-view" style="margin:1em 0.5em;">
 			            <li class="mui-table-view-cell">
@@ -63,9 +65,11 @@
 			            </li>
 		       </ul>-->
 			<!--product list-->
-			<ul class="mui-table-view mui-grid-view comditylists">
-			</ul>
-
+					<ul class="mui-table-view mui-grid-view comditylists" style="margin-top: -1em;">
+					</ul>
+				</div>
+			</div>
+			<input type="hidden" name="uids" id="uids" value="" />
 		</div>
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
@@ -73,40 +77,50 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init({
-				swipeBack: false,
-				preloadPages: [
-//				{
-//						id: 'commentlist.html',
-//						url: 'commentlist.html'
-//					},
-					{
-						id: 'detail.html',
-						url: 'detail.html'
-					}
-				],
-//				beforeback: function() {
-//					location.reload();
-//			    }
-			});
-//			window.addEventListener('prolid', function(event) {
-//				var uid = event.detail.id;
-//				//console.log(uid);
-//				getmessage(uid);
-//			});
 			var uid;
+			var page=0;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				uid = self.prolid;
+				$("#uids").val(uid);
+				mui.init({
+					swipeBack: false,
+					preloadPages: [
+						{
+							id: 'detail.html',
+							url: 'detail.html'
+						}
+					],
+					pullRefresh: {
+						container: '#pullrefresh',
+//						down: {
+//							callback: pulldownRefresh
+//						},
+						up: {
+							contentrefresh: TextMessage.update,
+							callback: pullupRefresh
+						}
+					}
+	//				beforeback: function() {
+	//					location.reload();
+	//			    }
+				});
 				getmessage(uid);
 			})
 			function reloadpage(){
 				location.reload();
 			}
+			function pullupRefresh() {
+				var usid=$("#uids").val();
+				setTimeout(function() {
+					getmessage(usid);
+				}, 1500);
+			}
 			//get message
 			function getmessage(uid) {
 				var params = {
-					"user_id": uid
+					"user_id": uid,
+					"page_num":page,
 				};
 				Repository.Commodity.commodityulist(params, {
 					ok: function(data) {
@@ -150,6 +164,9 @@
 				var commodityarr = commodity.commoditys;
 				var commoditylength = commodityarr.length;
 				var imgwidth=parseInt($(window).width())/3-17;
+				var allcount=commodity.all_comm_num;
+				var allcomiditynum=15*page;
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((allcount <=allcomiditynum));
 				for(i = 0; i < commoditylength; i++) {
 					var ucommodityobj = JSON.stringify(commodityarr[i]);
 					var ucommodityinfo = $.parseJSON(ucommodityobj);
@@ -193,6 +210,7 @@
 				});
 				$(".mui-content").show();
 				$("#loading").hide();
+				page++;
 			}
 			var commentPage = null;
 			//go comment list			

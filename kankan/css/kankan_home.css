@@ -249,7 +249,7 @@ body .mui-table-view-cell.mui-active{
 
 .kankan_det_goodsnum {
 	color: #000000;
-	margin-top: 1.2em;
+	margin-top: 1.1em;
 }
 
 .kankan_det_description {
@@ -343,10 +343,9 @@ body .mui-table-view-cell.mui-active{
 }
 
 .ka_mainbox {
-	margin-top: -1em;
+	margin-top: -1.1em;
 	margin-bottom: 3em;
 }
-
 .ka_userbox {
 	text-align: center;
 }
