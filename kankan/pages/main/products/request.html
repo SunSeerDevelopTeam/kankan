@@ -267,6 +267,9 @@
 								break;
 							}
 						}
+						if(transpro==""){
+							transpro=others[ot].trans.commodity[0];
+						}
 						var comm_name = HTMLDecode(transpro.comm_name);
 						var comm_img = transpro.comm_img;
 						var trans_type = others[ot].trans.trans_type;
