@@ -66,6 +66,7 @@ var JSLocale = {
 	"tab_2": "出品",
 	"tab_3": "求める商品",
 	"tab_4": "運送",
+	"tab_5": "リクエスト",
 
 	//commodity login page
 	"commodity_login": "商品登録",
