@@ -148,6 +148,7 @@
 				getdata("down","all");
 			});
 			function getdata(flag,index){
+				$(".mui-pull-loading").html(TextMessage.loading);
 				if(index==0){
 					//requested
 					var data_flg=2;

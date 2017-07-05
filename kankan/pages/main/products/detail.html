@@ -798,10 +798,11 @@
 						var trans_id = data.data.transinfo[0].trans_id;
 						//alert(trans_id);
 						mui.openWindow({
-							url: "../../transaction/transaction2.html?transid=" + trans_id,
+							url: "../../transaction/transaction2.html?transid=" + trans_id+"&goparmes=main",
 							id: "transaction",
 							extras: {
-								"transid": trans_id
+								"transid": trans_id,
+								"goparmes":"main"
 							}
 						})
 					},
