@@ -59,7 +59,7 @@
 			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				for(var i = 0; i < 4; i++) {
+				for(var i = 0; i < 5; i++) {
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
 					if(i > 0) {
@@ -96,6 +96,9 @@
 						}else if(targetTab == "products/product_want_to_buy.html"){
 							var homePage =plus.webview.getWebviewById('products/product_want_to_buy.html');
 							mui.fire(homePage, 'refreshtop');
+						} else if(targetTab == "products/request.html") {
+							var homePage =plus.webview.getWebviewById('products/request.html');
+							mui.fire(homePage, 'requestpage');
 						}
 						
 					}
