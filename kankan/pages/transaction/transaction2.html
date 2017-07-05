@@ -181,12 +181,13 @@
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
 				var goparmes=self.goparmes;
+				//alert(goparmes);
 				if(goparmes=="main"){
 					mui("header").on("tap","a",function(){
+						var preView = plus.webview.getWebviewById('selectitem');
+						plus.webview.close(preView);
 						var mainPage = plus.webview.getLaunchWebview();
    						mainPage.show();
-//						var preView = plus.webview.getWebviewById('requestlist');
-//						plus.webview.close(preView);
 					});
 				}
 				showRequestDetail();
@@ -900,15 +901,20 @@
 			
 			function gotoMain() {
 				mui.plusReady(function() {
-					var requestView = plus.webview.getWebviewById('request');
-					plus.webview.close(requestView);
-					var requestlistView = plus.webview.getWebviewById('requestlist');
-					plus.webview.close(requestlistView);
-					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
-					mui.back();
-					mui.fire(mainpage, 'refresh', {
-						refresh: "canRefresh"
-					});
+//					var requestView = plus.webview.getWebviewById('request');
+//					plus.webview.close(requestView);
+//					var requestlistView = plus.webview.getWebviewById('requestlist');
+//					plus.webview.close(requestlistView);
+//					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+//					mui.back();
+//					mui.fire(mainpage, 'refresh', {
+//						refresh: "canRefresh"
+//					});
+					var transactionView = plus.webview.getWebviewById('transaction');
+					plus.webview.close(transactionView);
+					var mainPage = plus.webview.getLaunchWebview();
+					mainPage.show();
+					mui.fire(mainPage,'gohome');
 				});
 			}
 
