@@ -158,18 +158,18 @@
 
 			});
 			mui.plusReady(function() {
-				getdata("down", "all");
+				getdata("down","all");
 			});
-
-			function getdata(flag, index) {
-				if(index == 0) {
+			function getdata(flag,index){
+				$(".mui-pull-loading").html(TextMessage.loading);
+				if(index==0){
 					//requested
-					var data_flg = 2;
-					if(flag == "down") {
-						var pages = 0;
-						requestedpage = 1;
-					} else {
-						var pages = requestedpage;
+					var data_flg=2;
+					if(flag=="down"){
+						var pages=0;
+						requestedpage=1;
+					}else{
+						var pages=requestedpage;
 						requestedpage++;
 					}
 				} else if(index == 1) {
