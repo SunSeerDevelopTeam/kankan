@@ -90,21 +90,6 @@
 	width: 100%;
 }
 
-.logistics {
-	position: absolute;
-    top: 75%;
-    left: 5%;
-}
-
-.logistics img {
-	position: fixed;
-    width: 50px;
-    height: auto;
-    z-index:999;
-}
-/*.item-img-box{
-	line-height: 160px;
-}*/
 .item-img-box img{
 	height:auto;width:100%;vertical-align:middle;
 }

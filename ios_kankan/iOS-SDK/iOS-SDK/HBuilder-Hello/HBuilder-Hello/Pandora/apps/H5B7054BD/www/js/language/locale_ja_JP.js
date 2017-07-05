@@ -25,7 +25,9 @@ var JSLocale = {
 	"verification-code": "<span style='color:red;'>*</span>認証番号",
 	"register": "確定",
 	"register-tips": "あとからプロフィールは変更可能です",
-	"register-tips-1": "上の確認ボタンを押すことになり、<a href='../setting/terms.html'>利用規約</a> に同意したことになります。",
+	"register-tips-1": "上の確認ボタンを押すことになり、",
+	"register-tips-2": "利用規約",
+	"register-tips-3": "に同意したことになります。",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
 	"please-input-password": "半角英字・数字(6～16桁)",
@@ -66,6 +68,7 @@ var JSLocale = {
 	"tab_2": "出品",
 	"tab_3": "求める商品",
 	"tab_4": "運送",
+	"tab_5": "リクエスト",
 
 	//commodity login page
 	"commodity_login": "商品登録",
@@ -176,8 +179,8 @@ var JSLocale = {
 	"category_top_14":"その他",
 	"quesreset":"リセット",
 	"nameplocder":"ユーザー名",
-	"networkerror":"ネットエラー、再確認してください。",
-	"networkerrordetail":"ネットエラー、ここをクリックし、もう一度試してみてください。"
+	"networkerror":"通信エラーが発生しました。しばらくしてからお試しください。",
+	"networkerrordetail":"通信エラーが発生しました、ここをクリックし、もう一度試してみてください。"
 }
 
 $(function() {

@@ -34,7 +34,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.15</string>
+	<string>0.0.18</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -89,7 +89,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>18</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -124,33 +124,7 @@
 	<key>StatusBarBackground</key>
 	<string>#FFFFFF</string>
 	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeShare</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>分享到微信、微博、QQ</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>分 享</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>share</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>Pandora/apps/HelloH5/www/sa.png</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>www.dcloud.io</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>关 于</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>about</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<dict>
-				<key>key3</key>
-				<string>value3</string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>UILaunchImages</key>
 	<array>
 		<dict>

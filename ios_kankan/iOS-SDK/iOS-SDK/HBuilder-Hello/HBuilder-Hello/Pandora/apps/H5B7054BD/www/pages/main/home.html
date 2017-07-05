@@ -283,7 +283,7 @@
 							c.classList.remove("mui-active");
 						}
 						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
-						localStorage.cid = activeTab.dataset.cid;
+						localStorage.setItem("cid", activeTab.dataset.cid);
 						activeTab.classList.add("mui-active");
 						mui('.mui-scroll-wrapper').scroll().scrollTo(-activeTab.offsetLeft, 0);
 					}
