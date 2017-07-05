@@ -177,8 +177,8 @@ var JSLocale = {
 	"category_top_14":"其他",
 	"quesreset":"重置",
 	"nameplocder":"用户名",
-	"networkerror":"网络错误，点此重试",
-	"networkerrordetail":"网络错误，点此返回重试"
+	"networkerror":"服务器或网络错误，点此重试",
+	"networkerrordetail":"服务器或网络错误，点此返回重试"
 }
 
 $(function() {
