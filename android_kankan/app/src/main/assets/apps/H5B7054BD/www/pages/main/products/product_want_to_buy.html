@@ -59,7 +59,7 @@
 				     <br />
 					<div class="ka_description lang" data-locale="commodity_want_forbidentext"></div>
 					<div class="ka_userbox">
-						<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_want_butonsure" onclick="publishscheck()"></button>
+						<button type="button" class="mui-btn mui-btn-red ka_prologsure lang"  data-locale="commodity_want_butonsure" onclick="publishscheck()" id="submit"></button>
 					</div>
 					<br/>
 					<div class="showimg"></div>
@@ -100,6 +100,7 @@ function publishscheck(){
 	if (!Repository.User.isEmptyEmail()) {
 		 return;
 	}else{
+		$("#submit").attr("disabled","disabled");
 		publishs();
 	}
 }

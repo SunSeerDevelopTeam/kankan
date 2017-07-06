@@ -110,6 +110,11 @@
 		        width:100%;
 		        z-index:1;
 		    }
+		    
+		    .mui-content-padded span {
+		    	color: #8f8f94;
+		    	font-size: 14px;
+		    }
 		</style>
 	</head>
 
@@ -189,7 +194,9 @@
 
 			<div class="mui-content-padded">
 				<p class="lang" data-locale="register-tips"></p>
-				<p class="lang" data-locale="register-tips-1"></p>
+				<span class="lang" data-locale="register-tips-1"></span>
+				<span id="clause" class="lang" style="color:#007AFF;" data-locale="register-tips-2"></span>
+				<span class="lang" data-locale="register-tips-3"></span>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -407,6 +414,19 @@
 							cityElement.setAttribute('data-val', items[0].value);
 						});
 					}
+					
+					doc.getElementById('clause').addEventListener('tap', function(event){
+						mui.openWindow({
+							id: "terms",
+							url: "../setting/terms.html",
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+					});
 				});
 			})(mui, document);
 		</script>

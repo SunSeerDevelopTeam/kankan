@@ -39,11 +39,11 @@
 				get_goods_list();
 			})
 			mui(".mui-bar-nav").on("tap",".mui-action-back",function(){
-				var view = plus.webview.currentWebview().opener();
-		    	var cmid=$("#comm_id").val();
-				mui.fire(view,'cid',{
-				    id:cmid
-				});
+//				var view = plus.webview.currentWebview().opener();
+//		    	var cmid=$("#comm_id").val();
+//				mui.fire(view,'cid',{
+//				    id:cmid
+//				});
 				mui.back();
 			});
 			var imgwidth = parseInt($(window).width()) / 3 - 17;
@@ -120,12 +120,13 @@
 						} else {
 							var trans_id = data.data.transinfo[0].trans_id;
 							mui.openWindow({
-								url: "./transaction2.html?transid=" + trans_id,
+								url: "./transaction2.html?transid=" + trans_id+"&goparmes=main",
 								id: "transaction",
 								extras: {
-									"transid": trans_id
+									"transid": trans_id,
+									"goparmes":"main"
 								}
-							})
+							});
 						}
 					},
 					ng: function(data) {

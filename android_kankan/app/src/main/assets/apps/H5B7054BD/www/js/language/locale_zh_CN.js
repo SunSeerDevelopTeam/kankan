@@ -25,7 +25,9 @@ var JSLocale = {
 	"verification-code": "<span style='color:red;'>*</span>验证码",
 	"register": "确定",
 	"register-tips": "以上注册信息可在个人信息画面变更。",
-	"register-tips-1": "点击确认按钮之后默认你已经接受<a href='../setting/terms.html'>使用条款</a>",
+	"register-tips-1": "点击确认按钮之后默认你已经接受",
+	"register-tips-2": "使用条款",
+	"register-tips-3": "",
 	"please-input-email": "请输入邮箱",
 	"please-input-username": "请输入用户名",
 	"please-input-password": "请输入密码",
@@ -66,6 +68,7 @@ var JSLocale = {
 	"tab_2": "发布",
 	"tab_3": "求购",
 	"tab_4": "物流",
+	"tab_5": "请求",
 
 	//commodity login page
 	"commodity_login": "商品登录",

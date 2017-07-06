@@ -179,23 +179,6 @@ function createListView(data) {
 	lazyload();
 }
 
-function bindRequestBtnEvent() {
-	$(".logistics").on("tap", "a", function(event) {
-		if (Repository.User.isLogin()) {
-			mui.openWindow({
-				id: 'request',
-				url: "/pages/main/products/request.html",
-				waiting: {
-					autoShow: false
-				},
-				show: {
-					duration: 200
-				}
-			});
-		}
-	});
-}
-
 function bindEventOnListViewItem() {
 	$(".li-content").off("tap", ".item-tap");
 	$(".li-content").on("tap", ".item-tap", function(event) {
@@ -348,7 +331,6 @@ mui.plusReady(function() {
 	} else {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
-	bindRequestBtnEvent();
 })
 
 window.addEventListener("search", function(event) {

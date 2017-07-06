@@ -38,6 +38,9 @@
 		        width:100%;
 		        z-index:1;
 		    }
+		    .otherli{
+		    	margin-left:-1.1em;
+		    }
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
 		<link rel="stylesheet" href="../../css/kankan_home.css">
@@ -88,8 +91,8 @@
 							</li>
 						</ul>
 						<center>
-						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 liheight" style="padding:0px;">
+						<ul class="mui-table-view mui-grid-view other" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px;">
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 liheight otherli" style="padding:0px;">
 
 							</li>
 						</ul>
@@ -177,8 +180,16 @@
 				});
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
-				var preView = plus.webview.getWebviewById('requestlist');
-				plus.webview.close(preView);
+				var goparmes=self.goparmes;
+				//alert(goparmes);
+				if(goparmes=="main"){
+					mui("header").on("tap","a",function(){
+						var preView = plus.webview.getWebviewById('selectitem');
+						plus.webview.close(preView);
+						var mainPage = plus.webview.getLaunchWebview();
+   						mainPage.show();
+					});
+				}
 				showRequestDetail();
 			})
 			function reloadpage(){
@@ -890,15 +901,20 @@
 			
 			function gotoMain() {
 				mui.plusReady(function() {
-					var requestView = plus.webview.getWebviewById('request');
-					plus.webview.close(requestView);
-					var requestlistView = plus.webview.getWebviewById('requestlist');
-					plus.webview.close(requestlistView);
-					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
-					mui.back();
-					mui.fire(mainpage, 'refresh', {
-						refresh: "canRefresh"
-					});
+//					var requestView = plus.webview.getWebviewById('request');
+//					plus.webview.close(requestView);
+//					var requestlistView = plus.webview.getWebviewById('requestlist');
+//					plus.webview.close(requestlistView);
+//					var mainpage = plus.webview.getWebviewById('pullrefresh_with_tab');
+//					mui.back();
+//					mui.fire(mainpage, 'refresh', {
+//						refresh: "canRefresh"
+//					});
+					var transactionView = plus.webview.getWebviewById('transaction');
+					plus.webview.close(transactionView);
+					var mainPage = plus.webview.getLaunchWebview();
+					mainPage.show();
+					mui.fire(mainPage,'gohome');
 				});
 			}
 

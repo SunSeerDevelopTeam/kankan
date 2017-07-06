@@ -797,11 +797,13 @@
 					ok: function(data) {
 						var trans_id = data.data.transinfo[0].trans_id;
 						//alert(trans_id);
+						var parmain="main";
 						mui.openWindow({
-							url: "../../transaction/transaction2.html?transid=" + trans_id,
+							url: "../../transaction/transaction2.html?transid=" + trans_id+"&goparmes=main",
 							id: "transaction",
 							extras: {
-								"transid": trans_id
+								"transid": trans_id,
+								"goparmes":parmain
 							}
 						})
 					},
@@ -853,7 +855,7 @@
 						mode = 'exchange';
 						params.mode = mode;
 						mui.openWindow({
-							url: "../../transaction/select_item.html",
+							url: "../../transaction/select_item.html?commodity_id="+codid+"&mode="+mode,
 							id: "selectitem",
 							extras: {
 								"commodity_id": codid,
