@@ -213,7 +213,8 @@
 								console.log(data);
 								Api.callback_ng(data);
 							},
-							error: function() {
+							error: function(errortypetext) {
+								$("#reloadpage").html(errortypetext);
 								$("#reloadpage").show();
 								$(".mui-content").hide();
 								$(".jiaoyihitext").hide();

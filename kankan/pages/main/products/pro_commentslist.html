@@ -110,7 +110,8 @@
 							$("#comments").html(htmlnull);
 						}
 					},
-					error:function(){
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
 						$(".mui-content").hide();
 						$("#reloadpage").show();
 					}
