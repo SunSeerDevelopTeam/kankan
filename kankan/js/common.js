@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -587,13 +587,14 @@ var Api;
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
+				var errortypetext=Api.errortype(type);
 				Log.e(xhr);
 				Log.e(type);
 				Log.e(errorThrown);
 				if(DEBUG) {
 					alert("ajax error callback. error type is " + type);
 				}
-				if(Validator.isFunc(callback.error)) callback.error();
+				if(Validator.isFunc(callback.error)) callback.error(errortypetext);
 				$d.reject();
 			}
 		});
@@ -642,7 +643,25 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
-
+	function errortype(type){
+		var retexts="";
+		switch(type){
+			case "abort":
+			retexts=TextMessage.nonetwork+"<br/>"+TextMessage.nonetwork2;
+			return retexts;
+			break;
+			case "timeout":
+			retexts=TextMessage.timeouttext+"<br/>"+TextMessage.timeouttext2;
+			return retexts;
+			break;
+			default:
+			retexts=TextMessage.intralerror+"<br/>"+TextMessage.timeouttext2;
+			return retexts;
+			break;
+		}
+	}
+	Api.errortype = errortype;
+	
 	function callback_ng(data) {
 		if(Validator.isObj(data)) {
 			$.each(data, function(key, value) {
@@ -1600,6 +1619,11 @@ var TextMessage;
 	TextMessage.no_data_tips_1 = language ? "該当する商品がありません。" : "该分类目前没有商品。";
 	TextMessage.no_data_tips_2 = language ? "これからの出品にご期待ください。" : "敬请期待新品上线。";
 	TextMessage.noemjoy = language ? "入力表情文字入力できない" : "不能输入表情符号";
+	TextMessage.nonetwork = language ? "ネットワーク接続がありません。" : "暂无网络,点此重试";
+	TextMessage.nonetwork2 = language ? "ネットワークの接続状況を確認してください。" : "";
+	TextMessage.timeouttext = language ? "接続がタイムアウトしました。" : "请求服务器超时,请稍后重试";
+	TextMessage.timeouttext2 = language ? "しばらくしてから再度お試しください。" : "";
+	TextMessage.intralerror	= language ? "通信エラーが発生しました。" : "服务器出错啦,请稍后重试";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
