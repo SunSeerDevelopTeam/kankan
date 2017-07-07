@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		240905031C200AEF0070786F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 240905021C200AEF0070786F /* CoreBluetooth.framework */; };
 		241BFD241DFBF4C000BA2B1D /* MiPassport.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 241BFD231DFBF4C000BA2B1D /* MiPassport.bundle */; };
 		242725C91D2666D300EBD79E /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242725C81D2666D300EBD79E /* UMMobClick.framework */; };
 		242725CB1D2666ED00EBD79E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242725CA1D2666ED00EBD79E /* JavaScriptCore.framework */; };
@@ -15,26 +14,10 @@
 		2430A7011E11603E00D3D42D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2430A6FF1E11603E00D3D42D /* libcrypto.a */; };
 		2430A7021E11603E00D3D42D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2430A7001E11603E00D3D42D /* libssl.a */; };
 		2447371B1D0830BB00D0F08F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371A1D0830BB00D0F08F /* WebKit.framework */; };
-		244737211D08318E00D0F08F /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371C1D08318E00D0F08F /* BaiduMapAPI_Base.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		244737221D08318E00D0F08F /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371D1D08318E00D0F08F /* BaiduMapAPI_Location.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		244737231D08318E00D0F08F /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371E1D08318E00D0F08F /* BaiduMapAPI_Map.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		244737241D08318E00D0F08F /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371F1D08318E00D0F08F /* BaiduMapAPI_Search.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		244737251D08318E00D0F08F /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 244737201D08318E00D0F08F /* BaiduMapAPI_Utils.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		24A7515F1D9CCCC600C8B0F9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A7515E1D9CCCC600C8B0F9 /* QuickLook.framework */; };
-		24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FB1CB50C3200C0F062 /* AlipaySDK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24AFD8011CB50C3200C0F062 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FD1CB50C3200C0F062 /* iflyMSC.framework */; };
 		24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FE1CB50C3200C0F062 /* TencentOpenAPI.framework */; };
-		24AFD8401CB50C4000C0F062 /* libalixpayment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8031CB50C3F00C0F062 /* libalixpayment.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		24AFD8411CB50C4000C0F062 /* libASIHttpRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8041CB50C3F00C0F062 /* libASIHttpRequest.a */; };
-		24AFD8421CB50C4000C0F062 /* libBaiduKeyVerify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8051CB50C3F00C0F062 /* libBaiduKeyVerify.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24AFD8431CB50C4000C0F062 /* libBaiduMobStatForSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8061CB50C3F00C0F062 /* libBaiduMobStatForSDK.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24AFD8441CB50C4000C0F062 /* libBaiduWalletSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8071CB50C3F00C0F062 /* libBaiduWalletSDK.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24AFD8451CB50C4000C0F062 /* libbmapimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8081CB50C3F00C0F062 /* libbmapimp.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		24AFD8461CB50C4000C0F062 /* libcoreSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8091CB50C3F00C0F062 /* libcoreSupport.a */; };
-		24AFD8471CB50C4000C0F062 /* libGeTuiPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80A1CB50C3F00C0F062 /* libGeTuiPush.a */; };
-		24AFD8481CB50C4000C0F062 /* libGeTuiSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80B1CB50C3F00C0F062 /* libGeTuiSdk.a */; };
-		24AFD8491CB50C4000C0F062 /* libIAPPay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80C1CB50C3F00C0F062 /* libIAPPay.a */; };
-		24AFD84A1CB50C4000C0F062 /* libiflySpeech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80D1CB50C3F00C0F062 /* libiflySpeech.a */; };
 		24AFD84B1CB50C4000C0F062 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80E1CB50C3F00C0F062 /* libJSONKit.a */; };
 		24AFD84C1CB50C4000C0F062 /* liblibAccelerometer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80F1CB50C3F00C0F062 /* liblibAccelerometer.a */; };
 		24AFD84D1CB50C4000C0F062 /* liblibBarcode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8101CB50C3F00C0F062 /* liblibBarcode.a */; };
@@ -44,7 +27,6 @@
 		24AFD8511CB50C4000C0F062 /* liblibGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8141CB50C4000C0F062 /* liblibGeolocation.a */; };
 		24AFD8521CB50C4000C0F062 /* liblibIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8151CB50C4000C0F062 /* liblibIO.a */; };
 		24AFD8531CB50C4000C0F062 /* liblibLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8161CB50C4000C0F062 /* liblibLog.a */; };
-		24AFD8541CB50C4000C0F062 /* liblibMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8171CB50C4000C0F062 /* liblibMap.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		24AFD8551CB50C4000C0F062 /* liblibMedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8181CB50C4000C0F062 /* liblibMedia.a */; };
 		24AFD8561CB50C4000C0F062 /* liblibMessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8191CB50C4000C0F062 /* liblibMessage.a */; };
 		24AFD8571CB50C4000C0F062 /* liblibNativeObj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD81A1CB50C4000C0F062 /* liblibNativeObj.a */; };
@@ -55,7 +37,6 @@
 		24AFD85C1CB50C4000C0F062 /* liblibPayment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD81F1CB50C4000C0F062 /* liblibPayment.a */; };
 		24AFD85E1CB50C4000C0F062 /* liblibPGInvocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8211CB50C4000C0F062 /* liblibPGInvocation.a */; };
 		24AFD85F1CB50C4000C0F062 /* liblibPGProximity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8221CB50C4000C0F062 /* liblibPGProximity.a */; };
-		24AFD8601CB50C4000C0F062 /* liblibPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8231CB50C4000C0F062 /* liblibPush.a */; };
 		24AFD8611CB50C4000C0F062 /* liblibShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8241CB50C4000C0F062 /* liblibShare.a */; };
 		24AFD8621CB50C4000C0F062 /* liblibSpeech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8251CB50C4000C0F062 /* liblibSpeech.a */; };
 		24AFD8631CB50C4000C0F062 /* liblibStatistic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8261CB50C4000C0F062 /* liblibStatistic.a */; };
@@ -66,20 +47,10 @@
 		24AFD8681CB50C4000C0F062 /* liblibXHR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD82B1CB50C4000C0F062 /* liblibXHR.a */; };
 		24AFD8691CB50C4000C0F062 /* liblibZip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD82C1CB50C4000C0F062 /* liblibZip.a */; };
 		24AFD86B1CB50C4000C0F062 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD82E1CB50C4000C0F062 /* libopencore-amrnb.a */; };
-		24AFD86C1CB50C4000C0F062 /* libpingpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD82F1CB50C4000C0F062 /* libpingpp.a */; };
-		24AFD86D1CB50C4000C0F062 /* libpingpppay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8301CB50C4000C0F062 /* libpingpppay.a */; };
-		24AFD86E1CB50C4000C0F062 /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8311CB50C4000C0F062 /* libPushSDK.a */; };
-		24AFD86F1CB50C4000C0F062 /* libQQOauth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8321CB50C4000C0F062 /* libQQOauth.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24AFD8701CB50C4000C0F062 /* libQQShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8331CB50C4000C0F062 /* libQQShare.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		24AFD8711CB50C4000C0F062 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8341CB50C4000C0F062 /* libSDWebImage.a */; };
-		24AFD8721CB50C4000C0F062 /* libSinaShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8351CB50C4000C0F062 /* libSinaShare.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24AFD8731CB50C4000C0F062 /* libSinaWBOauth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8361CB50C4000C0F062 /* libSinaWBOauth.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24AFD8741CB50C4000C0F062 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8371CB50C4000C0F062 /* libTCWeiboSDK.a */; };
-		24AFD8751CB50C4000C0F062 /* libTencentShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8381CB50C4000C0F062 /* libTencentShare.a */; };
 		24AFD8761CB50C4000C0F062 /* libTouchJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8391CB50C4000C0F062 /* libTouchJSON.a */; };
 		24AFD8771CB50C4000C0F062 /* libUPPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD83A1CB50C4000C0F062 /* libUPPayPlugin.a */; };
 		24AFD8781CB50C4000C0F062 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD83B1CB50C4000C0F062 /* libWeChatSDK.a */; };
-		24AFD8791CB50C4000C0F062 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD83C1CB50C4000C0F062 /* libWeiboSDK.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		24AFD87A1CB50C4000C0F062 /* libweixinShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD83D1CB50C4000C0F062 /* libweixinShare.a */; };
 		24AFD87B1CB50C4000C0F062 /* libWXOauth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD83E1CB50C4000C0F062 /* libWXOauth.a */; };
 		24AFD87C1CB50C4000C0F062 /* libwxpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD83F1CB50C4000C0F062 /* libwxpay.a */; };
@@ -92,9 +63,9 @@
 		24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF11C994A1700B05AA2 /* libicucore.tbd */; };
 		24BD5AF41C994A2700B05AA2 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF31C994A2700B05AA2 /* libstdc++.tbd */; };
 		24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF51C994BB200B05AA2 /* libc++.tbd */; };
-		24F990111DFBD9A500848C2B /* libMiOauth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990101DFBD9A500848C2B /* libMiOauth.a */; };
 		24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990121DFBDA3300848C2B /* CoreData.framework */; };
 		24F990151DFBDA5600848C2B /* MiPassport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990141DFBDA5600848C2B /* MiPassport.framework */; };
+		6DF7C5231F0E110100E67AED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DF7C5221F0E110100E67AED /* Images.xcassets */; };
 		7A6D778819FB5A9B0076EEFE /* icon87.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6D778619FB5A9B0076EEFE /* icon87.png */; };
 		7A6D778919FB5A9B0076EEFE /* icon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6D778719FB5A9B0076EEFE /* icon180.png */; };
 		7A6D778D19FB5AAD0076EEFE /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6D778A19FB5AAD0076EEFE /* Default-667h@2x.png */; };
@@ -104,13 +75,8 @@
 		7ACF69AD19FF89B1007C64F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACF69AC19FF89B1007C64F1 /* Security.framework */; };
 		8E163D021A8D208500308A8B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E163D011A8D208500308A8B /* AssetsLibrary.framework */; };
 		8E2EF7D61A7808F1007C06F4 /* inc in Resources */ = {isa = PBXBuildFile; fileRef = 8E2EF7D51A7808F1007C06F4 /* inc */; };
-		8E34838C1B56838600A40C55 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8E3483891B56838600A40C55 /* AMap.bundle */; };
 		8E34838D1B56838600A40C55 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8E34838A1B56838600A40C55 /* TencentOpenApi_IOS_Bundle.bundle */; };
-		8E34838E1B56838600A40C55 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8E34838B1B56838600A40C55 /* WeiboSDK.bundle */; };
 		8E6E37AC1B0E1B580036EB48 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6E37AB1B0E1B580036EB48 /* ImageIO.framework */; };
-		8EBB95F51BAD6AB700D250D2 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EBB95F21BAD6AB600D250D2 /* AlipaySDK.bundle */; };
-		8EBB95F61BAD6AB700D250D2 /* BaiduWalletSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EBB95F31BAD6AB600D250D2 /* BaiduWalletSDKBundle.bundle */; };
-		8EBB95F71BAD6AB700D250D2 /* Pingpp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EBB95F41BAD6AB600D250D2 /* Pingpp.bundle */; };
 		8EED629C198A1D13000A4449 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED629B198A1D13000A4449 /* Foundation.framework */; };
 		8EED629E198A1D13000A4449 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED629D198A1D13000A4449 /* CoreGraphics.framework */; };
 		8EED62A0198A1D13000A4449 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED629F198A1D13000A4449 /* UIKit.framework */; };
@@ -154,11 +120,9 @@
 		8EED659E198A5782000A4449 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED659D198A5782000A4449 /* Social.framework */; };
 		8EED65A0198A5789000A4449 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED659F198A5789000A4449 /* Accounts.framework */; };
 		8EED65A8198A6273000A4449 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED65A7198A6273000A4449 /* OpenGLES.framework */; };
-		8EED65AC198A63A8000A4449 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EED65AB198A63A8000A4449 /* mapapi.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		240905021C200AEF0070786F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		241BFD231DFBF4C000BA2B1D /* MiPassport.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MiPassport.bundle; path = ../../SDK/Bundles/MiPassport.bundle; sourceTree = "<group>"; };
 		242725C81D2666D300EBD79E /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMMobClick.framework; path = ../SDK/Libs/UMMobClick.framework; sourceTree = "<group>"; };
 		242725CA1D2666ED00EBD79E /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -166,26 +130,10 @@
 		2430A6FF1E11603E00D3D42D /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../SDK/Libs/libcrypto.a; sourceTree = "<group>"; };
 		2430A7001E11603E00D3D42D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../SDK/Libs/libssl.a; sourceTree = "<group>"; };
 		2447371A1D0830BB00D0F08F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		2447371C1D08318E00D0F08F /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Base.framework; path = ../SDK/Libs/BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
-		2447371D1D08318E00D0F08F /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Location.framework; path = ../SDK/Libs/BaiduMapAPI_Location.framework; sourceTree = "<group>"; };
-		2447371E1D08318E00D0F08F /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = ../SDK/Libs/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
-		2447371F1D08318E00D0F08F /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Search.framework; path = ../SDK/Libs/BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
-		244737201D08318E00D0F08F /* BaiduMapAPI_Utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Utils.framework; path = ../SDK/Libs/BaiduMapAPI_Utils.framework; sourceTree = "<group>"; };
 		24A7515E1D9CCCC600C8B0F9 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
-		24AFD7FB1CB50C3200C0F062 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = ../SDK/Libs/AlipaySDK.framework; sourceTree = "<group>"; };
-		24AFD7FD1CB50C3200C0F062 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ../SDK/Libs/iflyMSC.framework; sourceTree = "<group>"; };
 		24AFD7FE1CB50C3200C0F062 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = ../SDK/Libs/TencentOpenAPI.framework; sourceTree = "<group>"; };
-		24AFD8031CB50C3F00C0F062 /* libalixpayment.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libalixpayment.a; path = ../SDK/Libs/libalixpayment.a; sourceTree = "<group>"; };
 		24AFD8041CB50C3F00C0F062 /* libASIHttpRequest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libASIHttpRequest.a; path = ../SDK/Libs/libASIHttpRequest.a; sourceTree = "<group>"; };
-		24AFD8051CB50C3F00C0F062 /* libBaiduKeyVerify.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBaiduKeyVerify.a; path = ../SDK/Libs/libBaiduKeyVerify.a; sourceTree = "<group>"; };
-		24AFD8061CB50C3F00C0F062 /* libBaiduMobStatForSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBaiduMobStatForSDK.a; path = ../SDK/Libs/libBaiduMobStatForSDK.a; sourceTree = "<group>"; };
-		24AFD8071CB50C3F00C0F062 /* libBaiduWalletSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBaiduWalletSDK.a; path = ../SDK/Libs/libBaiduWalletSDK.a; sourceTree = "<group>"; };
-		24AFD8081CB50C3F00C0F062 /* libbmapimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbmapimp.a; path = ../SDK/Libs/libbmapimp.a; sourceTree = "<group>"; };
 		24AFD8091CB50C3F00C0F062 /* libcoreSupport.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoreSupport.a; path = ../SDK/Libs/libcoreSupport.a; sourceTree = "<group>"; };
-		24AFD80A1CB50C3F00C0F062 /* libGeTuiPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGeTuiPush.a; path = ../SDK/Libs/libGeTuiPush.a; sourceTree = "<group>"; };
-		24AFD80B1CB50C3F00C0F062 /* libGeTuiSdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGeTuiSdk.a; path = ../SDK/Libs/libGeTuiSdk.a; sourceTree = "<group>"; };
-		24AFD80C1CB50C3F00C0F062 /* libIAPPay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIAPPay.a; path = ../SDK/Libs/libIAPPay.a; sourceTree = "<group>"; };
-		24AFD80D1CB50C3F00C0F062 /* libiflySpeech.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiflySpeech.a; path = ../SDK/Libs/libiflySpeech.a; sourceTree = "<group>"; };
 		24AFD80E1CB50C3F00C0F062 /* libJSONKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libJSONKit.a; path = ../SDK/Libs/libJSONKit.a; sourceTree = "<group>"; };
 		24AFD80F1CB50C3F00C0F062 /* liblibAccelerometer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibAccelerometer.a; path = ../SDK/Libs/liblibAccelerometer.a; sourceTree = "<group>"; };
 		24AFD8101CB50C3F00C0F062 /* liblibBarcode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibBarcode.a; path = ../SDK/Libs/liblibBarcode.a; sourceTree = "<group>"; };
@@ -195,7 +143,6 @@
 		24AFD8141CB50C4000C0F062 /* liblibGeolocation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibGeolocation.a; path = ../SDK/Libs/liblibGeolocation.a; sourceTree = "<group>"; };
 		24AFD8151CB50C4000C0F062 /* liblibIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibIO.a; path = ../SDK/Libs/liblibIO.a; sourceTree = "<group>"; };
 		24AFD8161CB50C4000C0F062 /* liblibLog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibLog.a; path = ../SDK/Libs/liblibLog.a; sourceTree = "<group>"; };
-		24AFD8171CB50C4000C0F062 /* liblibMap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibMap.a; path = ../SDK/Libs/liblibMap.a; sourceTree = "<group>"; };
 		24AFD8181CB50C4000C0F062 /* liblibMedia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibMedia.a; path = ../SDK/Libs/liblibMedia.a; sourceTree = "<group>"; };
 		24AFD8191CB50C4000C0F062 /* liblibMessage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibMessage.a; path = ../SDK/Libs/liblibMessage.a; sourceTree = "<group>"; };
 		24AFD81A1CB50C4000C0F062 /* liblibNativeObj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibNativeObj.a; path = ../SDK/Libs/liblibNativeObj.a; sourceTree = "<group>"; };
@@ -206,7 +153,6 @@
 		24AFD81F1CB50C4000C0F062 /* liblibPayment.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibPayment.a; path = ../SDK/Libs/liblibPayment.a; sourceTree = "<group>"; };
 		24AFD8211CB50C4000C0F062 /* liblibPGInvocation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibPGInvocation.a; path = ../SDK/Libs/liblibPGInvocation.a; sourceTree = "<group>"; };
 		24AFD8221CB50C4000C0F062 /* liblibPGProximity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibPGProximity.a; path = ../SDK/Libs/liblibPGProximity.a; sourceTree = "<group>"; };
-		24AFD8231CB50C4000C0F062 /* liblibPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibPush.a; path = ../SDK/Libs/liblibPush.a; sourceTree = "<group>"; };
 		24AFD8241CB50C4000C0F062 /* liblibShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibShare.a; path = ../SDK/Libs/liblibShare.a; sourceTree = "<group>"; };
 		24AFD8251CB50C4000C0F062 /* liblibSpeech.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibSpeech.a; path = ../SDK/Libs/liblibSpeech.a; sourceTree = "<group>"; };
 		24AFD8261CB50C4000C0F062 /* liblibStatistic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibStatistic.a; path = ../SDK/Libs/liblibStatistic.a; sourceTree = "<group>"; };
@@ -217,20 +163,10 @@
 		24AFD82B1CB50C4000C0F062 /* liblibXHR.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibXHR.a; path = ../SDK/Libs/liblibXHR.a; sourceTree = "<group>"; };
 		24AFD82C1CB50C4000C0F062 /* liblibZip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibZip.a; path = ../SDK/Libs/liblibZip.a; sourceTree = "<group>"; };
 		24AFD82E1CB50C4000C0F062 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libopencore-amrnb.a"; path = "../SDK/Libs/libopencore-amrnb.a"; sourceTree = "<group>"; };
-		24AFD82F1CB50C4000C0F062 /* libpingpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpingpp.a; path = ../SDK/Libs/libpingpp.a; sourceTree = "<group>"; };
-		24AFD8301CB50C4000C0F062 /* libpingpppay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpingpppay.a; path = ../SDK/Libs/libpingpppay.a; sourceTree = "<group>"; };
-		24AFD8311CB50C4000C0F062 /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPushSDK.a; path = ../SDK/Libs/libPushSDK.a; sourceTree = "<group>"; };
-		24AFD8321CB50C4000C0F062 /* libQQOauth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQQOauth.a; path = ../SDK/Libs/libQQOauth.a; sourceTree = "<group>"; };
-		24AFD8331CB50C4000C0F062 /* libQQShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQQShare.a; path = ../SDK/Libs/libQQShare.a; sourceTree = "<group>"; };
 		24AFD8341CB50C4000C0F062 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = ../SDK/Libs/libSDWebImage.a; sourceTree = "<group>"; };
-		24AFD8351CB50C4000C0F062 /* libSinaShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSinaShare.a; path = ../SDK/Libs/libSinaShare.a; sourceTree = "<group>"; };
-		24AFD8361CB50C4000C0F062 /* libSinaWBOauth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSinaWBOauth.a; path = ../SDK/Libs/libSinaWBOauth.a; sourceTree = "<group>"; };
-		24AFD8371CB50C4000C0F062 /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTCWeiboSDK.a; path = ../SDK/Libs/libTCWeiboSDK.a; sourceTree = "<group>"; };
-		24AFD8381CB50C4000C0F062 /* libTencentShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTencentShare.a; path = ../SDK/Libs/libTencentShare.a; sourceTree = "<group>"; };
 		24AFD8391CB50C4000C0F062 /* libTouchJSON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTouchJSON.a; path = ../SDK/Libs/libTouchJSON.a; sourceTree = "<group>"; };
 		24AFD83A1CB50C4000C0F062 /* libUPPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUPPayPlugin.a; path = ../SDK/Libs/libUPPayPlugin.a; sourceTree = "<group>"; };
 		24AFD83B1CB50C4000C0F062 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = ../SDK/Libs/libWeChatSDK.a; sourceTree = "<group>"; };
-		24AFD83C1CB50C4000C0F062 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeiboSDK.a; path = ../SDK/Libs/libWeiboSDK.a; sourceTree = "<group>"; };
 		24AFD83D1CB50C4000C0F062 /* libweixinShare.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libweixinShare.a; path = ../SDK/Libs/libweixinShare.a; sourceTree = "<group>"; };
 		24AFD83E1CB50C4000C0F062 /* libWXOauth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWXOauth.a; path = ../SDK/Libs/libWXOauth.a; sourceTree = "<group>"; };
 		24AFD83F1CB50C4000C0F062 /* libwxpay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwxpay.a; path = ../SDK/Libs/libwxpay.a; sourceTree = "<group>"; };
@@ -243,10 +179,10 @@
 		24BD5AF11C994A1700B05AA2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		24BD5AF31C994A2700B05AA2 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		24BD5AF51C994BB200B05AA2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		24F990101DFBD9A500848C2B /* libMiOauth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMiOauth.a; path = ../SDK/Libs/libMiOauth.a; sourceTree = "<group>"; };
 		24F990121DFBDA3300848C2B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		24F990141DFBDA5600848C2B /* MiPassport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiPassport.framework; path = ../SDK/Libs/MiPassport.framework; sourceTree = "<group>"; };
 		6DF2FE241EF7A5A300852039 /* HBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HBuilder.entitlements; sourceTree = "<group>"; };
+		6DF7C5221F0E110100E67AED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		7A6D778619FB5A9B0076EEFE /* icon87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon87.png; sourceTree = "<group>"; };
 		7A6D778719FB5A9B0076EEFE /* icon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon180.png; sourceTree = "<group>"; };
 		7A6D778A19FB5AAD0076EEFE /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
@@ -256,13 +192,8 @@
 		7ACF69AC19FF89B1007C64F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8E163D011A8D208500308A8B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8E2EF7D51A7808F1007C06F4 /* inc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = inc; path = ../../SDK/inc; sourceTree = "<group>"; };
-		8E3483891B56838600A40C55 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		8E34838A1B56838600A40C55 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
-		8E34838B1B56838600A40C55 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		8E6E37AB1B0E1B580036EB48 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		8EBB95F21BAD6AB600D250D2 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		8EBB95F31BAD6AB600D250D2 /* BaiduWalletSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BaiduWalletSDKBundle.bundle; sourceTree = "<group>"; };
-		8EBB95F41BAD6AB600D250D2 /* Pingpp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Pingpp.bundle; sourceTree = "<group>"; };
 		8EED6298198A1D13000A4449 /* HBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EED629B198A1D13000A4449 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8EED629D198A1D13000A4449 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -311,7 +242,6 @@
 		8EED659D198A5782000A4449 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8EED659F198A5789000A4449 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8EED65A7198A6273000A4449 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		8EED65AB198A63A8000A4449 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,30 +260,17 @@
 				8EED641C198A2654000A4449 /* SystemConfiguration.framework in Frameworks */,
 				242725CB1D2666ED00EBD79E /* JavaScriptCore.framework in Frameworks */,
 				2447371B1D0830BB00D0F08F /* WebKit.framework in Frameworks */,
-				24AFD8401CB50C4000C0F062 /* libalixpayment.a in Frameworks */,
 				24AFD8411CB50C4000C0F062 /* libASIHttpRequest.a in Frameworks */,
-				24AFD8421CB50C4000C0F062 /* libBaiduKeyVerify.a in Frameworks */,
-				24AFD8431CB50C4000C0F062 /* libBaiduMobStatForSDK.a in Frameworks */,
-				24AFD8441CB50C4000C0F062 /* libBaiduWalletSDK.a in Frameworks */,
-				244737211D08318E00D0F08F /* BaiduMapAPI_Base.framework in Frameworks */,
-				24AFD8451CB50C4000C0F062 /* libbmapimp.a in Frameworks */,
 				24AFD8461CB50C4000C0F062 /* libcoreSupport.a in Frameworks */,
-				24AFD8471CB50C4000C0F062 /* libGeTuiPush.a in Frameworks */,
-				24AFD8481CB50C4000C0F062 /* libGeTuiSdk.a in Frameworks */,
-				24AFD8491CB50C4000C0F062 /* libIAPPay.a in Frameworks */,
-				24AFD84A1CB50C4000C0F062 /* libiflySpeech.a in Frameworks */,
 				24AFD84B1CB50C4000C0F062 /* libJSONKit.a in Frameworks */,
 				24AFD84C1CB50C4000C0F062 /* liblibAccelerometer.a in Frameworks */,
 				24AFD84D1CB50C4000C0F062 /* liblibBarcode.a in Frameworks */,
 				24AFD84E1CB50C4000C0F062 /* liblibCache.a in Frameworks */,
 				24AFD84F1CB50C4000C0F062 /* liblibCamera.a in Frameworks */,
 				24AFD8501CB50C4000C0F062 /* liblibContacts.a in Frameworks */,
-				24F990111DFBD9A500848C2B /* libMiOauth.a in Frameworks */,
 				24AFD8511CB50C4000C0F062 /* liblibGeolocation.a in Frameworks */,
 				24AFD8521CB50C4000C0F062 /* liblibIO.a in Frameworks */,
-				244737231D08318E00D0F08F /* BaiduMapAPI_Map.framework in Frameworks */,
 				24AFD8531CB50C4000C0F062 /* liblibLog.a in Frameworks */,
-				24AFD8541CB50C4000C0F062 /* liblibMap.a in Frameworks */,
 				24AFD8551CB50C4000C0F062 /* liblibMedia.a in Frameworks */,
 				24AFD8561CB50C4000C0F062 /* liblibMessage.a in Frameworks */,
 				24AFD8571CB50C4000C0F062 /* liblibNativeObj.a in Frameworks */,
@@ -365,7 +282,6 @@
 				24AFD85C1CB50C4000C0F062 /* liblibPayment.a in Frameworks */,
 				24AFD85E1CB50C4000C0F062 /* liblibPGInvocation.a in Frameworks */,
 				24AFD85F1CB50C4000C0F062 /* liblibPGProximity.a in Frameworks */,
-				24AFD8601CB50C4000C0F062 /* liblibPush.a in Frameworks */,
 				24AFD8611CB50C4000C0F062 /* liblibShare.a in Frameworks */,
 				24AFD8621CB50C4000C0F062 /* liblibSpeech.a in Frameworks */,
 				24AFD8631CB50C4000C0F062 /* liblibStatistic.a in Frameworks */,
@@ -377,29 +293,15 @@
 				24AFD8681CB50C4000C0F062 /* liblibXHR.a in Frameworks */,
 				24AFD8691CB50C4000C0F062 /* liblibZip.a in Frameworks */,
 				24AFD86B1CB50C4000C0F062 /* libopencore-amrnb.a in Frameworks */,
-				24AFD86C1CB50C4000C0F062 /* libpingpp.a in Frameworks */,
-				24AFD86D1CB50C4000C0F062 /* libpingpppay.a in Frameworks */,
-				24AFD86E1CB50C4000C0F062 /* libPushSDK.a in Frameworks */,
-				24AFD86F1CB50C4000C0F062 /* libQQOauth.a in Frameworks */,
-				24AFD8701CB50C4000C0F062 /* libQQShare.a in Frameworks */,
 				24AFD8711CB50C4000C0F062 /* libSDWebImage.a in Frameworks */,
-				24AFD8721CB50C4000C0F062 /* libSinaShare.a in Frameworks */,
-				24AFD8731CB50C4000C0F062 /* libSinaWBOauth.a in Frameworks */,
 				24F990151DFBDA5600848C2B /* MiPassport.framework in Frameworks */,
-				24AFD8741CB50C4000C0F062 /* libTCWeiboSDK.a in Frameworks */,
-				24AFD8751CB50C4000C0F062 /* libTencentShare.a in Frameworks */,
-				244737251D08318E00D0F08F /* BaiduMapAPI_Utils.framework in Frameworks */,
 				24AFD8761CB50C4000C0F062 /* libTouchJSON.a in Frameworks */,
 				24AFD8771CB50C4000C0F062 /* libUPPayPlugin.a in Frameworks */,
 				24AFD8781CB50C4000C0F062 /* libWeChatSDK.a in Frameworks */,
-				24AFD8791CB50C4000C0F062 /* libWeiboSDK.a in Frameworks */,
 				24AFD87A1CB50C4000C0F062 /* libweixinShare.a in Frameworks */,
 				24AFD87B1CB50C4000C0F062 /* libWXOauth.a in Frameworks */,
 				24AFD87C1CB50C4000C0F062 /* libwxpay.a in Frameworks */,
-				244737221D08318E00D0F08F /* BaiduMapAPI_Location.framework in Frameworks */,
-				24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */,
 				24B6D9481E534D1A0068AA69 /* liblibPDRCore.a in Frameworks */,
-				24AFD8011CB50C3200C0F062 /* iflyMSC.framework in Frameworks */,
 				24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */,
 				24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */,
 				24BD5AF41C994A2700B05AA2 /* libstdc++.tbd in Frameworks */,
@@ -410,7 +312,6 @@
 				24BD5AEA1C99492A00B05AA2 /* libiconv.2.tbd in Frameworks */,
 				24BD5AE81C99491D00B05AA2 /* libsqlite3.0.tbd in Frameworks */,
 				2430A7021E11603E00D3D42D /* libssl.a in Frameworks */,
-				240905031C200AEF0070786F /* CoreBluetooth.framework in Frameworks */,
 				8E6E37AC1B0E1B580036EB48 /* ImageIO.framework in Frameworks */,
 				8E163D021A8D208500308A8B /* AssetsLibrary.framework in Frameworks */,
 				8EED6596198A574C000A4449 /* CoreLocation.framework in Frameworks */,
@@ -421,7 +322,6 @@
 				8EED6598198A5754000A4449 /* MessageUI.framework in Frameworks */,
 				8EED6594198A5743000A4449 /* AVFoundation.framework in Frameworks */,
 				8EED6592198A5737000A4449 /* AddressBook.framework in Frameworks */,
-				244737241D08318E00D0F08F /* BaiduMapAPI_Search.framework in Frameworks */,
 				8EED6422198A2678000A4449 /* AudioToolbox.framework in Frameworks */,
 				8EED6420198A2668000A4449 /* MediaPlayer.framework in Frameworks */,
 				8EED641E198A265F000A4449 /* CoreTelephony.framework in Frameworks */,
@@ -437,6 +337,7 @@
 		8EED628F198A1D13000A4449 = {
 			isa = PBXGroup;
 			children = (
+				6DF7C5221F0E110100E67AED /* Images.xcassets */,
 				6DF2FE241EF7A5A300852039 /* HBuilder.entitlements */,
 				8EED62A1198A1D13000A4449 /* HBuilder-Hello */,
 				8EED629A198A1D13000A4449 /* Frameworks */,
@@ -464,24 +365,9 @@
 				242725CC1D26686700EBD79E /* CoreMotion.framework */,
 				242725CA1D2666ED00EBD79E /* JavaScriptCore.framework */,
 				242725C81D2666D300EBD79E /* UMMobClick.framework */,
-				2447371C1D08318E00D0F08F /* BaiduMapAPI_Base.framework */,
-				2447371D1D08318E00D0F08F /* BaiduMapAPI_Location.framework */,
-				2447371E1D08318E00D0F08F /* BaiduMapAPI_Map.framework */,
-				2447371F1D08318E00D0F08F /* BaiduMapAPI_Search.framework */,
-				244737201D08318E00D0F08F /* BaiduMapAPI_Utils.framework */,
 				2447371A1D0830BB00D0F08F /* WebKit.framework */,
-				24AFD8031CB50C3F00C0F062 /* libalixpayment.a */,
-				24F990101DFBD9A500848C2B /* libMiOauth.a */,
 				24AFD8041CB50C3F00C0F062 /* libASIHttpRequest.a */,
-				24AFD8051CB50C3F00C0F062 /* libBaiduKeyVerify.a */,
-				24AFD8061CB50C3F00C0F062 /* libBaiduMobStatForSDK.a */,
-				24AFD8071CB50C3F00C0F062 /* libBaiduWalletSDK.a */,
-				24AFD8081CB50C3F00C0F062 /* libbmapimp.a */,
 				24AFD8091CB50C3F00C0F062 /* libcoreSupport.a */,
-				24AFD80A1CB50C3F00C0F062 /* libGeTuiPush.a */,
-				24AFD80B1CB50C3F00C0F062 /* libGeTuiSdk.a */,
-				24AFD80C1CB50C3F00C0F062 /* libIAPPay.a */,
-				24AFD80D1CB50C3F00C0F062 /* libiflySpeech.a */,
 				24AFD80E1CB50C3F00C0F062 /* libJSONKit.a */,
 				24AFD80F1CB50C3F00C0F062 /* liblibAccelerometer.a */,
 				24AFD8101CB50C3F00C0F062 /* liblibBarcode.a */,
@@ -491,7 +377,6 @@
 				24AFD8141CB50C4000C0F062 /* liblibGeolocation.a */,
 				24AFD8151CB50C4000C0F062 /* liblibIO.a */,
 				24AFD8161CB50C4000C0F062 /* liblibLog.a */,
-				24AFD8171CB50C4000C0F062 /* liblibMap.a */,
 				24AFD8181CB50C4000C0F062 /* liblibMedia.a */,
 				24AFD8191CB50C4000C0F062 /* liblibMessage.a */,
 				24AFD81A1CB50C4000C0F062 /* liblibNativeObj.a */,
@@ -502,7 +387,6 @@
 				24AFD81F1CB50C4000C0F062 /* liblibPayment.a */,
 				24AFD8211CB50C4000C0F062 /* liblibPGInvocation.a */,
 				24AFD8221CB50C4000C0F062 /* liblibPGProximity.a */,
-				24AFD8231CB50C4000C0F062 /* liblibPush.a */,
 				24AFD8241CB50C4000C0F062 /* liblibShare.a */,
 				24AFD8251CB50C4000C0F062 /* liblibSpeech.a */,
 				24AFD8261CB50C4000C0F062 /* liblibStatistic.a */,
@@ -513,25 +397,13 @@
 				24AFD82B1CB50C4000C0F062 /* liblibXHR.a */,
 				24AFD82C1CB50C4000C0F062 /* liblibZip.a */,
 				24AFD82E1CB50C4000C0F062 /* libopencore-amrnb.a */,
-				24AFD82F1CB50C4000C0F062 /* libpingpp.a */,
-				24AFD8301CB50C4000C0F062 /* libpingpppay.a */,
-				24AFD8311CB50C4000C0F062 /* libPushSDK.a */,
-				24AFD8321CB50C4000C0F062 /* libQQOauth.a */,
-				24AFD8331CB50C4000C0F062 /* libQQShare.a */,
 				24AFD8341CB50C4000C0F062 /* libSDWebImage.a */,
-				24AFD8351CB50C4000C0F062 /* libSinaShare.a */,
-				24AFD8361CB50C4000C0F062 /* libSinaWBOauth.a */,
-				24AFD8371CB50C4000C0F062 /* libTCWeiboSDK.a */,
-				24AFD8381CB50C4000C0F062 /* libTencentShare.a */,
 				24AFD8391CB50C4000C0F062 /* libTouchJSON.a */,
 				24AFD83A1CB50C4000C0F062 /* libUPPayPlugin.a */,
 				24AFD83B1CB50C4000C0F062 /* libWeChatSDK.a */,
-				24AFD83C1CB50C4000C0F062 /* libWeiboSDK.a */,
 				24AFD83D1CB50C4000C0F062 /* libweixinShare.a */,
 				24AFD83E1CB50C4000C0F062 /* libWXOauth.a */,
 				24AFD83F1CB50C4000C0F062 /* libwxpay.a */,
-				24AFD7FB1CB50C3200C0F062 /* AlipaySDK.framework */,
-				24AFD7FD1CB50C3200C0F062 /* iflyMSC.framework */,
 				24AFD7FE1CB50C3200C0F062 /* TencentOpenAPI.framework */,
 				24BD5AF51C994BB200B05AA2 /* libc++.tbd */,
 				24BD5AF11C994A1700B05AA2 /* libicucore.tbd */,
@@ -541,7 +413,6 @@
 				24BD5AEB1C99493500B05AA2 /* libstdc++.6.tbd */,
 				24BD5AE91C99492A00B05AA2 /* libiconv.2.tbd */,
 				24BD5AE71C99491D00B05AA2 /* libsqlite3.0.tbd */,
-				240905021C200AEF0070786F /* CoreBluetooth.framework */,
 				8E6E37AB1B0E1B580036EB48 /* ImageIO.framework */,
 				8E163D011A8D208500308A8B /* AssetsLibrary.framework */,
 				7ACF69AC19FF89B1007C64F1 /* Security.framework */,
@@ -572,13 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				241BFD231DFBF4C000BA2B1D /* MiPassport.bundle */,
-				8EBB95F21BAD6AB600D250D2 /* AlipaySDK.bundle */,
-				8EBB95F31BAD6AB600D250D2 /* BaiduWalletSDKBundle.bundle */,
-				8EBB95F41BAD6AB600D250D2 /* Pingpp.bundle */,
-				8E3483891B56838600A40C55 /* AMap.bundle */,
 				8E34838A1B56838600A40C55 /* TencentOpenApi_IOS_Bundle.bundle */,
-				8E34838B1B56838600A40C55 /* WeiboSDK.bundle */,
-				8EED65AB198A63A8000A4449 /* mapapi.bundle */,
 				8EED6309198A2474000A4449 /* PandoraApi.bundle */,
 				8E2EF7D51A7808F1007C06F4 /* inc */,
 				8EED62AA198A1D13000A4449 /* AppDelegate.h */,
@@ -668,7 +533,7 @@
 		8EED6290198A1D13000A4449 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = DCloud;
 				TargetAttributes = {
 					8EED6297198A1D13000A4449 = {
@@ -715,33 +580,28 @@
 				8EED62EA198A215A000A4449 /* icon58.png in Resources */,
 				7A6D778D19FB5AAD0076EEFE /* Default-667h@2x.png in Resources */,
 				8EED62EB198A215A000A4449 /* icon72.png in Resources */,
+				6DF7C5231F0E110100E67AED /* Images.xcassets in Resources */,
 				8EED62EC198A215A000A4449 /* icon76.png in Resources */,
 				8EED62E3198A215A000A4449 /* icon120.png in Resources */,
 				8EED62E4198A215A000A4449 /* icon144.png in Resources */,
 				8EED62E7198A215A000A4449 /* icon40.png in Resources */,
 				241BFD241DFBF4C000BA2B1D /* MiPassport.bundle in Resources */,
 				8EED62F2198A2166000A4449 /* Default-568h@2x.png in Resources */,
-				8EBB95F51BAD6AB700D250D2 /* AlipaySDK.bundle in Resources */,
-				8EBB95F71BAD6AB700D250D2 /* Pingpp.bundle in Resources */,
 				7A6D778919FB5A9B0076EEFE /* icon180.png in Resources */,
 				7A6D778F19FB5AAD0076EEFE /* Default-Landscape-736h@3x.png in Resources */,
-				8E34838C1B56838600A40C55 /* AMap.bundle in Resources */,
 				8EED62E8198A215A000A4449 /* icon50.png in Resources */,
 				8EED62AF198A1D13000A4449 /* Main_iPhone.storyboard in Resources */,
 				8EED62A6198A1D13000A4449 /* InfoPlist.strings in Resources */,
 				8EED64AD198A39D7000A4449 /* control.xml in Resources */,
 				8EED62E2198A215A000A4449 /* icon114.png in Resources */,
-				8EBB95F61BAD6AB700D250D2 /* BaiduWalletSDKBundle.bundle in Resources */,
 				8EED62E5198A215A000A4449 /* icon152.png in Resources */,
 				8EED62E9198A215A000A4449 /* icon57.png in Resources */,
 				8EED62F4198A2166000A4449 /* Default@2x.png in Resources */,
 				8EED62ED198A215A000A4449 /* icon80.png in Resources */,
 				8EED62E6198A215A000A4449 /* icon29.png in Resources */,
-				8EED65AC198A63A8000A4449 /* mapapi.bundle in Resources */,
 				8EED6590198A3DF7000A4449 /* Pandora in Resources */,
 				8EED630A198A2474000A4449 /* PandoraApi.bundle in Resources */,
 				8E2EF7D61A7808F1007C06F4 /* inc in Resources */,
-				8E34838E1B56838600A40C55 /* WeiboSDK.bundle in Resources */,
 				7A6D778819FB5A9B0076EEFE /* icon87.png in Resources */,
 				7A6D778E19FB5AAD0076EEFE /* Default-736h@3x.png in Resources */,
 			);
@@ -803,13 +663,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -822,7 +688,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -842,20 +708,25 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -865,7 +736,8 @@
 		8EED62CE198A1D14000A4449 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -889,7 +761,7 @@
 					"$(SRCROOT)/../SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-Hello-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../SDK/libs";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunseer.kankan;
@@ -905,7 +777,8 @@
 		8EED62CF198A1D14000A4449 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -929,7 +802,7 @@
 					"$(SRCROOT)/../SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-Hello-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../SDK/libs";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunseer.kankan;
