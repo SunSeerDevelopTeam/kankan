@@ -270,7 +270,8 @@
 						});
 					}
 				},
-				error:function(){
+				error:function(errortypetext){
+					$("#reloadpage").html(errortypetext);
 					$("#reloadpage").show();
 				}
 			});

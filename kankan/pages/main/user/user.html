@@ -48,201 +48,193 @@
 	</head>
 
 	<body>
-		<div id="app" class="mui-views">
-			<div class="mui-view">
-				<div class="mui-navbar">
-				</div>
-				<div class="mui-pages">
-				</div>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="4" class="lang" data-locale="back"></font></a>
+		    <h1 class="mui-title maintitle"></h1>
+		    <a href="../../setting/setting.html" class="settingbut">
+				<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
+					<span class="mui-icon mui-icon-gear"></span>
+				</button>
+			</a>
+		</header>
+		<!--main content start--->
+		<div id="loading" class="ka_userbox">
+			<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
 			</div>
 		</div>
-			<header class="mui-bar mui-bar-nav">
-			    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="4" class="lang" data-locale="back"></font></a>
-			    <h1 class="mui-title maintitle"></h1>
-			    <a href="../../setting/setting.html" class="settingbut">
-					<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
-						<span class="mui-icon mui-icon-gear"></span>
-					</button>
-				</a>
-			</header>
-			<!--main content start-->
-					<div id="loading" class="mui-content ka_userbox">
-						<div class="spinner">
-						  <div class="double-bounce1"></div>
-						  <div class="double-bounce2"></div>
-						</div>
+		<div  id="reloadpage" onclick="reloadpage()"  style="display:none ;"><font size="2" class="lang" data-locale="networkerror"></font></div> 
+		<div class="tran-page mui-content" style="display: none;margin-top: -1em;">
+			<ul class="mui-table-view">
+				<li class="head-img-box">
+					<div>
+						<img src="../../../images/userPhoto.png" width="150" height="150" class="headimg">
+						<input type="hidden" name="headimgupdate" id="headimgupdate" value=""/>
 					</div>
-					<div  id="reloadpage" onclick="reloadpage()"  style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div> 
-					<div class="tran-page mui-content" style="display: none;margin-top: -1em;">
-						<ul class="mui-table-view">
-							<li class="head-img-box">
-								<div>
-									<img src="../../../images/userPhoto.png" width="150" height="150" class="headimg">
-									<input type="hidden" name="headimgupdate" id="headimgupdate" value=""/>
-								</div>
-								<div style="width: 100%;text-align: center;">
-								<div class="mui-pull-caption" id="editemeg">
-									<a href="#">
-										<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton lang" data-locale="userinforbutntext"></button>
-									</a>
-								</div>
-								</div>
-								<br>
-								<div>
-									<ul class="user-num">
-										<li class="user-num-comment">
-											<font size="2"><span class="lang" data-locale="det_pcercomment"></span><span class="commentnum"></span></font>
-											
-										</li>
-										<li class="user-num-sell">
-											<font size="2"><span class="lang" data-locale="det_producednum"></span><span class="sellnum"></span></font>	
-										</li>
-										<!--<li class="user-num-sell2">
-											<font size="2"><span class="lang" data-locale="ticknumber"></span><span class="ticknum"></span></font>											
-										</li>-->
-									</ul>
-								</div>
-								<ul class="user-comment-list">
-									<li class="user-comment-grid">
-										<img height="30" width="30" src="../../../images/Good.PNG"/>
-										<div class="user-comment-num good"></div>
-									</li>
-									<li class="user-comment-grid2">
-										<img height="30" width="30"  src="../../../images/Normal.PNG"/>
-										<div class="user-comment-num normal"></div>
-									</li>
-									<li class="user-comment-grid2">
-										<img height="30" width="30" src="../../../images/Bad.PNG"/>
-										<div class="user-comment-num bad"></div>
-									</li>
-									<li class="user-comment-grid3 usercommentlist">
-										<a href="../products/commentlist.html#allcommentlist">
-											<span class="mui-icon mui-navigate-right"></span>
-										</a>
-									</li>
-								</ul>
-								<ul class="user-comment-list">
-									<li class="user-point-grid" style="display: none;">
-										<a href="#">
-											<font color="#AAAAAA" size="1">
-												<span class="mui-icon-extra mui-icon-extra-share lang" data-locale="userpointtext" style="font-size: 16px;"></span>　
-											</font>
-										</a>
-									</li>
-									<li class="user-point-grid2" style="display: none;">
-											<font size="2" class="point"></font>
-									</li>
-									<li class="user-point-grid" id="area">
-										<a href="#">
-											<font color="#AAAAAA" size="2">
-												<span class="mui-icon mui-icon-paperplane" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
-											</font>
-										</a>
-									</li>
-								</ul>
+					<div style="width: 100%;text-align: center;">
+					<div class="mui-pull-caption" id="editemeg">
+						<a href="#">
+							<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton lang" data-locale="userinforbutntext"></button>
+						</a>
+					</div>
+					</div>
+					<br>
+					<div>
+						<ul class="user-num">
+							<li class="user-num-comment">
+								<font size="2"><span class="lang" data-locale="det_pcercomment"></span><span class="commentnum"></span></font>
+								
 							</li>
-						</ul>
-						<ul class="user-goods-list">
-							<li class="user-goods-title-grid">
-								<div id="products" class="user-product-tab1" onclick="switchs(this)">
-									<font size="2" color="#FFFFFF" class="lang" data-locale="onshowingtext"></font>
-								</div>
+							<li class="user-num-sell">
+								<font size="2"><span class="lang" data-locale="det_producednum"></span><span class="sellnum"></span></font>	
 							</li>
-							<li class="user-goods-title-grid">
-								<div id="favourate" class="user-product-tab22" onclick="switchs(this)">
-									<font size="2" color="#FFFFFF" class="lang" data-locale="praiseprotext"></font>
-								</div>
-							</li>
-							<!--<li class="user-goods-title-grid">
-								<div id="friends" class="user-product-tab32" onclick="closed()">
-									<font size="2" color="#FFFFFF" class="lang" data-locale="favoriteprotext"></font>
-								</div>
+							<!--<li class="user-num-sell2">
+								<font size="2"><span class="lang" data-locale="ticknumber"></span><span class="ticknum"></span></font>											
 							</li>-->
 						</ul>
-						<!--Produced products--->
-						<div id="myproducts" class="mui-slider ka_aboutupro">
-					        <div class="mui-slider-group myproductshow">
-							</div>
-						</div>
-						<!--favourate products--->
-						<div id="myfavourate" class="mui-slider ka_aboutupro" style="height:100%; display:none;">
-					        <div class="mui-slider-group myfavourateshow">
-							</div>
-						</div>
-						<!--favourate person--->
-						<div id="myfriends" class="mui-slider ka_aboutupro" style="height:100%; display:none;">
-					        <div class="mui-slider-group">
-								<div class="mui-slider-item" style="height:25%">
-									<ul class="user-item-list">
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/cbd.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/cbd.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/cbd.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/cbd.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/cbd.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/cbd.jpg">
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="mui-slider-item" style="height:25%">
-									<ul class="user-item-list">
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/muwu.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/muwu.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/muwu.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="">
-												<img height="90%" width="90%" src="../../../images/muwu.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="">
-												<img height="90%" width="90%" src="../../../images/muwu.jpg">
-											</a>
-										</li>
-										<li class="user-goods-grid detail">
-											<a id="1" href="#">
-												<img height="90%" width="90%" src="../../../images/muwu.jpg">
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
+					</div>
+					<ul class="user-comment-list">
+						<li class="user-comment-grid">
+							<img height="30" width="30" src="../../../images/Good.PNG"/>
+							<div class="user-comment-num good"></div>
+						</li>
+						<li class="user-comment-grid2">
+							<img height="30" width="30"  src="../../../images/Normal.PNG"/>
+							<div class="user-comment-num normal"></div>
+						</li>
+						<li class="user-comment-grid2">
+							<img height="30" width="30" src="../../../images/Bad.PNG"/>
+							<div class="user-comment-num bad"></div>
+						</li>
+						<li class="user-comment-grid3 usercommentlist">
+							<a href="../products/commentlist.html#allcommentlist">
+								<span class="mui-icon mui-navigate-right"></span>
+							</a>
+						</li>
+					</ul>
+					<ul class="user-comment-list">
+						<li class="user-point-grid" style="display: none;">
+							<a href="#">
+								<font color="#AAAAAA" size="1">
+									<span class="mui-icon-extra mui-icon-extra-share lang" data-locale="userpointtext" style="font-size: 16px;"></span>　
+								</font>
+							</a>
+						</li>
+						<li class="user-point-grid2" style="display: none;">
+								<font size="2" class="point"></font>
+						</li>
+						<li class="user-point-grid" id="area">
+							<a href="#">
+								<font color="#AAAAAA" size="2">
+									<span class="mui-icon mui-icon-paperplane" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
+								</font>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="user-goods-list">
+				<li class="user-goods-title-grid">
+					<div id="products" class="user-product-tab1" onclick="switchs(this)">
+						<font size="2" color="#FFFFFF" class="lang" data-locale="onshowingtext"></font>
+					</div>
+				</li>
+				<li class="user-goods-title-grid">
+					<div id="favourate" class="user-product-tab22" onclick="switchs(this)">
+						<font size="2" color="#FFFFFF" class="lang" data-locale="praiseprotext"></font>
+					</div>
+				</li>
+				<!--<li class="user-goods-title-grid">
+					<div id="friends" class="user-product-tab32" onclick="closed()">
+						<font size="2" color="#FFFFFF" class="lang" data-locale="favoriteprotext"></font>
+					</div>
+				</li>-->
+			</ul>
+			<!--Produced products--->
+			<div id="myproducts" class="mui-slider ka_aboutupro">
+		        <div class="mui-slider-group myproductshow">
 				</div>
+			</div>
+			<!--favourate products--->
+			<div id="myfavourate" class="mui-slider ka_aboutupro" style="height:100%; display:none;">
+		        <div class="mui-slider-group myfavourateshow">
+				</div>
+			</div>
+			<!--favourate person--->
+			<div id="myfriends" class="mui-slider ka_aboutupro" style="height:100%; display:none;">
+		        <div class="mui-slider-group">
+					<div class="mui-slider-item" style="height:25%">
+						<ul class="user-item-list">
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="mui-slider-item" style="height:25%">
+						<ul class="user-item-list">
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	</div>
 			<!--main content end-->
 	</body>
 	<script src="../../../js/mui.min.js"></script>
@@ -325,7 +317,8 @@
 						console.log("other error code:" + data);
 						
 					},
-					error:function(){
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
 						$("#reloadpage").show();
 						$(".tran-page").hide();
 						$("#loading").hide();
@@ -824,7 +817,8 @@
 					console.log("other error code:" + data);
 					
 				},
-				error:function(){
+				error:function(errortypetext){
+					$("#reloadpage").html(errortypetext);
 					$("#reloadpage").show();
 					$(".tran-page").hide();
 					$("#loading").hide();
