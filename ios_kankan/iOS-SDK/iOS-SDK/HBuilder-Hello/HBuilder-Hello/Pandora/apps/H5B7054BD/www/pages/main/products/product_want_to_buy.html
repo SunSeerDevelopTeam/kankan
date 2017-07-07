@@ -100,7 +100,6 @@ function publishscheck(){
 	if (!Repository.User.isEmptyEmail()) {
 		 return;
 	}else{
-		$("#submit").attr("disabled","disabled");
 		publishs();
 	}
 }
@@ -127,6 +126,7 @@ function publishs() {
 			duration: 'long',
 			type: 'div'
 		});
+		document.publishcomodity.comm_name.focus();
 		return false;
 	}
 	if(comm_name.trim().length>40){
@@ -149,6 +149,7 @@ function publishs() {
 			duration: 'long',
 			type: 'div'
 		});
+		document.publishcomodity.comm_detail.focus();
 		return false;
 	}
 	if(comm_detail.trim().length >1000) {
@@ -158,6 +159,7 @@ function publishs() {
 		});
 		return false;
 	}
+	$("#submit").attr("disabled","disabled");
 	var params = {
 		"buy_sell_flag":buy_sell_flag,
 		"comm_name":comm_name,

@@ -130,7 +130,8 @@
 					ng: function(data) {
 						Log.d(data);
 					},
-					error:function(){
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
 						$("#reloadpage").show();
 						$(".ka_mainbox").hide();
 						$("#loading").hide();

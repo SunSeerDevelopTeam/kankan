@@ -350,6 +350,12 @@
 				$("#firstconcerul").empty();
 				$(".mui-title").empty();
 				$("#userid").val("");
+				$("#myid").val("");
+				$("#comodityid").val("");
+				$("#comm_num").val("");
+				$(".kankan_productname").html(""); //name
+				$(".kankan_det_information").html(""); //message
+				$(".mui-title").html(""); //title
 			}
 
 			function getinfo(pid) {
@@ -370,7 +376,8 @@
 							$(".mui-content").hide();
 						}
 					},
-					error:function(){
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
 						$(".mui-content").hide();
 						$("#reloadpage").show();
 					}
@@ -669,6 +676,9 @@
 				//detail page
 				var detailPage = null;
 				mui('.detail').on('tap', 'a', function(e) {
+					document.body.scrollTop = document.documentElement.scrollTop = 0;
+					$(".mui-content").hide();
+					$("#loading").show();
 					var did = this.getAttribute('id');
 					if(!detailPage) {
 						detailPage = plus.webview.getWebviewById('detail.html');

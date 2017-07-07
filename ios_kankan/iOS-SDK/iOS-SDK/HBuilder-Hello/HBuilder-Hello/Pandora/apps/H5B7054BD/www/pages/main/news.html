@@ -85,6 +85,9 @@
 		  mui.plusReady(function() {
 		  	$("#pullrefresh").attr("style","margin-top:-3em");
 		  });
+		  function reloadpage(){
+		  	location.reload();
+		  }
 		 $('#reloadpage').on('tap', 'font', function(event) {
 				location.reload();
 			});
@@ -196,7 +199,8 @@
 					ng: function(data) {
 						Api.callback_ng(data);
 					},
-					error:function(){
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
 						$(".mui-pull").hide();
 						$(".mui-scroll").hide();
 						$("#reloadpage").show();
