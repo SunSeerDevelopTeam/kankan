@@ -54,8 +54,10 @@
 			</a>
 			<h1 class="mui-title"><span class="lang" data-locale="transaction"></span></h1>
 		</header>
+		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
 		<div class="mui-content wrapper">
-			<div id="mui-page-content">
+		<div id="pullrefresh" class="mui-scroll-wrapper">
+			<div id="mui-page-content" class="mui-scroll">
 				<div class="tran-page">
 					<div class="tran-body" style="margin-bottom:60px;">
 						<div class="tran-name-middle-status mui-center" style="display:none;">
@@ -155,6 +157,7 @@
 					</div>
 				</div>
 			</div>
+			</div>
 		</div>
 		<div class="input-bottom">
 			<form id="commodity_comments" name="commodity_comments" method="post">
@@ -171,9 +174,12 @@
 		<script type="text/javascript" src="../../js/sha256.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			mui.init();
 			var trans_id;
+			var page=0;
 			mui.plusReady(function() {
+				if(mui.os.ios){
+					$(".mui-content").attr("style","margin-top:2.5em;");
+				}
 				mui.preload({
 					id: 'detail',
 					url: '../main/products/detail.html'
@@ -181,7 +187,6 @@
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
 				var goparmes=self.goparmes;
-				//alert(goparmes);
 				if(goparmes=="main"){
 					mui("header").on("tap","a",function(){
 						var preView = plus.webview.getWebviewById('selectitem');
@@ -190,7 +195,22 @@
    						mainPage.show();
 					});
 				}
-				showRequestDetail();
+				mui.init({
+					pullRefresh: {
+						container: '#pullrefresh',
+//						down: {
+//							callback: pulldownRefresh
+//						},
+						up: {
+							contentrefresh: TextMessage.update,
+							contentinit: TextMessage.upmore,
+							contentdown: TextMessage.upmore,
+							contentnomore: TextMessage.nomore,
+							callback: pullupRefresh
+						}
+					}
+				});
+				showRequestDetail(page);
 			})
 			function reloadpage(){
 				location.reload();
@@ -207,15 +227,29 @@
 						"message": chatMsg,
 						"transid": trans_id
 					};
-					trans_flow('transConversation', params,'');
+					trans_flow('transConversation', params,'',"one");
 					$("#msg").val('');
 				}
 			}
+			function pullupRefresh(){
+				setTimeout(function() {
+						showRequestDetail(page);
+					}, 1500);
+				//showRequestDetail(page);
+			}
+			function pulldownRefresh(){
+				$("#msgArea").empty();
+				page=0;
+				showRequestDetail(page);
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+			}
 
-			function showRequestDetail() {
+			function showRequestDetail(page) {
 				var params = {
-					"transid": trans_id
+					"transid": trans_id,
+					"page_num":page
 				};
+				page++;
 				trans_flow('transEdite', params,'');
 			}
 
@@ -441,7 +475,10 @@
 				trans_flow('transEdite', params,'my');
 			})
 
-			function showChatMsg(usersinfo, messginfo, cur_user_id) {
+			function showChatMsg(usersinfo, messginfo, cur_user_id,select_flag) {
+				if(messginfo==""){
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+				}
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg='';
 				for(var user in usersinfo) {
 					if(usersinfo[user].user_role == "issue") {
@@ -483,7 +520,12 @@
 						}
 					}
 				}
-				$("#msgArea").html(chatMsg);
+				if(select_flag){
+					$("#msgArea").prepend(chatMsg);
+				}else{
+					$("#msgArea").append(chatMsg);
+					page++;
+				}
 			}
 
 			function showRequestStaus(transinfo, userinfo) {
@@ -775,7 +817,10 @@
 				}
 			})
 
-			function trans_flow(api_url_flag, params,flag) {
+			function trans_flow(api_url_flag, params,flag,last) {
+				if(last){
+					params.select_flag="one";
+				}
 				Repository.Transaction.trans(api_url_flag, params, {
 					ok: function(data) {
 						if(api_url_flag == 'transOrderReceipt') {
@@ -786,6 +831,10 @@
 							var messginfo = data.data.messginfo;
 							var commdinfo = data.data.commdinfo;
 							var usersinfo = data.data.usersinfo;
+							var allcount=	data.data.all_cnt[0].cnt;
+							console.log(allcount);
+							var allcomiditynum=10*page;
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh((allcount <=allcomiditynum));
 							var buyer_flag = false;
 							var buyer_id = transinfo[0].issue_user_id;
 							var seller_id = transinfo[0].accept_user_id;
@@ -798,8 +847,10 @@
 							if(flag == 'my') goods_detail(cur_user_id, commdinfo, 'my');
 							else if(flag == 'request') goods_detail(cur_user_id, commdinfo, 'request');
 							if(api_url_flag == 'transConversation'){
+								document.body.scrollTop = document.documentElement.scrollTop = 0;
 								if(messginfo) {
-									showChatMsg(usersinfo, messginfo, cur_user_id);
+									showChatMsg(usersinfo, messginfo, cur_user_id,"select_flag");
+									return;
 								}
 							}
 							if(trans_mode > 0) {
@@ -842,9 +893,10 @@
 						Log.i("message send faild!");
 						Api.callback_ng(data);
 					},
-					error:function(){
-						var nodata='<div  id="reloadpage" onclick="reloadpage()" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
-						$(".mui-content").html(nodata);
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
+						$("#reloadpage").show();
+						$(".mui-content").hide();
 					}
 				});
 			}

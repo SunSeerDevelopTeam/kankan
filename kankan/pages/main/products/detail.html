@@ -230,10 +230,19 @@
 			});
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
+				var flagback=event.detail.flag;
 				commodity_id = event.detail.id;
 				mui.plusReady(function() {
 					getinfo(id);
 				});
+				if(flagback=="concer"){
+					$(".mui-content").hide();
+					$("#loading").show();
+//					mui(".mui-bar-nav").on("tap","a",function(){
+//						var mainPage = plus.webview.getLaunchWebview();
+//						mainPage.show();
+//					});
+				}
 				
 			});
 			//*********************share start
@@ -344,9 +353,9 @@
 //				$(".firstimage img").attr("src", "");
 //				$(".lastimage img").attr("src", "");
 				$(".sliderimg").remove();
-				$("#lastremmondul").empty();
+				//$("#lastremmondul").empty();
 				$("#firstremmondul").empty();
-				$("#lastconcerul").empty();
+				//$("#lastconcerul").empty();
 				$("#firstconcerul").empty();
 				$(".mui-title").empty();
 				$("#userid").val("");
@@ -677,18 +686,21 @@
 				var detailPage = null;
 				mui('.detail').on('tap', 'a', function(e) {
 					document.body.scrollTop = document.documentElement.scrollTop = 0;
-					$(".mui-content").hide();
-					$("#loading").show();
+//					emptyhtml();
+//					$(".mui-content").hide();
+//					$("#loading").show();
 					var did = this.getAttribute('id');
 					if(!detailPage) {
 						detailPage = plus.webview.getWebviewById('detail.html');
 					}
 					mui.fire(detailPage, 'cid', {
-						id: did
+						id: did,
+						flag:"concer"
 					});
 					mui.openWindow({
 						id: 'detail.html'
 					});
+					
 				});
 				$(".mui-content").show();
 				$("#loading").hide();
