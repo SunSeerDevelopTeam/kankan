@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1788,4 +1788,19 @@ function HTMLEncode(html) {
 	var output = temp.innerHTML;
 	temp = null;
 	return output;
+}
+//iimgurl
+function thumbnail(imgurl){
+	var imgurlarr=imgurl.split("/");
+	var imgurl0="";
+	//console.log(imgsarr[0]);
+	for(var m=0;m<imgurlarr.length;m++){
+		//console.log(m+":"+imgurlarr[m]);
+		if(m<=8){
+			imgurl0+=imgurlarr[m]+"/";
+		}else{
+			imgurl0+="thumbnail/"+imgurlarr[9];
+		}
+	}
+	return imgurl0;
 }

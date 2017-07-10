@@ -82,6 +82,10 @@
 			});
 			var id;
 			mui.plusReady(function() {
+				if(mui.os.android){
+					$("#normalcomment").attr("style","margin-top: -4.7em;");
+					$("#badcomment").attr("style","margin-top: -4.5em;");
+				}
 				TextMessage.language = plus.os.language;
 				var self = plus.webview.currentWebview();
 				id = self.ucid;
@@ -101,8 +105,7 @@
 				$(".ka_commentfonts").removeClass("ka_clickcs");
 				$(".ka_commentsort").addClass("ka_clickcs");
 			});
-			$("#normalcomment").click(
-				function(){
+			mui(".ka_userbox").on("tap","#normalcomment",function(){
 					$("#badcommentlist").hide();
 					$("#normalcommentlist").show();
 					$("#goodcommentlist").hide();
@@ -110,10 +113,8 @@
 					$(".ka_commentfonts").removeClass("ka_clickcs");
 					$("#normalcomment .ka_commentfonts").addClass("ka_clickcs");
 					$(".ka_commentsort").removeClass("ka_clickcs");
-				}
-			);
-			$("#badcomment").click(
-				function(){
+			});
+			mui(".ka_userbox").on("tap","#badcomment",function(){
 					$("#badcommentlist").show();
 					$("#normalcommentlist").hide();
 					$("#goodcommentlist").hide();
@@ -121,11 +122,9 @@
 					$(".ka_commentfonts").removeClass("ka_clickcs");
 					$("#badcomment .ka_commentfonts").addClass("ka_clickcs");
 					$(".ka_commentsort").removeClass("ka_clickcs");
-				}
-			);
-			$("#goodcomment").click(
-				function(){
-					$("#goodcommentlist").show();
+			});
+			mui(".ka_userbox").on("tap","#goodcomment",function(){
+				$("#goodcommentlist").show();
 					$("#badcommentlist").hide();
 					$("#normalcommentlist").hide();
 					$("#allcommentlist").hide();
@@ -133,8 +132,7 @@
 					$(".ka_commentfonts").removeClass("ka_clickcs");
 					$("#goodcomment .ka_commentfonts").addClass("ka_clickcs");
 					$(".ka_commentsort").removeClass("ka_clickcs");
-				}
-			);
+			});
 			function reloadpage(){
 				location.reload();
 			}
