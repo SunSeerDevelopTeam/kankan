@@ -42,11 +42,15 @@
 			<h1 class="mui-title lang" data-locale="det_procoment"></h1>
 		</header>
 		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
-		<div class="mui-content ka_mainbox wrapper" >
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell ka_userbox" id="comments">
-				</li>
-			</ul>
+		<div class="mui-content ka_mainbox wrapper">
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view  mui-table-view-chevron">
+						<li class="mui-table-view-cell ka_userbox" id="comments">
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<div class="input-bottom">
 			<form id="commodity_comments" name="commodity_comments" method="post">
@@ -64,7 +68,6 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init();
 //			window.addEventListener('comid', function(event) {
 //				var id = event.detail.id;
 //				//var id="19";
@@ -74,13 +77,50 @@
 //				
 //			});
 			var id;
+			var page=0;
 			mui.plusReady(function() {
+				if(mui.os.ios){
+					$(".ka_mainbox").attr("style","margin-top:1em;");
+				}
+				$("#comments").empty();
 				var self = plus.webview.currentWebview();
 				id = self.comid;
 				$("#commodity_id").val(id);
 				$("#leave_msg_detail").attr("placeholder",TextMessage.contentlength);
-				getccomments(id);
-			})
+				mui.init({
+					swipeBack: false,
+					pullRefresh: {
+							container: '#pullrefresh',
+//							down: {
+//								callback: pulldownRefresh
+//							},
+						up: {
+							contentrefresh: TextMessage.update,
+							contentinit: TextMessage.upmore,
+							contentdown: TextMessage.upmore,
+							contentnomore: TextMessage.nomore,
+							auto: true,
+							callback: pullupRefresh
+						},
+					}
+				});
+				//getccomments(id);
+			});
+			function pullupRefresh(){
+				var ids=$("#commodity_id").val();
+				setTimeout(function(){
+					getccomments(ids);
+				},1500);
+			}
+			function pulldownRefresh(){
+				page=0;
+				var ids9=$("#commodity_id").val();
+				setTimeout(function(){
+					$("#comments").empty();
+					getccomments(ids9);
+					 mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				},1500);
+			}
 			//back refresh 
 			mui(".mui-bar-nav").on("tap","a",function(){
 				var view = plus.webview.currentWebview().opener();
@@ -96,7 +136,8 @@
 			}
 			function getccomments(rid) {
 				var params = {
-					"commodity_id": rid
+					"commodity_id": rid,
+					"page_num":page
 				};
 				Repository.Commodity.Commoditycomment(params, {
 					ok: function(data) {
@@ -105,10 +146,11 @@
 					},
 					ng: function(data) {
 						Log.d(data);
-						if(data == "2001") {
-							var htmlnull='<p id="null" >'+TextMessage.commentsnull+'</p>';
-							$("#comments").html(htmlnull);
-						}
+//						if(data == "2001") {
+//							mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+//							var htmlnull='<p id="null" >'+TextMessage.commentsnull+'</p>';
+//							$("#comments").html(htmlnull);
+//						}
 					},
 					error:function(errortypetext){
 						$("#reloadpage").html(errortypetext);
@@ -118,9 +160,20 @@
 				});
 			}
 			function showpcomehts(results) {
-				$("#comments").empty();
-				var datas = results.data;
+				if(results.data==""){
+					if(page==0){
+						var htmlnull='<p id="null" >'+TextMessage.commentsnull+'</p>';
+						//$("#comments").html(htmlnull);
+					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+				}
+				page++;
+				var datas = results.data.comment;
+				if(!datas){return;}
 				var dataslengh = datas.length;
+				var showlength=page*5;
+				var allcount=results.data.all_cnt;
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((showlength>=allcount));
 				for(var i = 0; i < dataslengh; i++) {
 					var pcommentobj = JSON.stringify(datas[i]);
 					var pcommentinfo = $.parseJSON(pcommentobj);

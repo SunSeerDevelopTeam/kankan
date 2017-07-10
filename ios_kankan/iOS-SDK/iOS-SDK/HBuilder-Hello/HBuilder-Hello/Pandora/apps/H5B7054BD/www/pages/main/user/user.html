@@ -68,7 +68,7 @@
 		<div class="tran-page mui-content" style="display: none;margin-top: -1em;">
 			<ul class="mui-table-view">
 				<li class="head-img-box">
-					<div>
+					<div class="editeimg">
 						<img src="../../../images/userPhoto.png" width="150" height="150" class="headimg">
 						<input type="hidden" name="headimgupdate" id="headimgupdate" value=""/>
 					</div>
@@ -94,7 +94,7 @@
 							</li>-->
 						</ul>
 					</div>
-					<ul class="user-comment-list">
+					<ul class="user-comment-list commentlists">
 						<li class="user-comment-grid">
 							<img height="30" width="30" src="../../../images/Good.PNG"/>
 							<div class="user-comment-num good"></div>
@@ -460,7 +460,7 @@
 		}
 		function clickusercomment(ueid){
 			var commentPage = null;
-			mui(".usercommentlist").on("tap","a",function(){
+			mui(".commentlists").on("tap","li",function(){
 				var ucid = ueid;
 						if(!commentPage) {
 							commentPage = plus.webview.getWebviewById('commentlist.html');

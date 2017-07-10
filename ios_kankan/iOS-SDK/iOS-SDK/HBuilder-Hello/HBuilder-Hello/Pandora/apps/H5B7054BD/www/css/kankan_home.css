@@ -419,7 +419,7 @@ body .mui-table-view-cell.mui-active{
 	font-size: 14px;
 	margin-bottom: 1em;
 	word-wrap:break-word;
-	text-align: center;
+	text-align: left;
 }
 .comtent{
 	width: 100%;
@@ -427,7 +427,7 @@ body .mui-table-view-cell.mui-active{
 .ka_commenttime {
 	margin-top: 1em;
 	color: #ACACB4;
-	margin-left: -4em;
+	/*margin-left: -4em;*/
 	font-size: 12px;
 }
 
