@@ -39,6 +39,16 @@
 				font-size: 12px;
 				
 			}
+			.stautesclose{
+				background-color:#DD524D;
+				margin-top: 1em;
+				position: absolute;
+				opacity: 0.7;
+				padding: 0 0.5em;
+				color: #FFFFFF;
+				font-size: 12px;
+				
+			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
@@ -257,10 +267,11 @@
 				{
 					id: 'detail.html',
 					url: '../products/detail.html'
-				},{
-					id: 'product_login.html',
-					url: '../products/product_login.html'
 				}
+//				,{
+//					id: 'product_login.html',
+//					url: '../products/product_login.html'
+//				}
 			],
 			beforeback: function() {
 		        var homePage = plus.webview.getWebviewById('home.html');
@@ -492,14 +503,18 @@
 			var editePage = null;
 			mui('.codedite').on('tap', 'a', function(e) {
 				var eid = this.getAttribute('id');
-				if(!editePage) {
-					editePage = plus.webview.getWebviewById('product_login.html');
-				}
-				mui.fire(editePage, 'eid', {
-					id: eid
-				});
+//				if(!editePage) {
+//					editePage = plus.webview.getWebviewById('product_login.html');
+//				}
+//				mui.fire(editePage, 'eid', {
+//					id: eid
+//				});
 				mui.openWindow({
-					id: 'product_login.html'
+					id: 'product_login',
+					url:"../products/product_login.html?eid="+eid,
+					extras:{
+						eid:eid
+					}
 				});
 			});
 		}
@@ -557,7 +572,7 @@
 			for(var ex=0; ex<exhibit_commdata.length;ex++){
 				var k = ex + 1 * 1;
 				var commexid=exhibit_commdata[ex].commodity_id;
-				var commeximg_url=exhibit_commdata[ex].img_url;
+				var commeximg_url=thumbnail(exhibit_commdata[ex].img_url);
 				var realwidth=exhibit_commdata[ex].comm_img_width;
 				var realheight=exhibit_commdata[ex].comm_img_height;
 				var commstatus=exhibit_commdata[ex].status;
@@ -578,14 +593,19 @@
 					
 					//console.log(toppx);
 				}
-				if(commstatus==0){
+				if(commstatus==0 || commstatus==4){
 					var classsort="codedite";
 				}else{
 					var classsort="detail";
 				}
 				exhibit_html+='<li class="user-goods-grid '+classsort+'">';
 				if(commstatus!=0){
-					exhibit_html+='<div class="stautestext">'+TextMessage.tranStatusRequest+'</div>';
+					if(commstatus==4){
+						exhibit_html+='<div class="stautesclose">'+TextMessage.tranStatusclose+'</div>';
+					}else{
+						exhibit_html+='<div class="stautestext">'+TextMessage.tranStatusRequest+'</div>';
+					}
+					
 				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
 				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppx+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';

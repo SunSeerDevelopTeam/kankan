@@ -177,7 +177,7 @@ function uploadimage(path) {
 		method: "post"
 	}, function(t, status) {
 		if(status == 200) {
-			//console.log("upload success:" + t.responseText);
+			console.log("upload success:" + t.responseText);
 			console.log("upload success!");
 			Processing(t.responseText);
 			wt.close();

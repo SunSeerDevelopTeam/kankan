@@ -21,7 +21,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;"></a>
-			<h1 class="mui-center mui-title lang" data-locale="commodity_login"></h1>
+			<h1 class="mui-center mui-title lang" data-locale=""></h1>
 		</header>
 		<div class="mui-content kankan_jyimgbox">
 			<form action="" method="post" name="publishcomodity" id="publishcomodity">
@@ -106,12 +106,15 @@
 				</div>
 				<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
 				<div class="ka_userbox">
-					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="commodity_buttonsure" onclick="publishscheck()" id="submit"></button>
+					<button type="button" class="mui-btn mui-btn-blue ka_prologsure lang" data-locale="" id="waste" style="margin-top: 1em;display: none;" onclick="wastes()"></button>
+					<button type="button" class="mui-btn mui-btn-grey ka_prologsure lang" data-locale="deletebut" id="delete" style="margin-top: 1em;display: none;" onclick="submitdelete()"></button>
+					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="commodity_buttonsure" style="margin-top: 1em;" onclick="publishscheck()" id="submit"></button>
 				</div>
 				<br/>
 				<div class="showimg"></div>
 				<div id="deltimg" style="display: none;"></div>
 				<input type="hidden" name="codid" id="codid" value="" />
+				<input type="hidden" name="commstautes" id="commstautes" value="" />
 			</form>
 		</div>
 	</body>
@@ -127,13 +130,17 @@
 	<script>
 	$(function() {
 		$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
+		$(".mui-title").html(TextMessage.commodity_login);
 	});
-	window.addEventListener('eid', function(event) {
-		var id = event.detail.id;
-		//alert(id);
+	var id;
+	//window.addEventListener('eid', function(event) {
+	mui.plusReady(function() {
+		var self = plus.webview.currentWebview();
+		id = self.eid;
+		//var id = event.detail.id;
 		$(".z_addImg").remove();
-		$(".mui-title").html(TextMessage.commodity_edit);
 		$(".mui-action-back").show();
+		$("#delete").show();
 		document.getElementById('codid').value=id;
 		getcomdinfo(id);
 	});
@@ -180,6 +187,7 @@
 	}
 	//edite information show
 	function messages(results){
+		$(".mui-title").html(TextMessage.commodity_edit);
 		$("#0").val("0");
 		$("#1").val("0");
 		$("#2").val("0");
@@ -196,6 +204,19 @@
 		var classify_id=results.data.classify_id;
 		var price=results.data.price;
 		var state=results.data.state;
+		var commstautes=results.data.comm_status;
+		if(commstautes=="0"){
+		//waste product
+			$("#waste").show();
+			$("#waste").text(TextMessage.commodity_luo);
+			$("#commstautes").val("2");
+		}
+		if(commstautes=="4"){
+		//again submit product
+			$("#waste").show();
+			$("#waste").text(TextMessage.commodity_againlogin);
+			$("#commstautes").val("1");
+		}
 		document.getElementById('comm_name').value=name;
 		document.getElementById('comm_detail').value=detail;
 		document.getElementById('business').value=business;
@@ -235,7 +256,6 @@
 	}
 	//edite show
 	function getcomdinfo(dataid){
-		mui.plusReady(function() {
 			var param3={
 				"commodity_id":dataid
 			}
@@ -266,9 +286,9 @@
 									url:"../../login/login.html"
 								});
 							}
+							//Api.callback_ng(data);
 						}
 			});
-		});
 		
 	}
 	//get classfiy 
@@ -340,6 +360,7 @@
 						},
 						ng: function(data) {
 							console.log("error" + data);
+							Api.callback_ng(data);
 						}
 					});
 				});
@@ -367,8 +388,10 @@
 					var statePicker = new $.PopPicker();
 					statePicker.setData(statedate);
 
-					window.addEventListener('eid', function(event) {
-						var picksortid = event.detail.id;
+					//window.addEventListener('eid', function(event) {
+						var selfs = plus.webview.currentWebview();
+						var picksortid = selfs.eid;
+						//var picksortid = event.detail.id;
 						var param4 = {
 							"commodity_id": picksortid
 						}
@@ -430,9 +453,10 @@
 										url: "../../login/login.html"
 									});
 								}
+								//Api.callback_ng(data);
 							}
 				});
-			});
+			//});
 			//category click picker
 			var showCatePickerButton = doc.getElementById('showCityPicker');
 			var cateResult = doc.getElementById('sortResult');
@@ -618,6 +642,7 @@ function publishs() {
 				});
 				
 			}else{
+				location.reload();
 				mui.back();
 			}
 		},
@@ -633,16 +658,6 @@ function publishs() {
 					url:"../../login/login.html"
 				});
 			} 
-			if(data == "3020") {
-				mui.toast(TextMessage.input_email, {
-					duration: 'long',
-					type: 'div'
-				});
-				mui.openWindow({
-					id: 'emai_summate',
-					url:"../../login/emai_summate.html"
-				});
-			}
 			if(data=="2002"){
 				mui.toast(TextMessage.userng, {
 					duration: 'long',
@@ -664,11 +679,15 @@ function publishs() {
 					url:"../sttting/point_to_ticket.html"
 				});
 			}
+			Api.callback_ng(data);
+			location.reload();
+			//mui.back();
 			console.log("other error code:" + data);
 			
 		},
 		error:function(){
 			error_tost.message();
+			location.reload();
 		}
 	});
 
@@ -739,7 +758,78 @@ document.getElementById('freebuybtn').addEventListener('tap', function(e) {
 		$("#exchbuybtn").addClass("ka_exchangegrey");
 	}
 });
-
+//delete product
+function submitdelete(){
+	var deid=$("#codid").val();
+	var btnArray = [TextMessage.sure, TextMessage.cancel];
+	var paramsde={
+		"commodity_id":deid,
+	};
+	mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
+		if (e.index == 0) {
+			mui.plusReady(function() {
+				Repository.Commodity.delete_pro(paramsde, {
+					ok:function(data){
+						mui.toast(TextMessage.delete_success, {
+							duration: 'long',
+							type: 'div'
+						});
+						location.reload();
+						mui.back();
+					},
+					ng:function(data){
+						Api.callback_ng(data);
+					},
+					error:function(){
+						error_tost.message();
+						location.reload();
+					}
+				});
+			});
+		}
+	});
+	
+}
+//waste product
+function wastes(){
+	var deid=$("#codid").val();
+	var comm_status=$("#commstautes").val();
+	var paramsw={
+		"commodity_id":deid,
+		"sell_off_flg":comm_status
+	};
+	if(comm_status==1){
+		var buttext=TextMessage.commodity_luo;
+		var mestext=TextMessage.comoditylogin_success;
+		var butval=4;
+	}else{
+		var buttext=TextMessage.commodity_againlogin;
+		var mestext=TextMessage.luopin_success;
+		var butval=1;
+	}
+	mui.plusReady(function() {
+		Repository.Commodity.Commoditypublish(paramsw, {
+			ok:function(data){
+				mui.toast(mestext, {
+					duration: 'long',
+					type: 'div'
+				});
+				$("#waste").text(buttext);
+				$("#commstautes").val(butval);
+				//location.reload();
+				//mui.back();
+			},
+			ng:function(data){
+				Api.callback_ng(data);
+				mui.back();
+			},
+			error:function(){
+				error_tost.message();
+				location.reload();
+			}
+		});
+	});
+}
 </script>
 
 </html>

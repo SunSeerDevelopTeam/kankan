@@ -169,7 +169,6 @@ function publishs() {
 		"imges[2]": imges2,
 		"imges[3]": imges3
 	};
-	console.dir(params);
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
 			Log.d("success");
@@ -186,9 +185,11 @@ function publishs() {
 		ng: function(data) {
 			Log.d(data);
 			Api.callback_ng(data);
+			location.reload();
 		},
 		error:function(){
 			error_tost.message();
+			location.reload();
 		}
 	});
 

@@ -86,7 +86,7 @@ var JSLocale = {
 	"commodity_free": "あげる",
 	"commodity_select": "商品選択",
 	"commodity_pointbuy": "ポイント",
-	"commodity_buttonsure": "出品する",
+	"commodity_buttonsure": "確定",
 	"commodity_price": "価  格",
 	"commodity_forbidentext": "出品が禁止されている商品、禁止されている行為を必ず確認してください。またブランド品でシリアルナンバー等がある場合はご記載ください。偽ブランド品の販売は犯罪であり処罰される可能性があります。",
 	"commodity_want":"欲しい物登録",
@@ -126,7 +126,7 @@ var JSLocale = {
 	"requesttitle":"リクエスト",
 	"requesthistory":"取引履歴",
 	"requestedpro":"リクエストされた",
-	"requestpro":"リスエストした",
+	"requestpro":"リエストした",
 	//setting page
 	"setting":"設定",
 	"pointbuytext":"ポイント購入",
@@ -180,7 +180,8 @@ var JSLocale = {
 	"quesreset":"リセット",
 	"nameplocder":"ユーザー名",
 	"networkerror":"通信エラーが発生しました。しばらくしてからお試しください。",
-	"networkerrordetail":"通信エラーが発生しました、ここをクリックし、もう一度試してみてください。"
+	"networkerrordetail":"通信エラーが発生しました、ここをクリックし、もう一度試してみてください。",
+	"deletebut":"削除",
 }
 
 $(function() {
