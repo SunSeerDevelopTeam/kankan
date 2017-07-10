@@ -156,7 +156,8 @@
 							//$("ul").hide();
 						}
 					},
-					error:function(){
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);	
 						$(".mui-content").hide();
 						$("#loading").hide();
 						$("#reloadpage").show();

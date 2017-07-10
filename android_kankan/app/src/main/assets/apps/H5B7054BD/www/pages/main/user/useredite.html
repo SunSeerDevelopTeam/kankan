@@ -15,7 +15,13 @@
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="4" class="lang" data-locale="back"></font></a>
 		   <h1 class="mui-center mui-title lang" data-locale="infoeditetitle"></h1>
 		</header>
-		<div class="mui-content">
+		<div id="loading" class="ka_userbox">
+			<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+			</div>
+		</div>
+		<div class="mui-content" style="display: none;">
 			<form method="post" name="userinfosub" id="userinfosub">
 				<div class="ka_editebox">
 					<div class="head-img-box ka_userimagebox editeimg" style="width: 100%;margin-left: -43%;">
@@ -23,7 +29,7 @@
 					</div>
 					<div class="ka_usernicknamebox">
 					<h6 class="lang" data-locale="uinfousername"></h6>
-					<input type="text" name="nickname" id="nickname" value="" placeholder="" data-locale="nameplocder"  class="ka_userfontsize lang" maxlength="100" />
+					<textarea type="text" name="nickname" id="nickname" value="" data-locale="nameplocder"  class="ka_userfontsize lang" rows="1" ></textarea>
 					</div>
 					<h6 class="lang" data-locale="introducetext" style="display: none;"></h6>
 					<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500" style="display: none;"></textarea>
@@ -74,7 +80,7 @@
 						//console.dir(data);
 						showuser(data);
 						$("#loading").hide();
-						$(".tran-page").show();
+						$(".mui-content").show();
 					//}
 				},
 				ng: function(data) {
