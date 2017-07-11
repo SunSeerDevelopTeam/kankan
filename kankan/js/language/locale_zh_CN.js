@@ -96,7 +96,7 @@ var JSLocale = {
 	"ticknumber":"Ticket数目",
 	"userinforbutntext":"用户信息编辑",
 	"userpointtext":"Point",
-	"onshowingtext":"出品中商品",
+	"onshowingtext":"出品商品",
 	"praiseprotext":"点赞商品",
 	"favoriteprotext":"人气商品",
 	"uinfousername":"用户名",

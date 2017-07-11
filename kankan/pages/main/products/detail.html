@@ -580,7 +580,7 @@
 					var k = j + 1 * 1;
 					var recomendsobj1 = JSON.stringify(recomendsarrs[j]);
 					recomendsobj = $.parseJSON(recomendsobj1);
-					var recomdimg = thumbnail(recomendsobj.commodity_photo_url);
+					var recomdimg = recomendsobj.commodity_thu_photo_url;
 					var recomdid = recomendsobj.commodity_id;
 					var advflag = recomendsobj.is_ad;
 					if(j>=4){
@@ -634,7 +634,7 @@
 					var m = l + 1 * 1;
 					var concernobj1 = JSON.stringify(concernarrs[l]);
 					concernsobj = $.parseJSON(concernobj1);
-					var concernimg = thumbnail(concernsobj.commodity_photo_url);
+					var concernimg = concernsobj.commodity_thu_photo_url;
 					var concernid = concernsobj.commodity_id;
 					if(l >= 4){
 						concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';

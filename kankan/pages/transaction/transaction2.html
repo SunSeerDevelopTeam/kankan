@@ -100,9 +100,9 @@
 						</ul>
 						</center>
 						<ul class="tran-button">
-							<li class="tran-button-sell" style="display:none;">
-								<div>
-									<font size="2" vertical-align="middle" onclick="stopTransaction();"></font>
+							<li class="tran-button-sell stop" style="display:none;" >
+								<div id="stopTransaction">
+									<font size="2" vertical-align="middle" ></font>
 								</div>
 							</li>
 							<!--<li class="tran-button-middle">
@@ -251,6 +251,9 @@
 				};
 				page++;
 				trans_flow('transEdite', params,'');
+				mui(".stop").on("tap","#stopTransaction",function(){
+					stopTransaction();
+				});
 			}
 
 			function getTransStatus(status) {
