@@ -40,6 +40,7 @@ mui.back = function() {
  */
 function pulldownRefresh() {
 	isDown = true;
+	mui('#pullrefresh').pullRefresh().refresh(true);
 	var params = {};
 	getDataFromServer(params, function(data) {
 		var table = document.body.querySelector('.mui-table-view');
