@@ -515,7 +515,8 @@ var Api;
 			logisticscontact:baseUrl() + '/logistics/index/setAccess',
 			logisticssendmail: baseUrl() + '/logistics/index/sendMailtoLCO/',
 			shareurl: baseUrl() + '/share.php?wxparms=',
-			shareid: baseUrl() + '/commodity/Encryption/'
+			shareid: baseUrl() + '/commodity/Encryption/',
+			delete_pro: baseUrl() + '/commodity/release/delete/',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -772,7 +773,7 @@ var Api;
 				break;
 			case '2003':
 				err_msg = TextMessage.errorCode_2003;
-				mui.alert(err_msg, {
+				mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'
 				});
@@ -1292,6 +1293,11 @@ var Repository;
 		}
 		Commodity.logisticssendmail = logisticssendmail;
 		
+		function delete_pro(params, callback) {
+			return Api.call(Api.url.Commodity.delete_pro, params, callback);
+		}
+		Commodity.delete_pro = delete_pro;
+		
 		function shareid(params, callback) {
 			return Api.call(Api.url.Commodity.shareid, params, callback);
 		}
@@ -1624,6 +1630,13 @@ var TextMessage;
 	TextMessage.timeouttext = language ? "接続がタイムアウトしました。" : "请求服务器超时,请稍后重试";
 	TextMessage.timeouttext2 = language ? "しばらくしてから再度お試しください。" : "";
 	TextMessage.intralerror	= language ? "通信エラーが発生しました。" : "服务器出错啦,请稍后重试";
+	TextMessage.tranStatusclose= language ? "未公開" : "未公开";
+	TextMessage.commodity_login= language ? "商品登録" : "商品发布";
+	TextMessage.commodity_luo= language ? "出品を一旦停止する" : "落品";
+	TextMessage.commodity_againlogin= language ? "出品を再開する" : "再出品";
+	TextMessage.comoditylogin_success= language ? "出品しました。" : "出品成功";
+	TextMessage.luopin_success= language ? "落品しました。" : "落品成功";
+	TextMessage.delete_success= language ? "削除しました。" : "删除成功";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
@@ -1775,4 +1788,19 @@ function HTMLEncode(html) {
 	var output = temp.innerHTML;
 	temp = null;
 	return output;
+}
+//iimgurl
+function thumbnail(imgurl){
+	var imgurlarr=imgurl.split("/");
+	var imgurl0="";
+	//console.log(imgsarr[0]);
+	for(var m=0;m<imgurlarr.length;m++){
+		//console.log(m+":"+imgurlarr[m]);
+		if(m<=8){
+			imgurl0+=imgurlarr[m]+"/";
+		}else{
+			imgurl0+="thumbnail/"+imgurlarr[9];
+		}
+	}
+	return imgurl0;
 }
