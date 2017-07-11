@@ -172,7 +172,7 @@
 					var ucommodityobj = JSON.stringify(commodityarr[i]);
 					var ucommodityinfo = $.parseJSON(ucommodityobj);
 					var commodityid = ucommodityinfo.commodity_id;
-					var comdityimage = thumbnail(ucommodityinfo.commodity_photo_url);
+					var comdityimage = ucommodityinfo.commodity_thu_photo_url;
 					var realwidth=ucommodityinfo.comm_img_width;
 					var realheight=ucommodityinfo.comm_img_height;
 					var leftpx=0;

@@ -96,7 +96,7 @@ var JSLocale = {
 	"ticknumber":"チケット数",
 	"userinforbutntext":"プロフィール編集",
 	"userpointtext":"ポイント",
-	"onshowingtext":"出品中アイテム",
+	"onshowingtext":"出品アイテム",
 	"praiseprotext":"いいねしたアイテム",
 	"favoriteprotext":"気になる",
 	"uinfousername":"ユーザー名",
@@ -126,7 +126,7 @@ var JSLocale = {
 	"requesttitle":"リクエスト",
 	"requesthistory":"取引履歴",
 	"requestedpro":"リクエストされた",
-	"requestpro":"リエストした",
+	"requestpro":"リクエストした",
 	//setting page
 	"setting":"設定",
 	"pointbuytext":"ポイント購入",
