@@ -572,7 +572,7 @@
 			for(var ex=0; ex<exhibit_commdata.length;ex++){
 				var k = ex + 1 * 1;
 				var commexid=exhibit_commdata[ex].commodity_id;
-				var commeximg_url=thumbnail(exhibit_commdata[ex].img_url);
+				var commeximg_url=exhibit_commdata[ex].img_thu_url;
 				var realwidth=exhibit_commdata[ex].comm_img_width;
 				var realheight=exhibit_commdata[ex].comm_img_height;
 				var commstatus=exhibit_commdata[ex].status;
@@ -628,7 +628,7 @@
 			for(var pi=0; pi<praise_commdata.length;pi++){
 				var ki = pi + 1 * 1;
 				var praisepid=praise_commdata[pi].commodity_id;
-				var praiseimg_url=praise_commdata[pi].img_url;
+				var praiseimg_url=praise_commdata[pi].img_thu_url;
 				var realwidthpra=praise_commdata[pi].comm_img_width;
 				var realheightpra=praise_commdata[pi].comm_img_height;
 				var oribipra=realheightpra/realwidthpra;

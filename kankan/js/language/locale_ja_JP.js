@@ -96,7 +96,7 @@ var JSLocale = {
 	"ticknumber":"チケット数",
 	"userinforbutntext":"プロフィール編集",
 	"userpointtext":"ポイント",
-	"onshowingtext":"出品中アイテム",
+	"onshowingtext":"出品アイテム",
 	"praiseprotext":"いいねしたアイテム",
 	"favoriteprotext":"気になる",
 	"uinfousername":"ユーザー名",
