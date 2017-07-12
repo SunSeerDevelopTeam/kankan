@@ -159,7 +159,7 @@ function compressImg(path) {
 				uploadimage(target);
 			},
 			function(error) {
-				alert("Compress error!" + error.message);
+				console.log("Compress error!" + error.message);
 			});
 		}
 	};
@@ -177,7 +177,7 @@ function uploadimage(path) {
 		method: "post"
 	}, function(t, status) {
 		if(status == 200) {
-			console.log("upload success:" + t.responseText);
+			//console.log("upload success:" + t.responseText);
 			console.log("upload success!");
 			Processing(t.responseText);
 			wt.close();

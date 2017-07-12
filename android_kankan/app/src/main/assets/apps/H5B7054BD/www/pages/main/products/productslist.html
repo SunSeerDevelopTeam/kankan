@@ -23,7 +23,7 @@
 		</div>
 		<div class="mui-content ka_mainbox" style="display: none;">
 		<div id="pullrefresh" class="mui-scroll-wrapper">
-			<div class="mui-scroll" style="margin-top: 1.1em;">
+			<div class="mui-scroll" style="padding-top: 1.1em;">
 				<ul class="mui-table-view" >
 					<li class="mui-table-view-cell">
 						<div class="ka_userbox">
@@ -181,20 +181,21 @@
 					var realheight=ucommodityinfo.comm_img_height;
 					var leftpx=0;
 					var oribi=realheight/realwidth;
-					var showwidth=130/oribi;
-					var cha1=showwidth-imgwidth;
+					var showwidth=imgwidth/oribi;
+					var showheight=oribi*imgwidth;
+					var cha1=showheight-imgwidth;
 					if(cha1>0){
-						leftpx=cha1/2;
+						toppx=cha1/2;
 					}else{
-						leftpx=0;
+						toppx=0;
 					}
 					if(comdityimage==""){
 						comdityimage="./../../images/nopic.jpg";
 					}
 					var html = new Util.StringBuilder();
-					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail ka_imgoption2">')
+					html.append('<li class="mui-table-view-cell mui-media mui-col-xs-4 detail ka_imgoption2" style="height:'+imgwidth+'px;over-flow:hidden;">')
 						.appendFormat('<a href="detail.html" id="{0}">', commodityid)
-						.appendFormat('<img class="mui-media-object" src="{0}" style="height: 130px;width:auto;vertical-align: middle;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
+						.appendFormat('<img class="mui-media-object" src="{0}" style="width:100%;vertical-align: middle;margin-top:-'+toppx+'px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'">', comdityimage)
 						.append('</a>')
 						.append('</li>');
 					$(".comditylists").append(html.toString());

@@ -222,12 +222,14 @@
 				if(chatMsg == '') {
 					mui.toast(TextMessage.transContact);
 					$("#msg").focus();
+					return;
 				} else {
 					var params = {
 						"message": chatMsg,
 						"transid": trans_id
 					};
 					trans_flow('transConversation', params,'',"one");
+					$("#msg").blur();
 					$("#msg").val('');
 				}
 			}
@@ -271,9 +273,6 @@
 							autoShow: false
 						},
 					});
-				});
-				mui(".ka_sendmesbox").on("tap",".ka_sendbutton",function(){
-					submitChat();
 				});
 			}
 
