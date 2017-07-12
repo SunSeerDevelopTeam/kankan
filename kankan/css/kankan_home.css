@@ -375,8 +375,8 @@ body .mui-table-view-cell.mui-active{
 	color:#007AFF; border: 1px #FFFFFF solid;
 }
 .ka_imgoption2 {
-	height: 130px;
-	line-height: 130px;
+	/*height: 130px;
+	line-height: 130px;*/
 	vertical-align: middle;
 	display: inline;
 	overflow: hidden;

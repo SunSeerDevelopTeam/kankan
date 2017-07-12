@@ -32,8 +32,7 @@
 			mui.init();
 			$(function(){
 			var language=navigator.language;
-			console.log("lan"+language);
-			if(language=="zh-CN" || language=="zh-TW" || language=="zh-HK"){
+			if(language=="zh-CN" || language=="zh-cn" || language=="zh-tw" || language=="zh-hk" || language=="zh-TW" || language=="zh-HK"){
 				$("#commerciallaw_jptext").hide();
 				$("#commerciallaw_zhtext").show();
 			}else{
