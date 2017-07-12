@@ -97,8 +97,12 @@
 //							callback: pulldownRefresh
 //						},
 						up: {
-							contentrefresh: TextMessage.update,
-							callback: pullupRefresh
+							contentrefresh:TextMessage.update,
+							contentinit: TextMessage.upmore,
+							contentdown: TextMessage.upmore,
+							contentnomore: TextMessage.nomore,
+							callback: pullupRefresh,
+							
 						}
 					}
 	//				beforeback: function() {

@@ -40,6 +40,7 @@ var JSLocale = {
 	/*user login page message end*/
 	/*detail page*/
 	"det_spdescription": "商品说明",
+	"det_information":"商品信息",
 	"det_spahare": "分享至",
 	"det_goodconcel": "取消",
 	"det_goods": "赞",
@@ -77,7 +78,7 @@ var JSLocale = {
 	"commodity_name": "商品名和说明",
 	"commodity_namelength": "商品名（40字以内）",
 	"commodity_descriptionlength": "商品说明（1000字以内）",
-	"commodity_detail": "商品详情",
+	"commodity_detail": "商品信息",
 	"commodity_sorts": "商品种类",
 	"commodity_must": "必填",
 	"commodity_stuates": "商品状态",

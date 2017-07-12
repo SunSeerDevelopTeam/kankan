@@ -138,10 +138,10 @@
 		var self = plus.webview.currentWebview();
 		id = self.eid;
 		//var id = event.detail.id;
-		$(".z_addImg").remove();
-		$(".mui-action-back").show();
-		document.getElementById('codid').value=id;
 		if(id){
+			$(".z_addImg").remove();
+			$(".mui-action-back").show();
+			document.getElementById('codid').value=id;
 			$("#delete").show();
 			getcomdinfo(id);
 		}
@@ -456,7 +456,7 @@
 										url: "../../login/login.html"
 									});
 								}
-								//Api.callback_ng(data);
+								Api.callback_ng(data);
 							}
 				});
 			}
@@ -627,9 +627,9 @@ function publishs() {
 	if(price!=""){
 		params.price=price;
 	}
-	var commodity_id=$("#codid").val();
-	if(commodity_id!=""){
-		params.commodity_id=commodity_id;
+	if(id){
+		var commodity_ids=$("#codid").val();
+		params.commodity_id=commodity_ids;
 	}
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
@@ -638,7 +638,7 @@ function publishs() {
 				duration: 'long',
 				type: 'div'
 			});
-			if(commodity_id==""){
+			if(!id){
 				location.reload();
 				mui.plusReady(function() {
 					var mainpage=plus.webview.getLaunchWebview();
@@ -684,7 +684,7 @@ function publishs() {
 				});
 			}
 			Api.callback_ng(data);
-			location.reload();
+			//location.reload();
 			//mui.back();
 			console.log("other error code:" + data);
 			

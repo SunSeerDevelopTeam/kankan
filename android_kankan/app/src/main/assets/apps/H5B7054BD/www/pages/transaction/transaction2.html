@@ -100,9 +100,9 @@
 						</ul>
 						</center>
 						<ul class="tran-button">
-							<li class="tran-button-sell" style="display:none;">
-								<div>
-									<font size="2" vertical-align="middle" onclick="stopTransaction();"></font>
+							<li class="tran-button-sell stop" style="display:none;" >
+								<div id="stopTransaction">
+									<font size="2" vertical-align="middle" ></font>
 								</div>
 							</li>
 							<!--<li class="tran-button-middle">
@@ -140,7 +140,7 @@
 						</ul>-->
 						<ul class="tran-distribution" style="display:none;">
 							<li class="tran-distribution-law logisticli">
-								<div class="tran-distribution-law-detail">
+								<div class="tran-distribution-law-detail specialbus">
 									<a href="../setting/specialbus.html">
 										<font size="2" class="lang" color="999999" data-locale="trans_criterion" vertical-align="middle"></font>
 									</a>
@@ -251,6 +251,30 @@
 				};
 				page++;
 				trans_flow('transEdite', params,'');
+				mui(".stop").on("tap","#stopTransaction",function(){
+					stopTransaction();
+				});
+				mui(".logistica").on("tap","div",function(){
+					mui.openWindow({
+						id: 'logisticslist2',
+						url:"../main/logisticslist2.html",
+						waiting: {
+							autoShow: false
+						},
+					});
+				});
+				mui(".specialbus").on("tap","a",function(){
+					mui.openWindow({
+						id: 'specialbus',
+						url:"../setting/specialbus.html",
+						waiting: {
+							autoShow: false
+						},
+					});
+				});
+				mui(".ka_sendmesbox").on("tap",".ka_sendbutton",function(){
+					submitChat();
+				});
 			}
 
 			function getTransStatus(status) {
