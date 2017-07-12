@@ -7,8 +7,8 @@
 	"id": "H5B7054BD",
 	"name": "kankan",
 	"version": {
-		"name": "0.0.20",
-		"code": "20"
+		"name": "0.0.21",
+		"code": "21"
 	},
 	"description": "",
 	"icons": {
@@ -474,7 +474,8 @@
 					"pages/main/category/tab-top-subpage-5.html",
 					"pages/main/news.html",
 					"pages/main/category/tab-top-subpage-6.html",
-					"pages/main/category/tab-top-subpage-7.html"
+					"pages/main/category/tab-top-subpage-7.html",
+					"pages/main/category/tab-top-subpage-14.html"
 				],
 				"priority": 0
 			},
@@ -490,7 +491,9 @@
 					"js/language/locale_ja_JP.js",
 					"js/common.js",
 					"js/language/locale_zh_CN.js",
-					"fonts/mui-icons-extra.ttf"
+					"fonts/mui-icons-extra.ttf",
+					"css/iconfontwuliu.css",
+					"fonts/iconfont.woff"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
@@ -539,7 +542,9 @@
 					"js/jquery-3.2.0.min.js",
 					"js/language.js",
 					"images/nopic.jpg",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js"
 				],
 				"refer": [
 					"pages/login/login.html",
@@ -905,7 +910,9 @@
 			},
 			"pages/main/category/tab-top-subpage-1.html": {
 				"resources": [
-					"pages/main/category/pullrefresh_sub_1.html"
+					"pages/main/category/pullrefresh_sub_1.html",
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -1039,6 +1046,13 @@
 			"pages/main/category/tab-top-subpage-7.html": {
 				"resources": [
 					"pages/main/category/pullrefresh_sub_7.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-14.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_14.html"
 				],
 				"refer": [],
 				"priority": 0
