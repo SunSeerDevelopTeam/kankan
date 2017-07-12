@@ -328,7 +328,7 @@ mui.plusReady(function() {
 			getDataFromServer(params, function(data) {
 				createListView(data);
 			});
-		}, 1000);
+		}, 100);
 	} else {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
