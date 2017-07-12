@@ -222,6 +222,7 @@
 				if(chatMsg == '') {
 					mui.toast(TextMessage.transContact);
 					$("#msg").focus();
+					return;
 				} else {
 					var params = {
 						"message": chatMsg,
@@ -272,9 +273,6 @@
 							autoShow: false
 						},
 					});
-				});
-				mui(".ka_sendmesbox").on("tap",".ka_sendbutton",function(){
-					submitChat();
 				});
 			}
 
