@@ -167,11 +167,13 @@
 		  function pullupRefresh(){
 		  	//mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
 		  	setTimeout(function(){
+		  		$(".mui-pull-caption").show();
 		  		getmessage(page);
 		  	},500);
 		  }   
 		  //down
 		  function downRefresh(){
+		  		mui('#pullrefresh').pullRefresh().refresh(true);
 		  		$("#OA_task_1").empty();
 		  		setTimeout(function(){
 		  			getmessage(0);

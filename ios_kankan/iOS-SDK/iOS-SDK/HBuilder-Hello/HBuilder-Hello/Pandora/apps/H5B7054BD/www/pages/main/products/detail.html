@@ -31,12 +31,12 @@
 			
 			.imgboxs {
 				width: 100%;
-				height: 320px;
+				/*height: 320px;*/
 				vertical-align: middle;
 				display: inline-block;
 				text-align: center;
 				overflow: hidden;
-				line-height: 320px;
+				/*line-height: 320px;*/
 			}
 		</style>
 	</head>
@@ -103,6 +103,18 @@
 					<div class="kankan_det_information" style="word-break:break-word;"></div>
 				</li>
 			</ul>
+			<h5 class="ka_h5backcolor lang comdinfo" data-locale="det_information"></h5>
+			<ul class="mui-table-view comdinfo">
+			        <li class="mui-table-view-cell">
+			            <div class="mui-pull-left ka_sorttext lang" data-locale="commodity_sorts"></div>
+			            <div class="mui-pull-left ka_sortvale" id="comd_sortvale"></div>
+			        </li>
+			       <li class="mui-table-view-cell">
+			            <div class="mui-pull-left ka_sorttext lang" data-locale="commodity_stuates"></div>
+			            <div class="mui-pull-left ka_sortvale" id="comd_stauteval"></div>
+			        </li>
+			    </ul>
+	    	
 			<!--share-->
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell kankan_det_description" id="share">
@@ -415,16 +427,30 @@
 			//message show
 			function messageshow(results) {
 				$(".mui-slider-indicator").empty();
+				var screenheight=parseInt($(window).height())*0.5;
 				var commodity = results.data;
 				var comdbasic = commodity.commodity_basic;
 				var userbasic = commodity.user_basic;
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail).replace(/\n/g,"<br />");
+				var comoditsort=comdbasic[0].catalog_detail+"&nbsp;<font color='#000000'>＞</font><br/>"+comdbasic[0].classify_detail;
+				var comdistate=comdbasic[0].state;
+				if(comdistate=="0"){
+					var comdistateval=TextMessage.prostaute0;
+				}else if(comdistate=="1"){
+					var comdistateval=TextMessage.prostaute1;
+				}else if(comdistate=="2"){
+					var comdistateval=TextMessage.prostaute2;
+				}else{
+					var comdistateval=TextMessage.prostaute3;
+				}
 				var comdityid = comdbasic[0].commodity_id;
 				var traslatestautes=comdbasic[0].status;
 				var buy_sell_flag = comdbasic[0].buy_sell_flag;
 				var myid=results.myid;
 				var tradeablenum = userbasic.user_comm_tradable_count;
+				$("#comd_stauteval").html(comdistateval);//state
+				$("#comd_sortvale").html(comoditsort);//sort
 				$("#myid").val(myid);
 				$("#comodityid").val(comdityid);
 				$("#comm_num").val(tradeablenum);
@@ -432,6 +458,9 @@
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
 				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
+				if(buy_sell_flag=="1"){
+					$(".comdinfo").hide();
+				}
 				if(traslatestautes=="0"){
 					$(".ka_buyway").show();
 					$("#traslateing").hide();
@@ -446,8 +475,8 @@
 				var la = imgsarr.length - 1 * 1;
 				if(imgsarr==""){
 					imgurl = "../../../images/nopic.jpg";
-					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center">';
-					htmlimg += '<img src="' + imgurl + '" style="max-height: 320px; width: auto;vertical-align:middle; onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center" style="height:'+screenheight+'px;line-height:'+screenheight+'px;">';
+					htmlimg += '<img src="' + imgurl + '" style="max-height: '+screenheight+'px; width: auto;vertical-align:middle; onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					htmlimg += '</div>';
 					var htmlfocus = '<div class="mui-indicator mui-active"></div>';
 					$(".mui-slider-indicator").append(htmlfocus);
@@ -463,10 +492,10 @@
 					var imgurl = imgsarr[i].url;
 					var realwidth=imgsarr[i].width;
 					var realheight=imgsarr[i].height;
-					if(realheight<320){
+					if(realheight<screenheight){
 						var biheight=realheight;
 					}else{
-						var biheight=320;
+						var biheight=screenheight;
 					}
 					var ribi=realwidth/realheight;
 					var showwidth=biheight*ribi;
@@ -478,13 +507,13 @@
 					}else{
 						//leftpx=0;
 						showwidth="auto";
-						var showheight="320px";
+						var showheight=screenheight+"px";
 					}
 					
 					if(imgsarr[i].url == "") {
 						imgurl = "../../../images/nopic.jpg";
 					}
-					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center">';
+					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center" style="height:'+screenheight+'px;line-height:'+screenheight+'px;">';
 					if(i>0){
 						htmlimg +='<div class="mui-icon mui-icon-back mui-pull-left Arrow leftarrow" onclick="goitem('+back+')"></div>';
 					}
@@ -542,6 +571,8 @@
 						$(".lanhk").show();
 					}
 				}
+				//recommend and concerned products image width
+				var recoimgheight=parseInt($(window).width())/4-16;
 				//buy way
 				var exchange = commodity.commodity_buy_way.exchange;
 				var business = commodity.commodity_buy_way.business;
@@ -580,13 +611,13 @@
 					var k = j + 1 * 1;
 					var recomendsobj1 = JSON.stringify(recomendsarrs[j]);
 					recomendsobj = $.parseJSON(recomendsobj1);
-					var recomdimg = thumbnail(recomendsobj.commodity_photo_url);
+					var recomdimg = recomendsobj.commodity_thu_photo_url;
 					var recomdid = recomendsobj.commodity_id;
 					var advflag = recomendsobj.is_ad;
 					if(j>=4){
 						recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						recomendhtml += '</a></li>';
 					}
 					var vall = k % 4;
@@ -603,7 +634,7 @@
 					if(j < 4) {
 						recomendaddfirsthtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendaddfirsthtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						recomendaddfirsthtml += '</a></li>';
 						$("#firstremmondul").html(recomendaddfirsthtml);
 					}
@@ -634,12 +665,12 @@
 					var m = l + 1 * 1;
 					var concernobj1 = JSON.stringify(concernarrs[l]);
 					concernsobj = $.parseJSON(concernobj1);
-					var concernimg = thumbnail(concernsobj.commodity_photo_url);
+					var concernimg = concernsobj.commodity_thu_photo_url;
 					var concernid = concernsobj.commodity_id;
 					if(l >= 4){
 						concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernhtml += '</a></li>';
 					}
 					var vallm = m % 4;
@@ -655,7 +686,7 @@
 					if(l < 4) {
 						concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="width: 95px;height: 81px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}

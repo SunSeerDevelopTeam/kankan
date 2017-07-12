@@ -318,6 +318,14 @@ body .mui-table-view-cell.mui-active{
 	font-size: 14px;
 	color: red;	
 }
+.ka_sorttext{
+	line-height: 1.5em;color:#6D6D72;font-size: 14px;width: 25%;
+}
+.ka_sortvale{
+	line-height: 1.5em;color: #333333;font-size: 14px;width: 75%;
+	text-align: left;
+	padding-left: 1em;
+}
 /***productlist page***/
 
 .ka_comlevnumber {
@@ -367,8 +375,8 @@ body .mui-table-view-cell.mui-active{
 	color:#007AFF; border: 1px #FFFFFF solid;
 }
 .ka_imgoption2 {
-	height: 130px;
-	line-height: 130px;
+	/*height: 130px;
+	line-height: 130px;*/
 	vertical-align: middle;
 	display: inline;
 	overflow: hidden;

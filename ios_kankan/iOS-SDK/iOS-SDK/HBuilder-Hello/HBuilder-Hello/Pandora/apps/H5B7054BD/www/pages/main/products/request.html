@@ -272,7 +272,7 @@
 							transpro=others[ot].trans.commodity[0];
 						}
 						var comm_name = HTMLDecode(transpro.comm_name);
-						var comm_img = thumbnail(transpro.comm_img);
+						var comm_img = transpro.comm_thu_img;
 						var trans_type = others[ot].trans.trans_type;
 						if(trans_type == "0") {
 							var trans_typetext = TextMessage.requireing;
@@ -332,7 +332,7 @@
 							}
 						}
 						var ocomm_name = otranspro.comm_name;
-						var ocomm_img = otranspro.comm_img;
+						var ocomm_img = otranspro.comm_thu_img;
 						if(otranspro.comm_img == "") {
 							var ocomm_img = "../../../images/nopic.jpg";
 						}
