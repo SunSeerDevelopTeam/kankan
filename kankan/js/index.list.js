@@ -40,6 +40,7 @@ mui.back = function() {
  */
 function pulldownRefresh() {
 	isDown = true;
+	mui('#pullrefresh').pullRefresh().refresh(true);
 	var params = {};
 	getDataFromServer(params, function(data) {
 		var table = document.body.querySelector('.mui-table-view');
@@ -327,7 +328,7 @@ mui.plusReady(function() {
 			getDataFromServer(params, function(data) {
 				createListView(data);
 			});
-		}, 1000);
+		}, 100);
 	} else {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}

@@ -103,6 +103,18 @@
 					<div class="kankan_det_information" style="word-break:break-word;"></div>
 				</li>
 			</ul>
+			<h5 class="ka_h5backcolor lang comdinfo" data-locale="det_information"></h5>
+			<ul class="mui-table-view comdinfo">
+			        <li class="mui-table-view-cell">
+			            <div class="mui-pull-left ka_sorttext lang" data-locale="commodity_sorts" style="padding-top: 7%;"></div>
+			            <div class="mui-pull-left ka_sortvale" id="comd_sortvale"></div>
+			        </li>
+			       <li class="mui-table-view-cell">
+			            <div class="mui-pull-left ka_sorttext lang" data-locale="commodity_stuates"></div>
+			            <div class="mui-pull-left ka_sortvale" id="comd_stauteval"></div>
+			        </li>
+			    </ul>
+	    	
 			<!--share-->
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell kankan_det_description" id="share">
@@ -420,11 +432,24 @@
 				var userbasic = commodity.user_basic;
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail).replace(/\n/g,"<br />");
+				var comoditsort=comdbasic[0].catalog_detail+"<br/><br/>"+comdbasic[0].classify_detail;
+				var comdistate=comdbasic[0].state;
+				if(comdistate=="0"){
+					var comdistateval=TextMessage.prostaute0;
+				}else if(comdistate=="1"){
+					var comdistateval=TextMessage.prostaute1;
+				}else if(comdistate=="2"){
+					var comdistateval=TextMessage.prostaute2;
+				}else{
+					var comdistateval=TextMessage.prostaute3;
+				}
 				var comdityid = comdbasic[0].commodity_id;
 				var traslatestautes=comdbasic[0].status;
 				var buy_sell_flag = comdbasic[0].buy_sell_flag;
 				var myid=results.myid;
 				var tradeablenum = userbasic.user_comm_tradable_count;
+				$("#comd_stauteval").html(comdistateval);//state
+				$("#comd_sortvale").html(comoditsort);//sort
 				$("#myid").val(myid);
 				$("#comodityid").val(comdityid);
 				$("#comm_num").val(tradeablenum);
@@ -432,6 +457,9 @@
 				$(".kankan_det_information").html(comdmesage); //message
 				$(".mui-title").html(comdname); //title
 				$(".kankan_zanbox").attr("id", comdityid); //praise comdity id
+				if(buy_sell_flag=="1"){
+					$(".comdinfo").hide();
+				}
 				if(traslatestautes=="0"){
 					$(".ka_buyway").show();
 					$("#traslateing").hide();
@@ -580,7 +608,7 @@
 					var k = j + 1 * 1;
 					var recomendsobj1 = JSON.stringify(recomendsarrs[j]);
 					recomendsobj = $.parseJSON(recomendsobj1);
-					var recomdimg = thumbnail(recomendsobj.commodity_photo_url);
+					var recomdimg = recomendsobj.commodity_thu_photo_url;
 					var recomdid = recomendsobj.commodity_id;
 					var advflag = recomendsobj.is_ad;
 					if(j>=4){
@@ -634,7 +662,7 @@
 					var m = l + 1 * 1;
 					var concernobj1 = JSON.stringify(concernarrs[l]);
 					concernsobj = $.parseJSON(concernobj1);
-					var concernimg = thumbnail(concernsobj.commodity_photo_url);
+					var concernimg = concernsobj.commodity_thu_photo_url;
 					var concernid = concernsobj.commodity_id;
 					if(l >= 4){
 						concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';

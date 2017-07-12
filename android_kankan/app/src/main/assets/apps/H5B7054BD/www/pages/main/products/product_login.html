@@ -92,13 +92,13 @@
 				<div class="ka_prologbox">
 					<h5 class="ka_proloh5 lang" data-locale="commodity_buyway"></h5>
 					<ul class="mui-table-view">
-						<li class="mui-table-view-cell" style="text-align:center;margin-left:3%;">
+						<li class="mui-table-view-cell" style="text-align:center;margin-left:3%; margin-right: 5%;">
 							<div class="ka_userbox">
-								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_switch" id="exchbuybtn" style="width: 45%;"></div>
+								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_switch" id="exchbuybtn" style="display: none;"></div>
 								<input type="hidden" name="exchange" id="exchange" value="0" />
 								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_pointbuy" id="pointbuybtn" style="display: none;"></div>
 								<input type="hidden" name="business" id="business" value="0" />
-								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free" id="freebuybtn" style="width: 45%;"></div>
+								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free" id="freebuybtn" style="width: 100%;"></div>
 								<input type="hidden" name="gratis" id="gratis" value="0" />
 							</div>
 						</li>
@@ -138,11 +138,13 @@
 		var self = plus.webview.currentWebview();
 		id = self.eid;
 		//var id = event.detail.id;
-		$(".z_addImg").remove();
-		$(".mui-action-back").show();
-		$("#delete").show();
-		document.getElementById('codid').value=id;
-		getcomdinfo(id);
+		if(id){
+			$(".z_addImg").remove();
+			$(".mui-action-back").show();
+			document.getElementById('codid').value=id;
+			$("#delete").show();
+			getcomdinfo(id);
+		}
 	});
 	window.addEventListener("refresh", function(event) {
 		location.reload();
@@ -392,6 +394,7 @@
 						var selfs = plus.webview.currentWebview();
 						var picksortid = selfs.eid;
 						//var picksortid = event.detail.id;
+					if(picksortid){
 						var param4 = {
 							"commodity_id": picksortid
 						}
@@ -453,9 +456,10 @@
 										url: "../../login/login.html"
 									});
 								}
-								//Api.callback_ng(data);
+								Api.callback_ng(data);
 							}
 				});
+			}
 			//});
 			//category click picker
 			var showCatePickerButton = doc.getElementById('showCityPicker');
@@ -623,9 +627,9 @@ function publishs() {
 	if(price!=""){
 		params.price=price;
 	}
-	var commodity_id=$("#codid").val();
-	if(commodity_id!=""){
-		params.commodity_id=commodity_id;
+	if(id){
+		var commodity_ids=$("#codid").val();
+		params.commodity_id=commodity_ids;
 	}
 	Repository.Commodity.Commoditypublish(params, {
 		ok: function(data) {
@@ -634,7 +638,7 @@ function publishs() {
 				duration: 'long',
 				type: 'div'
 			});
-			if(commodity_id==""){
+			if(!id){
 				location.reload();
 				mui.plusReady(function() {
 					var mainpage=plus.webview.getLaunchWebview();
@@ -680,7 +684,7 @@ function publishs() {
 				});
 			}
 			Api.callback_ng(data);
-			location.reload();
+			//location.reload();
 			//mui.back();
 			console.log("other error code:" + data);
 			

@@ -39,7 +39,8 @@ var JSLocale = {
 	"forget_password_msg": "カンカンで登録しているメールアドレスを入力してください。登録されているメールアドレスに新しいパスワード情報のメールを送信します。",
 	/*user login page message end*/
 	/*detail page*/
-	"det_spdescription": "商品詳細 ",
+	"det_spdescription": "商品の説明 ",
+	"det_information":"商品の情報",
 	"det_spahare": "シェア",
 	"det_goodconcel": "キャンセル",
 	"det_goods": "いいね!",
@@ -77,7 +78,7 @@ var JSLocale = {
 	"commodity_name": "商品名と商品詳細",
 	"commodity_namelength": "商品名（必須：40文字まで）",
 	"commodity_descriptionlength": "商品説明(必須：300文字まで)",
-	"commodity_detail": "商品詳細",
+	"commodity_detail": "商品の情報",
 	"commodity_sorts": "カテゴリー",
 	"commodity_must": "必須",
 	"commodity_stuates": "商品状態",
@@ -96,7 +97,7 @@ var JSLocale = {
 	"ticknumber":"チケット数",
 	"userinforbutntext":"プロフィール編集",
 	"userpointtext":"ポイント",
-	"onshowingtext":"出品中アイテム",
+	"onshowingtext":"出品アイテム",
 	"praiseprotext":"いいねしたアイテム",
 	"favoriteprotext":"気になる",
 	"uinfousername":"ユーザー名",
@@ -126,7 +127,7 @@ var JSLocale = {
 	"requesttitle":"リクエスト",
 	"requesthistory":"取引履歴",
 	"requestedpro":"リクエストされた",
-	"requestpro":"リエストした",
+	"requestpro":"リクエストした",
 	//setting page
 	"setting":"設定",
 	"pointbuytext":"ポイント購入",
