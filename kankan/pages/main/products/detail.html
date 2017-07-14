@@ -390,7 +390,7 @@
 						Log.d("success");
 						messageshow(data);
 						clickprocomment();
-						//clickwarn();
+						clickwarn();
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -457,7 +457,7 @@
 				Repository.Commodity.reportCommodity(paramport, {
 					ok: function(data) {
 						Log.d("success");
-						mui.toast(TextMessage.test, {
+						mui.toast(TextMessage.comodityreport_success, {
 							duration: 'long',
 							type: 'div'
 						});
@@ -476,6 +476,18 @@
 							mui.openWindow({
 								id: 'login',
 								url: "../../login/login.html"
+							});
+						}
+						if(data == "2004") {
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+						if(data == "3022") {
+							mui.toast(TextMessage.comodityrepot_repeat, {
+								duration: 'long',
+								type: 'div'
 							});
 						}
 					},
@@ -609,7 +621,7 @@
 				var ucomentnum = commodity.user_basic.user_comment_count;
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
-				var concernedtitle=uname+TextMessage.det_concerneds;
+				var concernedtitle=TextMessage.det_concerneds;
 				$(".concerned").html(concernedtitle);
 				$("#userid").val(userid);
 				$(".ka_authorname b").html(uname);

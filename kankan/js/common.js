@@ -517,7 +517,7 @@ var Api;
 			shareurl: baseUrl() + '/share.php?wxparms=',
 			shareid: baseUrl() + '/commodity/Encryption/',
 			delete_pro: baseUrl() + '/commodity/release/delete/',
-			reportCommodity: baseUrl() + '/commodity/reportCommodity/',
+			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -1587,7 +1587,7 @@ var TextMessage;
 	TextMessage.requestStop = language ? "取引を中止する" : "请求终止";
 	TextMessage.transSuccess = language ? "取引成立" : "交易成功";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
-	TextMessage.transContact = language ? "入力してください" : "交谈内容不能未空";
+	TextMessage.transContact = language ? "入力してください" : "交谈内容不能为空";
 	TextMessage.tranStatusRequest = language ? "取引中" : "请求中";
 	TextMessage.tranStatusDeal = language ? "取引成立" : "交易成立";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
@@ -1609,7 +1609,7 @@ var TextMessage;
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証番号エラー" : "验证码错误";
-	TextMessage.det_concerneds = language ? "さんが気になる商品" : "关注商品";
+	TextMessage.det_concerneds = language ? "出品者が気になる商品" : "出品者关注商品";
 	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
@@ -1644,7 +1644,10 @@ var TextMessage;
 	TextMessage.luopin_success= language ? "落品しました。" : "落品成功";
 	TextMessage.delete_success= language ? "削除しました。" : "删除成功";
 	TextMessage.complaintpro = language ? "不適切な商品の報告" : "举报此商品";
-	TextMessage.comoditylogin_success= language ? "報告しました。" : "举报成功";
+	TextMessage.comodityreport_success= language ? "報告しました。" : "举报成功";
+	TextMessage.comodityrepot_repeat= language ? "この商品はすでに報告済みです" : "请勿重复举报";
+	TextMessage.Compresserror = language ? "圧縮失敗" : "压缩失败";
+	TextMessage.Compresserror_si = language ? "ファイルが存在しません" : "文件不存在";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
