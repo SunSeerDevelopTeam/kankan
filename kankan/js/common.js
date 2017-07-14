@@ -1637,6 +1637,8 @@ var TextMessage;
 	TextMessage.comoditylogin_success= language ? "出品しました。" : "出品成功";
 	TextMessage.luopin_success= language ? "落品しました。" : "落品成功";
 	TextMessage.delete_success= language ? "削除しました。" : "删除成功";
+	TextMessage.search_result = language ? "検索結果" : "检索结果";
+	TextMessage.may_not_click = language ? "三分間後、発送ボタンをご押してください。" : "3分钟之内不可点击";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
