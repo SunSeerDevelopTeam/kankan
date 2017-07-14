@@ -517,6 +517,7 @@ var Api;
 			shareurl: baseUrl() + '/share.php?wxparms=',
 			shareid: baseUrl() + '/commodity/Encryption/',
 			delete_pro: baseUrl() + '/commodity/release/delete/',
+			reportCommodity: baseUrl() + '/commodity/reportCommodity/',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -1298,6 +1299,11 @@ var Repository;
 		}
 		Commodity.delete_pro = delete_pro;
 		
+		function reportCommodity(params, callback) {
+			return Api.call(Api.url.Commodity.reportCommodity, params, callback);
+		}
+		Commodity.reportCommodity = reportCommodity;
+		
 		function shareid(params, callback) {
 			return Api.call(Api.url.Commodity.shareid, params, callback);
 		}
@@ -1637,6 +1643,8 @@ var TextMessage;
 	TextMessage.comoditylogin_success= language ? "出品しました。" : "出品成功";
 	TextMessage.luopin_success= language ? "落品しました。" : "落品成功";
 	TextMessage.delete_success= language ? "削除しました。" : "删除成功";
+	TextMessage.complaintpro = language ? "不適切な商品の報告" : "举报此商品";
+	TextMessage.comoditylogin_success= language ? "報告しました。" : "举报成功";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
