@@ -141,10 +141,10 @@ function compressImg(path) {
 		}
 		function zipcom(presswidth,pressheight,quality){
 			plus.zip.compressImage({
-				src: path,
-				dst: "_doc/" + currenttime + ".jpg",
+				src:path,
+				dst: "_downloads/" + currenttime + ".jpg",
 				quality: quality,
-				overwrite: true,
+				overwrite: false,
 				format: "jpg",
 				width: presswidth,
 				height: pressheight
@@ -159,6 +159,18 @@ function compressImg(path) {
 				uploadimage(target);
 			},
 			function(error) {
+				if(error.code=="-4"){
+					mui.toast(TextMessage.Compresserror_si, {
+						duration: 'long',
+						type: 'div'
+					});
+				}else{
+					mui.toast(TextMessage.Compresserror, {
+						duration: 'long',
+						type: 'div'
+					});
+				}
+				console.log("errorcode:"+error.code);
 				console.log("Compress error!" + error.message);
 			});
 		}

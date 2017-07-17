@@ -239,8 +239,11 @@ body .mui-table-view-cell.mui-active{
 
 .kankan_det_comment {
 	margin-top: 1em;
+	margin-right: 1.5em;
 }
-
+.ka_warn{
+	margin-right: -1.5em;margin-top: -1em;font-size: 1.5em;
+}
 .kankan_det_comment p {
 	margin-left: 2em;
 	margin-top: -1.7em;

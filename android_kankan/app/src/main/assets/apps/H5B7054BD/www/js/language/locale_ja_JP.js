@@ -180,7 +180,7 @@ var JSLocale = {
 	"category_top_14":"その他",
 	"quesreset":"リセット",
 	"nameplocder":"ユーザー名",
-	"networkerror":"通信エラーが発生しました。しばらくしてからお試しください。",
+	"networkerror":"通信エラーが発生しました。通信環境を確認し、リロードしてください。",
 	"networkerrordetail":"通信エラーが発生しました、ここをクリックし、もう一度試してみてください。",
 	"deletebut":"削除",
 }
