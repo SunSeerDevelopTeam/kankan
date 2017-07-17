@@ -174,13 +174,6 @@ function createListView(data) {
 	if(Validator.isEmpty(table)) {
 		return;
 	}
-	/**
-	if (arguments[1] === "search") {
-		var searchResultTips = "<div class='no-data-tips'><p>你好</p></div>";
-		table.innerHTML = searchResultTips;
-		return;
-	}
-	**/
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
 		var htmlText = "<div class='no-data-tips'><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_1 + "</div><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_2 + "</div><br/></div>";
