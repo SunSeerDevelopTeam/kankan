@@ -8,6 +8,7 @@ mui.init({
 	pullRefresh: {
 		container: '#pullrefresh',
 		down: {
+			auto: true,
 			callback: pulldownRefresh,
 			contentinit: TextMessage.pull_down,
 			contentdown: "",
@@ -121,10 +122,15 @@ function getDataFromServer(params, callback) {
 				savePageInfo(data.data.pages);
 			},
 			ng: function(statuscode) {
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				if (isDown) {
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
+				} else {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+				}
 			},
 			error: function() {
+				var message = arguments[0].toString();
+				console.log("message is : " + message);
 				if(isDown) {
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
 				} else {
@@ -343,14 +349,7 @@ mui.plusReady(function() {
 			url: '../main/products/detail.html'
 		});
 	}
-	if(mui('#pullrefresh').length != 0) {
-		var params = {};
-		setTimeout(function() {
-			getDataFromServer(params, function(data) {
-				createListView(data);
-			});
-		}, 100);
-	} else {
+	if(mui('#pullrefresh').length === 0) {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
 })
