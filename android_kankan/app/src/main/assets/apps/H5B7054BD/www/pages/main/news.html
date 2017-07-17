@@ -194,6 +194,7 @@
 					ok: function(data) {
 						console.log(data);
 						showmessage(data);
+						clickquesition();
 						$("#pullrefresh").attr("style","margin-top:-1.1em;");
 						//mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
 						$(".deletenewstext").html(TextMessage.deletenewstext);
@@ -207,6 +208,14 @@
 						$(".mui-scroll").hide();
 						$("#reloadpage").show();
 					}
+				});
+			});
+		}
+		function clickquesition(){
+			mui("#OA_task_1").on("tap",".go_complaint",function(e){
+				mui.openWindow({
+					id:"question",
+					url:"../setting/question.html"
 				});
 			});
 		}

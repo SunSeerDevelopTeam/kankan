@@ -9,6 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../../css/iconmyfont.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
 		<style>
 			.Arrow {
@@ -90,8 +91,8 @@
 								<font color="#000000" size="3" id="commentsnum"></font>
 							</P>
 						</a>
+						<span class="mui-icon iconfont icon-tousu mui-pull-right ka_warn" ></span>
 						<input type="hidden" name="comodityid" id="comodityid" value="" />
-
 					</div>
 
 					<div class="kankan_det_goodsnum" id="zanshu"></div>
@@ -389,6 +390,7 @@
 						Log.d("success");
 						messageshow(data);
 						clickprocomment();
+						clickwarn();
 					},
 					ng: function(data) {
 						Log.d(data);
@@ -422,6 +424,78 @@
 								"comid": cid
 							}
 					});
+				});
+			}
+			function clickwarn(){
+				mui('.kankan_det_comment').on("tap",".ka_warn",function(e){
+					if(mui.os.plus){
+						var a = [{
+							title:TextMessage.complaintpro
+						}];
+						plus.nativeUI.actionSheet({
+							title: TextMessage.sharetitle,
+							cancel: TextMessage.cancel,
+							buttons: a
+						}, function(b) {
+							switch (b.index) {
+								case 1:
+									complaint();
+									break;
+								default:
+									break
+							}
+						})	
+					}
+				});
+			}
+			//complaint
+			function complaint(){
+				var comodid=$("#comodityid").val();
+				var paramport={
+					"commodity_id":comodid,
+				}
+				Repository.Commodity.reportCommodity(paramport, {
+					ok: function(data) {
+						Log.d("success");
+						mui.toast(TextMessage.comodityreport_success, {
+							duration: 'long',
+							type: 'div'
+						});
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "2001") {
+							$("#loading").show();
+							$(".mui-content").hide();
+						}
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url: "../../login/login.html"
+							});
+						}
+						if(data == "2004") {
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+						if(data == "3022") {
+							mui.toast(TextMessage.comodityrepot_repeat, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+					},
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
+						$(".mui-content").hide();
+						$("#reloadpage").show();
+					}
 				});
 			}
 			//message show
@@ -547,7 +621,7 @@
 				var ucomentnum = commodity.user_basic.user_comment_count;
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
-				var concernedtitle=uname+TextMessage.det_concerneds;
+				var concernedtitle=TextMessage.det_concerneds;
 				$(".concerned").html(concernedtitle);
 				$("#userid").val(userid);
 				$(".ka_authorname b").html(uname);
