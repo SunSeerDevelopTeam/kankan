@@ -113,7 +113,7 @@ function getDataFromServer(params, callback) {
 		} else if(cid != 0) {
 			params.catalog = cid;
 		}
-
+		params.max = 14;
 		Repository.Commodity.commodityList(params, {
 			ok: function(data) {
 				callback(data);
