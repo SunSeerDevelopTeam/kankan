@@ -260,10 +260,11 @@
 	<script>
 		mui.init({
 			swipeBack: false,
-			preloadPages: [{
-					id: 'commentlist.html',
-					url: '../products/commentlist.html'
-				},
+			preloadPages: [
+//			{
+//					id: 'commentlist.html',
+//					url: '../products/commentlist.html'
+//				},
 				{
 					id: 'detail.html',
 					url: '../products/detail.html'
@@ -472,15 +473,19 @@
 		function clickusercomment(ueid){
 			var commentPage = null;
 			mui(".commentlists").on("tap","li",function(){
-				var ucid = ueid;
-						if(!commentPage) {
-							commentPage = plus.webview.getWebviewById('commentlist.html');
-						}
-						mui.fire(commentPage, 'ucid', {
-							id: ucid
-						});
+					var ucid = ueid;
+//						if(!commentPage) {
+//							commentPage = plus.webview.getWebviewById('commentlist.html');
+//						}
+//						mui.fire(commentPage, 'ucid', {
+//							id: ucid
+//						});
 						mui.openWindow({
-							id: 'commentlist.html'
+							id: 'commentlist',
+							url: '../products/commentlist.html',
+							extras:{
+								ucid:ucid
+							}
 						});
 			});
 		}
@@ -608,7 +613,7 @@
 					
 				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
-				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppx+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;height:'+imgwidth+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
 				var yunum=k%6;
@@ -647,7 +652,7 @@
 				}
 				praise_html+='<li class="user-goods-grid detail">';
 				praise_html+='<a id="'+praisepid+'" href="#">';
-				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppxpra+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;height:'+imgwidth+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				praise_html+='</a>';
 				praise_html+='</li>';
 				var kiunum=ki%6;
