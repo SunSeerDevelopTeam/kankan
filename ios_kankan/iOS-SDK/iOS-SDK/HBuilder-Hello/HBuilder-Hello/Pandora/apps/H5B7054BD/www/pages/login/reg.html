@@ -218,7 +218,12 @@
 					var sendVCodeBtn = doc.getElementById('send-verification-code');
 					var canClick = true;
 					sendVCodeBtn.addEventListener('tap', function(event) {
-						if(!canClick) return;
+						if(!canClick) {
+							$("#send-verification-code").removeClass("mui-btn-success");
+							$("#send-verification-code").addClass("mui-btn-grey");
+							plus.nativeUI.toast(TextMessage.may_not_click);
+							return;
+						}
 						console.log("click sendVCodeBtn");
 						canClick = false;
 						var email = doc.getElementById('email').value.trim();
@@ -278,14 +283,19 @@
 									duration: 'long',
 									type: 'div'
 								})
+								$("#send-verification-code").removeClass("mui-btn-success");
+								$("#send-verification-code").addClass("mui-btn-grey");
 								var i = 0;
 								var updateText = setInterval(function() {
 									i++;
-									sendVCodeBtn.innerText = TextMessage.send_verification_code + "(" + (180 - i) + "s)";
 									if(180 - i == 0) {
-										sendVCodeBtn.innerText = TextMessage.send_verification_code;
+										$("#send-verification-code").removeClass("mui-btn-grey");
+										$("#send-verification-code").addClass("mui-btn-success");
 										canClick = true;
 										clearInterval(updateText);
+									} else {
+										$("#send-verification-code").removeClass("mui-btn-success");
+										$("#send-verification-code").addClass("mui-btn-grey");
 									}
 								}, 1000);
 							},

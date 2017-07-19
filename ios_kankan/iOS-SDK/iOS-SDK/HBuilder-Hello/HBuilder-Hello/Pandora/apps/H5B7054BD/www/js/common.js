@@ -517,6 +517,7 @@ var Api;
 			shareurl: baseUrl() + '/share.php?wxparms=',
 			shareid: baseUrl() + '/commodity/Encryption/',
 			delete_pro: baseUrl() + '/commodity/release/delete/',
+			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -1298,6 +1299,11 @@ var Repository;
 		}
 		Commodity.delete_pro = delete_pro;
 		
+		function reportCommodity(params, callback) {
+			return Api.call(Api.url.Commodity.reportCommodity, params, callback);
+		}
+		Commodity.reportCommodity = reportCommodity;
+		
 		function shareid(params, callback) {
 			return Api.call(Api.url.Commodity.shareid, params, callback);
 		}
@@ -1450,7 +1456,7 @@ var TextMessage;
 	TextMessage.goodshowmes = language ? "良い" : "好评";
 	TextMessage.normalshowmes = language ? "普通" : "中评";
 	TextMessage.badshowmes = language ? "悪い" : "差评";
-	TextMessage.datanull = language ? "データがありません。" : "暂无数据";
+	TextMessage.datanull = language ? "お知らせはありません。" : "暂无数据";
 	TextMessage.commentsnull = language ? "コメントがありません。" : "暂无评论";
 	TextMessage.not_network = language ? "接続がタイムアウトしました。このサイトが一時的に利用できなくなっていたり、サーバーの負荷が高すぎて接続できなくなっている可能性があります。しばらくしてから再度お試しください。" : "当前网络不给力，请稍后再试";
 	TextMessage.contentlength = language ? "レビュー内容(300字以内)" : "评论内容（不超过三百字）";
@@ -1581,7 +1587,7 @@ var TextMessage;
 	TextMessage.requestStop = language ? "取引を中止する" : "请求终止";
 	TextMessage.transSuccess = language ? "取引成立" : "交易成功";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
-	TextMessage.transContact = language ? "入力してください" : "交谈内容不能未空";
+	TextMessage.transContact = language ? "入力してください" : "交谈内容不能为空";
 	TextMessage.tranStatusRequest = language ? "取引中" : "请求中";
 	TextMessage.tranStatusDeal = language ? "取引成立" : "交易成立";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
@@ -1603,7 +1609,7 @@ var TextMessage;
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証番号エラー" : "验证码错误";
-	TextMessage.det_concerneds = language ? "さんが気になる商品" : "关注商品";
+	TextMessage.det_concerneds = language ? "出品者が気になる商品" : "出品者关注商品";
 	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
@@ -1637,6 +1643,13 @@ var TextMessage;
 	TextMessage.comoditylogin_success= language ? "出品しました。" : "出品成功";
 	TextMessage.luopin_success= language ? "落品しました。" : "落品成功";
 	TextMessage.delete_success= language ? "削除しました。" : "删除成功";
+	TextMessage.complaintpro = language ? "不適切な商品の報告" : "举报此商品";
+	TextMessage.comodityreport_success= language ? "報告しました。" : "举报成功";
+	TextMessage.comodityrepot_repeat= language ? "この商品はすでに報告済みです" : "请勿重复举报";
+	TextMessage.Compresserror = language ? "圧縮失敗" : "压缩失败";
+	TextMessage.Compresserror_si = language ? "ファイルが存在しません" : "文件不存在";
+	TextMessage.search_result = language ? "検索結果" : "检索结果";
+	TextMessage.may_not_click = language ? "三分間後、発送ボタンをご押してください。" : "3分钟之内不可点击";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

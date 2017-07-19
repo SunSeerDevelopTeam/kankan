@@ -1,4 +1,5 @@
 var pageInfo = {};
+var keyword = "";
 var network = true;
 var isDown = true;
 var detailPage = null;
@@ -7,11 +8,12 @@ mui.init({
 	pullRefresh: {
 		container: '#pullrefresh',
 		down: {
+			auto: true,
 			callback: pulldownRefresh,
 			contentinit: TextMessage.pull_down,
 			contentdown: "",
 			contentover: TextMessage.release,
-			contentrefresh: TextMessage.update
+			contentrefresh: ""
 		},
 		up: {
 			contentrefresh: TextMessage.loading,
@@ -41,6 +43,7 @@ mui.back = function() {
 function pulldownRefresh() {
 	isDown = true;
 	mui('#pullrefresh').pullRefresh().refresh(true);
+	keyword = "";
 	var params = {};
 	getDataFromServer(params, function(data) {
 		var table = document.body.querySelector('.mui-table-view');
@@ -71,6 +74,7 @@ function pullupRefresh() {
 	//mui('#pullrefresh').pullRefresh().endPullupToRefresh(pageInfo.list * pageInfo.page >= pageInfo.cnt);
 	//mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
 	var params = {};
+	params.search = keyword;
 	params.page = ++pageInfo.page;
 	getDataFromServer(params, function(data) {
 		var table = document.body.querySelector('.mui-table-view');
@@ -78,6 +82,9 @@ function pullupRefresh() {
 		if(Validator.isEmpty(data.data.commd)) {
 			//$("#item1mobile .mui-pull-loading").html(TextMessage.nomore);
 			mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+			if(keyword !== "") {
+				$(".mui-pull-caption-nomore").text(TextMessage.search_result + "'" + keyword + "'," + "全" + $('.mui-table-view li').length + "件");
+			}
 			return;
 		}
 		$(".mui-pull-caption-refresh").html(TextMessage.loading);
@@ -94,19 +101,19 @@ function pullupRefresh() {
 }
 
 function getDataFromServer(params, callback) {
-	if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+	if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE) {
 		network = false;
 	} else {
 		network = true;
 	}
-	if (network) {
+	if(network) {
 		var cid = localStorage.getItem("cid");
 		if(cid == -1) {
 			params.want = 1;
 		} else if(cid != 0) {
 			params.catalog = cid;
 		}
-		
+		params.max = 14;
 		Repository.Commodity.commodityList(params, {
 			ok: function(data) {
 				callback(data);
@@ -115,11 +122,16 @@ function getDataFromServer(params, callback) {
 				savePageInfo(data.data.pages);
 			},
 			ng: function(statuscode) {
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				if (isDown) {
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
+				} else {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+				}
 			},
 			error: function() {
-				if (isDown) {
+				var message = arguments[0].toString();
+				console.log("message is : " + message);
+				if(isDown) {
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
 				} else {
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
@@ -127,13 +139,13 @@ function getDataFromServer(params, callback) {
 			}
 		});
 	} else {
-		plus.nativeUI.alert(TextMessage.not_network, function(e){
-			if (isDown) {
+		plus.nativeUI.alert(TextMessage.not_network, function(e) {
+			if(isDown) {
 				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
 			} else {
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 			}
-		},TextMessage.sharetitle,TextMessage.sure);
+		}, TextMessage.sharetitle, TextMessage.sure);
 	}
 }
 
@@ -170,7 +182,7 @@ function createListView(data) {
 	}
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
-		var htmlText = "<div class='no-data-tips'><br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_1 +"</div><br/><div style='text-align:center;'>"+ TextMessage.no_data_tips_2 +"</div><br/></div>";
+		var htmlText = "<div class='no-data-tips'><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_1 + "</div><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_2 + "</div><br/></div>";
 		table.innerHTML = htmlText;
 		return;
 	}
@@ -180,6 +192,10 @@ function createListView(data) {
 		li.innerHTML = createListItem(item, imgwidth);
 		table.appendChild(li);
 	});
+	if (keyword !== "") {
+		$('.mui-pull-bottom-pocket').show();
+		$(".mui-pull-caption").text(TextMessage.search_result + "'" + keyword + "'," + "全" + $('.mui-table-view li').length + "件");
+	}
 	bindEventOnListViewItem();
 	lazyload();
 }
@@ -209,10 +225,10 @@ function bindEventOnListViewItem() {
 	});
 
 	$(".contentbottom").off("tap", ".like-area");
-	$(".contentbottom").on("tap",".like-area", function(event) {
+	$(".contentbottom").on("tap", ".like-area", function(event) {
 		console.log("click like");
 		var _self = $(this).find(".comm-like-num");
-		if (!Repository.User.isLogin()) {
+		if(!Repository.User.isLogin()) {
 			return;
 		}
 		var commId = _self.closest("li").find('.item-tap').attr('data-comm-id');
@@ -270,16 +286,16 @@ function createListItem(item, imgwidth) {
 		var toppx = heicha / 2;
 		stylimg = "margin-top:-" + toppx + "px;";
 	} else {
-		var hecha2=imgwidth-actuheight;
-		var toppx=hecha2 / 2;
+		var hecha2 = imgwidth - actuheight;
+		var toppx = hecha2 / 2;
 		stylimg = "margin-top:" + toppx + "px;";
 	}
-	var itemheight=imgwidth+40;
+	var itemheight = imgwidth + 40;
 	var listItemHTML = new Util.StringBuilder();
-	listItemHTML.appendFormat('<div class="li-content" id="{0}">',item.commodity_id)
-		.appendFormat('<div class="comm-item" style="height:{0}px;">',itemheight)
+	listItemHTML.appendFormat('<div class="li-content" id="{0}">', item.commodity_id)
+		.appendFormat('<div class="comm-item" style="height:{0}px;">', itemheight)
 		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
-		.appendFormat('<div class="item-img-box" style="height:{0}px;"><img class="lazy" src="{1}" onerror="this.src=' + "'../../../images/nopic.jpg'" + '" style="{2}"></div>',imgwidth,item.img_flag.thu_url, stylimg)
+		.appendFormat('<div class="item-img-box" style="height:{0}px;"><img class="lazy" src="{1}" onerror="this.src=' + "'../../../images/nopic.jpg'" + '" style="{2}"></div>', imgwidth, item.img_flag.thu_url, stylimg)
 		//.appendFormat('<img src="{0}">', item.img_flag)
 		//.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
@@ -314,7 +330,7 @@ function lazyload() {
 
 //当DOM准备就绪时
 mui.plusReady(function() {
-	if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+	if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE) {
 		network = false;
 	} else {
 		network = true;
@@ -326,14 +342,7 @@ mui.plusReady(function() {
 			url: '../main/products/detail.html'
 		});
 	}
-	if(mui('#pullrefresh').length != 0) {
-		var params = {};
-		setTimeout(function(){
-			getDataFromServer(params, function(data) {
-				createListView(data);
-			});
-		}, 100);
-	} else {
+	if(mui('#pullrefresh').length === 0) {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
 })
@@ -347,7 +356,7 @@ window.addEventListener("search", function(event) {
 	params.search = keyword;
 	getDataFromServer(params, function(data) {
 		document.body.querySelector('.mui-table-view').innerHTML = "";
-		createListView(data);
+		createListView(data, "search");
 	});
 });
 
@@ -359,27 +368,28 @@ window.addEventListener("refresh", function(event) {
 	getDataFromServer(params, function(data) {});
 });
 window.addEventListener("good", function(event) {
-	var prid= event.detail.prid;
-	if(prid!="undefined"){
+	var prid = event.detail.prid;
+	if(prid != "undefined") {
 		parise(prid);
 	}
-	
+
 });
-function parise(comid){
+
+function parise(comid) {
 	var params = {
 		"commodity_id": comid
 	};
 	Repository.Commodity.commodityDetail(params, {
 		ok: function(data) {
-			var praisenum=data.data.commodity_praise.praise_count;
-			var praistaute=data.data.commodity_praise.user_praise_status;
-			$("#"+comid+" .comm-like-num").html(praisenum);
-			if(praistaute=="0"){
-				$("#"+comid+" .comm-like").removeClass("comm-like-red");
-				$("#"+comid+" .comm-like").addClass("comm-like-gray");
-			}else{
-				$("#"+comid+" .comm-like").removeClass("comm-like-gray");
-				$("#"+comid+" .comm-like").addClass("comm-like-red");
+			var praisenum = data.data.commodity_praise.praise_count;
+			var praistaute = data.data.commodity_praise.user_praise_status;
+			$("#" + comid + " .comm-like-num").html(praisenum);
+			if(praistaute == "0") {
+				$("#" + comid + " .comm-like").removeClass("comm-like-red");
+				$("#" + comid + " .comm-like").addClass("comm-like-gray");
+			} else {
+				$("#" + comid + " .comm-like").removeClass("comm-like-gray");
+				$("#" + comid + " .comm-like").addClass("comm-like-red");
 			}
 			Log.d("success");
 		},
