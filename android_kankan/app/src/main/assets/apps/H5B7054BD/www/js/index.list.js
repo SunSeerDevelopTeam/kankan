@@ -8,6 +8,7 @@ mui.init({
 	pullRefresh: {
 		container: '#pullrefresh',
 		down: {
+			auto: true,
 			callback: pulldownRefresh,
 			contentinit: TextMessage.pull_down,
 			contentdown: "",
@@ -112,7 +113,7 @@ function getDataFromServer(params, callback) {
 		} else if(cid != 0) {
 			params.catalog = cid;
 		}
-
+		params.max = 14;
 		Repository.Commodity.commodityList(params, {
 			ok: function(data) {
 				callback(data);
@@ -121,10 +122,15 @@ function getDataFromServer(params, callback) {
 				savePageInfo(data.data.pages);
 			},
 			ng: function(statuscode) {
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				if (isDown) {
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
+				} else {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+				}
 			},
 			error: function() {
+				var message = arguments[0].toString();
+				console.log("message is : " + message);
 				if(isDown) {
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
 				} else {
@@ -174,13 +180,6 @@ function createListView(data) {
 	if(Validator.isEmpty(table)) {
 		return;
 	}
-	/**
-	if (arguments[1] === "search") {
-		var searchResultTips = "<div class='no-data-tips'><p>你好</p></div>";
-		table.innerHTML = searchResultTips;
-		return;
-	}
-	**/
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
 		var htmlText = "<div class='no-data-tips'><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_1 + "</div><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_2 + "</div><br/></div>";
@@ -343,14 +342,7 @@ mui.plusReady(function() {
 			url: '../main/products/detail.html'
 		});
 	}
-	if(mui('#pullrefresh').length != 0) {
-		var params = {};
-		setTimeout(function() {
-			getDataFromServer(params, function(data) {
-				createListView(data);
-			});
-		}, 100);
-	} else {
+	if(mui('#pullrefresh').length === 0) {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
 })

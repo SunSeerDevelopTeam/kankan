@@ -97,6 +97,9 @@
 							<li class="mui-table-view-cell mui-media mui-col-xs-5 liheight otherli" style="padding:0px;">
 
 							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 liheight otherliimg" style="padding:0px;">
+
+							</li>
 						</ul>
 						</center>
 						<ul class="tran-button">
@@ -323,7 +326,7 @@
 
 			function showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id) {
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, trans_mode, buyer_msg = '',
-					seller_msg = '';
+					seller_msg = '',seller_msg2 = '';
 				var buyer_comm_info = new Array();
 				var seller_comm_info = new Array();
 				for(var user in usersinfo) {
@@ -424,16 +427,30 @@
 					}
 					$(".cur-user").append("<input type='hidden' name='myid' id='myid' value='" + cur_user_id + "'>");
 				} else {
-					seller_msg += '<a href="#">';
-					seller_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
-					seller_img += '<img class="ka_touxiangimg" height="32px" width="32px" src="' + seller_photo + '" />';
-					seller_img += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
-					seller_img += '</div>';
-					seller_msg += '<img style="'+seller_top_margin+'" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
-					seller_msg += '</a>';
-					$(".other li").html(seller_msg);
-					$(".other-img li").html(seller_img);
-					//$(".other li").attr("style","margin-right:20px;");
+					if(cur_user_id==seller_id){
+						seller_msg += '<a href="#">';
+						//seller_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+						//seller_img += '<img class="ka_touxiangimg" height="32px" width="32px" src="' + seller_photo + '" />';
+						//seller_img += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
+						//seller_img += '</div>';
+						seller_msg += '<img style="'+seller_top_margin+'" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+						seller_msg2 +='<img src="../../images/jiantou.png" width="20" height="20"><img class="ka_touxiangimg" height="40px" width="40px" src="' + buyer_photo + '" style="margin-left:1.5em;margin-top:20%;" />';
+						seller_msg2 += '</a>';
+						$(".other li").html(seller_msg);
+						$(".other .otherliimg").html(seller_msg2);
+						//$(".other-img li").html(seller_img);
+					}else{
+						seller_msg += '<a href="#">';
+						seller_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
+						seller_img += '<img class="ka_touxiangimg" height="32px" width="32px" src="' + seller_photo + '" />';
+						seller_img += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
+						seller_img += '</div>';
+						seller_msg += '<img style="'+seller_top_margin+'" class="mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+						seller_msg += '</a>';
+						$(".other .otherli").html(seller_msg);
+						$(".other .otherliimg").remove();
+						$(".other-img li").html(seller_img);
+					}
 				}
 
 			}
