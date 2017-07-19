@@ -1,3 +1,8 @@
+/**
+ * 定义webviewGroup对象
+ * @param {String} id 父webview的id
+ * @param {Object} options
+ */
 var webviewGroup = function(id, options) {
 	this.id = id;
 	this.options = options;
@@ -15,22 +20,31 @@ var webviewGroup = function(id, options) {
 
 var proto = webviewGroup.prototype;
 
+/**
+ * 初始化
+ */
 proto._init = function() {
 	this._initParent();
 	this._initNativeView();
 	this._initWebviewContexts(this.options.index);
 };
+/**
+ * 初始化父webView
+ */
 proto._initParent = function() {
 	this.parent = plus.webview.getWebviewById(this.id);
+	// 若没有父webView则创建父webView
 	if(!this.parent) {
 		this.parent = plus.webview.create(this.id, this.id);
 		this.parent.show('none');
 	}
 };
+/**
+ * 初始化native view
+ */
 proto._initNativeView = function() {
 	this.nativeView = new plus.nativeObj.View('__MUI_TAB_NATIVE', {
 		'top': '87px',//这个需要根据顶部导航及顶部选项卡高度自动调整
-		//'height': (window.screen.height - 87)+"px",
 		'bottom': '50px',
 		'left': '100%',
 		'width': '100%',
@@ -38,6 +52,9 @@ proto._initNativeView = function() {
 	});
 	this.nativeView.show();
 };
+/**
+ * 初始化webView Context
+ */
 proto._initWebviewContexts = function() {
 	for(var len = this.items.length, i = len - 1; i >= 0; i--) {
 		var webviewOptions = this.items[i];
@@ -72,14 +89,26 @@ proto._initWebviewContexts = function() {
 		}
 	}
 };
+/**
+ * 
+ * @param {Object} webview
+ */
 proto._onChange = function(webview) {
 	this.currentWebview = webview;
 	this.onChange({
 		index: webview.__mui_index
 	});
 };
+/**
+ * 拖拽动画完成之后执行该回调方法
+ * @param {Object} dir 拖拽方向，其值为'left'或者'right'
+ * @param {Object} fromWebview
+ * @param {Object} view 目标webView
+ * @param {Object} viewId
+ */
 proto._dragCallback = function(dir, fromWebview, view, viewId) {
-	if(view === this.nativeView) { //需要创建webview
+	// 如果没有webview则创建新的webview
+	if(view === this.nativeView) {
 		//第一步:初始化目标webview
 		this.webviewContexts[viewId].createWebview('drag');
 		var targetWebview = this.webviewContexts[viewId].webview;
@@ -96,7 +125,11 @@ proto._dragCallback = function(dir, fromWebview, view, viewId) {
 		this._onChange(view);
 	}
 };
-
+/**
+ * 初始化webView的拖拽功能
+ * @param {Object} webview webView实例
+ * @param {String} dir 拖拽方向
+ */
 proto._initDrag = function(webview, dir) {
 	var flag = ('__mui_drag_' + dir + '_flag');
 	if(webview[flag]) {
@@ -105,7 +138,8 @@ proto._initDrag = function(webview, dir) {
 	var viewId = webview['__mui_' + (dir === 'left' ? 'right' : 'left')];
 	if(viewId) {
 		var view = plus.webview.getWebviewById(viewId);
-		if(!view) { //如果目标webview不存在,使用nativeView替换
+		//如果目标webview不存在,使用nativeView替换
+		if(!view) {
 			view = this.nativeView;
 		} else {
 			webview[flag] = true;
@@ -118,7 +152,8 @@ proto._initDrag = function(webview, dir) {
 				'moveMode': 'follow'
 			},
 			function(res) {
-				if(res.type === 'end' && res.result) { //拖拽完成
+				if(res.type === 'end' && res.result) {
+					//拖拽完成时执行回调方法
 					this._dragCallback(dir, webview, view, viewId);
 				}
 			}.bind(this)
@@ -127,10 +162,18 @@ proto._initDrag = function(webview, dir) {
 		webview[flag] = true;
 	}
 };
+/**
+ * 初始化拖拽
+ * @param {Object} webview
+ */
 proto._initDrags = function(webview) {
 	this._initDrag(webview, 'left');
 	this._initDrag(webview, 'right');
 };
+/**
+ * 检查拖拽功能是否被初始化
+ * @param {Object} webview
+ */
 proto._checkDrags = function(webview) {
 	var left = webview.__mui_left;
 	var right = webview.__mui_right;
@@ -147,17 +190,31 @@ proto._checkDrags = function(webview) {
 		}
 	}
 };
+
+/**
+ * 返回当前webView
+ */
 proto.getCurrentWebview = function() {
 	return this.currentWebview;
 };
+
+/**
+ * 返回当前webView的上下文对象
+ */
 proto.getCurrentWebviewContext = function() {
 	if(this.currentWebview) {
 		return this.webviewContexts[this.currentWebview.id];
 	}
 	return false;
 };
+
+/**
+ * 切换选项卡
+ * @param {String} id 将要显示的webView的id
+ */
 proto.switchTab = function(id) {
-	id = id.replace('_0', ''); //首页需要替换为appid
+	id = id.replace('_0', '');
+	// 当前的webView将要变为fromWebView
 	var fromWebview = this.currentWebview;
 	if(id === fromWebview.id) {
 		return;
@@ -175,14 +232,13 @@ proto.switchTab = function(id) {
 		isNew = true;
 		toWebviewContext.createWebview('startAnimation');
 		toWebview = toWebviewContext.webview;
-		//					toWebview.showBehind(plus.webview.getSecondWebview());
 		toWebview.show();
 		this._initDrags(toWebview);
-		this._checkDrags(toWebview); //新建的时候均需校验
+		this._checkDrags(toWebview); // 新建的时候均需校验
 	}
 	var self = this;
-//	console.log("current:" + fromWebview.id + ",to:" + fromToLeft);
-//	console.log("next:" + toWebview.id + ",from:" + toFromLeft);
+	console.log("current:" + fromWebview.id + ",to:" + fromToLeft);
+	console.log("next:" + toWebview.id + ",from:" + toFromLeft);
 
 	plus.webview.startAnimation({
 			'view': fromWebview,
@@ -200,7 +256,6 @@ proto.switchTab = function(id) {
 			'action': 'show'
 		},
 		function(e) {
-			//console.log("startAnimation callback...");
 			if(e.id === toWebview.id) {
 				isNew && plus.nativeUI.showWaiting();
 				this.currentWebview = toWebview;
@@ -213,8 +268,10 @@ proto.switchTab = function(id) {
 };
 
 /**
+ * webView组的上下文对象
  * @param {Object} id
  * @param {Object} webviewOptions
+ * @param {Object} groupContext
  */
 var webviewGroupContext = function(id, webviewOptions, groupContext) {
 	this.id = id;
@@ -228,10 +285,13 @@ var webviewGroupContext = function(id, webviewOptions, groupContext) {
 
 var _proto = webviewGroupContext.prototype;
 
+_proto.removeWebview = function() {
+	
+}
+
 _proto.createWebview = function(from) {
 	var options = this.options;
 	options.styles = options.styles || {
-		//top: "82px",
 		top:"82px",
 		bottom: "0px",
 		render: "always"
@@ -255,6 +315,10 @@ _proto.createWebview = function(from) {
 	this._initWebview();
 	this.inited = true;
 };
+
+/**
+ * 初始化webView
+ */
 _proto._initWebview = function() {
 	var options = this.options;
 	if(!this.webview) {

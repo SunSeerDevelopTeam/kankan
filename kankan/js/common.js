@@ -555,11 +555,11 @@ var Api;
 
 	function call(url, params, callback) {
 		var $d = $.Deferred();
-		Log.i("current API URL is " + url);
+//		Log.i("current API URL is " + url);
 		params[Api.Params.token] = getToken();
 		params[Api.Params.sign] = createSignInfo();
-		Log.i("current API params is ----> ");
-		Log.i(params);
+//		Log.i("current API params is ----> ");
+//		Log.i(params);
 //		ajax_error.checkNet();
 		mui.ajax(url, {
 			data: params,
@@ -567,7 +567,7 @@ var Api;
 			type: 'post',
 			timeout: 10000,
 			success: function(data) {
-				Log.i(data);
+//				Log.i(data);
 				setToken(data.result.tokencheck);
 				saveLoginStatus(data);
 				if(data.result.status == STATUS.OK && Validator.isFunc(callback.ok))
