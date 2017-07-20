@@ -391,7 +391,6 @@ function parise(comid) {
 				$("#" + comid + " .comm-like").removeClass("comm-like-gray");
 				$("#" + comid + " .comm-like").addClass("comm-like-red");
 			}
-			Log.d("success");
 		},
 		ng: function(data) {
 			Log.d(data);

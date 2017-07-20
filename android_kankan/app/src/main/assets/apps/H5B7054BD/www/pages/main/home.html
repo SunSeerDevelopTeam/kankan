@@ -278,6 +278,7 @@
 						extras: {}
 					}],
 					onChange: function(obj) {
+						console.log("onChange callback");
 						var c = document.querySelector(".mui-control-item.mui-active");
 						if(c) {
 							c.classList.remove("mui-active");
