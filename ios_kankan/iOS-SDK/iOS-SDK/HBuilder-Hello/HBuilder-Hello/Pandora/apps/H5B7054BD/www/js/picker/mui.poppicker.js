@@ -98,6 +98,7 @@
 						var eventData = event.detail || {};
 						var preItem = eventData.item || {};
 						nextPickerElement.picker.setItems(preItem.children);
+						nextPickerElement.picker.setSelectedIndex(0);
 					}
 				}, false);
 			}
