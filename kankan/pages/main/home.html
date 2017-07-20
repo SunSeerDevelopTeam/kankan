@@ -279,13 +279,35 @@
 					}],
 					onChange: function(obj) {
 						console.log("onChange callback");
+						console.log("user agent is " + navigator.userAgent.toLowerCase());
 						var c = document.querySelector(".mui-control-item.mui-active");
+						var userAgent = navigator.userAgent.toLowerCase();
 						if(c) {
 							c.classList.remove("mui-active");
+							if (userAgent.indexOf("ipad") >= 0) {
+								var wid = c.getAttribute("data-wid");
+								console.log("wid is " + wid);
+								var newwid = wid.substr(wid.lastIndexOf("-") + 1, wid.length);
+								console.log("newwid is " + newwid);
+								var webview = plus.webview.getWebviewById("pullrefresh_sub_" + newwid + ".html");
+								// 触发自定义事件
+								mui.fire(webview, "clear", {
+									clearData : "all",
+								});
+							}
 						}
 						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
 						localStorage.setItem("cid", activeTab.dataset.cid);
 						activeTab.classList.add("mui-active");
+						if (userAgent.indexOf("ipad") >= 0) {
+							var wid = activeTab.getAttribute("data-wid");
+							var newwid = wid.substr(wid.lastIndexOf("-") + 1, wid.length);
+							var webview = plus.webview.getWebviewById("pullrefresh_sub_" + newwid + ".html");
+							// 触发自定义事件
+							mui.fire(webview, "initData", {
+								createData : "yes",
+							});
+						}
 						mui('.mui-scroll-wrapper').scroll().scrollTo(-activeTab.offsetLeft, 0);
 					}
 				});
