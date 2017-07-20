@@ -76,13 +76,13 @@
 							</li>
 						</ul>
 						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user liheight" <!--style="height:85px;"-->>
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user liheight">
 
 							</li>
 							<li class="tran-pic-middle" style="margin-left:10px;">
 								<img height="24px" width="24px" src="../../images/xinhuan.png" />
 							</li>
-							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user liheight" <!--style="height:85px;"-->>
+							<li class="mui-table-view-cell mui-media mui-col-xs-5 request-user liheight" >
 
 							</li>
 						</ul>
@@ -912,10 +912,11 @@
 								$(".other").hide();
 								$(".other-img").show();
 							}
+							
 							setHidVal(transinfo, usersinfo, cur_user_id);
 							showRequestStaus(transinfo, usersinfo);
 							showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id);
-							if(messginfo) {
+							if( messginfo && !flag )  {
 								showChatMsg(usersinfo, messginfo, cur_user_id);
 							}
 							//tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
