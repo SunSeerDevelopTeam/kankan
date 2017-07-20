@@ -222,7 +222,7 @@
 			//setInterval(showRequestDetail, 10000, "");
 			function submitChat() {
 				var chatMsg = $("#msg").val();
-				if(chatMsg == '') {
+				if(chatMsg.trim() == '') {
 					mui.toast(TextMessage.transContact);
 					$("#msg").focus();
 					return;
@@ -624,7 +624,7 @@
 						$(".tran-button-buy font").text(TextMessage.transEve);	
 					}
 				}else if(status == 0) {
-					if(trans_mode > 0) {
+					//if(trans_mode > 0) {
 						if(buyer_flag == 'false') {
 							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transConfirm);
@@ -639,7 +639,7 @@
 								$(".tran-button").css('text-align', 'center');
 							}
 						}
-					} else {
+					/*} else {
 						if(buyer_flag == 'false') {
 							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transConfirm);
@@ -648,14 +648,14 @@
 							$(".tran-button-buy font").text(TextMessage.transWaitConfirm);
 						}
 
-					}
+					}*/
 				} else if(status == 1) {
 					if(buyer_flag == 'true') {
 						if(trans_type == 0) {
 							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transOrder);
 						} else {
-							if(trans_mode == 0) {
+							/*if(trans_mode == 0) {
 								if(buyer_deliver == 1 && seller_deliver == 0) {
 									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
@@ -666,10 +666,10 @@
 									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transDelive);
 								}
-							} else {
+							} else {*/
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transReceipt);
-							}
+							//}
 						}
 					} else {
 						if(trans_type == 0) {
@@ -690,7 +690,7 @@
 					}
 				} else if(status == 2) {
 					if(buyer_flag == 'true') {
-						if(trans_mode != 0) {
+						//if(trans_mode != 0) {
 							if(deliver == 0) {
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
@@ -698,7 +698,7 @@
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transReceipt);
 							}
-						} else {
+						/*} else {
 							if(buyer_deliver == 1 && seller_deliver == 0) {
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
@@ -717,17 +717,25 @@
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
-						}
+						}*/
 					} else {
-						if(trans_mode != 0) {
-							if(deliver == 0) {
+						//if(trans_mode != 0) {
+							if(seller_deliver == 0) {
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							} else {
-								$(".tran-button-buy").show();
-								$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
+								if(buyer_receipt == 0 && seller_urge_r == 0){
+									$(".tran-button-buy").show();
+									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
+								}else if(buyer_receipt == 0 && seller_urge_r == 1){
+									$(".tran-button-buy").show();
+									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
+								}else{
+									$(".tran-button-buy").show();
+									$(".tran-button-buy font").text(TextMessage.transEve);
+								}
 							}
-						} else {
+						/*} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transUrgeDelive);
@@ -746,7 +754,7 @@
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transDelive);
 							}
-						}
+						}*/
 					}
 				}
 			}
@@ -783,14 +791,14 @@
 					}
 				} else if(status == 2) {
 					if(buyer_flag == 'true') {
-						if(trans_mode != 0) {
+						//if(trans_mode != 0) {
 							if(seller_deliver == 0 ){
 								trans_flow('transUrgeDelive', params,'');
 							}else{
 								params.charity = 0;
 								trans_flow('transOrderReceipt', params,'');
 							}
-						} else {
+						/*} else {
 							if(buyer_deliver == 1 && seller_deliver == 0) {
 								trans_flow('transUrgeDelive', params,'');
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
@@ -805,17 +813,19 @@
 							} else if(buyer_deliver == 0) {
 								trans_flow('transOrderLogustics', params,'');
 							}
-						}
+						}*/
 					} else {
-						if(trans_mode != 0) {
-							if(buyer_deliver == 0 && buyer_receipt == 0){
+						//if(trans_mode != 0) {
+							if(seller_deliver == 0 ){
 								trans_flow('transOrderLogustics', params,'');
-							}else if(buyer_deliver == 1 && buyer_receipt == 0) {
-								trans_flow('transUrgeReceipt', params,'');
-							}else{
-								trans_flow('transUrgeReceipt', params,'');
+							}else {
+								if(buyer_receipt == 0 && seller_urge_r == 0){
+									trans_flow('transUrgeReceipt', params,'');
+								}else if(buyer_receipt == 0 && seller_urge_r == 1){
+									mui.toast(TextMessage.errorCode_2020);
+								}
 							}
-						} else {
+						/*} else {
 							if(buyer_deliver == 0 && seller_deliver == 1) {
 								trans_flow('transUrgeDelive', params,'');
 							} else if(buyer_deliver == 1 && seller_deliver == 1) {
@@ -830,7 +840,7 @@
 							} else if(seller_deliver == 0) {
 								trans_flow('transOrderLogustics', params,'');
 							}
-						}
+						}*/
 					}
 				} else if(status == 3) {
 					if(appraise == 0){
