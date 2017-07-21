@@ -258,6 +258,8 @@
 					var loginBtn = doc.getElementById('login');
 					loginBtn.addEventListener('tap', function(event) {
 						console.log("click login btn");
+						doc.getElementById('email').blur();
+						doc.getElementById('password').blur();
 						var email = doc.getElementById('email').value.trim();
 						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
 						if(email == "" || !reg.test(email)) {
@@ -270,8 +272,6 @@
 							plus.nativeUI.toast(TextMessage.password_error);
 							return;
 						}
-						doc.getElementById('email').blur();
-						doc.getElementById('password').blur();
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
