@@ -158,10 +158,15 @@
 
 			});
 			mui.plusReady(function() {
-				getdata("down","all");
+				getdata("down",0);
+				setTimeout(function(){
+					getdata("down",1,"first")
+				},2000);
 			});
-			function getdata(flag,index){
-				$(".mui-pull-loading").html(TextMessage.loading);
+			function getdata(flag,index,times){
+				if(times!="first"){
+					$(".mui-pull-loading").html(TextMessage.loading);
+				}
 				if(index==0){
 					//requested
 					var data_flg=2;
