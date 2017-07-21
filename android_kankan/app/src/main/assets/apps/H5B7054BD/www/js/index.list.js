@@ -359,7 +359,23 @@ window.addEventListener("search", function(event) {
 		createListView(data, "search");
 	});
 });
-
+window.addEventListener("initData", function(event){
+	if (event.detail.createData !== "yes") {
+		return;
+	}
+	var params = {};
+	getDataFromServer(params, function(data) {
+		document.body.querySelector('.mui-table-view').innerHTML = "";
+		createListView(data);
+	});
+});
+window.addEventListener("clear", function(event){
+	if (event.detail.clearData !== "all") {
+		return;
+	}
+	var table = document.body.querySelector('.mui-table-view');
+	table.innerHTML = "";
+});
 window.addEventListener("refresh", function(event) {
 	if(event.detail.refresh != "canRefresh") {
 		return;
