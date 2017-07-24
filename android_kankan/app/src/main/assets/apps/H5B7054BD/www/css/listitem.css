@@ -66,7 +66,7 @@
 
 .comm-like {
 	font-size: 35px;
-	line-height: 50px;
+	line-height: 40px;
 	text-align: center;
 	width: 100%;
 }
@@ -81,7 +81,7 @@
 
 .comm-like-num {
 	position: relative;
-	margin-top: -50px;
+	margin-top: -45px;
 	font-size: 14px;
 	float: left;
 	line-height: 50px;
