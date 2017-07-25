@@ -403,9 +403,7 @@
 					"js/language/locale_ja_JP.js",
 					"js/language/locale_zh_CN.js",
 					"images/nopic.jpg",
-					"images/weixin2.png",
-					"css/iconmyfont.css",
-					"fonts/iconfont.woff"
+					"images/weixin2.png"
 				],
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
@@ -477,10 +475,7 @@
 					"pages/main/news.html",
 					"pages/main/category/tab-top-subpage-6.html",
 					"pages/main/category/tab-top-subpage-7.html",
-					"pages/main/category/tab-top-subpage-14.html",
-					"pages/main/category/tab-top-subpage-8.html",
-					"pages/main/category/tab-top-subpage-9.html",
-					"pages/main/category/tab-top-subpage-10.html"
+					"pages/main/category/tab-top-subpage-14.html"
 				],
 				"priority": 0
 			},
@@ -498,8 +493,7 @@
 					"js/language/locale_zh_CN.js",
 					"fonts/mui-icons-extra.ttf",
 					"css/iconfontwuliu.css",
-					"fonts/iconfont.woff",
-					"css/iconmyfont.css"
+					"fonts/iconfont.woff"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
@@ -550,8 +544,7 @@
 					"images/nopic.jpg",
 					"js/language/locale_ja_JP.js",
 					"js/mui.pullToRefresh.js",
-					"js/mui.pullToRefresh.material.js",
-					"images/userPhoto.png"
+					"js/mui.pullToRefresh.material.js"
 				],
 				"refer": [
 					"pages/login/login.html",
@@ -756,8 +749,7 @@
 					"js/language.js",
 					"css/mui.min.css",
 					"fonts/mui.ttf",
-					"css/kankan_home.css",
-					"images/nopic.jpg"
+					"css/kankan_home.css"
 				],
 				"refer": [
 					"pages/main/products/translatelist.html",
@@ -795,13 +787,11 @@
 					"css/mui.min.css",
 					"js/language.js",
 					"images/morebut.png",
-					"images/nopic.jpg",
-					"images/jiantou.png"
+					"images/nopic.jpg"
 				],
 				"refer": [
 					"pages/transaction/transevaluate.html",
-					"pages/transaction/change_item.html",
-					"pages/main/logisticslist2.html"
+					"pages/transaction/change_item.html"
 				],
 				"priority": 0
 			},
@@ -896,9 +886,7 @@
 					"js/mui.view.js",
 					"js/language/locale_ja_JP.js",
 					"pages/setting/specialbus.html",
-					"fonts/mui.ttf",
-					"css/kankan_home.css",
-					"css/icons-extra.css"
+					"fonts/mui.ttf"
 				],
 				"refer": [
 					"pages/setting/question.html"
@@ -1065,47 +1053,6 @@
 			"pages/main/category/tab-top-subpage-14.html": {
 				"resources": [
 					"pages/main/category/pullrefresh_sub_14.html"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/logisticslist2.html": {
-				"resources": [
-					"css/feedback.css",
-					"css/wu.css",
-					"js/language/locale_zh_CN.js",
-					"css/kankan_home.css",
-					"css/icons-extra.css",
-					"js/common.js",
-					"js/mui.min.js",
-					"js/jquery-3.2.0.min.js",
-					"js/sha256.js",
-					"css/mui.min.css",
-					"js/language.js",
-					"images/car.png",
-					"js/feedback.js",
-					"js/mui.view.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/category/tab-top-subpage-8.html": {
-				"resources": [
-					"pages/main/category/pullrefresh_sub_8.html"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/category/tab-top-subpage-9.html": {
-				"resources": [
-					"pages/main/category/pullrefresh_sub_9.html"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"pages/main/category/tab-top-subpage-10.html": {
-				"resources": [
-					"pages/main/category/pullrefresh_sub_10.html"
 				],
 				"refer": [],
 				"priority": 0
