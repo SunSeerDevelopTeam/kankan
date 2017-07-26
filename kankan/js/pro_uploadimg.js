@@ -227,6 +227,7 @@ function imgappend(localurl) {
 }
 
 function getImage() {
+    mui('#photoRight').popover('hide');
 	var c = plus.camera.getCamera();
 	c.captureImage(function(e) {
 		plus.io.resolveLocalFileSystemURL(e, function(entry) {
@@ -246,6 +247,7 @@ function getImage() {
 }
 
 function galleryImg() {
+    mui('#photoLeft').popover('hide');
 	plus.gallery.pick(function(a) {
 		plus.io.resolveLocalFileSystemURL(a, function(entry) {
 			var localURL2 = entry.toLocalURL();

@@ -101,14 +101,18 @@
 
 			function gotoMain(){
 				mui.plusReady(function() {
-					var preViewTrans = plus.webview.getWebviewById('transaction');
+					/*var preViewTrans = plus.webview.getWebviewById('transaction');
 					plus.webview.close(preViewTrans);
-					var requestView = plus.webview.getWebviewById('request');
+					var requestView = plus.webview.getWebviewById('requestlist');
 					plus.webview.close(requestView);
 					var requestlistView = plus.webview.getWebviewById('requestlist');
 					plus.webview.close(requestlistView);
 					//var mainpage = plus.webview.getWebviewById('home');
-					mui.back();
+					mui.back();*/
+					mui.openWindow({
+						id: "requestlist",
+						url: "../main/products/requestlist.html"
+					});
 					mui.fire(mainpage, 'refresh', {
 						refresh: "canRefresh"
 					});

@@ -147,8 +147,10 @@
 			var userlanageval=document.getElementsByName('userlanageval');
 			for(var ukey=0;ukey<userlanageval.length;ukey++){
 				var eachvalue=userlanageval[ukey].value;
-				if(language.indexOf(eachvalue) >= 0){
+				if(language.indexOf(eachvalue) >= 0){    
 					userlanageval[ukey].checked="checked";
+				} else {
+				    userlanageval[0].checked="checked";
 				}
 			}
 		}

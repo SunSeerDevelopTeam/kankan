@@ -146,7 +146,7 @@ var JSLocale = {
 	"Appeal":"お問い合わせ",
 	"musttext":"印がある項目は必須項目となります。",
 	"upimgtext":"画像をアップロード",
-	"nametext":"氏名",
+	"nametext":"ユーザー名",
 	"contenttext":"お問い合わせ内容",
 	"suretext":"確    認",
 	"writeemail":"メール",
@@ -161,7 +161,7 @@ var JSLocale = {
 	"home_return":"ホームに戻る",
 	//message
 	"messagetitle":"あなたへのお知らせ",
-	"stautestext":"商品取引中",
+	"stautestext":"問い合わせ中",
 	"thistorytext":"取引履歴",
 	//category
 	"category_top_1":"すべて",
