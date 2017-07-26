@@ -32,10 +32,12 @@
 				<span class="mui-icon mui-icon-camera"></span>
 				<span class="mui-tab-label lang" data-locale="tab_2"></span>
 			</a>
+			<!--
 			<a class="mui-tab-item" href="products/product_want_to_buy.html">
 				<span class="mui-icon mui-icon-compose"></span>
 				<span class="mui-tab-label lang" data-locale="tab_3"></span>
 			</a>
+			-->
 			<a class="mui-tab-item" href="logisticslist.html">
 				<span class="mui-icon iconfont icon-wuliu"></span>
 				<span class="mui-tab-label lang" data-locale="tab_4"></span>
@@ -48,7 +50,7 @@
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init();
-			var subpages = ['home.html', 'products/request.html', 'products/product_login.html', 'products/product_want_to_buy.html', 'logisticslist.html'];
+			var subpages = ['home.html', 'products/request.html', 'products/product_login.html', 'logisticslist.html'];
 			var subpage_style = {
 				top: '0px',
 				bottom: '51px'
@@ -59,7 +61,7 @@
 			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				for(var i = 0; i < 5; i++) {
+				for(var i = 0; i < 4; i++) {
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
 					if(i > 0) {

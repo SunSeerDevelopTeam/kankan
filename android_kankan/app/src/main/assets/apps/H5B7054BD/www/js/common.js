@@ -1560,7 +1560,7 @@ var TextMessage;
 	TextMessage.transSuccess = language ? "取引成立" : "交易成功";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
 	TextMessage.transContact = language ? "入力してください" : "交谈内容不能为空";
-	TextMessage.tranStatusRequest = language ? "取引中" : "请求中";
+	TextMessage.tranStatusRequest = language ? "問い合わせ中" : "请求中";
 	TextMessage.tranStatusDeal = language ? "取引成立" : "交易成立";
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
 	TextMessage.transStopMsg = language ? "取引を中止しました。継続したい場合は再度取引をしてください。" : "已终止交易，不能继续交易。如果要继续交易请重新请求!!!";
