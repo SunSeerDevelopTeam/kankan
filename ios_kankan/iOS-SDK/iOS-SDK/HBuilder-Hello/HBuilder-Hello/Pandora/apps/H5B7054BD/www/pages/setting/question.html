@@ -63,6 +63,24 @@
 	        	 <input type="hidden" name="" id="1" value="0" class="imgname" />
 	        	 <input type="hidden" name="" id="2" value="0" class="imgname" />
 	        	 <input type="hidden" name="" id="3" value="0" class="imgname" />
+                  <div id="shensu" class="mui-popover mui-popover-action mui-popover-bottom">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a id="chooseImage" style="color: #9C9C9C" disabled="true"></a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="takephoto" onclick="getImage()" style="color: #007aff"></a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="fromChoose" onclick="galleryImg()" style="color: #007aff"></a>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#shensu" style="color: #007aff"></a>
+						</li>
+					</ul>
+		        </div>
 			</form>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js" ></script>
@@ -166,6 +184,10 @@
 				});
 			});
 			
+		    $('#chooseImage').text(TextMessage.chooseimage);
+		    $('#takephoto').text(TextMessage.tackpicture);
+		    $('#fromChoose').text(TextMessage.gallerychoose);
+		    $("[href='#shensu']").html("<b>" + TextMessage.cancel + "</b>");
 		</script>
 	</body>
 </html>

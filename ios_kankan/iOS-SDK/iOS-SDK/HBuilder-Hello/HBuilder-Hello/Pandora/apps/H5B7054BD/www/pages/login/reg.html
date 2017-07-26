@@ -225,6 +225,11 @@
 							return;
 						}
 						console.log("click sendVCodeBtn");
+						doc.getElementById('email').blur();
+						doc.getElementById('username').blur();
+						doc.getElementById('password').blur();
+						doc.getElementById('passwordConfirm').blur();
+						doc.getElementById('verificationCode').blur();
 						canClick = false;
 						var email = doc.getElementById('email').value.trim();
 						if (email == "") {
@@ -328,6 +333,11 @@
 					var regBtn = doc.getElementById('reg');
 					regBtn.addEventListener('tap', function(event) {
 						console.log("click regBtn");
+						doc.getElementById('email').blur();
+						doc.getElementById('username').blur();
+						doc.getElementById('password').blur();
+						doc.getElementById('passwordConfirm').blur();
+						doc.getElementById('verificationCode').blur();
 						var email = doc.getElementById('email').value.trim();
 						if (email == "") {
 							plus.nativeUI.toast(TextMessage.emailnull);
@@ -413,11 +423,6 @@
 
 					var showCityPicker = function() {
 						Log.i("click cityPicker");
-						doc.getElementById('email').blur();
-						doc.getElementById('username').blur();
-						doc.getElementById('password').blur();
-						doc.getElementById('passwordConfirm').blur();
-						doc.getElementById('verificationCode').blur();
 						cityPicker.show(function(items) {
 							var cityElement = doc.getElementById('city');
 							cityElement.value = items[0].text;

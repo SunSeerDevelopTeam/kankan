@@ -2,30 +2,7 @@
 	mui(".ka_prologbox0").on("tap", "#takepic", function(e) {
 		inputblur();
 		if(mui.os.plus) {
-			var a = [{
-				title: TextMessage.tackpicture
-			},
-			{
-				title: TextMessage.gallerychoose
-			}];
-			plus.nativeUI.actionSheet({
-				title: TextMessage.chooseimage,
-				cancel: TextMessage.cancel,
-				buttons: a
-			}, function(b) {
-				switch(b.index) {
-					case 0:
-						break;
-					case 1:
-						getImage();
-						break;
-					case 2:
-						galleryImg();
-						break;
-					default:
-						break
-				}
-			})
+			mui('#shensu').popover('toggle');
 		}
 	
 	});

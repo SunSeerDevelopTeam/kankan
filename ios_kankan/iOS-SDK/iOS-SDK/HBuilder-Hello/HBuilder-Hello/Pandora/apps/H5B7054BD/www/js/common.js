@@ -1154,45 +1154,17 @@ var Repository;
 
 		function isLogin() {
 			var myid = plus.storage.getItem("myid");
-			if((myid == "" || myid == null)) {
-				var btnArray = [{
-					title: TextMessage.login
-				}, {
-					title: TextMessage.register
-				}];
-				plus.nativeUI.actionSheet({
-					cancel: TextMessage.skip,
-					buttons: btnArray
-				}, function(e) {
-					switch(e.index) {
-						case 1:
-							mui.openWindow({
-								id: 'login',
-								url: '/pages/login/login.html',
-								waiting: {
-									autoShow: false
-								},
-								show: {
-									duration: 200
-								}
-							});
-							break;
-						case 2:
-							mui.openWindow({
-								id: 'reg',
-								url: '/pages/login/reg.html',
-								waiting: {
-									autoShow: false
-								},
-								show: {
-									duration: 200
-								}
-							});
-							break;
-						default:
-							break;
+			if (myid == "" || myid == null) {
+				if (mui('#clickzan').length != 0) {
+					mui('#clickzan').popover('toggle');
+				} else {
+					if (plus) {
+						var homePage = plus.webview.getWebviewById("home.html");
+						mui.fire(homePage, 'showActionSheet', {
+							isShow: 'yes'
+						});
 					}
-				});
+				}
 				return false;
 			}
 			return true;

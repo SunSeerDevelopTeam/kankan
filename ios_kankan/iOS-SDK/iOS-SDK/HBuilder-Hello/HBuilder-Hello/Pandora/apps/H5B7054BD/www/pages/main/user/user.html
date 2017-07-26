@@ -49,6 +49,17 @@
 				font-size: 12px;
 				
 			}
+			.comm-name{
+				  height: 1.5em;
+				  font-size: 14px;
+				  padding-left: 5%;
+				  padding-bottom: 5%;
+				  text-overflow: ellipsis;
+				  overflow: hidden;
+				  color: #222222;
+				  text-align: left;
+				  
+			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
@@ -581,6 +592,7 @@
 				var realwidth=exhibit_commdata[ex].comm_img_width;
 				var realheight=exhibit_commdata[ex].comm_img_height;
 				var commstatus=exhibit_commdata[ex].status;
+				var exhibitcomname=HTMLDecode(exhibit_commdata[ex].comm_name);
 				var oribi=realheight/realwidth;
 				var showheight=imgwidth*oribi;
 				var cha1=showheight-imgwidth;
@@ -614,6 +626,7 @@
 				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
 				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;height:'+imgwidth+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				exhibit_html+='<div class="comm-name mui-col-sm-12">'+exhibitcomname+'</div>';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
 				var yunum=k%6;
@@ -636,6 +649,7 @@
 				var praiseimg_url=praise_commdata[pi].img_thu_url;
 				var realwidthpra=praise_commdata[pi].comm_img_width;
 				var realheightpra=praise_commdata[pi].comm_img_height;
+				var praisecomname=HTMLDecode(praise_commdata[pi].comm_name);
 				var oribipra=realheightpra/realwidthpra;
 				var showheightpra=oribipra*imgwidth;
 				var cha2=showheightpra-imgwidth;
@@ -653,6 +667,7 @@
 				praise_html+='<li class="user-goods-grid detail">';
 				praise_html+='<a id="'+praisepid+'" href="#">';
 				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;height:'+imgwidth+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				praise_html+='<div class="comm-name mui-col-sm-12">'+praisecomname+'</div>';
 				praise_html+='</a>';
 				praise_html+='</li>';
 				var kiunum=ki%6;

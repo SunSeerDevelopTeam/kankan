@@ -115,6 +115,36 @@
 				<div id="deltimg" style="display: none;"></div>
 				<input type="hidden" name="codid" id="codid" value="" />
 				<input type="hidden" name="commstautes" id="commstautes" value="" />
+				<div id="photoLeft" class="mui-popover mui-popover-action mui-popover-bottom">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a id="chooseImage" style="color: #9C9C9C" disabled="true"></a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="fromChoose" onclick="galleryImg()" style="color: #007aff"></a>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#photoLeft" style="color: #007aff"></a>
+						</li>
+					</ul>
+		        </div>
+			    <div id="photoRight" class="mui-popover mui-popover-action mui-popover-bottom">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a id="comdity_takepic" style="color: #9C9C9C" disabled="true"></a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id="tackpicture" onclick="getImage()" style="color: #007aff"></a>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#photoRight" style="color: #007aff"></a>
+						</li>
+					</ul>
+		        </div>
 			</form>
 		</div>
 	</body>
@@ -834,6 +864,13 @@ function wastes(){
 		});
 	});
 }
+$('#chooseImage').text(TextMessage.chooseimage);
+$('#fromChoose').text(TextMessage.gallerychoose);
+$('#comdity_takepic').text(TextMessage.comdity_takepic);
+$('#tackpicture').text(TextMessage.tackpicture);
+$("[href='#photoLeft']").html("<b>" + TextMessage.cancel + "</b>");
+$("[href='#photoRight']").html("<b>" + TextMessage.cancel + "</b>");
+
 </script>
 
 </html>
