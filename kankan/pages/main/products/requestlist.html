@@ -15,24 +15,52 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="requesthistory"></h1>
 		</header>
-		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
 		<div class="mui-content">
-			<ul class="mui-table-view" id="historyshow">
-			</ul>
+			<div id="pullrefresh" class="mui-scroll-wrapper" style="margin-top: 1em;">
+				<div class="mui-scroll" >
+					<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
+					<ul class="mui-table-view mui-grid-view" id="historyshow" style="display: none;">
+					</ul>
+				</div>
+			</div>
 		</div>
-		<script src="../../../js/mui.min.js"></script>
+		<script>var h5pullDown = true;</script>
+		<script src="../../../js/mui.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript">
-			mui.init(/*{
-				swipeBack: false,
-				preloadPages: [{
-						id:"transaction",
-						url:"../../transaction/transaction2.html"
-				}]
-			}*/);
+			mui.init({
+				pullRefresh: {
+						container: '#pullrefresh',
+						down: {
+							contentrefresh:TextMessage.update,
+							contentnomore: TextMessage.nomore,
+							auto: true,
+							//top:"180px",
+							callback: pulldownRefresh
+						},
+//						up: {
+//							contentrefresh:TextMessage.update,
+//							contentinit: TextMessage.upmore,
+//							contentdown: TextMessage.upmore,
+//							contentnomore: TextMessage.nomore,
+//							callback: pulldownRefresh,
+//							
+//						}
+					}
+			});
+			function pulldownRefresh(){
+				$("#reloadpage").hide();
+				$("#historyshow").hide();
+				mui('#pullrefresh').pullRefresh().refresh(true);
+				setTimeout(function() {
+					$("#historyshow").empty();
+					getmessage();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				}, 1500);
+			}
 			function showhistory(results){
 				var data=results.data;
 				var datalen=data.length;
@@ -58,10 +86,11 @@
 					}
 					var comm_name=HTMLDecode(trans[0].comm_name);
 					var html = new Util.StringBuilder();
-					html.appendFormat('<li class="mui-table-view-cell transli"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img src="{1}" style="width: 60px;max-height: 60px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>',trans_id,comm_img)
+					html.appendFormat('<li class="mui-table-view-cell transli" style="width:100%;"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img src="{1}" style="width: 60px;max-height: 60px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>',trans_id,comm_img)
 						.appendFormat('<div class="mui-pull-left requestbox"><span>{0}</span><div><font color="#0062CC" style="display:none;">{1}P</font></div></div>',comm_name,price)
 						.appendFormat('<div class="mui-pull-right ka_userbox {0}">{1}</div></a></li>',trstatus=="3" ? "requestsuccess":"requeststop",status);
 					$("#historyshow").append(html.toString());
+					$("#historyshow").show();
 					var translatepage=null;
 					mui('.transli').on('tap','a',function(e) {
 						var tid = this.getAttribute('id');
@@ -77,41 +106,45 @@
 						});
 					});
 				}
+				
 			}
 			function reloadpage(){
 				location.reload();
 			}
-			mui.plusReady(function() {
+			function getmessage(){
 				var params = {};
 				Repository.User.mytranshistory(params,{
 					ok: function(data) {
 						console.log("request history success");
 						showhistory(data);
+						$("#reloadpage").hide();
 					},
 					ng: function(data) {
 						console.log("error");
 						Log.d(data);
 						//emptycontent();
 						if(data=="2001"){
-							alert(TextMessage.datanull);
+							mui.toast(TextMessage.datanull, {
+								duration: 'long',
+								type: 'div'
+							});
 							//$("ul").hide();
 						}
 						if(data=="1000"){
-							alert(TextMessage.test);
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
 							mui.toast(TextMessage.datanull, {
 								duration: 'long',
 								type: 'div'
 							})
 						}
-						if(data=="1000"){
-							alert(TextMessage.test);
-							mui.openWindow({
-								id: 'login',
-								url:"../../login/login.html"
-							});
-						}
 						if(data=="2002"){
-							alert(TextMessage.userng);
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							});
 							mui.openWindow({
 								id: 'login',
 								url:"../../login/login.html"
@@ -121,10 +154,14 @@
 					error:function(errortypetext){
 						$("#reloadpage").html(errortypetext);
 						$("#reloadpage").show();
-						$(".mui-content").hide();
+						$("#historyshow").hide();
+						//$(".mui-content").hide();reloadpage
 					}
 				});
-			});
+			}
+//			mui.plusReady(function() {
+//				getmessage();
+//			});
 		</script>
 	</body>
 
