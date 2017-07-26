@@ -125,7 +125,7 @@ var JSLocale = {
 	"change":"兑换",
 	//request
 	"requesttitle":"请求",
-	"requesthistory":"交易履历",
+	"requesthistory":"交易历史",
 	"requestedpro":"被请求商品",
 	"requestpro":"请求商品",
 	//setting page

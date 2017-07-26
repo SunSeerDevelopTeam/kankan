@@ -43,6 +43,10 @@ mui.back = function() {
 function pulldownRefresh() {
 	isDown = true;
 	mui('#pullrefresh').pullRefresh().refresh(true);
+	
+	if (keyword !== "") {
+		$('#searchResultPanel').hide();
+	}
 	keyword = "";
 	var params = {};
 	getDataFromServer(params, function(data) {
@@ -82,9 +86,6 @@ function pullupRefresh() {
 		if(Validator.isEmpty(data.data.commd)) {
 			//$("#item1mobile .mui-pull-loading").html(TextMessage.nomore);
 			mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-			if(keyword !== "") {
-				$(".mui-pull-caption-nomore").text(TextMessage.search_result + "'" + keyword + "'," + "全" + $('.mui-table-view li').length + "件");
-			}
 			return;
 		}
 		$(".mui-pull-caption-refresh").html(TextMessage.loading);
@@ -193,8 +194,8 @@ function createListView(data) {
 		table.appendChild(li);
 	});
 	if (keyword !== "") {
-		$('.mui-pull-bottom-pocket').show();
-		$(".mui-pull-caption").text(TextMessage.search_result + "'" + keyword + "'," + "全" + $('.mui-table-view li').length + "件");
+		var searchResultHTML = '<li id="searchResultPanel" class="mui-table-view-cell mui-col-sm-12 mui-col-xs-12"><p>'+TextMessage.search_result+"'" + keyword + "'," + "全" + data.data.pages.cnt + "件"+'</p></li>';
+		$('ul.mui-table-view').first().prepend(searchResultHTML);
 	}
 	bindEventOnListViewItem();
 	lazyload();

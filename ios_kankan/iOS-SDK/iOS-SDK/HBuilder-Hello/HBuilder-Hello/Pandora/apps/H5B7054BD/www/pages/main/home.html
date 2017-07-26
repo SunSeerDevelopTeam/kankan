@@ -142,8 +142,10 @@
 					<div class="mui-scroll">
 						<a class="mui-control-item mui-active lang" data-locale="category_top_1" href="#item1mobile" data-wid="tab-top-subpage-1" data-cid="0">
 						</a>
+						<!--
 						<a class="mui-control-item lang" data-locale="category_top_2" href="#item2mobile" data-wid="tab-top-subpage-2" data-cid="-1">
 						</a>
+						-->
 						<a class="mui-control-item lang" data-locale="category_top_3" href="#item3mobile" data-wid="tab-top-subpage-3" data-cid="3">
 						</a>
 						<a class="mui-control-item lang" data-locale="category_top_4" href="#item4mobile" data-wid="tab-top-subpage-4" data-cid="33">
@@ -284,11 +286,15 @@
 						id: "tab-top-subpage-13",
 						url: "category/tab-top-subpage-13.html",
 						extras: {}
-					}, {
+					}
+					/**
+					, {
 						id: "tab-top-subpage-14",
 						url: "category/tab-top-subpage-14.html",
 						extras: {}
-					}],
+					}
+					**/
+					],
 					onChange: function(obj) {
 						console.log("onChange callback");
 						console.log("user agent is " + navigator.userAgent.toLowerCase());
