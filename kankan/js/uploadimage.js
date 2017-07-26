@@ -172,6 +172,7 @@
 	}
 	
 	function getImage() {
+	    mui('#shensu').popover('hide');
 		var c = plus.camera.getCamera();
 		c.captureImage(function(e) {
 			plus.io.resolveLocalFileSystemURL(e, function(entry) {
@@ -191,6 +192,7 @@
 	}
 	
 	function galleryImg() {
+	    mui('#shensu').popover('hide');
 		plus.gallery.pick(function(a) {
 			plus.io.resolveLocalFileSystemURL(a, function(entry) {
 				var localURL2 = entry.toLocalURL();
