@@ -60,6 +60,35 @@
 		<script type="text/javascript" src="../../../js/common.js" ></script>
 		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js" ></script>
 		<script type="text/javascript" src="../../../js/index.list.js" ></script>
+	    <script>
+			$('#pullrefresh').after(getzanItems());
+			$("#loginItem").click(function(){
+                mui.openWindow({
+					id: 'login',
+					url: '/pages/login/login.html',
+					waiting: {
+						autoShow: false
+					},
+					show: {
+						duration: 200
+					}
+				});
+				mui('#clickzan').popover('hide');
+            });
+            $("#registerItem").click(function(){
+                mui.openWindow({
+					id: 'reg',
+					url: '/pages/login/reg.html',
+					waiting: {
+						autoShow: false
+					},
+					show: {
+						duration: 200
+					}
+				});
+				mui('#clickzan').popover('hide');
+            });
+		</script>
 	</body>
 
 </html>
