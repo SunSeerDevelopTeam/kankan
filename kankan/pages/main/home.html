@@ -199,6 +199,18 @@
 					$('i').hide();
 				}
 			});
+			
+			window.addEventListener("showActionSheet", function(event){
+				if (event.detail.isShow !== 'yes') {
+					return;
+				}
+				var wids = $('.mui-scroll .mui-active').index() + 1;
+				var pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
+				mui.fire(pullrefresh_page, 'showActionSheet', {
+					isHide: 'no'
+				});
+			});
+			
 			window.addEventListener('praiseid', function(event) {
 				var praiseid = event.detail.praiseid;
 				//alert(typeof(praiseid));
@@ -282,6 +294,12 @@
 						console.log("user agent is " + navigator.userAgent.toLowerCase());
 						var c = document.querySelector(".mui-control-item.mui-active");
 						var userAgent = navigator.userAgent.toLowerCase();
+                        // hide actionSheet
+						var wids = $('.mui-scroll .mui-active').index();
+						var pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
+						mui.fire(pullrefresh_page, 'hideActionSheet', {
+							isHide: 'yes'
+						});
 						if(c) {
 							c.classList.remove("mui-active");
 							if (userAgent.indexOf("ipad") >= 0) {
@@ -299,6 +317,11 @@
 						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
 						localStorage.setItem("cid", activeTab.dataset.cid);
 						activeTab.classList.add("mui-active");
+						wids = $('.mui-scroll .mui-active').index();
+						pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
+						mui.fire(pullrefresh_page, 'hideActionSheet', {
+							isHide: 'yes'
+						});
 						if (userAgent.indexOf("ipad") >= 0) {
 							var wid = activeTab.getAttribute("data-wid");
 							var newwid = wid.substr(wid.lastIndexOf("-") + 1, wid.length);
@@ -347,47 +370,8 @@
 					});
 				});
 				mui("header").on("tap","#offCanvasShow", function() {
-					var isLogin = plus.storage.getItem("LoginFlag");
-					if(!isLogin) {
-						var btnArray = [{
-							title: TextMessage.login
-						}, {
-							title: TextMessage.register
-						}];
-						plus.nativeUI.actionSheet({
-							cancel: TextMessage.skip,
-							buttons: btnArray
-						}, function(e) {
-							switch(e.index) {
-								case 1:
-									mui.openWindow({
-										id: 'login',
-										url: '../login/login.html',
-										waiting: {
-											autoShow: false
-										},
-										show: {
-											duration: 200
-										}
-									});
-									break;
-								case 2:
-									mui.openWindow({
-										id: 'reg',
-										url: '../login/reg.html',
-										waiting: {
-											autoShow: false
-										},
-										show: {
-											duration: 200
-										}
-									});
-									break;
-								default:
-									break;
-							}
-						});
-					} else {
+					// var isLogin = plus.storage.getItem("LoginFlag");
+					if(Repository.User.isLogin()) {
 						mui.openWindow({
 							id: 'news',
 							url: 'news.html',

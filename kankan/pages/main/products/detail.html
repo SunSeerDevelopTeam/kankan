@@ -123,11 +123,7 @@
 					<div id="weixinimgbox">
 						<img src="../../../images/weixin2.png">
 					</div>
-					<!--<img src="../../../images/facebook.png" width="40" height="30">
-					<img src="../../../images/line.png" width="30" height="30">
-					<img src="../../../images/twitter.png" width="30" height="30">-->
-
-				</li>
+                </li>
 			</ul>
 			<!--Producer information-->
 			<div class="kankan_det_author">
@@ -206,6 +202,38 @@
 			<input type="hidden" name="userid" id="userid" value="" />
 			<input type="hidden" name="myid" id="myid" value="" />
 			<input type="hidden" name="comm_num" id="comm_num" value="" />
+			<!--Report-->
+			<div id="report" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a id="see" href="#" style="color: #9C9C9C" disabled="true"></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="reportGoods" onclick="complaint()" style="color: #007aff"></a>
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#report" style="color: #007aff"></a>
+					</li>
+				</ul>
+		    </div>
+		    <!--pengyouquan-->
+			<div id="friendChat" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a id="shareFriends" onclick="weixinchat('WXSceneSession')" style="color: #007aff"></a >
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="shareCircle" onclick="weixinchat('WXSceneTimeline')" style="color: #007aff"></a >
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#friendChat" style="color: #007aff">cc</a >
+					</li>
+				</ul>
+		    </div>
 		</div>
 
 		<script src="../../../js/mui.min.js"></script>
@@ -260,10 +288,15 @@
 			});
 			//*********************share start
 			
-
+            
+            
 			//onclick share
+			var shares = {};
+		    var sId;
+		    var sImage;
 			function clickshare(shareid,imgurl0){
-				var shares = {};
+				sId = shareid;
+				sImage = imgurl0;
 				mui.plusReady(function() {
 					TextMessage.language = plus.os.language;
 					plus.share.getServices(function(s) {
@@ -276,89 +309,68 @@
 					}, function() {
 						console.log("share server fail");
 					});
-				});
+				});	
 				document.getElementById("share").addEventListener('tap', function() {
-					var ids = [{
-							id: "weixin",
-							ex: "WXSceneSession"
-						}, {
-							id: "weixin",
-							ex: "WXSceneTimeline"
-						}],
-						bts = [{
-							title: TextMessage.towchatfrind
-						}, {
-							title: TextMessage.towchatcircle
-						}];
-					plus.nativeUI.actionSheet({
-						cancel: TextMessage.cancel,
-						buttons: bts
-					}, function(e) {
-						var i = e.index;
-						if(i > 0) {
-							var s_id = ids[i - 1].id;
-							var share = shares[s_id];
-							if(share) {
-								if(share.authenticated) {
-									shareMessage(share, ids[i - 1].ex);
-								} else {
-									share.authorize(function() {
-										shareMessage(share, ids[i - 1].ex);
-									}, function(e) {
-										console.log("error：" + e.code + " - " + e.message);
-									});
-								}
-							} else {
-								mui.toast("can not get share server")
-							}
-						}
-					});
+					mui('#friendChat').popover('toggle');
 				});
-				//share message
-				function shareMessage(share, ex) {
-					var msg = {
-						extra: {
-							scene: ex
-						}
-					};
-					var paramshareid = {
-						"commodity_id": shareid
-					};
-					Repository.Commodity.shareid(paramshareid, {
-						ok: function(data) {
-							console.log(data.data.commodity_id);
-							var outid=data.data.commodity_id;
-							shareout(outid)
-							console.log("success");
-						},
-						ng: function(data) {
-							console.log(data);
-						}
-					});
-					function shareout(shareids){
-						msg.href = Api.url.Commodity.shareurl+shareids;
-						msg.title =TextMessage.sharetitle;
-						msg.content = TextMessage.sharecontent;
-						msg.thumbs = [imgurl0];
-						//alert(msg.href + "title" + msg.title + "content:" + msg.content + 'thumbs:' + msg.thumbs);
-						share.send(msg, function() {
-							var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
-	//						mui.toast(sharesuccesstext, {
-	//							duration: 'long',
-	//							type: 'div'
-	//						});
-	//						alert("aaaa");
-							console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
-						}, function(e) {
-							console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
-						});
+			}
+		
+		    function shareMessage(share, ex) {
+				var msg = {
+					extra: {
+						scene: ex
 					}
-					
+				};
+				var paramshareid = {
+					"commodity_id": sId
+				};
+				Repository.Commodity.shareid(paramshareid, {
+					ok: function(data) {
+						console.log(data.data.commodity_id);
+						var outid=data.data.commodity_id;
+						shareout(outid)
+						console.log("success");
+					},
+					ng: function(data) {
+						console.log(data);
+					}
+				});
+				function shareout(shareids){
+					msg.href = Api.url.Commodity.shareurl+shareids;
+					msg.title =TextMessage.sharetitle;
+					msg.content = TextMessage.sharecontent;
+					msg.thumbs = [sImage];
+					share.send(msg, function() {
+						var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
+						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.success);
+					}, function(e) {
+						console.log(TextMessage.share + "\"" + share.description + "\"" + TextMessage.faile + e.code + " - " + e.message);
+					});
 				}
 			}
 				
 			
 			//share end***********/
+			
+            function weixinchat(flag) {
+				var s_id = 'weixin';
+				var share = shares[s_id];
+				mui('#friendChat').popover('hide');
+				if (share) {
+					if (share.authenticated) {
+						shareMessage(share, flag);
+					} else {
+						share.authorize(function() {
+							shareMessage(share, flag);
+						}, function(e) {
+							console.log("error: " + e.code + " - " + e.message);
+						});
+					}
+				} else {
+					mui.toast("can not share server");
+				}
+			}
+
 			function reloadpage(){
 				mui.back();
 			}
@@ -431,22 +443,7 @@
 			function clickwarn(){
 				mui('.kankan_det_comment').on("tap",".ka_warn",function(e){
 					if(mui.os.plus){
-						var a = [{
-							title:TextMessage.complaintpro
-						}];
-						plus.nativeUI.actionSheet({
-							title: TextMessage.sharetitle,
-							cancel: TextMessage.cancel,
-							buttons: a
-						}, function(b) {
-							switch (b.index) {
-								case 1:
-									complaint();
-									break;
-								default:
-									break
-							}
-						})	
+						mui('#report').popover('toggle');	
 					}
 				});
 			}
@@ -1002,6 +999,13 @@
 					}
 				}
 			})
+		    
+		    $('#see').text(TextMessage.sharetitle);
+		    $('#reportGoods').text(TextMessage.complaintpro);
+		    $('#shareFriends').text(TextMessage.towchatfrind);
+		    $('#shareCircle').text(TextMessage.towchatcircle);
+		    $("[href='#report']").html("<b>" + TextMessage.cancel + "</b>");
+		    $("[href='#friendChat']").html("<b>" + TextMessage.cancel + "</b>");
 		</script>
 	</body>
 

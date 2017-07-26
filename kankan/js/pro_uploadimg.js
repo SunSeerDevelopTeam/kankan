@@ -2,24 +2,7 @@
 mui(".ka_prologbox0").on("tap", "#takepic", function(e) {
 	inputblur();
 	if(mui.os.plus) {
-		var a = [{
-			title: TextMessage.tackpicture
-		}];
-		plus.nativeUI.actionSheet({
-			title: TextMessage.comdity_takepic,
-			cancel: TextMessage.cancel,
-			buttons: a
-		}, function(b) {
-			switch(b.index) {
-				case 0:
-					break;
-				case 1:
-					getImage();
-					break;
-				default:
-					break
-			}
-		})
+		mui('#photoRight').popover('toggle');
 	}
 
 });
@@ -27,24 +10,7 @@ mui(".ka_prologbox0").on("tap", "#takepic", function(e) {
 mui(".ka_prologbox0").on("tap", "#gallery", function(e) {
 	inputblur();
 	if(mui.os.plus) {
-		var a = [{
-			title: TextMessage.gallerychoose
-		}];
-		plus.nativeUI.actionSheet({
-			title: TextMessage.chooseimage,
-			cancel: TextMessage.cancel,
-			buttons: a
-		}, function(b) {
-			switch(b.index) {
-				case 0:
-					break;
-				case 1:
-					galleryImg();
-					break;
-				default:
-					break
-			}
-		})
+		mui('#photoLeft').popover('toggle');
 	}
 
 });

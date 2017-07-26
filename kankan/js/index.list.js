@@ -327,7 +327,25 @@ function lazyload() {
 	});
 	**/
 }
-
+function getzanItems() {
+	var zanItemHTML = new Util.StringBuilder();
+	zanItemHTML.append('<div id="clickzan" class="mui-popover mui-popover-action mui-popover-bottom">')
+	    .append('<ul class="mui-table-view">')
+	    .append('<li class="mui-table-view-cell">')
+	    .appendFormat('<a id="loginItem" style="color: #007aff">{0}</a >', TextMessage.login)
+	    .append('</li>')
+	    .append('<li class="mui-table-view-cell">')
+	    .appendFormat('<a id="registerItem" style="color: #007aff">{0}</a >', TextMessage.register)
+	    .append('</li>')
+	    .append('</ul>')
+	    .append('<ul class="mui-table-view">')
+	    .append('<li class="mui-table-view-cell">')
+	    .appendFormat('<a href="#clickzan" style="color: #007aff"><b>{0}</b></a >', TextMessage.cancel)
+	    .append('</li>')
+	    .append('</ul>')
+	    .append('</div>');
+	return zanItemHTML.toString();
+}
 //当DOM准备就绪时
 mui.plusReady(function() {
 	if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE) {
@@ -345,6 +363,7 @@ mui.plusReady(function() {
 	if(mui('#pullrefresh').length === 0) {
 		localStorage.cid = mui(".mui-control-item.mui-active")[0].dataset.cid;
 	}
+	getzanItems();
 })
 
 window.addEventListener("search", function(event) {
@@ -358,6 +377,20 @@ window.addEventListener("search", function(event) {
 		document.body.querySelector('.mui-table-view').innerHTML = "";
 		createListView(data, "search");
 	});
+});
+
+window.addEventListener("hideActionSheet", function(event){
+	if (event.detail.isHide !== "yes") {
+		return;
+	}
+	mui("#clickzan").popover('hide');
+});
+
+window.addEventListener("showActionSheet", function(event){
+	if (event.detail.isHide !== "no") {
+		return;
+	}
+	mui('#clickzan').popover('show');
 });
 window.addEventListener("initData", function(event){
 	if (event.detail.createData !== "yes") {
