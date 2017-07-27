@@ -12,7 +12,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
+			<a onclick="gotoHistory()" class="mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="requesthistory"></h1>
 		</header>
 		<div class="mui-content">
@@ -162,6 +162,15 @@
 //			mui.plusReady(function() {
 //				getmessage();
 //			});
+            function gotoHistory() {
+            	mui.openWindow({
+					id: "request",
+					url: "request.html",
+					waiting: {
+						autoShow: false
+					}
+				});
+            }
 		</script>
 	</body>
 
