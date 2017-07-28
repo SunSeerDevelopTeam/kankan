@@ -1474,7 +1474,7 @@ var TextMessage;
 	TextMessage.errorCode_2012 = language ? "画像がありません" : "没有上传画像";
 	TextMessage.errorCode_2013 = language ? "メール/ユーザー名が間違っています、もしくは存在しています" : "注册邮箱/用户名 错误，或已存在";
 	TextMessage.errorCode_2014 = language ? "認証番号は無効になりました" : "验证码失效";
-	TextMessage.errorCode_2015 = language ? "多重チェックインができません" : "不能重复签到";
+	TextMessage.errorCode_2015 = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません" : "该商品正在问合中，不能重复提交请求";
 	TextMessage.errorCode_2017 = language ? "ポイント不足になっています" : "您当前point不足";
 	TextMessage.errorCode_2018 = language ? "相手側の対応をお待ちください。" : "交易订单不存在或被删除";
