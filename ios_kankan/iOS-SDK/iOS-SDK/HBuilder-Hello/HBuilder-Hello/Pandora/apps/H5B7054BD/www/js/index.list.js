@@ -84,8 +84,9 @@ function pullupRefresh() {
 		var table = document.body.querySelector('.mui-table-view');
 		var imgwidth = parseInt($(window).width()) / 2 - 34;
 		if(Validator.isEmpty(data.data.commd)) {
-			//$("#item1mobile .mui-pull-loading").html(TextMessage.nomore);
-			mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+			//$('.mui-pull-caption').html(TextMessage.nomore);
+			mui.toast(TextMessage.nomore);
+			mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 			return;
 		}
 		$(".mui-pull-caption-refresh").html(TextMessage.loading);
