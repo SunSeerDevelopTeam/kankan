@@ -589,7 +589,7 @@ var Api;
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
-				var errortypetext=Api.errortype(type);
+				var errortypetext = Api.errortype(type, url);
 				Log.e(xhr);
 				Log.e(type);
 				Log.e(errorThrown);
@@ -645,21 +645,23 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
-	function errortype(type){
-		var retexts="";
+	function errortype(type, url){
+		var splitFlag = "<br/>";
+		if (url === Api.url.Commodity.commodityList
+		||	url === Api.url.User.logout
+		) {
+			splitFlag = "\n";
+		}
 		switch(type){
 			case "abort":
-			retexts=TextMessage.nonetwork+"<br/>"+TextMessage.nonetwork2;
-			return retexts;
-			break;
+				return TextMessage.nonetwork + splitFlag +TextMessage.nonetwork2;
+				break;
 			case "timeout":
-			retexts=TextMessage.timeouttext+"<br/>"+TextMessage.timeouttext2;
-			return retexts;
-			break;
+				return TextMessage.timeouttext + splitFlag + TextMessage.timeouttext2;
+				break;
 			default:
-			retexts=TextMessage.intralerror+"<br/>"+TextMessage.timeouttext2;
-			return retexts;
-			break;
+				return TextMessage.intralerror + splitFlag + TextMessage.timeouttext2;
+				break;
 		}
 	}
 	Api.errortype = errortype;
@@ -1472,7 +1474,7 @@ var TextMessage;
 	TextMessage.errorCode_2012 = language ? "画像がありません" : "没有上传画像";
 	TextMessage.errorCode_2013 = language ? "メール/ユーザー名が間違っています、もしくは存在しています" : "注册邮箱/用户名 错误，或已存在";
 	TextMessage.errorCode_2014 = language ? "認証番号は無効になりました" : "验证码失效";
-	TextMessage.errorCode_2015 = language ? "多重チェックインができません" : "不能重复签到";
+	TextMessage.errorCode_2015 = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません" : "该商品正在问合中，不能重复提交请求";
 	TextMessage.errorCode_2017 = language ? "ポイント不足になっています" : "您当前point不足";
 	TextMessage.errorCode_2018 = language ? "相手側の対応をお待ちください。" : "交易订单不存在或被删除";
