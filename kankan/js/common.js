@@ -589,7 +589,7 @@ var Api;
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
-				var errortypetext=Api.errortype(type);
+				var errortypetext = Api.errortype(type, url);
 				Log.e(xhr);
 				Log.e(type);
 				Log.e(errorThrown);
@@ -645,21 +645,21 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
-	function errortype(type){
-		var retexts="";
+	function errortype(type, url){
+		var splitFlag = "<br/>";
+		if (url === Api.url.Commodity.commodityList) {
+			splitFlag = "\n";
+		}
 		switch(type){
 			case "abort":
-			retexts=TextMessage.nonetwork+"<br/>"+TextMessage.nonetwork2;
-			return retexts;
-			break;
+				return TextMessage.nonetwork + splitFlag +TextMessage.nonetwork2;
+				break;
 			case "timeout":
-			retexts=TextMessage.timeouttext+"<br/>"+TextMessage.timeouttext2;
-			return retexts;
-			break;
+				return TextMessage.timeouttext + splitFlag + TextMessage.timeouttext2;
+				break;
 			default:
-			retexts=TextMessage.intralerror+"<br/>"+TextMessage.timeouttext2;
-			return retexts;
-			break;
+				return TextMessage.intralerror + splitFlag + TextMessage.timeouttext2;
+				break;
 		}
 	}
 	Api.errortype = errortype;

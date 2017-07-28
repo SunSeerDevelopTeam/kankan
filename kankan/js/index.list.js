@@ -132,7 +132,9 @@ function getDataFromServer(params, callback) {
 			},
 			error: function() {
 				var message = arguments[0].toString();
-				console.log("message is : " + message);
+				if (typeof(plus) !== undefined) {
+					plus.nativeUI.toast(message);
+				}
 				if(isDown) {
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
 				} else {
