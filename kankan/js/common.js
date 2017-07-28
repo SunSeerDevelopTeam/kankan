@@ -647,7 +647,9 @@ var Api;
 	Api.setToken = setToken;
 	function errortype(type, url){
 		var splitFlag = "<br/>";
-		if (url === Api.url.Commodity.commodityList) {
+		if (url === Api.url.Commodity.commodityList
+		||	url === Api.url.User.logout
+		) {
 			splitFlag = "\n";
 		}
 		switch(type){

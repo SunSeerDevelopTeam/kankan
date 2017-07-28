@@ -292,9 +292,11 @@
 				//sure log out
 				if(clickval=="0"){
 					mui.plusReady(function() {
+						var waitingDialog = plus.nativeUI.showWaiting();
 						var params={};
 						Repository.User.logout(params,{
 							ok: function(data) {
+								waitingDialog.close();
 								plus.storage.setItem('token','');//clear locale token
 								plus.storage.setItem('LoginFlag','');//clear LoginFlag
 								plus.storage.setItem('email','');//clear login user email
@@ -307,8 +309,13 @@
 								console.log("log out success");
 							},
 							ng: function(data) {
+								waitingDialog.close();
 								console.log("logout error:"+data);
 								Log.d(data);
+							},
+							error: function(message) {
+								waitingDialog.close();
+								plus.nativeUI.toast(message);
 							}
 						});
 					});
