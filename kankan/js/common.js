@@ -1552,6 +1552,7 @@ var TextMessage;
 	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
 	TextMessage.nomore = language ? "データがありません" : "没有更多数据了";
+	TextMessage.nomorenews = language ? "お知らせはありません" : "暂无消息";
 	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
 	TextMessage.update = language ? "更新中" : "正在刷新";
 	TextMessage.pull_down = language ? "引っ張って更新" : "下拉可以刷新";
