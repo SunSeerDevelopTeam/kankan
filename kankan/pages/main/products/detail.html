@@ -294,9 +294,13 @@
 			var shares = {};
 		    var sId;
 		    var sImage;
-			function clickshare(shareid,imgurl0){
+		    var sName;
+		    var sDetail;
+			function clickshare(shareid,imgurl0,comdname,comdetail){
 				sId = shareid;
 				sImage = imgurl0;
+				sName=comdname;
+				sDetail=comdetail;
 				mui.plusReady(function() {
 					TextMessage.language = plus.os.language;
 					plus.share.getServices(function(s) {
@@ -337,8 +341,8 @@
 				});
 				function shareout(shareids){
 					msg.href = Api.url.Commodity.shareurl+shareids;
-					msg.title =TextMessage.sharetitle;
-					msg.content = TextMessage.sharecontent;
+					msg.title =sName;
+					msg.content = sDetail;
 					msg.thumbs = [sImage];
 					share.send(msg, function() {
 						var sharesuccesstext=TextMessage.share + "\"" + share.description + "\"" + TextMessage.success;
@@ -836,7 +840,12 @@
 					}*/
 					imgurl0 = imgurlpath+'/thumbnail'+imgurlname;
 				}
-				clickshare(comdityid,imgurl0);
+				if(comdmesage.lenght>10){
+					var comdetail=comdmesage.substring(0,10)+"......";
+				}else{
+					var comdetail=comdmesage;
+				}
+				clickshare(comdityid,imgurl0,comdname,comdetail);
 			}
 			//products list
 			var prolistpage = null;
