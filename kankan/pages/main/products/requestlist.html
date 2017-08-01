@@ -12,7 +12,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a onclick="gotoHistory()" class="mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="requesthistory"></h1>
 		</header>
 		<div class="mui-content">
@@ -164,7 +164,7 @@
 //			mui.plusReady(function() {
 //				getmessage();
 //			});
-            function gotoHistory() {
+            /*function gotoHistory() {
             	mui.openWindow({
 					id: "request",
 					url: "request.html",
@@ -172,7 +172,12 @@
 						autoShow: false
 					}
 				});
-            }
+            }*/
+           mui(".mui-bar-nav").on("tap","a",function(){
+				var view = plus.webview.currentWebview().opener();
+				mui.fire(view,'requestpage');
+				mui.back();
+			});
 		</script>
 	</body>
 
