@@ -146,6 +146,7 @@
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
 		<script src="../../../js/language.js"></script>
 		<script src="../../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			var imgwidth = parseInt($(window).width()) / 3 - 17;
@@ -307,7 +308,7 @@
 						}
 						var html = new Util.StringBuilder();
 						html.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-4 translate"><a id="{0}" href="#">', transid)
-							.appendFormat('<div class="ka_imgoption" style="height:{0}px;text-align:center;{3}}"><img class="mui-media-object" src="{1}" style="height: auto;width:100%;margin-top:{2}px;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '"></div>', imgwidth, comm_img == "" ? "../../../images/nopic.jpg" : comm_img, toppx,toppx < 0 ?"":"display: table-cell;vertical-align:middle;")
+							.appendFormat('<div class="ka_imgoption" style="height:{0}px;text-align:center;{3}}"><img class="mui-media-object" data-original="{1}" style="height: auto;width:100%;margin-top:{2}px;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '"></div>', imgwidth, comm_img == "" ? "../../../images/nopic.jpg" : comm_img, toppx,toppx < 0 ?"":"display: table-cell;vertical-align:middle;")
 							.appendFormat('<div class="mui-media-body">{0}</div>', comm_name)
 							.appendFormat('<div class="mui-pull-left" style="{0}">{1}</div></a>', trans_type == 0 ? "font-size:12px;color:#F0AD4E;" : "font-size:12px;color:#C7254E;", trans_typetext)
 							//.appendFormat('<div class="{0}">{1}</div>', trans_type == 0 ? "kankan_jyz" : "kankan_jycl", trans_typetext)
@@ -375,7 +376,7 @@
 						}
 						var html2 = new Util.StringBuilder();
 						html2.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-4 translate"><a id="{0}" href="#">', otransid)
-							.appendFormat('<div class="ka_imgoption" style="height:{0}px;{3}}"><img class="mui-media-object" src="{1}" style="height: auto;width:100%;margin-top:{2}px;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '"></div>', imgwidth, ocomm_img == "" ? "../../../images/nopic.jpg" : ocomm_img, otoppx,otoppx < 0 ?"":"display: table-cell;vertical-align:middle;")
+							.appendFormat('<div class="ka_imgoption" style="height:{0}px;{3}}"><img class="mui-media-object" data-original="{1}" style="height: auto;width:100%;margin-top:{2}px;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '"></div>', imgwidth, ocomm_img == "" ? "../../../images/nopic.jpg" : ocomm_img, otoppx,otoppx < 0 ?"":"display: table-cell;vertical-align:middle;")
 							.appendFormat('<div class="mui-media-body">{0}</div>', ocomm_name)
 							.appendFormat('<div class="mui-pull-left trans_typetexts" style="{0}">{1}</div></a>', trans_type == 0 ? "font-size:12px;color:#F0AD4E;" : "font-size:12px;color:#C7254E;",otrans_typetext)
 							//.appendFormat('<div class="{0}">{1}</div>', otrans_type == 0 ? "kankan_jyz" : "kankan_jycl", otrans_typetext)
@@ -386,6 +387,12 @@
 						$("#request").append(html2.toString());
 					}
 				}
+			    $("img.mui-media-object").lazyload({
+			    	threshold: 200,
+					placeholder: "../../../images/nopic.jpg",
+					effect: "fadeIn",
+					failure_limit : 10
+			    });
 			}
 			(function($) {
 				//阻尼系数

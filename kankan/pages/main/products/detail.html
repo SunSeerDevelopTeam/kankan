@@ -241,6 +241,7 @@
 		<script src="../../../js/language.js"></script>
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
+		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			var commodity_id;
 			var _w = parseInt($(window).width()); //获取浏览器的宽度
@@ -594,7 +595,7 @@
 					if(i>0){
 						htmlimg +='<div class="mui-icon mui-icon-back mui-pull-left Arrow leftarrow" onclick="goitem('+back+')"></div>';
 					}
-					htmlimg += '<img src="' + imgurl + '" style="max-height: '+showheight+'; width: '+showwidth+';vertical-align:middle; onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+					htmlimg += '<img class="cycleImage" src="' + imgurl + '" style="max-height: '+showheight+'; width: '+showwidth+';vertical-align:middle; onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 					if(i<la){
 						htmlimg +='<div class="mui-icon mui-icon-forward mui-pull-left Arrow rightarrow" style="margin-left: 80%;" onclick="goitem('+forward+')"></div>';
 					}
@@ -605,6 +606,12 @@
 						var htmlfocus = '<div class="mui-indicator"></div>';
 					}
 					$(".mui-slider-indicator").append(htmlfocus);
+					$("img.cycleImage").lazyload({
+						threshold: 200,
+						placeholder: "../../../images/nopic.jpg",
+						effect: "fadeIn",
+						failure_limit : 10
+					});
 				}
 				$(".lunboimgbox").html(htmlimg);
 				if(imglength > 1) {
@@ -629,6 +636,12 @@
 				$("#userid").val(userid);
 				$(".ka_authorname b").html(uname);
 				$(".ka_touxiangimg").attr("src", uimage);
+				$("img.ka_touxiangimg").lazyload({
+					threshold: 200,
+					placeholder: "../../../images/nopic.jpg",
+					effect: "fadeIn",
+					failure_limit: 10
+				});
 				$(".authcom").html(ucomentnum);
 				$(".authcomdnum").html(ucomeditynum);
 				$(".kankan_det_locationinfo").html(uadress);
@@ -694,7 +707,7 @@
 					if(j>=4){
 						recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendhtml += '<img class="mui-media-object ka_imgewh" src="' + recomdimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						recomendhtml += '<img class="mui-media-object ka_imgewh" data-original="' + recomdimg + '" style="height: '+recoimgheight+'px;">';
 						recomendhtml += '</a></li>';
 					}
 					var vall = k % 4;
@@ -747,7 +760,7 @@
 					if(l >= 4){
 						concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernhtml += '<img class="mui-media-object" src="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						concernhtml += '<img class="mui-media-object" data-original="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernhtml += '</a></li>';
 					}
 					var vallm = m % 4;
@@ -763,7 +776,7 @@
 					if(l < 4) {
 						concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
 						concernaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernaddhtml += '<img class="mui-media-object" src="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						concernaddhtml += '<img class="mui-media-object" data-original="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}
@@ -781,6 +794,13 @@
 				//concenered end**************************************/
 				//buy way
 				//praise staute
+				// add lazyload
+				$("img.mui-media-object").lazyload({
+					threshold: 200,
+					placeholder: "../../../images/nopic.jpg",
+					effect: "fadeIn",
+					failure_limit: 10
+				});
 				var user_praise_status = commodity.commodity_praise.user_praise_status;
 				if(user_praise_status == "0") {
 					$("#zanqian").show();
