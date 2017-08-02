@@ -268,6 +268,7 @@
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 	<script>
 		mui.init({
 			swipeBack: false,
@@ -625,7 +626,7 @@
 					
 				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
-				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;height:'+imgwidth+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img class="exhibit" style="width: 100%;height:'+imgwidth+'px;" data-original="'+commeximg_url+'"></div>';
 				exhibit_html+='<div class="comm-name mui-col-sm-12">'+exhibitcomname+'</div>';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
@@ -679,6 +680,12 @@
 					praise_html+='<ul class="user-item-list">';
 				}
 			}
+			$("img.exhibit").lazyload({
+				threshold: 200,
+				placeholder: "../../../images/nopic.jpg",
+				effect: "fadeIn",
+				failure_limit : 10
+			});
 			$(".myfavourateshow").html(praise_html);
 			mui('.mui-slider').slider().gotoItem(0);
 			var userid=results.myid;
