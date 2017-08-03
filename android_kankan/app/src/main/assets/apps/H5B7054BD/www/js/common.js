@@ -589,7 +589,7 @@ var Api;
 				$d.resolve();
 			},
 			error: function(xhr, type, errorThrown) {
-				var errortypetext=Api.errortype(type);
+				var errortypetext = Api.errortype(type, url);
 				Log.e(xhr);
 				Log.e(type);
 				Log.e(errorThrown);
@@ -645,21 +645,23 @@ var Api;
 		}
 	}
 	Api.setToken = setToken;
-	function errortype(type){
-		var retexts="";
+	function errortype(type, url){
+		var splitFlag = "<br/>";
+		if (url === Api.url.Commodity.commodityList
+		||	url === Api.url.User.logout
+		) {
+			splitFlag = "\n";
+		}
 		switch(type){
 			case "abort":
-			retexts=TextMessage.nonetwork+"<br/>"+TextMessage.nonetwork2;
-			return retexts;
-			break;
+				return TextMessage.nonetwork + splitFlag +TextMessage.nonetwork2;
+				break;
 			case "timeout":
-			retexts=TextMessage.timeouttext+"<br/>"+TextMessage.timeouttext2;
-			return retexts;
-			break;
+				return TextMessage.timeouttext + splitFlag + TextMessage.timeouttext2;
+				break;
 			default:
-			retexts=TextMessage.intralerror+"<br/>"+TextMessage.timeouttext2;
-			return retexts;
-			break;
+				return TextMessage.intralerror + splitFlag + TextMessage.timeouttext2;
+				break;
 		}
 	}
 	Api.errortype = errortype;
@@ -1472,7 +1474,7 @@ var TextMessage;
 	TextMessage.errorCode_2012 = language ? "画像がありません" : "没有上传画像";
 	TextMessage.errorCode_2013 = language ? "メール/ユーザー名が間違っています、もしくは存在しています" : "注册邮箱/用户名 错误，或已存在";
 	TextMessage.errorCode_2014 = language ? "認証番号は無効になりました" : "验证码失效";
-	TextMessage.errorCode_2015 = language ? "多重チェックインができません" : "不能重复签到";
+	TextMessage.errorCode_2015 = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません" : "该商品正在问合中，不能重复提交请求";
 	TextMessage.errorCode_2017 = language ? "ポイント不足になっています" : "您当前point不足";
 	TextMessage.errorCode_2018 = language ? "相手側の対応をお待ちください。" : "交易订单不存在或被删除";
@@ -1541,6 +1543,7 @@ var TextMessage;
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールアドレスが未入力です。" : "邮箱不能为空！";
 	TextMessage.username_null = language ? "ユーザー名が未入力です。" : "用户名不能为空!";
+	TextMessage.nickname_null = language ? "ニックネームが未入力です。" : "请输入用户昵称!";
 	TextMessage.username_error = language ? "ユーザー名が10桁以内に設定してください" : "用户名长度不能超过10位字符";
 	TextMessage.addressnull = language ? "アドレスを入力してください!" : "地址不能为空！";
 	TextMessage.codenull = language ? "認証番号を入力してください!" : "验证码不能为空！";
@@ -1550,6 +1553,7 @@ var TextMessage;
 	TextMessage.no_data = language ? "該当カテゴリのデータがありません。" : "当前分类下没有数据";
 	TextMessage.upmore = language ? "スクロールで更新" : "上拉显示更多";
 	TextMessage.nomore = language ? "データがありません" : "没有更多数据了";
+	TextMessage.nomorenews = language ? "お知らせはありません" : "暂无消息";
 	TextMessage.release = language ? "離すと更新" : "释放立即刷新";
 	TextMessage.update = language ? "更新中" : "正在刷新";
 	TextMessage.pull_down = language ? "引っ張って更新" : "下拉可以刷新";
@@ -1595,6 +1599,7 @@ var TextMessage;
 	TextMessage.nicknamenull = language ? "ユーザー名未入力です。" : "用户名不能为空";
 	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
 	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
+	TextMessage.nickname_error = language ? "ニックネームを１０文字以内に設定してください" : "昵称不能超过10位";
 	TextMessage.pwdudsuccess = language ? "パスワードを再発行しました。" : "密码更新成功";
 	TextMessage.re_issue = language ? "パスワード発行画面より再度手続きを行ってください。" : "验证码失效,请重新发送验证码.";
 	TextMessage.inputtext = language ? "入力文字数:" : "还能输入";

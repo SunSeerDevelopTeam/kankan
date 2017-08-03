@@ -148,7 +148,7 @@
 						<li class="user-point-grid" id="area">
 							<a href="#">
 								<font color="#AAAAAA" size="2">
-									<span class="mui-icon mui-icon-paperplane" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
+									<span class="mui-icon mui-icon-location" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
 								</font>
 							</a>
 						</li>
@@ -268,6 +268,7 @@
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 	<script>
 		mui.init({
 			swipeBack: false,
@@ -625,7 +626,7 @@
 					
 				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
-				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;height:'+imgwidth+'px;" src="'+commeximg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img class="exhibit" style="width: 100%;margin-top:'+toppx+'px;" data-original="'+commeximg_url+'"></div>';
 				exhibit_html+='<div class="comm-name mui-col-sm-12">'+exhibitcomname+'</div>';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
@@ -666,7 +667,7 @@
 				}
 				praise_html+='<li class="user-goods-grid detail">';
 				praise_html+='<a id="'+praisepid+'" href="#">';
-				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;height:'+imgwidth+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppxpra+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
 				praise_html+='<div class="comm-name mui-col-sm-12">'+praisecomname+'</div>';
 				praise_html+='</a>';
 				praise_html+='</li>';
@@ -679,6 +680,12 @@
 					praise_html+='<ul class="user-item-list">';
 				}
 			}
+			$("img.exhibit").lazyload({
+				threshold: 200,
+				placeholder: "../../../images/nopic.jpg",
+				effect: "fadeIn",
+				failure_limit : 10
+			});
 			$(".myfavourateshow").html(praise_html);
 			mui('.mui-slider').slider().gotoItem(0);
 			var userid=results.myid;

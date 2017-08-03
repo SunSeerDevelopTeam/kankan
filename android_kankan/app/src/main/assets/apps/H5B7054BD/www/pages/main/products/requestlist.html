@@ -12,7 +12,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a onclick="gotoHistory()" class="mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
 			<h1 class="mui-title lang" data-locale="requesthistory"></h1>
 		</header>
 		<div class="mui-content">
@@ -30,6 +30,7 @@
 		<script src="../../../js/language.js"></script>
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
+		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 		<script type="text/javascript">
 			mui.init({
 				pullRefresh: {
@@ -37,6 +38,8 @@
 						down: {
 							contentrefresh:TextMessage.update,
 							contentnomore: TextMessage.nomore,
+							contentover:TextMessage.release,
+							contentdown:TextMessage.pull_down,
 							auto: true,
 							//top:"180px",
 							callback: pulldownRefresh
@@ -86,10 +89,11 @@
 					}
 					var comm_name=HTMLDecode(trans[0].comm_name);
 					var html = new Util.StringBuilder();
-					html.appendFormat('<li class="mui-table-view-cell transli" style="width:100%;"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img src="{1}" style="width: 60px;max-height: 60px;" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>',trans_id,comm_img)
+					html.appendFormat('<li class="mui-table-view-cell transli" style="width:100%;"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left"><img class="lazy" data-original="{1}" style="width: 60px;max-height: 60px;"></div>',trans_id,comm_img)
 						.appendFormat('<div class="mui-pull-left requestbox"><span>{0}</span><div><font color="#0062CC" style="display:none;">{1}P</font></div></div>',comm_name,price)
 						.appendFormat('<div class="mui-pull-right ka_userbox {0}">{1}</div></a></li>',trstatus=="3" ? "requestsuccess":"requeststop",status);
 					$("#historyshow").append(html.toString());
+					lazyload();
 					$("#historyshow").show();
 					var translatepage=null;
 					mui('.transli').on('tap','a',function(e) {
@@ -162,6 +166,14 @@
 //			mui.plusReady(function() {
 //				getmessage();
 //			});
+            function lazyload() {
+				$("img.lazy").lazyload({
+					threshold: 40,
+					placeholder: "../../../images/nopic.jpg",
+					effect: "fadeIn",
+					failure_limit: 10
+				});
+            }
             function gotoHistory() {
             	mui.openWindow({
 					id: "request",

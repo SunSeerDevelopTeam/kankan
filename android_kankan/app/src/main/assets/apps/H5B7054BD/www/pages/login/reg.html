@@ -144,6 +144,13 @@
 						<input id='username' name="username" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-username">
 					</div>
 				</div>
+				<!-- nickname -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="nickname" class="lang" data-locale="nickname"></label>
+						<input id='nickname' name="nickname" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-nickname">
+					</div>
+				</div>
 				<!-- password -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
@@ -227,6 +234,7 @@
 						console.log("click sendVCodeBtn");
 						doc.getElementById('email').blur();
 						doc.getElementById('username').blur();
+						doc.getElementById('nickname').blur();
 						doc.getElementById('password').blur();
 						doc.getElementById('passwordConfirm').blur();
 						doc.getElementById('verificationCode').blur();
@@ -251,6 +259,17 @@
 						}
 						if (username.length > 10) {
 							plus.nativeUI.toast(TextMessage.username_error);
+							canClick = true;
+							return;
+						}
+						var nickname = doc.getElementById('nickname').value.trim();
+						if (nickname == "") {
+							plus.nativeUI.toast(TextMessage.nickname_null);
+							canClick = true;
+							return;
+						}
+						if (nickname.length > 10) {
+							plus.nativeUI.toast(TextMessage.nickname_error);
 							canClick = true;
 							return;
 						}
@@ -335,6 +354,7 @@
 						console.log("click regBtn");
 						doc.getElementById('email').blur();
 						doc.getElementById('username').blur();
+						doc.getElementById('nickname').blur();
 						doc.getElementById('password').blur();
 						doc.getElementById('passwordConfirm').blur();
 						doc.getElementById('verificationCode').blur();
@@ -355,6 +375,15 @@
 						}
 						if (username.length > 10) {
 							plus.nativeUI.toast(TextMessage.username_error);
+							return;
+						}
+						var nickname = doc.getElementById('nickname').value.trim();
+						if (nickname == "") {
+							plus.nativeUI.toast(TextMessage.nickname_null);
+							return;
+						}
+						if (nickname.length > 10) {
+							plus.nativeUI.toast(TextMessage.nickname_error);
 							return;
 						}
 						var password = doc.getElementById('password').value.trim();
@@ -387,6 +416,7 @@
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value.trim();
 						params[Api.Params.username] = doc.getElementById('username').value.trim();
+						params[Api.Params.nickname] = doc.getElementById('nickname').value.trim();
 						params[Api.Params.password] = hex_sha1(hex_md5(password));
 						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');
 						params[Api.Params.vCode] = doc.getElementById('verificationCode').value.trim();

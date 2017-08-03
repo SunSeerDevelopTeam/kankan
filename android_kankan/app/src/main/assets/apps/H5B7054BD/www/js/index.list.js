@@ -132,7 +132,9 @@ function getDataFromServer(params, callback) {
 			},
 			error: function() {
 				var message = arguments[0].toString();
-				console.log("message is : " + message);
+				if (typeof(plus) !== undefined) {
+					plus.nativeUI.toast(message);
+				}
 				if(isDown) {
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
 				} else {
@@ -307,10 +309,10 @@ function createListItem(item, imgwidth) {
 		.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', HTMLDecode(item.comm_name))
 		.appendFormat('<div class="comm-price mui-col-sm-12">{0}</div>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
-		.append('<div class="like-area height-max mui-col-sm-4 mui-col-xs-4">')
+		.append('<div class="like-area height-max paddingDistance mui-col-sm-4 mui-col-xs-4">')
 		.appendFormat('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled ' + "{0}" + '">', item.praise_flg == 0 ? "comm-like-gray" : "comm-like-red")
 		.append('</span>')
-		.appendFormat('<span class="comm-like-num">{0}</span>', item.praise_cnt)
+		.appendFormat('<span class="numDistance comm-like-num">{0}</span>', item.praise_cnt)
 		.append('</div>')
 		.append('</div>')
 		.append('</div>')
