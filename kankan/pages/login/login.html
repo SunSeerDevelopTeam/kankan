@@ -280,6 +280,8 @@
 						Repository.User.login(params, {
 							ok: function(data) {
 								// TODO OK logic
+								doc.getElementById('email').blur();
+						        doc.getElementById('password').blur();
 								Log.d("email login ok");
 								plus.storage.setItem('LoginFlag', 'isLogin');
 								loginFlg = true;
