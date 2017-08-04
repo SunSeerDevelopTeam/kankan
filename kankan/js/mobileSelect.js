@@ -113,9 +113,9 @@ window.MobileSelect = (function() {
 		        '<div class="content">'+
 		            '<div class="btnBar">'+
 		                '<div class="fixWidth">'+
-		                    '<div class="cancel">取消</div>'+
+		                    '<div class="cancel">'+TextMessage.cancel+'</div>'+
 		                    '<div class="title"></div>'+
-		                    '<div class="ensure">确定</div>'+
+		                    '<div class="ensure">'+TextMessage.confirmBtnYes+'</div>'+
 		                '</div>'+
 		            '</div>'+
 		            '<div class="panel">'+
