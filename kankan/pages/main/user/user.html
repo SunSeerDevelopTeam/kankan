@@ -66,6 +66,9 @@
 		<link rel="stylesheet" href="../../../css/wu.css">
 		<link href="../../../css/mui.picker.css" rel="stylesheet" />
 		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />
+		 <link rel="stylesheet" type="text/css" href="../../../css/public.css">
+	    <link rel="stylesheet" type="text/css" href="../../../css/mobileSelect.css">
+	    <script src="../../../js/mobileSelect.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -87,7 +90,7 @@
 		</div>
 		<div  id="reloadpage" onclick="reloadpage()"  style="display:none ;"><font size="2" class="lang" data-locale="networkerror"></font></div> 
 		<div class="tran-page mui-content" style="display: none;margin-top: -1em;">
-			<ul class="mui-table-view">
+			<ul class="mui-table-view contain">
 				<li class="head-img-box">
 					<div class="editeimg">
 						<img src="../../../images/userPhoto.png" width="150" height="150" class="headimg">
@@ -145,13 +148,26 @@
 						<li class="user-point-grid2" style="display: none;">
 								<font size="2" class="point"></font>
 						</li>
-						<li class="user-point-grid" id="area">
+						<li class="user-point-grid">
+							<a href="#" id="trigger4">
+								<font color="#AAAAAA" size="2">
+									<span class="mui-icon mui-icon-location" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
+								</font>
+							</a>
+							<!--<div class="fixWidth">
+							<div class="demo">
+							 	<div id="trigger4">地区选择-级联</div>
+							 </div>
+							</div>-->
+						</li>
+						
+						<!--<li class="user-point-grid" id="area">
 							<a href="#">
 								<font color="#AAAAAA" size="2">
 									<span class="mui-icon mui-icon-location" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
 								</font>
 							</a>
-						</li>
+						</li>-->
 					</ul>
 				</li>
 			</ul>
@@ -270,6 +286,8 @@
 	<script src="../../../js/sha256.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 	<script>
+		var positions='0';
+		var mobileSelect4;
 		mui.init({
 			swipeBack: false,
 			preloadPages: [
@@ -835,9 +853,30 @@
 		}
 		mui.plusReady(function() {
 			//message show
+			$(".head-img-box").attr("style","width: "+parseInt($(window).width())+"px;");
 			var params={};
 			Repository.User.Usershow(params, {
 				ok: function(data) {
+					var address=data.data.address;
+					positions=chosecictval(address);
+					mobileSelect4 = new MobileSelect({
+					    trigger: '#city',
+					    title: '地区选择',
+					    wheels: cityData, 
+					    position:positions+",",
+					    //position:"12",
+					    //value2:1,
+					    transitionEnd:function(indexArr, data){
+					    	if(indexArr=="NAN"){
+					    		indexArr=positions;
+					    	}
+					        console.log(indexArr);
+					    },
+					    callback:function(indexArr, data){
+					        console.log(data);
+					        updateaddress(data[0].id);
+					    }  
+					});
 //					if (!Repository.User.isEmptyEmail()) {
 //						 return;
 //					}else{
@@ -873,97 +912,259 @@
 			});
 			
 		});
-	//address picker
-	(function($, doc) {
-		$.init();
-		$.ready(function() {
-			mui.plusReady(function() {
-				//message show
-				var params={};
-				Repository.User.Usershow(params, {
-					ok: function(data) {
-						console.log("get address success");
-						var address=data.data.address;
-						addresspicker(address);
-					},
-					ng: function(data) {
-						mui.back;
-						console.log(data);
-						console.log("other error code:" + data);
-						
-					}
-				});
-			});
-			function chosecictval(addresstext){
-				for(var ca=0;ca<cityData.length;ca++){
-					if(cityData[ca].text==addresstext){
-						return cityData[ca].value;
-						break;
-					}
-				}
+		var cityData = [
+		{
+			data:[{
+			"id": 1,
+			"value": "北海道"
+			},
+			{
+				"id": 8011,
+				"value": "青森県"
+			},
+			{
+			"id": 10043,
+			"value": "岩手県"
+			},
+			{
+				"id": 11954,
+				"value": "宮城県"
+			},
+			{
+			"id": 14749,
+			"value": "秋田県"
+			},
+			{
+				"id": 16900,
+				"value": "山形県"
+			},
+			{
+			"id": 18840,
+			"value": "福島県"
+			},
+			{
+				"id": 22437,
+				"value": "茨城県"
+			},
+			{
+			"id": 25284,
+			"value": "栃木県"
+			},
+			{
+				"id": 27114,
+				"value": "群馬県"
+			},
+			{
+			"id": 28611,
+			"value": "埼玉県"
+			},
+			{
+				"id": 31540,
+				"value": "千葉県"
+			},
+			{
+			"id": 35122,
+			"value": "東京都"
+			},
+			{
+				"id": 38853,
+				"value": "神奈川県"
+			},
+			{
+			"id": 41134,
+			"value": "新潟県"
+			},
+			{
+				"id": 46471,
+				"value": "富山県"
+			},
+			{
+			"id": 49442,
+			"value": "石川県"
+			},
+			{
+				"id": 51892,
+				"value": "福井県"
+			},
+			{
+			"id": 54020,
+			"value": "山梨県"
+			},
+			{
+				"id": 54960,
+				"value": "長野県"
 			}
-			
-			function addresspicker(addresstext){
-				//address picker
-				var cityPicker = new mui.PopPicker();
-				cityPicker.setData(cityData);
-				var cityvalue=chosecictval(addresstext);
-				cityPicker.pickers[0].setSelectedValue(cityvalue);
-				var showcityPickerButton = doc.getElementById('area');
-				var cityResult = doc.getElementById('city');
-				showcityPickerButton.addEventListener('tap', function(event) {
-					cityPicker.show(function(items) {
-						cityResult.innerText = items[0].text;
-						var addresscity=items[0].value;
-						var parms2={
-							"flag":"address",
-							"address_id":addresscity
-						};
-						Repository.User.userinfo(parms2, {
-							ok: function(data) {
+			]
+		}
+	];
+	function chosecictval(addresstext){
+		console.dir(cityData[0].data);
+		var cityvaluearr=cityData[0].data;
+		for(var ca=0;ca<cityvaluearr.length;ca++){
+			if(cityvaluearr[ca].value==addresstext){
+				//return cityvaluearr[ca].value;
+				return ca;
+				break;
+			}
+		}
+	}
+	//setTimeout(function(){
+//	mobileSelect4 = new MobileSelect({
+//	    trigger: '#city',
+//	    title: '地区选择',
+//	    wheels: cityData, 
+//	    position:'0',
+//	    //position:"12",
+//	    //value2:1,
+//	    transitionEnd:function(indexArr, data){
+//	    	if(indexArr=="NAN"){
+//	    		indexArr=positions;
+//	    	}
+//	        console.log(indexArr);
+//	    },
+//	    callback:function(indexArr, data){
+//	        console.log(data);
+//	        updateaddress(data[0].id);
+//	    }  
+//	});
+	//},1000);
+	function updateaddress(addresscity){
+		var parms2={
+			"flag":"address",
+			"address_id":addresscity
+		};
+		Repository.User.userinfo(parms2, {
+			ok: function(data) {
 //								if (!Repository.User.isEmptyEmail()) {
 //								 return;
 //								} else {
-								 console.log("success");
-								//}
-								//console.log("success");
-								//console.dir(data);
+				 console.log("success");
+				//}
+				//console.log("success");
+				//console.dir(data);
 //								mui.toast(TextMessage.updatesuccessinfo, {
 //									duration: 'long',
 //									type: 'div'
 //								});
-							},
-							ng: function(data) {
-								Log.d(data);
-								if(data == "1000") {
-									mui.toast(TextMessage.test, {
-										duration: 'long',
-										type: 'div'
-									});
-									mui.openWindow({
-										id: 'login',
-										url:"../../login/login.html"
-									});
-								}
-								if(data == "2002") {
-									mui.toast(TextMessage.userng, {
-										duration: 'long',
-										type: 'div'
-									});
-									mui.openWindow({
-										id: 'login',
-										url:"../../login/login.html"
-									});
-								}
-								console.log("other error code:" + data);
-								
-							}
-						});
+			},
+			ng: function(data) {
+				Log.d(data);
+				if(data == "1000") {
+					mui.toast(TextMessage.test, {
+						duration: 'long',
+						type: 'div'
 					});
-				}, false);
+					mui.openWindow({
+						id: 'login',
+						url:"../../login/login.html"
+					});
+				}
+				if(data == "2002") {
+					mui.toast(TextMessage.userng, {
+						duration: 'long',
+						type: 'div'
+					});
+					mui.openWindow({
+						id: 'login',
+						url:"../../login/login.html"
+					});
+				}
+				console.log("other error code:" + data);
+				
 			}
 		});
-	})(mui, document);	
+}
+	//address picker
+//	(function($, doc) {
+//		$.init();
+//		$.ready(function() {
+//			mui.plusReady(function() {
+//				//message show
+//				var params={};
+//				Repository.User.Usershow(params, {
+//					ok: function(data) {
+//						console.log("get address success");
+//						var address=data.data.address;
+//						//addresspicker(address);
+//					},
+//					ng: function(data) {
+//						mui.back;
+//						console.log(data);
+//						console.log("other error code:" + data);
+//						
+//					}
+//				});
+//			});
+//			function chosecictval(addresstext){
+//				for(var ca=0;ca<cityData.length;ca++){
+//					if(cityData[ca].text==addresstext){
+//						return cityData[ca].value;
+//						break;
+//					}
+//				}
+//			}
+//			
+//			function addresspicker(addresstext){
+//				//address picker
+//				var cityPicker = new mui.PopPicker();
+//				cityPicker.setData(cityData);
+//				var cityvalue=chosecictval(addresstext);
+//				cityPicker.pickers[0].setSelectedValue(cityvalue);
+//				var showcityPickerButton = doc.getElementById('area');
+//				var cityResult = doc.getElementById('city');
+//				showcityPickerButton.addEventListener('tap', function(event) {
+//					cityPicker.show(function(items) {
+//						cityResult.innerText = items[0].text;
+//						var addresscity=items[0].value;
+//						var parms2={
+//							"flag":"address",
+//							"address_id":addresscity
+//						};
+//						Repository.User.userinfo(parms2, {
+//							ok: function(data) {
+////								if (!Repository.User.isEmptyEmail()) {
+////								 return;
+////								} else {
+//								 console.log("success");
+//								//}
+//								//console.log("success");
+//								//console.dir(data);
+////								mui.toast(TextMessage.updatesuccessinfo, {
+////									duration: 'long',
+////									type: 'div'
+////								});
+//							},
+//							ng: function(data) {
+//								Log.d(data);
+//								if(data == "1000") {
+//									mui.toast(TextMessage.test, {
+//										duration: 'long',
+//										type: 'div'
+//									});
+//									mui.openWindow({
+//										id: 'login',
+//										url:"../../login/login.html"
+//									});
+//								}
+//								if(data == "2002") {
+//									mui.toast(TextMessage.userng, {
+//										duration: 'long',
+//										type: 'div'
+//									});
+//									mui.openWindow({
+//										id: 'login',
+//										url:"../../login/login.html"
+//									});
+//								}
+//								console.log("other error code:" + data);
+//								
+//							}
+//						});
+//					});
+//				}, false);
+//			}
+//		});
+//	})(mui, document);	
 	</script>
 
 </html>
