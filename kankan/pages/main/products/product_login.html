@@ -9,8 +9,10 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
-		<link href="../../../css/mui.picker.css" rel="stylesheet" />
-		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />
+		<!--<link href="../../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />-->
+		<link rel="stylesheet" type="text/css" href="../../../css/public.css">
+	    <link rel="stylesheet" type="text/css" href="../../../css/mobileSelect.css">
 		<style>
 			h5{
 				margin-left: 0.2em;
@@ -49,10 +51,10 @@
 				<div class="ka_prologbox">
 					<h5 class="ka_proloh5 lang" data-locale="commodity_name"></h5>
 					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell" style="width: 100%;">
 							<input type="text" class="lang" data-locale="commodity_namelength" id="comm_name" name="comm_name" maxlength="40" onfocus="closepicker()" onblur="pickershow()">
 						</li>
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell" style="width: 100%;">
 							<textarea class="ka_noborder" maxlength="1000" id="comm_detail" name="comm_detail" onfocus="closepicker()" onblur="pickershow()" oninput="daojishu()"></textarea>
 							<div class="daojishitext"></div>
 						</li>
@@ -62,20 +64,20 @@
 				<div class="ka_prologbox">
 					<h5 class="ka_proloh5 lang" data-locale="commodity_detail"></h5>
 					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell" style="width: 100%;">
 							<div class="mui-navigate-right" id="showCityPicker">
 								<span class="ka_proinfo lang" data-locale="commodity_sorts" ></span>
-								<div class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian1"></div>
-								<div id='sortResult' class="ui-alert mui-pull-right ka_sortname"></div>
+								<div id='sortResult' class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian1"></div>
+								<!--<div  class="ui-alert mui-pull-right ka_sortname"></div>-->
 								<input type="hidden" name="classify_id" id="classify_id" value="" />
 							</div>
 
 						</li>
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell" style="width: 100%;">
 							<div class="mui-navigate-right" id="prostuat">
 								<span class="ka_proinfo lang" data-locale="commodity_stuates"></span>
-								<div class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian2"></div>
-								<div id='stauteResult' class="ui-alert mui-pull-right ka_sortname"></div>
+								<div id='stauteResult' class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian2"></div>
+								<!--<div  class="ui-alert mui-pull-right ka_sortname"></div>-->
 								<input type="hidden" name="comm_state" id="comm_state" value="" />
 							</div>
 						</li>
@@ -92,13 +94,13 @@
 				<div class="ka_prologbox">
 					<h5 class="ka_proloh5 lang" data-locale="commodity_buyway"></h5>
 					<ul class="mui-table-view">
-						<li class="mui-table-view-cell" style="text-align:center;margin-left:3%; margin-right: 5%;">
+						<li class="mui-table-view-cell" style="text-align:center;width: 100%;">
 							<div class="ka_userbox">
 								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_switch" id="exchbuybtn" style="display: none;"></div>
 								<input type="hidden" name="exchange" id="exchange" value="0" />
 								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_pointbuy" id="pointbuybtn" style="display: none;"></div>
 								<input type="hidden" name="business" id="business" value="0" />
-								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free" id="freebuybtn" style="width: 100%;"></div>
+								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free" id="freebuybtn" style="width: 50%;margin-left: 22%;"></div>
 								<input type="hidden" name="gratis" id="gratis" value="0" />
 							</div>
 						</li>
@@ -116,7 +118,7 @@
 				<input type="hidden" name="codid" id="codid" value="" />
 				<input type="hidden" name="commstautes" id="commstautes" value="" />
 				<div id="photoLeft" class="mui-popover mui-popover-action mui-popover-bottom">
-					<ul class="mui-table-view">
+					<ul class="mui-table-view tickimgbox">
 						<li class="mui-table-view-cell">
 							<a id="chooseImage" style="color: #9C9C9C" disabled="true"></a>
 						</li>
@@ -124,14 +126,14 @@
 							<a id="fromChoose" onclick="galleryImg()" style="color: #007aff"></a>
 						</li>
 					</ul>
-					<ul class="mui-table-view">
+					<ul class="mui-table-view tickimgbox">
 						<li class="mui-table-view-cell">
 							<a href="#photoLeft" style="color: #007aff"></a>
 						</li>
 					</ul>
 		        </div>
 			    <div id="photoRight" class="mui-popover mui-popover-action mui-popover-bottom">
-					<ul class="mui-table-view">
+					<ul class="mui-table-view tickimgbox">
 						<li class="mui-table-view-cell">
 							<a id="comdity_takepic" style="color: #9C9C9C" disabled="true"></a>
 						</li>
@@ -139,7 +141,7 @@
 							<a id="tackpicture" onclick="getImage()" style="color: #007aff"></a>
 						</li>
 					</ul>
-					<ul class="mui-table-view">
+					<ul class="mui-table-view tickimgbox">
 						<li class="mui-table-view-cell">
 							<a href="#photoRight" style="color: #007aff"></a>
 						</li>
@@ -151,30 +153,108 @@
 	<script src="../../../js/mui.min.js"></script>
 	<script src="../../../js/mui.view.js "></script>
 	<script src="../../../js/common.js"></script>
-	<script src="../../../js/mui.picker.js"></script>
-	<script src="../../../js/picker/mui.poppicker.js"></script>
+	<!--<script src="../../../js/mui.picker.js"></script>
+	<script src="../../../js/picker/mui.poppicker.js"></script>-->
 	<script src="../../../js/jquery-3.2.0.min.js"></script>
 	<script src="../../../js/language.js"></script>
 	<script src="../../../js/sha256.js"></script>
 	<script src="../../../js/pro_uploadimg.js"></script>
+	<script src="../../../js/mobileSelect.js" type="text/javascript"></script>
 	<script>
+		mui.init({
+			beforeback: function() {
+				var list = plus.webview.currentWebview().opener();
+				mui.fire(list, 'refreshlist');
+				return true;
+			}
+		});
 	$(function() {
 		$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
 		$(".mui-title").html(TextMessage.commodity_login);
 	});
 	var id;
-	//window.addEventListener('eid', function(event) {
+	var testarr=[];
+	var catearrs=[{data:[]}];
+	var positions='0';
+	var mobileSelect4;
+	var stautsSelect;
+	var stautesposition='0';
+	var statedate = [{data:[{
+						id: '0',
+						value: TextMessage.prostaute0
+					}, {
+						id: '1',
+						value: TextMessage.prostaute1
+					}, {
+						id: '2',
+						value: TextMessage.prostaute2
+					}, {
+						id: '3',
+						value: TextMessage.prostaute3
+					}]}];
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		id = self.eid;
-		//var id = event.detail.id;
 		if(id){
 			$(".z_addImg").remove();
 			$(".mui-action-back").show();
 			document.getElementById('codid').value=id;
 			$("#delete").show();
 			getcomdinfo(id);
+		}else{
+			stautsSelect= new MobileSelect({
+			    trigger: '#stauteResult',
+			    title: '',
+			    wheels: statedate, 
+			    position:'0',
+			    transitionEnd:function(indexArr, data){
+			    	if(indexArr=="NAN"){
+			    		indexArr=stautesposition;
+			    	}
+			        console.log(indexArr);
+			    },
+			    callback:function(indexArr, data){
+			        console.log(data[0].id);
+			        $("#comm_state").val(data[0].id);
+			        $("#stauteResult").text(data[0].value);
+			        $("#stauteResult").removeClass("ka_bitian");
+			        $("#stauteResult").addClass("ka_sortname");					       
+			    }  
+			});
+			var param2 = {
+				"flg": "classify"
+			};
+			Repository.Commodity.category(param2, {
+				ok: function(data) {
+					console.log("success");
+					catearrs[0].data =categorypushnew(data);
+					mobileSelect4 = new MobileSelect({
+					    trigger: '#sortResult',
+					    title: '',
+					    wheels: catearrs, 
+					    position:'0,0',
+					    transitionEnd:function(indexArr, data){
+					    	if(indexArr=="NAN"){
+					    		indexArr=positions;
+					    	}
+					        console.log(indexArr);
+					    },
+					    callback:function(indexArr, data){
+					        console.log(data[1].id);
+					       document.getElementById("classify_id").value=data[1].id;
+						   document.getElementById("sortResult").setAttribute("class","ka_sortname mui-pull-right");
+					    }  
+					});
+					//var catearrs = categorypush(data);
+					//sortpicker(catearrs);
+				},
+				ng: function(data) {
+					console.log("error" + data);
+					Api.callback_ng(data);
+				}
+			});
 		}
+		
 	});
 	window.addEventListener("refresh", function(event) {
 		location.reload();
@@ -257,21 +337,32 @@
 		document.getElementById('classify_id').value=classify_id;
 		document.getElementById('price').value=price;
 		document.getElementById('comm_state').value=state;
+		$("#stauteResult").removeClass("ka_bitian");
+		$("#stauteResult").addClass("ka_sortname");
+		if(state=="0"){
+			$("#stauteResult").html(TextMessage.prostaute0);
+		}else if(state=="1"){
+			$("#stauteResult").html(TextMessage.prostaute1);
+		}else if(state=="2"){
+			$("#stauteResult").html(TextMessage.prostaute2);
+		}else{
+			$("#stauteResult").html(TextMessage.prostaute3);
+		}
 		if(image0!=""){
-			document.getElementById('0').value=image0;
-			imagepull(0,image0);
+			document.getElementById('0').value=image0.imgurl;
+			imagepull(0,image0.imgurl);
 		}
 		if(image1!=""){
-			document.getElementById('1').value=image1;
-			imagepull(1,image1);
+			document.getElementById('1').value=image1.imgurl;
+			imagepull(1,image1.imgurl);
 		}
 		if(image2!=""){
-			document.getElementById('2').value=image2;
-			imagepull(2,image2);
+			document.getElementById('2').value=image2.imgurl;
+			imagepull(2,image2.imgurl);
 		}
 		if(image3!=""){
-			document.getElementById('3').value=image3;
-			imagepull(3,image3);
+			document.getElementById('3').value=image3.imgurl;
+			imagepull(3,image3.imgurl);
 		}
 		if(business=="1"){
 			$("#pointbuybtn").removeClass("ka_exchangegrey");
@@ -295,6 +386,10 @@
 						ok: function(data) {
 							console.log("success");
 							messages(data);
+							var catid = data.data.classify_id; //second category value
+							//var pickcatarr = categorychoose(catearrs, catid); //selected category value
+							var stautid = data.data.state;
+							selectdefault(catid,stautid);
 						},
 						ng: function(data) {
 							console.log("error:"+data);
@@ -324,22 +419,21 @@
 		
 	}
 	//get classfiy 
-	var testarr=[];
-	function categorypush(results){
+	function categorypushnew(results){
 		var catedata=results.data;
 		for(var c=0;c<catedata.length;c++){
 			var categoryadd={
-					value: catedata[c].catalog_id,
-					text: catedata[c].catalog_detail,
-					children: []
+					id: catedata[c].catalog_id,
+					value: catedata[c].catalog_detail,
+					childs: []
 				};
 				if(catedata[c].children) {
-					var childrenarr = categoryadd.children;
+					var childrenarr = categoryadd.childs;
 					var secondcatearr = catedata[c].children;
 					for(var t = 0; t < secondcatearr.length; t++) {
 						var childrenadd = {
-							value: secondcatearr[t].classify_id,
-							text: secondcatearr[t].classify_detail
+							id: secondcatearr[t].classify_id,
+							value: secondcatearr[t].classify_detail
 						}
 						childrenarr.push(childrenadd);
 					}
@@ -348,174 +442,270 @@
 
 			}
 			return testarr;
-		}
-
-		function categorychoose(catearr, catid) {
-			for(var ci = 0; ci < catearr.length; ci++) {
-				var childredarr = catearr[ci].children;
-				for(var di = 0; di < childredarr.length; di++) {
-					if(childredarr[di].value == catid) {
-						return catearr[ci];
-						break;
+	}
+	function categorychoose(catearr,catid,flag) {
+		var arrs=catearr;
+		for(var ci = 0; ci < arrs.length; ci++) {
+			var childredarr = arrs[ci].childs;
+			for(var di = 0; di < childredarr.length; di++) {
+				if(childredarr[di].id == catid) {
+					//return catearr[ci];
+					if(flag){
+						return arrs[ci].value+" "+childredarr[di].value;
+					}else{
+						return ci+","+di;
 					}
-				}
-			}
-		}
-
-		function childrentext(childredarr, catid) {
-			for(var chd = 0; chd < childredarr.length; chd++) {
-				if(childredarr[chd].value == catid) {
-					return childredarr[chd].text;
 					break;
 				}
 			}
 		}
-		//picker
-		(function($, doc) {
-			$.init({
-				beforeback: function() {
-					var list = plus.webview.currentWebview().opener();
-					mui.fire(list, 'refreshlist');
-					return true;
-				}
-			});
-			$.ready(function() {
-				mui.plusReady(function() {
-					var param2 = {
+	}
+
+	function childrentext(stautid) {
+		var childredarr=statedate[0].data;
+		for(var chd = 0; chd < childredarr.length; chd++) {
+			if(childredarr[chd].id == stautid) {
+				//return childredarr[chd].text;
+				return chd;
+				break;
+			}
+		}
+	}
+	function selectdefault(catid,stautid){
+		stautesposition=childrentext(stautid)+",";
+		stautsSelect= new MobileSelect({
+				    trigger: '#stauteResult',
+				    title: '',
+				    wheels: statedate, 
+				    position:stautesposition,
+				    transitionEnd:function(indexArr, data){
+				    	if(indexArr=="NAN"){
+				    		indexArr=stautesposition;
+				    	}
+				        console.log(indexArr);
+				    },
+				    callback:function(indexArr, data){
+				        console.log(data[0].id);
+				        $("#comm_state").val(data[0].id);
+				        $("#stauteResult").text(data[0].value);
+				        $("#stauteResult").removeClass("ka_bitian");
+				        $("#stauteResult").addClass("ka_sortname");					       
+				    }  
+				});
+		var param2 = {
 						"flg": "classify"
 					};
-					Repository.Commodity.category(param2, {
-						ok: function(data) {
-							console.log("success");
-							var catearrs = categorypush(data);
-							sortpicker(catearrs);
-						},
-						ng: function(data) {
-							console.log("error" + data);
-							Api.callback_ng(data);
-						}
-					});
+		Repository.Commodity.category(param2, {
+			ok: function(data) {
+				catearrs[0].data =categorypushnew(data);
+				$("#sortResult").addClass("ka_sortname");
+				$("#sortResult").removeClass("ka_bitian");
+				var cateval=categorychoose(catearrs[0].data,catid,"value");
+				$("#sortResult").text(cateval);
+				var category=categorychoose(catearrs[0].data,catid);
+				var categoryarr=category.split(',');
+				positions=category;
+				console.log(category);
+				mobileSelect4 = new MobileSelect({
+				    trigger: '#sortResult',
+				    title: '',
+				    wheels: catearrs, 
+				    position:category,
+				    value2:categoryarr[0],
+				    transitionEnd:function(indexArr, data){
+				    	if(indexArr=="NAN"){
+				    		indexArr=positions;
+				    	}
+				        console.log(indexArr);
+				    },
+				    callback:function(indexArr, data){
+				        console.log(data[1].id);
+				        document.getElementById("classify_id").value=data[1].id;
+						document.getElementById("sortResult").setAttribute("class","ka_sortname mui-pull-right");
+				    }  
 				});
-				//commodity sort
-				function sortpicker(catearrs) {
-					//commodity category
-					var categoryPicker = new $.PopPicker({
-						layer: 2
-					});
-					categoryPicker.setData(catearrs);
-					//commodity use stuate
-					var statedate = [{
-						value: '0',
-						text: TextMessage.prostaute0
-					}, {
-						value: '1',
-						text: TextMessage.prostaute1
-					}, {
-						value: '2',
-						text: TextMessage.prostaute2
-					}, {
-						value: '3',
-						text: TextMessage.prostaute3
-					}];
-					var statePicker = new $.PopPicker();
-					statePicker.setData(statedate);
-
-					//window.addEventListener('eid', function(event) {
-						var selfs = plus.webview.currentWebview();
-						var picksortid = selfs.eid;
-						//var picksortid = event.detail.id;
-					if(picksortid){
-						var param4 = {
-							"commodity_id": picksortid
-						}
-						Repository.Commodity.Commodityedite(param4, {
-							ok: function(data) {
-								console.log("success");
-								var catid = data.data.classify_id; //second category value
-								var pickcatarr = categorychoose(catearrs, catid); //selected category value
-								var stautid = data.data.state;
-								//console.dir(pickcatarr);
-								var firstcateval = pickcatarr.value; //first category value
-								//set category picker Default value
-								categoryPicker.pickers[0].setSelectedValue(firstcateval, 0, function() {
-									setTimeout(function() {
-										categoryPicker.pickers[1].setSelectedValue(catid);
-									}, 10);
-								});
-								var childrentextcat = childrentext(pickcatarr.children, catid);
-								document.getElementById("bitian1").style.display = "none";
-								doc.getElementById('sortResult').innerText = pickcatarr.text + " " + childrentextcat;
-								//set use state picker Default value
-								statePicker.pickers[0].setSelectedValue(stautid);
-								document.getElementById("bitian2").style.display = "none";
-								var childrentextstate = childrentext(statedate, stautid);
-								document.getElementById('stauteResult').innerHTML = childrentextstate;
-							},
-							ng: function(data) {
-								Log.d(data);
-								if(data == "1000") {
-									mui.toast(TextMessage.test, {
-										duration: 'long',
-										type: 'div'
-									});
-									mui.openWindow({
-										id: 'login',
-										url: "../../login/login.html"
-									});
-								}
-								if(data == "3020") {
-									mui.toast(TextMessage.input_email, {
-										duration: 'long',
-										type: 'div'
-									});
-									mui.openWindow({
-										id: 'emai_summate',
-										url: "../../login/emai_summate.html",
-										extras: {
-											formPageName: "product_login"
-										}
-									});
-								}
-								if(data == "2002") {
-									mui.toast(TextMessage.userng, {
-										duration: 'long',
-										type: 'div'
-									});
-									mui.openWindow({
-										id: 'login',
-										url: "../../login/login.html"
-									});
-								}
-								Api.callback_ng(data);
-							}
-				});
+			},
+			ng: function(data) {
+				console.log("error" + data);
+				Api.callback_ng(data);
 			}
-			//});
-			//category click picker
-			var showCatePickerButton = doc.getElementById('showCityPicker');
-			var cateResult = doc.getElementById('sortResult');
-			showCatePickerButton.addEventListener('tap', function(event) {
-			  	inputblur();
-				categoryPicker.show(function(items) {
-					cateResult.innerText = items[0].text + " " + items[1].text;
-					document.getElementById("classify_id").value = items[1].value;
-					document.getElementById("bitian1").style.display = "none";
-				});
-			}, false);
-			//staute click Picker
-			var showstatePickerButton = doc.getElementById('prostuat');
-			var stauteResult = doc.getElementById('stauteResult');
-			showstatePickerButton.addEventListener('tap', function(event) {
-				inputblur();
-				statePicker.show(function(items) {
-					stauteResult.innerText = items[0].text;
-					document.getElementById('comm_state').value = items[0].value;
-					document.getElementById("bitian2").style.display = "none";
-				});
-			}, false);
-		}
-	});
-})(mui, document);
+		});
+	}
+//		function categorypush(results){
+//			var catedata=results.data;
+//			for(var c=0;c<catedata.length;c++){
+//				var categoryadd={
+//						value: catedata[c].catalog_id,
+//						text: catedata[c].catalog_detail,
+//						children: []
+//					};
+//					if(catedata[c].children) {
+//						var childrenarr = categoryadd.children;
+//						var secondcatearr = catedata[c].children;
+//						for(var t = 0; t < secondcatearr.length; t++) {
+//							var childrenadd = {
+//								value: secondcatearr[t].classify_id,
+//								text: secondcatearr[t].classify_detail
+//							}
+//							childrenarr.push(childrenadd);
+//						}
+//						testarr.push(categoryadd);
+//					}
+//	
+//				}
+//				return testarr;
+//			}
+
+//		function categorychoose(catearr, catid) {
+//			for(var ci = 0; ci < catearr.length; ci++) {
+//				var childredarr = catearr[ci].children;
+//				for(var di = 0; di < childredarr.length; di++) {
+//					if(childredarr[di].value == catid) {
+//						return catearr[ci];
+//						break;
+//					}
+//				}
+//			}
+//		}
+//
+//		function childrentext(childredarr, catid) {
+//			for(var chd = 0; chd < childredarr.length; chd++) {
+//				if(childredarr[chd].value == catid) {
+//					return childredarr[chd].text;
+//					break;
+//				}
+//			}
+//		}
+		//picker
+		//(function($, doc) {
+//			$.init({
+//				beforeback: function() {
+//					var list = plus.webview.currentWebview().opener();
+//					mui.fire(list, 'refreshlist');
+//					return true;
+//				}
+//			});
+			//$.ready(function() {
+				//commodity sort
+//				function sortpicker(catearrs) {
+//					//commodity category
+//					var categoryPicker = new $.PopPicker({
+//						layer: 2
+//					});
+//					categoryPicker.setData(catearrs);
+//					//commodity use stuate
+//					var statedate = [{
+//						value: '0',
+//						text: TextMessage.prostaute0
+//					}, {
+//						value: '1',
+//						text: TextMessage.prostaute1
+//					}, {
+//						value: '2',
+//						text: TextMessage.prostaute2
+//					}, {
+//						value: '3',
+//						text: TextMessage.prostaute3
+//					}];
+//					var statePicker = new $.PopPicker();
+//					statePicker.setData(statedate);
+//
+//					//window.addEventListener('eid', function(event) {
+//						var selfs = plus.webview.currentWebview();
+//						var picksortid = selfs.eid;
+//						//var picksortid = event.detail.id;
+//					if(picksortid){
+//						var param4 = {
+//							"commodity_id": picksortid
+//						}
+//						Repository.Commodity.Commodityedite(param4, {
+//							ok: function(data) {
+//								console.log("success");
+//								var catid = data.data.classify_id; //second category value
+//								var pickcatarr = categorychoose(catearrs, catid); //selected category value
+//								var stautid = data.data.state;
+//								//console.dir(pickcatarr);
+//								var firstcateval = pickcatarr.value; //first category value
+//								//set category picker Default value
+//								categoryPicker.pickers[0].setSelectedValue(firstcateval, 0, function() {
+//									setTimeout(function() {
+//										categoryPicker.pickers[1].setSelectedValue(catid);
+//									}, 10);
+//								});
+//								var childrentextcat = childrentext(pickcatarr.children, catid);
+//								document.getElementById("bitian1").style.display = "none";
+//								doc.getElementById('sortResult').innerText = pickcatarr.text + " " + childrentextcat;
+//								//set use state picker Default value
+//								statePicker.pickers[0].setSelectedValue(stautid);
+//								document.getElementById("bitian2").style.display = "none";
+//								var childrentextstate = childrentext(statedate, stautid);
+//								document.getElementById('stauteResult').innerHTML = childrentextstate;
+//							},
+//							ng: function(data) {
+//								Log.d(data);
+//								if(data == "1000") {
+//									mui.toast(TextMessage.test, {
+//										duration: 'long',
+//										type: 'div'
+//									});
+//									mui.openWindow({
+//										id: 'login',
+//										url: "../../login/login.html"
+//									});
+//								}
+//								if(data == "3020") {
+//									mui.toast(TextMessage.input_email, {
+//										duration: 'long',
+//										type: 'div'
+//									});
+//									mui.openWindow({
+//										id: 'emai_summate',
+//										url: "../../login/emai_summate.html",
+//										extras: {
+//											formPageName: "product_login"
+//										}
+//									});
+//								}
+//								if(data == "2002") {
+//									mui.toast(TextMessage.userng, {
+//										duration: 'long',
+//										type: 'div'
+//									});
+//									mui.openWindow({
+//										id: 'login',
+//										url: "../../login/login.html"
+//									});
+//								}
+//								Api.callback_ng(data);
+//							}
+//				});
+//			}
+//			//});
+//			//category click picker
+////			var showCatePickerButton = doc.getElementById('showCityPicker');
+////			var cateResult = doc.getElementById('sortResult');
+////			showCatePickerButton.addEventListener('tap', function(event) {
+////			  	inputblur();
+////				categoryPicker.show(function(items) {
+////					cateResult.innerText = items[0].text + " " + items[1].text;
+////					document.getElementById("classify_id").value = items[1].value;
+////					document.getElementById("bitian1").style.display = "none";
+////				});
+////			}, false);
+////			//staute click Picker
+////			var showstatePickerButton = doc.getElementById('prostuat');
+////			var stauteResult = doc.getElementById('stauteResult');
+////			showstatePickerButton.addEventListener('tap', function(event) {
+////				inputblur();
+////				statePicker.show(function(items) {
+////					stauteResult.innerText = items[0].text;
+////					document.getElementById('comm_state').value = items[0].value;
+////					document.getElementById("bitian2").style.display = "none";
+////				});
+////			}, false);
+//		}
+//	});
+//})(mui, document);
 //email check
 function publishscheck(){
 	if (!Repository.User.isEmptyEmail()) {
@@ -657,7 +847,7 @@ function publishs() {
 	if(price!=""){
 		params.price=price;
 	}
-	if(id){
+	if(id!=0){
 		var commodity_ids=$("#codid").val();
 		params.commodity_id=commodity_ids;
 	}

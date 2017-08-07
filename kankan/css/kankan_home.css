@@ -459,7 +459,9 @@ body .mui-table-view-cell.mui-active{
 
 
 /*********product login*********/
-
+.tickimgbox li{
+	width: 100%;
+}
 .ka_pictures {
 	height: 50px;
 	width: 50px;
