@@ -389,18 +389,13 @@ window.MobileSelect = (function() {
 	    },
 
 	    setCurDistance: function(indexArr){
+	    	if(indexArr.indexOf(",")>=0){
+	    		indexArr=indexArr.split(",");
+	    	}
 	    	var _this = this;
 	    	var temp = [];
-	    	var len=indexArr.length-1*1;
-	    	if(len>1){
-	    		indexArr=indexArr.substring(len,-1);
-	    	}
     		for(var i=0; i<_this.slider.length; i++){
-    			if(len>1){
-    				temp.push(_this.calcDistance(indexArr));
-    			}else{
-    				temp.push(_this.calcDistance(indexArr[i]));
-    			}
+				temp.push(_this.calcDistance(indexArr[i]));
 	    		_this.movePosition(_this.slider[i],temp[i]);
 	    	}
 	    	

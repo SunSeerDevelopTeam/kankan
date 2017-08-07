@@ -292,18 +292,10 @@
 		mui.init({
 			swipeBack: false,
 			preloadPages: [
-//			{
-//					id: 'commentlist.html',
-//					url: '../products/commentlist.html'
-//				},
 				{
 					id: 'detail.html',
 					url: '../products/detail.html'
 				}
-//				,{
-//					id: 'product_login.html',
-//					url: '../products/product_login.html'
-//				}
 			],
 			beforeback: function() {
 		        var homePage = plus.webview.getWebviewById('home.html');
@@ -924,26 +916,6 @@
 			}
 		}
 	}
-	//setTimeout(function(){
-//	mobileSelect4 = new MobileSelect({
-//	    trigger: '#city',
-//	    title: '地区选择',
-//	    wheels: cityData, 
-//	    position:'0',
-//	    //position:"12",
-//	    //value2:1,
-//	    transitionEnd:function(indexArr, data){
-//	    	if(indexArr=="NAN"){
-//	    		indexArr=positions;
-//	    	}
-//	        console.log(indexArr);
-//	    },
-//	    callback:function(indexArr, data){
-//	        console.log(data);
-//	        updateaddress(data[0].id);
-//	    }  
-//	});
-	//},1000);
 	function updateaddress(addresscity){
 		var parms2={
 			"flag":"address",
