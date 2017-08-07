@@ -29,7 +29,7 @@
 					</div>
 					<div class="ka_usernicknamebox">
 					<h6 class="lang" data-locale="uinfousername"></h6>
-					<textarea type="text" name="nickname" id="nickname" value="" data-locale="nameplocder"  class="ka_userfontsize lang" rows="1" ></textarea>
+					<textarea onkeyup="this.value=this.value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]|\uD83E[\uDC00-\uDFFF]/g,'')" type="text" name="nickname" id="nickname" value="" data-locale="nameplocder"  class="ka_userfontsize lang" rows="1" ></textarea>
 					</div>
 					<h6 class="lang" data-locale="introducetext" style="display: none;"></h6>
 					<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500" style="display: none;"></textarea>
