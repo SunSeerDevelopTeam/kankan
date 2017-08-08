@@ -174,15 +174,11 @@
 					failure_limit: 10
 				});
             }
-            function gotoHistory() {
-            	mui.openWindow({
-					id: "request",
-					url: "request.html",
-					waiting: {
-						autoShow: false
-					}
-				});
-            }
+            mui(".mui-bar-nav").on("tap","a",function(){
+ 				var view = plus.webview.currentWebview().opener();
+ 				mui.fire(view,'requestpage');
+ 				mui.back();
+ 			});
 		</script>
 	</body>
 
