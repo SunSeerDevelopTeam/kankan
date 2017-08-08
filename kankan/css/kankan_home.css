@@ -586,7 +586,7 @@ body .mui-table-view-cell.mui-active{
 
 .z_photo img {
 	width: 1rem;
-	height: 1rem;
+	/*height: 1rem;*/
 }
 
 .z_addImg {

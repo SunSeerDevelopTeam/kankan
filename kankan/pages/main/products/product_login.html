@@ -284,14 +284,35 @@
 		document.getElementById('comm_detail').blur();
 	}
 	//edite image show
-	function imagepull(im,srcval){
+	function imagepull(im,srcval,imgWidth, imgHeight){
+	    var imgwidth = parseInt($(window).width()) / 4 - 33.75;
+	    var hwhpercent = imgHeight / imgWidth;
+	    var top_margin = 0;
+	    var showheight = imgwidth * hwhpercent;
+	    var cha1 = showheight - imgwidth;
+	    if(cha1 > 0) {
+		    top_margin = cha1 / 2;
+	    } else {
+		    top_margin = 0;
+	    }
+	    
+	    if (showheight < imgwidth) {
+            imgdiv="position: relative; top: "+(imgwidth-showheight)/2+"px;";
+		} else {
+			imgdiv="height:"+ imgwidth +"px; overflow: hidden; line-height: "+ imgwidth +"px;";
+		}
+		var styleimg="height: auto; margin-top:-"+ top_margin +"px;";
+		
+		
 		var img = document.createElement("img");
 		img.setAttribute("src", srcval);
 		img.setAttribute("alt", im);
 		img.setAttribute("onerror", "this.src='../../../images/nopic.jpg'");
 		img.setAttribute("class", "z_images");
+		img.setAttribute("style", styleimg);
 		var imgAdd = document.createElement("div");
 		imgAdd.setAttribute("class", "z_addImg");
+		imgAdd.setAttribute("style", imgdiv);
 		imgAdd.appendChild(img);
 		$(".z_photo").append(imgAdd);
 		imglength();
@@ -350,19 +371,19 @@
 		}
 		if(image0!=""){
 			document.getElementById('0').value=image0.imgurl;
-			imagepull(0,image0.imgurl);
+			imagepull(0,image0.imgurl,image0.imgwidth, image0.imgheight);
 		}
 		if(image1!=""){
 			document.getElementById('1').value=image1.imgurl;
-			imagepull(1,image1.imgurl);
+			imagepull(1,image1.imgurl,image1.imgwidth, image1.imgheight);
 		}
 		if(image2!=""){
 			document.getElementById('2').value=image2.imgurl;
-			imagepull(2,image2.imgurl);
+			imagepull(2,image2.imgurl, image2.imgwidth, image2.imgheight);
 		}
 		if(image3!=""){
 			document.getElementById('3').value=image3.imgurl;
-			imagepull(3,image3.imgurl);
+			imagepull(3,image3.imgurl, image3.imgwidth, image3.imgheight);
 		}
 		if(business=="1"){
 			$("#pointbuybtn").removeClass("ka_exchangegrey");

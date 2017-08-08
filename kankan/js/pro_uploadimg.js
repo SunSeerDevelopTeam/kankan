@@ -84,17 +84,21 @@ function imgRemove() {
 };
 
 //compressImage
+var presswidth = 0;
+var pressheight = 0;
+var rwidth = 0;
+var rheight = 0;
 function compressImg(path) {
 	var currenttime = Date.parse(new Date());
 	var imgcm = new Image(); 
 	imgcm.src = path+"?"+currenttime;
 	imgcm.onload=function(){
 		console.log("width:"+imgcm.width+"</br>height:"+imgcm.height);
-		var rwidth=imgcm.width;
-		var rheight=imgcm.height;
+		rwidth=imgcm.width;
+		rheight=imgcm.height;
 		if(rwidth>=2000 & rheight>=2000){
-			var presswidth=rwidth/10;
-			var pressheight=rheight/10;
+			presswidth=rwidth/10;
+			pressheight=rheight/10;
 			if(pressheight<=500){
 				zipcom(presswidth,pressheight,80);
 			}else{
@@ -122,6 +126,9 @@ function compressImg(path) {
 				var width = event.width; // px
 				var height = event.height; // px
 				console.log("compress size is (byte):"+size);
+				imgappend(target);
+				imglength();
+			    imgRemove();
 				uploadimage(target);
 			},
 			function(error) {
@@ -205,9 +212,26 @@ function Processing(results) {
 	}
 }
 var nums = 0;
-
+var imgdiv;
 function imgappend(localurl) {
-	var flag = true;
+	var imgwidth = parseInt($(window).width()) / 4 - 33.75;
+    var hwhpercent = rheight / rwidth;
+	var top_margin = 0;
+	var showheight = imgwidth * hwhpercent;
+	var cha1 = showheight - imgwidth;
+	if(cha1 > 0) {
+		top_margin = cha1 / 2;
+	} else {
+		top_margin = 0;
+	}
+    if (showheight < imgwidth) {
+        imgdiv="position: relative; top: "+(imgwidth-showheight)/2+"px;";
+	} else {
+		imgdiv="height:"+ imgwidth +"px; overflow: hidden; line-height: "+ imgwidth +"px;";
+	}
+	var styleimg="height: auto; margin-top:-"+ top_margin +"px;";
+	
+    var flag = true;
 	for(var m = 0; m < 4; m++) {
 		var valuem = $("#" + m).val();
 		if(valuem == "0") {
@@ -219,9 +243,10 @@ function imgappend(localurl) {
 	img.setAttribute("src", localurl);
 	img.setAttribute("alt", nums);
 	img.setAttribute("class", "z_images");
-	img.setAttribute("style", "display: none");
+	img.setAttribute("style", styleimg);
 	var imgAdd = document.createElement("div");
 	imgAdd.setAttribute("class", "z_addImg");
+	imgAdd.setAttribute("style", imgdiv);
 	imgAdd.appendChild(img);
 	$(".z_photo").append(imgAdd);
 }
@@ -251,10 +276,10 @@ function galleryImg() {
 	plus.gallery.pick(function(a) {
 		plus.io.resolveLocalFileSystemURL(a, function(entry) {
 			var localURL2 = entry.toLocalURL();
-			imgappend(localURL2);
-			imglength();
-			imgRemove();
 			compressImg(localURL2);
+			/*imglength();
+			imgRemove();*/
+			// imgappend(localURL2);
 
 		}, function(e) {
 			console.log("Read photo file error：" + e.message);
