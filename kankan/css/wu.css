@@ -999,3 +999,19 @@
 	vertical-align: middle;
 	text-align:center;
 }
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+    .bottomStyle {
+        bottom: 1.8rem !important;
+    }
+}
+@media screen and (min-width: 375px) and (max-width: 767px) {
+    .bottomStyle {
+        bottom: 0.5rem !important;
+    }
+}
+@media screen and (min-width: 768px) {
+    .bottomStyle {
+        bottom: 0.6rem !important;
+    }
+}

@@ -270,7 +270,26 @@
 					</div>
 				</div>
 			</div>
-	</div>
+	        <!--click user information-->
+	        <div id="userEdit" class="bottomStyle mui-popover mui-popover-action mui-popover-bottom">				
+	        	<ul class="mui-table-view tickimgbox">					
+	        		<li class="mui-table-view-cell">						
+	        			<a id="changeImage" style="color: #9C9C9C" disabled="true"></a >					
+	        		</li>					
+	        		<li class="mui-table-view-cell">						
+	        			<a id="takePhoto" onclick="getImage()"></a >					
+	        		</li>					
+	        		<li class="mui-table-view-cell">						
+	        			<a id="chooseFrom" onclick="galleryImg()"></a >					
+	        		</li>				
+	        	</ul>				
+	        	<ul class="mui-table-view tickimgbox">
+	        		<li class="mui-table-view-cell">						
+	        			<a href="#userEdit"></a >
+	        		</li>				
+	        	</ul>		    
+	        </div>
+		</div>
 			<!--main content end-->
 	</body>
 	<script src="../../../js/mui.min.js"></script>
@@ -370,8 +389,9 @@
 		});
 		//change head image
 		mui(".editeimg").on("tap", ".headimg", function(e) {
-			if(mui.os.plus){
-				var a = [{
+			if(mui.os.plus) {
+				mui("#userEdit").popover("toggle");
+				/*var a = [{
 					title: TextMessage.tackpicture
 				}, {
 					title: TextMessage.gallerychoose
@@ -393,7 +413,7 @@
 						default:
 							break
 					}
-				})	
+				})*/	
 			}
 			
 		});
@@ -422,6 +442,7 @@
 				});
 		}
 		function getImage() {
+			mui("#userEdit").popover("hide");
 			var c = plus.camera.getCamera();
 			c.captureImage(function(e) {
 				plus.io.resolveLocalFileSystemURL(e, function(entry) {
@@ -441,6 +462,7 @@
 		}
 		
 		function galleryImg() {
+			mui("#userEdit").popover("hide");
 			plus.gallery.pick(function(a) {
 				plus.io.resolveLocalFileSystemURL(a, function(entry) {
 					var localURL2 = entry.toLocalURL();
@@ -962,6 +984,10 @@
 			}
 		});
 }
+	$('#changeImage').text(TextMessage.edite_headimage);
+	$('#takePhoto').text(TextMessage.tackpicture);
+	$('#chooseFrom').text(TextMessage.gallerychoose);
+	$("[href='#userEdit']").html("<b>" + TextMessage.cancel + "</b>");
 	//address picker
 //	(function($, doc) {
 //		$.init();
