@@ -257,9 +257,9 @@ function getImage() {
 	c.captureImage(function(e) {
 		plus.io.resolveLocalFileSystemURL(e, function(entry) {
 			var localurl = entry.toLocalURL();
-			imgappend(localurl);
+			/*imgappend(localurl);
 			imglength();
-			imgRemove();
+			imgRemove();*/
 			compressImg(localurl);
 		}, function(e) {
 			console.log("Read the picture file error：" + e.message);
