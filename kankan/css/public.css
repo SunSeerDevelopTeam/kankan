@@ -8,7 +8,7 @@ html {
   padding: 0; 
 }
 body,h1,h2,h3,h4,h5,h6,p,ul,ol,dd,form,span,samp,p,a{
-    font-size: 12px;
+    /*font-size: 12px;*/
     font-weight: normal;
     margin:0;
     font-family:  "Microsoft YaHei", Helvetica, STHeiTi,"Helvetica Neue","寰蒋闆呴粦",SimSun,sans-serif;
@@ -46,7 +46,7 @@ img {
 }
 
 body,button,input,select,textarea {
-  font-size: 12px;
+ /* font-size: 12px;*/
   font-family:  "Microsoft YaHei", Helvetica, STHeiTi,"Helvetica Neue","寰蒋闆呴粦",SimSun,sans-serif;
   color:#3c3c3c;
   outline: none;
@@ -85,7 +85,7 @@ table {
 }
 /* 缁熶竴涓婃爣鍜屼笅鏍� */
 sub, sup{
-  font-size:75%;
+  /*font-size:75%;*/
   line-height:0;
   position:relative;
 }
@@ -187,7 +187,7 @@ body {
   border: 1px solid #999;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 14px;
+/*  font-size: 14px;*/
   line-height: 40px;
 }
 
@@ -218,7 +218,7 @@ body {
 }
 
 .nav h1 {
-  font-size: 2.5em;
+  /*font-size: 2.5em;*/
   font-weight: bold;
 }
 
