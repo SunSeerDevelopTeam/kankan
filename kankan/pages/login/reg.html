@@ -420,7 +420,7 @@
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value.trim();
 						params[Api.Params.username] = doc.getElementById('username').value.trim();
-						params[Api.Params.nickname] = doc.getElementById('nickname').value.trim();
+						params[Api.Params.nickName] = doc.getElementById('nickname').value.trim();
 						params[Api.Params.password] = hex_sha1(hex_md5(password));
 						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');
 						params[Api.Params.vCode] = doc.getElementById('verificationCode').value.trim();
