@@ -999,19 +999,23 @@
 	vertical-align: middle;
 	text-align:center;
 }
-
-@media screen and (min-width: 320px) and (max-width: 374px) {
+@media screen and (max-width: 320px) {
     .bottomStyle {
-        bottom: 1.8rem !important;
+        bottom: 2.3rem !important;
     }
 }
-@media screen and (min-width: 375px) and (max-width: 767px) {
+@media screen and (min-width: 321px) and (max-width: 360px) {
     .bottomStyle {
-        bottom: 0.5rem !important;
+        bottom: 2.5rem !important;
+    }
+}
+@media screen and (min-width: 361px) and (max-width: 768px){
+    .bottomStyle {
+        bottom: 2.2rem !important;
     }
 }
 @media screen and (min-width: 768px) {
     .bottomStyle {
-        bottom: 0.6rem !important;
+        bottom: 2.3rem !important;
     }
 }
