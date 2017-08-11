@@ -454,6 +454,7 @@
 			}
 			//complaint
 			function complaint(){
+				mui("#report").popover('hide');
 				var comodid=$("#comodityid").val();
 				var paramport={
 					"commodity_id":comodid,
@@ -466,8 +467,11 @@
 							type: 'div'
 						});
 						mui.openWindow({
-							id: 'question',
-							url: "../../setting/question.html"
+							id: 'complaint',
+							url: "complaint.html",
+							extras: {
+						        "commodity_id": comodid
+					        } 
 						});
 					},
 					ng: function(data) {

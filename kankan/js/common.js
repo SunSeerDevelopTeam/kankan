@@ -500,6 +500,7 @@ var Api;
 
 		},
 		Commodity: {
+			reportCommReason: baseUrl() + '/commodity/Commoditydetail/reportCommReason',
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
 			commodityList: baseUrl() + '/index/index/',
 			category: baseUrl() + '/commodity/catalog/',
@@ -518,6 +519,7 @@ var Api;
 			shareid: baseUrl() + '/commodity/Encryption/',
 			delete_pro: baseUrl() + '/commodity/release/delete/',
 			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
+			CommodityReportShow: baseUrl() + '/commodity/Commoditydetail/commodityreportshow',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -1198,6 +1200,15 @@ var Repository;
 
 	var Commodity;
 	(function(Commodity) {
+		function CommodityReportShow(params, callback) {
+			return Api.call(Api.url.Commodity.CommodityReportShow, params, callback);
+		}
+		Commodity.CommodityReportShow = CommodityReportShow;
+        function reportCommReason(params, callback) {
+        	return Api.call(Api.url.Commodity.reportCommReason, params, callback);
+        }
+        Commodity.reportCommReason = reportCommReason;
+
 		function commodityDetail(params, callback) {
 			return Api.call(Api.url.Commodity.commodityDetail, params, callback);
 		}
@@ -1534,6 +1545,7 @@ var TextMessage;
 	TextMessage.logouttitle = language ? "ログアウト" : "退出登录";
 	TextMessage.logoutsuccess = language ? "ログアウトしました" : "退出成功";
 	TextMessage.requiresuccess = language ? "クレーム提出しました" : "申述成功提出";
+	TextMessage.reportsuccess = language ? "それが正常に報告されています" : "已成功举报";
 	TextMessage.namenotnull = language ? "ユーザー名を入力してください" : "姓名不能为空";
 	TextMessage.contentnotnull = language ? "内容を入力してください" : "内容不能为空";
 	TextMessage.noopen = language ? "サービー提供までお楽しみに" : "暂未开通，敬请期待";

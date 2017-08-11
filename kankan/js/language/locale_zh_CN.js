@@ -144,6 +144,11 @@ var JSLocale = {
 	"version":"版本号",
 	"moneycla":"金钱决算",
 	"speciallow":"特商法",
+	//complaint page
+	"productReportTitle":"举报商品",
+	"productName":"商品名",
+	"productNameInput":"该当商品名",
+	"reporttext":"报告理由",
 	//question page
 	"Appeal":"申诉",
 	"musttext":"标记为必填项",
