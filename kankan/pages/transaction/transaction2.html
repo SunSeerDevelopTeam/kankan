@@ -167,7 +167,7 @@
 			<form id="commodity_comments" name="commodity_comments" method="post">
 				<div class="ka_sendmesbox ka_userbox">
 					<input  type="hidden" id="commodity_id" name="commodity_id"/>
-					<textarea type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="msg" name="leave_msg_detail"></textarea>
+					<textarea onkeyup="this.value=this.value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]|\uD83E[\uDC00-\uDFFF]/g,'')" type="text" class="ka_sendcontent" maxlength="300"  rows="1" id="msg" name="leave_msg_detail"></textarea>
 					<button style="margin-top:1%" type="button" class="mui-btn ka_sendbutton lang"  data-locale="contentsend" onclick="submitChat()"></button>
 				</div>
 			</form>
