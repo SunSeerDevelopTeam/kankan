@@ -671,6 +671,7 @@
 				}
 				//recommend and concerned products image width
 				var recoimgheight=parseInt($(window).width())/4-16;
+				var li_height = parseInt($(window).width()) * 0.25 -2;
 				//buy way
 				var exchange = commodity.commodity_buy_way.exchange;
 				var business = commodity.commodity_buy_way.business;
@@ -713,9 +714,9 @@
 					var recomdid = recomendsobj.commodity_id;
 					var advflag = recomendsobj.is_ad;
 					if(j>=4){
-						recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-						recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendhtml += '<img class="mui-media-object ka_imgewh" data-original="' + recomdimg + '" style="height: '+recoimgheight+'px;">';
+						recomendhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail" style="height: '+li_height+'px;">';
+						recomendhtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh" style="height: '+li_height+'px;">';
+						recomendhtml += '<img class="mui-media-object ka_imgewh imageDetail" data-original="' + recomdimg + '">';
 						recomendhtml += '</a></li>';
 					}
 					var vall = k % 4;
@@ -730,9 +731,9 @@
 					}
 
 					if(j < 4) {
-						recomendaddfirsthtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-						recomendaddfirsthtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh">';
-						recomendaddfirsthtml += '<img class="mui-media-object" src="' + recomdimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						recomendaddfirsthtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail" style="height: '+li_height+'px;">';
+						recomendaddfirsthtml += '<a href="detail.html" id="' + recomdid + '" class="ka_imgewh" style="height: '+li_height+'px;">';
+						recomendaddfirsthtml += '<img class="mui-media-object imageDetail" src="' + recomdimg + '" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						recomendaddfirsthtml += '</a></li>';
 						$("#firstremmondul").html(recomendaddfirsthtml);
 					}
@@ -766,9 +767,9 @@
 					var concernimg = concernsobj.commodity_thu_photo_url;
 					var concernid = concernsobj.commodity_id;
 					if(l >= 4){
-						concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-						concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernhtml += '<img class="mui-media-object" data-original="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						concernhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail" style="height: '+li_height+'px;">';
+						concernhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh" style="height: '+li_height+'px;">';
+						concernhtml += '<img class="mui-media-object" data-original="' + concernimg + '" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernhtml += '</a></li>';
 					}
 					var vallm = m % 4;
@@ -782,9 +783,9 @@
 						concernhtml += '<ul class="mui-table-view mui-grid-view">';
 					}
 					if(l < 4) {
-						concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail">';
-						concernaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh">';
-						concernaddhtml += '<img class="mui-media-object" data-original="' + concernimg + '" style="height: '+recoimgheight+'px;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
+						concernaddhtml += '<li class="mui-table-view-cell mui-media mui-col-xs-3 detail" style="height: '+li_height+'px;">';
+						concernaddhtml += '<a href="detail.html" id="' + concernid + '" class="ka_imgewh" style="height: '+li_height+'px;">';
+						concernaddhtml += '<img class="mui-media-object" data-original="' + concernimg + '" onerror="this.src=' + "'../../../images/nopic.jpg'" + '">';
 						concernaddhtml += '</a></li>';
 						$("#firstconcerul").html(concernaddhtml);
 					}
