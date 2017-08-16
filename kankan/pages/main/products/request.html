@@ -163,9 +163,12 @@
 			}
 			window.addEventListener('requestpage', function(event) {
 				self.location.reload();
-
-			});
+            });
 			mui.plusReady(function() {
+				var wt = plus.nativeUI.showWaiting();
+				setTimeout(function(){
+					wt.close();
+				},800);
 				getdata("down",0);
 				setTimeout(function(){
 					getdata("down",1,"first")
@@ -395,6 +398,7 @@
 					placeholder: "../../../images/nopic.jpg",
 					effect: "fadeIn",
 					failure_limit : 10
+					
 			    });
 			}
 			(function($) {

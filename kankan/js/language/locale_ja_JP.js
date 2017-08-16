@@ -144,6 +144,11 @@ var JSLocale = {
 	"version":"バージョン",
 	"moneycla":"資金決済法",
 	"speciallow":"特定商取引法",
+	//complaint page
+	"productReportTitle":"不適切な商品報告",
+	"productName":"商品名",
+	"productNameInput":"該当商品名",
+	"reporttext":"報告理由",
 	//question page
 	"Appeal":"お問い合わせ",
 	"musttext":"印がある項目は必須項目となります。",

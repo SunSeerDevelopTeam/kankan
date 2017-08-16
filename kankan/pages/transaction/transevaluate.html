@@ -62,7 +62,7 @@
 								<li style="padding:5px;" class="lang" data-locale="eve_comment"></li>
 								<li>
 									<div class="mui-input-row" style="margin: 10px 5px;">
-										<textarea name="evaluate_msg" style="background:#eee;" id="evaluate_msg" rows="5" placeholder=""></textarea>
+										<textarea onkeyup="this.value=this.value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]|\uD83E[\uDC00-\uDFFF]/g,'')" name="evaluate_msg" style="background:#eee;" maxlength="300" id="evaluate_msg" rows="5" placeholder=""></textarea>
 										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined lang" data-locale="eve_btn"></button>
 									</div>
 								</li>
