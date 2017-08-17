@@ -16,3 +16,4 @@
 /android_kankan/keystore.keystore
 /android_kankan/app/*.iml
 /android_kankan/app/src/main/assets/apps
+/android_kankan/local.properties

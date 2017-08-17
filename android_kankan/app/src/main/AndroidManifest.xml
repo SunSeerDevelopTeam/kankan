@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sunseer.kankan"
-    android:versionCode="38"
-    android:versionName="0.0.38" >
+    android:versionCode="39"
+    android:versionName="0.0.39" >
 
     <supports-screens
         android:anyDensity="true"
