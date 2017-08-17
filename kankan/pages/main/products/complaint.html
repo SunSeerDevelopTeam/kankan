@@ -38,7 +38,7 @@
 					<textarea style="background:#FFFFFF;width:85%;" rows="5"  id="contents" name="contents" maxlength="1000"></textarea>
     			</div>
 				<div class="mui-button-row" style="margin-bottom: 1em;margin-top: 1em;">
-					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="submitvals()" data-locale="suretext"></button>&nbsp;&nbsp;
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="submitvals()" data-locale="suretext" id='submit'></button>&nbsp;&nbsp;
 					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="clearallval()" data-locale="quesreset"></button>
 				</div>
 				<!--mask-->
@@ -103,6 +103,7 @@
 					});
 					return false;
 				}
+				$("#submit").attr("disabled",'disabled');
 				var params2={
 					"full_name":fullname,
 					"email":email,
