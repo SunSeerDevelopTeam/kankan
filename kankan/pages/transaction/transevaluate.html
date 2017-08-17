@@ -101,6 +101,8 @@
 
 			function gotoMain(){
 				mui.plusReady(function() {
+					var transactionView = plus.webview.getWebviewById('transaction');
+					plus.webview.close(transactionView);
 					var mainPage = plus.webview.getLaunchWebview();
 					mui.fire(mainPage,'gohome');
        				mainPage.show();
