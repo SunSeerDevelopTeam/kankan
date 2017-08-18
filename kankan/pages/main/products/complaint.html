@@ -23,11 +23,11 @@
 				<div style="padding:15px 15px;"><span style="color:red">*</span><span class="lang" data-locale="musttext"></span></div>
 				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="productName"></span></h5>
     			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
-					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear lang" data-locale="productNameInput" name="commodity_name" id="commodity_name">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear lang" data-locale="productNameInput" name="commodity_name" disabled="disabled" id="commodity_name">
 				</div>
 				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="nametext"></span></h5>
     			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
-					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear lang" data-locale="nametext" name="full_name" id="full_name">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear lang" data-locale="nametext" name="full_name" id="full_name" disabled="disabled">
 				</div>
 				<h5 style="padding-left:15px"><span style="color:red">*</span>Email</h5>
     			<div class="mui-input-row" style="text-align:center;">
@@ -35,10 +35,10 @@
 				</div>
 				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="reporttext"></span></h5>
     			<div class="mui-input-row" style="text-align:center;">
-					<textarea style="background:#FFFFFF;width:85%;" rows="5"  id="contents" name="contents"></textarea>
+					<textarea style="background:#FFFFFF;width:85%;" rows="5"  id="contents" name="contents" maxlength="1000"></textarea>
     			</div>
 				<div class="mui-button-row" style="margin-bottom: 1em;margin-top: 1em;">
-					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="submitvals()" data-locale="suretext"></button>&nbsp;&nbsp;
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="submitvals()" data-locale="suretext" id='submit'></button>&nbsp;&nbsp;
 					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="clearallval()" data-locale="quesreset"></button>
 				</div>
 				<!--mask-->
@@ -103,6 +103,7 @@
 					});
 					return false;
 				}
+				$("#submit").attr("disabled",'disabled');
 				var params2={
 					"full_name":fullname,
 					"email":email,
