@@ -885,14 +885,15 @@
 			})
 
 			function trans_flow(api_url_flag, params,flag,last) {
-				if(last){
-					params.select_flag="one";
-				}
 				Repository.Transaction.trans(api_url_flag, params, {
 					ok: function(data) {
 						if(api_url_flag == 'transOrderReceipt') {
 							gotoEvaluate(params.transid);
 						} else {
+							if(last){
+								//params.select_flag="one";
+								location.reload();
+							}
 							Log.i("message send successfully!");
 							var transinfo = data.data.transinfo;
 							var messginfo = data.data.messginfo;
