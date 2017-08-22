@@ -142,29 +142,29 @@
 					<div class="mui-scroll">
 						<a class="mui-control-item mui-active lang" data-locale="category_top_1" data-wid="tab-top-subpage-1" data-cid="0">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_2" data-wid="tab-top-subpage-2" data-cid="3">
+						<a class="mui-control-item lang" data-locale="category_top_2" data-wid="tab-top-subpage-1" data-cid="3">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_3" data-wid="tab-top-subpage-3" data-cid="33">
+						<a class="mui-control-item lang" data-locale="category_top_3" data-wid="tab-top-subpage-1" data-cid="33">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_4" data-wid="tab-top-subpage-4" data-cid="40">
+						<a class="mui-control-item lang" data-locale="category_top_4" data-wid="tab-top-subpage-1" data-cid="40">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_5" data-wid="tab-top-subpage-5" data-cid="41">
+						<a class="mui-control-item lang" data-locale="category_top_5" data-wid="tab-top-subpage-1" data-cid="41">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_6" data-wid="tab-top-subpage-6" data-cid="42">
+						<a class="mui-control-item lang" data-locale="category_top_6" data-wid="tab-top-subpage-1" data-cid="42">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_7" data-wid="tab-top-subpage-7" data-cid="6">
+						<a class="mui-control-item lang" data-locale="category_top_7" data-wid="tab-top-subpage-1" data-cid="6">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_8" data-wid="tab-top-subpage-8" data-cid="44">
+						<a class="mui-control-item lang" data-locale="category_top_8" data-wid="tab-top-subpage-1" data-cid="44">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_9" data-wid="tab-top-subpage-9" data-cid="45">
+						<a class="mui-control-item lang" data-locale="category_top_9" data-wid="tab-top-subpage-1" data-cid="45">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_10" data-wid="tab-top-subpage-10" data-cid="46">
+						<a class="mui-control-item lang" data-locale="category_top_10" data-wid="tab-top-subpage-1" data-cid="46">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_11" data-wid="tab-top-subpage-11" data-cid="2">
+						<a class="mui-control-item lang" data-locale="category_top_11" data-wid="tab-top-subpage-1" data-cid="2">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_12" data-wid="tab-top-subpage-12" data-cid="48">
+						<a class="mui-control-item lang" data-locale="category_top_12" data-wid="tab-top-subpage-1" data-cid="48">
 						</a>
-						<a class="mui-control-item lang" data-locale="category_top_13" data-wid="tab-top-subpage-13" data-cid="32">
+						<a class="mui-control-item lang" data-locale="category_top_13" data-wid="tab-top-subpage-1" data-cid="32">
 						</a>
 					</div>
 				</div>
@@ -177,8 +177,21 @@
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
 		<script type="text/javascript" src="../../js/index.list.js"></script>
-		<script type="text/javascript" src="../../js/webviewGroup.js"></script>
-		<script>
+		<script type="text/javascript">
+			mui.init({
+				subpages: [{
+					url: 'category/tab-top-subpage.html',
+					id: 'tab-top-subpage',
+					styles: {
+						top: '81px',
+						bottom: '0px',
+					}
+				}]
+			});
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005
+			});
+			
 			window.addEventListener("updateUserImgEvent", function(event) {
 				if(DEBUG) {
 					alert("updateUserImgEvent[imgURL=" + event.detail.userImgURL + "]");
@@ -197,145 +210,33 @@
 					$('i').hide();
 				}
 			});
-			
-			window.addEventListener("showActionSheet", function(event){
-				if (event.detail.isShow !== 'yes') {
+
+			window.addEventListener("showActionSheet", function(event) {
+				if(event.detail.isShow !== 'yes') {
 					return;
 				}
-				var wids = $('.mui-scroll .mui-active').index() + 1;
-				var pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
+				var pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub");
 				mui.fire(pullrefresh_page, 'showActionSheet', {
 					isHide: 'no'
 				});
 			});
-			
+			// 自定义点赞监听事件
 			window.addEventListener('praiseid', function(event) {
 				var praiseid = event.detail.praiseid;
-				//alert(typeof(praiseid));
-				if(typeof(praiseid) != "undefined"){
-					var wids=$('.mui-scroll .mui-active').index() + 1;
-					var page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
+				if(typeof(praiseid) != "undefined") {
+					var page = plus.webview.getWebviewById("pullrefresh_sub");
 					mui.fire(page, 'good', {
 						prid: praiseid
 					});
 				}
-				
-			});
-			mui.init();
-			mui('.mui-scroll-wrapper').scroll({
-				deceleration: 0.0005
+
 			});
 			mui.plusReady(function() {
 				var userPhoto = document.getElementById("user");
 				var searchBtn = $('.mui-icon-search').first();
-				var curScroll = 0;
-				var group = new webviewGroup("home.html", {
-					items: [{
-						id: "tab-top-subpage-1",
-						url: "category/tab-top-subpage-1.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-2",
-						url: "category/tab-top-subpage-2.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-3",
-						url: "category/tab-top-subpage-3.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-4",
-						url: "category/tab-top-subpage-4.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-5",
-						url: "category/tab-top-subpage-5.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-6",
-						url: "category/tab-top-subpage-6.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-7",
-						url: "category/tab-top-subpage-7.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-8",
-						url: "category/tab-top-subpage-8.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-9",
-						url: "category/tab-top-subpage-9.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-10",
-						url: "category/tab-top-subpage-10.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-11",
-						url: "category/tab-top-subpage-11.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-12",
-						url: "category/tab-top-subpage-12.html",
-						extras: {}
-					}, {
-						id: "tab-top-subpage-13",
-						url: "category/tab-top-subpage-13.html",
-						extras: {}
-					}
-					],
-					onChange: function(obj) {
-						console.log("onChange callback");
-						console.log("user agent is " + navigator.userAgent.toLowerCase());
-						var c = document.querySelector(".mui-control-item.mui-active");
-						var userAgent = navigator.userAgent.toLowerCase();
-                        // hide actionSheet
-						var wids = $('.mui-scroll .mui-active').index();
-						var pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
-						mui.fire(pullrefresh_page, 'hideActionSheet', {
-							isHide: 'yes'
-						});
-						if(c) {
-							c.classList.remove("mui-active");
-							if (userAgent.indexOf("ipad") >= 0) {
-								var wid = c.getAttribute("data-wid");
-								console.log("wid is " + wid);
-								var newwid = wid.substr(wid.lastIndexOf("-") + 1, wid.length);
-								console.log("newwid is " + newwid);
-								var webview = plus.webview.getWebviewById("pullrefresh_sub_" + newwid + ".html");
-								// 触发自定义事件
-								mui.fire(webview, "clear", {
-									clearData : "all",
-								});
-							}
-						}
-						var activeTab = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
-						localStorage.setItem("cid", activeTab.dataset.cid);
-						activeTab.classList.add("mui-active");
-						wids = $('.mui-scroll .mui-active').index();
-						pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub_" + wids + ".html");
-						mui.fire(pullrefresh_page, 'hideActionSheet', {
-							isHide: 'yes'
-						});
-						if (userAgent.indexOf("ipad") >= 0) {
-							var wid = activeTab.getAttribute("data-wid");
-							var newwid = wid.substr(wid.lastIndexOf("-") + 1, wid.length);
-							var webview = plus.webview.getWebviewById("pullrefresh_sub_" + newwid + ".html");
-							// 触发自定义事件
-							mui.fire(webview, "initData", {
-								createData : "yes",
-							});
-						}
-						mui('.mui-scroll-wrapper').scroll().scrollTo(-activeTab.offsetLeft, 0);
-					}
-				});
-				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
-					var wid = this.getAttribute("data-wid");
-					group.switchTab(wid);
-				});
-				document.querySelector('.mui-scroll-wrapper').addEventListener('scroll', function(e) {
-					curScroll = e.detail.x;
-				});
+				// 将当前分类信息存储起来
+				localStorage.setItem("cid", $('.mui-control-item.mui-active').attr('data-cid'));
+				// 点击用户头像触发该事件
 				userPhoto.addEventListener('click', function(event) {
 					if(Repository.User.isLogin()) {
 						mui.openWindow({
@@ -347,14 +248,11 @@
 						});
 					}
 				});
-
+				// 检索按钮事件
 				searchBtn.click(function() {
 					mui.openWindow({
 						id: 'search',
 						url: 'search.html',
-						extras: {
-							wid: $('.mui-scroll .mui-active').index() + 1
-						},
 						show: {
 							aniShow: 'slide-in-bottom',
 							duration: 200
@@ -364,7 +262,8 @@
 						}
 					});
 				});
-				mui("header").on("tap","#offCanvasShow", function() {
+				// 通知按钮事件
+				mui("header").on("tap", "#offCanvasShow", function() {
 					// var isLogin = plus.storage.getItem("LoginFlag");
 					if(Repository.User.isLogin()) {
 						mui.openWindow({
@@ -372,6 +271,18 @@
 							url: 'news.html',
 						});
 					}
+				});
+				// 切换分类的事件处理
+				mui(".mui-scroll").on("tap", ".mui-control-item", function(event){
+					// 显示加载框
+					plus.nativeUI.showWaiting();
+					// 延迟1000ms后获取当前分类并存储起来
+					setTimeout(function(){
+						localStorage.setItem("cid", $('.mui-control-item.mui-active').attr('data-cid'));
+						console.log("cur cid is " + $('.mui-control-item.mui-active').attr('data-cid'));
+						var pullrefresh_sub_page = plus.webview.getWebviewById('pullrefresh_sub');
+						mui.fire(pullrefresh_sub_page, 'initData',{createData:"yes"});
+					}, 1000);
 				});
 			});
 		</script>
