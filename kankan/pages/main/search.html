@@ -42,7 +42,7 @@
 			});
 			mui.plusReady(function() {
 				$('.mui-icon-search').click(function() {
-					keyword = $('#search').val().trim();
+					keyword = HTMLEncode($('#search').val().trim());
 					Log.i("keyword is " + keyword);
 					setTimeout(function() {
 						mui.back();

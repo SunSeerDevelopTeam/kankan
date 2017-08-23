@@ -189,7 +189,7 @@ function createListView(data) {
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
 	if(Validator.isEmpty(data.data.commd)) {
 		if (keyword !== "") {
-			var searchResultHTML = '<li id="searchResultPanel" class="mui-table-view-cell mui-col-sm-12 mui-col-xs-12"><p>'+TextMessage.search_result+"'" + keyword + "'," + "全" + data.data.pages.cnt + "件"+'</p></li>';
+			var searchResultHTML = '<li id="searchResultPanel" class="mui-table-view-cell mui-col-sm-12 mui-col-xs-12"><p>'+TextMessage.search_result + "'" + HTMLDecode(keyword) + "'," + "全" + data.data.pages.cnt + "件"+'</p></li>';
 			$('ul.mui-table-view').first().prepend(searchResultHTML);
 		} else {
 			var htmlText = "<div class='no-data-tips'><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_1 + "</div><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_2 + "</div><br/></div>";
