@@ -171,6 +171,14 @@
 				//location.reload();
 			}
 			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var email = self.email;
+				console.log("question.html email value is " + email);
+				if (email) {
+					var emailElement = document.getElementById('email');
+					emailElement.disabled = "";
+					emailElement.value = email;
+				}
 				var params={};
 				Repository.User.Usercomplaint(params,{
 					ok: function(data) {

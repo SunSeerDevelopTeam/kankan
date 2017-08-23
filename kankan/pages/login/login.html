@@ -222,6 +222,9 @@
 														mui.openWindow({
 															id: "question",
 															url: "../setting/question.html",
+															extras : {
+																email : ""
+															},
 															waiting: {
 																autoShow: false
 															},
@@ -320,6 +323,9 @@
 											mui.openWindow({
 												id: "question",
 												url: "../setting/question.html",
+												extras : {
+													email : doc.getElementById('email').value.trim()
+												},
 												waiting: {
 													autoShow: false
 												},
