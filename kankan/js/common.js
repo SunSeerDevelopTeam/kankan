@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1518,7 +1518,7 @@ var TextMessage;
 	TextMessage.pro_pricetest = language ? "価格は数字のみを設定してください" : "价格只能是数字";
 	TextMessage.pro_pricenumbtest = language ? "有効な数字（0円以上）を設定してください" : "价格必须大于0";
 	TextMessage.pro_buywaytest = language ? "取引手段を選択してください。" : "请选择交易手段";
-	TextMessage.pro_logininfo = language ? "登録が完了しました。" : "发布成功";
+	TextMessage.pro_logininfo = language ? "商品を出品しました" : "发布成功";
 	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
 	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";

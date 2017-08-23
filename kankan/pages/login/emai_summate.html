@@ -15,7 +15,6 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title lang" data-locale="writeemail"></h1>
 		</header>
 		<div style="text-align: left;margin-top: 50px;margin-bottom: -2.5em;">
@@ -54,12 +53,7 @@
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
 			var formPageName;
-			mui.init({
-//				beforeback: function() {
-//					var homePage = plus.webview.currentWebview().opener();
-//					mui.fire(homePage, 'refreshlist');
-//				}
-			});
+			mui.init();
 			mui.plusReady(function() {
 				formPageName = plus.webview.currentWebview().formPageName;
 				var sendVCodeBtn = document.getElementById('send-verification-code');
