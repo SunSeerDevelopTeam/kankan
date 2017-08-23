@@ -66,7 +66,6 @@ function pulldownRefresh() {
 			table.appendChild(li);
 		});
 		bindEventOnListViewItem();
-		lazyload();
 		mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 	});
 }
@@ -98,7 +97,6 @@ function pullupRefresh() {
 			table.appendChild(li);
 		});
 		bindEventOnListViewItem();
-		lazyload();
 		mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 	});
 }
@@ -183,6 +181,9 @@ function savePageInfo(pages) {
 function createListView(data) {
 	var table = document.body.querySelector('.mui-table-view');
 	if(Validator.isEmpty(table)) {
+		if (plus) {
+			plus.nativeUI.closeWaiting();
+		}
 		return;
 	}
 	var imgwidth = parseInt($(window).width()) / 2 - 34;
@@ -193,6 +194,9 @@ function createListView(data) {
 		} else {
 			var htmlText = "<div class='no-data-tips'><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_1 + "</div><br/><div style='text-align:center;'>" + TextMessage.no_data_tips_2 + "</div><br/></div>";
 			table.innerHTML = htmlText;
+		}
+		if (plus) {
+			plus.nativeUI.closeWaiting();
 		}
 		return;
 	}
@@ -207,7 +211,9 @@ function createListView(data) {
 		$('ul.mui-table-view').first().prepend(searchResultHTML);
 	}
 	bindEventOnListViewItem();
-	lazyload();
+	if (plus) {
+		plus.nativeUI.closeWaiting();
+	}
 }
 
 function bindEventOnListViewItem() {
@@ -236,7 +242,6 @@ function bindEventOnListViewItem() {
 
 	$(".contentbottom").off("tap", ".like-area");
 	$(".contentbottom").on("tap", ".like-area", function(event) {
-		console.log("click like");
 		var _self = $(this).find(".comm-like-num");
 		if(!Repository.User.isLogin()) {
 			return;
@@ -327,16 +332,6 @@ function createListItem(item, imgwidth) {
 	return listItemHTML.toString();
 }
 
-function lazyload() {
-	/**
-	$("img.lazy").lazyload({
-		threshold: 200,
-		placeholder: "../../../images/nopic.jpg",
-		effect: "fadeIn",
-		failure_limit: 10
-	});
-	**/
-}
 function getzanItems() {
 	var zanItemHTML = new Util.StringBuilder();
 	zanItemHTML.append('<div id="clickzan" class="mui-popover mui-popover-action mui-popover-bottom">')
