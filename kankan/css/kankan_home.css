@@ -189,12 +189,12 @@ body .mui-table-view-cell.mui-active{
 }
 
 .requestbox {
-	margin-left: 1.1em;
+	margin-left: 0.5em;
 }
 
 .requeststop {
 	background-color: #DD524D;
-	width: 9em;
+	width: 7em;
 	height: 2.5em;
 	border: 1px #DD524D solid;
 	border-radius: 2px;
@@ -206,7 +206,7 @@ body .mui-table-view-cell.mui-active{
 
 .requestsuccess {
 	background-color: #2AC845;
-	width: 8em;
+	width: 7em;
 	height: 2.5em;
 	border: 1px #2AC845 solid;
 	border-radius: 2px;
@@ -328,6 +328,22 @@ body .mui-table-view-cell.mui-active{
 	line-height: 1.5em;color: #333333;font-size: 14px;width: 75%;
 	text-align: left;
 	padding-left: 1em;
+}
+.gratis_goods {
+	height: 50px;
+	background-color: #6ACB9A;
+	font-size: 15px;
+}
+.gratis_goods div {
+	margin-left: 1em;
+	line-height: 50px;
+	color: #FFFFFF;
+}
+.gratis_goods a{
+	display: block;
+	margin-right: 0.5em;
+	line-height: 50px;
+	color: #FFFFFF;
 }
 /***productlist page***/
 
@@ -564,7 +580,44 @@ body .mui-table-view-cell.mui-active{
 	color: #2187E7;
 	font-size: 14px;
 }
-
+.inputPrice {
+	height: 0.7rem;
+	width: 100%;
+	border: 1px solid #cccccc;
+	border-left: none;
+	border-right: none;
+	background: #fff;
+}
+.inputPrice .inputNumber {
+	display: block;
+	float: left;
+	width: 70%;
+	height: 0.65rem;
+	border: none;
+	ime-mode:Disabled;
+}
+.inputPrice .inputSpan {
+	width: 28%; 
+	display: block; 
+	float: right; 
+	height: 0.7rem; 
+	line-height: 0.7rem;
+}
+.tradeLi {
+	border: none;
+}
+.tradeFees ul li {
+	width: 100%;
+	overflow: inherit;
+}
+.tradeFees ul li input{
+	border: none;
+	margin-bottom: 0;
+}
+.tradeFees ul li .fee {
+	float: right;
+	padding-right: 1.1rem;
+}
 /**take picture***/
 
 .container {
@@ -877,7 +930,13 @@ body .mui-table-view-cell.mui-active{
 	background-color: #FFFFFF;
 }
 .ka_usersubmitbtn{
-	width: 100%;margin-top: 2em;
+	width: 100%;
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+}
+#changeMail {
+	width: 100%;
+	margin-top: 1em;
 }
 /*loading*/
 .spinner {
@@ -944,4 +1003,22 @@ body .mui-table-view-cell.mui-active{
 }
 #reloadpage{
 	font-size: 14px;
+}
+/*seller account page*/
+.seller_bank {
+	margin-top: 2.5em;
+	height: 2.5em;
+	border: 1px solid #c8c7cc; 
+	border-left: none; 
+	border-right: none;
+	background-color: #FFFFFF;
+	width: 100%;
+}
+.seller_bank div {
+	display: flex;
+	align-items: center;
+	height: 2.5em;
+}
+.accountDesc {
+	margin: 1em 0 1em 1em;
 }

@@ -92,8 +92,8 @@
 
 							</li>
 						</ul>
-						<ul class="mui-row mui-table-view mui-grid-view other liheight" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px;">
-							<li class="mui-table-view-cell mui-media mui-col-xs-4 liheight otherli" style="padding:0px; margin-left: 0;">
+						<ul class="mui-row mui-table-view mui-grid-view other ulAndLiStyle" style="display:none;text-align:center;margin-top:10px;position: inherit;padding:0 10px 10px 10px;">
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 otherli" style="padding:0px; margin-left: 0;">
 
 							</li>
                             <li class="mui-col-xs-4 secondLi">
@@ -220,7 +220,7 @@
 			function reloadpage(){
 				location.reload();
 			}
-			var imgwidth = parseInt($(window).width()) / 2 - 52;
+			var imgwidth = parseInt($(window).width()) / 2 - 63.34375;
 			//setInterval(showRequestDetail, 10000, "");
 			function submitChat() {
 				var chatMsg = $("#msg").val();
@@ -346,6 +346,7 @@
 				var seller_comm_exist = false;
 				var seller_img='',buyer_img='',buyer_top_margin='',seller_top_margin='';
 				$(".liheight").attr("style","height:"+imgwidth+"px;overflow:hidden;");
+				$(".ulAndLiStyle").attr("style","height:"+(imgwidth+27)+"px;overflow:hidden;");
 				$(".secondLi").attr("style","height:"+imgwidth+"px;line-height:"+imgwidth+"px; text-align: center;");
 				for(var goods in commdinfo) {
 					if(commdinfo[goods].user_id == buyer_id) {
@@ -431,9 +432,11 @@
 					$(".cur-user").append("<input type='hidden' name='myid' id='myid' value='" + cur_user_id + "'>");
 				} else {
 					if(cur_user_id==seller_id){
-						seller_msg += '<a href="#">';
+						seller_msg += '<a href="#" style="height: '+imgwidth+'px;">';
 						seller_msg += '<img style="'+seller_top_margin+'" class="imageOne mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 						seller_msg += '</a>';
+						seller_msg += '<div style="height: 21px;"><span>&yen;<span>3,000</span>';
+						seller_msg += '</span></div>';
 						
 						seller_msg1 += '<img src="../../images/jiantou.png" width="20" height="20">';
 						
@@ -441,24 +444,27 @@
 						seller_msg2 += '<img class="ka_touxiangimg" height="40px" width="40px" src="' + buyer_photo + '"/>';
 						seller_msg2 += '</div>';
 						if (showheight < imgwidth) {
-							$(".other .otherli").attr("style", "margin-left: 0.5rem;position: relative;top:"+ (imgwidth-showheight)/2 +"px;left:"+ (imgwidth-showheight)/2 +"px;");
+							$(".other .otherli").attr("style", "margin-left: 0.5rem;");
 						} else {
-							$(".other .otherli").attr("style", "margin-left: 0.5rem;height:"+imgwidth+"px;line-height:"+imgwidth+"px;");
+							$(".other .otherli").attr("style", "margin-left: 0.5rem;height:"+(imgwidth+21)+"px;");
 						}
 						$(".other .otherli").html(seller_msg);
 						$(".secondLi").html(seller_msg1);
 						$(".other .otherliimg").html(seller_msg2);
 						//$(".other-img li").html(seller_img);
 					}else{
-						seller_msg += '<a href="#">';
+						seller_msg += '<a href="#" style="height: '+imgwidth+'px;">';
+						seller_msg += '<img style="'+seller_top_margin+'" class="mui-media-object" data-original="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
+						seller_msg += '</a>';
+						seller_msg += '<div><span>&yen;<span>3,000</span>';
+						seller_msg += '</span></div>';
 						seller_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
 						seller_img += '<img class="ka_touxiangimg" height="32px" width="32px" src="' + seller_photo + '" />';
 						seller_img += '<font size="2" vertical-align="middle">' + seller_nickname + '</font>';
 						seller_img += '</div>';
-						seller_msg += '<img style="'+seller_top_margin+'" class="mui-media-object" data-original="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
-						seller_msg += '</a>';
-						$(".other .otherli").attr("style", "margin-left: 33%;");
+						$(".other .otherli").attr("style", "margin-left: 33%; height: "+(imgwidth+27)+"px;");
 						$(".other .otherli").html(seller_msg);
+						$(".secondLi").remove();
 						$(".other .otherliimg").remove();
 						$(".other-img li").html(seller_img);
 					}
