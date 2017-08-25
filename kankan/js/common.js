@@ -518,6 +518,7 @@ var Api;
 			shareurl: baseUrl() + '/share.php?wxparms=',
 			shareid: baseUrl() + '/commodity/Encryption/',
 			delete_pro: baseUrl() + '/commodity/release/delete/',
+			getPrice: baseUrl() + '/commodity/release/infobase',
 			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
 			CommodityReportShow: baseUrl() + '/commodity/Commoditydetail/commodityreportshow',
 		},
@@ -1284,6 +1285,11 @@ var Repository;
 		}
 		Commodity.delete_pro = delete_pro;
 		
+		function getPrice(params, callback) {
+			return Api.call(Api.url.Commodity.getPrice, params, callback);
+		}
+		Commodity.getPrice = getPrice;
+
 		function reportCommodity(params, callback) {
 			return Api.call(Api.url.Commodity.reportCommodity, params, callback);
 		}
