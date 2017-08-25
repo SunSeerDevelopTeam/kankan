@@ -38,7 +38,7 @@ var JSLocale = {
 	"please-input-verification-code": "请输入验证码",
 	"send-verification-code": "发送验证码",
 	"retrieve_password":"找回密码",
-	"forget_password_msg": "请入力kankan登陆用邮箱地址，系统将把新密码发送过去请查收",
+	"forget_password_msg": "请输入kankan登录时使用的邮箱，系统将发送验证码，请查收",
 	/*user login page message end*/
 	/*detail page*/
 	"det_spdescription": "商品说明",
