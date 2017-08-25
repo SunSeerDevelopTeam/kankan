@@ -348,7 +348,7 @@
 								break;
 							}
 						}
-						var ocomm_name = otranspro.comm_name;
+						var ocomm_name = HTMLDecode(otranspro.comm_name);
 						var ocomm_img = otranspro.comm_thu_img;
 						if(otranspro.comm_img == "") {
 							var ocomm_img = "../../../images/nopic.jpg";
