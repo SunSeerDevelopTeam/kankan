@@ -554,25 +554,24 @@
 						if(messginfo[chat].user_id == buyer_id) {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-right"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-
-							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
+							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
 							chatMsg += '</div>';
 						} else {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-left"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
+							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
 							chatMsg += '</div>';
 						}
 					} else {
 						if(messginfo[chat].user_id == seller_id) {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-right"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
+							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
 							chatMsg += '</div>';
 						} else {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-left"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '</div>';
+							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
 							chatMsg += '</div>';
 						}
 					}
@@ -887,6 +886,11 @@
 			function trans_flow(api_url_flag, params,flag,last) {
 				Repository.Transaction.trans(api_url_flag, params, {
 					ok: function(data) {
+						if (api_url_flag == 'transUrgeDelive') { // 催促发货
+							plus.nativeUI.toast(TextMessage.urge_delive_finish);
+						} else if (api_url_flag == 'transUrgeReceipt') { // 催促收货
+							plus.nativeUI.toast(TextMessage.urge_receipt_finish);
+						}
 						if(api_url_flag == 'transOrderReceipt') {
 							gotoEvaluate(params.transid);
 						} else {

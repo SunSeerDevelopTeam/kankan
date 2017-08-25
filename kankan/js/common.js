@@ -1639,6 +1639,8 @@ var TextMessage;
 	TextMessage.Compresserror_si = language ? "ファイルが存在しません" : "文件不存在";
 	TextMessage.search_result = language ? "検索結果" : "检索结果";
 	TextMessage.may_not_click = language ? "三分間後、発送ボタンをご押してください。" : "3分钟之内不可点击";
+	TextMessage.urge_receipt_finish = language ? "取引相手に商品確認を催促しました。" : "已催促对方收货";
+	TextMessage.urge_delive_finish = language ? "取引相手に商品発送を催促しました。" : "已催促对方发货";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
