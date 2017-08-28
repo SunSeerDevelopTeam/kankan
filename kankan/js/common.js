@@ -494,6 +494,9 @@ var Api;
 			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/',
 			setImg: baseUrl() + '/user/setting/setImg/',
 			email_rgister_check: baseUrl() + '/user/Setemail/',
+			personal_infor: baseUrl() + '/user/Useraccount/getbankname/',
+			personal_finish: baseUrl() + '/user/Useraccount/',
+			getpersonal_bankinfor: baseUrl() + '/user/Useraccount/u_accountshow',
 			set_message: baseUrl() + '/user/usersystemmsg/set_message/',
 			del_message: baseUrl() + '/user/usersystemmsg/del_message/',
 			get_message: baseUrl() + '/user/usersystemmsg/get_message/'
@@ -1141,7 +1144,22 @@ var Repository;
 			return Api.call(Api.url.User.email_rgister_check, params, callback);
 		}
 		User.email_rgister_check = email_rgister_check;
-
+        
+        function personal_infor(params, callback) {
+        	return Api.call(Api.url.User.personal_infor, params, callback);
+        }
+        User.personal_infor = personal_infor;
+        
+        function personal_finish(params, callback) {
+        	return Api.call(Api.url.User.personal_finish, params, callback);
+        }
+        User.personal_finish = personal_finish;
+        
+        function getpersonal_bankinfor(params, callback) {
+        	return Api.call(Api.url.User.getpersonal_bankinfor, params, callback);
+        }
+        User.getpersonal_bankinfor = getpersonal_bankinfor;
+        
 		function set_message(params, callback) {
 			return Api.call(Api.url.User.set_message, params, callback);
 		}
@@ -1531,6 +1549,11 @@ var TextMessage;
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 	TextMessage.updatesuccessinfo = language ? "更新が成功しました!" : "更新成功!";
 	TextMessage.edite_headimage = language ? "プロフィール画像の変更" : "修改头像";
+	/*个人确认账户信息*/
+	TextMessage.pleasebank = language ? "銀行を選択してください" : "请选择银行";
+	TextMessage.pleaseAccount = language ? "アカウントの種類を選択してください" : "请选择账户类型";
+	TextMessage.branchNumberNull = language ? "店舗番号は空ではありません" : "分店号不能为空";
+	TextMessage.accountNumberNull = language ? "銀行カード番号は空欄にできません" : "银行卡号不能为空";
 	TextMessage.sendtextrequest = language ? "にメールを送りますか" : "发送电子邮件";
 	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
 	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";

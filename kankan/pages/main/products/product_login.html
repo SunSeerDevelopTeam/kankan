@@ -122,11 +122,11 @@
 					<ul class="mui-table-view ka_prologbox">
 						<li class="mui-table-view-cell" style="width: 100%;">
 						    <span class="ka_proinfo lang mui-col-xs-9" data-locale="commodity_transactionFees"></span>
-						    <span class="fee mui-col-xs-3">¥<span id="trans_fees"></span></span>
+						    <span class="fee mui-col-xs-3">&yen;<span id="trans_fees"></span></span>
 						</li>
 						<li class="mui-table-view-cell" style="width: 100%;">
 						    <span class="ka_proinfo lang mui-col-xs-9" data-locale="commodity_tradingIncome"></span>
-						    <span class="fee mui-col-xs-3">¥<span id="trading_income"></span></span>
+						    <span class="fee mui-col-xs-3">&yen;<span id="trading_income"></span></span>
 						</li>
 					</ul>
 				</div>
@@ -964,7 +964,7 @@ function publishs() {
 				location.reload();
 				mui.plusReady(function() {
 					var mainpage=plus.webview.getLaunchWebview();
-					 mui.fire(mainpage,'gohome');
+					mui.fire(mainpage,'gohome');
 				});
 				
 			}else{
