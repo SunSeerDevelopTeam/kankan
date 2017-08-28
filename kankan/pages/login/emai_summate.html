@@ -145,6 +145,10 @@
 							mui.fire(homeWebView, 'refresh', {
 								refresh: "canRefresh"
 							});
+						} else if (formPageName === "question") {
+							var questionPage = plus.webview.getWebviewById("question");
+							questionPage.reload();
+							mui.back();
 						} else {
 							mui.back();
 						}

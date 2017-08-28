@@ -703,8 +703,13 @@ var Api;
 				});
 				break;
 			case '1002':
-				if(key == Api.Params.username) err_msg = TextMessage.username + TextMessage.errorCode_1002;
-				else err_msg = TextMessage.errorCode_1002;
+				if(key == Api.Params.username) {
+					err_msg = TextMessage.username + TextMessage.errorCode_1002;
+				} else if (key == Api.Params.email) {
+					err_msg = TextMessage.emailnull;
+				} else {
+					err_msg = TextMessage.errorCode_1002;
+				}
 				mui.toast(err_msg, {
 					duration: 'long',
 					type: 'div'
