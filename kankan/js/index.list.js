@@ -314,6 +314,7 @@ function createListItem(item, imgwidth) {
 		//.appendFormat('<img src="{0}">', item.img_flag)
 		//.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)
 		.append('</div>')
+		.append('<div class="suspension_price"><span>&yen<span style="padding-left:0.4em">3,000</span></span></div>')
 		.append('<div class="item-buttom mui-col-sm-12 mui-col-xs-12">')
 		.append('<div class="height-max mui-row contentbottom">')
 		.append('<div class="height-max mui-col-sm-8 mui-col-xs-8">')

@@ -51,8 +51,11 @@
 						    <label class="lang" data-locale="korean_user"></label>
 						    <input name="userlanageval" type="checkbox" value="3">
 						</div>
-	    	     </div>
+	    	        </div>
 					<button type="button" class="mui-btn mui-btn-red ka_usersubmitbtn lang" data-locale="user_buttonsure" onclick="userinfosubmit()"></button>
+				    <!--增加账号确认-->
+				    <h6 class="lang" data-locale="intelligence"></h6>
+				    <button id="changeMail" type="button" class="mui-btn mui-btn-red lang" data-locale="changemail_auth" onclick="test()"></button>
 				    <div id="userEdit" class="mui-popover mui-popover-action mui-popover-bottom">				
 			        	<ul style="margin: 8px 11px 8px 2px;" class="mui-table-view">					
 			        		<li class="mui-table-view-cell">						
@@ -260,7 +263,14 @@
 				});
 			});
 		}
-			//change head image
+		
+		function test() {
+			mui.openWindow({
+				url: '../../transaction/seller_account.html',
+				id: 'seller_account.html'
+			});
+		}
+		//change head image
 		mui(".editeimg").on("tap", ".headimg", function(e) {
 			if(mui.os.plus){
 				mui("#userEdit").popover("toggle");
