@@ -189,6 +189,7 @@ var JSLocale = {
 	"networkerror":"通信エラーが発生しました。通信環境を確認し、リロードしてください。",
 	"networkerrordetail":"通信エラーが発生しました、ここをクリックし、もう一度試してみてください。",
 	"deletebut":"削除",
+	"reg_tips":"3分毎に一度のみ発信ができます。",
 }
 
 $(function() {

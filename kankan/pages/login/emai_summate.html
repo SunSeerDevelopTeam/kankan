@@ -15,6 +15,9 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav">
+				<font class="lang" data-locale="back" size="3"></font>
+			</a>
 			<h1 class="mui-title lang" data-locale="writeemail"></h1>
 		</header>
 		<div style="text-align: left;margin-top: 50px;margin-bottom: -2.5em;">
@@ -148,6 +151,10 @@
 						} else if (formPageName === "question") {
 							var questionPage = plus.webview.getWebviewById("question");
 							questionPage.reload();
+							mui.back();
+						} else if (formPageName === "complaint") {
+							var complaintPage = plus.webview.getWebviewById("complaint");
+							complaintPage.reload();
 							mui.back();
 						} else {
 							mui.back();

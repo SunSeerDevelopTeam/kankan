@@ -189,20 +189,21 @@
 											});
 											if(data.email == "") {
 												plus.nativeUI.alert(TextMessage.input_email, function(event) {
-													//mui.back();
-													mui.openWindow({
-														id: "emai_summate",
-														url: "emai_summate.html",
-														waiting: {
-															autoShow: false
-														},
-														show: {
-															duration: 200
-														},
-														extras: {
-															formPageName: "login"
-														}
-													});
+													if (event.index == 0) {
+														mui.openWindow({
+															id: "emai_summate",
+															url: "emai_summate.html",
+															waiting: {
+																autoShow: false
+															},
+															show: {
+																duration: 200
+															},
+															extras: {
+																formPageName: "login"
+															}
+														});
+													}
 												}, TextMessage.sharetitle, TextMessage.yes);
 											} else {
 												//mui.back();
@@ -216,14 +217,14 @@
 										},
 										ng: function(data) {
 											waiting.close();
-											if(data == "2022") {
+											if(data[0] == "2022") {
 												plus.nativeUI.confirm(TextMessage.representations, function(event) {
 													if (event.index == 0) {
 														mui.openWindow({
 															id: "question",
 															url: "../setting/question.html",
 															extras : {
-																email : ""
+																email : data[1]
 															},
 															waiting: {
 																autoShow: false
@@ -232,11 +233,13 @@
 																duration: 200
 															}
 														});
-													} else {
-														// cancel
 													}
-													
 												}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
+											} else if (data == "2002") {
+												mui.toast(TextMessage.userng, {
+													duration: 'long',
+													type: 'div'
+												})
 											}
 										},
 										error: function() {
@@ -317,7 +320,7 @@
 										type: 'div'
 									})
 								}
-								if(data == "2022") {
+								if(data[0] == "2022") {
 									plus.nativeUI.confirm(TextMessage.representations, function(event) {
 										if (event.index == 0) {
 											mui.openWindow({

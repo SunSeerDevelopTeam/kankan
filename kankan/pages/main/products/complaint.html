@@ -74,11 +74,41 @@
 			function showinfo(results){
 				var info = results.data;
 				var email = info.email;
+				if (checkEmail(email)) {
+					$("#email").val(email);
+				} else {
+					$("#email").removeAttr("disabled");
+				}
 				var fullname = info.nick_name;
 				var commodity_name = info.comm_name;
-				$("#full_name").val(fullname);
-				$("#email").val(email);
-				$("#commodity_name").val(commodity_name);
+				console.log("commodity_name is " + HTMLDecode(HTMLDecode(commodity_name)));
+				$("#full_name").val(HTMLDecode(fullname));
+				$("#commodity_name").val(HTMLDecode(HTMLDecode(commodity_name)));
+			}
+			// check email.
+			function checkEmail(email) {
+				if (email == "" || typeof(email) == "undefined" || email == null || !email) {
+					plus.nativeUI.alert(TextMessage.input_email, function(event) {
+						var index = event.index;
+						if (event.index == 0) {
+							mui.openWindow({
+								id: "emai_summate",
+								url: "/pages/login/emai_summate.html",
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								},
+								extras: {
+									formPageName: "complaint"
+								}
+							});
+						}
+					}, TextMessage.sharetitle, TextMessage.yes);
+					return false;
+				}
+				return true;
 			}
 			function inputblur(){
 				document.getElementById('full_name').blur();

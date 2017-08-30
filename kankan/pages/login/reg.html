@@ -12,6 +12,10 @@
 		<link rel="stylesheet" type="text/css" href="../../css/public.css">
 	    <link rel="stylesheet" type="text/css" href="../../css/mobileSelect.css">
 		<style>
+			.mui-content {
+				background-color: #FFFFFF;
+			}
+			
 			.area {
 				margin: 20px auto 0px auto;
 			}
@@ -55,11 +59,14 @@
 				width: 100%;
 				height: 15%;
 				text-align: center;
-				margin-top: 20px;
+				margin-top: -30px;
+  				margin-bottom: -50px;
 			}
 			
 			#avatar img {
-				border-radius: 50%;
+				border-radius: 30%;
+				width: 60px;
+				height: 60px;
 			}
 			
 			label.error {
@@ -186,6 +193,9 @@
 				<div class="mui-content-padded">
 					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
 				</div>
+				<div>
+					<label class="lang" style="color:#CF2D28;margin-left: 10px;" data-locale="reg_tips"></label>
+				</div>
 				<!-- introduction code -->
 				<!--
 				<div class="mui-input-group">
@@ -196,7 +206,7 @@
 				</div>
 				-->
 				<!-- submit button -->
-				<div class="mui-content-padded">
+				<div class="mui-content-padded" style="margin-top: 10px;">
 					<button id='reg' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
 				</div>
 			</form>

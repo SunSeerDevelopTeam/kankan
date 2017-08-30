@@ -190,6 +190,7 @@ var JSLocale = {
 	"networkerror":"服务器或网络错误，点此重试",
 	"networkerrordetail":"服务器或网络错误，点此返回重试",
 	"deletebut":"删除",
+	"reg_tips":"每三分钟只能发送一次",
 }
 
 $(function() {
