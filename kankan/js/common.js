@@ -1617,7 +1617,7 @@ var TextMessage;
 	TextMessage.ulanguagenull = language ? "一つ以上言語を選んでください。" : "至少选择一种语言";
 	TextMessage.username_error = language ? "ユーザー名を１０文字以内に設定してください" : "用户名不能超过10位";
 	TextMessage.nickname_error = language ? "ニックネームを１０文字以内に設定してください" : "昵称不能超过10位";
-	TextMessage.pwdudsuccess = language ? "パスワードを再発行しました。" : "密码更新成功";
+	TextMessage.pwdudsuccess = language ? "パスワードを変更しました。" : "密码更新成功";
 	TextMessage.re_issue = language ? "パスワード発行画面より再度手続きを行ってください。" : "验证码失效,请重新发送验证码.";
 	TextMessage.inputtext = language ? "入力文字数:" : "还能输入";
 	TextMessage.inputpoint = language ? "文字" : "个字";
