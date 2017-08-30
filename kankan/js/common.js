@@ -1184,16 +1184,18 @@ var Repository;
 			var email = plus.storage.getItem("email");
 			if(email == "" || email == null) {
 				plus.nativeUI.alert(TextMessage.input_email, function(event) {
-					mui.openWindow({
-						id: "emai_summate",
-						url: "/pages/login/emai_summate.html",
-						waiting: {
-							autoShow: false
-						},
-						show: {
-							duration: 200
-						}
-					});
+					if (event.index == 0) {
+						mui.openWindow({
+							id: "emai_summate",
+							url: "/pages/login/emai_summate.html",
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+					}
 				}, TextMessage.sharetitle, TextMessage.yes);
 				return false;
 			}

@@ -140,6 +140,8 @@
 				};
 				Repository.User.email_rgister_check(params2, {
 					ok: function(data) {
+						// 邮箱信息补全之后将信息存储在本地
+						plus.storage.setItem("email", email);
 						mui.toast(TextMessage.updatesuccessinfo, {
 							duration: 'long',
 							type: 'div'
