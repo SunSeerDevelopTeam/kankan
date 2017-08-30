@@ -17,10 +17,14 @@
 		</header>
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-scroll-wrapper" style="margin-top: 1em;">
-				<div class="mui-scroll" >
-					<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
-					<ul class="mui-table-view mui-grid-view" id="historyshow" style="padding-top: 0.88rem;display: none;">
-					</ul>
+				<div class="mui-scroll">
+					<div id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
+					<div id="historyshow">
+						<ul class="mui-table-view mui-grid-view" id="historyUl" style="padding-top: 0.88rem; display: none;">
+						</ul>
+						<div id="total" style="height: 60px;width: 100%;margin-top: 60%;background: #FFF;display: none;"></div>
+					</div>
+					<!--<div style="height: 50px;width: 100%;margin-top: 100px;border: 1px solid red;">bfdbvfnvbfnm</div>-->
 				</div>
 			</div>
 		</div>
@@ -56,10 +60,12 @@
 			});
 			function pulldownRefresh(){
 				$("#reloadpage").hide();
-				$("#historyshow").hide();
+				$("#historyUl").hide();
+				$("#total").hide();
 				mui('#pullrefresh').pullRefresh().refresh(true);
 				setTimeout(function() {
-					$("#historyshow").empty();
+					$("#historyUl").empty();
+					$("#total").empty();
 					getmessage();
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 				}, 1500);
@@ -90,11 +96,12 @@
 					var comm_name=HTMLDecode(trans[0].comm_name);
 					var html = new Util.StringBuilder();
 					html.appendFormat('<li class="mui-row mui-table-view-cell transli" style="width:100%; height: 76px;"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left mui-col-xs-2"><img class="lazy" data-original="{1}" style="width: 60px;max-height: 60px;"></div>',trans_id,comm_img)
-						.appendFormat('<div style="text-overflow: ellipsis;overflow: hidden;" class="mui-pull-left mui-col-xs-3 requestbox">{0}<div><font color="#0062CC" style="display:none;">{1}P</font></div></div>',comm_name,price)
-						.appendFormat('<div style="margin-left: 0.3rem;" class="mui-pull-left mui-col-xs-6 ka_userbox"><div class="{0}">{1}</div></div></a></li>',trstatus=="3" ? "requestsuccess":"requeststop",status);
-					$("#historyshow").append(html.toString());
+						.appendFormat('<div style="text-overflow: ellipsis;overflow: hidden;" class="mui-pull-left mui-col-xs-4 requestbox">{0}<div style="text-align:left;"><font color="#0062CC">{1}P</font></div></div>',comm_name,price)
+						.appendFormat('<div style="margin-left: 0.5rem;" class="mui-pull-left mui-col-xs-5 ka_userbox"><div class="{0}">{1}</div></div></a></li>',trstatus=="3" ? "requestsuccess":"requeststop",status);
+					$("#historyUl").append(html.toString());
 					lazyload();
 					$("#historyshow").show();
+					$("#historyUl").show();
 					var translatepage=null;
 					mui('.transli').on('tap','a',function(e) {
 						var tid = this.getAttribute('id');
@@ -110,7 +117,10 @@
 						});
 					});
 				}
-				
+				//价格是需要从后台拿到的，所以先保留
+				$("#total").append('<div class="mui-col-xs-6 mui-pull-left" style="display:flex; align-items: center; left: 1em; height: 60px;">共赚了</div>');
+				$("#total").append('<div class="mui-col-xs-6 mui-pull-left" style="display:flex; align-items: center; left: 1em; height: 60px;">&yen;<span>3,000,000</span>元</div>');
+			    $("#total").show();
 			}
 			function reloadpage(){
 				location.reload();

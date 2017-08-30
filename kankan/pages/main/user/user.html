@@ -617,6 +617,7 @@
 			var toppx=0;
 			var toppxpra=0;
 			var exhibit_commdata=results.data.exhibit_comm;
+			console.log(exhibit_commdata);
 			var exhibit_html='<div class="mui-slider-item" style="height:25%">';
 				exhibit_html+='<ul class="user-item-list">';
 			for(var ex=0; ex<exhibit_commdata.length;ex++){
@@ -627,6 +628,7 @@
 				var realheight=exhibit_commdata[ex].comm_img_height;
 				var commstatus=exhibit_commdata[ex].status;
 				var exhibitcomname=HTMLDecode(exhibit_commdata[ex].comm_name);
+				var price = exhibit_commdata[ex].price ? parseFloat(exhibit_commdata[ex].price).toLocaleString() : "0";
 				var oribi=realheight/realwidth;
 				var showheight=imgwidth*oribi;
 				var cha1=showheight-imgwidth;
@@ -660,6 +662,7 @@
 				}
 				exhibit_html+='<a id="'+commexid+'" href="#">';
 				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img class="exhibit" style="width: 100%;margin-top:'+toppx+'px;" data-original="'+commeximg_url+'"></div>';
+				exhibit_html+='<div class="mui-text-left" style="font-size:14px;"><span>&yen;<span id="comm_price">'+price+'</span></span></div>';
 				exhibit_html+='<div class="comm-name mui-col-sm-12">'+exhibitcomname+'</div>';
 				exhibit_html+='</a>';
 				exhibit_html+='</li>';
@@ -701,6 +704,7 @@
 				praise_html+='<li class="user-goods-grid detail">';
 				praise_html+='<a id="'+praisepid+'" href="#">';
 				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppxpra+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				praise_html+='<div class="mui-text-left" style="font-size:14px;"><span>&yen;<span id="comm_price">'+price+'</span></span></div>';
 				praise_html+='<div class="comm-name mui-col-sm-12">'+praisecomname+'</div>';
 				praise_html+='</a>';
 				praise_html+='</li>';
@@ -872,6 +876,7 @@
 			var params={};
 			Repository.User.Usershow(params, {
 				ok: function(data) {
+					console.log(data.data)
 					var address=data.data.address;
 					positions=chosecictval(address);
 					mobileSelect4 = new MobileSelect({

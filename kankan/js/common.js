@@ -494,6 +494,9 @@ var Api;
 			addComplaint: baseUrl() + '/user/Usercomplaint/addComplaint/',
 			setImg: baseUrl() + '/user/setting/setImg/',
 			email_rgister_check: baseUrl() + '/user/Setemail/',
+			personal_infor: baseUrl() + '/user/Useraccount/getbankname/',
+			personal_finish: baseUrl() + '/user/Useraccount/',
+			getpersonal_bankinfor: baseUrl() + '/user/Useraccount/u_accountshow',
 			set_message: baseUrl() + '/user/usersystemmsg/set_message/',
 			del_message: baseUrl() + '/user/usersystemmsg/del_message/',
 			get_message: baseUrl() + '/user/usersystemmsg/get_message/'
@@ -518,6 +521,7 @@ var Api;
 			shareurl: baseUrl() + '/share.php?wxparms=',
 			shareid: baseUrl() + '/commodity/Encryption/',
 			delete_pro: baseUrl() + '/commodity/release/delete/',
+			getPrice: baseUrl() + '/commodity/release/infobase',
 			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
 			CommodityReportShow: baseUrl() + '/commodity/Commoditydetail/commodityreportshow',
 		},
@@ -1145,7 +1149,22 @@ var Repository;
 			return Api.call(Api.url.User.email_rgister_check, params, callback);
 		}
 		User.email_rgister_check = email_rgister_check;
-
+        
+        function personal_infor(params, callback) {
+        	return Api.call(Api.url.User.personal_infor, params, callback);
+        }
+        User.personal_infor = personal_infor;
+        
+        function personal_finish(params, callback) {
+        	return Api.call(Api.url.User.personal_finish, params, callback);
+        }
+        User.personal_finish = personal_finish;
+        
+        function getpersonal_bankinfor(params, callback) {
+        	return Api.call(Api.url.User.getpersonal_bankinfor, params, callback);
+        }
+        User.getpersonal_bankinfor = getpersonal_bankinfor;
+        
 		function set_message(params, callback) {
 			return Api.call(Api.url.User.set_message, params, callback);
 		}
@@ -1291,6 +1310,11 @@ var Repository;
 		}
 		Commodity.delete_pro = delete_pro;
 		
+		function getPrice(params, callback) {
+			return Api.call(Api.url.Commodity.getPrice, params, callback);
+		}
+		Commodity.getPrice = getPrice;
+
 		function reportCommodity(params, callback) {
 			return Api.call(Api.url.Commodity.reportCommodity, params, callback);
 		}
@@ -1525,12 +1549,18 @@ var TextMessage;
 	TextMessage.pro_pricetest = language ? "価格は数字のみを設定してください" : "价格只能是数字";
 	TextMessage.pro_pricenumbtest = language ? "有効な数字（0円以上）を設定してください" : "价格必须大于0";
 	TextMessage.pro_buywaytest = language ? "取引手段を選択してください。" : "请选择交易手段";
-	TextMessage.pro_logininfo = language ? "商品を出品しました" : "发布成功";
+	TextMessage.numberRangeText = language ? "販売価格の範囲で金額を入力してください。" : "请在提示的金额范围内输入贩卖价格",
+	TextMessage.pro_logininfo = language ? "登録が完了しました。" : "发布成功";
 	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
 	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";
 	TextMessage.updatesuccessinfo = language ? "更新が成功しました!" : "更新成功!";
 	TextMessage.edite_headimage = language ? "プロフィール画像の変更" : "修改头像";
+	/*个人确认账户信息*/
+	TextMessage.pleasebank = language ? "銀行を選択してください" : "请选择银行";
+	TextMessage.pleaseAccount = language ? "アカウントの種類を選択してください" : "请选择账户类型";
+	TextMessage.branchNumberNull = language ? "店舗番号は空ではありません" : "分店号不能为空";
+	TextMessage.accountNumberNull = language ? "銀行カード番号は空欄にできません" : "银行卡号不能为空";
 	TextMessage.sendtextrequest = language ? "にメールを送りますか" : "发送电子邮件";
 	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
 	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";
@@ -1558,6 +1588,8 @@ var TextMessage;
 	TextMessage.noopen = language ? "サービー提供までお楽しみに" : "暂未开通，敬请期待";
 	TextMessage.ticketng = language ? "チケット数が不足です" : "Ticket数量不足";
 	TextMessage.yes = language ? "はい" : "好的";
+	/*没有设置账号*/
+	TextMessage.noAccount = language ? "プロフィール編集にて口座情報を入力してください" : "未设置账号，请到用户信息编辑中添加",
 	TextMessage.input_email = language ? "メールアドレスを設定してください。" : "请完善邮箱信息";
 	TextMessage.updatemailng = language ? "リフレッシュ失敗しました！" : "更新失败,未知错误!";
 	TextMessage.emailnull = language ? "メールアドレスが未入力です。" : "邮箱不能为空！";
@@ -1588,18 +1620,24 @@ var TextMessage;
 	TextMessage.transStop = language ? "取引を中止する" : "交易终止";
 	TextMessage.transStopMsg = language ? "取引を中止しました。継続したい場合は再度取引をしてください。" : "已终止交易，不能继续交易。如果要继续交易请重新请求!!!";
 	TextMessage.transSuccessMsg = language ? "取引が完了しました。" : "交易已完成";
-	TextMessage.transConfirm = language ? "取引を確認する" : "确认交易";
+	TextMessage.transConfirm = language ? "取引を開始する" : "开始交易";
 	TextMessage.transWaitConfirm = language ? "相手の確認を待つ" : "等待对方确认";
-	TextMessage.transOrder = language ? "注文の生成" : "订单生成";
+	TextMessage.transOrder = language ? "支払い手続きへ" : "去付款";
 	TextMessage.transUrgeDelive = language ? "出荷をリクエストする" : "催促对方发货";
-	TextMessage.transReceipt = language ? "品物を確認する" : "确认收货";
-	TextMessage.transDelive = language ? "出荷確認" : "确认发货";
-	TextMessage.transWaitOrder = language ? "相手の注文を待つ" : "等待对方下单";
+	TextMessage.transReceipt = language ? "品物受領" : "确认收货";
+	TextMessage.transDelive = language ? "出荷完了" : "完成发货";
+	TextMessage.transWaitOrder = language ? "支払いを待っている" : "等待付款";
 	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
 	TextMessage.transFinish = language ? "取引完了" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
 	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
 	TextMessage.transContinue = language ? "取引を継続します。" : "继续交易!";
+//	add
+	TextMessage.accountsReceivable = language ? "振込先確認" : "确认收款账户";
+	TextMessage.applyforPayment = language ? "振込申請" : "申请收款";
+/*seller account page*/
+    TextMessage.branchnumberRangeText = language ? "3桁に制限" : "限制为3位数字",
+    TextMessage.cardnumberRangeText = language ? "7桁に制限" : "限制为7位数字",
 	TextMessage.confirmBtnYes = language ? "はい" : "确认";
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";

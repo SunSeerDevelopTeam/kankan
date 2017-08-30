@@ -32,7 +32,7 @@
 }
 
 .item-tap {
-	height: 80%;
+	height: 69%;
 	text-align:center;
 	background-color: #FFFFFF;
 	overflow: hidden;
@@ -129,4 +129,19 @@
 
 #searchResultPanel > p {
 	text-align: center;
+}
+.suspension_price {
+	height: 11%;
+	position: relative;
+    bottom: 10%;
+	padding-left: 0.5em;
+	background-color:#999999;
+	color:#FFFFFF;
+	font-size:14px;
+	width:50%;
+}
+.suspension_price span {
+	height: 100%;
+	display: flex;
+	align-items: center;
 }

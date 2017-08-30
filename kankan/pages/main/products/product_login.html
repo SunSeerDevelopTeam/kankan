@@ -25,7 +25,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;"></a>
 			<h1 class="mui-center mui-title lang" data-locale=""></h1>
 		</header>
-		<div class="mui-content kankan_jyimgbox">
+		<div class="mui-content" style="margin-top: 0.5em;">
 			<form action="" method="post" name="publishcomodity" id="publishcomodity">
 				<h5 class="ka_proloh5 ka_propicfonts lang" data-locale="commodity_photos" style="margin-top: 0.5em;"></h5>
 				<div class="ka_prologbox0 z_photo">
@@ -98,14 +98,39 @@
 							<div class="ka_userbox">
 								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_switch" id="exchbuybtn" style="display: none;"></div>
 								<input type="hidden" name="exchange" id="exchange" value="0" />
-								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_pointbuy" id="pointbuybtn" style="display: none;"></div>
+								<!--买卖-->
+								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_pointbuy" id="pointbuybtn" style="width: 40%; margin-left: 10%;"></div>
 								<input type="hidden" name="business" id="business" value="0" />
-								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free" id="freebuybtn" style="width: 50%;margin-left: 22%;"></div>
+								<!--免费赠送-->
+								<div class="mui-pull-left ka_exchangegrey lang" data-locale="commodity_free" id="freebuybtn" style="width: 40%;"></div>
 								<input type="hidden" name="gratis" id="gratis" value="0" />
 							</div>
 						</li>
 					</ul>
 				</div>
+				<!--商品价格start-->
+				<div>
+					<h5 class="ka_proloh5 lang" data-locale="commodity_price" style="margin: 1.5em 0 1.5em 0.5em"></h5>
+					<div class="inputPrice">
+						<input id="number_price" type="number" onkeyup="getNumber()" class="inputNumber" disabled="true"/>
+						<span class="inputSpan">&yen;<span id="input_price"></span></span>
+					</div>
+                </div>
+				<!--商品价格end-->
+				<!--Trading interest start-->
+				<div class="tradeFees">
+					<ul class="mui-table-view ka_prologbox">
+						<li class="mui-table-view-cell" style="width: 100%;">
+						    <span class="ka_proinfo lang mui-col-xs-9" data-locale="commodity_transactionFees"></span>
+						    <span class="fee mui-col-xs-3">&yen;<span id="trans_fees"></span></span>
+						</li>
+						<li class="mui-table-view-cell" style="width: 100%;">
+						    <span class="ka_proinfo lang mui-col-xs-9" data-locale="commodity_tradingIncome"></span>
+						    <span class="fee mui-col-xs-3">&yen;<span id="trading_income"></span></span>
+						</li>
+					</ul>
+				</div>
+				<!--Trading interest end-->
 				<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
 				<div class="ka_userbox">
 					<button type="button" class="mui-btn mui-btn-blue ka_prologsure lang" data-locale="" id="waste" style="margin-top: 1em;display: none;" onclick="wastes()"></button>
@@ -168,14 +193,18 @@
 				return true;
 			}
 		});
-	$(function() {
-		$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
-		$(".mui-title").html(TextMessage.commodity_login);
-	});
+		$(function() {
+			$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
+			$(".mui-title").html(TextMessage.commodity_login);
+		});
 	var id;
 	var testarr=[];
 	var catearrs=[{data:[]}];
 	var positions='0';
+	//getprice
+	var price_max = 0;
+	var price_min = 0;
+	var charge_rate = 0; //rate
 	var mobileSelect4;
 	var stautsSelect;
 	var stautesposition='0';
@@ -192,7 +221,20 @@
 						id: '3',
 						value: TextMessage.prostaute3
 					}]}];
+		
 	mui.plusReady(function() {
+		var params = {};
+		Repository.Commodity.getPrice(params, {
+			ok: function(data) {
+				console.log("success");
+				showPrice(data);
+			},
+			ng: function(data) {
+				console.log("error:"+data);
+				Log.d(data);
+			}
+		});
+		
 		var self = plus.webview.currentWebview();
 		id = self.eid;
 		if(id){
@@ -254,8 +296,13 @@
 				}
 			});
 		}
-		
 	});
+	function showPrice(results) {
+		var resultsData = results.data;
+		price_max = resultsData[0].price_max;
+		price_min = resultsData[1].price_min;
+		charge_rate = resultsData[2].charge_rate;
+	}
 	window.addEventListener("refresh", function(event) {
 		location.reload();
 	});
@@ -269,7 +316,17 @@
 		var texts="<font color='#ACACB4'>"+delength+"/1000</font>";
 		$(".daojishitext").html(texts);
 	}
-	//click inpuit close picker
+	//getNumber
+	function getNumber() {
+		var number_price = $("#number_price").val();
+		if (parseInt(number_price) < price_min || parseInt(number_price) > price_max ) {
+		    mui.alert(TextMessage.numberRangeText);
+		}
+		
+		$("#input_price").html(parseFloat(Math.floor(number_price)).toLocaleString());
+	    $("#trans_fees").html(parseFloat(Math.floor(number_price * charge_rate / 100)).toLocaleString());
+	    $("#trading_income").html(parseFloat(Math.floor(number_price) - Math.floor(number_price * charge_rate / 100)).toLocaleString());
+	}
 	function closepicker(){
 		preventKeyBoardSubmit.closekeybord();
 		$(".mui-poppicker").hide();
@@ -335,9 +392,11 @@
 		var image2=results.data.imges[2];
 		var image3=results.data.imges[3];
 		var classify_id=results.data.classify_id;
-		var price=results.data.price;
 		var state=results.data.state;
 		var commstautes=results.data.comm_status;
+	    var price = results.data.price;
+	    var rate = results.data.service_charge;
+	    var profile = results.data.profit;
 		if(commstautes=="0"){
 		//waste product
 			$("#waste").show();
@@ -356,8 +415,11 @@
 		document.getElementById('exchange').value=exchange;
 		document.getElementById('gratis').value=gratis;
 		document.getElementById('classify_id').value=classify_id;
-		document.getElementById('price').value=price;
 		document.getElementById('comm_state').value=state;
+		$("#number_price").val(price);
+		$("#input_price").html(parseFloat(price).toLocaleString());
+		$("#trans_fees").html(parseFloat(rate).toLocaleString());
+		$("#trading_income").html(parseFloat(profile).toLocaleString());
 		$("#stauteResult").removeClass("ka_bitian");
 		$("#stauteResult").addClass("ka_sortname");
 		if(state=="0"){
@@ -386,6 +448,7 @@
 			imagepull(3,image3.imgurl, image3.imgwidth, image3.imgheight);
 		}
 		if(business=="1"){
+			$("#number_price").removeAttr("disabled");
 			$("#pointbuybtn").removeClass("ka_exchangegrey");
 			$("#pointbuybtn").addClass("ka_exchangered");
 		}
@@ -735,6 +798,11 @@ function publishscheck(){
 		publishs();
 	}
 }
+
+function removeComma(str) { 
+    str = str.replace(/,/g, "");
+    return str; 
+} 
 //submit form
 function publishs() {
 	var buy_sell_flag = "0";
@@ -749,7 +817,10 @@ function publishs() {
 	var imges1 = $("#1").val();
 	var imges2 = $("#2").val();
 	var imges3 = $("#3").val();
-	var price = $("#price").val();
+	var price = $("#number_price").val();
+	var service_charge = removeComma($("#trans_fees").html());
+	var profit = removeComma($("#trading_income").html());
+	
 	if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
 		mui.toast(TextMessage.pro_imagetest, {
 			duration: 'long',
@@ -787,6 +858,13 @@ function publishs() {
 			type: 'div'
 		});
 		document.publishcomodity.comm_detail.focus();
+		return false;
+	}
+	if (price.length == 0) {
+		mui.toast(TextMessage.pro_pricenulltest, {
+			duration: 'long',
+			type: 'div'
+		});
 		return false;
 	}
 	if(regStr.test(comm_detail)){
@@ -850,7 +928,8 @@ function publishs() {
 		});
 		return false;
 	}
-	$("#submit").attr("disabled","disabled");
+	
+	/*$("#submit").attr("disabled","disabled");*/
 	var params = {
 		"buy_sell_flag": buy_sell_flag,
 		"comm_name": comm_name,
@@ -867,6 +946,8 @@ function publishs() {
 	};
 	if(price!=""){
 		params.price=price;
+		params.service_charge = service_charge;
+		params.profit = profit;
 	}
 	if(id!=0){
 		var commodity_ids=$("#codid").val();
@@ -883,7 +964,7 @@ function publishs() {
 				location.reload();
 				mui.plusReady(function() {
 					var mainpage=plus.webview.getLaunchWebview();
-					 mui.fire(mainpage,'gohome');
+					mui.fire(mainpage,'gohome');
 				});
 				
 			}else{
@@ -964,10 +1045,12 @@ document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
 	var businessval=$("#business").val();
 	if(businessval=="0"){
 		$("#business").val("1");
+		$("#number_price").removeAttr("disabled");
 		$("#pointbuybtn").removeClass("ka_exchangegrey");
 		$("#pointbuybtn").addClass("ka_exchangered");
 	}else{
 		$("#business").val("0");
+		$("#number_price").attr("disabled", "true");
 		$("#pointbuybtn").removeClass("ka_exchangered");
 		$("#pointbuybtn").addClass("ka_exchangegrey");
 	}
@@ -982,6 +1065,7 @@ document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
 document.getElementById('freebuybtn').addEventListener('tap', function(e) {
 	inputblur();
 	var gratisval=$("#gratis").val();
+	$("#number_price").attr("disabled", "true");
 	if(gratisval=="0"){
 		$("#gratis").val("1");
 		$("#freebuybtn").removeClass("ka_exchangegrey");
