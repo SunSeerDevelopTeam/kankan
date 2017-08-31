@@ -527,11 +527,13 @@ body .mui-table-view-cell.mui-active{
 	color: red;
 	font-size: 12px;
 	margin-right: 2em;
+	line-height: 27px;
 }
 
 .ka_sortname {
 	font-size: 14px;
 	margin-right: 2em;
+	line-height: 27px;
 }
 
 .ka_exchangered {
