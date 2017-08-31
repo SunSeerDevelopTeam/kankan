@@ -1686,6 +1686,7 @@ var TextMessage;
 	TextMessage.may_not_click = language ? "三分間後、発送ボタンをご押してください。" : "3分钟之内不可点击";
 	TextMessage.urge_receipt_finish = language ? "取引相手に商品確認を催促しました。" : "已催促对方收货";
 	TextMessage.urge_delive_finish = language ? "取引相手に商品発送を催促しました。" : "已催促对方发货";
+	TextMessage.stop_user = language ? "このアカウントが既に利用停止されました。" : "该用户已被停止使用";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

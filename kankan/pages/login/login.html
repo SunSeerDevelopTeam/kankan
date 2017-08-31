@@ -62,9 +62,11 @@
 			#forget_password {
 				font-size: 80%;
 			}
+			
 			#new_user_login {
 				font-size: 80%;
 			}
+			
 			#email-login-form input {
 				font-size: 67%;
 				line-height: 1.5;
@@ -189,7 +191,7 @@
 											});
 											if(data.email == "") {
 												plus.nativeUI.alert(TextMessage.input_email, function(event) {
-													if (event.index == 0) {
+													if(event.index == 0) {
 														mui.openWindow({
 															id: "emai_summate",
 															url: "emai_summate.html",
@@ -208,8 +210,8 @@
 											} else {
 												//mui.back();
 												var mainPage = plus.webview.getLaunchWebview();
-			       								mainPage.show();
-			       								var homepageWebView = plus.webview.getWebviewById('home.html');
+												mainPage.show();
+												var homepageWebView = plus.webview.getWebviewById('home.html');
 												mui.fire(homepageWebView, 'refresh', {
 													refresh: "canRefresh"
 												});
@@ -219,12 +221,12 @@
 											waiting.close();
 											if(data[0] == "2022") {
 												plus.nativeUI.confirm(TextMessage.representations, function(event) {
-													if (event.index == 0) {
+													if(event.index == 0) {
 														mui.openWindow({
 															id: "question",
 															url: "../setting/question.html",
-															extras : {
-																email : data[1]
+															extras: {
+																email: data[1]
 															},
 															waiting: {
 																autoShow: false
@@ -235,7 +237,7 @@
 														});
 													}
 												}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
-											} else if (data == "2002") {
+											} else if(data == "2002") {
 												mui.toast(TextMessage.userng, {
 													duration: 'long',
 													type: 'div'
@@ -274,7 +276,7 @@
 						}
 						reg = /^[0-9a-zA-Z]{6,16}$/
 						var password = doc.getElementById('password').value.trim();
-						if (!reg.test(password)) {
+						if(!reg.test(password)) {
 							plus.nativeUI.toast(TextMessage.password_error);
 							return;
 						}
@@ -287,7 +289,7 @@
 							ok: function(data) {
 								// TODO OK logic
 								doc.getElementById('email').blur();
-						        doc.getElementById('password').blur();
+								doc.getElementById('password').blur();
 								Log.d("email login ok");
 								plus.storage.setItem('LoginFlag', 'isLogin');
 								loginFlg = true;
@@ -297,11 +299,11 @@
 									waiting.close();
 									//mui.back();
 									var mainPage = plus.webview.getLaunchWebview();
-       								mainPage.show();
-       								var homepageWebView = plus.webview.getWebviewById('home.html');
-										mui.fire(homepageWebView, 'refresh', {
-											refresh: "canRefresh"
-										});
+									mainPage.show();
+									var homepageWebView = plus.webview.getWebviewById('home.html');
+									mui.fire(homepageWebView, 'refresh', {
+										refresh: "canRefresh"
+									});
 								}, 500);
 							},
 							ng: function(data) {
@@ -322,12 +324,12 @@
 								}
 								if(data[0] == "2022") {
 									plus.nativeUI.confirm(TextMessage.representations, function(event) {
-										if (event.index == 0) {
+										if(event.index == 0) {
 											mui.openWindow({
 												id: "question",
 												url: "../setting/question.html",
-												extras : {
-													email : doc.getElementById('email').value.trim()
+												extras: {
+													email: doc.getElementById('email').value.trim()
 												},
 												waiting: {
 													autoShow: false
@@ -339,7 +341,7 @@
 										} else {
 											// cancel
 										}
-										
+
 									}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
 								}
 							},
@@ -351,16 +353,61 @@
 
 					var forgetPwdBtn = doc.getElementById('forget_password');
 					forgetPwdBtn.addEventListener('tap', function(event) {
-						$.openWindow({
-							id: 'forget_password',
-							url: 'forget_password.html',
-							extras: {
-								email: doc.getElementById('email').value.trim()
+						var params = {
+							pwd_flg: "verification",
+							email: doc.getElementById('email').value.trim()
+						};
+						Repository.User.forgetPwd(params, {
+							ok: function(data) {
+								$.openWindow({
+									id: 'forget_password',
+									url: 'forget_password.html',
+									extras: {
+										email: doc.getElementById('email').value.trim()
+									},
+									waiting: {
+										autoShow: false
+									}
+								});
 							},
-							waiting: {
-								autoShow: false
+							ng: function(data) {
+								$.each(data, function(key, value) {
+									switch(value) {
+										case "1002":
+											if(key == Api.Params.email) {
+												mui.toast(TextMessage.email_error1, {
+													duration: 'long',
+													type: 'div'
+												})
+											}
+											break;
+										default:
+											break;
+									}
+								});
+								if(data == "2010") {
+									mui.toast(TextMessage.stop_user, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+								if(data == "1001") {
+									mui.toast(TextMessage.errorCode_1001, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+								if(data == "5001") {
+									mui.toast(TextMessage.emailsenderror, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+							},
+							error: function() {
+								waiting.close();
 							}
-						});
+						}, false);
 					});
 
 					var newUserLogin = doc.getElementById('new_user_login');
