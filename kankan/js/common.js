@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = true;
+var DEVELOPMENT = false;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1463,8 +1463,8 @@ var TextMessage;
 	TextMessage.faile = language ? "失敗:" : "失败:";
 	TextMessage.sharecontent = language ? "カンカンをシェアする" : "看看的分享";
 	TextMessage.sharetitle = language ? "カンカン" : "看看";
-	TextMessage.login = language ? "登録済みの方はこちら" : "登录";
-	TextMessage.register = language ? "未登録の方はこちら" : "注册";
+	TextMessage.login = language ? "ログイン" : "登录";
+	TextMessage.register = language ? "新規登録" : "注册";
 	TextMessage.cancel = language ? "キャンセル" : "取消";
 	TextMessage.towchatfrind = language ? "WeChatのチャットに送信" : "发送给微信好友";
 	TextMessage.towchatcircle = language ? "WeChatのモーメンツ上で共有" : "分享到微信朋友圈";
