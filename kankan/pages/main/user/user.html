@@ -587,7 +587,7 @@
 			var badnum=results.data.user_opinion_l_count;
 			var uname=results.data.user_name;
 			if(results.data.address=="" || results.data.address=="undefined"){
-				var uaddress="全国";
+				var uaddress = "未設定";
 			}else{
 				var uaddress=results.data.address;
 			}
@@ -879,7 +879,11 @@
 				ok: function(data) {
 					console.log(data.data)
 					var address=data.data.address;
+					if (address == "") {
+						address = "未設定";
+					}
 					positions=chosecictval(address);
+					console.log("positions value is " + positions);
 					mobileSelect4 = new MobileSelect({
 					    trigger: '#city',
 					    title: '',
@@ -888,10 +892,10 @@
 					    //position:"12",
 					    //value2:1,
 					    transitionEnd:function(indexArr, data){
-					    	if(indexArr=="NAN"){
+					    	if(indexArr=="NAN" || indexArr == "NaN" || typeof(indexArr) == "undefined"){
 					    		indexArr=positions;
 					    	}
-					        console.log(indexArr);
+					        console.log("indexArr value is " + indexArr);
 					    },
 					    callback:function(indexArr, data){
 					        console.log(data);
@@ -933,17 +937,17 @@
 			});
 			
 	});
-	function chosecictval(addresstext){
-		console.dir(cityData[0].data);
-		var cityvaluearr=cityData[0].data;
-		for(var ca=0;ca<cityvaluearr.length;ca++){
-			if(cityvaluearr[ca].value==addresstext){
-				//return cityvaluearr[ca].value;
+	
+	function chosecictval(addressText){
+		console.log("addressText is " + addressText);
+		var cityValueArray = cityData[0].data;
+		for(var ca = 0; ca < cityValueArray.length; ca++){
+			if(cityValueArray[ca].value == addressText){
 				return ca;
-				break;
 			}
 		}
 	}
+	
 	function updateaddress(addresscity){
 		var parms2={
 			"flag":"address",

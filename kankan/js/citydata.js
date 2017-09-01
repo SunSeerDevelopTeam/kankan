@@ -1,6 +1,10 @@
 var cityData = [
     {
         "data": [
+        	{
+        		"id": 0,
+        		"value": "未設定"
+        	},
             {
                 "id": 1, 
                 "value": "北海道"
