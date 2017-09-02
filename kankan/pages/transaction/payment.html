@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>translatelist</title>
+		<title>payment.html</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
@@ -13,24 +13,6 @@
 			body {
 				background-color: #efeff4;
 			}
-			.wrapper{
-		        position:absolute;
-		       top:1px;
-		        left:0px;
-		        right:0px;
-		        bottom:0px;
-		        overflow:auto;
-		        -webkit-overflow-scrolling : touch;
-		    }
-			.input-bottom{
-		        position:fixed;
-		        bottom:0px;
-		        left:0px;
-		        width:100%;
-		        border-top:1px solid #ccc;
-		        background-color:#fff;
-		        z-index:1;
-		    }
 		    .input-top{
 		        position:relative;
 		        top:0px;
@@ -38,8 +20,8 @@
 		        width:100%;
 		        z-index:1;
 		    }
-		    .otherli{
-		    	margin-left:-1.1em;
+		    input:active {
+		    	background: #CF2D28;
 		    }
 		</style>
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
@@ -53,21 +35,39 @@
 		</header>
 		<div id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
 		<div class="mui-content" style="padding-top: 0;">
-		    <div class="contentTop" style="height: 80px; background-color: #FFFFFF;">
-		    	<div class="mui-pull-left mui-col-xs-4" style="height: 80px;">
-		    		<img style="width: 80px; height: 80px;" src="../../images/logo.png">
+		    <div class="contentTop" style="height: 100px; background-color: #FFFFFF;">
+		    	<div id="comm_image" class="mui-pull-left mui-col-xs-4" >
+		    		<!--<img id="comm_img" style="" src="../../images/logo.png">-->
 		    	</div>
-		    	<div class="mui-pull-left mui-col-xs-8" style="height: 80px;display: flex;align-items: center;">
-		    		<span>商品名商品名商品名商品名商品名商品名商品名商品名</span>
+		    	<div class="mui-pull-left mui-col-xs-8" style="height: 80px;display: flex;align-items: center;margin-left: 1em;">
+		    		<span id="comm_name"></span>
 		    	</div>
 		    </div>
 		    <div class="contentBottom" style="height: 50px; line-height: 50px;background-color: #FFFFFF; margin-top: 15px;">
 		    	<div class="mui-pull-left lang" style="margin-left: 1em;" data-locale="payment_amount">
 		    	</div>
-		    	<div class="mui-pull-right" style="margin-right: 0.5em;"><span>&yen;<span>1,000</span></span></div>
+		    	<div class="mui-pull-right" style="margin-right: 0.5em;"><span>&yen;<span id="comm_price"></span></span></div>
 		    </div>
-		    <div id="pay_ment" class="mui-col-xs-8 lang" data-locale="pay" style="background-color: red; color: #FFFFFF; text-align: center; position: absolute; left: 16.5%; bottom: 5em; padding: 0.3em 0;">
+		    <div style="background-color: #FFFFFF;margin-top: 1.5em;padding: 0.1em 0 1.1em 1em;">
+		    	<div style="margin: 0.5em 0 1em" class="lang" data-locale="payment_method"></div>
+		    	<div>
+		    		<div style="height: 2em;">
+		    			<div class="mui-pull-left" style="display: flex;align-items: center;">
+		    				<input id="balance" type="radio" name="method" style="zoom: 1.8;"/>
+		    			    <span style="margin-left: 0.5em;" class="lang" data-locale="balance_payment"></span>
+		    			</div>
+		    			<div class="mui-pull-right" style="margin-right: 2em;">
+		    				<span>&yen;<span id="user_balance"></span></span>
+		    			</div>
+		    		</div>
+		    		<div style="display: flex;align-items: center;">
+		    			<input id="otherway" type="radio" name="method" style="zoom: 1.8;"/>
+		    			<span style="margin-left: 0.5em;" class="lang" data-locale="otherway_payment"></span>
+		    		</div>
+		    	</div>
 		    </div>
+		    <button id="pay_ment" class="mui-col-xs-8 lang" data-locale="pay" onclick="pay()" style="background-color: red; color: #FFFFFF; text-align: center; position: absolute; left: 16.5%; bottom: 5em; padding: 0.3em 0;">
+		    </button>
 		</div>
 		
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -80,15 +80,117 @@
 			function reloadpage(){
 				location.reload();
 			}
-			
+			var imgContent;
+			var comm_price;
+			var user_balance;
+			mui.init({
+				
+			});
 			mui.plusReady(function() {
-				mui(".mui-content").on('tap', '#pay_ment', function() {
+				/*mui(".mui-content").on('tap', '#pay_ment', function() {
 					mui.openWindow({
 						url: 'sample_payment.html',
 						id: 'sample_payment.html'
 					});
-				});
+				});*/
+				var self = plus.webview.currentWebview();
+				trans_id = self.transid;
+				var params = {
+					'transid': trans_id
+				};
+				Repository.Transaction.transPayshow(params, {
+					ok: function(data) {
+						console.log("success");
+						showPayInfor(data);
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						Log.d(data);
+					}
+				})
 			})
+			
+			function showPayInfor(results) {
+				var commBasicInfor = results.data;
+			    var comm_imgUrl = commBasicInfor.comm_imgs[0].url;
+			    var comm_imgWidth = commBasicInfor.comm_imgs[0].width;
+			    var comm_imgHeight = commBasicInfor.comm_imgs[0].height;
+			    var comm_name = commBasicInfor.comm_name;
+			    comm_price = commBasicInfor.price;
+			    user_balance = commBasicInfor.user_balance;
+			    //img所在框的大小
+			    var imgDivWidth = $("#comm_image").width();
+			    var imgDivHeight = $("#comm_image").height();
+			    if (comm_imgHeight > imgDivHeight) {
+			    	extraImg = 'margin-top:-'+(comm_imgHeight-imgDivHeight)/2+'px;';
+			    	$("#comm_image").attr("style", "overflow: hidden;");
+			    } else {
+			        extraImg = 'position:relative; top:'+(imgDivHeight-comm_imgHeight)/2+'px; left:'+(imgDivWidth-comm_imgWidth)/2+'px;';
+			    }
+			    imgContent = '<img style="'+extraImg+'" data-original="'+comm_imgUrl+'" onerror="this.src=' + "'../../images/nopic.jpg'" + '"/>';
+			    $("#comm_image").append(imgContent);
+			    $("#comm_name").html(comm_name);
+			    $("#comm_price").html(parseFloat(comm_price).toLocaleString());
+			    $("#user_balance").html(parseFloat(user_balance).toLocaleString());
+			    $("img").lazyload({
+					threshold: 90,
+					placeholder: "../../images/nopic.jpg",
+					effect: "fadeIn",
+					failure_limit : 2
+				});
+			}
+            $(function(){
+            	$('input:radio[name="method"]').change(function() {
+            		if($(":radio:checked").attr("id")=="balance") {
+            			if (user_balance < comm_price) {
+						    $("button").attr("disabled", "disabled");
+						} else {
+						    $("button").removeAttr("disabled");
+						}
+            		} else {
+            			$("button").removeAttr("disabled");
+            		}
+				});
+            });
+			//付款按钮
+			var pay_way;
+			var params2;
+			function pay() {
+				var self = plus.webview.currentWebview();
+				trans_id = self.transid;
+				if($(":radio:checked").attr("id")=="balance") {
+					pay_way = 0;
+					params2 = {
+						'transid': trans_id,
+						'pay_way': pay_way //0表示余额  1表示银行
+			        };
+				} else {
+					pay_way = 1;
+					mui.openWindow({
+						url: 'sample_payment.html',
+						id: 'sample_payment.html',
+						extras: {
+						    "transid": trans_id,
+						    "pay_way": pay_way
+					    }
+					});
+				}
+				
+				Repository.Transaction.transgotoPay(params2, {
+					ok: function(data) {
+						console.log("success");
+						mui.openWindow({
+							url: "transaction2.html?transid=" + trans_id+"",
+							id: "transaction2.html"
+						});
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						alert(JSON.stringify(data));
+						Log.d(data);
+					}
+				})
+			}
 		</script>
 	</body>
 

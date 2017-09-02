@@ -2,7 +2,7 @@
 <html>
     <head>
 		<meta charset="utf-8">
-		<title>product_login</title>
+		<title>sell_account.html</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -267,10 +267,14 @@
 	        Repository.User.personal_finish(params, {
 				ok: function(data) {
 					Log.d("success");
-					mui.openWindow({
+					/*mui.openWindow({
 						id: 'useredite',
 						url:"useredite.html"
-					});
+					});*/
+					mui.openWindow({
+				        url: 'transfer_application.html',
+				        id: 'transfer_application'
+			       });
 				},
 				ng: function(data) {
 					Log.d(data);

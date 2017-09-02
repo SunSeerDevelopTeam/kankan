@@ -105,6 +105,7 @@ var JSLocale = {
 	"ticknumber":"チケット数",
 	"userinforbutntext":"プロフィール編集",
 	"userpointtext":"ポイント",
+	"userpricetext": "売上金",
 	"onshowingtext":"出品アイテム",
 	"praiseprotext":"いいねしたアイテム",
 	"favoriteprotext":"気になる",
@@ -177,6 +178,9 @@ var JSLocale = {
 	//payment procedures page
 	"payment_procedures": "支払い手続き",
 	"payment_amount": "支払い金額",
+	"payment_method": "支払い方法",
+	"balance_payment": "売上金",
+	"otherway_payment": "别途支払",
 	"pay": "支払い",
 	//payment page
 	"pay_page": "支払い画面",
@@ -195,6 +199,25 @@ var JSLocale = {
 	"account_descriptionOne": "※口座番号が７桁未満の場合は先頭に０をつけてください",
 	"account_descriptionTwo": "※振込先が間違っている場合、再振込手数料２１０円が発生します",
 	"next": "次へ",
+	//balance management page
+	"balance_management": "売上金管理",
+	"balance_history": "振込履歴",
+	"balance_transferfinish": "振込完了",
+	"more_history": "履歴をもつと見る",
+	"applyforPayment": "振込申請",
+	"tranfer_history": "振込申請履歴",
+	// transfer application page
+	"transfer_application": "振込申請",
+	"transfer_applicationprice": "振込申請金額（振込手数料含あ）",
+	"transfer_fee": "振込手数料",
+	"transfer_price": "振込金額",
+	"applyfor_transfer": "振込申請を行う",
+	// transfer finish page
+	"transfer_finish": "振込申請完了",
+	"transfer_finished": "振込申請しました。",
+	"transfer_contentone": "※振込にはスケジュールによって、三日から2週間がかかります。ご了承ください。",
+	"transfer_contenttwo": "※なお、振込申請のキャンセルは申請してから24時間内のみできます。",
+	"transfer_button": "売上金管理へ",
 	//message
 	"messagetitle":"あなたへのお知らせ",
 	"stautestext":"問い合わせ中",

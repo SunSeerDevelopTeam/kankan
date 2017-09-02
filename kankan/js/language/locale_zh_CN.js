@@ -105,6 +105,7 @@ var JSLocale = {
 	"ticknumber":"Ticket数目",
 	"userinforbutntext":"用户信息编辑",
 	"userpointtext":"Point",
+	"userpricetext": "余额",
 	"onshowingtext":"出品商品",
 	"praiseprotext":"点赞商品",
 	"favoriteprotext":"人气商品",
@@ -178,6 +179,9 @@ var JSLocale = {
 	//payment procedures page
 	"payment_procedures": "付款手续",
 	"payment_amount": "支付金额",
+	"payment_method": "支付方法",
+	"balance_payment": "余额支付",
+	"otherway_payment": "别途支付",
 	"pay": "付款",
 	//payment page
 	"pay_page": "支付页面",
@@ -195,7 +199,27 @@ var JSLocale = {
 	"name_behind": "开户者姓名（名）",
 	"account_descriptionOne": "※银行卡号不足7位时请在前面用0补齐。",
 	"account_descriptionTwo": "※在提供的账号信息不对的时候，再次转账的时候需要扣除210日元。",
-	"next": "下一步",
+	"next": "继续",
+	//balance management page
+	"balance_management": "余额管理",
+	"balance_history": "转账历史",
+	"balance_transferfinish": "转账完成",
+	"more_history": "更多历史记录",
+	"applyforPayment": "申请收款",
+	// transfer history page
+	"tranfer_history": "转账申请历史",
+	// transfer application page
+	"transfer_application": "转账申请",
+	"transfer_applicationprice": "转账申请金额（包括转账手续费）",
+	"transfer_fee": "转账手续费",
+	"transfer_price": "转账金额",
+	"applyfor_transfer": "申请转账",
+	// transfer finish page
+	"transfer_finish": "转账申请完成",
+	"transfer_finished": "已进行转账申请。",
+	"transfer_contentone": "※根据日程，转账需要三天到两周的时间，请您了解。",
+	"transfer_contenttwo": "※若需取消转账申请，请在申请后24小时内进行操作。",
+	"transfer_button": "余额管理",
 	//message 
 	"messagetitle":"站内信",
 	"stautestext":"该商品交易中",

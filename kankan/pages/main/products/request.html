@@ -290,12 +290,19 @@
 						var comm_name = HTMLDecode(transpro.comm_name);
 						var comm_img = transpro.comm_thu_img;
 						var trans_type = others[ot].trans.trans_type;
-						if(trans_type == "0") {
-							var trans_typetext = TextMessage.requireing;
+						/*if(trans_type == "0") {
+							var trans_typetext = TextMessage.waitforConfirm;
 						} else {
 							var trans_typetext = TextMessage.requresuces;
-						}
+						}*/
 						var status = others[ot].trans.status;
+						if (status == "0") {
+							var trans_typetext = TextMessage.waitforConfirm;
+						} else if (status == "1") {
+							var trans_typetext = TextMessage.waitPay;
+						} else if (status == "2") {
+							var trans_typetext = TextMessage.waitSellerSend;
+						}
 						var other_photo = others[ot].trans.other_photo;
 						var my_photo = others[ot].trans.my_photo;
 						var price = others[ot].trans.price;
@@ -354,12 +361,19 @@
 							var ocomm_img = "../../../images/nopic.jpg";
 						}
 						var otrans_type = own[ow].trans.trans_type;
-						if(otrans_type == "0") {
-							var otrans_typetext = TextMessage.requireing;
+						/*if(otrans_type == "0") {
+							var otrans_typetext = TextMessage.waitforConfirm;
 						} else {
 							var otrans_typetext = TextMessage.requresuces;
-						}
+						}*/
 						var ostatus = own[ow].trans.status;
+						if(ostatus == "0") {
+							var otrans_typetext = TextMessage.waitforConfirm;
+						} else if (ostatus == "1") {
+							var otrans_typetext = TextMessage.transOrder;
+						} else if (ostatus == "2") {
+							var otrans_typetext = TextMessage.waitSellerSend;
+						}
 						var oother_photo = own[ow].trans.other_photo;
 						var omy_photo = own[ow].trans.my_photo;
 						if(own[ow].trans.my_photo == "") {

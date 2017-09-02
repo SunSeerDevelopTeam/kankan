@@ -3,11 +3,11 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>translatelist</title>
+		<title>sample_payment.html</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
-		<script src="../../jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
 		<link rel="stylesheet" href="../../css/kankan_home.css">
 		<link href="../../css/wu.css" rel="stylesheet" />
@@ -21,8 +21,8 @@
 		<div class="mui-content">
 		    <div class="picture_content"></div>
 		    <div class="paymentBtn" style="width: 100%; position: absolute; top: 60%;">
-		    	<div id="pay_money" class="mui-pull-left lang" style="font-size: 15px; color: #FFFFFF; width: 40%; background-color: red; margin-left: 8%; text-align: center; padding: 0.2em 0;" data-locale="pay_finish"></div>
-		    	<div id="pay_cancel" class="mui-pull-right lang" style="font-size: 15px; color: #FFFFFF; width: 40%; background-color: red; margin-right: 8%; text-align: center; padding: 0.2em 0;" data-locale="pay_cancel"></div>
+		    	<button id="pay_money" onclick="payFinish()" class="mui-pull-left lang" style="font-size: 15px; color: #FFFFFF; width: 40%; background-color: red; margin-left: 8%; text-align: center; padding: 0.2em 0;" data-locale="pay_finish"></button>
+		    	<button id="pay_cancel" onclick="payCancel()" class="mui-pull-right lang" style="font-size: 15px; color: #FFFFFF; width: 40%; background-color: red; margin-right: 8%; text-align: center; padding: 0.2em 0;" data-locale="pay_cancel"></button>
 		    </div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -35,11 +35,43 @@
 		    function reloadpage(){
 				location.reload();
 			}
+		    mui.init({
+		    	
+		    });
 			mui.plusReady(function() {
-				mui(".paymentBtn").on('tap', '#pay_money', function() {
-					
-				});
+				var self = plus.webview.currentWebview();
+				trans_id = self.transid;
+				pay_way = self.pay_way;
 			})
+			
+			function payFinish() {
+				var params = {
+					'pay_bank_flag': 1,
+					'transid': trans_id,
+					'pay_way': pay_way
+				};
+				Repository.Transaction.transgotoPay(params, {
+					ok: function(data) {
+						console.log("success");
+						alert(JSON.stringify(data));
+						mui.openWindow({
+							url: "transaction2.html?transid=" + trans_id+"",
+							id: "transaction2.html"
+						});
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						Log.d(data);
+					}
+				})
+			}
+			
+			function payCancel() {
+				mui.openWindow({
+					url: "transaction2.html?transid=" + trans_id+"",
+					id: "transaction2.html"
+				});
+			}
 		</script>
 	</body>
 
