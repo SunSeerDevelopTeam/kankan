@@ -15,7 +15,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-center mui-title lang" data-locale="designated_account"></h1>
+			<h1 class="mui-center mui-title lang" data-locale="confirm_account"></h1>
 		</header>
 		<div class="mui-content" style="font-size: 15px;">
 			<form action="" method="post" name="" id="">
@@ -105,54 +105,55 @@
 						value: "建设银行"
 					}]}];
 		mui.plusReady(function() {
+			$("input").attr("disabled","true");
 			$(".mui-content").css("height",document.body.scrollHeight);
-			var params = {};
-			Repository.User.personal_infor(params, {
-				ok: function(data) {
-					console.log("success");
-					branchData[0].data = branchList(data);
-					console.log(branchData);
-					branchListData= new MobileSelect({
-					    trigger: '#branchResults',
-					    title: '',
-					    wheels: branchData,
-					    position:'0,0',
-					    transitionEnd:function(indexArr, data){
-					    	if(indexArr=="NAN"){
-					    		indexArr=stautesposition;
-					    	}
-					        console.log(indexArr);
-					    },
-					    callback:function(indexArr, data){
-					        $("#branch_id").val(data[0].value);
-					        $("#branchResults").addClass("ka_sortname");					       
-					    }  
-			        });
-				},
-				ng: function(data) {
-					console.log("error:"+data);
-					Log.d(data);
-				}
-			});
-			
-			accountListData= new MobileSelect({
-			    trigger: '#accountResults',
-			    title: '',
-			    wheels: accountData,
-			    position:'0',
-			    transitionEnd:function(indexArr, data){
-			    	if(indexArr=="NAN"){
-			    		indexArr=stautesposition;
-			    	}
-			        console.log(indexArr);
-			    },
-			    callback:function(indexArr, data){
-			        console.log(data[0].id);
-			        $("#accountSelect").text(data[0].value);
-			        $("#accountResults").removeClass("ka_bitian");
-			        $("#accountResults").addClass("ka_sortname");					       
-			    }  
-			});
+//			var params = {};
+//			Repository.User.personal_infor(params, {
+//				ok: function(data) {
+//					console.log("success");
+//					branchData[0].data = branchList(data);
+//					console.log(branchData);
+//					branchListData= new MobileSelect({
+//					    trigger: '#branchResults',
+//					    title: '',
+//					    wheels: branchData,
+//					    position:'0,0',
+//					    transitionEnd:function(indexArr, data){
+//					    	if(indexArr=="NAN"){
+//					    		indexArr=stautesposition;
+//					    	}
+//					        console.log(indexArr);
+//					    },
+//					    callback:function(indexArr, data){
+//					        $("#branch_id").val(data[0].value);
+//					        $("#branchResults").addClass("ka_sortname");					       
+//					    }  
+//			        });
+//				},
+//				ng: function(data) {
+//					console.log("error:"+data);
+//					Log.d(data);
+//				}
+//			});
+//			
+//			accountListData= new MobileSelect({
+//			    trigger: '#accountResults',
+//			    title: '',
+//			    wheels: accountData,
+//			    position:'0',
+//			    transitionEnd:function(indexArr, data){
+//			    	if(indexArr=="NAN"){
+//			    		indexArr=stautesposition;
+//			    	}
+//			        console.log(indexArr);
+//			    },
+//			    callback:function(indexArr, data){
+//			        console.log(data[0].id);
+//			        $("#accountSelect").text(data[0].value);
+//			        $("#accountResults").removeClass("ka_bitian");
+//			        $("#accountResults").addClass("ka_sortname");					       
+//			    }  
+//			});
 		    var params2 = {};
 		    Repository.User.getpersonal_bankinfor(params2, {
 				ok: function(data) {
@@ -272,8 +273,8 @@
 						url:"useredite.html"
 					});*/
 					mui.openWindow({
-				        url: 'seller_account_confirm.html',
-				        id: 'seller_account_confirm'
+				        url: 'transfer_application.html',
+				        id: 'transfer_application'
 			       });
 				},
 				ng: function(data) {

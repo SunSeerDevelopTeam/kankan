@@ -188,6 +188,7 @@ var JSLocale = {
 	"pay_cancel": "キャンセル",
 	//seller account information
 	"designated_account": "振込先口座の指定",
+	"confirm_account": "振込先口座の確認",
 	"bank": "銀行",
 	"selectbank": "銀行を選択してください",
 	"selecttype": "タイプを選択してください",

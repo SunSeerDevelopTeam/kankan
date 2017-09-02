@@ -544,7 +544,12 @@ var Api;
 			/*add 支付页面显示*/
 			transPayshow: baseUrl() + '/transaction/transoperation/trans_pay_show/',
 			/*add 去付款*/
-			transgotoPay: baseUrl() + '/transaction/transoperation/trans_pay_choice/'
+			transgotoPay: baseUrl() + '/transaction/transoperation/trans_pay_choice/',
+			balancemanagement:baseUrl() + '/user/usertransfer/',
+			gettransferrecord:baseUrl() + '/user/usertransfer/gettransferrecord/',
+			canceltransfer:baseUrl() + '/user/usertransfer/recorddel/',
+			applytransfer:baseUrl() + '/user/usertransfer/applyshow/',
+			transfersubmit:baseUrl() + '/user/usertransfer/transfer_submit'
 		}
 	};
 	Api.Params = {
@@ -1427,6 +1432,31 @@ var Repository;
         	return Api.call(Api.url.Trans.transgotoPay, params, callback);
         }
         Transaction.transgotoPay = transgotoPay;
+        
+        function balancemanagement(params, callback) {
+			return Api.call(Api.url.Trans.balancemanagement, params, callback);
+		}
+        Transaction.balancemanagement = balancemanagement;
+        
+        function gettransferrecord(params, callback) {
+			return Api.call(Api.url.Trans.gettransferrecord, params, callback);
+		}
+        Transaction.gettransferrecord = gettransferrecord;
+        
+        function canceltransfer(params, callback) {
+			return Api.call(Api.url.Trans.canceltransfer, params, callback);
+		}
+        Transaction.canceltransfer = canceltransfer;
+        
+        function applytransfer(params, callback) {
+			return Api.call(Api.url.Trans.applytransfer, params, callback);
+		}
+        Transaction.applytransfer = applytransfer;
+        
+        function transfersubmit(params, callback) {
+			return Api.call(Api.url.Trans.transfersubmit, params, callback);
+		}
+        Transaction.transfersubmit = transfersubmit;
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
@@ -1531,7 +1561,7 @@ var TextMessage;
 	TextMessage.errorCode_2014 = language ? "認証番号は無効になりました" : "验证码失效";
 	TextMessage.errorCode_2015 = language ? "メールで失敗を発送する" : "邮件发送失败";
 	TextMessage.errorCode_2016 = language ? "問い合わせ中商品なので、リクエストができません" : "该商品正在问合中，不能重复提交请求";
-	TextMessage.errorCode_2017 = language ? "ポイント不足になっています" : "您当前point不足";
+	TextMessage.errorCode_2017 = language ? "口座の殘高が不足して" : "您当前余额不足";
 	TextMessage.errorCode_2018 = language ? "相手側の対応をお待ちください。" : "交易订单不存在或被删除";
 	TextMessage.errorCode_2019 = language ? "コメントを発表したので、再度発表ができません" : "已发布评论，请勿重复发布";
 	TextMessage.errorCode_2020 = language ? "既にリクエスト済みです。" : "已催促发货，请勿重复催促";
@@ -1711,6 +1741,10 @@ var TextMessage;
 	TextMessage.urge_receipt_finish = language ? "取引相手に商品確認を催促しました。" : "已催促对方收货";
 	TextMessage.urge_delive_finish = language ? "取引相手に商品発送を催促しました。" : "已催促对方发货";
 	TextMessage.stop_user = language ? "このアカウントが既に利用停止されました。" : "该用户已被停止使用";
+	TextMessage.transfersuccess = language ? "振込完了" : "转账完成";
+	TextMessage.amountcheck= language ? "振替金額は0" : "转账金额必须大于0";
+	TextMessage.balancecheck= language ? "口座の殘高が不足して" : "您当前余额不足";
+	TextMessage.ammontlength= language ? "申請額は10桁を超えることはできない" : "申请金额不能超过十位";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

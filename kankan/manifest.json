@@ -390,7 +390,10 @@
 					"js/language/locale_ja_JP.js",
 					"js/language/locale_zh_CN.js",
 					"images/nopic.jpg",
-					"images/weixin2.png"
+					"images/weixin2.png",
+					"js/jquery.lazyload.min.js",
+					"css/iconmyfont.css",
+					"fonts/iconfont.woff"
 				],
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
@@ -421,7 +424,10 @@
 					"js/language.js",
 					"js/language/locale_zh_CN.js",
 					"js/pro_uploadimg.js",
-					"js/picker/mui.poppicker.js"
+					"js/picker/mui.poppicker.js",
+					"js/mobileSelect.js",
+					"css/public.css",
+					"css/mobileSelect.css"
 				],
 				"refer": [
 					"pages/login/login.html"
@@ -447,7 +453,8 @@
 					"js/webviewGroup.js",
 					"js/index.list.js",
 					"pages/main/category/tab-top-subpage-1.html",
-					"js/sha256.js"
+					"js/sha256.js",
+					"pages/main/category/tab-top-subpage.html"
 				],
 				"refer": [
 					"pages/login/login.html",
@@ -480,7 +487,8 @@
 					"js/language/locale_zh_CN.js",
 					"fonts/mui-icons-extra.ttf",
 					"css/iconfontwuliu.css",
-					"fonts/iconfont.woff"
+					"fonts/iconfont.woff",
+					"css/iconmyfont.css"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
@@ -531,7 +539,9 @@
 					"images/nopic.jpg",
 					"js/language/locale_ja_JP.js",
 					"js/mui.pullToRefresh.js",
-					"js/mui.pullToRefresh.material.js"
+					"js/mui.pullToRefresh.material.js",
+					"js/jquery.lazyload.min.js",
+					"images/userPhoto.png"
 				],
 				"refer": [
 					"pages/login/login.html",
@@ -661,13 +671,20 @@
 					"css/kankan_home.css",
 					"css/icons-extra.css",
 					"pages/setting/setting.html",
-					"js/language/locale_ja_JP.js"
+					"js/language/locale_ja_JP.js",
+					"js/citydata.js",
+					"pages/transaction/balance_management.html",
+					"js/jquery.lazyload.min.js",
+					"css/public.css",
+					"css/mobileSelect.css",
+					"js/mobileSelect.js"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
 					"pages/main/products/detail.html",
 					"pages/main/products/commentlist.html",
-					"pages/login/login.html"
+					"pages/login/login.html",
+					"pages/main/user/useredite.html"
 				],
 				"priority": 0
 			},
@@ -736,7 +753,8 @@
 					"js/language.js",
 					"css/mui.min.css",
 					"fonts/mui.ttf",
-					"css/kankan_home.css"
+					"css/kankan_home.css",
+					"js/mui.js"
 				],
 				"refer": [
 					"pages/main/products/translatelist.html",
@@ -778,7 +796,8 @@
 				],
 				"refer": [
 					"pages/transaction/transevaluate.html",
-					"pages/transaction/change_item.html"
+					"pages/transaction/change_item.html",
+					"pages/setting/specialbus.html"
 				],
 				"priority": 0
 			},
@@ -1042,6 +1061,133 @@
 					"pages/main/category/pullrefresh_sub_14.html"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/pullrefresh_sub.html": {
+				"resources": [
+					"css/listitem.css",
+					"images/nopic.jpg",
+					"js/index.list.js"
+				],
+				"refer": [
+					"pages/login/login.html"
+				],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/user/useredite.html": {
+				"resources": [
+					"images/userPhoto.png"
+				],
+				"refer": [
+					"pages/transaction/seller_account.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/seller_account.html": {
+				"resources": [
+					"js/mobileSelect.js",
+					"js/common.js",
+					"js/pro_uploadimg.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/public.css",
+					"css/mobileSelect.css",
+					"css/kankan_home.css",
+					"js/mui.view.js"
+				],
+				"refer": [
+					"pages/transaction/transfer_application.html",
+					"pages/transaction/seller_account_confirm.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/transfer_application.html": {
+				"resources": [
+					"js/mobileSelect.js",
+					"js/common.js",
+					"js/pro_uploadimg.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/public.css",
+					"css/mobileSelect.css",
+					"css/kankan_home.css",
+					"js/mui.view.js"
+				],
+				"refer": [
+					"pages/transaction/transfer_finish.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/transfer_finish.html": {
+				"resources": [],
+				"refer": [
+					"pages/transaction/balance_management.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/balance_management.html": {
+				"resources": [
+					"pages/main/user/user.html",
+					"js/mobileSelect.js",
+					"js/common.js",
+					"js/pro_uploadimg.js",
+					"js/mui.min.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/public.css",
+					"css/mobileSelect.css",
+					"css/kankan_home.css",
+					"js/mui.view.js"
+				],
+				"refer": [
+					"pages/transaction/transfer_history.html",
+					"pages/transaction/seller_account.html",
+					"pages/transaction/seller_account_confirm.html"
+				],
+				"priority": 0
+			},
+			"pages/transaction/transfer_history.html": {
+				"resources": [
+					"js/mui.js",
+					"js/mobileSelect.js",
+					"js/common.js",
+					"js/pro_uploadimg.js",
+					"js/sha256.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/language.js",
+					"css/mui.min.css",
+					"css/public.css",
+					"css/mobileSelect.css",
+					"css/kankan_home.css",
+					"js/mui.view.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/transaction/seller_account_confirm.html": {
+				"resources": [],
+				"refer": [
+					"pages/transaction/transfer_application.html"
+				],
 				"priority": 0
 			}
 		},

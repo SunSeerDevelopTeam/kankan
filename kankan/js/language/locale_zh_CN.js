@@ -189,6 +189,7 @@ var JSLocale = {
 	"pay_cancel": "取消",
 	//seller account information
 	"designated_account": "个人账户信息完善",
+	"confirm_account": "个人账户信息确认",
 	"bank": "银行",
 	"selectbank": "选择银行",
 	"selecttype": "选择类型",

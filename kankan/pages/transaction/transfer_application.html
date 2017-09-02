@@ -20,27 +20,28 @@
 		<div class="mui-content" style="font-size: 15px;background-color: #FFFFFF;">
 			<div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="userpricetext"></div>
 		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #efeff4;">
-		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span>99,999,999,999,999</span></span>
+		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="balance"></span></span>
 		    </div>
 		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em; border-bottom: 1px solid lightgrey;" class="lang" data-locale="transfer_applicationprice"></div>
 		    <!--input price-->
 		    <div>
 				<div class="inputPrice" style="border-top: none;">
-					<input id="input_transferPrice" type="number" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="gettransferPrice()" class="inputNumber"/>
+					<input id="input_transferPrice" type="number" maxlength="10" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="gettransferPrice()" class="inputNumber" />
 					<span class="inputSpan">&yen;<span id="span_transferPrice"></span></span>
 				</div>
             </div>
 		    <!--转账手续费-->
 		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;clear: both;" class="lang" data-locale="transfer_fee"></div>
 		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #efeff4;">
-		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="transfer_fee">99,999,999,999,999</span></span>
+		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="transfer_fee"></span></span>
 		    </div>
 		    <!--转账金额-->
 		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="transfer_price"></div>
 		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #efeff4;">
-		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="transfer_price">99,999,999,999,999</span></span>
+		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="transfer_price"></span></span>
 		    </div>
 		    <button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="applyfor_transfer" style="margin-top: 5em;margin-left: 10%;" onclick="transferMoney()" id="submit"></button>
+			<input type="hidden" name="bankname" id="bankname" value="" />
 		</div>
 	</body>
 	<script src="../../js/mui.min.js" ></script>
@@ -57,27 +58,114 @@
 		});
 		
 		mui.plusReady(function() {
-		    
+		    var params={};
+			Repository.Transaction.applytransfer(params, {
+					ok: function(data) {
+						Log.i("message send successfully!");
+						messageshow(data.data);
+						
+					},
+					ng: function(data) {
+						Api.callback_ng(data);
+					},
+					error:function(){
+						var nodata='<div  id="reloadpage" onclick="location.reload();" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+						$(".mui-content").html(nodata);
+					}
+			});
 		});
-        
+        function messageshow(results){
+        	var balance=Math.floor(results.user_balance).toLocaleString();
+        	var bank=results.bank_code;
+        	$("#balance").html(balance);
+        	$("#bankname").val(bank);
+        }
         function gettransferPrice() {
         	var input_transferPrice = $("#input_transferPrice").val();
+        	var bank=$("#bankname").val();
         	if (input_transferPrice == '0') {
         		$("#transfer_fee").text('-');
         		$("#transfer_price").text('-');
         		$("button").attr("disabled", true);
         	} else {
         		$("#span_transferPrice").html(parseFloat(Math.floor(input_transferPrice)).toLocaleString());
+        		if(bank=="東京三菱UFJ銀行"){
+	        		if(input_transferPrice < 30000){
+	        			var transfer_price=input_transferPrice*1-108*1;
+	        			$("#transfer_fee").text(108);
+	        			$("#transfer_price").text(transfer_price);
+	        		}else{
+	        			var transfer_price=input_transferPrice*1-324*1;
+	        			$("#transfer_fee").text(324);
+	        			$("#transfer_price").text(transfer_price);
+	        		}
+        		}else{
+        			if(input_transferPrice < 30000){
+        				var transfer_price=input_transferPrice*1-540*1;
+	        			$("#transfer_fee").text(540);
+	        			$("#transfer_price").text(transfer_price);
+	        		}else{
+	        			var transfer_price=input_transferPrice*1-756*1;
+	        			$("#transfer_fee").text(756);
+	        			$("#transfer_price").text(transfer_price);
+	        		}
+        		}
         	    $("button").removeAttr("disabled");
         	}
         }
 		
 		function transferMoney() {
+			var apply_amount=$("#input_transferPrice").val();
+			var apply_charge=$("#transfer_fee").text();
+			var amount=$("#transfer_price").text();
+			if(amount<=0){
+				mui.toast(TextMessage.amountcheck, {
+					duration: 'long',
+					type: 'div'
+				});
+				$("button").attr("disabled", true);
+				return false;
+			}
+			if($("#balance").text()<apply_amount){
+				mui.toast(TextMessage.balancecheck, {
+					duration: 'long',
+					type: 'div'
+				});
+				$("button").attr("disabled", true);
+				return false;
+			}
+			if(apply_amount.length>10){
+				mui.toast(TextMessage.ammontlength, {
+					duration: 'long',
+					type: 'div'
+				});
+				$("button").attr("disabled", true);
+				return false;
+			}
 			//有api了再做处理
 			var btnArray = [TextMessage.ok, TextMessage.cancel];
 			mui.confirm(TextMessage.wouldtransfer, '', btnArray, function(e) {
 				if (e.index == 0) {
-					gototransferFinish();
+					var params={
+						"apply_amount":apply_amount,
+						"apply_charge":apply_charge,
+						"amount":amount
+					};
+					Repository.Transaction.transfersubmit(params, {
+							ok: function(data) {
+								Log.i("message send successfully!");
+								location.reload();
+								gototransferFinish();
+								
+							},
+							ng: function(data) {
+								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="location.reload();" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
+							}
+					});
 				}
 			});
 		}

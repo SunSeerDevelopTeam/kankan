@@ -18,27 +18,32 @@
 			<h1 class="mui-center mui-title lang" data-locale="tranfer_history"></h1>
 		</header>
 		<div class="mui-content" style="font-size: 15px;">
-		    <div class="transferHistory" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border: 1px solid lightgrey;font-size: 12px;">
-		    	<div class="mui-col-xs-5">YYYY/MM/DD HH:MM</div>
-		    	<button style="height: 2em;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel"></button>
-		    	<div style="display: none;" class="lang" data-locale="balance_transferfinish"></div>
-		    	<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>3,000,000</span></div>
-		    </div>
-		    <div class="transferHistory" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border-bottom: 1px solid lightgrey;font-size: 12px;">
-		    	<div class="mui-col-xs-5">YYYY/MM/DD HH:MM</div>
-		    	<button style="height: 2em;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel"></button>
-		    	<div style="display: none;" class="lang" data-locale="balance_transferfinish"></div>
-		    	<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>3,000,000</span></div>
-		    </div>
-		    <div class="transferHistory" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border-bottom: 1px solid lightgrey;font-size: 12px;">
-		    	<div class="mui-col-xs-5">YYYY/MM/DD HH:MM</div>
-		    	<button style="height: 2em;display: none;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel"></button>
-		    	<div class="mui-col-xs-4 lang" data-locale="balance_transferfinish"></div>
-		    	<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>3,000,000</span></div>
-		    </div>
+			<div id="pullrefresh" class="mui-scroll-wrapper" style="margin-top: 3em;">
+				<div class="mui-scroll">
+				    <!--<div class="transferHistory" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border: 1px solid lightgrey;font-size: 12px;">
+				    	<div class="mui-col-xs-5">YYYY/MM/DD HH:MM</div>
+				    	<button style="height: 2em;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel"></button>
+				    	<div style="display: none;" class="lang" data-locale="balance_transferfinish"></div>
+				    	<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>3,000,000</span></div>
+				    </div>
+				    <div class="transferHistory" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border-bottom: 1px solid lightgrey;font-size: 12px;">
+				    	<div class="mui-col-xs-5">YYYY/MM/DD HH:MM</div>
+				    	<button style="height: 2em;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel"></button>
+				    	<div style="display: none;" class="lang" data-locale="balance_transferfinish"></div>
+				    	<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>3,000,000</span></div>
+				    </div>
+				    <div class="transferHistory" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border-bottom: 1px solid lightgrey;font-size: 12px;">
+				    	<div class="mui-col-xs-5">YYYY/MM/DD HH:MM</div>
+				    	<button style="height: 2em;display: none;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel"></button>
+				    	<div class="mui-col-xs-4 lang" data-locale="balance_transferfinish"></div>
+				    	<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>3,000,000</span></div>
+				    </div>-->
+				</div>
+			</div>
 		</div>
 	</body>
-	<script src="../../js/mui.min.js" ></script>
+	<script>var h5pullDown = true;</script>
+	<script src="../../js/mui.js" ></script>
 	<script src="../../js/mui.view.js "></script>
 	<script src="../../js/common.js"></script>
 	<script src="../../js/jquery-3.2.0.min.js"></script>
@@ -48,18 +53,112 @@
 	<script src="../../js/mobileSelect.js" type="text/javascript"></script>
 	<script>
 		mui.init({
-
+				pullRefresh: {
+						container: '#pullrefresh',
+						down: {
+							contentrefresh:TextMessage.update,
+							contentnomore: TextMessage.nomore,
+							contentover:TextMessage.release,
+							contentdown:TextMessage.pull_down,
+							auto: true,
+							top:"3em",
+							callback: pulldownRefresh
+						},
+						up: {
+							contentrefresh: TextMessage.loading,
+					        contentnomore:TextMessage.nomore,
+					        contentinit: "ssss",
+					        contentdown:TextMessage.upmore,
+					        callback: pullupRefresh,
+							
+						}
+					}
 		});
+		var page=1;
+		function getmessage(){
+			mui.plusReady(function() {
+				var params={
+					"page":page
+				};
+				Repository.Transaction.gettransferrecord(params, {
+						ok: function(data) {
+							Log.i("message send successfully!");
+							messageshow(data.data);
+							
+						},
+						ng: function(data) {
+							Api.callback_ng(data);
+						},
+						error:function(){
+							var nodata='<div  id="reloadpage" onclick="location.reload();" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+							$(".mui-content").html(nodata);
+						}
+				});
+			});
+		}		
 		
-		mui.plusReady(function() {
-			mui(".transferHistory").on('tap', '.btnConfirm', function() {
+		function messageshow(results){
+			var allcount=results.allcount;
+			var num=page*10;
+			mui('#pullrefresh').pullRefresh().endPullupToRefresh((num >= allcount));
+			for(var i=0;i<results.transfer_record.length;i++){
+				var ammont=Math.floor(results.transfer_record[i].amount).toLocaleString();
+				var application_state=results.transfer_record[i].application_state;
+				var apply_date=results.transfer_record[i].apply_date;
+				var trans_aplid=results.transfer_record[i].trans_aplid;
+				var time=results.transfer_record[i].day;
+				var html = new Util.StringBuilder();
+					html.appendFormat('<div class="transferHistory" id="{0}" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border: 1px solid lightgrey;font-size: 12px;background-color: #E0EEEE;">',trans_aplid)
+						.appendFormat('<div class="mui-col-xs-5">{0}</div>',apply_date)
+						.appendFormat('<button style="height: 2em;{1}" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel">{0}</button>',TextMessage.cancel,time<=0 ? "":"display:none;")
+						.appendFormat('<div style="display:{1};" class="lang" data-locale="balance_transferfinish">{0}</div>',TextMessage.transfersuccess,application_state==2 ? "block" :"none")
+						.appendFormat('<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>{0}</span></div></div>',ammont);
+					
+					$(".mui-scroll").append(html.toString());
+			}
+			
+			mui(".transferHistory").on('tap', '.btnConfirm', function(event) {
+				var elem = this;
+				var rid = elem.parentNode.getAttribute("id");
+				var paramsdel={
+					"trans_aplid":rid
+				};
 				var btnArray = [TextMessage.ok, TextMessage.cancel];
 				mui.confirm(TextMessage.reallyCancel, '', btnArray, function(e) {
-					
+					if(e.index==0){
+						Repository.Transaction.canceltransfer(paramsdel, {
+							ok: function(data) {
+								$("#"+rid).remove();
+							},
+							ng: function(data) {
+								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="location.reload();" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
+							}
+						});
+					}
 			    });
 		    });
-		});
-
+		    page++;
+		}
 		
+		function pulldownRefresh(){
+			mui('#pullrefresh').pullRefresh().refresh(true);
+				page=1;
+				setTimeout(function() {
+					$(".mui-scroll").empty();
+					getmessage();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				}, 1000);
+		}
+		
+		function pullupRefresh(){
+			setTimeout(function() {
+					getmessage();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				}, 1000);
+		}
 	</script>
 </html>
