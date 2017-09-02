@@ -2,7 +2,7 @@
 <html>
     <head>
 		<meta charset="utf-8">
-		<title>sell_account.html</title>
+		<title>sell_account_confirm.html</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -22,7 +22,7 @@
 				<!--bank-->
 				<div class="seller_bank">
 					<div class="mui-pull-left lang" style="margin-left: 1em;" data-locale="bank"></div>
-					<div id="branchResults" class="mui-pull-right lang mui-col-xs-4" data-locale="selectbank" style="margin-right: 0.5em;"></div>
+					<div id="branchResults" class="mui-pull-right lang mui-col-xs-4"  style="margin-right: 0.5em;"></div>
 					<input type="hidden" name="branch_id" id="branch_id" value="" />
 				</div>
 				<!--account type-->
@@ -30,7 +30,7 @@
 					<ul class="mui-table-view ka_prologbox">
 						<li class="mui-table-view-cell" style="display: -webkit-box;">
 						    <div class="mui-col-xs-9 mui-pull-left lang" data-locale="account_type"></div>
-						    <div id="accountResults" class="lang" data-locale="selecttype" style="margin-right: 0.5em;"></div>
+						    <div id="accountResults" class="lang"  style="margin-right: 0.5em;"></div>
 					        <input type="hidden" name="accountSelect" id="accountSelect" value="" />
 						</li>
 						<li class="mui-table-view-cell" style="display: -webkit-box;">
@@ -83,7 +83,7 @@
 	<script src="../../js/mobileSelect.js" type="text/javascript"></script>
 	<script>
 		mui.init({
-
+			
 		});
 		var id;
 		var testarr=[];
@@ -105,6 +105,12 @@
 						value: "建设银行"
 					}]}];
 		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			var params2 = self.param;
+			if(params2){
+				console.log(params2);
+				showPersonalInfor(params2);
+			}
 			$("input").attr("disabled","true");
 			$(".mui-content").css("height",document.body.scrollHeight);
 //			var params = {};
@@ -154,19 +160,19 @@
 //			        $("#accountResults").addClass("ka_sortname");					       
 //			    }  
 //			});
-		    var params2 = {};
-		    Repository.User.getpersonal_bankinfor(params2, {
-				ok: function(data) {
-					var results = data.data;
-					if (results.u_traid) {
-						showPersonalInfor(results);
-					}
-				},
-				ng: function(data) {
-					console.log("error:"+data);
-					Log.d(data);
-				}
-			});
+//		    var params2 = {};
+//		    Repository.User.getpersonal_bankinfor(params2, {
+//				ok: function(data) {
+//					var results = data.data;
+//					if (results.u_traid) {
+//						showPersonalInfor(results);
+//					}
+//				},
+//				ng: function(data) {
+//					console.log("error:"+data);
+//					Log.d(data);
+//				}
+//			});
 		});
 		// get bank infor
 		function showPersonalInfor(results) {

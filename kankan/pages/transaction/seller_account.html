@@ -264,22 +264,27 @@
 				"surname": surname,
 				"name": name
 	        };
-	        Repository.User.personal_finish(params, {
-				ok: function(data) {
-					Log.d("success");
-					/*mui.openWindow({
-						id: 'useredite',
-						url:"useredite.html"
-					});*/
-					mui.openWindow({
+			mui.openWindow({
 				        url: 'seller_account_confirm.html',
-				        id: 'seller_account_confirm'
-			       });
-				},
-				ng: function(data) {
-					Log.d(data);
-				}
-			});
+				        id: 'seller_account_confirm',
+				        extras:{
+				        	param:params
+				        }
+			  });
+			
+//	        Repository.User.personal_finish(params, {
+//				ok: function(data) {
+//					Log.d("success");
+//					/*mui.openWindow({
+//						id: 'useredite',
+//						url:"useredite.html"
+//					});*/
+//					
+//				},
+//				ng: function(data) {
+//					Log.d(data);
+//				}
+//			});
 		}
 	</script>
 </html>
