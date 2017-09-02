@@ -112,7 +112,7 @@
 				<div>
 					<h5 class="ka_proloh5 lang" data-locale="commodity_price" style="margin: 1.5em 0 1.5em 0.5em"></h5>
 					<div class="inputPrice">
-						<input id="number_price" type="number" onkeyup="getNumber()" class="inputNumber" disabled="true"/>
+						<input id="number_price" type="number" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="getNumber()" class="inputNumber" disabled="true"/>
 						<span class="inputSpan">&yen;<span id="input_price"></span></span>
 					</div>
                 </div>
@@ -860,13 +860,7 @@ function publishs() {
 		document.publishcomodity.comm_detail.focus();
 		return false;
 	}
-	if (price.length == 0) {
-		mui.toast(TextMessage.pro_pricenulltest, {
-			duration: 'long',
-			type: 'div'
-		});
-		return false;
-	}
+
 	if(regStr.test(comm_detail)){
 	　　mui.toast(TextMessage.noemjoy, {
 			duration: 'long',

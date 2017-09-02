@@ -390,6 +390,7 @@
 
 				var buyer_flag = false;
 				if(cur_user_id == buyer_id) buyer_flag = true;
+				var price = transinfo[0].price;
 				var trans_mode = transinfo[0].trans_mode;
 				if(trans_mode == 0) {
 					if(seller_comm_exist) {
@@ -435,7 +436,7 @@
 						seller_msg += '<a href="#" style="height: '+imgwidth+'px;">';
 						seller_msg += '<img style="'+seller_top_margin+'" class="imageOne mui-media-object" src="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 						seller_msg += '</a>';
-						seller_msg += '<div style="height: 21px;"><span>&yen;<span>3,000</span>';
+						seller_msg += '<div style="height: 21px;"><span>&yen;<span>'+parseFloat(price).toLocaleString()+'</span>';
 						seller_msg += '</span></div>';
 						
 						seller_msg1 += '<img src="../../images/jiantou.png" width="20" height="20">';
@@ -456,7 +457,7 @@
 						seller_msg += '<a href="#" style="height: '+imgwidth+'px;">';
 						seller_msg += '<img style="'+seller_top_margin+'" class="mui-media-object" data-original="' + seller_comm_img + '" onerror="this.src=' + "'../../images/nopic.jpg'" + '">';
 						seller_msg += '</a>';
-						seller_msg += '<div><span>&yen;<span>3,000</span>';
+						seller_msg += '<div><span>&yen;<span>'+parseFloat(price).toLocaleString()+'</span>';
 						seller_msg += '</span></div>';
 						seller_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
 						seller_img += '<img class="ka_touxiangimg" height="32px" width="32px" src="' + seller_photo + '" />';
@@ -651,15 +652,19 @@
 							$(".tran-button-buy").show();
 							$(".tran-button-buy font").text(TextMessage.transConfirm);
 						} else {
-							if(trans_mode == 1) {
+							//原来的start
+							/*if(trans_mode == 1) {
 								$(".tran-button-buy").show();
 								$(".tran-button-buy font").text(TextMessage.transWaitConfirm);
 							} else {
-								//$(".tran-button-buy font").text("订单申请");
 								$(".tran-button-buy").hide();
 								$(".tran-button-sell").show();
 								$(".tran-button").css('text-align', 'center');
-							}
+							}*/
+							//原来的end
+							$(".tran-button-buy").hide();
+							$(".tran-button-sell").show();
+							$(".tran-button").css('text-align', 'center');
 						}
 					/*} else {
 						if(buyer_flag == 'false') {
@@ -803,17 +808,30 @@
 				var seller_urge_d = $("#seller_urge_d").val();
 				var seller_receipt = $("#seller_receipt").val();
 				var appraise = $("#appraise").val();
-				if(status == 0) {
-					if(buyer_flag != 'true') {
-						trans_flow('transRequestOrder', params,'');
+				//判断
+				var wanttopay = $(".tran-button-buy font").text();
+				if (wanttopay == TextMessage.transOrder) {
+					if (trans_mode == '1') {
+						mui.openWindow({
+							url: 'payment.html',
+							id: 'payment.html',
+							extras: {
+						        "transid": trans_id
+					        }
+						});
 					}
-				} else if(status == 1) {
-					if(buyer_flag == 'true') {
-						trans_flow('transSubmitOrder', params,'');
-					}
-				} else if(status == 2) {
-					if(buyer_flag == 'true') {
-						//if(trans_mode != 0) {
+				} else {
+					if(status == 0) {
+						if(buyer_flag != 'true') {
+							trans_flow('transRequestOrder', params,'');
+						}
+				    } else if(status == 1) {
+						if(buyer_flag == 'true') {
+							trans_flow('transSubmitOrder', params,'');
+						}
+				    } else if(status == 2) {
+					    if(buyer_flag == 'true') {
+						    //if(trans_mode != 0) {
 							if(seller_deliver == 0 ){
 								trans_flow('transUrgeDelive', params,'');
 							}else{
@@ -863,29 +881,30 @@
 								trans_flow('transOrderLogustics', params,'');
 							}
 						}*/
-					}
-				} else if(status == 3) {
-					if(appraise == 0){
-						jumpToOtherPage('./transevaluate.html','transevaluate',trans_id)
-					}else{
-						return false;
-					}
-				} else if(status == 7) {
-					if(appraise == 0){
-						jumpToOtherPage('./transevaluate.html','transevaluate',trans_id)
-					}else{
-						return false;
-					}
-				} else if(status == 8) {
-					var preView = plus.webview.getWebviewById('selectitem');
-					plus.webview.close(preView);
-					gotoMain();
-				} else if(status == 9) {
-					if(appraise == 0){
-						jumpToOtherPage('./transevaluate.html','transevaluate',trans_id)
-					}else{
-						return false;
-					}
+					    }
+				    } else if(status == 3) {
+						if(appraise == 0){
+							jumpToOtherPage('./transevaluate.html','transevaluate',trans_id)
+						}else{
+							return false;
+						}
+				    } else if(status == 7) {
+						if(appraise == 0){
+							jumpToOtherPage('./transevaluate.html','transevaluate',trans_id)
+						}else{
+							return false;
+						}
+					} else if(status == 8) {
+						var preView = plus.webview.getWebviewById('selectitem');
+						plus.webview.close(preView);
+						gotoMain();
+					} else if(status == 9) {
+						if(appraise == 0){
+							jumpToOtherPage('./transevaluate.html','transevaluate',trans_id)
+						}else{
+							return false;
+						}
+				    }
 				}
 			})
 
@@ -950,11 +969,15 @@
 							//tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
 							var tranStatusVal = '';
 							if(trans_status == 0){
-								tranStatusVal = TextMessage.requireing;
+								tranStatusVal = TextMessage.waitforConfirm;
 							}else if(trans_status == 1){
-								tranStatusVal = TextMessage.requireing;								
+								if (cur_user_id == seller_id) {
+									tranStatusVal = TextMessage.waitPay;
+								} else {
+									tranStatusVal = TextMessage.transOrder;
+								}							
 							}else if(trans_status == 2){
-								tranStatusVal = TextMessage.requresuces;
+								tranStatusVal = TextMessage.waitSellerSend;
 							}else if(trans_status == 3){
 								tranStatusVal = TextMessage.transFinish;
 							}else if(trans_status == 7){

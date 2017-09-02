@@ -540,7 +540,11 @@ var Api;
 			transStop: baseUrl() + '/transaction/transoperation/transaction_stop/',
 			transEdite: baseUrl() + '/transaction/transoperation/transaction_show/',
 			transUrgeDelive: baseUrl() + '/transaction/transoperation/trans_urge_deliver/',
-			transUrgeReceipt: baseUrl() + '/transaction/transoperation/trans_urge_receipt/'
+			transUrgeReceipt: baseUrl() + '/transaction/transoperation/trans_urge_receipt/',
+			/*add 支付页面显示*/
+			transPayshow: baseUrl() + '/transaction/transoperation/trans_pay_show/',
+			/*add 去付款*/
+			transgotoPay: baseUrl() + '/transaction/transoperation/trans_pay_choice/'
 		}
 	};
 	Api.Params = {
@@ -1413,7 +1417,16 @@ var Repository;
 			return Api.call(Api.url.Trans.transUrgeReceipt, params, callback);
 		}
 		Transaction.transUrgeReceipt = transUrgeReceipt;
-
+		
+		function transPayshow(params, callback) {
+			return Api.call(Api.url.Trans.transPayshow, params, callback);
+		}
+        Transaction.transPayshow = transPayshow;
+        
+        function transgotoPay(params, callback) {
+        	return Api.call(Api.url.Trans.transgotoPay, params, callback);
+        }
+        Transaction.transgotoPay = transgotoPay;
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
@@ -1625,19 +1638,30 @@ var TextMessage;
 	TextMessage.transOrder = language ? "支払い手続きへ" : "去付款";
 	TextMessage.transUrgeDelive = language ? "出荷をリクエストする" : "催促对方发货";
 	TextMessage.transReceipt = language ? "品物受領" : "确认收货";
-	TextMessage.transDelive = language ? "出荷完了" : "完成发货";
-	TextMessage.transWaitOrder = language ? "支払いを待っている" : "等待付款";
+	TextMessage.transDelive = language ? "出荷完了" : "确认发货";
+	TextMessage.transWaitOrder = language ? "相手の注文を待つ" : "等待对方下单";
 	TextMessage.transUrgeReceipt = language ? "相手に品物を督促" : "催促对方收货";
 	TextMessage.transFinish = language ? "取引完了" : "交易完成";
 	TextMessage.transWaitReceipt = language ? "相手を待つ" : "等待对方收货";
 	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
 	TextMessage.transContinue = language ? "取引を継続します。" : "继续交易!";
+	TextMessage.waitforConfirm = language ? "取引依賴確認待ち" : "等待确认交易";
+	TextMessage.waitPay = language ? "入金待ち" : "等待付款";
+	TextMessage.waitotherPay  =language ? "相手の支払いを待つ" : "等待对方付款";
+	TextMessage.waitPayHandle = language ? "入金処理待ち" : "等待付款处理";
+	TextMessage.waitSellerSend = language ? "発送待ち" : "等待卖家发货";
+	TextMessage.waitBuyerConfirm = language ? "相手を待つ" : "等待买家收货";
 //	add
 	TextMessage.accountsReceivable = language ? "振込先確認" : "确认收款账户";
 	TextMessage.applyforPayment = language ? "振込申請" : "申请收款";
 /*seller account page*/
     TextMessage.branchnumberRangeText = language ? "3桁に制限" : "限制为3位数字",
     TextMessage.cardnumberRangeText = language ? "7桁に制限" : "限制为7位数字",
+/*balance management*/
+    TextMessage.ok = language ? "OK" : "OK",
+/*transfer application*/
+    TextMessage.wouldtransfer = language ? "振込申請を行います。よろしいでしょうか。" : "将进行转账申请。确定吗？",
+    TextMessage.reallyCancel = language ? "本当にキャンセルしたい": "真的要取消吗?",
 	TextMessage.confirmBtnYes = language ? "はい" : "确认";
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";

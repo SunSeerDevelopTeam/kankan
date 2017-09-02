@@ -187,22 +187,26 @@
 			</div>
 
 			<!--Commodity exchange, white send, point exchange information button-->
+			<!--白送-->
 			<div class="ka_buyway">
 				<!--<a href="../../transaction/transaction2.html"></a><button type="button" class="mui-btn mui-btn-danger" id="switchp" style="display: none;"></a>
 			<b><span class="lang" data-locale="det_pointexch"></span>(<span class="comdprice"></span>)</b>
 		</button>-->
-				<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;"></a>
-			<span class="lang" data-locale="det_exchange"><b></b></span>
-		</button>
-					<a href="../../transaction/transaction2.html"><button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;"></a>
-			<span class="lang" data-locale="det_send"><b></b></span>
-		</button>
+		        <a href="../../transaction/transaction2.html">
+		        	<button type="button" class="mui-btn mui-btn-danger" id="switchex" style="display: none;">
+		        </a>
+		        <span class="lang" data-locale="det_exchange"><b></b></span>
+		        <a href="../../transaction/transaction2.html">
+				<button type="button" class="mui-btn mui-btn-danger" id="switchsend" style="display: none;"></a>
+					<span class="lang" data-locale="det_send"><b></b></span>
+				</button>
 			</div>
+			<!--正在交易中-->
 			<div id="traslateing" class="lang" data-locale="stautestext"></div>
-			<!--底部新加的样式-->
+			<!--价格加购买-->
 			<div id="bottom_price" class="gratis_goods">
-		        <div class="mui-pull-left">&yen;<span>3,000</span></div>
-		        <a href="../../transaction/payment.html" class="mui-pull-right lang">去购买</a>
+		        <div class="mui-pull-left">&yen;<span id="detail_commPrice"></span></div>
+		        <div id="gotobuy" class="mui-pull-right lang" style="margin-right: 1em;">去购买</div>
 		    </div>
 			<input type="hidden" name="userid" id="userid" value="" />
 			<input type="hidden" name="myid" id="myid" value="" />
@@ -249,6 +253,9 @@
 		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			var commodity_id;
+			var comm_exchange;
+			var comm_business;
+			var comm_gratis;
 			var _w = parseInt($(window).width()); //获取浏览器的宽度
 			mui.init({
 				swipeBack: false,
@@ -412,6 +419,9 @@
 				Repository.Commodity.commodityDetail(params, {
 					ok: function(data) {
 						Log.d("success");
+						comm_exchange = data.data.commodity_buy_way.exchange;
+						comm_business = data.data.commodity_buy_way.business;
+						comm_gratis = data.data.commodity_buy_way.business;
 						messageshow(data);
 						clickprocomment();
 						clickwarn();
@@ -538,6 +548,7 @@
 				var comdityid = comdbasic[0].commodity_id;
 				var traslatestautes=comdbasic[0].status;
 				var buy_sell_flag = comdbasic[0].buy_sell_flag;
+				var price = comdbasic[0].price;
 				var myid=results.myid;
 				var tradeablenum = userbasic.user_comm_tradable_count;
 				$("#comd_stauteval").html(comdistateval);//state
@@ -553,10 +564,17 @@
 					$(".comdinfo").hide();
 				}
 				if(traslatestautes=="0"){
-					$(".ka_buyway").show();
+					if (price > 0) {
+						$("#detail_commPrice").text(parseFloat(price).toLocaleString());
+					} else {
+						$("#detail_commPrice").text(0);
+					}
+					$(".ka_buyway").hide();
+					$("#bottom_price").show();
 					$("#traslateing").hide();
 				}else{
 					$(".ka_buyway").hide();
+					$("#bottom_price").hide();
 					$("#traslateing").show();
 				}
 				var imgsarr = commodity.commodity_imgs;
@@ -985,7 +1003,93 @@
 					}
 				});
 			}
-			mui(".ka_buyway").on('tap', '.mui-btn', function() {
+			mui("#bottom_price").on('tap', '#gotobuy', function() {
+				// var change_name = $(this).attr("id");
+				var mode;
+				var codid = $(".kankan_zanbox").attr("id");
+				var params = {
+					"commodity_id": codid
+				};
+				var comduid=$("#userid").val();
+				var myuid=$("#myid").val();
+				var tradeablenum = $("#comm_num").val();
+				if(comduid==myuid){
+					mui.toast(TextMessage.operation_error, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
+				var login_flag = plus.storage.getItem("LoginFlag");
+				if(login_flag != 'isLogin') {
+					mui.toast(TextMessage.test, {
+						duration: 'long',
+						type: 'div'
+					});
+					mui.openWindow({
+						id: 'login',
+						url: "../../login/login.html"
+					});
+				} else {
+					if (comm_business == 1) {
+						mode = 'business';
+						params.mode = mode;
+						transRequest(params);
+					}
+					if (comm_exchange == 1) {
+						if(tradeablenum == 0){
+							mui.toast(TextMessage.commdNo, {
+								duration: 'long',
+								type: 'div'
+							});
+							return false;
+						}
+						mode = 'exchange';
+						params.mode = mode;
+						mui.openWindow({
+							url: "../../transaction/select_item.html?commodity_id="+codid+"&mode="+mode,
+							id: "selectitem",
+							extras: {
+								"commodity_id": codid,
+								"mode": mode
+							}
+						})
+					}
+					if (comm_gratis == 1) {
+						mode = 'gratis';
+						params.mode = mode;
+						transRequest(params);
+					}
+					/*if(change_name == 'switchp') {
+						mode = 'business';
+						params.mode = mode;
+						transRequest(params);
+					} else if(change_name == 'switchex') {
+						if(tradeablenum == 0){
+							mui.toast(TextMessage.commdNo, {
+								duration: 'long',
+								type: 'div'
+							});
+							return false;
+						}
+						mode = 'exchange';
+						params.mode = mode;
+						mui.openWindow({
+							url: "../../transaction/select_item.html?commodity_id="+codid+"&mode="+mode,
+							id: "selectitem",
+							extras: {
+								"commodity_id": codid,
+								"mode": mode
+							}
+						})
+					} else {
+						mode = 'gratis';
+						params.mode = mode;
+						transRequest(params);
+					}*/
+				}
+			});
+			/*mui(".ka_buyway").on('tap', '.mui-btn', function() {
 				var change_name = $(this).attr("id");
 				var mode;
 				var codid = $(".kankan_zanbox").attr("id");
@@ -1041,7 +1145,7 @@
 						transRequest(params);
 					}
 				}
-			})
+			})*/
 		    
 		    $('#see').text(TextMessage.sharetitle);
 		    $('#reportGoods').text(TextMessage.complaintpro);

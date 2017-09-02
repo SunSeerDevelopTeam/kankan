@@ -1024,3 +1024,8 @@ body .mui-table-view-cell.mui-active{
 .accountDesc {
 	margin: 1em 1em 1em 1em;
 }
+/*payment page*/
+.contentTop #comm_image {
+	width: 100px;
+	height: 100px;
+}

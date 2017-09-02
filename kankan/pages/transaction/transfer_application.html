@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>transfer_application.html</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
+		<link rel="stylesheet" href="../../css/public.css" type="text/css"/>
+		<link rel="stylesheet" href="../../css/mobileSelect.css" type="text/css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-center mui-title lang" data-locale="transfer_application"></h1>
+		</header>
+		<div class="mui-content" style="font-size: 15px;background-color: #FFFFFF;">
+			<div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="userpricetext"></div>
+		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #efeff4;">
+		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span>99,999,999,999,999</span></span>
+		    </div>
+		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em; border-bottom: 1px solid lightgrey;" class="lang" data-locale="transfer_applicationprice"></div>
+		    <!--input price-->
+		    <div>
+				<div class="inputPrice" style="border-top: none;">
+					<input id="input_transferPrice" type="number" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="gettransferPrice()" class="inputNumber"/>
+					<span class="inputSpan">&yen;<span id="span_transferPrice"></span></span>
+				</div>
+            </div>
+		    <!--转账手续费-->
+		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;clear: both;" class="lang" data-locale="transfer_fee"></div>
+		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #efeff4;">
+		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="transfer_fee">99,999,999,999,999</span></span>
+		    </div>
+		    <!--转账金额-->
+		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="transfer_price"></div>
+		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #efeff4;">
+		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="transfer_price">99,999,999,999,999</span></span>
+		    </div>
+		    <button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="applyfor_transfer" style="margin-top: 5em;margin-left: 10%;" onclick="transferMoney()" id="submit"></button>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js" ></script>
+	<script src="../../js/mui.view.js "></script>
+	<script src="../../js/common.js"></script>
+	<script src="../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../js/language.js"></script>
+	<script src="../../js/sha256.js"></script>
+	<script src="../../js/pro_uploadimg.js"></script>
+	<script src="../../js/mobileSelect.js" type="text/javascript"></script>
+	<script>
+		mui.init({
+
+		});
+		
+		mui.plusReady(function() {
+		    
+		});
+        
+        function gettransferPrice() {
+        	var input_transferPrice = $("#input_transferPrice").val();
+        	if (input_transferPrice == '0') {
+        		$("#transfer_fee").text('-');
+        		$("#transfer_price").text('-');
+        		$("button").attr("disabled", true);
+        	} else {
+        		$("#span_transferPrice").html(parseFloat(Math.floor(input_transferPrice)).toLocaleString());
+        	    $("button").removeAttr("disabled");
+        	}
+        }
+		
+		function transferMoney() {
+			//有api了再做处理
+			var btnArray = [TextMessage.ok, TextMessage.cancel];
+			mui.confirm(TextMessage.wouldtransfer, '', btnArray, function(e) {
+				if (e.index == 0) {
+					gototransferFinish();
+				}
+			});
+		}
+		
+		function gototransferFinish() {
+			mui.openWindow({
+				url: 'transfer_finish.html',
+				id: 'transfer_finish.html'
+			});
+		}
+	</script>
+</html>
