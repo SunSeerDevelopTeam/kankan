@@ -206,7 +206,7 @@
 			<!--价格加购买-->
 			<div id="bottom_price" class="gratis_goods">
 		        <div class="mui-pull-left">&yen;<span id="detail_commPrice"></span></div>
-		        <div id="gotobuy" class="mui-pull-right lang" style="margin-right: 1em;">去购买</div>
+		        <div id="gotobuy" class="mui-pull-right lang" data-locale="det_buy" style="margin-right: 1em;"></div>
 		    </div>
 			<input type="hidden" name="userid" id="userid" value="" />
 			<input type="hidden" name="myid" id="myid" value="" />
@@ -1055,7 +1055,7 @@
 							}
 						})
 					}
-					if (comm_gratis == 1) {
+					if (comm_gratis == 0) {
 						mode = 'gratis';
 						params.mode = mode;
 						transRequest(params);

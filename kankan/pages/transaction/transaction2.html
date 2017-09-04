@@ -181,6 +181,18 @@
 		<script type="text/javascript" charset="utf-8">
 			var trans_id;
 			var page=0;
+			var buyApplyFlag=0; //买家申请标志
+			var buyAgreeFlag=0; //买家同意标志
+			var sellApplyFlag=0; //卖家申请标志
+			var sellAgreeFlag=0; //卖家同意标志
+			var Pay_status; //付没付款
+			var stop_flag;
+			var trans_mode;
+			var buyer_id; //买家的id
+			var seller_id; //卖家id
+			var cur_user_id; //当前所在id
+			var trans_deliver; //有没有发货
+			var trans_status; //status的值
 			mui.plusReady(function() {
 				if(mui.os.ios){
 					$(".mui-content").attr("style","margin-top:2.5em;");
@@ -598,20 +610,11 @@
 				var deliver = transinfo[0].deliver;
 				var appraise  = transinfo[0].appraise;
 				var buyer_flag = $("#buyer_flag").val();
+				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
 				var params = {
 					"transid": trans_id
 				};
 				var buyer_id = transinfo[0].issue_user_id;
-				if(trans_type == 0) {
-					$(".tran-button-sell").show();
-					$(".tran-button-sell font").text(TextMessage.requestStop);
-				} else {
-					$(".tran-button-sell").show();
-					$(".tran-button-sell font").text(TextMessage.transStop);
-				}
-				var buyer_deliver, seller_deliver, buyer_urge_r, seller_urge_r, buyer_urge_d, seller_urge_d, buyer_receipt, seller_receipt;
-				
-							
 				for(var u in userinfo) {
 					if(userinfo[u].user_id == buyer_id) {
 						buyer_deliver = userinfo[u].deliver_flag;
@@ -624,6 +627,37 @@
 						seller_urge_d = userinfo[u].urge_d_flag;
 						seller_receipt = userinfo[u].receipt_flag;
 					}
+				}
+				/*原来的if(trans_type == 0) {
+					$(".tran-button-sell").show();
+					$(".tran-button-sell font").text(TextMessage.requestStop);
+				} else {
+					$(".tran-button-sell").show();
+					$(".tran-button-sell font").text(TextMessage.transStop);
+				}*/
+				//现在的
+				if (trans_type == 0) {
+					$(".tran-button-sell").show();
+					$(".tran-button-sell font").text(TextMessage.requestStop);
+				} else if (trans_mode == 1 && Pay_status == 1 && sellApplyFlag == 1) {
+					if (cur_user_id == seller_id) {
+						$(".tran-button-sell").show();
+					    $(".tran-button-sell font").text(TextMessage.waitBuyerAgree);
+					} else {
+						$(".tran-button-sell").show();
+					    $(".tran-button-sell font").text(TextMessage.agreeTerminate);
+					}
+				} else if (trans_mode == 1 && Pay_status == 1 && buyApplyFlag == 1) {
+					if (cur_user_id == buyer_id) {
+						$(".tran-button-sell").show();
+					    $(".tran-button-sell font").text(TextMessage.waitSellerAgree);
+					} else {
+						$(".tran-button-sell").show();
+					    $(".tran-button-sell font").text(TextMessage.agreeTerminate);
+					}
+				} else if (trans_type == 1) {
+					$(".tran-button-sell").show();
+					$(".tran-button-sell font").text(TextMessage.transStop);
 				}
 				if(status == 8) {
 					mui.alert(TextMessage.transStopMsg,'kankan',TextMessage.sure);
@@ -933,13 +967,26 @@
 							var allcomiditynum=10*page;
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh((allcount <=allcomiditynum));
 							var buyer_flag = false;
-							var buyer_id = transinfo[0].issue_user_id;
-							var seller_id = transinfo[0].accept_user_id;
-							var cur_user_id = data.myid;
-							var trans_mode = transinfo[0].trans_mode;
-							var trans_status = transinfo[0].status;
-							var trans_deliver = transinfo[0].deliver;
+							buyer_id = transinfo[0].issue_user_id;
+							seller_id = transinfo[0].accept_user_id;
+							cur_user_id = data.myid;
+							trans_mode = transinfo[0].trans_mode;
+							trans_status = transinfo[0].status;
+							trans_deliver = transinfo[0].deliver;
 							var trans_type = transinfo[0].trans_type;
+							//同意终止操作
+							for(var i in usersinfo) {
+								if(usersinfo[i].user_id == seller_id) {
+									Pay_status = usersinfo[i].pay_stautes;
+									sellApplyFlag=usersinfo[i].apply_abort_flag;
+									sellAgreeFlag=usersinfo[i].agree_abort_flag;
+								} else {
+									Pay_status = usersinfo[i].pay_stautes;
+									buyApplyFlag=usersinfo[i].apply_abort_flag;
+									buyAgreeFlag=usersinfo[i].agree_abort_flag;
+								}
+							}
+							
 							if(buyer_id == cur_user_id) buyer_flag = 'true';
 							if(flag == 'my') goods_detail(cur_user_id, commdinfo, 'my');
 							else if(flag == 'request') goods_detail(cur_user_id, commdinfo, 'request');
@@ -977,7 +1024,34 @@
 									tranStatusVal = TextMessage.transOrder;
 								}							
 							}else if(trans_status == 2){
-								tranStatusVal = TextMessage.waitSellerSend;
+								/*if (trans_deliver == 0 && sellApplyFlag == 1) {
+									if (cur_user_id == seller_id) {
+										tranStatusVal = TextMessage.waitBuyerAgree;
+									} else {
+										tranStatusVal = TextMessage.agreeTerminate;
+									}
+								} else if (trans_deliver == 0) {
+									tranStatusVal = TextMessage.waitSellerSend;
+								} else if (trans_deliver == 1) {
+									tranStatusVal = TextMessage.waitBuyerConfirm;
+								}*/
+								if (trans_deliver == 0 && sellApplyFlag == 1) {
+									if (cur_user_id == seller_id) {
+										tranStatusVal = TextMessage.waitBuyerAgree;
+									} else {
+										tranStatusVal = TextMessage.agreeTerminate;
+									}
+								} else if (trans_deliver == 0 && buyApplyFlag == 1) {
+									if (cur_user_id == buyer_id) {
+										tranStatusVal = TextMessage.waitSellerAgree;
+									} else {
+										tranStatusVal = TextMessage.agreeTerminate;
+									}
+								} else if (trans_deliver == 0) {
+									tranStatusVal = TextMessage.waitSellerSend;
+								} else if (trans_deliver == 1) {
+									tranStatusVal = TextMessage.waitBuyerConfirm;
+								}
 							}else if(trans_status == 3){
 								tranStatusVal = TextMessage.transFinish;
 							}else if(trans_status == 7){
@@ -1073,9 +1147,77 @@
 			}
 
 			function stopTransaction() {
-				var params = {
-					"transid": trans_id
-				};
+				var params = {};
+				//交易终止的stop_flag =0;
+				//同意终止的stop_flag =1;
+				//这两个都得弹框
+				alert("sellerApply:"+ sellApplyFlag);
+				alert("sellerAgree:"+ sellAgreeFlag);
+				alert("buyerApply:"+ buyApplyFlag);
+				alert("buyerAgree："+ buyAgreeFlag);
+				//交易类型为买卖并且已经付款
+				if(trans_mode==1 && Pay_status==1) {
+					// 买方和卖方都没有做任何操作
+					if (sellApplyFlag == 0 && sellAgreeFlag == 0 && buyApplyFlag  == 0 && buyAgreeFlag == 0) {
+						params= {
+							"transid": trans_id,
+							"stop_flag": 0
+						};
+						trans_stop(params);
+					} 
+					//有人发起申请但是没有同意终止
+					if ((sellApplyFlag == 1 || buyApplyFlag == 1) && (sellAgreeFlag==0 && buyAgreeFlag==0)) {
+						params= {
+							"transid": trans_id,
+							"stop_flag": 1
+						};
+						
+						//发起人为卖家
+						if(sellApplyFlag==1){
+							//登录为卖家
+							if(cur_user_id==seller_id){
+								//等待买家同意
+								$(".tran-button-sell div font").html(TextMessage.waitBuyerAgree);
+								//不能发起同意终止请求
+							}else{
+								//登录为买家,可以发起同意终止请求
+								$(".tran-button-sell div font").html(TextMessage.agreeTerminate);
+								trans_stop(params);
+							}
+						}
+						//发起人为买方
+						if(buyApplyFlag==1){
+							if(cur_user_id==buyer_id){
+								//登录为买家
+								$(".tran-button-sell div font").html(TextMessage.waitSellerAgree);
+								//不能发起同意终止请求
+							}else{
+								//登录为卖家，可以发起同意终止请求
+								$(".tran-button-sell div font").html(TextMessage.agreeTerminate);
+								trans_stop(params);
+							}
+						}
+					}
+					//对方已经同意终止
+					if(sellAgreeFlag==1 || buyAgreeFlag==1){
+						$(".tran-button-sell").hide();
+					}
+
+				}else{
+					//未付款或者交易类型不等于买卖
+					params= {
+						"transid": trans_id
+					};
+					trans_stop(params);
+					/*if(订单状态==7 || 订单状态==8 || 订单状态==9){
+						交易按钮不显示
+					}*/
+					if (trans_status == 7 || trans_status == 8 || trans_status == 9) {
+						$(".tran-button-sell").hide();
+					}
+				}
+			}
+			function trans_stop(params) {
 				var btnArray = [TextMessage.confirmBtnNo, TextMessage.confirmBtnYes];
 				var trans_type = $("#trans_type").val();
 

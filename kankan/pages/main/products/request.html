@@ -290,6 +290,7 @@
 						var comm_name = HTMLDecode(transpro.comm_name);
 						var comm_img = transpro.comm_thu_img;
 						var trans_type = others[ot].trans.trans_type;
+                        var deliver = others[ot].trans.deliver;
 						/*if(trans_type == "0") {
 							var trans_typetext = TextMessage.waitforConfirm;
 						} else {
@@ -301,7 +302,11 @@
 						} else if (status == "1") {
 							var trans_typetext = TextMessage.waitPay;
 						} else if (status == "2") {
-							var trans_typetext = TextMessage.waitSellerSend;
+							if (deliver == 0) {
+								var trans_typetext = TextMessage.waitSellerSend; //没有发货
+							} else {
+								var trans_typetext = TextMessage.waitBuyerConfirm; //已经发货
+							}
 						}
 						var other_photo = others[ot].trans.other_photo;
 						var my_photo = others[ot].trans.my_photo;
@@ -361,6 +366,7 @@
 							var ocomm_img = "../../../images/nopic.jpg";
 						}
 						var otrans_type = own[ow].trans.trans_type;
+						var otrans_deliver = own[ow].trans.deliver;
 						/*if(otrans_type == "0") {
 							var otrans_typetext = TextMessage.waitforConfirm;
 						} else {
@@ -372,7 +378,11 @@
 						} else if (ostatus == "1") {
 							var otrans_typetext = TextMessage.transOrder;
 						} else if (ostatus == "2") {
-							var otrans_typetext = TextMessage.waitSellerSend;
+							if (otrans_deliver == 0) {
+								var otrans_typetext = TextMessage.waitSellerSend;
+							} else {
+								var otrans_typetext = TextMessage.waitBuyerConfirm;
+							}
 						}
 						var oother_photo = own[ow].trans.other_photo;
 						var omy_photo = own[ow].trans.my_photo;

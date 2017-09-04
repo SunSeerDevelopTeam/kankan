@@ -15,6 +15,9 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav input-top">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+				<font size="3" class="lang" data-locale="back"></font>
+			</a>
 			<h1 class="mui-title"><span class="lang" data-locale="pay_page"></span></h1>
 		</header>
 		<div id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
@@ -35,6 +38,8 @@
 		    function reloadpage(){
 				location.reload();
 			}
+		    var trans_id;
+		    var pay_way;
 		    mui.init({
 		    	
 		    });
@@ -55,9 +60,12 @@
 						console.log("success");
 						alert(JSON.stringify(data));
 						mui.openWindow({
-							url: "transaction2.html?transid=" + trans_id+"",
-							id: "transaction2.html"
-						});
+							url: "transaction2.html?transid="+ trans_id,
+							id: "transaction",
+							extras: {
+								"transid": trans_id
+							}
+				        })
 					},
 					ng: function(data) {
 						console.log("error:"+data);
@@ -68,9 +76,12 @@
 			
 			function payCancel() {
 				mui.openWindow({
-					url: "transaction2.html?transid=" + trans_id+"",
-					id: "transaction2.html"
-				});
+					url: "transaction2.html?transid="+ trans_id,
+					id: "transaction",
+					extras: {
+						"transid": trans_id
+					}
+				})
 			}
 		</script>
 	</body>

@@ -319,10 +319,6 @@
 	//getNumber
 	function getNumber() {
 		var number_price = $("#number_price").val();
-		if (parseInt(number_price) < price_min || parseInt(number_price) > price_max ) {
-		    mui.alert(TextMessage.numberRangeText);
-		}
-		
 		$("#input_price").html(parseFloat(Math.floor(number_price)).toLocaleString());
 	    $("#trans_fees").html(parseFloat(Math.floor(number_price * charge_rate / 100)).toLocaleString());
 	    $("#trading_income").html(parseFloat(Math.floor(number_price) - Math.floor(number_price * charge_rate / 100)).toLocaleString());
@@ -733,6 +729,14 @@ function publishs() {
 		}
 		if(price < 0) {
 			mui.toast(TextMessage.pro_pricenumbtest, {
+				duration: 'long',
+				type: 'div'
+			});
+			document.publishcomodity.price.focus();
+			return false;
+		}
+		if (price < price_min || price > price_max ) {
+			mui.toast(TextMessage.numberRangeText, {
 				duration: 'long',
 				type: 'div'
 			});
