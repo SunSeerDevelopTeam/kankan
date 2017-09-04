@@ -70,6 +70,7 @@
 				<div class="ka_userbox">
 					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="next" style="margin-top: 1em;" onclick="finish()" id=""></button>
 				</div>
+				<input type="hidden" name="froms" id="froms" value="" />
 			</form>
 		</div>
 	</body>
@@ -113,6 +114,7 @@
 			}
 			$("input").attr("disabled","true");
 			$(".mui-content").css("height",document.body.scrollHeight);
+			$("#froms").val(self.froms);
 		if(self.froms=="management"){
 //			var params = {};
 //			Repository.User.personal_infor(params, {
@@ -275,14 +277,17 @@
 	        Repository.User.personal_finish(params, {
 				ok: function(data) {
 					Log.d("success");
-					/*mui.openWindow({
-						id: 'useredite',
-						url:"useredite.html"
-					});*/
-					mui.openWindow({
-				        url: 'transfer_application.html',
-				        id: 'transfer_application'
-			       });
+					if($("#froms").val()=="management"){
+						mui.openWindow({
+					        url: 'transfer_application.html',
+					        id: 'transfer_application'
+				       });
+			     	 }else{
+			     	 	mui.openWindow({
+							id: 'useredite',
+							url:"useredite.html"
+						});
+			     	 }
 				},
 				ng: function(data) {
 					Log.d(data);
