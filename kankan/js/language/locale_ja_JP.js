@@ -42,7 +42,7 @@ var JSLocale = {
 	/*user login page message end*/
 	/*detail page*/
 	"donateGoods": "寄付対象商品",
-	"det_buy": "購入手続きへ",
+	"det_buy": "購入",
 	"det_spdescription": "商品の説明 ",
 	"det_information":"商品の情報",
 	"det_spahare": "シェア",

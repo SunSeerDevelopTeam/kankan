@@ -157,7 +157,14 @@
 			var otranspro = "";
 			var requestpage = 0;
 			var requestedpage = 0;
-
+            var sellApplyFlag;
+            var sellAgreeFlag;
+            var buyApplyFlag;
+            var buyAgreeFlag;
+            var otrans_sellApplyFlag;
+            var otrans_sellAgreeFlag;
+            var otrans_buyApplyFlag;
+            var otrans_buyAgreeFlag;
 			function reloadpage() {
 				location.reload();
 			}
@@ -291,20 +298,49 @@
 						var comm_img = transpro.comm_thu_img;
 						var trans_type = others[ot].trans.trans_type;
                         var deliver = others[ot].trans.deliver;
-						/*if(trans_type == "0") {
-							var trans_typetext = TextMessage.waitforConfirm;
-						} else {
-							var trans_typetext = TextMessage.requresuces;
-						}*/
+                        var seller_id = others[ot].trans.accept_user_id;
+                        var buy_id = others[ot].trans.issue_user_id;
+                        var transDetail = others[ot].trans.transdetail;
+                        for (var t in transDetail) {
+                        	if(seller_id==transDetail[t].user_id){
+                        		sellApplyFlag = transDetail[t].apply_abort_flag;
+                        		sellAgreeFlag = transDetail[t].agree_abort_flag;
+                        	}
+                        	if(buy_id==transDetail[t].user_id){
+                        		buyApplyFlag = transDetail[t].apply_abort_flag;
+                        		buyAgreeFlag = transDetail[t].agree_abort_flag;
+                        	}
+                        }
 						var status = others[ot].trans.status;
 						if (status == "0") {
 							var trans_typetext = TextMessage.waitforConfirm;
 						} else if (status == "1") {
 							var trans_typetext = TextMessage.waitPay;
 						} else if (status == "2") {
-							if (deliver == 0) {
+							if (deliver == 0 && (sellApplyFlag == 1 || buyApplyFlag == 1) && (sellAgreeFlag==0 && buyAgreeFlag==0)) {
+								//发起人为卖方
+								if (sellApplyFlag == 1) {
+		                        	//登录为卖方
+		                        	if (myid == seller_id) {
+		                        		var trans_typetext = TextMessage.waitBuyerAgree;
+		                            //登录为买方
+		                        	} else {
+		                        		var trans_typetext = TextMessage.agreeTerminate;
+		                        	}
+		                        }
+								//发起人为买方
+		                        if (buyApplyFlag == 1) {
+		                        	//登录为买方
+		                        	if (myid == buy_id) {
+		                        		var trans_typetext = TextMessage.waitSellerAgree;
+		                        	//登录为卖方
+		                        	} else {
+		                        		var trans_typetext = TextMessage.agreeTerminate;
+		                        	}
+		                        }
+							} else if (deliver == 0) {
 								var trans_typetext = TextMessage.waitSellerSend; //没有发货
-							} else {
+							} else if (deliver == 1) {
 								var trans_typetext = TextMessage.waitBuyerConfirm; //已经发货
 							}
 						}
@@ -343,6 +379,7 @@
 						$("#request").empty();
 					}
 					var own = data.other;
+					console.log(own);
 					if(own) {
 						var owlength = own.length;
 					} else {
@@ -367,6 +404,19 @@
 						}
 						var otrans_type = own[ow].trans.trans_type;
 						var otrans_deliver = own[ow].trans.deliver;
+						var otrans_seller_id = own[ow].trans.accept_user_id;
+                        var otrans_buy_id = own[ow].trans.issue_user_id;
+						var otherTransDetail = own[ow].trans.transdetail;
+						for (var t in otherTransDetail) {
+                        	if(otrans_seller_id==otherTransDetail[t].user_id){
+                        		otrans_sellApplyFlag = otherTransDetail[t].apply_abort_flag;
+                        		otrans_sellAgreeFlag = otherTransDetail[t].agree_abort_flag;
+                        	}
+                        	if(otrans_buy_id==otherTransDetail[t].user_id){
+                        		otrans_buyApplyFlag = otherTransDetail[t].apply_abort_flag;
+                        		otrans_buyAgreeFlag = otherTransDetail[t].agree_abort_flag;
+                        	}
+                        }
 						/*if(otrans_type == "0") {
 							var otrans_typetext = TextMessage.waitforConfirm;
 						} else {
@@ -378,10 +428,31 @@
 						} else if (ostatus == "1") {
 							var otrans_typetext = TextMessage.transOrder;
 						} else if (ostatus == "2") {
-							if (otrans_deliver == 0) {
-								var otrans_typetext = TextMessage.waitSellerSend;
-							} else {
-								var otrans_typetext = TextMessage.waitBuyerConfirm;
+							if (otrans_deliver == 0 && (otrans_sellApplyFlag == 1 || otrans_buyApplyFlag == 1) && (otrans_sellAgreeFlag==0 && otrans_buyAgreeFlag==0)) {
+								//发起人为卖方
+								if (otrans_sellApplyFlag == 1) {
+		                        	//登录为卖方
+		                        	if (myid == otrans_seller_id) {
+		                        		var otrans_typetext = TextMessage.waitBuyerAgree;
+		                            //登录为买方
+		                        	} else {
+		                        		var otrans_typetext = TextMessage.agreeTerminate;
+		                        	}
+		                        }
+								//发起人为买方
+		                        if (otrans_buyApplyFlag == 1) {
+		                        	//登录为买方
+		                        	if (myid == otrans_buy_id) {
+		                        		var otrans_typetext = TextMessage.waitSellerAgree;
+		                        	//登录为卖方
+		                        	} else {
+		                        		var otrans_typetext = TextMessage.agreeTerminate;
+		                        	}
+		                        }
+							} else if (otrans_deliver == 0) {
+								var otrans_typetext = TextMessage.waitSellerSend; //没有发货
+							} else if (otrans_deliver == 1) {
+								var otrans_typetext = TextMessage.waitBuyerConfirm; //已经发货
 							}
 						}
 						var oother_photo = own[ow].trans.other_photo;

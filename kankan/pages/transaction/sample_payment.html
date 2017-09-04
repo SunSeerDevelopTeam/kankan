@@ -58,7 +58,6 @@
 				Repository.Transaction.transgotoPay(params, {
 					ok: function(data) {
 						console.log("success");
-						alert(JSON.stringify(data));
 						mui.openWindow({
 							url: "transaction2.html?transid="+ trans_id,
 							id: "transaction",
