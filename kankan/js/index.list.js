@@ -320,7 +320,7 @@ function createListItem(item, imgwidth) {
 		.append('<div class="height-max mui-row contentbottom">')
 		.append('<div class="height-max mui-col-sm-8 mui-col-xs-8">')
 		.appendFormat('<div class="comm-name mui-col-sm-12">{0}</div>', HTMLDecode(item.comm_name))
-		.appendFormat('<div class="comm-price mui-col-sm-12">{0}</div>', item.address == "" ? "全国" : item.address)
+		.appendFormat('<div class="comm-price mui-col-sm-12">{0}</div>', item.address == "" ? "未設定" : item.address)
 		.append('</div>')
 		.append('<div class="like-area height-max paddingDistance mui-col-sm-4 mui-col-xs-4">')
 		.appendFormat('<span class="comm-like mui-icon-extra mui-icon-extra-heart-filled ' + "{0}" + '">', item.praise_flg == 0 ? "comm-like-gray" : "comm-like-red")
