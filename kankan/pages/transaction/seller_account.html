@@ -89,7 +89,8 @@
 		var testarr=[];
 		var branchListData;
 		var accountListData;
-		var stautesposition='0';
+		var accountposition='0';
+		var branchposition='0';
 	    var branchData = [{data:[]}];
 	    var accountData = [{data:[{
 						id: '0',
@@ -111,15 +112,28 @@
 				ok: function(data) {
 					console.log("success");
 					branchData[0].data = branchList(data);
+					//console.log(branchData);
+					
+				},
+				ng: function(data) {
+					console.log("error:"+data);
+					Log.d(data);
+				}
+			});
+			
+		    var params2 = {};
+		    Repository.User.getpersonal_bankinfor(params2, {
+				ok: function(data) {
 					console.log(branchData);
+					branchposition=childrentext(branchData[0].data,data.data.bank_code);
 					branchListData= new MobileSelect({
 					    trigger: '#branchResults',
 					    title: '',
 					    wheels: branchData,
-					    position:'0,0',
+					    position:branchposition+",",
 					    transitionEnd:function(indexArr, data){
 					    	if(indexArr=="NAN"){
-					    		indexArr=stautesposition;
+					    		indexArr=branchposition;
 					    	}
 					        console.log(indexArr);
 					    },
@@ -128,34 +142,25 @@
 					        $("#branchResults").addClass("ka_sortname");					       
 					    }  
 			        });
-				},
-				ng: function(data) {
-					console.log("error:"+data);
-					Log.d(data);
-				}
-			});
-			
-			accountListData= new MobileSelect({
-			    trigger: '#accountResults',
-			    title: '',
-			    wheels: accountData,
-			    position:'0',
-			    transitionEnd:function(indexArr, data){
-			    	if(indexArr=="NAN"){
-			    		indexArr=stautesposition;
-			    	}
-			        console.log(indexArr);
-			    },
-			    callback:function(indexArr, data){
-			        console.log(data[0].id);
-			        $("#accountSelect").text(data[0].value);
-			        $("#accountResults").removeClass("ka_bitian");
-			        $("#accountResults").addClass("ka_sortname");					       
-			    }  
-			});
-		    var params2 = {};
-		    Repository.User.getpersonal_bankinfor(params2, {
-				ok: function(data) {
+			        accountposition=childrentext(accountData[0].data,data.data.account_type);
+			        accountListData= new MobileSelect({
+					    trigger: '#accountResults',
+					    title: '',
+					    wheels: accountData,
+					    position:accountposition+",",
+					    transitionEnd:function(indexArr, data){
+					    	if(indexArr=="NAN"){
+					    		indexArr=accountposition;
+					    	}
+					        console.log(indexArr);
+					    },
+					    callback:function(indexArr, data){
+					        console.log(data[0].id);
+					        $("#accountSelect").val(data[0].value);
+					        $("#accountResults").removeClass("ka_bitian");
+					        $("#accountResults").addClass("ka_sortname");					       
+					    }  
+					});
 					var results = data.data;
 					if (results.u_traid) {
 						showPersonalInfor(results);
@@ -167,6 +172,15 @@
 				}
 			});
 		});
+		//get position
+		function childrentext(childredarr,value) {
+			for(var chd in childredarr) {
+				if(childredarr[chd].value == value) {
+					return chd;
+					break;
+				}
+			}
+		}
 		// get bank infor
 		function showPersonalInfor(results) {
 			document.getElementById('branch_id').value=results.bank_code;
