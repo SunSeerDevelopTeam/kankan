@@ -142,7 +142,7 @@
 								<font color="#AAAAAA" size="1" style="font-size: 16px;">
 									<span class="lang" data-locale="userpricetext">
 									</span>
-									<span>&yen;<span>3,000,000</span></span>
+									<span>&yen;<span id="user_balance"></span></span>
 								</font>
 							</a>
 						</li>
@@ -577,6 +577,8 @@
 			$(".myproductshow").empty();
 			var ucomentnum=results.data.comment_cnt;
 			var unick_name=results.data.nick_name;
+			var user_balance=Math.floor(results.data.user_balance).toLocaleString();
+			$("#user_balance").text(user_balance);
 			if(results.data.user_photo==""){
 				var user_photo="../../../images/userPhoto.png";
 			}else{
