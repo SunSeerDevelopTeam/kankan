@@ -117,16 +117,15 @@
 					}
 			    });
 		    });
-		    mui(".mui-content").on("tap","#submit",function(){
-		    	mui.openWindow({
-		    		url: "seller_account_confirm.html",
-					id: "seller_account_confirm",
-					extras:{
-						froms:"management"
-					}
-		    	});
-		    });
 		}
-		
+		mui(".mui-content").on("tap","#submit",function(){
+	    	mui.openWindow({
+	    		url: "seller_account_confirm.html",
+				id: "seller_account_confirm",
+				extras:{
+					froms:"management"
+				}
+	    	});
+	    });
 	</script>
 </html>
