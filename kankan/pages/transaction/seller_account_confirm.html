@@ -113,6 +113,7 @@
 			}
 			$("input").attr("disabled","true");
 			$(".mui-content").css("height",document.body.scrollHeight);
+		if(self.froms=="management"){
 //			var params = {};
 //			Repository.User.personal_infor(params, {
 //				ok: function(data) {
@@ -141,7 +142,6 @@
 //					Log.d(data);
 //				}
 //			});
-//			
 //			accountListData= new MobileSelect({
 //			    trigger: '#accountResults',
 //			    title: '',
@@ -160,20 +160,21 @@
 //			        $("#accountResults").addClass("ka_sortname");					       
 //			    }  
 //			});
-//		    var params2 = {};
-//		    Repository.User.getpersonal_bankinfor(params2, {
-//				ok: function(data) {
-//					var results = data.data;
-//					if (results.u_traid) {
-//						showPersonalInfor(results);
-//					}
-//				},
-//				ng: function(data) {
-//					console.log("error:"+data);
-//					Log.d(data);
-//				}
-//			});
-		});
+		    var params2 = {};
+		    Repository.User.getpersonal_bankinfor(params2, {
+				ok: function(data) {
+					var results = data.data;
+					if (results.u_traid) {
+						showPersonalInfor(results);
+					}
+				},
+				ng: function(data) {
+					console.log("error:"+data);
+					Log.d(data);
+				}
+			});
+		}
+	});
 		// get bank infor
 		function showPersonalInfor(results) {
 			document.getElementById('branch_id').value=results.bank_code;
