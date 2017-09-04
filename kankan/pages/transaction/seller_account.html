@@ -14,7 +14,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-center mui-title lang" data-locale="designated_account"></h1>
 		</header>
 		<div class="mui-content" style="font-size: 15px;">
@@ -104,7 +104,15 @@
 					}, {
 						id: '3',
 						value: "建设银行"
-					}]}];
+					}
+				]
+	    	}];
+		mui("header").on("tap",".mui-back",function(){
+			mui.openWindow({
+				id: 'useredite',
+				url:"./main/user/useredite.html"
+			});
+		});
 		mui.plusReady(function() {
 			$(".mui-content").css("height",document.body.scrollHeight);
 			var params = {};
