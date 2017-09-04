@@ -20,18 +20,25 @@
 		<div class="mui-content" style="font-size: 15px;">
 			<form action="" method="post" name="" id="">
 				<!--bank-->
-				<div class="seller_bank">
-					<div class="mui-pull-left lang" style="margin-left: 1em;" data-locale="bank"></div>
-					<div id="branchResults" class="mui-pull-right lang mui-col-xs-4"  style="margin-right: 0.5em;"></div>
-					<input type="hidden" name="branch_id" id="branch_id" value="" />
+				<div class="tradeFees" >
+					<ul class="mui-table-view ka_prologbox">
+						<li class="mui-table-view-cell" style="display: -webkit-box;">
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="bank"></span>
+					        	<input type="text" id="branch_id" name="branch_id" class="mui-pull-right"  style="width: 30%; height: auto; padding: 0; ime-mode:Disabled;"/>
+					        </div>
+						</li>
+					</ul>
+					
 				</div>
 				<!--account type-->
 				<div class="tradeFees" style="margin-top: 2em;">
 					<ul class="mui-table-view ka_prologbox">
 						<li class="mui-table-view-cell" style="display: -webkit-box;">
-						    <div class="mui-col-xs-9 mui-pull-left lang" data-locale="account_type"></div>
-						    <div id="accountResults" class="lang"  style="margin-right: 0.5em;"></div>
-					        <input type="hidden" name="accountSelect" id="accountSelect" value="" />
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="account_type"></span>
+					        	<input type="text" id="accountSelect" name="accountSelect" class="mui-pull-right"  style="width: 30%; height: auto; padding: 0; ime-mode:Disabled;"/>
+					        </div>
 						</li>
 						<li class="mui-table-view-cell" style="display: -webkit-box;">
 						    <div style="width: 100%;">
@@ -180,9 +187,7 @@
 		// get bank infor
 		function showPersonalInfor(results) {
 			document.getElementById('branch_id').value=results.bank_code;
-			document.getElementById('branchResults').innerHTML=results.bank_code;
 			document.getElementById('accountSelect').value=results.account_type;
-			document.getElementById('accountResults').innerHTML=results.account_type;
 			document.getElementById('branch_number').value=results.branch_number;
 			document.getElementById('card_number').value=results.account_number;
 			document.getElementById('name_front').value=results.surname;
