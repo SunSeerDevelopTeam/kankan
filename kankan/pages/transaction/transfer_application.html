@@ -21,12 +21,13 @@
 			<div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="userpricetext"></div>
 		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #efeff4;">
 		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="balance"></span></span>
+		    	<input type="hidden" name="balanceval" id="balanceval" value="" />
 		    </div>
 		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em; border-bottom: 1px solid lightgrey;" class="lang" data-locale="transfer_applicationprice"></div>
 		    <!--input price-->
 		    <div>
 				<div class="inputPrice" style="border-top: none;">
-					<input id="input_transferPrice" type="number" maxlength="10" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="gettransferPrice()" class="inputNumber" />
+					<input id="input_transferPrice" name="input_transferPrice" type="number" maxlength="10" value="" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="gettransferPrice()" class="inputNumber" />
 					<span class="inputSpan">&yen;<span id="span_transferPrice"></span></span>
 				</div>
             </div>
@@ -77,6 +78,7 @@
         function messageshow(results){
         	var balance=Math.floor(results.user_balance).toLocaleString();
         	var bank=results.bank_code;
+        	$("#balanceval").val(results.user_balance);
         	$("#balance").html(balance);
         	$("#bankname").val(bank);
         }
@@ -123,15 +125,15 @@
 					duration: 'long',
 					type: 'div'
 				});
-				$("button").attr("disabled", true);
+				$("button").removeAttr("disabled");
 				return false;
 			}
-			if($("#balance").text()<apply_amount){
+			if($("#balanceval").val()*1 < apply_amount*1){
 				mui.toast(TextMessage.balancecheck, {
 					duration: 'long',
 					type: 'div'
 				});
-				$("button").attr("disabled", true);
+				$("button").removeAttr("disabled");
 				return false;
 			}
 			if(apply_amount.length>10){
@@ -139,13 +141,14 @@
 					duration: 'long',
 					type: 'div'
 				});
-				$("button").attr("disabled", true);
+				$("button").removeAttr("disabled");
 				return false;
 			}
 			//有api了再做处理
 			var btnArray = [TextMessage.ok, TextMessage.cancel];
 			mui.confirm(TextMessage.wouldtransfer, '', btnArray, function(e) {
 				if (e.index == 0) {
+					$("button").attr("disabled", true);
 					var params={
 						"apply_amount":apply_amount,
 						"apply_charge":apply_charge,
@@ -154,8 +157,9 @@
 					Repository.Transaction.transfersubmit(params, {
 							ok: function(data) {
 								Log.i("message send successfully!");
-								location.reload();
+								$("#input_transferPrice").val("");
 								gototransferFinish();
+								$("button").removeAttr("disabled");
 								
 							},
 							ng: function(data) {
