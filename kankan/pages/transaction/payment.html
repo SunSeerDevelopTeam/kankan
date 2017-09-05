@@ -39,21 +39,21 @@
 		<div id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
 		<div class="mui-content" style="padding-top: 0;">
 		    <div class="contentTop" style="height: 100px; background-color: #FFFFFF;">
-		    	<div id="comm_image" class="mui-pull-left mui-col-xs-4" >
+		    	<div id="comm_image" class="mui-pull-left mui-col-xs-4" style="width: 100px; height: 100px;">
 		    		<!--<img id="comm_img" style="" src="../../images/logo.png">-->
 		    	</div>
-		    	<div class="mui-pull-left mui-col-xs-8" style="height: 80px;display: flex;align-items: center;margin-left: 1em;">
+		    	<div class="mui-pull-left mui-col-xs-7" style="height: 100px;display: flex;align-items: center;margin-left: 1em;">
 		    		<span id="comm_name"></span>
 		    	</div>
 		    </div>
-		    <div class="contentBottom" style="height: 50px; line-height: 50px;background-color: #FFFFFF; margin-top: 15px;">
+		    <div class="contentBottom" style="width: 100%; height: 3em; line-height: 3em;background-color: #FFFFFF; margin-top: 1em;">
 		    	<div class="mui-pull-left lang" style="margin-left: 1em;" data-locale="payment_amount">
 		    	</div>
 		    	<div class="mui-pull-right" style="margin-right: 0.5em;"><span>&yen;<span id="comm_price"></span></span></div>
 		    </div>
-		    <div style="background-color: #FFFFFF;margin-top: 1.5em;padding: 0.1em 0 1.1em 1em;">
-		    	<div style="margin: 0.5em 0 1em" class="lang" data-locale="payment_method"></div>
-		    	<div>
+		    <div style="width: 100%; background-color: #FFFFFF;margin-top: 1.5em;padding: 0.1em 0 1.1em 1em;">
+		    	<div style="width: 100%; margin: 0.5em 0 1em" class="lang" data-locale="payment_method"></div>
+		    	<div style="width: 100%;">
 		    		<div style="height: 2em;">
 		    			<div class="mui-pull-left" style="display: flex;align-items: center;">
 		    				<input id="balance" type="radio" name="method" style="zoom: 1.8;"/>
@@ -90,13 +90,8 @@
 			mui.init({
 				
 			});
+			var showimgWidth = parseInt($(window).width()) / 2 - 80;
 			mui.plusReady(function() {
-				/*mui(".mui-content").on('tap', '#pay_ment', function() {
-					mui.openWindow({
-						url: 'sample_payment.html',
-						id: 'sample_payment.html'
-					});
-				});*/
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
 				var params = {
@@ -122,15 +117,18 @@
 			    var comm_name = commBasicInfor.comm_name;
 			    comm_price = commBasicInfor.price;
 			    user_balance = commBasicInfor.user_balance;
-			    //img所在框的大小
-			    var imgDivWidth = $("#comm_image").width();
-			    var imgDivHeight = $("#comm_image").height();
-			    if (comm_imgHeight > imgDivHeight) {
-			    	extraImg = 'margin-top:-'+(comm_imgHeight-imgDivHeight)/2+'px;';
-			    	$("#comm_image").attr("style", "overflow: hidden;");
+			    //比例
+			    var proportion = comm_imgHeight / comm_imgWidth;
+			    //显示图片的宽和高
+			    var showimgHeight = showimgWidth * proportion;
+			    var divHeight = $("#comm_image").height();
+			    //图片的高度大大于框的高度
+			    if (showimgHeight > divHeight) {
+			    	extraImg = 'width: 100%; margin-top:-'+(showimgHeight-divHeight)/2+'px;';
 			    } else {
-			        extraImg = 'position:relative; top:'+(imgDivHeight-comm_imgHeight)/2+'px; left:'+(imgDivWidth-comm_imgWidth)/2+'px;';
+			        extraImg = 'width: 100%; position:relative; top:'+(divHeight-showimgHeight)/2+'px;';
 			    }
+			    $("#comm_image").attr("style", "overflow: hidden;");
 			    imgContent = '<img style="'+extraImg+'" data-original="'+comm_imgUrl+'" onerror="this.src=' + "'../../images/nopic.jpg'" + '"/>';
 			    $("#comm_image").append(imgContent);
 			    $("#comm_name").html(comm_name);
@@ -148,11 +146,14 @@
             		if($(":radio:checked").attr("id")=="balance") {
             			if (user_balance < comm_price) {
 						    $("button").attr("disabled", "disabled");
+						    $("button").css("background-color", "darkgray");
 						} else {
 						    $("button").removeAttr("disabled");
+						    $("button").css("background-color", "red");
 						}
             		} else {
             			$("button").removeAttr("disabled");
+            			$("button").css("background-color", "red");
             		}
 				});
             });
@@ -160,8 +161,6 @@
 			var pay_way;
 			var params2;
 			function pay() {
-				/*var self = plus.webview.currentWebview();
-				trans_id = self.transid;*/
 				if($(":radio:checked").attr("id")=="balance") {
 					pay_way = 0;
 					params2 = {
@@ -183,13 +182,10 @@
 				Repository.Transaction.transgotoPay(params2, {
 					ok: function(data) {
 						console.log("success");
-						mui.openWindow({
-							url: "transaction2.html?transid="+ trans_id,
-							id: "transaction",
-							extras: {
-								"transid": trans_id
-							}
-				        })
+						var transactionPage = plus.webview.getWebviewById('transaction');
+				        mui.fire(transactionPage, 'refresh', {
+						    refresh: "canRefresh"
+					    });
 					},
 					ng: function(data) {
 						console.log("error:"+data);
@@ -207,7 +203,6 @@
 								})
 								break;
 						}
-						
 					}
 				})
 			}

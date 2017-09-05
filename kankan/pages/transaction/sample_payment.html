@@ -58,13 +58,10 @@
 				Repository.Transaction.transgotoPay(params, {
 					ok: function(data) {
 						console.log("success");
-						mui.openWindow({
-							url: "transaction2.html?transid="+ trans_id,
-							id: "transaction",
-							extras: {
-								"transid": trans_id
-							}
-				        })
+				        var transactionPage = plus.webview.getWebviewById('transaction');
+				        mui.fire(transactionPage, 'refresh', {
+						    refresh: "canRefresh"
+					    });
 					},
 					ng: function(data) {
 						console.log("error:"+data);
