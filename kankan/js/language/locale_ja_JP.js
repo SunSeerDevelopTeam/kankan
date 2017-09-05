@@ -243,6 +243,7 @@ var JSLocale = {
 	"networkerrordetail":"通信エラーが発生しました、ここをクリックし、もう一度試してみてください。",
 	"deletebut":"削除",
 	"reg_tips":"3分毎に一度のみ発信ができます。",
+	"checkuser":"ユーザー認証",
 }
 
 $(function() {

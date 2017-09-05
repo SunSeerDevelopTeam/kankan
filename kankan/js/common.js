@@ -499,7 +499,9 @@ var Api;
 			getpersonal_bankinfor: baseUrl() + '/user/Useraccount/u_accountshow',
 			set_message: baseUrl() + '/user/usersystemmsg/set_message/',
 			del_message: baseUrl() + '/user/usersystemmsg/del_message/',
-			get_message: baseUrl() + '/user/usersystemmsg/get_message/'
+			get_message: baseUrl() + '/user/usersystemmsg/get_message/',
+			accountsendvocde:baseUrl() + '/user/Useraccount/verification',
+			accountcheckvocde:baseUrl() + '/user/Useraccount/checkvcode',
 
 		},
 		Commodity: {
@@ -1189,7 +1191,16 @@ var Repository;
 			return Api.call(Api.url.User.get_message, params, callback);
 		}
 		User.get_message = get_message;
+		
+		function accountsendvocde(params, callback) {
+			return Api.call(Api.url.User.accountsendvocde, params, callback);
+		}
+		User.accountsendvocde = accountsendvocde;
 
+		function accountcheckvocde(params, callback) {
+			return Api.call(Api.url.User.accountcheckvocde, params, callback);
+		}
+		User.accountcheckvocde = accountcheckvocde;
 		function isLogin() {
 			var myid = plus.storage.getItem("myid");
 			if (myid == "" || myid == null) {

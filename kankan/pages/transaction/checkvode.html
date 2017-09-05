@@ -66,7 +66,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav">
 				<a class="lang" data-locale="back"></a>
 			</a>
-			<h1 class="mui-title lang" data-locale="retrieve_password"></h1>
+			<h1 class="mui-title lang" data-locale="checkuser"></h1>
 		</header>
 		<div class="mui-content">
 			<span class="lang" data-locale=""></span>
@@ -106,6 +106,7 @@
 							});
 						},
 						ng: function(data){
+							alert(data);
 							Api.callback_ng(data);
 						}
 					});
