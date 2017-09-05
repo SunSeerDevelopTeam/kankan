@@ -36,6 +36,7 @@
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
 		<script type="text/javascript">
+			var income;
 			mui.init({
 				pullRefresh: {
 						container: '#pullrefresh',
@@ -105,27 +106,34 @@
 					var translatepage=null;
 					mui('.transli').on('tap','a',function(e) {
 						var tid = this.getAttribute('id');
-//						var preView = plus.webview.getWebviewById('request');
-//						plus.webview.close(preView);
 						mui.openWindow({
-							//id: 'transaction'
 							url: "../../transaction/transaction2.html?transid=" + trans_id,
-						id: "transaction",
-						extras: {
-							"transid": tid
-						}
+							id: "transaction",
+							extras: {
+								"transid": tid
+							}
 						});
 					});
 				}
-				//价格是需要从后台拿到的，所以先保留
-				$("#total").append('<div class="mui-col-xs-6 mui-pull-left" style="display:flex; align-items: center; left: 1em; height: 60px;">共赚了</div>');
-				$("#total").append('<div class="mui-col-xs-6 mui-pull-left" style="display:flex; align-items: center; left: 1em; height: 60px;">&yen;<span id="totalMoney"></span>元</div>');
+				
+				$("#total").append('<div class="mui-col-xs-6 mui-pull-left lang" style="display:flex; align-items: center; left: 1em; height: 60px;">'+TextMessage.totolMoney+'</div>');
+				$("#total").append('<div class="mui-col-xs-6 mui-pull-left" style="display:flex; align-items: center; left: 1em; height: 60px;">&yen;<span id="totalMoney">'+income+'</span></div>');
 			    $("#total").show();
 			}
 			function reloadpage(){
 				location.reload();
 			}
 			function getmessage(){
+				var params1 = {};
+				Repository.Transaction.getTotalMoney(params1, {
+					ok: function(data) {
+						income = data.data.income ? parseFloat(data.data.income).toLocaleString() : '0';
+					},
+					ng: function(data) {
+						
+					}
+				});
+				
 				var params = {};
 				Repository.User.mytranshistory(params,{
 					ok: function(data) {

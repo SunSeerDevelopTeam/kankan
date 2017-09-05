@@ -549,7 +549,8 @@ var Api;
 			gettransferrecord:baseUrl() + '/user/usertransfer/gettransferrecord/',
 			canceltransfer:baseUrl() + '/user/usertransfer/recorddel/',
 			applytransfer:baseUrl() + '/user/usertransfer/applyshow/',
-			transfersubmit:baseUrl() + '/user/usertransfer/transfer_submit'
+			transfersubmit:baseUrl() + '/user/usertransfer/transfer_submit',
+			getTotalMoney: baseUrl() + '/user/Usertrans/gettransprofit',
 		}
 	};
 	Api.Params = {
@@ -1457,6 +1458,11 @@ var Repository;
 			return Api.call(Api.url.Trans.transfersubmit, params, callback);
 		}
         Transaction.transfersubmit = transfersubmit;
+        
+        function getTotalMoney(params, callback) {
+        	return Api.call(Api.url.Trans.getTotalMoney, params, callback);
+        }
+        Transaction.getTotalMoney = getTotalMoney;
 	})(Transaction = Repository.Transaction || (Repository.Transaction = {}));
 	Repository.Transaction = Transaction;
 })(Repository || (Repository = {}));
@@ -1748,6 +1754,7 @@ var TextMessage;
 	TextMessage.amountcheck= language ? "振替金額は0" : "转账金额必须大于0";
 	TextMessage.balancecheck= language ? "口座の殘高が不足して" : "您当前余额不足";
 	TextMessage.ammontlength= language ? "申請額は10桁を超えることはできない" : "申请金额不能超过十位";
+	TextMessage.totolMoney = language ? "売上高" : "共赚了";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

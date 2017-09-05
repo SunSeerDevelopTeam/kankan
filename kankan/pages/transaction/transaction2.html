@@ -788,6 +788,7 @@
 								if(buyer_receipt == 0 && seller_urge_r == 0){
 									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
+									$(".tran-name-middle-status font").text(TextMessage.waitBuyerConfirm);
 								}else if(buyer_receipt == 0 && seller_urge_r == 1){
 									$(".tran-button-buy").show();
 									$(".tran-button-buy font").text(TextMessage.transUrgeReceipt);
@@ -844,16 +845,14 @@
 				var appraise = $("#appraise").val();
 				//判断
 				var wanttopay = $(".tran-button-buy font").text();
-				if (wanttopay == TextMessage.transOrder) {
-					if (trans_mode == '1') {
-						mui.openWindow({
-							url: 'payment.html',
-							id: 'payment.html',
-							extras: {
-						        "transid": trans_id
-					        }
-						});
-					}
+				if (wanttopay == TextMessage.transOrder && trans_mode == '1') {
+					mui.openWindow({
+						url: 'payment.html',
+						id: 'payment.html',
+						extras: {
+					        "transid": trans_id
+				        }
+					});
 				} else {
 					if(status == 0) {
 						if(buyer_flag != 'true') {
@@ -965,7 +964,7 @@
 							var allcount=	data.data.all_cnt[0].cnt;
 							console.log(allcount);
 							var allcomiditynum=10*page;
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh((allcount <=allcomiditynum));
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(allcount <=allcomiditynum);
 							var buyer_flag = false;
 							buyer_id = transinfo[0].issue_user_id;
 							seller_id = transinfo[0].accept_user_id;
@@ -1177,7 +1176,7 @@
 							}else{
 								//登录为买家,可以发起同意终止请求
 								$(".tran-button-sell div font").html(TextMessage.agreeTerminate);
-								trans_stop(params);
+								trans_stop(params,"history");
 							}
 						}
 						//发起人为买方
@@ -1189,7 +1188,7 @@
 							}else{
 								//登录为卖家，可以发起同意终止请求
 								$(".tran-button-sell div font").html(TextMessage.agreeTerminate);
-								trans_stop(params);
+								trans_stop(params,"history");
 							}
 						}
 					}
@@ -1212,7 +1211,7 @@
 					}
 				}
 			}
-			function trans_stop(params) {
+			function trans_stop(params,flag) {
 				var btnArray = [TextMessage.confirmBtnNo, TextMessage.confirmBtnYes];
 				var trans_type = $("#trans_type").val();
 
@@ -1221,10 +1220,17 @@
 						Repository.Transaction.transStop(params, {
 							ok: function(data) {
 								Log.i("message send successfully!");
-								if(trans_type == 1) {
-									gotoEvaluate(trans_id);
+								if(flag) {
+								    mui.openWindow({
+										id: 'requestlist',
+										url: "../main/products/requestlist.html"
+									});
 								} else {
-									gotoMain();
+									if(trans_type == 1) {
+									    gotoEvaluate(trans_id);
+									} else {
+										gotoMain();
+									}
 								}
 							},
 							ng: function(data) {
