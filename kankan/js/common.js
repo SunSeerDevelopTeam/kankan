@@ -1599,7 +1599,7 @@ var TextMessage;
 	TextMessage.pro_pricenumbtest = language ? "有効な数字（0円以上）を設定してください" : "价格必须大于0";
 	TextMessage.pro_buywaytest = language ? "取引手段を選択してください。" : "请选择交易手段";
 	TextMessage.numberRangeText = language ? "販売価格の範囲で金額を入力してください。" : "请在提示的金额范围内输入贩卖价格",
-	TextMessage.pro_logininfo = language ? "登録が完了しました。" : "发布成功";
+	TextMessage.pro_logininfo = language ? "出品しました" : "发布成功";
 	TextMessage.pro_pricenulltest = language ? "商品価格を設定してください!" : "商品价格不能为空!";
 	TextMessage.not_exist_email = language ? "無効なメールアドレスです。" : "该邮箱不存在";
 	TextMessage.commodity_edit = language ? "商品編集" : "商品编辑";

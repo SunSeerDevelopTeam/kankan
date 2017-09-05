@@ -55,7 +55,7 @@
 			<h1 class="mui-title"><span class="lang" data-locale="transaction"></span></h1>
 		</header>
 		<div  id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
-		<div class="mui-content wrapper">
+		<div class="mui-content wrapper" style="top:45px;bottom: 52px;">
 		<div id="pullrefresh" class="mui-scroll-wrapper">
 			<div id="mui-page-content" class="mui-scroll">
 				<div class="tran-page">
@@ -172,7 +172,8 @@
 				</div>
 			</form>
 		</div>
-		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script>var h5pullDown = true;</script>
+		<script type="text/javascript" src="../../js/mui.js"></script>
 		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../../js/language.js"></script>
 		<script type="text/javascript" src="../../js/sha256.js"></script>
@@ -215,9 +216,14 @@
 				mui.init({
 					pullRefresh: {
 						container: '#pullrefresh',
-//						down: {
-//							callback: pulldownRefresh
-//						},
+						down: {
+							contentrefresh:TextMessage.update,
+							contentnomore: TextMessage.nomore,
+							contentover:TextMessage.release,
+							contentdown:TextMessage.pull_down,
+							//auto: true,
+							callback: pulldownRefresh
+						},
 						up: {
 							contentrefresh: TextMessage.update,
 							contentinit: TextMessage.upmore,
@@ -245,7 +251,7 @@
 						"message": chatMsg,
 						"transid": trans_id
 					};
-					trans_flow('transConversation', params,'',"one");
+					trans_flow('transConversation', params, '');
 					$("#msg").blur();
 					$("#msg").val('');
 				}
@@ -552,7 +558,7 @@
 			})
 
 			function showChatMsg(usersinfo, messginfo, cur_user_id,select_flag) {
-				if(messginfo==""){
+				if(messginfo == ""){
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
 				}
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg='';
@@ -596,8 +602,10 @@
 					}
 				}
 				if(select_flag){
+					$("#msgArea").html("");
 					$("#msgArea").prepend(chatMsg);
 				}else{
+					$("#msgArea").html("");
 					$("#msgArea").append(chatMsg);
 					page++;
 				}
@@ -941,7 +949,7 @@
 				}
 			})
 
-			function trans_flow(api_url_flag, params,flag,last) {
+			function trans_flow(api_url_flag, params,flag) {
 				Repository.Transaction.trans(api_url_flag, params, {
 					ok: function(data) {
 						if (api_url_flag == 'transUrgeDelive') { // 催促发货
@@ -952,10 +960,6 @@
 						if(api_url_flag == 'transOrderReceipt') {
 							gotoEvaluate(params.transid);
 						} else {
-							if(last){
-								//params.select_flag="one";
-								location.reload();
-							}
 							Log.i("message send successfully!");
 							var transinfo = data.data.transinfo;
 							var messginfo = data.data.messginfo;
@@ -1009,7 +1013,7 @@
 							setHidVal(transinfo, usersinfo, cur_user_id);
 							showRequestStaus(transinfo, usersinfo);
 							showTranCommodMsg(transinfo, usersinfo, commdinfo, cur_user_id);
-							if( messginfo && !flag )  {
+							if(messginfo && !flag)  {
 								showChatMsg(usersinfo, messginfo, cur_user_id);
 							}
 							//tranStatusVal = trans_type == 0 ? TextMessage.tranStatusRequest : TextMessage.tranStatusDeal;
