@@ -1026,6 +1026,6 @@ body .mui-table-view-cell.mui-active{
 }
 /*payment page*/
 .contentTop #comm_image {
-	width: 100px;
-	height: 100px;
+	width: 6em;
+	height: 6em;
 }

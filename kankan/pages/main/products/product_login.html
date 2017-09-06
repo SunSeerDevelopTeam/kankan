@@ -413,7 +413,7 @@
 		document.getElementById('classify_id').value=classify_id;
 		document.getElementById('comm_state').value=state;
 		$("#number_price").val(price);
-		$("#input_price").html(parseFloat(price).toLocaleString());
+		$("#input_price").html(price ? parseFloat(price).toLocaleString() : '0');
 		$("#trans_fees").html(parseFloat(rate).toLocaleString());
 		$("#trading_income").html(parseFloat(profile).toLocaleString());
 		$("#stauteResult").removeClass("ka_bitian");
@@ -956,6 +956,18 @@ function wastes(){
 	mui.plusReady(function() {
 		Repository.Commodity.Commoditypublish(paramsw, {
 			ok:function(data){
+				if($("#number_price").val()=="") {
+					mui.toast(TextMessage.pro_pricenulltest, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
+				if ($("#number_price").val() < price_min || $("#number_price").val() > price_max ) {
+					mui.alert(TextMessage.numberRangeText);
+					return false;
+				}
+				document.getElementById('number_price').blur();
 				mui.toast(mestext, {
 					duration: 'long',
 					type: 'div'

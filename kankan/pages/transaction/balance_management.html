@@ -13,13 +13,13 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav" style="background-color: #E0EEEE;">
+		<header class="mui-bar mui-bar-nav" style="background-color: #EFEFF4;">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-center mui-title lang" data-locale="balance_management"></h1>
 		</header>
 		<div class="mui-content" style="font-size: 15px;background-color: #FFFFFF;">
 			<div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="userpricetext"></div>
-		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #E0EEEE;">
+		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #EFEFF4;">
 		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="userbalance"></span></span>
 		    </div>
 		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="balance_history" id="historytitle"></div>
@@ -80,7 +80,7 @@
 				var apply_date=results.transfer_record[i].apply_date;
 				var trans_aplid=results.transfer_record[i].trans_aplid;
 				var time=results.transfer_record[i].day;
-					html+='<div class="transferHistory" id="'+trans_aplid+'" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border: 1px solid lightgrey;font-size: 12px;background-color: #E0EEEE;">';
+					html+='<div class="transferHistory" id="'+trans_aplid+'" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border: 1px solid lightgrey;font-size: 12px;background-color: #EFEFF4;">';
 					html+='<div class="mui-col-xs-5">'+apply_date+'</div>';
 					if(time<=0){
 						html+='<button style="height: 2em;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel">'+TextMessage.cancel+'</button>';

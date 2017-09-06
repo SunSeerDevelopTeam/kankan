@@ -1693,6 +1693,7 @@ var TextMessage;
 	TextMessage.transStopTips = language ? "取引中止しますか？" : "确认终止交易吗?";
 	TextMessage.transContinue = language ? "取引を継続します。" : "继续交易!";
 	TextMessage.waitforConfirm = language ? "取引依賴確認待ち" : "等待确认交易";
+	TextMessage.orderGeneration = language ? "注文の生成" : "订单生成";
 	TextMessage.waitPay = language ? "入金待ち" : "等待付款";
 	TextMessage.waitotherPay  =language ? "相手の支払いを待つ" : "等待对方付款";
 	TextMessage.waitPayHandle = language ? "入金処理待ち" : "等待付款处理";

@@ -71,11 +71,29 @@
 			}
 			
 			function payCancel() {
-				mui.openWindow({
-					url: "transaction2.html?transid="+ trans_id,
-					id: "transaction",
-					extras: {
-						"transid": trans_id
+				var params = {
+					'pay_bank_flag': 0,
+					'transid': trans_id,
+					'pay_way': pay_way
+				};
+				Repository.Transaction.transgotoPay(params, {
+					ok: function(data) {
+						console.log("success");
+				        var transactionPage = plus.webview.getWebviewById('transaction');
+				        mui.fire(transactionPage, 'refresh', {
+						    refresh: "canRefresh"
+					    });
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						switch(data) {
+							case "3031":
+								var transactionPage = plus.webview.getWebviewById('transaction');
+						        mui.fire(transactionPage, 'refresh', {
+								    refresh: "canRefresh"
+							    });
+								break;
+						}
 					}
 				})
 			}
