@@ -110,7 +110,7 @@
 				</div>
 				<!--商品价格start-->
 				<div>
-					<h5 class="ka_proloh5 lang" data-locale="commodity_price" style="margin: 1.5em 0 1.5em 0.5em"></h5>
+					<h5 class="ka_proloh5" id="commodityPrice" style="margin: 1.5em 0 1.5em 0.5em"></h5>
 					<div class="inputPrice">
 						<input id="number_price" type="number" oninput="if(value.length>7)value=value.slice(0,7)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="getNumber()" class="inputNumber" disabled="true"/>
 						<span class="inputSpan">&yen;<span id="input_price"></span></span>
@@ -121,7 +121,7 @@
 				<div class="tradeFees">
 					<ul class="mui-table-view ka_prologbox">
 						<li class="mui-table-view-cell" style="width: 100%;">
-						    <span class="ka_proinfo lang mui-col-xs-9" data-locale="commodity_transactionFees"></span>
+						    <span class="ka_proinfo mui-col-xs-9" id="transaction_fees"></span>
 						    <span class="fee mui-col-xs-3">&yen;<span id="trans_fees"></span></span>
 						</li>
 						<li class="mui-table-view-cell" style="width: 100%;">
@@ -301,7 +301,9 @@
 		var resultsData = results.data;
 		price_max = resultsData[0].price_max;
 		price_min = resultsData[1].price_min;
+		$("#commodityPrice").text(TextMessage.commodity_price + "(" + parseFloat(price_min).toLocaleString() + "~~" + parseFloat(price_max).toLocaleString() + ")");
 		charge_rate = resultsData[2].charge_rate;
+		$("#transaction_fees").text(TextMessage.commodity_transactionFees + "(" + charge_rate + "%)");
 	}
 	window.addEventListener("refresh", function(event) {
 		location.reload();

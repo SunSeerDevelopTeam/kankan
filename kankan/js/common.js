@@ -1767,6 +1767,8 @@ var TextMessage;
 	TextMessage.balancecheck= language ? "口座の殘高が不足して" : "您当前余额不足";
 	TextMessage.ammontlength= language ? "申請額は10桁を超えることはできない" : "申请金额不能超过十位";
 	TextMessage.totolMoney = language ? "売上高" : "共赚了";
+	TextMessage.commodity_price = language ? "販売価格" : "商品价格";
+	TextMessage.commodity_transactionFees = language ? "販売手数料": "交易手续费";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
