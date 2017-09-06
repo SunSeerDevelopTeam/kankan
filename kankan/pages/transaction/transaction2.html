@@ -538,7 +538,13 @@
 					jumpToOtherPage('./change_item.html','change_item',trans_id);
 				}
 			}
-
+            //监听是否可以进行刷新
+            window.addEventListener("refresh", function(event){
+				if (event.detail.refresh !== "canRefresh") {
+					return;
+				}
+				location.reload();
+			});
 			mui(".exchange").on('tap', '.request-user', function() {
 				var cur_user_id = $("#myid").val();
 				var params = {
@@ -744,8 +750,13 @@
 				} else if(status == 1) {
 					if(buyer_flag == 'true') {
 						if(trans_type == 0) {
-							$(".tran-button-buy").show();
-							$(".tran-button-buy font").text(TextMessage.transOrder);
+							if (trans_mode == 1) {
+								$(".tran-button-buy").show();
+							    $(".tran-button-buy font").text(TextMessage.transOrder);
+							} else if (trans_mode == 2) {
+								$(".tran-button-buy").show();
+							    $(".tran-button-buy font").text(TextMessage.orderGeneration);
+							}
 						} else {
 							/*if(trans_mode == 0) {
 								if(buyer_deliver == 1 && seller_deliver == 0) {
@@ -765,8 +776,15 @@
 						}
 					} else {
 						if(trans_type == 0) {
-							$(".tran-button-buy").show();
-							$(".tran-button-buy font").text(TextMessage.transWaitOrder);
+							if (trans_mode == 2) {
+								$(".tran-button-buy").show();
+							    $(".tran-button-buy font").text(TextMessage.transWaitOrder);
+							    $(".tran-name-middle-status font").text(TextMessage.transWaitOrder);
+							} else if (trans_mode == 1){
+								$(".tran-button-buy").show();
+							    $(".tran-button-buy font").text(TextMessage.waitPay);
+							    $(".tran-name-middle-status font").text(TextMessage.waitPay);
+							}
 						} else {
 							if(seller_deliver == 1 && buyer_deliver == 0) {
 								$(".tran-button-buy").show();
@@ -1044,11 +1062,20 @@
 							if(trans_status == 0){
 								tranStatusVal = TextMessage.waitforConfirm;
 							}else if(trans_status == 1){
-								if (cur_user_id == seller_id) {
+								/*if (cur_user_id == seller_id) {
 									tranStatusVal = TextMessage.waitPay;
 								} else {
 									tranStatusVal = TextMessage.transOrder;
-								}							
+								}*/
+								if (trans_mode == 2) {
+									if (cur_user_id == buyer_id) {
+										tranStatusVal = TextMessage.orderGeneration;
+									} else {
+										tranStatusVal = TextMessage.transWaitOrder;
+									}
+								} else if (trans_mode == 1) {
+									tranStatusVal = TextMessage.waitPay;
+								}
 							}else if(trans_status == 2){
 								/*if (trans_deliver == 0 && sellApplyFlag == 1) {
 									if (cur_user_id == seller_id) {
@@ -1185,7 +1212,7 @@
 							"transid": trans_id,
 							"stop_flag": 0
 						};
-						trans_stop(params);
+						trans_stop(params,"applystop");
 					} 
 					//有人发起申请但是没有同意终止
 					if ((sellApplyFlag == 1 || buyApplyFlag == 1) && (sellAgreeFlag==0 && buyAgreeFlag==0)) {
@@ -1247,13 +1274,15 @@
 						Repository.Transaction.transStop(params, {
 							ok: function(data) {
 								Log.i("message send successfully!");
-								if(flag) {
+								if (flag == "history") {
 								    mui.openWindow({
 										id: 'requestlist',
 										url: "../main/products/requestlist.html"
 									});
+								} else if (flag == "applystop") {
+									location.reload();
 								} else {
-									if(trans_type == 1) {
+									if (trans_type == 1) {
 									    gotoEvaluate(trans_id);
 									} else {
 										gotoMain();

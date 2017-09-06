@@ -297,6 +297,7 @@
 						var comm_name = HTMLDecode(transpro.comm_name);
 						var comm_img = transpro.comm_thu_img;
 						var trans_type = others[ot].trans.trans_type;
+						var trans_mode = others[ot].trans.trans_mode;
                         var deliver = others[ot].trans.deliver;
                         var seller_id = others[ot].trans.accept_user_id;
                         var buy_id = others[ot].trans.issue_user_id;
@@ -315,7 +316,11 @@
 						if (status == "0") {
 							var trans_typetext = TextMessage.waitforConfirm;
 						} else if (status == "1") {
-							var trans_typetext = TextMessage.waitPay;
+							if (trans_mode == 1) {
+								var trans_typetext = TextMessage.waitPay;
+							} else if (trans_mode == 2) {
+								var trans_typetext = TextMessage.transWaitOrder;
+							}
 						} else if (status == "2") {
 							if (deliver == 0 && (sellApplyFlag == 1 || buyApplyFlag == 1) && (sellAgreeFlag==0 && buyAgreeFlag==0)) {
 								//发起人为卖方
@@ -403,6 +408,7 @@
 							var ocomm_img = "../../../images/nopic.jpg";
 						}
 						var otrans_type = own[ow].trans.trans_type;
+						var otrans_mode = own[ow].trans.trans_mode;
 						var otrans_deliver = own[ow].trans.deliver;
 						var otrans_seller_id = own[ow].trans.accept_user_id;
                         var otrans_buy_id = own[ow].trans.issue_user_id;
@@ -426,7 +432,11 @@
 						if(ostatus == "0") {
 							var otrans_typetext = TextMessage.waitforConfirm;
 						} else if (ostatus == "1") {
-							var otrans_typetext = TextMessage.transOrder;
+							if (otrans_mode == 2) {
+								var otrans_typetext = TextMessage.orderGeneration;
+							} else {
+								var otrans_typetext = TextMessage.transOrder;
+							}
 						} else if (ostatus == "2") {
 							if (otrans_deliver == 0 && (otrans_sellApplyFlag == 1 || otrans_buyApplyFlag == 1) && (otrans_sellAgreeFlag==0 && otrans_buyAgreeFlag==0)) {
 								//发起人为卖方
