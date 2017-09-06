@@ -575,28 +575,29 @@
 				}
 
 				for(var chat in messginfo) {
+					var insDate = formatDateTime(messginfo[chat].ins_date);
 					if(cur_user_id == buyer_id) {
 						if(messginfo[chat].user_id == buyer_id) {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-right"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
+							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + insDate + ']</div>';
 							chatMsg += '</div>';
 						} else {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-left"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
+							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + insDate + ']</div>';
 							chatMsg += '</div>';
 						}
 					} else {
 						if(messginfo[chat].user_id == seller_id) {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-right"><img src="' + seller_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
+							chatMsg += '<div class="mui-pull-right ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + insDate + ']</div>';
 							chatMsg += '</div>';
 						} else {
 							chatMsg += '<div class="comtent mui-pull-left">';
 							chatMsg += '<div class="mui-pull-left"><img src="' + buyer_photo + '" width="40" height="40" class="ka_touxiangimg"></div>';
-							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + messginfo[chat].ins_date.substring(5, 19) + ']</div>';
+							chatMsg += '<div class="mui-pull-left ka_commentinfobox">' + messginfo[chat].msg_detail + '<br>[' + insDate + ']</div>';
 							chatMsg += '</div>';
 						}
 					}
@@ -609,6 +610,28 @@
 					$("#msgArea").append(chatMsg);
 					page++;
 				}
+			}
+			
+			/**
+			 * 时间格式处理函数
+			 * @param {Object} dateTimeStr API返回的message插入DB的时间
+			 */
+			function formatDateTime(dateTimeStr) {
+				// 默认显示格式为MM-DD hh:mm:ss
+				var result = dateTimeStr.substring(5, 19);
+				// 将消息发送时间字符串转化为Date类型，并且获取毫秒数。
+				var dateTime = new Date(dateTimeStr).getTime();
+				// 获取当前时间的毫秒数
+				var curDate = new Date().getTime();
+				// 计算相差毫秒数
+				var dateSubtraction = curDate - dateTime;
+				// 计算相差天数
+				var days = Math.floor(dateSubtraction / (24*3600*1000));
+				// 当时间相差超过一年时显示格式为YYYY-MM-DD
+				if (days >= 365) {
+					result = dateTimeStr.substring(0, 10);
+				}
+				return result;
 			}
 
 			function showRequestStaus(transinfo, userinfo) {
