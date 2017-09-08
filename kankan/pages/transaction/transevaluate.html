@@ -136,6 +136,8 @@
 					ok: function(data) {
 						Log.i("message send successfully!");
 						gotoMain();
+						$("#evaluate_msg").val('');
+						$("input:radio").prop("checked",false);
 					},
 					ng: function(data) {
 						Api.callback_ng(data);

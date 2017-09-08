@@ -1701,7 +1701,7 @@ var TextMessage;
 	TextMessage.waitBuyerConfirm = language ? "相手を待つ" : "等待买家收货";
 	TextMessage.waitBuyerAgree = language ? "バイヤーの承諾を待つ" : "等待买家同意";
 	TextMessage.waitSellerAgree = language ? "売家を待つ" : "等待卖家同意";
-	TextMessage.agreeTerminate = language ? "承諾の中止" : "同意终止";
+	TextMessage.agreeTerminate = language ? "取引中止承認待ち" : "等待同意终止";
 //	add
 	TextMessage.accountsReceivable = language ? "振込先確認" : "确认收款账户";
 	TextMessage.applyforPayment = language ? "振込申請" : "申请收款";

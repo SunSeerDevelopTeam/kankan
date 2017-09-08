@@ -246,30 +246,35 @@
 					duration: 'long',
 					type: 'div'
 				});
+				return;
 			}
 			if (account_type == "") {
 				mui.toast(TextMessage.pleaseAccount, {
 					duration: 'long',
 					type: 'div'
 				});
+				return;
 			}
 			if (branch_number == "") {
 				mui.toast(TextMessage.branchNumberNull, {
 					duration: 'long',
 					type: 'div'
 				});
+				return;
 			}
 			if (account_number == "") {
 				mui.toast(TextMessage.accountNumberNull, {
 					duration: 'long',
 					type: 'div'
 				});
+				return;
 			}
 			if (surname == "" || name == "") {
 				mui.toast(TextMessage.namenotnull, {
 					duration: 'long',
 					type: 'div'
 				});
+				return;
 			}
 			var params = {
 				"bank_code": bank_code,

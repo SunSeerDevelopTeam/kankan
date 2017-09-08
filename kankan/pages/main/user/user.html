@@ -927,7 +927,11 @@
 								url:"../../login/login.html"
 							});
 					}else{
-							mui.back();
+					    // mui.back();
+						mui.openWindow({
+							id: 'login',
+							url:"../../login/login.html"
+						});
 					}
 					console.log("other error code:" + data);
 					

@@ -69,7 +69,7 @@
 		    		</div>
 		    	</div>
 		    </div>
-		    <button id="pay_ment" class="mui-col-xs-8 lang" data-locale="pay" onclick="pay()" style="background-color: red; color: #FFFFFF; text-align: center; position: absolute; left: 16.5%; bottom: 5em; padding: 0.3em 0;">
+		    <button class="mui-col-xs-8 lang" data-locale="pay" onclick="pay()" style="background-color: red; color: #FFFFFF; text-align: center; position: absolute; left: 16.5%; bottom: 5em; padding: 0.3em 0;">
 		    </button>
 		</div>
 		
@@ -90,7 +90,7 @@
 			mui.init({
 				
 			});
-			var showimgWidth = parseInt($(window).width()) / 2 - 78;
+			var showimgWidth = 120;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				trans_id = self.transid;
@@ -131,7 +131,7 @@
 			    $("#comm_image").attr("style", "overflow: hidden;");
 			    imgContent = '<img style="'+extraImg+'" data-original="'+comm_imgUrl+'" onerror="this.src=' + "'../../images/nopic.jpg'" + '"/>';
 			    $("#comm_image").append(imgContent);
-			    $("#comm_name").html(comm_name);
+			    $("#comm_name").html(HTMLDecode(comm_name));
 			    $("#comm_price").html(parseFloat(comm_price).toLocaleString());
 			    $("#user_balance").html(parseFloat(user_balance).toLocaleString());
 			    $("img").lazyload({
