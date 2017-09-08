@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+    <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/style.css" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<style>
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="margin-bottom: 2em;">
+				<font class="lang" data-locale="back" size="4"></font>
+			</a>
+			<h1 class="mui-center mui-title lang" data-locale="productReportTitle"></h1>
+		</header>
+		<div style="background:#FEFDF8; height: 105%;" class="mui-content">
+			<form>
+				<div style="padding:15px 15px;"><span style="color:red">*</span><span class="lang" data-locale="musttext"></span></div>
+				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="productName"></span></h5>
+    			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear lang" data-locale="productNameInput" name="commodity_name" disabled="disabled" id="commodity_name">
+				</div>
+				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="nametext"></span></h5>
+    			<div class="mui-input-row" style="text-align:center;margin-bottom:10px;">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="mui-input-clear lang" data-locale="nametext" name="full_name" id="full_name" disabled="disabled">
+				</div>
+				<h5 style="padding-left:15px"><span style="color:red">*</span>Email</h5>
+    			<div class="mui-input-row" style="text-align:center;">
+					<input type="text" style="background:#FFFFFF;width:85%;" class="" placeholder="Email" id="email" name="email" disabled="disabled">
+				</div>
+				<h5 style="padding-left:15px"><span style="color:red">*</span><span class="lang" data-locale="reporttext"></span></h5>
+    			<div class="mui-input-row" style="text-align:center;">
+					<textarea style="background:#FFFFFF;width:85%;" rows="5"  id="contents" name="contents" maxlength="1000"></textarea>
+    			</div>
+				<div class="mui-button-row" style="margin-bottom: 1em;margin-top: 1em;">
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="submitvals()" data-locale="suretext" id='submit'></button>&nbsp;&nbsp;
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outline lang" onclick="clearallval()" data-locale="quesreset"></button>
+				</div>
+				<!--mask-->
+		        <div class="z_mask">
+		            <!--alert box-->
+		            <div class="z_alert">
+		                <p class="lang" data-locale="commodity_photodet"></p>
+		                <p>
+		                    <span class="z_cancel lang" data-locale="det_goodconcel"></span>
+		                    <span class="z_sure lang" data-locale="register"></span>
+		                </p>
+		            </div>
+		        </div>
+				<div id="deltimg" style="display: none;"></div>
+				<input type="hidden" name="" id="0" value="0" class="imgname" />
+	        	<input type="hidden" name="" id="1" value="0" class="imgname" />
+	        	<input type="hidden" name="" id="2" value="0" class="imgname" />
+	        	<input type="hidden" name="" id="3" value="0" class="imgname" />
+			</form>
+		</div>
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../js/mui.view.js" ></script>
+		<script type="text/javascript" src="../../../js/jquery-3.2.0.min.js" ></script>
+		<script type="text/javascript" src="../../../js/language.js" ></script>
+		<script type="text/javascript" src="../../../js/sha256.js" ></script>
+		<script type="text/javascript" src="../../../js/common.js" ></script>
+		
+		<script>
+			mui.init();
+			var commodity_id;
+			//upload image url
+			var server = Api.url.User.userupimage;
+			function showinfo(results){
+				var info = results.data;
+				var email = info.email;
+				if (checkEmail(email)) {
+					$("#email").val(email);
+				} else {
+					$("#email").removeAttr("disabled");
+				}
+				var fullname = info.nick_name;
+				var commodity_name = info.comm_name;
+				console.log("commodity_name is " + HTMLDecode(HTMLDecode(commodity_name)));
+				$("#full_name").val(HTMLDecode(fullname));
+				$("#commodity_name").val(HTMLDecode(HTMLDecode(commodity_name)));
+			}
+			// check email.
+			function checkEmail(email) {
+				if (email == "" || typeof(email) == "undefined" || email == null || !email) {
+					plus.nativeUI.alert(TextMessage.input_email, function(event) {
+						var index = event.index;
+						if (event.index == 0) {
+							mui.openWindow({
+								id: "emai_summate",
+								url: "/pages/login/emai_summate.html",
+								waiting: {
+									autoShow: false
+								},
+								show: {
+									duration: 200
+								},
+								extras: {
+									formPageName: "complaint"
+								}
+							});
+						}
+					}, TextMessage.sharetitle, TextMessage.yes);
+					return false;
+				}
+				return true;
+			}
+			function inputblur(){
+				document.getElementById('full_name').blur();
+				document.getElementById('contents').blur();
+			}
+			function submitvals(){
+				var fullname=$("#full_name").val();
+				var comm_name=$("#commodity_name").val();
+				var email=$("#email").val();
+				var contents=$("#contents").val();
+				if(fullname==""){
+					mui.toast(TextMessage.namenotnull, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
+				if(contents==""){
+					mui.toast(TextMessage.contentnotnull, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
+				$("#submit").attr("disabled",'disabled');
+				var params2={
+					"full_name":fullname,
+					"email":email,
+					"comm_name":comm_name,
+					"report_reason":contents,
+					"commodity_id": commodity_id
+				};
+				mui.plusReady(function() {
+					if (!Repository.User.isEmptyEmail()) {
+						return;
+					} else {
+						Repository.Commodity.reportCommReason(params2,{
+							ok: function(data) {
+								console.log("success");
+								mui.toast(TextMessage.reportsuccess, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.back();
+							},
+							ng: function(data) {
+								Api.callback_ng(data);
+								console.log("error:"+data);
+								Log.d(data);
+							},
+							error:function(){
+								error_tost.message();
+							}
+						});
+					}
+				});
+			}
+			function clearallval(){
+				$("#full_name").val("");
+				$("#contents").val("");
+				$("#0").val("0");
+				$("#1").val("0");
+				$("#2").val("0");
+				$("#3").val("0");
+				$(".z_images").remove();
+				//location.reload();
+			}
+			mui.plusReady(function() {
+				var complaint = plus.webview.currentWebview();
+				commodity_id = complaint.commodity_id;
+				var params = {
+					"commodity_id": commodity_id
+				};
+				Repository.Commodity.CommodityReportShow(params,{
+					ok: function(data) {
+						console.log("success");
+						showinfo(data);
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						Log.d(data);
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

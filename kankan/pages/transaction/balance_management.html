@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>balance_management.html</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
+		<link rel="stylesheet" href="../../css/public.css" type="text/css"/>
+		<link rel="stylesheet" href="../../css/mobileSelect.css" type="text/css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: #EFEFF4;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-center mui-title lang" data-locale="balance_management"></h1>
+		</header>
+		<div class="mui-content" style="font-size: 15px;background-color: #FFFFFF;">
+			<div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="userpricetext"></div>
+		    <div style="height: 3.5em;border: 1px solid lightgray;background-color: #EFEFF4;">
+		    	<span style="height: 3.5em;line-height: 3.5em;display: block;text-align: right;padding-right: 1em;">&yen;<span id="userbalance"></span></span>
+		    </div>
+		    <div style="height: 2.5em;display: flex;align-items: center;padding-left: 1em;" class="lang" data-locale="balance_history" id="historytitle"></div>
+		    <div id="morehistory" style="height: 3em;line-height: 3em;border-bottom:1px solid lightgray;">
+		    	<div class="mui-pull-left lang" data-locale="more_history" style="padding-left: 1em;"></div>
+		    	<div style="height: 1.9em; line-height: 1.9em;" class="mui-icon mui-icon-arrowright mui-pull-right"></div>
+		    </div>
+		    <button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="applyforPayment" style="margin-top: 5em;margin-left: 10%;" onclick="" id="submit"></button>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js" ></script>
+	<script src="../../js/mui.view.js "></script>
+	<script src="../../js/common.js"></script>
+	<script src="../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../js/language.js"></script>
+	<script src="../../js/sha256.js"></script>
+	<script src="../../js/pro_uploadimg.js"></script>
+	<script src="../../js/mobileSelect.js" type="text/javascript"></script>
+	<script>
+		mui.init({
+		});
+		
+		mui.plusReady(function() {
+			var params={};
+			Repository.Transaction.balancemanagement(params, {
+							ok: function(data) {
+								Log.i("message send successfully!");
+								messageshow(data.data);
+								
+							},
+							ng: function(data) {
+								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="location.reload();" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
+							}
+					});
+		    
+		    mui(".mui-content").on('tap', '#morehistory', function() {
+		    	mui.openWindow({
+					url: "transfer_history.html",
+					id: "transfer_history"
+				})
+		    });
+		});
+		function messageshow(results){
+			var balance=Math.floor(results.user_balance).toLocaleString();
+			$("#userbalance").html(balance);
+			if(results.transfer_record==""){
+				$("#historytitle").hide();
+				return false;
+			}
+			var html='';
+			for(var i=0;i<results.transfer_record.length;i++){
+				var ammont=Math.floor(results.transfer_record[i].amount).toLocaleString();
+				var application_state=results.transfer_record[i].application_state;
+				var apply_date=results.transfer_record[i].apply_date;
+				var trans_aplid=results.transfer_record[i].trans_aplid;
+				var time=results.transfer_record[i].day;
+					html+='<div class="transferHistory" id="'+trans_aplid+'" style="height: 3em;display: flex;align-items: center;padding-left: 1em;border: 1px solid lightgrey;font-size: 12px;background-color: #EFEFF4;">';
+					html+='<div class="mui-col-xs-5">'+apply_date+'</div>';
+					if(time<=0){
+						html+='<button style="height: 2em;" type="button" class="mui-btn mui-btn-red mui-col-xs-4 lang btnConfirm" data-locale="pay_cancel">'+TextMessage.cancel+'</button>';
+					}
+					if(application_state==2){
+						html+='<div style="" class="lang" data-locale="balance_transferfinish">'+TextMessage.transfersuccess+'</div>';
+					}
+					html+='<div class="mui-col-xs-3" style="margin-left: 0.5em;">&yen;<span>'+ammont+'</span></div>';
+		   			html+='</div>';
+			}
+			$("#historytitle").after(html);
+			mui(".transferHistory").on('tap', '.btnConfirm', function(event) {
+				var elem = this;
+				var rid = elem.parentNode.getAttribute("id");
+				var paramsdel={
+					"trans_aplid":rid
+				};
+				var btnArray = [TextMessage.ok, TextMessage.cancel];
+				mui.confirm(TextMessage.reallyCancel, '', btnArray, function(e) {
+					if(e.index==0){
+						Repository.Transaction.canceltransfer(paramsdel, {
+							ok: function(data) {
+								location.reload();
+								
+							},
+							ng: function(data) {
+								Api.callback_ng(data);
+							},
+							error:function(){
+								var nodata='<div  id="reloadpage" onclick="location.reload();" ><font size="2" class="lang" data-locale="networkerror"></font></div>';
+								$(".mui-content").html(nodata);
+							}
+						});
+					}
+			    });
+		    });
+		}
+		mui(".mui-content").on("tap","#submit",function(){
+	    	mui.openWindow({
+	    		url: "seller_account_confirm.html",
+				id: "seller_account_confirm",
+				extras:{
+					froms:"management"
+				}
+	    	});
+	    });
+	</script>
+</html>

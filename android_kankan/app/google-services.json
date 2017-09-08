@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1071513297635",
+    "firebase_url": "https://kankan-a2f78.firebaseio.com",
+    "project_id": "kankan-a2f78",
+    "storage_bucket": "kankan-a2f78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071513297635:android:fbee0e25468dae43",
+        "android_client_info": {
+          "package_name": "com.sunseer.kankan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071513297635-dvipgn867bjpa8l63aho5e5hidpb4tcq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcPrJFpfJlBqtOXNctYDWr5HrUCxB2gU8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

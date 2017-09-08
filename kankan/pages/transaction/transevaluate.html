@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>transevaluate</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
+		<link rel="stylesheet" href="../../css/wu.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title"><span class="lang" data-locale="evalute_finish"></span></h1>
+		</header>
+		<div class="mui-pages">
+			<!--main content start-->
+			<form name="transevaluate" id="transevaluate">
+				<div class="mui-page-content">
+					<div class="mui-scroll-wrapper">
+						<div class="tran-page">
+							<div style="font-size:1.2rem;;background:#F3F3F3;height:45px;width:100%;padding:15px 5px;">
+								<span class="lang" data-locale="det_pcercomment"></span>
+							</div>
+							<ul class="mui-table-view" style="margin-top:0px;">
+								<li class="head-img-box">
+									<ul class="user-comment-list">
+										<li class="user-comment-grid">
+											<img height="30%" width="30%" src="../../images/Good.PNG" />
+										</li>
+										<li class="user-comment-grid2">
+											<img height="30%" width="30%" src="../../images/Normal.PNG" />
+										</li>
+										<li class="user-comment-grid2">
+											<img height="30%" width="30%" src="../../images/Bad.PNG" />
+										</li>
+									</ul>
+									<ul class="user-comment-list">
+										<li class="user-comment-grid lang" data-locale="det_goodcomments">
+										</li>
+										<li class="user-comment-grid2 lang" data-locale="det_normalcomments">
+										</li>
+										<li class="user-comment-grid2 lang" data-locale="det_badcomments">
+										</li>
+									</ul>
+									<ul class="user-comment-list ">
+										<li class="user-comment-grid">
+											<input name="evalueate" value="0" type="radio">
+										</li>
+										<li class="user-comment-grid2">
+											<input name="evalueate" value="1" type="radio">
+										</li>
+										<li class="user-comment-grid2">
+											<input name="evalueate" value="2" type="radio">
+										</li>
+									</ul>
+								</li>
+								<li style="padding:5px;" class="lang" data-locale="eve_comment"></li>
+								<li>
+									<div class="mui-input-row" style="margin: 10px 5px;">
+										<textarea onkeyup="this.value=this.value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]|\uD83E[\uDC00-\uDFFF]/g,'')" name="evaluate_msg" style="background:#eee;" maxlength="300" id="evaluate_msg" rows="5" placeholder=""></textarea>
+										<button id="evaluate_btn" onclick="evaluate_submit();" style="background:#eee;width:100%" type="button" class="mui-btn mui-btn-block mui-btn-block mui-btn-outlined lang" data-locale="eve_btn"></button>
+									</div>
+								</li>
+							</ul>
+							<div style="text-align:center;margin-top:-5px;background:#F3F3F3;height:40px;width:100%;padding-top:20px;">
+								<a href="javascript:gotoMain();" style="background:#6ACB9A;margin-bottom:10px;"><span class="lang" data-locale="home_return"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				beforeback: function() {
+					var list = plus.webview.currentWebview().opener();
+					mui.fire(list, 'refresh', {
+						refresh: "canRefresh"
+					});
+					return true;
+				}
+			});
+			var trans_id;
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				trans_id = self.transid;
+				$("#evaluate_msg").attr('placeholder',TextMessage.evaluateMsg);
+			});
+
+			function gotoMain(){
+				mui.plusReady(function() {
+					var transactionView = plus.webview.getWebviewById('transaction');
+					plus.webview.close(transactionView);
+					var mainPage = plus.webview.getLaunchWebview();
+					mui.fire(mainPage,'gohome');
+       				mainPage.show();
+				});
+			}
+			function evaluate_submit() {
+				var evaluate_flg = $("input[name='evalueate']:checked").val();
+				var evaluate_msg = $("#evaluate_msg").val();
+				if(!evaluate_flg){
+					var err_msg = TextMessage.evelevel;
+						mui.toast(err_msg, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
+				if(evaluate_msg == ''){
+					var err_msg = TextMessage.evecommenttestnull;
+					mui.toast(err_msg, {
+					duration: 'long',
+					type: 'div'
+					});
+					return false;
+				}
+				var params = {
+					"transid": trans_id,
+					"message": evaluate_msg,
+					"flag": evaluate_flg
+				};
+				Repository.Transaction.transOrderEvaluate(params, {
+					ok: function(data) {
+						Log.i("message send successfully!");
+						gotoMain();
+					},
+					ng: function(data) {
+						Api.callback_ng(data);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

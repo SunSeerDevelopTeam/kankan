@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<style>
+			.mui-content {
+				background-color: #FFFFFF;
+			}
+			
+			.login-panel {
+				margin: 15px;
+			}
+			
+			li {
+				list-style: none;
+			}
+			
+			#weixin-oauth {
+				background-color: forestgreen;
+			}
+			
+			.mui-table-view-cell span {
+				color: white;
+				height: 100%;
+				display: inline-block;
+				vertical-align: middle;
+				text-align: center;
+			}
+			
+			.mui-input-group label {
+				width: 41%;
+			}
+			
+			.mui-input-row {
+				overflow: inherit;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 59%;
+			}
+			
+			#forget_password,
+			#new_user_login {
+				color: #FF0000;
+			}
+			
+			#email-login-form {
+				margin-top: 30px;
+			}
+			
+			#email-login-form label {
+				font-size: 80%;
+			}
+			
+			#forget_password {
+				font-size: 80%;
+			}
+			
+			#new_user_login {
+				font-size: 80%;
+			}
+			
+			#email-login-form input {
+				font-size: 67%;
+				line-height: 1.5;
+			}
+			
+			.app-icons {
+				width: 10%;
+				float: left;
+			}
+			
+			.app-msg {
+				width: 80%;
+				float: left;
+				text-align: center;
+				margin-top: 8px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav">
+				<font class="lang" data-locale="back" size="3"></font>
+			</a>
+			<h1 class="mui-title"><span class="lang" data-locale="login"></span></h1>
+		</header>
+		<div class="mui-content">
+			<div class="login-panel">
+				<li class="mui-table-view-cell" id="weixin-oauth" class="oauth-area">
+					<div class="oauth-btn">
+						<div class="app-icons"><img src="../../images/weixin.png" /></div>
+						<div class="app-msg"><span class="lang" data-locale="wechat_login"></span></div>
+						<!--<a class="mui-navigate-right"></a>-->
+					</div>
+				</li>
+				<li>
+					<form id="email-login-form">
+						<div class="mui-input-group">
+							<div class="mui-input-row">
+								<label class="lang" data-locale="email"></label>
+								<input id='email' type="email" class="mui-input-clear mui-input lang" data-locale="please-input-email">
+							</div>
+							<div class="mui-input-row">
+								<label class="lang" data-locale="password"></label>
+								<input id='password' type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
+							</div>
+						</div>
+						<div class="mui-content-padded">
+							<div id='login' class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="login"></div>
+						</div>
+					</form>
+				</li>
+				<div class="mui-text-right lang" id="forget_password" data-locale="forget_password"></div>
+				<div class="mui-text-right lang" id="new_user_login" data-locale="new_user_login"></div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.enterfocus.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/md5.js"></script>
+		<script type="text/javascript" src="../../js/sha1.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script>
+			(function($, doc) {
+				$.init({
+					statusBarBackground: '#FFFFFF',
+					beforeback: function() {
+						var homeWebView = plus.webview.getWebviewById('home.html');
+						mui.fire(homeWebView, 'refresh', {
+							refresh: "canRefresh"
+						});
+						return true;
+					}
+				});
+				$.plusReady(function() {
+					var webviewArray = plus.webview.all();
+					plus.screen.lockOrientation("portrait-primary");
+					var settings = app.getSettings();
+					var state = app.getState();
+					app.setState(null);
+					//第三方登录
+					var authBtns = ['weixin'];
+					var auths = {};
+					var oauthArea = doc.getElementById('weixin-oauth');
+					plus.oauth.getServices(function(services) {
+						for(var i in services) {
+							var service = services[i];
+							auths[service.id] = service;
+							if(~authBtns.indexOf(service.id)) {
+								var isInstalled = app.isInstalled(service.id);
+								var isDisable = (!isInstalled && service.id === 'weixin') ? 'disabled' : '';
+							}
+						}
+						if(isDisable === 'disabled') {
+							doc.getElementsByClassName('oauth-btn')[0].setAttribute('data-able', 'disabled');
+						}
+						$(oauthArea).on('tap', '.oauth-btn', function() {
+							Log.i("oauthArea click");
+							if(this.getAttribute('data-able')) {
+								plus.nativeUI.toast(TextMessage.wechat_not_install);
+								return;
+							}
+							var auth = auths['weixin'];
+							var waiting = plus.nativeUI.showWaiting();
+							auth.login(function() {
+								auth.getUserInfo(function() {
+									var name = auth.userInfo.nickname || auth.userInfo.name;
+									var params = {};
+									params[Api.Params.loginType] = LOGIN_TYPE.OAUTH;
+									params[Api.Params.nickName] = auth.userInfo.nickname;
+									//params.[Api.Params.nickName] = name;
+									params[Api.Params.openId] = auth.userInfo.unionid;
+									params[Api.Params.headimgUrl] = auth.userInfo.headimgurl;
+									Repository.User.login(params, {
+										ok: function(data) {
+											app.createState(name, function() {
+												plus.storage.setItem('LoginFlag', 'isLogin');
+												waiting.close();
+											});
+											if(data.email == "") {
+												plus.nativeUI.alert(TextMessage.input_email, function(event) {
+													if(event.index == 0) {
+														mui.openWindow({
+															id: "emai_summate",
+															url: "emai_summate.html",
+															waiting: {
+																autoShow: false
+															},
+															show: {
+																duration: 200
+															},
+															extras: {
+																formPageName: "login"
+															}
+														});
+													}
+												}, TextMessage.sharetitle, TextMessage.yes);
+											} else {
+												//mui.back();
+												var mainPage = plus.webview.getLaunchWebview();
+												mainPage.show();
+												var homepageWebView = plus.webview.getWebviewById('home.html');
+												mui.fire(homepageWebView, 'refresh', {
+													refresh: "canRefresh"
+												});
+											}
+										},
+										ng: function(data) {
+											waiting.close();
+											if(data[0] == "2022") {
+												plus.nativeUI.confirm(TextMessage.representations, function(event) {
+													if(event.index == 0) {
+														mui.openWindow({
+															id: "question",
+															url: "../setting/question.html",
+															extras: {
+																email: data[1]
+															},
+															waiting: {
+																autoShow: false
+															},
+															show: {
+																duration: 200
+															}
+														});
+													}
+												}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
+											} else if(data == "2002") {
+												mui.toast(TextMessage.userng, {
+													duration: 'long',
+													type: 'div'
+												})
+											}
+										},
+										error: function() {
+											waiting.close();
+										}
+									});
+								}, function(e) {});
+							}, function(e) {
+								console.dir(e);
+								waiting.close();
+							});
+						});
+					}, function(e) {
+						oauthArea.style.display = 'none';
+					});
+					// close splash
+					setTimeout(function() {
+						//关闭 splash
+						plus.navigator.closeSplashscreen();
+					}, 600);
+
+					var loginBtn = doc.getElementById('login');
+					loginBtn.addEventListener('tap', function(event) {
+						console.log("click login btn");
+						doc.getElementById('email').blur();
+						doc.getElementById('password').blur();
+						var email = doc.getElementById('email').value.trim();
+						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
+						if(email == "" || !reg.test(email)) {
+							plus.nativeUI.toast(TextMessage.email_error1);
+							return;
+						}
+						reg = /^[0-9a-zA-Z]{6,16}$/
+						var password = doc.getElementById('password').value.trim();
+						if(!reg.test(password)) {
+							plus.nativeUI.toast(TextMessage.password_error);
+							return;
+						}
+						var waiting = plus.nativeUI.showWaiting();
+						var params = {};
+						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
+						params[Api.Params.email] = doc.getElementById('email').value.trim();
+						params[Api.Params.password] = hex_sha1(hex_md5(doc.getElementById('password').value.trim()));
+						Repository.User.login(params, {
+							ok: function(data) {
+								// TODO OK logic
+								doc.getElementById('email').blur();
+								doc.getElementById('password').blur();
+								Log.d("email login ok");
+								plus.storage.setItem('LoginFlag', 'isLogin');
+								loginFlg = true;
+								doc.getElementById('email').value = "";
+								doc.getElementById('password').value = "";
+								setTimeout(function() {
+									waiting.close();
+									//mui.back();
+									var mainPage = plus.webview.getLaunchWebview();
+									mainPage.show();
+									var homepageWebView = plus.webview.getWebviewById('home.html');
+									mui.fire(homepageWebView, 'refresh', {
+										refresh: "canRefresh"
+									});
+								}, 500);
+							},
+							ng: function(data) {
+								// TODO NG logic
+								Log.d("email login ng");
+								waiting.close();
+								if(data === "3001") {
+									mui.toast(TextMessage.login_error, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+								if(data == "2002") {
+									mui.toast(TextMessage.userng, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+								if(data[0] == "2022") {
+									plus.nativeUI.confirm(TextMessage.representations, function(event) {
+										if(event.index == 0) {
+											mui.openWindow({
+												id: "question",
+												url: "../setting/question.html",
+												extras: {
+													email: doc.getElementById('email').value.trim()
+												},
+												waiting: {
+													autoShow: false
+												},
+												show: {
+													duration: 200
+												}
+											});
+										} else {
+											// cancel
+										}
+
+									}, TextMessage.sharetitle, [TextMessage.yes, TextMessage.cancel]);
+								}
+							},
+							error: function() {
+								waiting.close();
+							}
+						});
+					});
+
+					var forgetPwdBtn = doc.getElementById('forget_password');
+					forgetPwdBtn.addEventListener('tap', function(event) {
+						var params = {
+							pwd_flg: "verification",
+							email: doc.getElementById('email').value.trim()
+						};
+						Repository.User.forgetPwd(params, {
+							ok: function(data) {
+								$.openWindow({
+									id: 'forget_password',
+									url: 'forget_password.html',
+									extras: {
+										email: doc.getElementById('email').value.trim()
+									},
+									waiting: {
+										autoShow: false
+									}
+								});
+							},
+							ng: function(data) {
+								$.each(data, function(key, value) {
+									switch(value) {
+										case "1002":
+											if(key == Api.Params.email) {
+												mui.toast(TextMessage.email_error1, {
+													duration: 'long',
+													type: 'div'
+												})
+											}
+											break;
+										default:
+											break;
+									}
+								});
+								if(data == "2010") {
+									mui.toast(TextMessage.stop_user, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+								if(data == "1001") {
+									mui.toast(TextMessage.errorCode_1001, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+								if(data == "5001") {
+									mui.toast(TextMessage.emailsenderror, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+							},
+							error: function() {
+								waiting.close();
+							}
+						}, false);
+					});
+
+					var newUserLogin = doc.getElementById('new_user_login');
+					newUserLogin.addEventListener('tap', function(event) {
+						$.openWindow({
+							id: 'reg',
+							url: "/pages/login/reg.html"
+						});
+					});
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+			}
+			
+			a#user img {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				margin-top: -0.2em;
+			}
+			
+			header a.mui-icon-extra-notice {
+				margin-top: 0.5em;
+				margin-right: 0.25em;
+			}
+			
+			header a.mui-icon-search {
+				width: 60px;
+			}
+			
+			i {
+				display: block;
+				visibility: hidden;
+				background: #f00;
+				border-radius: 50%;
+				width: 5px;
+				height: 5px;
+				top: 0px;
+				right: 0px;
+				position: absolute;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-pull-left" id="user">
+				<img src="../../images/default.jpg" />
+			</a>
+			<h1 id="title" class="mui-title lang" data-locale="app_name"></h1>
+			<a style="position:relative;width: 30px;height: 100%;margin-top: 10px;" class="mui-icon-extra mui-icon-extra-notice mui-pull-right" id="offCanvasShow">
+				<i></i>
+			</a>
+			<a class="mui-icon mui-icon-search mui-pull-right" style="margin-right: 0px;"></a>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active lang" data-locale="category_top_1" data-wid="tab-top-subpage-1" data-cid="0">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_2" data-wid="tab-top-subpage-1" data-cid="3">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_3" data-wid="tab-top-subpage-1" data-cid="33">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_4" data-wid="tab-top-subpage-1" data-cid="40">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_5" data-wid="tab-top-subpage-1" data-cid="41">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_6" data-wid="tab-top-subpage-1" data-cid="42">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_7" data-wid="tab-top-subpage-1" data-cid="6">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_8" data-wid="tab-top-subpage-1" data-cid="44">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_9" data-wid="tab-top-subpage-1" data-cid="45">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_10" data-wid="tab-top-subpage-1" data-cid="46">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_11" data-wid="tab-top-subpage-1" data-cid="2">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_12" data-wid="tab-top-subpage-1" data-cid="48">
+						</a>
+						<a class="mui-control-item lang" data-locale="category_top_13" data-wid="tab-top-subpage-1" data-cid="32">
+						</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/index.list.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				subpages: [{
+					url: 'category/tab-top-subpage.html',
+					id: 'tab-top-subpage',
+					styles: {
+						top: '81px',
+						bottom: '0px',
+					}
+				}]
+			});
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005
+			});
+			
+			window.addEventListener("updateUserImgEvent", function(event) {
+				if(DEBUG) {
+					alert("updateUserImgEvent[imgURL=" + event.detail.userImgURL + "]");
+				}
+				$('#user img').attr('src', event.detail.userImgURL);
+			});
+
+			window.addEventListener("updateNoticeStatusEvent", function(event) {
+				if(DEBUG) {
+					alert("updateNoticeStatusEvent[flg=" + event.detail.flg + "]");
+				}
+				if(event.detail.flg == "1") {
+					$('i').css('visibility', 'visible');
+					$('i').show();
+				} else {
+					$('i').hide();
+				}
+			});
+
+			window.addEventListener("showActionSheet", function(event) {
+				if(event.detail.isShow !== 'yes') {
+					return;
+				}
+				var pullrefresh_page = plus.webview.getWebviewById("pullrefresh_sub");
+				mui.fire(pullrefresh_page, 'showActionSheet', {
+					isHide: 'no'
+				});
+			});
+			// 自定义点赞监听事件
+			window.addEventListener('praiseid', function(event) {
+				var praiseid = event.detail.praiseid;
+				if(typeof(praiseid) != "undefined") {
+					var page = plus.webview.getWebviewById("pullrefresh_sub");
+					mui.fire(page, 'good', {
+						prid: praiseid
+					});
+				}
+
+			});
+			mui.plusReady(function() {
+				var userPhoto = document.getElementById("user");
+				var searchBtn = $('.mui-icon-search').first();
+				// 将当前分类信息存储起来
+				localStorage.setItem("cid", $('.mui-control-item.mui-active').attr('data-cid'));
+				// 点击用户头像触发该事件
+				userPhoto.addEventListener('click', function(event) {
+					if(Repository.User.isLogin()) {
+						mui.openWindow({
+							id: "user",
+							url: "user/user.html",
+							waiting: {
+								autoShow: false
+							}
+						});
+					}
+				});
+				// 检索按钮事件
+				searchBtn.click(function() {
+					mui.openWindow({
+						id: 'search',
+						url: 'search.html',
+						show: {
+							aniShow: 'slide-in-bottom',
+							duration: 200
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				});
+				// 通知按钮事件
+				mui("header").on("tap", "#offCanvasShow", function() {
+					// var isLogin = plus.storage.getItem("LoginFlag");
+					if(Repository.User.isLogin()) {
+						mui.openWindow({
+							id: 'news',
+							url: 'news.html',
+						});
+					}
+				});
+				// 切换分类的事件处理
+				mui(".mui-scroll").on("tap", ".mui-control-item", function(event){
+					// 显示加载框
+					plus.nativeUI.showWaiting();
+					// 延迟1000ms后获取当前分类并存储起来
+					setTimeout(function(){
+						localStorage.setItem("cid", $('.mui-control-item.mui-active').attr('data-cid'));
+						console.log("cur cid is " + $('.mui-control-item.mui-active').attr('data-cid'));
+						var pullrefresh_sub_page = plus.webview.getWebviewById('pullrefresh_sub');
+						mui.fire(pullrefresh_sub_page, 'initData',{createData:"yes"});
+					}, 1000);
+				});
+			});
+		</script>
+	</body>
+
+</html>

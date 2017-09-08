@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>User</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link href="../../../css/icons-extra.css" rel="stylesheet" />
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #ffffff;
+			}
+			.pimgbox{
+				width:100%;text-align:center;border:1px solid #ffffff;overflow:hidden;
+				/*display:table;*/
+			}
+			#myproducts{
+				background-color: #ffffff;
+			}
+			#myfavourate{
+				background-color: #ffffff;
+			}
+			/*.pimgbox img{
+				display:table-cell; vertical-align:middle;
+				}*/
+			.stautestext{
+				background-color: #F0AD4E;
+				margin-top: 1em;
+				position: absolute;
+				opacity: 0.7;
+				padding: 0 0.5em;
+				color: #FFFFFF;
+				font-size: 12px;
+				
+			}
+			.stautesclose{
+				background-color:#DD524D;
+				margin-top: 1em;
+				position: absolute;
+				opacity: 0.7;
+				padding: 0 0.5em;
+				color: #FFFFFF;
+				font-size: 12px;
+				
+			}
+			.comm-name{
+				  height: 1.5em;
+				  font-size: 14px;
+				  padding-left: 5%;
+				  padding-bottom: 5%;
+				  text-overflow: ellipsis;
+				  overflow: hidden;
+				  color: #222222;
+				  text-align: left;
+				  
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../../css/feedback.css" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css">
+		<link rel="stylesheet" href="../../../css/wu.css">
+		<!--<link href="../../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />-->
+		 <link rel="stylesheet" type="text/css" href="../../../css/public.css">
+	    <link rel="stylesheet" type="text/css" href="../../../css/mobileSelect.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #007aff;"><font size="4" class="lang" data-locale="back"></font></a>
+		    <h1 class="mui-title maintitle"></h1>
+		    <a href="../../setting/setting.html" class="settingbut">
+				<button type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
+					<span class="mui-icon mui-icon-gear"></span>
+				</button>
+			</a>
+		</header>
+		<!--main content start--->
+		<div id="loading" class="ka_userbox">
+			<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+			</div>
+		</div>
+		<div  id="reloadpage" onclick="reloadpage()"  style="display:none ;"><font size="2" class="lang" data-locale="networkerror"></font></div> 
+		<div class="tran-page mui-content" style="display: none;margin-top: -1em;">
+			<ul class="mui-table-view contain">
+				<li class="head-img-box">
+					<div class="editeimg">
+						<img src="../../../images/userPhoto.png" width="150" height="150" class="headimg">
+						<input type="hidden" name="headimgupdate" id="headimgupdate" value=""/>
+					</div>
+					<div style="width: 100%;text-align: center;">
+					<div class="mui-pull-caption" id="editemeg">
+						<a href="#">
+							<button type="button" class="mui-btn mui-btn-grey mui-btn-block editebutton lang" data-locale="userinforbutntext"></button>
+						</a>
+					</div>
+					</div>
+					<br>
+					<div>
+						<ul class="user-num">
+							<li class="user-num-comment">
+								<font size="2"><span class="lang" data-locale="det_pcercomment"></span><span class="commentnum"></span></font>
+								
+							</li>
+							<li class="user-num-sell">
+								<font size="2"><span class="lang" data-locale="det_producednum"></span><span class="sellnum"></span></font>	
+							</li>
+							<!--<li class="user-num-sell2">
+								<font size="2"><span class="lang" data-locale="ticknumber"></span><span class="ticknum"></span></font>											
+							</li>-->
+						</ul>
+					</div>
+					<ul class="user-comment-list commentlists">
+						<li class="user-comment-grid">
+							<img height="30" width="30" src="../../../images/Good.PNG"/>
+							<div class="user-comment-num good"></div>
+						</li>
+						<li class="user-comment-grid2">
+							<img height="30" width="30"  src="../../../images/Normal.PNG"/>
+							<div class="user-comment-num normal"></div>
+						</li>
+						<li class="user-comment-grid2">
+							<img height="30" width="30" src="../../../images/Bad.PNG"/>
+							<div class="user-comment-num bad"></div>
+						</li>
+						<li class="user-comment-grid3 usercommentlist">
+							<a href="../products/commentlist.html#allcommentlist">
+								<span class="mui-icon mui-navigate-right"></span>
+							</a>
+						</li>
+					</ul>
+					<ul class="user-comment-list" style="margin-top: 0.5rem;">
+						<li class="user-point-grid" style="margin-right: 1.5em;">
+							<a href="../../transaction/balance_management.html">
+								<font color="#AAAAAA" size="1" style="font-size: 16px;">
+									<span class="lang" data-locale="userpricetext">
+									</span>
+									<span>&yen;<span id="user_balance"></span></span>
+								</font>
+							</a>
+						</li>
+						<li class="user-point-grid2" style="display: none;">
+								<font size="2" class="point"></font>
+						</li>
+						<li class="user-point-grid">
+							<a href="#" id="trigger4">
+								<font color="#AAAAAA" size="2">
+									<span class="mui-icon mui-icon-location" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
+								</font>
+							</a>
+							<!--<div class="fixWidth">
+							<div class="demo">
+							 	<div id="trigger4">地区选择-级联</div>
+							 </div>
+							</div>-->
+						</li>
+						
+						<!--<li class="user-point-grid" id="area">
+							<a href="#">
+								<font color="#AAAAAA" size="2">
+									<span class="mui-icon mui-icon-location" style="margin-left:-0.3em;"><font size="3" class="address" id="city"></font></span>
+								</font>
+							</a>
+						</li>-->
+					</ul>
+				</li>
+			</ul>
+			<ul class="user-goods-list">
+				<li class="user-goods-title-grid">
+					<div id="products" class="user-product-tab1" onclick="switchs(this)">
+						<font size="2" color="#FFFFFF" class="lang" data-locale="onshowingtext"></font>
+					</div>
+				</li>
+				<li class="user-goods-title-grid">
+					<div id="favourate" class="user-product-tab22" onclick="switchs(this)">
+						<font size="2" color="#FFFFFF" class="lang" data-locale="praiseprotext"></font>
+					</div>
+				</li>
+				<!--<li class="user-goods-title-grid">
+					<div id="friends" class="user-product-tab32" onclick="closed()">
+						<font size="2" color="#FFFFFF" class="lang" data-locale="favoriteprotext"></font>
+					</div>
+				</li>-->
+			</ul>
+			<!--Produced products--->
+			<div id="myproducts" class="mui-slider ka_aboutupro">
+		        <div class="mui-slider-group myproductshow">
+				</div>
+			</div>
+			<!--favourate products--->
+			<div id="myfavourate" class="mui-slider ka_aboutupro" style="height:100%; display:none;">
+		        <div class="mui-slider-group myfavourateshow">
+				</div>
+			</div>
+			<!--favourate person--->
+			<div id="myfriends" class="mui-slider ka_aboutupro" style="height:100%; display:none;">
+		        <div class="mui-slider-group">
+					<div class="mui-slider-item" style="height:25%">
+						<ul class="user-item-list">
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/cbd.jpg">
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="mui-slider-item" style="height:25%">
+						<ul class="user-item-list">
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+							<li class="user-goods-grid detail">
+								<a id="1" href="#">
+									<img height="90%" width="90%" src="../../../images/muwu.jpg">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	        <!--click user information-->
+	        <div id="userEdit" class="bottomStyle mui-popover mui-popover-action mui-popover-bottom">				
+	        	<ul class="mui-table-view tickimgbox">					
+	        		<li style="display: block;" class="mui-table-view-cell">						
+	        			<a id="changeImage" style="color: #9C9C9C" disabled="true"></a >					
+	        		</li>					
+	        		<li style="display: block;" class="mui-table-view-cell">						
+	        			<a id="takePhoto" onclick="getImage()"></a >					
+	        		</li>					
+	        		<li style="display: block;" class="mui-table-view-cell">						
+	        			<a id="chooseFrom" onclick="galleryImg()"></a >					
+	        		</li>				
+	        	</ul>				
+	        	<ul class="mui-table-view tickimgbox">
+	        		<li style="display: block;" class="mui-table-view-cell">						
+	        			<a href="#userEdit"></a >
+	        		</li>				
+	        	</ul>		    
+	        </div>
+		</div>
+			<!--main content end-->
+	</body>
+	<script src="../../../js/mui.min.js"></script>
+	<script src="../../../js/mui.view.js "></script>
+	<script src="../../../js/common.js"></script>
+	<script src="../../../js/citydata.js" type="text/javascript"></script>
+	<script src="../../../js/mobileSelect.js" type="text/javascript"></script>
+	<!--<script src="../../../js/picker/city.data.js"></script>
+	<script src="../../../js/picker/mui.picker.js"></script>
+	<script src="../../../js/picker/mui.poppicker.js"></script>-->
+	<script src='../../../js/feedback.js'></script>
+	<script src="../../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../../js/language.js"></script>
+	<script src="../../../js/sha256.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
+	<script>
+		var positions='0';
+		var mobileSelect4;
+		mui.init({
+			swipeBack: false,
+			preloadPages: [
+				{
+					id: 'detail.html',
+					url: '../products/detail.html'
+				}
+			],
+			beforeback: function() {
+		        var homePage = plus.webview.getWebviewById('home.html');
+				mui.fire(homePage, 'refresh',{refresh:"canRefresh"});
+		    }
+		});
+		function reloadpage(){
+			location.reload();
+		}
+		function closed(){
+			mui.toast(TextMessage.noopen, {
+				duration: 'long',
+				type: 'div'
+			});
+		}
+		//back refresh
+		window.addEventListener('refreshlist', function(e){
+		    location.reload();
+		});
+		window.addEventListener('headimage', function(e){
+			mui.plusReady(function() {
+				//message show
+				var params={};
+				Repository.User.Usershow(params, {
+					ok: function(data) {
+	//					if (!Repository.User.isEmptyEmail()) {
+	//						 return;
+	//					}else{
+							console.log("success");
+							if(data.data.user_photo==""){
+								var user_photo="../../../images/userPhoto.png";
+							}else{
+								var user_photo=data.data.user_photo;
+							}
+							var uname=data.data.user_name;
+							$("#nickname").val(uname);
+							$(".maintitle").html(uname);
+							$(".headimg").attr("src",user_photo);
+						//}
+					},
+					ng: function(data) {
+						if(data == "2002" || data == "2022") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+									id: 'login',
+									url:"../../login/login.html"
+								});
+						}else{
+								mui.back();
+						}
+						console.log("other error code:" + data);
+						
+					},
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
+						$("#reloadpage").show();
+						$(".tran-page").hide();
+						$("#loading").hide();
+					}
+				});
+				
+			});
+		});
+		mui("#editemeg").on("tap", "a", function(e) {
+			mui.openWindow({
+				id: 'useredite',
+				url:"useredite.html"
+			});
+		});
+		//change head image
+		mui(".editeimg").on("tap", ".headimg", function(e) {
+			if(mui.os.plus) {
+				mui("#userEdit").popover("toggle");
+				/*var a = [{
+					title: TextMessage.tackpicture
+				}, {
+					title: TextMessage.gallerychoose
+				}];
+				plus.nativeUI.actionSheet({
+					title: TextMessage.edite_headimage,
+					cancel: TextMessage.cancel,
+					buttons: a
+				}, function(b) {
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							getImage();
+							break;
+						case 2:
+							galleryImg();
+							break;
+						default:
+							break
+					}
+				})*/	
+			}
+			
+		});
+		function compressImg(path) {
+			var currenttime = Date.parse(new Date());
+			plus.zip.compressImage({
+					src: path,
+					dst: "_doc/" + currenttime + ".jpg",
+					quality: 20,
+					overwrite: true,
+					format: "jpg",
+					width: "300px",
+					height: "auto"
+				},
+				function(event) {
+					console.log("Compress success!");
+					var target = event.target;
+					var size = event.size; // （Byte）
+					var width = event.width; // px
+					var height = event.height; // px
+					console.log(size);
+					uploadimage(target)
+				},
+				function(error) {
+					alert("Compress error!" + error.code);
+				});
+		}
+		function getImage() {
+			mui("#userEdit").popover("hide");
+			var c = plus.camera.getCamera();
+			c.captureImage(function(e) {
+				plus.io.resolveLocalFileSystemURL(e, function(entry) {
+					var localurl = entry.toLocalURL();
+					$(".headimg").attr("src",localurl);
+					$("#headimgupdate").val(localurl);
+					//uploadimage(localurl);
+					compressImg(localurl);
+				}, function(e) {
+					console.log("Read the picture file error：" + e.message);
+				});
+			}, function(s) {
+				console.log("error" + s);
+			}, {
+				filename: "_doc/camera/"
+			})
+		}
+		
+		function galleryImg() {
+			mui("#userEdit").popover("hide");
+			plus.gallery.pick(function(a) {
+				plus.io.resolveLocalFileSystemURL(a, function(entry) {
+					var localURL2 = entry.toLocalURL();
+					$(".headimg").attr("src",localURL2);
+					$("#headimgupdate").val(localURL2);
+					compressImg(localURL2);
+					//uploadimage(localURL2);
+		
+				}, function(e) {
+					console.log("Read photo file error：" + e.message);
+				});
+			}, function(a) {}, {
+				filter: "image"
+			})
+		};
+		//Commodity switch
+		function switchs(e) {
+			if(e.id == "products") {
+				// click 出品中アイテム
+				$("#myfavourate").hide();
+				$("#myfriends").hide();
+				$("#myproducts").show();
+				$("#favourate").removeClass("user-product-tab2");
+				$("#favourate").addClass("user-product-tab22");
+				$("#friends").removeClass("user-product-tab3");
+				$("#friends").addClass("user-product-tab32");
+				$("#products").removeClass("user-product-tab12");
+				$("#products").addClass("user-product-tab1");
+			} else if(e.id == "favourate") {
+				// click いいねをしたアイテム
+				$("#myproducts").hide();
+				$("#myfriends").hide();
+				$("#myfavourate").show();
+				$("#products").removeClass("user-product-tab1");
+				$("#products").addClass("user-product-tab12");
+				$("#friends").removeClass("user-product-tab3");
+				$("#friends").addClass("user-product-tab32");
+				$("#favourate").removeClass("user-product-tab22");
+				$("#favourate").addClass("user-product-tab2");
+			} else {
+				// click 気になる
+				$("#myproducts").hide();
+				$("#myfavourate").hide();
+				$("#myfriends").show();
+				$("#products").removeClass("user-product-tab1");
+				$("#products").addClass("user-product-tab12");
+				$("#favourate").removeClass("user-product-tab2");
+				$("#favourate").addClass("user-product-tab22");
+				$("#friends").removeClass("user-product-tab32");
+				$("#friends").addClass("user-product-tab3");
+			}
+		}
+		function clickusercomment(ueid){
+			var commentPage = null;
+			mui(".commentlists").on("tap","li",function(){
+					var ucid = ueid;
+//						if(!commentPage) {
+//							commentPage = plus.webview.getWebviewById('commentlist.html');
+//						}
+//						mui.fire(commentPage, 'ucid', {
+//							id: ucid
+//						});
+						mui.openWindow({
+							id: 'commentlist',
+							url: '../products/commentlist.html',
+							extras:{
+								ucid:ucid
+							}
+						});
+			});
+		}
+		function clickdetail(){
+			var detailPage = null;
+			mui('.detail').on('tap', 'a', function(e) {
+				var id = this.getAttribute('id');
+				if(!detailPage) {
+					detailPage = plus.webview.getWebviewById('detail.html');
+				}
+				mui.fire(detailPage, 'cid', {
+					id: id
+				});
+				mui.openWindow({
+					id: 'detail.html'
+				});
+			});
+		}
+		function clickeditepro(){
+			var editePage = null;
+			mui('.codedite').on('tap', 'a', function(e) {
+				var eid = this.getAttribute('id');
+//				if(!editePage) {
+//					editePage = plus.webview.getWebviewById('product_login.html');
+//				}
+//				mui.fire(editePage, 'eid', {
+//					id: eid
+//				});
+				mui.openWindow({
+					id: 'product_login',
+					url:"../products/product_login.html?eid="+eid,
+					extras:{
+						eid:eid
+					}
+				});
+			});
+		}
+		var imgwidth=parseInt($(window).width())/3-9;
+		//show user information
+		function showuser(results){
+			$(".myfavourateshow").empty();
+			$(".myproductshow").empty();
+			var ucomentnum=results.data.comment_cnt;
+			var unick_name=results.data.nick_name;
+			var user_balance=Math.floor(results.data.user_balance).toLocaleString();
+			$("#user_balance").text(user_balance);
+			if(results.data.user_photo==""){
+				var user_photo="../../../images/userPhoto.png";
+			}else{
+				var user_photo=results.data.user_photo;
+			}
+			var user_point=results.data.user_point;
+			var ucomoditynum=results.data.exhibit_cnt;
+			var ugoodnum=results.data.user_opinion_h_count;
+			var unormalnum=results.data.user_opinion_m_count;
+			var badnum=results.data.user_opinion_l_count;
+			var uname=results.data.user_name;
+			if(results.data.address=="" || results.data.address=="undefined"){
+				var uaddress = "未設定";
+			}else{
+				var uaddress=results.data.address;
+			}
+			var uintroduce=results.data.introduce;
+			var uticknum=results.data.user_ticket;
+			$(".headimg").attr("src",user_photo);
+			$(".commentnum").html(ucomentnum);
+			$(".sellnum").html(ucomoditynum);
+			$(".good").html(ugoodnum);
+			$(".normal").html(unormalnum);
+			$(".bad").html(badnum);
+			$(".address").html(uaddress);
+			$("#nickname").val(uname);
+			$(".point").html(user_point);
+			$(".maintitle").html(uname);
+			//$(".maintitle").attr("style","margin-left:-10%;");
+			$("#introduce").val(uintroduce);
+			$(".ticknum").html(uticknum);
+			var language=results.data.talk_flag;
+			var userlanageval=document.getElementsByName('userlanageval');
+			for(var ukey=0;ukey<userlanageval.length;ukey++){
+				var eachvalue=userlanageval[ukey].value;
+				if(language.indexOf(eachvalue) >= 0){
+					userlanageval[ukey].checked="checked";
+				}
+			}
+			var toppx=0;
+			var toppxpra=0;
+			var exhibit_commdata=results.data.exhibit_comm;
+			console.log(exhibit_commdata);
+			var exhibit_html='<div class="mui-slider-item" style="height:25%">';
+				exhibit_html+='<ul class="user-item-list">';
+			for(var ex=0; ex<exhibit_commdata.length;ex++){
+				var k = ex + 1 * 1;
+				var commexid=exhibit_commdata[ex].commodity_id;
+				var commeximg_url=exhibit_commdata[ex].img_thu_url;
+				var realwidth=exhibit_commdata[ex].comm_img_width;
+				var realheight=exhibit_commdata[ex].comm_img_height;
+				var commstatus=exhibit_commdata[ex].status;
+				var exhibitcomname=HTMLDecode(exhibit_commdata[ex].comm_name);
+				var price = exhibit_commdata[ex].price ? parseFloat(exhibit_commdata[ex].price).toLocaleString() : "0";
+				var oribi=realheight/realwidth;
+				var showheight=imgwidth*oribi;
+				var cha1=showheight-imgwidth;
+				if(cha1>0){
+					toppx=(cha1/2)*-1;
+				}else{
+//					chah=imgwidth-showheight*1;
+//					if(chah=="NaN"){
+//						toppx=72/2;
+//					}else{
+//						toppx=chah/2;
+//					}
+					toppx=0;
+					//console.log(showheight);
+					
+					//console.log(toppx);
+				}
+				if(commstatus==0 || commstatus==4){
+					var classsort="codedite";
+				}else{
+					var classsort="detail";
+				}
+				exhibit_html+='<li class="user-goods-grid '+classsort+'">';
+				if(commstatus!=0){
+					if(commstatus==4){
+						exhibit_html+='<div class="stautesclose">'+TextMessage.tranStatusclose+'</div>';
+					}else{
+						exhibit_html+='<div class="stautestext">'+TextMessage.tranStatusRequest+'</div>';
+					}
+					
+				}
+				exhibit_html+='<a id="'+commexid+'" href="#">';
+				exhibit_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img class="exhibit" style="width: 100%;margin-top:'+toppx+'px;" data-original="'+commeximg_url+'"></div>';
+				exhibit_html+='<div class="mui-text-left" style="font-size:14px;"><span>&yen;<span id="comm_price">'+price+'</span></span></div>';
+				exhibit_html+='<div class="comm-name mui-col-sm-12">'+exhibitcomname+'</div>';
+				exhibit_html+='</a>';
+				exhibit_html+='</li>';
+				var yunum=k%6;
+				if(yunum==0 || k==exhibit_commdata.length){
+					exhibit_html+='</ul></div>';
+				}
+				if(yunum==0 && k< exhibit_commdata.length){
+					exhibit_html+='<div class="mui-slider-item" style="height:25%">';
+					exhibit_html+='<ul class="user-item-list">';
+				}
+			}
+			$(".myproductshow").html(exhibit_html);
+			//praise commodity list
+			var praise_commdata=results.data.praise_comm;
+			var praise_html='<div class="mui-slider-item" style="height:25%">';
+				praise_html+='<ul class="user-item-list">';
+			for(var pi=0; pi<praise_commdata.length;pi++){
+				var ki = pi + 1 * 1;
+				var praisepid=praise_commdata[pi].commodity_id;
+				var praiseimg_url=praise_commdata[pi].img_thu_url;
+				var realwidthpra=praise_commdata[pi].comm_img_width;
+				var realheightpra=praise_commdata[pi].comm_img_height;
+				var praisecomname=HTMLDecode(praise_commdata[pi].comm_name);
+				var oribipra=realheightpra/realwidthpra;
+				var showheightpra=oribipra*imgwidth;
+				var cha2=showheightpra-imgwidth;
+				var price = praise_commdata[pi].price ? parseFloat(praise_commdata[pi].price).toLocaleString() : "0";
+				if(cha2>0){
+					toppxpra=(cha2/2)*(-1);
+				}else{
+//					chah2=imgwidth-showheightpra*1;
+//					if(chah2=="NaN"){
+//						toppxpra=72/2;
+//					}else{
+//						toppxpra=chah2/2;
+//					}
+					toppxpra=0;
+				}
+				praise_html+='<li class="user-goods-grid detail">';
+				praise_html+='<a id="'+praisepid+'" href="#">';
+				praise_html+='<div class="pimgbox" style="height:'+imgwidth+'px;"><img style="width: 100%;margin-top:'+toppxpra+'px;" src="'+praiseimg_url+'" onerror="this.src='+"'../../../images/nopic.jpg'"+'"></div>';
+				praise_html+='<div class="mui-text-left" style="font-size:14px;"><span>&yen;<span id="comm_price">'+price+'</span></span></div>';
+				praise_html+='<div class="comm-name mui-col-sm-12">'+praisecomname+'</div>';
+				praise_html+='</a>';
+				praise_html+='</li>';
+				var kiunum=ki%6;
+				if(kiunum==0 || ki==praise_commdata.length){
+					praise_html+='</ul></div>';
+				}
+				if(kiunum==0 && ki< praise_commdata.length){
+					praise_html+='<div class="mui-slider-item" style="height:25%">';
+					praise_html+='<ul class="user-item-list">';
+				}
+			}
+			$("img.exhibit").lazyload({
+				threshold: 200,
+				placeholder: "../../../images/nopic.jpg",
+				effect: "fadeIn",
+				failure_limit : 10
+			});
+			$(".myfavourateshow").html(praise_html);
+			mui('.mui-slider').slider().gotoItem(0);
+			var userid=results.myid;
+			clickusercomment(userid);
+			clickdetail();
+			clickeditepro();
+		}
+		function uploadimage(path){
+		var currenttime = Date.parse(new Date());
+		plus.zip.compressImage({
+				src: path,
+				dst: "_doc/" + currenttime + ".jpg",
+				quality: 20,
+				overwrite: true,
+				format: "jpg",
+				width: "auto",
+				height: "auto"
+			},
+			function(event) {
+				console.log("Compress success!");
+				var target = event.target;
+				var size = event.size; // （Byte）
+				var width = event.width; // px
+				var height = event.height; // px
+				mui.plusReady(function() {
+					submitvalues(target);//upload
+				});
+			},
+			function(error) {
+				console.log("Compress error!" + error.message);
+			});
+			function submitvalues(target){
+				var serverurl=Api.url.User.setImg;
+				var wt = plus.nativeUI.showWaiting();
+				var task = plus.uploader.createUpload(serverurl, {
+					method: "post"
+				}, function(t, status) {
+					if(status == 200) {
+						//console.log("upload success:" + t.responseText);
+						console.log("upload success!");
+						mui.toast(TextMessage.updatesuccessinfo, {
+							duration: 'long',
+							type: 'div'
+						});
+						wt.close();
+						//mui.back();
+					} else {
+						console.log("upload error:" + status);
+						console.log("upload error:" + t.responseText);
+						wt.close();
+					}
+				});
+				//add parameter
+				task.addData("tokencheck", Api.getToken()); //Api.getToken()
+				task.addData("signcheck", Api.createSignInfo());
+				task.addFile(target, { key: "image" });
+				task.start();
+			}
+		}
+		//submit userinformation form
+		function userinfosubmit(){
+			var nickname=document.userinfosub.nickname.value;
+			var introduce=document.userinfosub.introduce.value;
+			var userlanageval=document.getElementsByName('userlanageval');
+			var talk_flag="";
+			for(var ui=0;ui<userlanageval.length;ui++){
+				if(userlanageval[ui].checked==true){
+					talk_flag+=","+userlanageval[ui].value;
+				}
+			}
+			var talk_flagtru=talk_flag.substr(1);
+			if(nickname.trim()==""){
+				mui.toast(TextMessage.nicknamenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(nickname.trim().length>10){
+				mui.toast(TextMessage.username_error, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(talk_flagtru==""){
+				mui.toast(TextMessage.ulanguagenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			mui.plusReady(function() {
+				//compress Image
+				var path=$("#headimgupdate").val();
+				var serverimg=$(".headimg").attr("src");
+				var params4={
+					"flag":"info",
+					"nick_name":nickname.trim(),
+					"talk_flag":talk_flagtru,
+					"introduce":introduce
+				};
+				Repository.User.userinfo(params4, {
+					ok: function(data) {
+						$(".maintitle").html(nickname.trim());
+//						if (!Repository.User.isEmptyEmail()) {
+//								 //alert("没有登录");
+//								 return;
+//						} else {
+							//console.log("success");
+						 	console.log("success");
+							mui.toast(TextMessage.updatesuccessinfo, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.back();
+						//}
+						
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						} 
+						if(data=="2002" || data=="2022"){
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						console.log("other error code:" + data);
+						
+					}
+				});
+			});
+		}
+		mui.plusReady(function() {
+			//message show
+			$(".head-img-box").attr("style","width: "+parseInt($(window).width())+"px;");
+			var params={};
+			Repository.User.Usershow(params, {
+				ok: function(data) {
+					console.log(data.data)
+					var address=data.data.address;
+					if (address == "") {
+						address = "未設定";
+					}
+					positions=chosecictval(address);
+					console.log("positions value is " + positions);
+					mobileSelect4 = new MobileSelect({
+					    trigger: '#city',
+					    title: '',
+					    wheels: cityData, 
+					    position:positions+",",
+					    //position:"12",
+					    //value2:1,
+					    transitionEnd:function(indexArr, data){
+					    	if(indexArr=="NAN" || indexArr == "NaN" || typeof(indexArr) == "undefined"){
+					    		indexArr=positions;
+					    	}
+					        console.log("indexArr value is " + indexArr);
+					    },
+					    callback:function(indexArr, data){
+					        console.log(data);
+					        updateaddress(data[0].id);
+					    }  
+					});
+//					if (!Repository.User.isEmptyEmail()) {
+//						 return;
+//					}else{
+						console.log("success");
+						//console.dir(data);
+						showuser(data);
+						$("#loading").hide();
+						$(".tran-page").show();
+					//}
+				},
+				ng: function(data) {
+					if(data == "2002" || data == "2022") {
+						mui.toast(TextMessage.test, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+					}else{
+							mui.back();
+					}
+					console.log("other error code:" + data);
+					
+				},
+				error:function(errortypetext){
+					$("#reloadpage").html(errortypetext);
+					$("#reloadpage").show();
+					$(".tran-page").hide();
+					$("#loading").hide();
+				}
+			});
+			
+	});
+	
+	function chosecictval(addressText){
+		console.log("addressText is " + addressText);
+		var cityValueArray = cityData[0].data;
+		for(var ca = 0; ca < cityValueArray.length; ca++){
+			if(cityValueArray[ca].value == addressText){
+				return ca;
+			}
+		}
+	}
+	
+	function updateaddress(addresscity){
+		var parms2={
+			"flag":"address",
+			"address_id":addresscity
+		};
+		Repository.User.userinfo(parms2, {
+			ok: function(data) {
+//								if (!Repository.User.isEmptyEmail()) {
+//								 return;
+//								} else {
+				 console.log("success");
+				//}
+				//console.log("success");
+				//console.dir(data);
+//								mui.toast(TextMessage.updatesuccessinfo, {
+//									duration: 'long',
+//									type: 'div'
+//								});
+			},
+			ng: function(data) {
+				Log.d(data);
+				if(data == "1000") {
+					mui.toast(TextMessage.test, {
+						duration: 'long',
+						type: 'div'
+					});
+					mui.openWindow({
+						id: 'login',
+						url:"../../login/login.html"
+					});
+				}
+				if(data == "2002") {
+					mui.toast(TextMessage.userng, {
+						duration: 'long',
+						type: 'div'
+					});
+					mui.openWindow({
+						id: 'login',
+						url:"../../login/login.html"
+					});
+				}
+				console.log("other error code:" + data);
+				
+			}
+		});
+}
+	$('#changeImage').text(TextMessage.edite_headimage);
+	$('#takePhoto').text(TextMessage.tackpicture);
+	$('#chooseFrom').text(TextMessage.gallerychoose);
+	$("[href='#userEdit']").html("<b>" + TextMessage.cancel + "</b>");
+	//address picker
+//	(function($, doc) {
+//		$.init();
+//		$.ready(function() {
+//			mui.plusReady(function() {
+//				//message show
+//				var params={};
+//				Repository.User.Usershow(params, {
+//					ok: function(data) {
+//						console.log("get address success");
+//						var address=data.data.address;
+//						//addresspicker(address);
+//					},
+//					ng: function(data) {
+//						mui.back;
+//						console.log(data);
+//						console.log("other error code:" + data);
+//						
+//					}
+//				});
+//			});
+//			function chosecictval(addresstext){
+//				for(var ca=0;ca<cityData.length;ca++){
+//					if(cityData[ca].text==addresstext){
+//						return cityData[ca].value;
+//						break;
+//					}
+//				}
+//			}
+//			
+//			function addresspicker(addresstext){
+//				//address picker
+//				var cityPicker = new mui.PopPicker();
+//				cityPicker.setData(cityData);
+//				var cityvalue=chosecictval(addresstext);
+//				cityPicker.pickers[0].setSelectedValue(cityvalue);
+//				var showcityPickerButton = doc.getElementById('area');
+//				var cityResult = doc.getElementById('city');
+//				showcityPickerButton.addEventListener('tap', function(event) {
+//					cityPicker.show(function(items) {
+//						cityResult.innerText = items[0].text;
+//						var addresscity=items[0].value;
+//						var parms2={
+//							"flag":"address",
+//							"address_id":addresscity
+//						};
+//						Repository.User.userinfo(parms2, {
+//							ok: function(data) {
+////								if (!Repository.User.isEmptyEmail()) {
+////								 return;
+////								} else {
+//								 console.log("success");
+//								//}
+//								//console.log("success");
+//								//console.dir(data);
+////								mui.toast(TextMessage.updatesuccessinfo, {
+////									duration: 'long',
+////									type: 'div'
+////								});
+//							},
+//							ng: function(data) {
+//								Log.d(data);
+//								if(data == "1000") {
+//									mui.toast(TextMessage.test, {
+//										duration: 'long',
+//										type: 'div'
+//									});
+//									mui.openWindow({
+//										id: 'login',
+//										url:"../../login/login.html"
+//									});
+//								}
+//								if(data == "2002") {
+//									mui.toast(TextMessage.userng, {
+//										duration: 'long',
+//										type: 'div'
+//									});
+//									mui.openWindow({
+//										id: 'login',
+//										url:"../../login/login.html"
+//									});
+//								}
+//								console.log("other error code:" + data);
+//								
+//							}
+//						});
+//					});
+//				}, false);
+//			}
+//		});
+//	})(mui, document);	
+	</script>
+
+</html>
