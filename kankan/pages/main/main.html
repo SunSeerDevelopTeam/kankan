@@ -111,6 +111,10 @@
 						} else if(targetTab == "products/request.html") {
 							var homePage = plus.webview.getWebviewById('products/request.html');
 							mui.fire(homePage, 'requestpage');
+							var productLoginPage = plus.webview.getWebviewById('products/product_login.html');
+							mui.fire(productLoginPage, 'hideSheet', {
+							    isHide: 'yes'
+						    });
 						}
 
 					}
@@ -119,6 +123,10 @@
 				//若为iOS平台或非首次显示，则直接显示
 				if(mui.os.ios || aniShow[targetTab]) {
 					plus.webview.show(targetTab);
+					var productLoginPage = plus.webview.getWebviewById('products/product_login.html');
+					mui.fire(productLoginPage, 'hideSheet', {
+					    isHide: 'yes'
+				    });
 				} else {
 					//否则，使用fade-in动画，且保存变量
 					var temp = {};

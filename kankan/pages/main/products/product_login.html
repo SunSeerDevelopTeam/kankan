@@ -311,6 +311,13 @@
 	window.addEventListener("refreshtop", function(event) {
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
 	});
+	window.addEventListener("hideSheet", function(event) {
+		if (event.detail.isHide != 'yes') {
+			return;
+		}
+		mui("#photoLeft").popover('hide');
+		mui("#photoRight").popover('hide');
+	});
 	function daojishu(){
 		var delength=$("#comm_detail").val().trim().length;
 		var cha=1000-delength;

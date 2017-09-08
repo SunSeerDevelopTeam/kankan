@@ -135,7 +135,7 @@
 	position: relative;
     bottom: 10%;
 	padding-left: 0.5em;
-	background-color:#999999;
+	background-color:rgba(153,153,153,.4);
 	color:#FFFFFF;
 	font-size:14px;
 	width:65%;
