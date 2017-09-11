@@ -24,7 +24,7 @@
 		<div class="mui-content" style="display: none;">
 			<form method="post" name="userinfosub" id="userinfosub">
 				<div class="ka_editebox">
-					<div class="head-img-box ka_userimagebox editeimg" style="width: 100%;margin-left: -43%;">
+					<div class="head-img-box ka_userimagebox editeimg" style="width: 20%;">
 						<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg" />
 					</div>
 					<div class="ka_usernicknamebox">
@@ -272,6 +272,7 @@
 		}
 		//change head image
 		mui(".editeimg").on("tap", ".headimg", function(e) {
+			$("#nickname").blur();
 			if(mui.os.plus){
 				mui("#userEdit").popover("toggle");
 				/*var a = [{
