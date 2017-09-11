@@ -29,6 +29,7 @@
 
 .comm-item {
 	/*height: 200px;*/
+	padding-bottom: 2px;
 }
 
 .item-tap {
@@ -73,7 +74,7 @@
 
 .comm-name {
 	font-size: 14px;
-	height: 55%;
+	height: 60%;
 	padding-left: 5%;
 	padding-bottom: 5%;
 	text-overflow: ellipsis;
@@ -83,7 +84,7 @@
 
 .comm-price {
 	font-size: 14px;
-	height: 45%;
+	height: 40%;
 	padding-left: 5%;
 	padding-bottom: 5%;
 	font-weight: 800;

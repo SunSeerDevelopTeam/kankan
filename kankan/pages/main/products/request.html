@@ -322,7 +322,7 @@
 								var trans_typetext = TextMessage.transWaitOrder;
 							}
 						} else if (status == "2") {
-							if (deliver == 0 && (sellApplyFlag == 1 || buyApplyFlag == 1) && (sellAgreeFlag==0 && buyAgreeFlag==0)) {
+							if ((deliver == 0 || deliver == 1) && (sellApplyFlag == 1 || buyApplyFlag == 1) && (sellAgreeFlag==0 && buyAgreeFlag==0)) {
 								//发起人为卖方
 								if (sellApplyFlag == 1) {
 		                        	//登录为卖方
@@ -366,10 +366,10 @@
 							toppx = 0;
 						}
 						var html = new Util.StringBuilder();
-						html.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-4 translate"><a id="{0}" href="#">', transid)
+						html.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-4 translate" style="padding: 10px 1px 0 14px;"><a id="{0}" href="#">', transid)
 							.appendFormat('<div class="ka_imgoption" style="height:{0}px;text-align:center;{3}}"><img class="mui-media-object" data-original="{1}" style="height: auto;width:100%;margin-top:{2}px;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '"></div>', imgwidth, comm_img == "" ? "../../../images/nopic.jpg" : comm_img, toppx,toppx < 0 ?"":"display: table-cell;vertical-align:middle;")
-							.appendFormat('<div class="mui-media-body">{0}</div>', comm_name)
-							.appendFormat('<div class="mui-pull-left" style="{0}">{1}</div></a>', trans_type == 0 ? "font-size:12px;color:#F0AD4E;" : "font-size:12px;color:#C7254E;", trans_typetext)
+							.appendFormat('<div class="mui-media-body" style="height:16px;">{0}</div>', comm_name)
+							.appendFormat('<div class="mui-pull-left" style="font-size:12px;color:#F0AD4E;width:100%;text-align:left;text-overflow: ellipsis;overflow: hidden;">{0}</div></a>', trans_typetext)
 							//.appendFormat('<div class="{0}">{1}</div>', trans_type == 0 ? "kankan_jyz" : "kankan_jycl", trans_typetext)
 							.appendFormat('<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 20px; height: 20px;display:{0};"></div>', transprocount > 1 ? "" : "none")
 							.appendFormat('<div class="mui-pull-left kankan_jyimgbox"><img src="{0}" style="border-radius: 50%; width: 20px; height: 20px;">', my_photo == "" ? "../../../images/userPhoto.png" : my_photo)
@@ -438,7 +438,7 @@
 								var otrans_typetext = TextMessage.transOrder;
 							}
 						} else if (ostatus == "2") {
-							if (otrans_deliver == 0 && (otrans_sellApplyFlag == 1 || otrans_buyApplyFlag == 1) && (otrans_sellAgreeFlag==0 && otrans_buyAgreeFlag==0)) {
+							if ((otrans_deliver == 0 || otrans_deliver == 1) && (otrans_sellApplyFlag == 1 || otrans_buyApplyFlag == 1) && (otrans_sellAgreeFlag==0 && otrans_buyAgreeFlag==0)) {
 								//发起人为卖方
 								if (otrans_sellApplyFlag == 1) {
 		                        	//登录为卖方
@@ -488,8 +488,8 @@
 						var html2 = new Util.StringBuilder();
 						html2.appendFormat('<li class="mui-table-view-cell mui-media mui-col-xs-4 translate"><a id="{0}" href="#">', otransid)
 							.appendFormat('<div class="ka_imgoption" style="height:{0}px;{3}}"><img class="mui-media-object" data-original="{1}" style="height: auto;width:100%;margin-top:{2}px;vertical-align:middle;" onerror="this.src=' + "'../../../images/nopic.jpg'" + '"></div>', imgwidth, ocomm_img == "" ? "../../../images/nopic.jpg" : ocomm_img, otoppx,otoppx < 0 ?"":"display: table-cell;vertical-align:middle;")
-							.appendFormat('<div class="mui-media-body">{0}</div>', ocomm_name)
-							.appendFormat('<div class="mui-pull-left trans_typetexts" style="{0}">{1}</div></a>', trans_type == 0 ? "font-size:12px;color:#F0AD4E;" : "font-size:12px;color:#C7254E;",otrans_typetext)
+							.appendFormat('<div class="mui-media-body" style="height:16px;">{0}</div>', ocomm_name)
+							.appendFormat('<div class="mui-pull-left trans_typetexts" style="font-size:12px;color:#F0AD4E;">{0}</div></a>', otrans_typetext)
 							//.appendFormat('<div class="{0}">{1}</div>', otrans_type == 0 ? "kankan_jyz" : "kankan_jycl", otrans_typetext)
 							.appendFormat('<div class="kankan_morecoin"><img src="../../../images/morebut.png" style="width: 20px; height: 20px;display:{0};"></div>', otransprocount > 1 ? "" : "none")
 							.appendFormat('<div class="mui-pull-left kankan_jyimgbox"><img src="{0}" style="border-radius: 50%; width: 20px; height: 20px;">', omy_photo == "" ? "../../../images/userPhoto.png" : omy_photo)

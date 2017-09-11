@@ -191,10 +191,12 @@ body .mui-table-view-cell.mui-active{
 .requestbox {
 	margin-left: 0.69em;
 }
-
+.mui-navigate-right:after, .mui-push-right:after {
+	right: 12px;
+}
 .requeststop {
 	background-color: #DD524D;
-	width: 6em;
+	width: 8em;
 	height: 2.5em;
 	border: 1px #DD524D solid;
 	border-radius: 2px;
@@ -206,7 +208,7 @@ body .mui-table-view-cell.mui-active{
 
 .requestsuccess {
 	background-color: #2AC845;
-	width: 6em;
+	width: 8em;
 	height: 2.5em;
 	border: 1px #2AC845 solid;
 	border-radius: 2px;
@@ -596,7 +598,11 @@ body .mui-table-view-cell.mui-active{
 	width: 70%;
 	height: 0.65rem;
 	border: none;
-	ime-mode:Disabled;
+	ime-mode: disabled;
+	-webkit-ime-mode: disabled;
+	-moz-ime-mode: disabled;
+	-o-ime-mode: disabled;
+	-ms-ime-mode: disabled;
 }
 .inputPrice .inputSpan {
 	width: 28%; 

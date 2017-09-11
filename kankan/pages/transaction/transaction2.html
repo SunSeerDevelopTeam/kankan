@@ -276,6 +276,7 @@
 				};
 				page++;
 				trans_flow('transEdite', params,'');
+				mui(".stop").off("tap", "#stopTransaction");
 				mui(".stop").on("tap","#stopTransaction",function(){
 					stopTransaction();
 				});
@@ -1102,6 +1103,18 @@
 									}
 								} else if (trans_deliver == 0) {
 									tranStatusVal = TextMessage.waitSellerSend;
+								} else if (trans_deliver == 1 && sellApplyFlag == 1) {
+									if (cur_user_id == seller_id) {
+										tranStatusVal = TextMessage.waitBuyerAgree;
+									} else {
+										tranStatusVal = TextMessage.agreeTerminate;
+									}
+								} else if (trans_deliver == 1 && buyApplyFlag == 1) {
+									if (cur_user_id == buyer_id) {
+										tranStatusVal = TextMessage.waitSellerAgree;
+									} else {
+										tranStatusVal = TextMessage.agreeTerminate;
+									}
 								} else if (trans_deliver == 1) {
 									tranStatusVal = TextMessage.waitBuyerConfirm;
 								}

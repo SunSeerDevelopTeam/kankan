@@ -109,16 +109,16 @@
 					</ul>
 				</div>
 				<!--商品价格start-->
-				<div>
+				<div class="priceContent" style="display: none;">
 					<h5 class="ka_proloh5" id="commodityPrice" style="margin: 1.5em 0 1.5em 0.5em"></h5>
 					<div class="inputPrice">
-						<input id="number_price" type="number" oninput="if(value.length>7)value=value.slice(0,7)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="getNumber()" class="inputNumber" disabled="true"/>
+						<input id="number_price" type="tel" oninput="if(value.length>7)value=value.slice(0,7)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="getNumber()" class="inputNumber"/>
 						<span class="inputSpan">&yen;<span id="input_price"></span></span>
 					</div>
                 </div>
 				<!--商品价格end-->
 				<!--Trading interest start-->
-				<div class="tradeFees">
+				<div class="tradeFees" style="display: none;">
 					<ul class="mui-table-view ka_prologbox">
 						<li class="mui-table-view-cell" style="width: 100%;">
 						    <span class="ka_proinfo mui-col-xs-9" id="transaction_fees"></span>
@@ -328,6 +328,12 @@
 	//getNumber
 	function getNumber() {
 		var number_price = $("#number_price").val();
+		if (isNaN(number_price)) {
+			$("#input_price").html('0');
+			$("#trans_fees").html('0');
+			$("#trading_income").html('0');
+			return;
+		}
 		$("#input_price").html(parseFloat(Math.floor(number_price)).toLocaleString());
 	    $("#trans_fees").html(parseFloat(Math.floor(number_price * charge_rate / 100)).toLocaleString());
 	    $("#trading_income").html(parseFloat(Math.floor(number_price) - Math.floor(number_price * charge_rate / 100)).toLocaleString());
@@ -402,6 +408,13 @@
 	    var price = results.data.price;
 	    var rate = results.data.service_charge;
 	    var profile = results.data.profit;
+	    if (business == '1') {
+	    	$(".priceContent").show();
+	    	$(".tradeFees").show();
+	    } else {
+	    	$(".priceContent").hide();
+	    	$(".tradeFees").hide();
+	    }
 		if(commstautes=="0"){
 		//waste product
 			$("#waste").show();
@@ -871,12 +884,14 @@ document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
 	var businessval=$("#business").val();
 	if(businessval=="0"){
 		$("#business").val("1");
-		$("#number_price").removeAttr("disabled");
+		$(".priceContent").show();
+		$(".tradeFees").show();
 		$("#pointbuybtn").removeClass("ka_exchangegrey");
 		$("#pointbuybtn").addClass("ka_exchangered");
 	}else{
 		$("#business").val("0");
-		$("#number_price").attr("disabled", "true");
+		$(".priceContent").hide();
+		$(".tradeFees").hide();
 		$("#pointbuybtn").removeClass("ka_exchangered");
 		$("#pointbuybtn").addClass("ka_exchangegrey");
 	}
@@ -891,7 +906,8 @@ document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
 document.getElementById('freebuybtn').addEventListener('tap', function(e) {
 	inputblur();
 	var gratisval=$("#gratis").val();
-	$("#number_price").attr("disabled", "true");
+    $(".priceContent").hide();
+    $(".tradeFees").hide();
 	if(gratisval=="0"){
 		$("#gratis").val("1");
 		$("#freebuybtn").removeClass("ka_exchangegrey");
@@ -965,6 +981,16 @@ function wastes(){
 	mui.plusReady(function() {
 		Repository.Commodity.Commoditypublish(paramsw, {
 			ok:function(data){
+				if (isNaN($("#number_price").val())) {
+					$("#input_price").html('0');
+					$("#trans_fees").html('0');
+					$("#trading_income").html('0');
+					mui.toast(TextMessage.pro_pricetest, {
+						duration: 'long',
+						type: 'div'
+					});
+					return false;
+				}
 				if($("#number_price").val()=="") {
 					mui.toast(TextMessage.pro_pricenulltest, {
 						duration: 'long',
