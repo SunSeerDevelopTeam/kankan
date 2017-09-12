@@ -18,7 +18,7 @@
 			<h1 class="mui-center mui-title lang" data-locale="confirm_account"></h1>
 		</header>
 		<div class="mui-content" style="font-size: 15px;">
-			<form action="" method="post" name="" id="">
+			<form action="" method="post" name="" id="" style="height:500px;">
 				<!--bank-->
 				<div class="tradeFees" >
 					<ul class="mui-table-view ka_prologbox">
@@ -43,7 +43,7 @@
 						<li class="mui-table-view-cell" style="display: -webkit-box;">
 						    <div style="width: 100%;">
 					        	<span class="lang" data-locale="branch_number"></span>
-					        	<input type="number" id="branch_number" class="mui-pull-right" onchange="getBranchNumber()" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="width: 50%; height: auto; padding: 0; ime-mode:Disabled;"/>
+					        	<input type="tel" id="branch_number" class="mui-pull-right" oninput="if(value.length>3)value=value.slice(0,3)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="width: 30%; height: auto; padding: 0; ime-mode:Disabled;"/>
 					        </div>
 						</li>
 					</ul>
@@ -54,7 +54,7 @@
 						<li class="mui-table-view-cell" style="display: -webkit-box;">
 						    <div style="width: 100%;">
 					        	<span class="lang" data-locale="account_number"></span>
-					        	<input type="number" id="card_number" onchange="getCardNumber()" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="width: 50%; height: auto; padding: 0;ime-mode:Disabled;" class="mui-pull-right" maxlength="7"/>
+					        	<input type="tel" id="card_number" oninput="if(value.length>7)value=value.slice(0,7)" onchange="getCardNumber()" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="width: 30%; height: auto; padding: 0;ime-mode:Disabled;" class="mui-pull-right"/>
 					        </div>
 						</li>
 						<li class="mui-table-view-cell" style="display: -webkit-box;">
@@ -205,39 +205,29 @@
 			}
 			return testarr;
 		}
-		
-		function getBranchNumber() {
-			var branch_number = $("#branch_number").val();
-			if (branch_number.length > 3) {
-				mui.toast(TextMessage.branchnumberRangeText, {
-					duration: 'long',
-					type: 'div'
-			    });
-		    }
+
+        function getCardNumber() {
+			var regStr = /^[0-9]*$/;
+			var account_number = $("#card_number").val();
+			if (regStr.test(account_number)) {
+				if (account_number.length > 0 && account_number.length < 7) {
+					var x = PrefixInteger(account_number, 7);
+				    $("#card_number").val(x);
+				}
+			} else {
+				mui.alert(TextMessage.accountnumberText);
+			}
 		}
-		//num表示输入的数字，n表示要显示的几位数
+
 		function PrefixInteger(num, n) {
             return (Array(n).join(0) + num).slice(-n);
         }
 
-		function getCardNumber() {
-			var branch_number = $("#card_number").val();
-			if (branch_number.length > 0 && branch_number.length < 7) {
-                var x = PrefixInteger(branch_number, 7);
-				$("#card_number").val(x);
-			}
-			if (branch_number.length > 7) {
-				mui.toast(TextMessage.cardnumberRangeText, {
-					duration: 'long',
-					type: 'div'
-			    });
-		    }
-		}
-		
 		function finish() {
 			var bank_code = $("#branch_id").val();
 			var account_type = $("#accountSelect").val();
 			var branch_number = $("#branch_number").val();
+			var numberReg = /^[0-9]*$/;
 			var account_number = $("#card_number").val();
 			var surname = $("#name_front").val();
 			var name = $("#name_behind").val();
@@ -262,6 +252,16 @@
 				});
 				return;
 			}
+			if (numberReg.test(branch_number)) {
+				if (branch_number.length > 0 && branch_number.length < 3) {
+					mui.alert(TextMessage.branchnumberText);
+			        return;
+				}
+			} else {
+				mui.alert(TextMessage.branchnumberText);
+			    return;
+			}
+			
 			if (account_number == "") {
 				mui.toast(TextMessage.accountNumberNull, {
 					duration: 'long',
@@ -269,6 +269,12 @@
 				});
 				return;
 			}
+			
+			if (!numberReg.test(account_number)) {
+				mui.alert(TextMessage.accountnumberText);
+				return;
+			}
+
 			if (surname == "" || name == "") {
 				mui.toast(TextMessage.namenotnull, {
 					duration: 'long',

@@ -1606,7 +1606,7 @@ var TextMessage;
 	TextMessage.pro_descriptiontest = language ? "商品の説明文を入力してください。" : "商品描述不能为空";
 	TextMessage.pro_sorttest = language ? "商品のカテゴリを選択してください。" : "请选择商品分类";
 	TextMessage.pro_stautetest = language ? "商品の状態を選択してください。" : "请选择商品状态";
-	TextMessage.pro_pricetest = language ? "商品価格を半角数字で設定してください" : "请用半角数字设定商品价格";
+	TextMessage.pro_pricetest = language ? "商品価格を半角数字で設定してください。" : "请用半角数字设定商品价格";
 	TextMessage.pro_pricenumbtest = language ? "有効な数字（0円以上）を設定してください" : "价格必须大于0";
 	TextMessage.pro_buywaytest = language ? "取引手段を選択してください。" : "请选择交易手段";
 	TextMessage.numberRangeText = language ? "販売価格の範囲で金額を入力してください。" : "请在提示的金额范围内输入贩卖价格",
@@ -1621,6 +1621,8 @@ var TextMessage;
 	TextMessage.pleaseAccount = language ? "アカウントの種類を選択してください" : "请选择账户类型";
 	TextMessage.branchNumberNull = language ? "店舗番号は空ではありません" : "分店号不能为空";
 	TextMessage.accountNumberNull = language ? "銀行カード番号は空欄にできません" : "银行卡号不能为空";
+	TextMessage.branchnumberText = language ? "支店番号を半角数字3桁で入力してください。" : "请用半角数字输入3位的分店号";
+	TextMessage.accountnumberText = language ? "口座番号を半角数字3桁で入力してください。" : "请用半角数字输入7位的银行卡号";
 	TextMessage.sendtextrequest = language ? "にメールを送りますか" : "发送电子邮件";
 	TextMessage.telrequesttext = language ? "に電話しますか" : "拨打电话";
 	TextMessage.sedsuccseetext = language ? "ご利用頂きありがとうございます。" : "谢谢您的使用";
