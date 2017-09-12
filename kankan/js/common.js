@@ -526,6 +526,7 @@ var Api;
 			getPrice: baseUrl() + '/commodity/release/infobase',
 			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
 			CommodityReportShow: baseUrl() + '/commodity/Commoditydetail/commodityreportshow',
+			getorganization:baseUrl() + '/commodity/release/getorganization',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -1251,6 +1252,10 @@ var Repository;
 			return Api.call(Api.url.Commodity.CommodityReportShow, params, callback);
 		}
 		Commodity.CommodityReportShow = CommodityReportShow;
+		function getorganization(params, callback) {
+			return Api.call(Api.url.Commodity.getorganization, params, callback);
+		}
+		Commodity.getorganization = getorganization;
         function reportCommReason(params, callback) {
         	return Api.call(Api.url.Commodity.reportCommReason, params, callback);
         }
@@ -1769,6 +1774,7 @@ var TextMessage;
 	TextMessage.totolMoney = language ? "売上高" : "共赚了";
 	TextMessage.commodity_price = language ? "販売価格" : "商品价格";
 	TextMessage.commodity_transactionFees = language ? "販売手数料": "交易手续费";
+	TextMessage.charitycheck = language ? "0円を捧げる公益あいには参加しない": "白送交易不参与公益";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

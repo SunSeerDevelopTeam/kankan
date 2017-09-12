@@ -99,6 +99,7 @@
 				</li>
 				</ul>
 				<h5 class="ka_h5backcolor lang" data-locale="det_spdescription"></h5>
+				<span class="mui-icon iconfont icon-leaf" style="color:red;margin-left: 4em;font-size: 22px;margin-top: -1em;"></span>
 				<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<div class="kankan_det_information" style="word-break:break-word;"></div>
@@ -536,6 +537,11 @@
 				var comdmesage = HTMLDecode(comdbasic[0].comm_detail).replace(/\n/g,"<br />");
 				var comoditsort=comdbasic[0].catalog_detail+"&nbsp;<font color='#000000'>＞</font><br/>"+comdbasic[0].classify_detail;
 				var comdistate=comdbasic[0].state;
+				var donation_id=comdbasic[0].donation_id;
+				var donation_amount=comdbasic[0].donation_amount;
+				if(donation_id=="" || donation_amount<=0){
+					$(".icon-leaf").hide();
+				}
 				if(comdistate=="0"){
 					var comdistateval=TextMessage.prostaute0;
 				}else if(comdistate=="1"){
