@@ -118,7 +118,7 @@
                 </div>
 				<!--商品价格end-->
 				<!--Trading interest start-->
-				<div class="tradeFees" style="display: none;">
+				<div class="tradeFees">
 					<ul class="mui-table-view ka_prologbox">
 						<li class="mui-table-view-cell" style="width: 100%;">
 						    <span class="ka_proinfo mui-col-xs-9" id="transaction_fees"></span>
@@ -131,6 +131,19 @@
 					</ul>
 				</div>
 				<!--Trading interest end-->
+				<!---寄付机能-->
+				<h5 class="ka_proloh5" style="margin: 1.5em 0 1.5em 0.5em">寄付について</h5>
+				<ul class="mui-table-view">
+						<li class="mui-table-view-cell" style="width: 100%;">
+							<div class="mui-navigate-right">
+								<span class="ka_proinfo lang" data-locale="" >寄付先一覧</span>
+								<div id='donation_result' class="mui-pull-right ka_sortname lang" data-locale="" id="">寄付しない</div>
+								<!--<div  class="ui-alert mui-pull-right ka_sortname"></div>-->
+								<input type="hidden" name="donation_id" id="donation_id" value="" />
+							</div>
+
+						</li>
+				</ul>
 				<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
 				<div class="ka_userbox">
 					<button type="button" class="mui-btn mui-btn-blue ka_prologsure lang" data-locale="" id="waste" style="margin-top: 1em;display: none;" onclick="wastes()"></button>
@@ -199,13 +212,23 @@
 		});
 	var id;
 	var testarr=[];
+	var orarr=[
+				{
+				id:'',
+				value:'寄付しない'
+				},
+			];
 	var catearrs=[{data:[]}];
+	var organizationarr=[{data:[]}];
 	var positions='0';
+	//getprice
 	var price_max = 0;
 	var price_min = 0;
 	var charge_rate = 0;
 	var mobileSelect4;
 	var stautsSelect;
+	var organizationSelect;
+	var organizationposition='0';
 	var stautesposition='0';
 	var statedate = [{data:[{
 						id: '0',
@@ -262,6 +285,7 @@
 			        $("#stauteResult").addClass("ka_sortname");					       
 			    }  
 			});
+			//category
 			var param2 = {
 				"flg": "classify"
 			};
@@ -286,8 +310,36 @@
 						   document.getElementById("sortResult").setAttribute("class","ka_sortname mui-pull-right");
 					    }  
 					});
-					//var catearrs = categorypush(data);
-					//sortpicker(catearrs);
+				},
+				ng: function(data) {
+					console.log("error" + data);
+					Api.callback_ng(data);
+				}
+			});
+			//donation_organization
+			var param4 = {};
+			Repository.Commodity.getorganization(param4, {
+				ok: function(data) {
+					console.log(data);
+					organizationarr[0].data =organizationpush(data);
+					console.log(organizationarr);
+					organizationSelect = new MobileSelect({
+					    trigger: '#donation_result',
+					    title: '',
+					    wheels: organizationarr, 
+					    position:'0',
+					    transitionEnd:function(indexArr, data){
+					    	if(indexArr=="NAN"){
+					    		indexArr=organizationposition;
+					    	}
+					        console.log(indexArr);
+					    },
+					    callback:function(indexArr, data){
+					        console.log(data[0].id);
+					       document.getElementById("donation_id").value=data[0].id;
+						   document.getElementById("donation_result").setAttribute("class","ka_sortname mui-pull-right");
+					    }  
+					});
 				},
 				ng: function(data) {
 					console.log("error" + data);
@@ -407,12 +459,9 @@
 	    var price = results.data.price;
 	    var rate = results.data.service_charge;
 	    var profile = results.data.profit;
-	    if (business == '1') {
-	    	$(".priceContent").show();
-	    	$(".tradeFees").show();
-	    } else {
-	    	$(".priceContent").hide();
-	    	$(".tradeFees").hide();
+	    var org_name=results.data.org_name;
+	    if(org_name!=""){
+	    	$("#donation_result").html(org_name);
 	    }
 		if(commstautes=="0"){
 		//waste product
@@ -490,7 +539,8 @@
 							var catid = data.data.classify_id; //second category value
 							//var pickcatarr = categorychoose(catearrs, catid); //selected category value
 							var stautid = data.data.state;
-							selectdefault(catid,stautid);
+							var donation_id=data.data.donation_id;
+							selectdefault(catid,stautid,donation_id);
 						},
 						ng: function(data) {
 							console.log("error:"+data);
@@ -572,7 +622,29 @@
 			}
 		}
 	}
-	function selectdefault(catid,stautid){
+	function organizationpush(results) {
+			var ordata = results.data;
+			for (var b=0; b<ordata.length; b++) {
+				var orgaAdd = {
+					id: ordata[b].org_id,
+					value: ordata[b].org_name
+				};
+				orarr.push(orgaAdd);
+			}
+			return orarr;
+	}
+	function organizationtext(organizationarr,donation_id){
+		var childredarr=organizationarr[0].data;
+		console.log(organizationarr);
+		for(var chd = 0; chd < childredarr.length; chd++) {
+			if(childredarr[chd].id == donation_id) {
+				//return childredarr[chd].text;
+				return chd;
+				break;
+			}
+		}
+	}
+	function selectdefault(catid,stautid,donation_id){
 		stautesposition=childrentext(stautid)+",";
 		stautsSelect= new MobileSelect({
 				    trigger: '#stauteResult',
@@ -631,6 +703,38 @@
 				Api.callback_ng(data);
 			}
 		});
+		//donation_organization
+		var param4 = {};
+		Repository.Commodity.getorganization(param4, {
+			ok: function(data) {
+				console.log(data);
+				organizationarr[0].data =organizationpush(data);
+				if(donation_id!=""){
+					organizationposition=organizationtext(organizationarr,donation_id)+',';
+				}
+				organizationSelect = new MobileSelect({
+				    trigger: '#donation_result',
+				    title: '',
+				    wheels: organizationarr, 
+				    position:organizationposition,
+				    transitionEnd:function(indexArr, data){
+				    	if(indexArr=="NAN"){
+				    		indexArr=organizationposition;
+				    	}
+				        console.log(indexArr);
+				    },
+				    callback:function(indexArr, data){
+				        console.log(data[0].id);
+				       document.getElementById("donation_id").value=data[0].id;
+					   document.getElementById("donation_result").setAttribute("class","ka_sortname mui-pull-right");
+				    }  
+				});
+			},
+			ng: function(data) {
+				console.log("error" + data);
+				Api.callback_ng(data);
+			}
+		});
 	}
 //email check
 function publishscheck(){
@@ -662,6 +766,7 @@ function publishs() {
 	var price = $("#number_price").val();
 	var service_charge = removeComma($("#trans_fees").html());
 	var profit = removeComma($("#trading_income").html());
+	var donation_id=$("#donation_id").val();
 	
 	if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
 		mui.toast(TextMessage.pro_imagetest, {
@@ -766,7 +871,16 @@ function publishs() {
 		});
 		return false;
 	}
-	
+	if(gratis=="1" && donation_id!=""){
+		mui.toast(TextMessage.charitycheck, {
+			duration: 'long',
+			type: 'div'
+		});
+		return false;
+	}
+	if(gratis==1){
+		donation_id="";
+	}
 	/*$("#submit").attr("disabled","disabled");*/
 	var params = {
 		"buy_sell_flag": buy_sell_flag,
@@ -777,15 +891,20 @@ function publishs() {
 		"exchange": exchange,
 		"business": business,
 		"gratis": gratis,
+		"donation_id":donation_id,
 		"imges[0]": imges0,
 		"imges[1]": imges1,
 		"imges[2]": imges2,
 		"imges[3]": imges3
 	};
-	if(price!=""){
+	if(price!="" && business==1){
 		params.price=price;
 		params.service_charge = service_charge;
 		params.profit = profit;
+		if($("#donation_id").val()!=""){
+			var donation_amount=Math.ceil(service_charge/10);
+			params.donation_amount = donation_amount;
+		}
 	}
 	if(id!=0){
 		var commodity_ids=$("#codid").val();
@@ -889,8 +1008,7 @@ document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
 		$("#pointbuybtn").addClass("ka_exchangered");
 	}else{
 		$("#business").val("0");
-		$(".priceContent").hide();
-		$(".tradeFees").hide();
+		$("#number_price").attr("disabled", "true");
 		$("#pointbuybtn").removeClass("ka_exchangered");
 		$("#pointbuybtn").addClass("ka_exchangegrey");
 	}
