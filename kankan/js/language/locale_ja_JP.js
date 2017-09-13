@@ -86,7 +86,7 @@ var JSLocale = {
 	"commodity_sorts": "カテゴリー",
 	"commodity_must": "必須",
 	"commodity_stuates": "商品状態",
-	"commodity_buyway": "交易手段",
+	"commodity_buyway": "取引手段",
 	"commodity_transactionFees": "販売手数料",
 	"commodity_tradingIncome": "販売利益",
 	"commodity_benefitActivity": "寄付について",

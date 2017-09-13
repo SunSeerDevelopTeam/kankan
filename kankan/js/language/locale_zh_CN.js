@@ -86,7 +86,7 @@ var JSLocale = {
 	"commodity_sorts": "商品种类",
 	"commodity_must": "必填",
 	"commodity_stuates": "商品状态",
-	"commodity_buyway": "交换手段",
+	"commodity_buyway": "交易方式",
 	"commodity_transactionFees": "交易手续费",
 	"commodity_tradingIncome": "交易收益",
 	"commodity_benefitActivity": "关于公益",
