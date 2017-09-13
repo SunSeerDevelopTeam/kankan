@@ -54,13 +54,14 @@
 
 			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
-				
+				/**
 				var getPushInfo = function() {
 					var info = plus.push.getClientInfo();
 					console.log("获取客户端推送标识信息：");
 					console.dir(info);
 				}
 				getPushInfo();
+				**/
 				var self = plus.webview.currentWebview();
 				for(var i = 0; i < 4; i++) {
 					var temp = {};
@@ -73,7 +74,7 @@
 					}
 					self.append(sub);
 				}
-				
+				/**
 				plus.push.addEventListener("click", function(msg){
 					console.log("push click event");
 				}, false);
@@ -81,8 +82,7 @@
 				plus.push.addEventListener("receive", function(msg){
 					console.log("push receive event");
 				}, false);
-				
-				
+				**/
 			});
 			//当前激活选项
 			var activeTab = subpages[0];
