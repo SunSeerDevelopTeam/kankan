@@ -683,7 +683,7 @@
 					    $(".tran-button-sell font").text(TextMessage.waitBuyerAgree);
 					} else {
 						$(".tran-button-sell").show();
-					    $(".tran-button-sell font").text(TextMessage.agreeTerminate);
+					    $(".tran-button-sell font").text(TextMessage.terminate);
 					}
 				} else if (trans_mode == 1 && Pay_status == 1 && buyApplyFlag == 1) {
 					if (cur_user_id == buyer_id) {
@@ -691,7 +691,7 @@
 					    $(".tran-button-sell font").text(TextMessage.waitSellerAgree);
 					} else {
 						$(".tran-button-sell").show();
-					    $(".tran-button-sell font").text(TextMessage.agreeTerminate);
+					    $(".tran-button-sell font").text(TextMessage.terminate);
 					}
 				} else if (trans_type == 1) {
 					$(".tran-button-sell").show();
@@ -1242,7 +1242,7 @@
 								//不能发起同意终止请求
 							}else{
 								//登录为买家,可以发起同意终止请求
-								$(".tran-button-sell div font").html(TextMessage.agreeTerminate);
+								$(".tran-button-sell div font").html(TextMessage.terminate);
 								trans_stop(params,"history");
 							}
 						}
@@ -1254,7 +1254,7 @@
 								//不能发起同意终止请求
 							}else{
 								//登录为卖家，可以发起同意终止请求
-								$(".tran-button-sell div font").html(TextMessage.agreeTerminate);
+								$(".tran-button-sell div font").html(TextMessage.terminate);
 								trans_stop(params,"history");
 							}
 						}
