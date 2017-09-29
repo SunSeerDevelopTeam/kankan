@@ -335,6 +335,10 @@ body .mui-table-view-cell.mui-active{
 	height: 50px;
 	background-color: #6ACB9A;
 	font-size: 15px;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	z-index: 1;
 }
 .gratis_goods div {
 	margin-left: 1em;

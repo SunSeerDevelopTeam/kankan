@@ -173,7 +173,7 @@
 			</div>
 			<!--Recommended products-->
 			<h5 class="ka_h5backcolor lang" data-locale="det_recommends"></h5>
-			<div class="mui-slider">
+			<div class="mui-slider" style="margin-bottom: 3em;">
 				<div class="mui-slider-group">
 					<!--last-->
 					<!--<div class="mui-slider-item mui-slider-item-duplicate" id="lastrecommend">
@@ -207,8 +207,8 @@
 			<div id="traslateing" class="lang" data-locale="stautestext"></div>
 			<!--价格加购买-->
 			<div id="bottom_price" class="gratis_goods">
-		        <div class="mui-pull-left">&yen;<span id="detail_commPrice"></span></div>
-		        <div id="gotobuy" class="mui-pull-right lang" data-locale="det_buy" style="margin-right: 1em;"></div>
+		        <strong><div class="mui-pull-left">&yen;<span id="detail_commPrice"></span></div></strong>
+		        <strong><div id="gotobuy" class="mui-pull-right lang" data-locale="det_buy" style="margin-right: 1em;"></div></strong>
 		    </div>
 			<input type="hidden" name="userid" id="userid" value="" />
 			<input type="hidden" name="myid" id="myid" value="" />
@@ -283,8 +283,9 @@
 					    praiseid:cmid
 					});
 					self.location.reload();
-			    }
+				}
 		    });
+		    
 		    
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
@@ -304,9 +305,7 @@
 				
 			});
 			//*********************share start
-			
-            
-			//onclick share
+            //onclick share
 			var shares = {};
 		    var sId;
 		    var sImage;
