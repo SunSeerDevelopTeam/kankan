@@ -524,9 +524,11 @@ var Api;
 			shareid: baseUrl() + '/commodity/Encryption/',
 			delete_pro: baseUrl() + '/commodity/release/delete/',
 			getPrice: baseUrl() + '/commodity/release/infobase',
+			//getPrice: baseUrl() + '/commodity/Commoditybase/infobase/',
 			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
 			CommodityReportShow: baseUrl() + '/commodity/Commoditydetail/commodityreportshow',
 			getorganization:baseUrl() + '/commodity/release/getorganization',
+			//getorganization:baseUrl() + '/commodity/Commoditybase/getorganization',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
