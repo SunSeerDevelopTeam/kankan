@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-	<head>
+    <head>
 		<meta charset="utf-8">
 		<title>product_login</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -9,6 +8,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../../css/mui.min.css">
 		<link rel="stylesheet" href="../../../css/kankan_home.css">
+		<link rel="stylesheet" href="../../../css/global.css" />
 		<!--<link href="../../../css/mui.picker.css" rel="stylesheet" />
 		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />-->
 		<link rel="stylesheet" type="text/css" href="../../../css/public.css">
@@ -17,6 +17,23 @@
 			h5{
 				margin-left: 0.2em;
 			}
+			.box{
+	            position: fixed;
+	            width: 100%;
+	            height: 100%;
+	            background: red;
+	            display: none;
+	            z-index: 99999;
+	        }
+	        .box1{
+	            width: 235px;
+	            height: 250px;
+	            position: fixed;
+	            left: 46%;
+	            top: 35%;
+	            margin-left: -100px;
+	            border: 4px solid #f00;
+	        }
 		</style>
 	</head>
 
@@ -132,8 +149,19 @@
 				</div>
 				<!--Trading interest end-->
 				<!---寄付机能-->
-				<h5 class="ka_proloh5" style="margin: 1.5em 0 1.5em 0.5em">寄付について</h5>
-				<ul class="mui-table-view">
+				<div style="margin: 1.5em 0 3.5em 0.5em;">
+				    <h5 class="ka_proloh5 mui-pull-left">寄付について</h5>
+				    <div class="mui-icon mui-icon-help mui-pull-right open-window-title" style="padding-right: 2%;"></div>
+				    <!--<div class="mui-row">
+				        <div class="mui-col-sm-6"><h5 class="ka_proloh5">寄付について</h5></div>
+				        <div class="mui-col-sm-6">
+				            <div class="mui-icon mui-icon-help"></div>
+				        </div>
+				    </div>-->
+				    <!--<h5 class="ka_proloh5">寄付について</h5>-->
+				    
+				</div>
+				<ul class="mui-table-view" style="clear: both;">
 						<li class="mui-table-view-cell" style="width: 100%;">
 							<div class="mui-navigate-right">
 								<span class="ka_proinfo lang" data-locale="" >寄付先一覧</span>
@@ -198,6 +226,7 @@
 	<script src="../../../js/sha256.js"></script>
 	<script src="../../../js/pro_uploadimg.js"></script>
 	<script src="../../../js/mobileSelect.js" type="text/javascript"></script>
+	<script src="../../../js/windowOpen.js"></script>
 	<script>
 		mui.init({
 			beforeback: function() {
@@ -245,6 +274,11 @@
 					}]}];
 		
 	mui.plusReady(function() {
+	    plus.key.addEventListener('backbutton',function() {
+	       $(".window-container").hide();
+	       $('.window-masking').removeAttr("style");
+	       $("body").unbind("touchmove");
+	    },false);
 		var params = {};
 		Repository.Commodity.getPrice(params, {
 			ok: function(data) {
@@ -356,6 +390,7 @@
 		charge_rate = resultsData[2].charge_rate;
 		$("#transaction_fees").text(TextMessage.commodity_transactionFees + "(" + charge_rate + "%)");
 	}
+	
 	window.addEventListener("refresh", function(event) {
 		location.reload();
 	});
@@ -376,6 +411,15 @@
 		var texts="<font color='#ACACB4'>"+delength+"/1000</font>";
 		$(".daojishitext").html(texts);
 	}
+	$('.open-window-title').on('click',function(){
+		setTitle = TextMessage.aboutDonate;
+		setContents = '<div style="clear:both;padding-top: 1em;"><div style="text-align:left;text-indent:2em">'+TextMessage.donate1+'</div><div style="text-align:left;text-indent:2em;">'+TextMessage.donate2+'</div><div style="text-align:left;text-indent:2em;">'+TextMessage.donate3+'</div></div>';
+		setButton = TextMessage.confirmBtnYes;
+		$(this).openWindow(setTitle,setContents,[setButton]);
+		$("body").bind("touchmove", function(e) {
+			e.preventDefault();
+		});
+	});
 	//getNumber
 	function getNumber() {
 		var number_price = $("#number_price").val();

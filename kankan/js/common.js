@@ -1777,6 +1777,11 @@ var TextMessage;
 	TextMessage.commodity_price = language ? "販売価格" : "商品价格";
 	TextMessage.commodity_transactionFees = language ? "販売手数料": "交易手续费";
 	TextMessage.charitycheck = language ? "0円を捧げる公益あいには参加しない": "白送交易不参与公益";
+	/*deatil page*/
+	TextMessage.aboutDonate = language ? "寄付について": "关于捐款";
+	TextMessage.donate1 = language ? "この商品が購入される場合、カンカンが販売手数料の10%を下記のある寄付先に寄付します。" : "当此商品被卖出时，kankan将会从贩卖手续费中给下列受捐者中的一位捐赠10%的金额。";
+    TextMessage.donate2 = language ? "寄付先一覧" : "受捐者列表";
+    TextMessage.donate3 = language ? "テスト寄付先" : "测试捐赠目的地";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

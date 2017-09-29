@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="../../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../../css/iconmyfont.css" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<link rel="stylesheet" href="../../../css/global.css" />
 		<style>
 			.Arrow {
 				font-size: 4em;
@@ -99,7 +100,7 @@
 				</li>
 				</ul>
 				<h5 class="ka_h5backcolor lang" data-locale="det_spdescription"></h5>
-				<span class="mui-icon iconfont icon-leaf" style="color:red;margin-left: 4em;font-size: 22px;margin-top: -1em;"></span>
+				<span class="mui-icon iconfont icon-leaf open-window-title" style="color:red;margin-left: 4em;font-size: 22px;margin-top: -1em;"></span>
 				<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<div class="kankan_det_information" style="word-break:break-word;"></div>
@@ -252,6 +253,7 @@
 		<script src="../../../js/sha256.js"></script>
 		<script src="../../../js/common.js"></script>
 		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
+		<script src="../../../js/windowOpen.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			var commodity_id;
 			var comm_exchange;
@@ -282,7 +284,8 @@
 					});
 					self.location.reload();
 			    }
-			});
+		    });
+		    
 			window.addEventListener('cid', function(event) {
 				var id = event.detail.id;
 				var flagback=event.detail.flag;
@@ -302,7 +305,6 @@
 			});
 			//*********************share start
 			
-            
             
 			//onclick share
 			var shares = {};
@@ -332,7 +334,7 @@
 					mui('#friendChat').popover('toggle');
 				});
 			}
-		
+		    
 		    function shareMessage(share, ex) {
 				var msg = {
 					extra: {
@@ -388,7 +390,15 @@
 					mui.toast("can not share server");
 				}
 			}
-
+            $('.open-window-title').on('click',function(){
+				setTitle = TextMessage.aboutDonate;
+				setContents = '<div style="clear:both;padding-top: 1em;"><div style="text-align:left;text-indent:2em">'+TextMessage.donate1+'</div><div style="text-align:left;text-indent:2em;">'+TextMessage.donate2+'</div><div style="text-align:left;text-indent:2em;">'+TextMessage.donate3+'</div></div>';
+				setButton = TextMessage.confirmBtnYes;
+				$(this).openWindow(setTitle,setContents,[setButton]);
+				$("body").bind("touchmove", function(e) {
+					e.preventDefault();
+				});
+			});
 			function reloadpage(){
 				mui.back();
 			}
