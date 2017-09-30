@@ -355,7 +355,7 @@
 					forgetPwdBtn.addEventListener('tap', function(event) {
 						var params = {
 							pwd_flg: "verification",
-							//pwd_flg_check:"check",
+							pwd_flg_check:"check",
 							email: doc.getElementById('email').value.trim()
 						};
 						Repository.User.forgetPwd(params, {

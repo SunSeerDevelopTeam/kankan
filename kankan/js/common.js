@@ -1785,6 +1785,10 @@ var TextMessage;
 	TextMessage.donate1 = language ? "この商品が購入される場合、カンカンが販売手数料の10%を下記のある寄付先に寄付します。" : "当此商品被卖出时，kankan将会从贩卖手续费中给下列受捐者中的一位捐赠10%的金额。";
     TextMessage.donate2 = language ? "寄付先一覧" : "受捐者列表";
     TextMessage.donate3 = language ? "テスト寄付先" : "测试捐赠目的地";
+    TextMessage.rulesitem= language ? "利用規約等の表示" : "利用规约等的表示";
+    TextMessage.setting= language ? "設定" : "设置";
+    TextMessage.imageDiskSpace = language ? "5K～2Mの画像を利用してください" : "请使用5K〜2M图像";
+    TextMessage.imageProportions = language ? "画像が長すぎで、幅の3倍以下切ってください" : "图像太长，请切下3倍宽度"
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

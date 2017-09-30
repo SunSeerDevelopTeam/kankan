@@ -35,7 +35,7 @@
 				<button style="width: 70px;" type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
 				</button>
-				<h1 style="width: 244px;" class="mui-center mui-title title-center lang" data-locale="setting"></h1>
+				<h1 style="width: 244px;" class="mui-center mui-title title-center lang" data-locale="" id="title"></h1>
 			</div>
 			<!--page title end-->
 			<!--main page-->
@@ -201,9 +201,21 @@
 	<script src="../../js/common.js"></script>
 	<script>
 		mui.init();
+		var flag=null;
 		mui.plusReady(function(){
 			var version = plus.runtime.version;
 			$('#version').text(version);
+			var self = plus.webview.currentWebview();
+				flag = self.flag;
+				if(flag=="rules"){
+					$(".logout").hide();
+					$(".Contact").hide();
+					$("#title").text(TextMessage.rulesitem);
+				}else{
+					$(".logout").show();
+					$(".Contact").show();
+					$("#title").text(TextMessage.setting);
+				}
 		});
 		$(function(){
 			var language=navigator.language;

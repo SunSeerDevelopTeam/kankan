@@ -7,7 +7,7 @@
 	"id": "H5B7054BD",
 	"name": "kankan",
 	"version": {
-		"name": "0.0.8",
+		"name": "0.0.57",
 		"code": "8"
 	},
 	"description": "",
@@ -357,7 +357,8 @@
 					"images/userPhoto.png",
 					"js/language/locale_ja_JP.js",
 					"js/md5.js",
-					"js/sha1.js"
+					"js/sha1.js",
+					"js/citydata.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -393,7 +394,9 @@
 					"images/weixin2.png",
 					"js/jquery.lazyload.min.js",
 					"css/iconmyfont.css",
-					"fonts/iconfont.woff"
+					"fonts/iconfont.woff",
+					"js/windowOpen.js",
+					"css/global.css"
 				],
 				"refer": [
 					"pages/main/products/pro_commentslist.html",
@@ -427,7 +430,9 @@
 					"js/picker/mui.poppicker.js",
 					"js/mobileSelect.js",
 					"css/public.css",
-					"css/mobileSelect.css"
+					"css/mobileSelect.css",
+					"js/windowOpen.js",
+					"css/global.css"
 				],
 				"refer": [
 					"pages/login/login.html"
@@ -469,7 +474,13 @@
 					"pages/main/news.html",
 					"pages/main/category/tab-top-subpage-6.html",
 					"pages/main/category/tab-top-subpage-7.html",
-					"pages/main/category/tab-top-subpage-14.html"
+					"pages/main/category/tab-top-subpage-14.html",
+					"pages/main/category/tab-top-subpage-8.html",
+					"pages/main/category/tab-top-subpage-9.html",
+					"pages/main/category/tab-top-subpage-11.html",
+					"pages/main/category/tab-top-subpage-12.html",
+					"pages/main/category/tab-top-subpage-13.html",
+					"pages/main/category/tab-top-subpage-10.html"
 				],
 				"priority": 0
 			},
@@ -792,12 +803,15 @@
 					"css/mui.min.css",
 					"js/language.js",
 					"images/morebut.png",
-					"images/nopic.jpg"
+					"images/nopic.jpg",
+					"js/mui.js",
+					"js/jquery.lazyload.min.js"
 				],
 				"refer": [
 					"pages/transaction/transevaluate.html",
 					"pages/transaction/change_item.html",
-					"pages/setting/specialbus.html"
+					"pages/setting/specialbus.html",
+					"pages/transaction/payment.html"
 				],
 				"priority": 0
 			},
@@ -892,7 +906,10 @@
 					"js/mui.view.js",
 					"js/language/locale_ja_JP.js",
 					"pages/setting/specialbus.html",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"pages/setting/terms.html",
+					"css/kankan_home.css",
+					"css/icons-extra.css"
 				],
 				"refer": [
 					"pages/setting/question.html"
@@ -941,7 +958,8 @@
 				"refer": [
 					"pages/main/products/request.html",
 					"pages/login/reg.html",
-					"pages/login/login.html"
+					"pages/login/login.html",
+					"pages/setting/setting.html"
 				],
 				"priority": 0
 			},
@@ -995,7 +1013,8 @@
 					"images/nopic.jpg",
 					"images/request.png",
 					"js/jquery.lazyload.min.js",
-					"css/listitem.css"
+					"css/listitem.css",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [
 					"pages/main/products/request.html"
@@ -1017,7 +1036,10 @@
 					"js/index.list.js",
 					"images/nopic.jpg"
 				],
-				"refer": [],
+				"refer": [
+					"pages/setting/setting.html",
+					"pages/login/login.html"
+				],
 				"priority": 0
 			},
 			"pages/setting/specialbus.html": {
@@ -1188,6 +1210,62 @@
 				"refer": [
 					"pages/transaction/transfer_application.html"
 				],
+				"priority": 0
+			},
+			"pages/transaction/payment.html": {
+				"resources": [],
+				"refer": [
+					"pages/transaction/sample_payment.html"
+				],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-8.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_8.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-9.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_9.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-11.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_11.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-12.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_12.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-13.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_13.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/main/category/tab-top-subpage-10.html": {
+				"resources": [
+					"pages/main/category/pullrefresh_sub_10.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/setting/terms.html": {
+				"resources": [
+					"pages/setting/setting.html"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

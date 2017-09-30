@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>pullrefresh_sub</title>
+		<title>pullrefresh_sub_6</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -54,14 +54,13 @@
 				</ul>
 			</div>
 		</div>
-		<script type="text/javascript" src="../../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../../js/sha256.js"></script>
-		<script type="text/javascript" src="../../../js/jquery-3.2.0.min.js"></script>
-		<script type="text/javascript" src="../../../js/common.js"></script>
-		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
-		<script type="text/javascript" src="../../../js/index.list.js"></script>
-		<script>
-			// $('#pullrefresh').append(getzanItems());
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../js/sha256.js" ></script>
+		<script type="text/javascript" src="../../../js/jquery-3.2.0.min.js" ></script>
+		<script type="text/javascript" src="../../../js/common.js" ></script>
+		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js" ></script>
+		<script type="text/javascript" src="../../../js/index.list.js" ></script>
+	    <script>
 			$('#pullrefresh').after(getzanItems());
 			$("#loginItem").click(function(){
                 mui.openWindow({
@@ -85,6 +84,22 @@
 					},
 					show: {
 						duration: 200
+					}
+				});
+				mui('#clickzan').popover('hide');
+            });
+            $("#rulesItem").click(function(){
+                mui.openWindow({
+					id: 'reg',
+					url: '/pages/setting/setting.html',
+					waiting: {
+						autoShow: false
+					},
+					show: {
+						duration: 200
+					},
+					extras: {
+						"flag": "rules"
 					}
 				});
 				mui('#clickzan').popover('hide');
