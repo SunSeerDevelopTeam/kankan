@@ -126,6 +126,20 @@ function compressImg(path) {
 				var width = event.width; // px
 				var height = event.height; // px
 				console.log("compress size is (byte):"+size);
+				if (size < 5*1024 || size > 2*1024*1024) {
+					mui.toast(TextMessage.imageDiskSpace, {
+						duration: 'long',
+						type: 'div'
+					});
+					return;
+				}
+				if (width > 3*height && height > 3*width) {
+					mui.toast(TextMessage.imageProportions, {
+						duration: 'long',
+						type: 'div'
+					});
+					return;
+				}
 				imgappend(target);
 				imglength();
 			    imgRemove();
