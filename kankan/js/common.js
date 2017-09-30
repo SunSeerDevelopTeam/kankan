@@ -1788,7 +1788,7 @@ var TextMessage;
     TextMessage.rulesitem= language ? "利用規約等の表示" : "利用规约等的表示";
     TextMessage.setting= language ? "設定" : "设置";
     TextMessage.imageDiskSpace = language ? "5K～2Mの画像を利用してください" : "请使用5K〜2M图像";
-    TextMessage.imageProportions = language ? "画像が長すぎで、幅の3倍以下切ってください" : "图像太长，请切下3倍宽度"
+    TextMessage.imageProportions = language ? "画像が長すぎで、幅の3倍以下切ってください" : "图像太长，请切下3倍宽度";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
