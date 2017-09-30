@@ -17,7 +17,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-center mui-title lang" data-locale="confirm_account"></h1>
 		</header>
-		<div class="mui-content" style="font-size: 15px;">
+		<div class="mui-content" style="font-size: 15px;min-height: 600px;">
 			<form action="" method="post" name="" id="" style="height:500px;">
 				<!--bank-->
 				<div class="tradeFees" >
@@ -101,16 +101,16 @@
 	    var branchData = [{data:[]}];
 	    var accountData = [{data:[{
 						id: '0',
-						value: "兴业银行"
+						value: "普通預金"
 					}, {
 						id: '1',
-						value: "交通银行"
+						value: "当座預金"
 					}, {
 						id: '2',
-						value: "招商银行"
+						value: "貯蓄預金"
 					}, {
 						id: '3',
-						value: "建设银行"
+						value: "その他"
 					}]}];
 		mui.plusReady(function() {
 			var self = plus.webview.currentWebview();
