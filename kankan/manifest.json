@@ -7,7 +7,7 @@
 	"id": "H5B7054BD",
 	"name": "kankan",
 	"version": {
-		"name": "0.0.57",
+		"name": "0.0.59",
 		"code": "8"
 	},
 	"description": "",
@@ -180,26 +180,26 @@
 				"ios": {
 					"iphone": {
 						"default": "",
-						"retina35": "",
-						"retina40": ""
+						"retina35": "C:/Users/xyw/Desktop/splash/640・960.png",
+						"retina40": "C:/Users/xyw/Desktop/splash/640・1136.png","retina47":"C:/Users/xyw/Desktop/splash/750・1334.png","retina55":"C:/Users/xyw/Desktop/splash/1242・2208.png"
 					},
 					"ipad": {
-						"portrait": "",
+						
 						"portrait-retina": "",
 						"landscape": "",
 						"landscape-retina": "",
-						"portrait7": "",
+						"portrait7": "C:/Users/xyw/Desktop/splash/768・1024.png",
 						"portrait-retina7": "",
 						"landscape7": "",
-						"landscape-retina7": ""
+						"landscape-retina7": "","portrait":"C:/Users/xyw/Desktop/splash/768・1004.png"
 					}
 				},
 				"android": {
 					"mdpi": "",
 					"ldpi": "",
-					"hdpi": "",
-					"xhdpi": "",
-					"xxhdpi": ""
+					"hdpi": "C:/Users/xyw/Desktop/splash/480・762.png",
+					"xhdpi": "C:/Users/xyw/Desktop/splash/720・1242.png",
+					"xxhdpi": "C:/Users/xyw/Desktop/splash/1080・1882.png"
 				}
 			},"debug":true
 		}
