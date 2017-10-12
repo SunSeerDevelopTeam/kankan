@@ -147,12 +147,12 @@
 					</div>
 				</div>
 				<!-- username -->
-				<div class="mui-input-group">
+				<!--<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label for="username" class="lang" data-locale="username"></label>
 						<input id='username' name="username" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-username">
 					</div>
-				</div>
+				</div>-->
 				<!-- nickname -->
 				<div class="mui-input-group">
 					<div class="mui-input-row">
@@ -247,7 +247,7 @@
 						}
 						console.log("click sendVCodeBtn");
 						doc.getElementById('email').blur();
-						doc.getElementById('username').blur();
+						//doc.getElementById('username').blur();
 						doc.getElementById('nickname').blur();
 						doc.getElementById('password').blur();
 						doc.getElementById('passwordConfirm').blur();
@@ -265,7 +265,7 @@
 							canClick = true;
 							return;
 						}
-						var username = doc.getElementById('username').value.trim();
+						/*var username = doc.getElementById('username').value.trim();
 						if (username == "") {
 							plus.nativeUI.toast(TextMessage.username_null);
 							canClick = true;
@@ -275,7 +275,7 @@
 							plus.nativeUI.toast(TextMessage.username_error);
 							canClick = true;
 							return;
-						}
+						}*/
 						var nickname = doc.getElementById('nickname').value.trim();
 						if (nickname == "") {
 							plus.nativeUI.toast(TextMessage.nickname_null);
@@ -367,7 +367,7 @@
 					regBtn.addEventListener('tap', function(event) {
 						console.log("click regBtn");
 						doc.getElementById('email').blur();
-						doc.getElementById('username').blur();
+						//doc.getElementById('username').blur();
 						doc.getElementById('nickname').blur();
 						doc.getElementById('password').blur();
 						doc.getElementById('passwordConfirm').blur();
@@ -382,7 +382,7 @@
 							plus.nativeUI.toast(TextMessage.email_error1);
 							return;
 						}
-						var username = doc.getElementById('username').value.trim();
+						/*var username = doc.getElementById('username').value.trim();
 						if (username == "") {
 							plus.nativeUI.toast(TextMessage.username_null);
 							return;
@@ -390,7 +390,7 @@
 						if (username.length > 10) {
 							plus.nativeUI.toast(TextMessage.username_error);
 							return;
-						}
+						}*/
 						var nickname = doc.getElementById('nickname').value.trim();
 						if (nickname == "") {
 							plus.nativeUI.toast(TextMessage.nickname_null);
@@ -429,7 +429,7 @@
 						var waiting = plus.nativeUI.showWaiting();
 						var params = {};
 						params[Api.Params.email] = doc.getElementById('email').value.trim();
-						params[Api.Params.username] = doc.getElementById('username').value.trim();
+						//params[Api.Params.username] = doc.getElementById('username').value.trim();
 						params[Api.Params.nickName] = doc.getElementById('nickname').value.trim();
 						params[Api.Params.password] = hex_sha1(hex_md5(password));
 						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');

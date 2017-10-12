@@ -1549,7 +1549,7 @@ var TextMessage;
 	TextMessage.send_code_ok = language ? "認証番号が入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
 	TextMessage.send_code_ng = language ? "認証番号発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
 	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
-	TextMessage.username = language ? "ユーザー名" : "用户名";
+	/*TextMessage.username = language ? "ユーザー名" : "用户名";*/
 	TextMessage.verificationCode = language ? "認証番号" : "验证码";
 	TextMessage.login_error = language ? "メールアドレスまたはパスワードが間違っています。" : "用户名或者密码错误";
 	TextMessage.send_verification_code = language ? "認証番号を発信" : "发送验证码";
