@@ -316,12 +316,16 @@ body .mui-table-view-cell.mui-active{
 	height: 25px;
 }
 #traslateing{
-	width: 50%;
-	margin: 1em 25%;
+	height: 50px;
+	line-height:50px;
+	background-color: #aaa;
+	font-size: 15px;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	z-index: 1;
+	color: #f00;
 	text-align: center;
-	height: 3em;
-	font-size: 14px;
-	color: red;	
 }
 .ka_sorttext{
 	line-height: 1.5em;color:#6D6D72;font-size: 14px;width: 25%;
