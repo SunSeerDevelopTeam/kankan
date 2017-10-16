@@ -301,10 +301,12 @@ function createListItem(item, imgwidth) {
 	if(heicha > 0) {
 		var toppx = heicha / 2;
 		stylimg = "margin-top:-" + toppx + "px;";
-	} else {
+	} else if (heicha < 0){
 		var hecha2 = imgwidth - actuheight;
 		var toppx = hecha2 / 2;
 		stylimg = "margin-top:" + toppx + "px;";
+	} else {
+		stylimg = "margin-top:0px;";
 	}
 	var itemheight = imgwidth + 40;
 	var listItemHTML = new Util.StringBuilder();

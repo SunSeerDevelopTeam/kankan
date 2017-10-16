@@ -1,6 +1,6 @@
 ﻿var secretKey = "justfortest00001xxxxOOOX";
 var DEBUG = false;
-var DEVELOPMENT = false;
+var DEVELOPMENT = true;
 var STATUS = {
 	OK: "OK",
 	NG: "NG"
@@ -1725,6 +1725,8 @@ var TextMessage;
     TextMessage.reallyCancel = language ? "本当にキャンセルしたい": "真的要取消吗?",
 	TextMessage.confirmBtnYes = language ? "はい" : "确认";
 	TextMessage.confirmBtnNo = language ? "いいえ" : "取消";
+	TextMessage.confirm = language ? "はい" : "确定";
+	TextMessage.buyTitle = language ? "この商品を買いますか？" : "要买这个商品吗？";
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証番号エラー" : "验证码错误";
 	TextMessage.det_concerneds = language ? "出品者が気になる商品" : "出品者关注商品";

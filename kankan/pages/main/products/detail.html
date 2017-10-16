@@ -634,7 +634,7 @@
 						var showheight=screenheight+"px";
 					}
 					
-					if(imgsarr[i].url == "") {
+					if(imgsarr[i].url == "" || imgsarr[i].height == '0' || imgsarr[i].width == '0') {
 						imgurl = "../../../images/nopic.jpg";
 					}
 					htmlimg += '<div class="mui-slider-item sliderimg imgboxs" align="center" style="height:'+screenheight+'px;line-height:'+screenheight+'px;">';
@@ -1018,23 +1018,23 @@
 					}
 				});
 			}
-			mui("#bottom_price").on('tap', '#gotobuy', function() {
-				// var change_name = $(this).attr("id");
+			
+			function gotoBuy() {
 				var mode;
 				var codid = $(".kankan_zanbox").attr("id");
 				var params = {
-					"commodity_id": codid
-				};
+				    "commodity_id": codid
+			    };
 				var comduid=$("#userid").val();
 				var myuid=$("#myid").val();
 				var tradeablenum = $("#comm_num").val();
-				if(comduid==myuid){
+			    if (comduid==myuid) {
 					mui.toast(TextMessage.operation_error, {
 						duration: 'long',
 						type: 'div'
 					});
 					return false;
-				}
+			    }
 				var login_flag = plus.storage.getItem("LoginFlag");
 				if(login_flag != 'isLogin') {
 					mui.toast(TextMessage.test, {
@@ -1075,93 +1075,16 @@
 						params.mode = mode;
 						transRequest(params);
 					}
-					/*if(change_name == 'switchp') {
-						mode = 'business';
-						params.mode = mode;
-						transRequest(params);
-					} else if(change_name == 'switchex') {
-						if(tradeablenum == 0){
-							mui.toast(TextMessage.commdNo, {
-								duration: 'long',
-								type: 'div'
-							});
-							return false;
-						}
-						mode = 'exchange';
-						params.mode = mode;
-						mui.openWindow({
-							url: "../../transaction/select_item.html?commodity_id="+codid+"&mode="+mode,
-							id: "selectitem",
-							extras: {
-								"commodity_id": codid,
-								"mode": mode
-							}
-						})
-					} else {
-						mode = 'gratis';
-						params.mode = mode;
-						transRequest(params);
-					}*/
 				}
+			}
+			mui("#bottom_price").on('tap', '#gotobuy', function() {
+				var btnArray=[TextMessage.confirm,TextMessage.confirmBtnNo];
+				mui.confirm(TextMessage.buyTitle,'',btnArray,function(e) {
+					if (e.index == 0) {
+						gotoBuy();
+					} else {}
+				})
 			});
-			/*mui(".ka_buyway").on('tap', '.mui-btn', function() {
-				var change_name = $(this).attr("id");
-				var mode;
-				var codid = $(".kankan_zanbox").attr("id");
-				var params = {
-					"commodity_id": codid
-				};
-				var comduid=$("#userid").val();
-				var myuid=$("#myid").val();
-				var tradeablenum = $("#comm_num").val();
-				if(comduid==myuid){
-					mui.toast(TextMessage.operation_error, {
-						duration: 'long',
-						type: 'div'
-					});
-					return false;
-				}
-				var login_flag = plus.storage.getItem("LoginFlag");
-				if(login_flag != 'isLogin') {
-					mui.toast(TextMessage.test, {
-						duration: 'long',
-						type: 'div'
-					});
-					mui.openWindow({
-						id: 'login',
-						url: "../../login/login.html"
-					});
-				} else {
-					if(change_name == 'switchp') {
-						mode = 'business';
-						params.mode = mode;
-						transRequest(params);
-					} else if(change_name == 'switchex') {
-						if(tradeablenum == 0){
-							mui.toast(TextMessage.commdNo, {
-								duration: 'long',
-								type: 'div'
-							});
-							return false;
-						}
-						mode = 'exchange';
-						params.mode = mode;
-						mui.openWindow({
-							url: "../../transaction/select_item.html?commodity_id="+codid+"&mode="+mode,
-							id: "selectitem",
-							extras: {
-								"commodity_id": codid,
-								"mode": mode
-							}
-						})
-					} else {
-						mode = 'gratis';
-						params.mode = mode;
-						transRequest(params);
-					}
-				}
-			})*/
-		    
 		    $('#see').text(TextMessage.sharetitle);
 		    $('#reportGoods').text(TextMessage.complaintpro);
 		    $('#shareFriends').text(TextMessage.towchatfrind);
