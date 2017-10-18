@@ -27,7 +27,7 @@
 		    <!--input price-->
 		    <div>
 				<div class="inputPrice" style="border-top: none;">
-					<input id="input_transferPrice" name="input_transferPrice" type="number" maxlength="10" value="" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="gettransferPrice()" class="inputNumber" />
+					<input id="input_transferPrice" name="input_transferPrice" type="number" maxlength="10" value="" oninput="if(value.length>7)value=value.slice(0,7)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="gettransferPrice()" class="inputNumber" />
 					<span class="inputSpan">&yen;<span id="span_transferPrice"></span></span>
 				</div>
             </div>
@@ -93,26 +93,46 @@
         		$("#span_transferPrice").html(parseFloat(Math.floor(input_transferPrice)).toLocaleString());
         		if(bank=="東京三菱UFJ銀行"){
 	        		if(input_transferPrice < 30000){
+	        			if (input_transferPrice < 108) {
+	        				$("button").attr("disabled", true);
+	        			} else {
+	        				$("button").removeAttr("disabled");
+	        			}
 	        			var transfer_price=input_transferPrice*1-108*1;
 	        			$("#transfer_fee").text(108);
 	        			$("#transfer_price").text(transfer_price);
 	        		}else{
+	        			if (input_transferPrice < 324) {
+	        				$("button").attr("disabled", true);
+	        			} else {
+	        				$("button").removeAttr("disabled");
+	        			}
 	        			var transfer_price=input_transferPrice*1-324*1;
 	        			$("#transfer_fee").text(324);
 	        			$("#transfer_price").text(transfer_price);
 	        		}
         		}else{
         			if(input_transferPrice < 30000){
+        				if (input_transferPrice < 540) {
+        					$("button").attr("disabled", true);
+        				} else {
+        					$("button").removeAttr("disabled");
+        				}
         				var transfer_price=input_transferPrice*1-540*1;
 	        			$("#transfer_fee").text(540);
 	        			$("#transfer_price").text(transfer_price);
 	        		}else{
+	        			if (input_transferPrice < 756) {
+	        				$("button").attr("disabled", true);
+	        			} else {
+	        				$("button").removeAttr("disabled");
+	        			}
 	        			var transfer_price=input_transferPrice*1-756*1;
 	        			$("#transfer_fee").text(756);
 	        			$("#transfer_price").text(transfer_price);
 	        		}
         		}
-        	    $("button").removeAttr("disabled");
+        	    //$("button").removeAttr("disabled");
         	}
         }
 		
