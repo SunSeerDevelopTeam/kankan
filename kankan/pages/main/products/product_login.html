@@ -17,23 +17,10 @@
 			h5{
 				margin-left: 0.2em;
 			}
-			.box{
-	            position: fixed;
-	            width: 100%;
-	            height: 100%;
-	            background: red;
-	            display: none;
-	            z-index: 99999;
-	        }
-	        .box1{
-	            width: 235px;
-	            height: 250px;
-	            position: fixed;
-	            left: 46%;
-	            top: 35%;
-	            margin-left: -100px;
-	            border: 4px solid #f00;
-	        }
+			.aboutDonate {
+				text-align:left;
+				text-indent:2em;
+			}
 		</style>
 	</head>
 
@@ -413,7 +400,14 @@
 	}
 	$('.open-window-title').on('click',function(){
 		setTitle = TextMessage.aboutDonate;
-		setContents = '<div style="clear:both;padding-top: 1em;"><div style="text-align:left;text-indent:2em">'+TextMessage.donate1+'</div><div style="text-align:left;text-indent:2em;">'+TextMessage.donate2+'</div><div style="text-align:left;text-indent:2em;">'+TextMessage.donate3+'</div></div>';
+		setContents = '<div style="clear:both;">'+
+				      '<div class="aboutDonate">'+TextMessage.donate1+'</div>'+
+				      '<div class="aboutDonate">'+TextMessage.donate2+'</div>'+
+				      '<div class="aboutDonate">'+TextMessage.donate3+'</div>'+
+				      '<div class="aboutDonate">'+TextMessage.donate4+'</div>'+
+				      '<div class="aboutDonate">'+TextMessage.donate5+'</div>'+
+				      '<div class="aboutDonate">'+TextMessage.donate6+'</div>'+
+				      '<div class="aboutDonate">'+TextMessage.donate7+'</div>';
 		setButton = TextMessage.confirmBtnYes;
 		$(this).openWindow(setTitle,setContents,[setButton]);
 		$("body").bind("touchmove", function(e) {
