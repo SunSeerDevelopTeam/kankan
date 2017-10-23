@@ -180,7 +180,8 @@ var JSLocale = {
 	"payment_amount": "支払い金額",
 	"payment_method": "支払い方法",
 	"balance_payment": "売上金",
-	"otherway_payment": "别途支払",
+	"credit_card":"クレジットカード決済",
+	"bank_card":"銀行振込決済",
 	"pay": "支払い",
 	//payment page
 	"pay_page": "支払い画面",

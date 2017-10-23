@@ -181,7 +181,8 @@ var JSLocale = {
 	"payment_amount": "支付金额",
 	"payment_method": "支付方法",
 	"balance_payment": "余额支付",
-	"otherway_payment": "别途支付",
+	"credit_card":"信用卡支付",
+	"bank_card":"银行卡支付",
 	"pay": "付款",
 	//payment page
 	"pay_page": "支付页面",
