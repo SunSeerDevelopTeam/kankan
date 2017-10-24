@@ -135,7 +135,7 @@
 			    //显示图片的宽和高
 			    var showimgHeight = showimgWidth * proportion;
 			    var divHeight = $("#comm_image").height();
-			    $("#userid").val(results.myid);
+			    $("#userid").val(results.myid.trim());
 			    $("#price").val(commBasicInfor.price);
 			    //图片的高度大大于框的高度
 			    if (showimgHeight > divHeight) {
@@ -197,6 +197,7 @@
 					pay_url = 'https://secure.telecomcredit.co.jp/inetcredit/secure/order.pl';
 					//pay_url += "?clientip="+clientip+"&money="+money+"&i=on&userid="+userid+"&option="+transid+"&redirect_back_url="+redirect_back_url;
 					pay_url += "?clientip="+clientip+"&money="+money+"&i=on&userid="+userid+"&option="+transid;
+					alert(pay_url);
 					plus.runtime.openURL(pay_url);
 				}else if(pay_way ==2){
 					pay_url = 'https://secure.telecomcredit.co.jp/banktransfer/settle/transfer_request.pl';
