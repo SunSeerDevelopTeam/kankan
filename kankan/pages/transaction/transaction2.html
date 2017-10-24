@@ -132,6 +132,7 @@
 						<input type="hidden" id="seller_urge_d" name="seller_urge_d" value="" />
 						<input type="hidden" id="seller_receipt" name="seller_receipt" value="" />
 						<input type="hidden" id="appraise" name="appraise" value="" />
+						<input type="hidden" id="userid" name="userid" value="">
 						<!--<ul class="tran-distribution change_price" style="display:none;" onclick="change_price();">
 							<li class="tran-distribution-law">
 								<a href="../main/logisticslist.html">
@@ -425,6 +426,7 @@
 						seller_msg += '</a>';
 						seller_msg += '<input type="hidden" name="seller_commodity_id" value="' + seller_comm_id + '">';
 						seller_msg += '<input type="hidden" name="seller_user_id" value="' + seller_id + '">';
+						
 					}
 					buyer_msg += '<a href="#">';
 					buyer_img += '<div class="mui-media-body" style="height:35px;margin-top:0px;">';
@@ -443,11 +445,13 @@
 						$(".request-user").html(seller_msg);
 						$(".cur-user-img").html(buyer_img);
 						$(".request-user-img").html(seller_img);
+						$("#userid").val(buyer_id);
 					} else {
 						$(".request-user").html(buyer_msg);
 						$(".cur-user").html(seller_msg);
 						$(".request-user-img").html(buyer_img);
 						$(".cur-user-img").html(seller_img);
+						$("#userid").val(seller_id);
 					}
 					$(".cur-user").append("<input type='hidden' name='myid' id='myid' value='" + cur_user_id + "'>");
 				} else {
@@ -471,6 +475,7 @@
 						$(".other .otherli").html(seller_msg);
 						$(".secondLi").html(seller_msg1);
 						$(".other .otherliimg").html(seller_msg2);
+						$("#userid").val(buyer_id);
 						//$(".other-img li").html(seller_img);
 					}else{
 						seller_msg += '<a href="#" style="height: '+imgwidth+'px;">';
@@ -487,6 +492,7 @@
 						$(".secondLi").remove();
 						$(".other .otherliimg").remove();
 						$(".other-img li").html(seller_img);
+						$("#userid").val(seller_id);
 					}
 				}
 				$("img.mui-media-object").lazyload({
@@ -870,6 +876,16 @@
 					}
 				}
 			}
+			mui('div').on('tap', '.ka_touxiangimg', function(e) {
+				var uid = $("#userid").val();
+				mui.openWindow({
+					id: 'productslist',
+					url:'../main/products/productslist.html?prolid='+uid,
+					extras: {
+								"prolid": uid
+							}
+				});
+			});
 			mui(".mui-bar-nav").on("tap","a",function(){
 				var view = plus.webview.currentWebview().opener();
 				mui.fire(view,'requestpage');

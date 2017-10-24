@@ -69,12 +69,12 @@
 		    				<span style="margin-left: 0.5em;" class="lang"  data-locale="credit_card"></span>
 		    			</div>
 		    		</div>
-		    		<div style="height: 2em;">
+		    		<!--<div style="height: 2em;">
 		    			<div style="display: flex;align-items: center;">
 		    				<input id="bank_card" type="radio" name="method" value="2" style="zoom: 1.8;"/>
 		    				<span style="margin-left: 0.5em;" class="lang" data-locale="bank_card"></span>
 		    			</div>
-		    		</div>
+		    		</div>-->
 		    	</div>
 		    </div>
 		    <input type="hidden" name="transid" value="" id="transid" />
@@ -135,7 +135,7 @@
 			    //显示图片的宽和高
 			    var showimgHeight = showimgWidth * proportion;
 			    var divHeight = $("#comm_image").height();
-			    $("#userid").val(results.myid.trim());
+			    $("#userid").val(results.myid);
 			    $("#price").val(commBasicInfor.price);
 			    //图片的高度大大于框的高度
 			    if (showimgHeight > divHeight) {
@@ -197,14 +197,15 @@
 					pay_url = 'https://secure.telecomcredit.co.jp/inetcredit/secure/order.pl';
 					//pay_url += "?clientip="+clientip+"&money="+money+"&i=on&userid="+userid+"&option="+transid+"&redirect_back_url="+redirect_back_url;
 					pay_url += "?clientip="+clientip+"&money="+money+"&i=on&userid="+userid+"&option="+transid;
-					alert(pay_url);
+					//console.log(pay_url);
 					plus.runtime.openURL(pay_url);
-				}else if(pay_way ==2){
+				}/*else if(pay_way ==2){
 					pay_url = 'https://secure.telecomcredit.co.jp/banktransfer/settle/transfer_request.pl';
 					//pay_url += "?clientip="+clientip+"&money="+money+"&i=on&sendid="+userid+"&option="+transid+"&redirect_back_url="+redirect_back_url+"&testmode=on";
 					pay_url += "?clientip="+clientip+"&money="+money+"&i=on&sendid="+userid+"&option="+transid+"&testmode=on";
+					console.log(pay_url);
 					plus.runtime.openURL(pay_url);
-				}
+				}*/
 			}
 			
 			function gotopay(params2){
