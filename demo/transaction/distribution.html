@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link href="../css/icons-extra.css" rel="stylesheet" />
+		<script src="jquery-3.2.0.min.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../css/feedback.css" />
+		<link rel="stylesheet" href="kankan_home.css">
+		<link href="wu.css" rel="stylesheet" />
+	</head>
+
+	<body class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--send message to delivery-->
+		<div id="dialog" class="call-dialog-div">
+			<div id="deliveryMsgDiv" class="call-dialog-msg-div">						
+			</div>
+			<div>
+				<ul class="call-dialog">
+					<li class="call-dialog-cancel">
+						<a onclick="goback();">
+						<font color="white">キャンセル</font>
+						</a>
+					</li>
+					<li class="call-dialog-ok">
+						<a onclick="goSend();">
+							<font color="white">送る</font>	
+						</a>
+					</li>
+				</ul>
+				<input id="deliveryMsg" type="text" hidden="hidden" value="" />
+				<input id="deliveryTel" type="text" hidden="hidden" value="" />
+			</div>
+		</div>
+		<!--show message when click 送る button-->
+		<div id="dialogOK" class="call-dialog-div">
+		</div>
+		<!--单页面结束-->
+		<div id="distribution" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font size="4">戻る<font size="4"></span>
+				</button>
+				<h1 class="mui-center mui-title title-center">物流</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="tran-page">
+					<div class="tran-body">
+						<ul class="delivery-info">
+							<li class="delivery-icon">
+								<img height="100%" width="100%" src="../images/location.png"/>
+							</li>
+							<li class="delivery-detail">
+								<font color="#000000" size="2">特定商取引法11111<br>12345678901</font>
+							</li>
+						</ul>
+						<ul class="delivery-list">
+							<li class="delivery-grid">
+								<div class="delivery-detail-call" onclick="showDialog('特定商取引法11111','12345678901');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">メール送信</font>
+								</div>
+							</li>
+							<li class="delivery-grid2">
+								<div class="delivery-detail-call2" onclick="showCallDialog('特定商取引法11111','12345678901');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">電話</font>
+								</div>
+							</li>
+							<li class="delivery-grid3">
+								<div class="delivery-detail-call3" onclick="window.open('http://www.google.com');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">ホームページへ</font>
+								</div>
+							</li>
+						</ul>
+						<ul class="delivery-info">
+							<li class="delivery-icon">
+								<img height="100%" width="100%" src="../images/location.png"/>
+							</li>
+							<li class="delivery-detail">
+								<font color="#000000" size="2">特定商取引法22222<br>12345678902</font>
+							</li>
+						</ul>
+						<ul class="delivery-list">
+							<li class="delivery-grid">
+								<div class="delivery-detail-call" onclick="showDialog('特定商取引法22222','12345678902');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">メール送信</font>
+								</div>
+							</li>
+							<li class="delivery-grid2">
+								<div class="delivery-detail-call2" onclick="showCallDialog('特定商取引法22222','12345678902');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">電話</font>
+								</div>
+							</li>
+							<li class="delivery-grid3">
+								<div class="delivery-detail-call3" onclick="window.open('http://www.google.com');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">ホームページへ</font>
+								</div>
+							</li>
+						</ul>
+						<ul class="delivery-info">
+							<li class="delivery-icon">
+								<img height="100%" width="100%" src="../images/location.png"/>
+							</li>
+							<li class="delivery-detail">
+								<font color="#000000" size="2">特定商取引法33333<br>12345678903</font>
+							</li>
+						</ul>
+						<ul class="delivery-list">
+							<li class="delivery-grid">
+								<div class="delivery-detail-call" onclick="showDialog('特定商取引法33333','12345678903');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">メール送信</font>
+								</div>
+							</li>
+							<li class="delivery-grid2">
+								<div class="delivery-detail-call2" onclick="showCallDialog('特定商取引法33333','12345678903');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">電話</font>
+								</div>
+							</li>
+							<li class="delivery-grid3">
+								<div class="delivery-detail-call3" onclick="window.open('http://www.google.com');">
+									<font size="2" color="#FFFFFF" vertical-align="middle">ホームページへ</font>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面结束-->
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.view.js "></script>
+	<script src='../js/feedback.js'></script>
+	<script>
+		var timer;
+		mui.init();
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#distribution'
+		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+			view.addEventListener('pageBeforeShow', function(e) {
+				//				console.log(e.detail.page.id + ' beforeShow');
+			});
+			view.addEventListener('pageShow', function(e) {
+				//				console.log(e.detail.page.id + ' show');
+			});
+			view.addEventListener('pageBeforeBack', function(e) {
+				//				console.log(e.detail.page.id + ' beforeBack');
+			});
+			view.addEventListener('pageBack', function(e) {
+				//				console.log(e.detail.page.id + ' back');
+			});
+		})(mui);
+		
+		function showDialog(msg, tel) {
+			var dialog = document.getElementById('dialog');
+			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
+			var content = "";
+			document.getElementById('deliveryMsg').value = msg;
+			document.getElementById('deliveryTel').value = tel;
+			// create content into innerHTML
+			content += "<font color=\"white\">";
+			content += msg;
+			content += "<br>";
+			content += tel;
+			content += "にメールを送りますか？</font>";
+			deliveryMsgDialog.innerHTML = content;
+			dialog.style.display = "block";
+			// display div slowly
+			var x=0;
+			timer=setInterval(function()
+			{
+			    x+=0.05;
+			    dialog.style.opacity=x;
+			},10);
+		}
+		
+		function showCallDialog(msg, tel) {
+			var dialog = document.getElementById('dialog');
+			var deliveryMsgDialog = document.getElementById('deliveryMsgDiv');
+			var content = "";
+			document.getElementById('deliveryMsg').value = "";
+			document.getElementById('deliveryTel').value = tel;
+			// create content into innerHTML
+			content += "<font color=\"white\">";
+			content += msg;
+			content += "<br>";
+			content += tel;
+			content += "に電話を送りますか？</font>";
+			deliveryMsgDialog.innerHTML = content;
+			dialog.style.display = "block";
+			// display div slowly
+			var x=0;
+			timer=setInterval(function()
+			{
+			    x+=0.05;
+			    dialog.style.opacity=x;
+			},10);
+		}
+		
+		// close div and stop the timer
+		function goback() {
+			var dialog = document.getElementById('dialog');
+			clearInterval(timer);
+			dialog.style.opacity=0;
+			dialog.style.display="none";
+		}
+		function goSend() {
+			var dialog = document.getElementById('dialog');
+			var dialogOK = document.getElementById('dialogOK');
+			var msg = document.getElementById('deliveryMsg').value;
+			var tel = document.getElementById('deliveryTel').value;
+			clearInterval(timer);
+			dialog.style.opacity=0;
+			dialog.style.display = "none";
+			// send mail OK
+			if (msg !== "" && tel != "") {
+				// show dialog OK
+				dialogOK.style.display = "block";
+				var content = "";
+				content += "<div class=\"call-dialog-msg-div\">";
+				content += "<font size=\"2\" color=\"white\">";
+				content += "ご利用ありがとうございます。<br>";
+				content += msg + "<br>";
+				content += tel + "ににメールを送りました。<br>";
+				content += "返信お待ちください<br><br></font>";
+				content += "<a onclick=\"gook();\">";
+				content += "<font color=\"white\">OK</font>";
+				content += "</a>";
+				content += "</div>";
+				dialogOK.innerHTML = content;
+				// display div slowly
+				var x=0;
+				timer=setInterval(function()
+				{
+				    x+=0.05;
+				    dialogOK.style.opacity=x;
+				},10);
+			} else {
+				// phone call OK
+				window.location.href = "tel://" + tel;
+			}
+		}
+		// send mail successed and close div
+		function gook(msg, tel) {
+			var dialogOK = document.getElementById('dialogOK');
+			clearInterval(timer);
+			dialogOK.style.opacity=0;
+			dialogOK.style.display="none";
+		}
+	</script>
+
+</html>

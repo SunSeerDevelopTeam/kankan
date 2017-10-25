@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>requestlist</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left"><font size="3" class="lang" data-locale="back"></font></a>
+			<h1 class="mui-title lang" data-locale="requesthistory"></h1>
+		</header>
+		<div class="mui-content">
+			<div id="pullrefresh" class="mui-scroll-wrapper" style="margin-top: 1em;">
+				<div class="mui-scroll">
+					<div id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
+					<div id="historyshow">
+						<ul class="mui-table-view mui-grid-view" id="historyUl" style="padding-top: 0.88rem; display: none;">
+						</ul>
+						<div id="total" style="height: 60px;width: 100%;margin-top: 60%;background: #FFF;display: none;"></div>
+					</div>
+					<!--<div style="height: 50px;width: 100%;margin-top: 100px;border: 1px solid red;">bfdbvfnvbfnm</div>-->
+				</div>
+			</div>
+		</div>
+		<script>var h5pullDown = true;</script>
+		<script src="../../../js/mui.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script src="../../../js/common.js"></script>
+		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js"></script>
+		<script type="text/javascript">
+			var income;
+			mui.init({
+				pullRefresh: {
+						container: '#pullrefresh',
+						down: {
+							contentrefresh:TextMessage.update,
+							contentnomore: TextMessage.nomore,
+							contentover:TextMessage.release,
+							contentdown:TextMessage.pull_down,
+							auto: true,
+							//top:"180px",
+							callback: pulldownRefresh
+						},
+//						up: {
+//							contentrefresh:TextMessage.update,
+//							contentinit: TextMessage.upmore,
+//							contentdown: TextMessage.upmore,
+//							contentnomore: TextMessage.nomore,
+//							callback: pulldownRefresh,
+//							
+//						}
+					}
+			});
+			function pulldownRefresh(){
+				$("#reloadpage").hide();
+				$("#historyUl").hide();
+				$("#total").hide();
+				mui('#pullrefresh').pullRefresh().refresh(true);
+				setTimeout(function() {
+					$("#historyUl").empty();
+					$("#total").empty();
+					getmessage();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				}, 1500);
+			}
+			function showhistory(results){
+				var data=results.data;
+				var datalen=data.length;
+				for(var i=0;i<datalen;i++){
+					var trans=data[i].trans;
+					var price=trans.price ? parseFloat(trans.price).toLocaleString() : '0';
+					var trans_id=trans.trans_id;
+					var trstatus=trans.status;
+					if(trstatus=="3"){
+						//var status="取引が成功する";
+						var status = TextMessage.transSuccess;
+					}else if(trstatus=="8"){
+						//var status="中止を請求する";
+						var status = TextMessage.requestStop;
+					}else{
+						//var status="取引の中止";
+						var status = TextMessage.transactionStop;
+					}
+					if(trans[0].comm_img==""){
+						var comm_img ="../../../images/nopic.jpg";
+					}else{
+						var comm_img=trans[0].comm_img;
+					}
+					var comm_name=HTMLDecode(trans[0].comm_name);
+					var html = new Util.StringBuilder();
+					html.appendFormat('<li class="mui-row mui-table-view-cell transli" style="width:100%; height: 76px;"><a class="mui-navigate-right" id="{0}"><div class="mui-pull-left mui-col-xs-2"><img class="lazy" data-original="{1}" style="width: 60px;max-height: 60px;"></div>',trans_id,comm_img)
+						.appendFormat('<div style="text-overflow: ellipsis;overflow: hidden;" class="mui-pull-left mui-col-xs-3 requestbox">{0}<div style="text-align:left;"><font color="#0062CC">&yen;{1}</font></div></div>',comm_name,price)
+						.appendFormat('<div style="" class="mui-pull-left mui-col-xs-5 ka_userbox"><div class="{0}">{1}</div></div></a></li>',trstatus=="3" ? "requestsuccess":"requeststop",status);
+					$("#historyUl").append(html.toString());
+					lazyload();
+					$("#historyshow").show();
+					$("#historyUl").show();
+					var translatepage=null;
+					mui('.transli').on('tap','a',function(e) {
+						var tid = this.getAttribute('id');
+						mui.openWindow({
+							url: "../../transaction/transaction2.html?transid=" + trans_id,
+							id: "transaction",
+							extras: {
+								"transid": tid
+							}
+						});
+					});
+				}
+				
+				$("#total").append('<div class="mui-col-xs-6 mui-pull-left lang" style="display:flex; align-items: center; left: 1em; height: 60px;">'+TextMessage.totolMoney+'</div>');
+				$("#total").append('<div class="mui-col-xs-6 mui-pull-left" style="display:flex; align-items: center; left: 1em; height: 60px;">&yen;<span id="totalMoney">'+income+'</span></div>');
+			    $("#total").show();
+			}
+			function reloadpage(){
+				location.reload();
+			}
+			function getmessage(){
+				var params1 = {};
+				Repository.Transaction.getTotalMoney(params1, {
+					ok: function(data) {
+						income = data.data.income ? parseFloat(data.data.income).toLocaleString() : '0';
+					},
+					ng: function(data) {
+						
+					}
+				});
+				
+				var params = {};
+				Repository.User.mytranshistory(params,{
+					ok: function(data) {
+						console.log("request history success");
+						showhistory(data);
+						$("#reloadpage").hide();
+					},
+					ng: function(data) {
+						console.log("error");
+						Log.d(data);
+						//emptycontent();
+						if(data=="2001"){
+							mui.toast(TextMessage.datanull, {
+								duration: 'long',
+								type: 'div'
+							});
+							//$("ul").hide();
+						}
+						if(data=="1000"){
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.toast(TextMessage.datanull, {
+								duration: 'long',
+								type: 'div'
+							})
+						}
+						if(data=="2002"){
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+					},
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
+						$("#reloadpage").show();
+						$("#historyshow").hide();
+						//$(".mui-content").hide();reloadpage
+					}
+				});
+			}
+//			mui.plusReady(function() {
+//				getmessage();
+//			});
+            function lazyload() {
+				$("img.lazy").lazyload({
+					threshold: 40,
+					placeholder: "../../../images/nopic.jpg",
+					effect: "fadeIn",
+					failure_limit: 10
+				});
+            }
+            mui(".mui-bar-nav").on("tap","a",function(){
+ 				var view = plus.webview.currentWebview().opener();
+ 				mui.fire(view,'requestpage');
+ 				mui.back();
+ 			});
+		</script>
+	</body>
+
+</html>

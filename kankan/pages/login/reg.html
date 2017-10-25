@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<!--<link href="../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />-->
+		<link rel="stylesheet" type="text/css" href="../../css/public.css">
+	    <link rel="stylesheet" type="text/css" href="../../css/mobileSelect.css">
+		<style>
+			.mui-content {
+				background-color: #FFFFFF;
+			}
+			
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-input-group:first {
+				margin-top: 30px;
+			}
+			
+			.mui-input-group {
+				margin-top: -1px;
+			}
+			
+			.mui-input-group label {
+				width: 41%;
+			}
+			
+			.mui-input-row {
+				overflow: inherit;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 59%;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			#avatar {
+				width: 100%;
+				height: 15%;
+				text-align: center;
+				margin-top: -30px;
+  				margin-bottom: -50px;
+			}
+			
+			#avatar img {
+				border-radius: 30%;
+				width: 60px;
+				height: 60px;
+			}
+			
+			label.error {
+				width: 100%;
+				color: red;
+				display: block;
+				height: 30px;
+				float: left;
+				text-align: center;
+			}
+			
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+			
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+			
+			#regForm {
+				margin-top: 45px;
+			}
+			
+			#regForm label {
+				font-size: 75%;
+			}
+			
+			#regForm input {
+				font-size: 67%;
+				line-height: 1.5;
+			}
+			
+			.input-top {
+		        position:relative;
+		        top:0px;
+		        left:0px;
+		        width:100%;
+		        z-index:1;
+		    }
+		    
+		    .mui-content-padded span {
+		    	color: #8f8f94;
+		    	font-size: 14px;
+		    }
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav input-top">
+			<a class="mui-action-back mui-icon mui-icon-left-nav"></a>
+			<a class="lang" data-locale="back"></a>
+			<h1 class="mui-title"><span class="lang" data-locale="user-login"></span></h1>
+			<!--<a class="mui-icon mui-icon-closeempty mui-pull-right"></a>-->
+		</header>
+		<div class="mui-content">
+			<div id="avatar">
+				<img src="../../images/userPhoto.png" />
+			</div>
+			<form id="regForm" method="post">
+				<!-- email -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="email" class="lang" data-locale="email"></label>
+						<input id='email' name="email" type="email" class="mui-input lang" data-locale="please-input-email">
+					</div>
+				</div>
+				<!-- username -->
+				<!--<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="username" class="lang" data-locale="username"></label>
+						<input id='username' name="username" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-username">
+					</div>
+				</div>-->
+				<!-- nickname -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label for="nickname" class="lang" data-locale="nickname"></label>
+						<input id='nickname' name="nickname" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-nickname">
+					</div>
+				</div>
+				<!-- password -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="password"></label>
+						<input id='password' name="password" type="password" class="mui-input-clear mui-input lang" data-locale="please-input-password">
+					</div>
+				</div>
+				<!-- password confirm -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="password-confirm"></label>
+						<input id='passwordConfirm' name="passwordConfirm" type="password" class="mui-input-clear mui-input lang" data-locale="please-confirm-password">
+					</div>
+				</div>
+				<!-- address -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="address"></label>
+						<input id="city" name="city" type="text" value="" class="mui-input-clear mui-input lang" data-locale="address-details" readonly="readonly">
+						<a id="showCityPicker" class="mui-navigate-right"></a>
+					</div>
+				</div>
+				<!-- verification code -->
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="verification-code"></label>
+						<input id='verificationCode' name="verificationCode" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-verification-code">
+					</div>
+				</div>
+				<!-- send verification code button -->
+				<div class="mui-content-padded">
+					<div id='send-verification-code' class="mui-btn mui-btn-block mui-btn-success lang" data-locale="send-verification-code"></div>
+				</div>
+				<div>
+					<label class="lang" style="color:#CF2D28;margin-left: 10px;" data-locale="reg_tips"></label>
+				</div>
+				<!-- introduction code -->
+				<!--
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="lang" data-locale="introduction-code"></label>
+						<input id='introduction-code' name="introduction-code" type="text" class="mui-input-clear mui-input lang" data-locale="please-input-introduction-code">
+					</div>
+				</div>
+				-->
+				<!-- submit button -->
+				<div class="mui-content-padded" style="margin-top: 10px;">
+					<button id='reg' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
+				</div>
+			</form>
+
+			<div class="mui-content-padded">
+				<p class="lang" data-locale="register-tips"></p>
+				<span class="lang" data-locale="register-tips-1"></span>
+				<span id="clause" class="lang" style="color:#007AFF;" data-locale="register-tips-2"></span>
+				<span class="lang" data-locale="register-tips-3"></span>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/sha1.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/md5.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script src="../../js/citydata.js" type="text/javascript"></script>
+		<script src="../../js/mobileSelect.js" type="text/javascript"></script>
+		<!--<script type="text/javascript" src="../../js/picker/mui.picker.js"></script>
+		<script type="text/javascript" src="../../js/picker/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../../js/picker/city.data.js"></script>-->
+		<script type="text/javascript" charset="utf-8">
+			(function(mui, doc) {
+				mui.init();
+				mui.plusReady(function() {
+					console.log("reg page plus ready...");
+					var sendVCodeBtn = doc.getElementById('send-verification-code');
+					var canClick = true;
+					sendVCodeBtn.addEventListener('tap', function(event) {
+						if(!canClick) {
+							$("#send-verification-code").removeClass("mui-btn-success");
+							$("#send-verification-code").addClass("mui-btn-grey");
+							plus.nativeUI.toast(TextMessage.may_not_click);
+							return;
+						}
+						console.log("click sendVCodeBtn");
+						doc.getElementById('email').blur();
+						//doc.getElementById('username').blur();
+						doc.getElementById('nickname').blur();
+						doc.getElementById('password').blur();
+						doc.getElementById('passwordConfirm').blur();
+						doc.getElementById('verificationCode').blur();
+						canClick = false;
+						var email = doc.getElementById('email').value.trim();
+						if (email == "") {
+							plus.nativeUI.toast(TextMessage.emailnull);
+							canClick = true;
+							return;
+						}
+						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
+						if (!reg.test(email)) {
+							plus.nativeUI.toast(TextMessage.email_error1);
+							canClick = true;
+							return;
+						}
+						/*var username = doc.getElementById('username').value.trim();
+						if (username == "") {
+							plus.nativeUI.toast(TextMessage.username_null);
+							canClick = true;
+							return;
+						}
+						if (username.length > 10) {
+							plus.nativeUI.toast(TextMessage.username_error);
+							canClick = true;
+							return;
+						}*/
+						var nickname = doc.getElementById('nickname').value.trim();
+						if (nickname == "") {
+							plus.nativeUI.toast(TextMessage.nickname_null);
+							canClick = true;
+							return;
+						}
+						if (nickname.length > 10) {
+							plus.nativeUI.toast(TextMessage.nickname_error);
+							canClick = true;
+							return;
+						}
+						var password = doc.getElementById('password').value.trim();
+						if(password == ""){
+							plus.nativeUI.toast(TextMessage.password_notnull);
+							canClick = true;
+							return;
+						}
+						var reg = /^[0-9a-zA-Z]{6,16}$/
+						if (!reg.test(password)) {
+							plus.nativeUI.toast(TextMessage.password_error);
+							canClick = true;
+							return;
+						}
+						var passwordConfirm = doc.getElementById('passwordConfirm').value.trim();
+						if (password != passwordConfirm) {
+							plus.nativeUI.toast(TextMessage.confirmPwd_error);
+							canClick = true;
+							return;
+						}
+						var city = doc.getElementById('city').getAttribute('data-val');
+						if (city == null) {
+							plus.nativeUI.toast(TextMessage.addressnull);
+							canClick = true;
+							return;
+						}
+						var waiting = plus.nativeUI.showWaiting();
+						var params = {};
+						params[Api.Params.email] = doc.getElementById('email').value;
+						Repository.User.checkEmail(params, {
+							ok: function(data) {
+								waiting.close();
+								mui.toast(TextMessage.send_code_ok, {
+									duration: 'long',
+									type: 'div'
+								})
+								$("#send-verification-code").removeClass("mui-btn-success");
+								$("#send-verification-code").addClass("mui-btn-grey");
+								var i = 0;
+								var updateText = setInterval(function() {
+									i++;
+									if(180 - i == 0) {
+										$("#send-verification-code").removeClass("mui-btn-grey");
+										$("#send-verification-code").addClass("mui-btn-success");
+										canClick = true;
+										clearInterval(updateText);
+									} else {
+										$("#send-verification-code").removeClass("mui-btn-success");
+										$("#send-verification-code").addClass("mui-btn-grey");
+									}
+								}, 1000);
+							},
+							ng: function(data) {
+								waiting.close();
+								canClick = true;
+								switch(data) {
+									case "2013":
+										mui.toast(TextMessage.email_error, {
+											duration: 'long',
+											type: 'div'
+										})
+										break;
+									default:
+										mui.toast(TextMessage.send_code_ng, {
+											duration: 'long',
+											type: 'div'
+										})
+										break;
+								}
+							},
+							error: function() {
+								canClick = true;
+								waiting.close();
+							}
+						});
+					});
+
+					// register logic
+					var regBtn = doc.getElementById('reg');
+					regBtn.addEventListener('tap', function(event) {
+						console.log("click regBtn");
+						doc.getElementById('email').blur();
+						//doc.getElementById('username').blur();
+						doc.getElementById('nickname').blur();
+						doc.getElementById('password').blur();
+						doc.getElementById('passwordConfirm').blur();
+						doc.getElementById('verificationCode').blur();
+						var email = doc.getElementById('email').value.trim();
+						if (email == "") {
+							plus.nativeUI.toast(TextMessage.emailnull);
+							return;
+						}
+						var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
+						if (!reg.test(email)) {
+							plus.nativeUI.toast(TextMessage.email_error1);
+							return;
+						}
+						/*var username = doc.getElementById('username').value.trim();
+						if (username == "") {
+							plus.nativeUI.toast(TextMessage.username_null);
+							return;
+						}
+						if (username.length > 10) {
+							plus.nativeUI.toast(TextMessage.username_error);
+							return;
+						}*/
+						var nickname = doc.getElementById('nickname').value.trim();
+						if (nickname == "") {
+							plus.nativeUI.toast(TextMessage.nickname_null);
+							return;
+						}
+						if (nickname.length > 10) {
+							plus.nativeUI.toast(TextMessage.nickname_error);
+							return;
+						}
+						var password = doc.getElementById('password').value.trim();
+						if(password==""){
+							plus.nativeUI.toast(TextMessage.password_notnull);
+							return;
+						}
+						var reg = /^[0-9a-zA-Z]{6,16}$/
+						if (!reg.test(password)) {
+							plus.nativeUI.toast(TextMessage.password_error);
+							return;
+						}
+						var passwordConfirm = doc.getElementById('passwordConfirm').value.trim();
+						if (password != passwordConfirm) {
+							plus.nativeUI.toast(TextMessage.confirmPwd_error);
+							return;
+						}
+						var city = doc.getElementById('city').getAttribute('data-val');
+						if (city == null) {
+							plus.nativeUI.toast(TextMessage.addressnull);
+							return;
+						}
+						var verificationCode = doc.getElementById('verificationCode').value.trim();
+						if (verificationCode == "") {
+							plus.nativeUI.toast(TextMessage.codenull);
+							return;
+						}
+						
+						var waiting = plus.nativeUI.showWaiting();
+						var params = {};
+						params[Api.Params.email] = doc.getElementById('email').value.trim();
+						//params[Api.Params.username] = doc.getElementById('username').value.trim();
+						params[Api.Params.nickName] = doc.getElementById('nickname').value.trim();
+						params[Api.Params.password] = hex_sha1(hex_md5(password));
+						params[Api.Params.addressId] = doc.getElementById('city').getAttribute('data-val');
+						params[Api.Params.vCode] = doc.getElementById('verificationCode').value.trim();
+						params[Api.Params.rCode] = "";
+						params[Api.Params.loginType] = LOGIN_TYPE.EMAIL;
+						Repository.User.register(params, {
+							ok: function(data) {
+								Log.i("register ok");
+								waiting.close();
+								plus.storage.setItem('LoginFlag', 'isLogin');
+								mui.back();
+							},
+							ng: function(data) {
+								waiting.close();
+								Api.callback_ng(data);
+							},
+							error: function() {
+								waiting.close();
+							}
+						});
+					});
+					var mobileSelect4 = new MobileSelect({
+					    trigger: '#city',
+					    title: '',
+					    wheels: cityData, 
+					    position:"0",
+					    transitionEnd:function(indexArr, data){
+					        //console.log(indexArr);
+					    },
+					    callback:function(indexArr, data){
+					        console.log(data);
+					        var cityElement = document.getElementById('city');
+							cityElement.value = data[0].value;
+							cityElement.setAttribute('data-val', data[0].id);
+					    }  
+					});
+					// address logic
+//					var cityPickerBtn = doc.getElementById('showCityPicker');
+//					var cityInput = doc.getElementById('city');
+//					var cityPicker = new mui.PopPicker();
+//					cityPicker.setData(cityData);
+//					cityPickerBtn.addEventListener('tap', function(event) {
+//						showCityPicker();
+//					});
+//					cityInput.addEventListener('tap', function(event) {
+//						showCityPicker();
+//					});
+//
+//					var showCityPicker = function() {
+//						Log.i("click cityPicker");
+//						cityPicker.show(function(items) {
+//							var cityElement = doc.getElementById('city');
+//							cityElement.value = items[0].text;
+//							cityElement.setAttribute('data-val', items[0].value);
+//						});
+//					}
+					
+					doc.getElementById('clause').addEventListener('tap', function(event){
+						mui.openWindow({
+							id: "terms",
+							url: "../setting/terms.html",
+							waiting: {
+								autoShow: false
+							},
+							show: {
+								duration: 200
+							}
+						});
+					});
+				});
+			})(mui, document);
+		</script>
+	</body>
+
+</html>

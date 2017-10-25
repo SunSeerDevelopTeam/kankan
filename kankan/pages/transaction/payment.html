@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>payment.html</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<script src="../../jquery-3.2.0.min.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		    .input-top{
+		        position:relative;
+		        top:0px;
+		        left:0px;
+		        width:100%;
+		        z-index:1;
+		    }
+		    input:active {
+		    	background: #CF2D28;
+		    }
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css">
+		<link href="../../css/wu.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav input-top">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+				<font size="3" class="lang" data-locale="back"></font>
+			</a>
+			<h1 class="mui-title"><span class="lang" data-locale="payment_procedures"></span></h1>
+		</header>
+		<div id="reloadpage" onclick="reloadpage()" style="display: none;"><font size="2" class="lang" data-locale="networkerror"></font></div>
+		<div class="mui-content" style="padding-top: 0;">
+		    <div class="contentTop" style="height: 6em; background-color: #FFFFFF;">
+		    	<div id="comm_image" class="mui-pull-left mui-col-xs-4" style="width: 6em; height: 6em;">
+		    		<!--<img id="comm_img" style="" src="../../images/logo.png">-->
+		    	</div>
+		    	<div class="mui-pull-left mui-col-xs-7" style="height: 6em;display: flex;align-items: center;margin-left: 1em;">
+		    		<span id="comm_name"></span>
+		    	</div>
+		    </div>
+		    <div class="contentBottom" style="width: 100%; height: 3em; line-height: 3em;background-color: #FFFFFF; margin-top: 1em;">
+		    	<div class="mui-pull-left lang" style="margin-left: 1em;" data-locale="payment_amount">
+		    	</div>
+		    	<div class="mui-pull-right" style="margin-right: 0.5em;"><span>&yen;<span id="comm_price"></span></span></div>
+		    </div>
+		    <div style="width: 100%; background-color: #FFFFFF;margin-top: 1.5em;padding: 0.1em 0 1.1em 1em;">
+		    	<div style="width: 100%; margin: 0.5em 0 1em" class="lang" data-locale="payment_method"></div>
+		    	<div style="width: 100%;">
+		    		<div style="height: 2em;">
+		    			<div class="mui-pull-left" style="display: flex;align-items: center;">
+		    				<input id="balance" type="radio" value="0" name="method" style="zoom: 1.8;"/>
+		    			    <span style="margin-left: 0.5em;" class="lang" data-locale="balance_payment"></span>
+		    			</div>
+		    			<div class="mui-pull-right" style="margin-right: 2em;">
+		    				<span>&yen;<span id="user_balance"></span></span>
+		    			</div>
+		    		</div>
+		    		<div style="height: 2em;">
+		    			<div style="display: flex;align-items: center;">
+		    				<input id="credit_card" type="radio" value="1" name="method" style="zoom: 1.8;"/>
+		    				<span style="margin-left: 0.5em;" class="lang"  data-locale="credit_card"></span>
+		    			</div>
+		    		</div>
+		    		<!--<div style="height: 2em;">
+		    			<div style="display: flex;align-items: center;">
+		    				<input id="bank_card" type="radio" name="method" value="2" style="zoom: 1.8;"/>
+		    				<span style="margin-left: 0.5em;" class="lang" data-locale="bank_card"></span>
+		    			</div>
+		    		</div>-->
+		    	</div>
+		    </div>
+		    <input type="hidden" name="transid" value="" id="transid" />
+		    <input type="hidden" name="userid" value="" id="userid" />
+		    <input type="hidden" name="price" value="" id="price"  />
+		    <button class="mui-col-xs-8 lang" data-locale="pay" onclick="pay()" style="background-color: red; color: #FFFFFF; text-align: center; position: absolute; left: 16.5%; bottom: 5em; padding: 0.3em 0;">
+		    </button>
+		</div>
+		
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.0.min.js"></script>
+		<script type="text/javascript" src="../../js/language.js"></script>
+		<script type="text/javascript" src="../../js/sha256.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/jquery.lazyload.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			function reloadpage(){
+				location.reload();
+			}
+			var imgContent;
+			var comm_price;
+			var user_balance;
+			var trans_id;
+			mui.init({
+				
+			});
+			var showimgWidth = 120;
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				trans_id = self.transid;
+				var params = {
+					'transid': trans_id
+				};
+				$("#transid").val(trans_id);
+				Repository.Transaction.transPayshow(params, {
+					ok: function(data) {
+						console.log("success");
+						showPayInfor(data);
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						Log.d(data);
+					}
+				})
+			})
+			
+			function showPayInfor(results) {
+				console.dir(results);
+				var commBasicInfor = results.data;
+			    var comm_imgUrl = commBasicInfor.comm_imgs[0].url;
+			    var comm_imgWidth = commBasicInfor.comm_imgs[0].width;
+			    var comm_imgHeight = commBasicInfor.comm_imgs[0].height;
+			    var comm_name = commBasicInfor.comm_name;
+			    comm_price = commBasicInfor.price;
+			    user_balance = commBasicInfor.user_balance;
+			    //比例
+			    var proportion = comm_imgHeight / comm_imgWidth;
+			    //显示图片的宽和高
+			    var showimgHeight = showimgWidth * proportion;
+			    var divHeight = $("#comm_image").height();
+			    $("#userid").val(results.myid);
+			    $("#price").val(commBasicInfor.price);
+			    //图片的高度大大于框的高度
+			    if (showimgHeight > divHeight) {
+			    	extraImg = 'width: 100%; margin-top:-'+(showimgHeight-divHeight)/2+'px;';
+			    } else {
+			        extraImg = 'width: 100%; position:relative; top:'+(divHeight-showimgHeight)/2+'px;';
+			    }
+			    $("#comm_image").attr("style", "overflow: hidden;");
+			    imgContent = '<img style="'+extraImg+'" data-original="'+comm_imgUrl+'" onerror="this.src=' + "'../../images/nopic.jpg'" + '"/>';
+			    $("#comm_image").append(imgContent);
+			    $("#comm_name").html(HTMLDecode(comm_name));
+			    $("#comm_price").html(parseFloat(comm_price).toLocaleString());
+			    $("#user_balance").html(parseFloat(user_balance).toLocaleString());
+			    $("img").lazyload({
+					threshold: 90,
+					placeholder: "../../images/nopic.jpg",
+					effect: "fadeIn",
+					failure_limit : 2
+				});
+			}
+            $(function(){
+            	$('input:radio[name="method"]').change(function() {
+            		if($(":radio:checked").attr("id")=="balance") {
+            			if (user_balance < comm_price) {
+						    $("button").attr("disabled", "disabled");
+						    $("button").css("background-color", "darkgray");
+						} else {
+						    $("button").removeAttr("disabled");
+						    $("button").css("background-color", "red");
+						}
+            		} else {
+            			$("button").removeAttr("disabled");
+            			$("button").css("background-color", "red");
+            		}
+				});
+            });
+			//付款按钮
+			var pay_way;
+			var params2;
+			var pay_url;
+			var clientip="00329";
+			var money;
+			var i="on";
+			var transid="";
+			var redirect_back_url="https://www.kankann.jp:442/bankval/Transfer/";
+			var userid="";
+			function pay() {
+				pay_way = $(":radio:checked").val();
+				money=$("#price").val();
+				transid=$("#transid").val();
+				userid=$("#userid").val();
+				params2 = {
+					'transid': trans_id,
+					'pay_way': pay_way //0表示余额  1表示银行
+			    };
+				if(pay_way == 0) {
+					gotopay(params2);
+				} else if ( pay_way ==1 ) {
+					pay_url = 'https://secure.telecomcredit.co.jp/inetcredit/secure/order.pl';
+					//pay_url += "?clientip="+clientip+"&money="+money+"&i=on&userid="+userid+"&option="+transid+"&redirect_back_url="+redirect_back_url;
+					pay_url += "?clientip="+clientip+"&money="+money+"&i=on&userid="+userid+"&option="+transid;
+					//console.log(pay_url);
+					plus.runtime.openURL(pay_url);
+					var ws=plus.webview.currentWebview();
+					plus.webview.close(ws);
+				}/*else if(pay_way ==2){
+					pay_url = 'https://secure.telecomcredit.co.jp/banktransfer/settle/transfer_request.pl';
+					//pay_url += "?clientip="+clientip+"&money="+money+"&i=on&sendid="+userid+"&option="+transid+"&redirect_back_url="+redirect_back_url+"&testmode=on";
+					pay_url += "?clientip="+clientip+"&money="+money+"&i=on&sendid="+userid+"&option="+transid+"&testmode=on";
+					console.log(pay_url);
+					plus.runtime.openURL(pay_url);
+				}*/
+			}
+			
+			function gotopay(params2){
+				Repository.Transaction.transgotoPay(params2, {
+					ok: function(data) {
+						console.log("success");
+						var transactionPage = plus.webview.getWebviewById('transaction');
+				        mui.fire(transactionPage, 'refresh', {
+						    refresh: "canRefresh"
+					    });
+					},
+					ng: function(data) {
+						console.log("error:"+data);
+						switch(data) {
+							case "3030":
+								mui.toast(TextMessage.invalid_type, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
+							case "3031":
+								mui.toast(TextMessage.pay_error, {
+									duration: 'long',
+									type: 'div'
+								})
+								break;
+						}
+					}
+				})
+			}
+		</script>
+	</body>
+
+</html>

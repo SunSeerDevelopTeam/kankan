@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>pullrefresh_sub_8</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../../css/listitem.css" />
+		<style>
+			img {
+				width: 150px;
+				height: 150px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-row">
+					<!--
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							<img src="img/muwu.jpg"/>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							<img src="img/muwu.jpg"/>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							<img src="img/muwu.jpg"/>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							<img src="img/muwu.jpg"/>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							<img src="img/muwu.jpg"/>
+						</a>
+					</li>
+					-->
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../js/sha256.js" ></script>
+		<script type="text/javascript" src="../../../js/jquery-3.2.0.min.js" ></script>
+		<script type="text/javascript" src="../../../js/common.js" ></script>
+		<script type="text/javascript" src="../../../js/jquery.lazyload.min.js" ></script>
+		<script type="text/javascript" src="../../../js/index.list.js" ></script>
+	    <script>
+			$('#pullrefresh').after(getzanItems());
+			$("#loginItem").click(function(){
+                mui.openWindow({
+					id: 'login',
+					url: '/pages/login/login.html',
+					waiting: {
+						autoShow: false
+					},
+					show: {
+						duration: 200
+					}
+				});
+				mui('#clickzan').popover('hide');
+            });
+            $("#registerItem").click(function(){
+                mui.openWindow({
+					id: 'reg',
+					url: '/pages/login/reg.html',
+					waiting: {
+						autoShow: false
+					},
+					show: {
+						duration: 200
+					}
+				});
+				mui('#clickzan').popover('hide');
+            });
+            $("#rulesItem").click(function(){
+                mui.openWindow({
+					id: 'reg',
+					url: '/pages/setting/setting.html',
+					waiting: {
+						autoShow: false
+					},
+					show: {
+						duration: 200
+					},
+					extras: {
+						"flag": "rules"
+					}
+				});
+				mui('#clickzan').popover('hide');
+            });
+		</script>
+	</body>
+
+</html>

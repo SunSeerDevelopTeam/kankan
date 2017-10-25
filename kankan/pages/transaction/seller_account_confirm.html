@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>sell_account_confirm.html</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css" />
+		<link rel="stylesheet" href="../../css/public.css" type="text/css"/>
+		<link rel="stylesheet" href="../../css/mobileSelect.css" type="text/css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-center mui-title lang" data-locale="confirm_account"></h1>
+		</header>
+		<div class="mui-content" style="font-size: 15px;min-height: 600px;">
+			<form action="" method="post" name="" id="" style="height:500px;">
+				<!--bank-->
+				<div class="tradeFees" >
+					<ul class="mui-table-view ka_prologbox">
+						<li class="mui-table-view-cell" style="display: -webkit-box;">
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="bank"></span>
+					        	<input type="text" id="branch_id" name="branch_id" class="mui-pull-right"  style="width: 50%; height: auto; padding: 0; ime-mode:Disabled;"/>
+					        </div>
+						</li>
+					</ul>
+					
+				</div>
+				<!--account type-->
+				<div class="tradeFees" style="margin-top: 2em;">
+					<ul class="mui-table-view ka_prologbox">
+						<li class="mui-table-view-cell" style="display: -webkit-box;">
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="account_type"></span>
+					        	<input type="text" id="accountSelect" name="accountSelect" class="mui-pull-right"  style="width: 50%; height: auto; padding: 0; ime-mode:Disabled;"/>
+					        </div>
+						</li>
+						<li class="mui-table-view-cell" style="display: -webkit-box;">
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="branch_number"></span>
+					        	<input type="tel" id="branch_number" class="mui-pull-right" oninput="if(value.length>3)value=value.slice(0,3)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="width: 30%; height: auto; padding: 0; ime-mode:Disabled;"/>
+					        </div>
+						</li>
+					</ul>
+				</div>
+				<!--account personal information-->
+				<div class="tradeFees" style="margin-top: 2em;">
+					<ul class="mui-table-view ka_prologbox">
+						<li class="mui-table-view-cell" style="display: -webkit-box;">
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="account_number"></span>
+					        	<input type="tel" id="card_number" oninput="if(value.length>7)value=value.slice(0,7)" onchange="getCardNumber()" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="width: 30%; height: auto; padding: 0;ime-mode:Disabled;" class="mui-pull-right"/>
+					        </div>
+						</li>
+						<li class="mui-table-view-cell" style="display: -webkit-box;">
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="name_front"></span>
+					        	<input type="text" id="name_front" style="width: 50%; height: auto; padding: 0;" class="mui-pull-right" maxlength="7"/>
+					        </div>
+						</li>
+						<li class="mui-table-view-cell" style="display: -webkit-box;">
+						    <div style="width: 100%;">
+					        	<span class="lang" data-locale="name_behind"></span>
+					        	<input type="text" id="name_behind" style="width: 50%; height: auto; padding: 0;" class="mui-pull-right" maxlength="7"/>
+					        </div>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="lang accountDesc" data-locale="account_descriptionOne"></div>
+				<div class="lang" style="margin: 0 1em" data-locale="account_descriptionTwo"></div>
+				<div class="ka_userbox">
+					<button type="button" class="mui-btn mui-btn-red ka_prologsure lang" data-locale="next" style="margin-top: 1em;" onclick="finish()" id=""></button>
+				</div>
+				<input type="hidden" name="froms" id="froms" value="" />
+			</form>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js" ></script>
+	<script src="../../js/mui.view.js "></script>
+	<script src="../../js/common.js"></script>
+	<script src="../../js/jquery-3.2.0.min.js"></script>
+	<script src="../../js/language.js"></script>
+	<script src="../../js/sha256.js"></script>
+	<script src="../../js/pro_uploadimg.js"></script>
+	<script src="../../js/mobileSelect.js" type="text/javascript"></script>
+	<script>
+		mui.init({
+			
+		});
+		var id;
+		var testarr=[];
+		var branchListData;
+		var accountListData;
+		var stautesposition='0';
+	    var branchData = [{data:[]}];
+	    var accountData = [{data:[{
+						id: '0',
+						value: "普通預金"
+					}, {
+						id: '1',
+						value: "当座預金"
+					}, {
+						id: '2',
+						value: "貯蓄預金"
+					}, {
+						id: '3',
+						value: "その他"
+					}]}];
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			var params2 = self.param;
+			if(params2){
+				console.log(params2);
+				showPersonalInfor(params2);
+			}
+			$("input").attr("disabled","true");
+			$(".mui-content").css("height",document.body.scrollHeight);
+			$("#froms").val(self.froms);
+		if(self.froms=="management"){
+//			var params = {};
+//			Repository.User.personal_infor(params, {
+//				ok: function(data) {
+//					console.log("success");
+//					branchData[0].data = branchList(data);
+//					console.log(branchData);
+//					branchListData= new MobileSelect({
+//					    trigger: '#branchResults',
+//					    title: '',
+//					    wheels: branchData,
+//					    position:'0,0',
+//					    transitionEnd:function(indexArr, data){
+//					    	if(indexArr=="NAN"){
+//					    		indexArr=stautesposition;
+//					    	}
+//					        console.log(indexArr);
+//					    },
+//					    callback:function(indexArr, data){
+//					        $("#branch_id").val(data[0].value);
+//					        $("#branchResults").addClass("ka_sortname");					       
+//					    }  
+//			        });
+//				},
+//				ng: function(data) {
+//					console.log("error:"+data);
+//					Log.d(data);
+//				}
+//			});
+//			accountListData= new MobileSelect({
+//			    trigger: '#accountResults',
+//			    title: '',
+//			    wheels: accountData,
+//			    position:'0',
+//			    transitionEnd:function(indexArr, data){
+//			    	if(indexArr=="NAN"){
+//			    		indexArr=stautesposition;
+//			    	}
+//			        console.log(indexArr);
+//			    },
+//			    callback:function(indexArr, data){
+//			        console.log(data[0].id);
+//			        $("#accountSelect").text(data[0].value);
+//			        $("#accountResults").removeClass("ka_bitian");
+//			        $("#accountResults").addClass("ka_sortname");					       
+//			    }  
+//			});
+		    var params2 = {};
+		    Repository.User.getpersonal_bankinfor(params2, {
+				ok: function(data) {
+					var results = data.data;
+					if (results.u_traid) {
+						showPersonalInfor(results);
+					}
+				},
+				ng: function(data) {
+					console.log("error:"+data);
+					Log.d(data);
+				}
+			});
+		}
+	});
+		// get bank infor
+		function showPersonalInfor(results) {
+			document.getElementById('branch_id').value=results.bank_code;
+			document.getElementById('accountSelect').value=results.account_type;
+			document.getElementById('branch_number').value=results.branch_number;
+			document.getElementById('card_number').value=results.account_number;
+			document.getElementById('name_front').value=results.surname;
+			document.getElementById('name_behind').value=results.name;
+		}
+
+		function branchList(results) {
+			var bankName = results.data;
+			for (var b=0; b<bankName.length; b++) {
+				var banknameAdd = {
+					id: bankName[b].bank_code,
+					value: bankName[b].bank_name
+				};
+				testarr.push(banknameAdd);
+			}
+			return testarr;
+		}
+
+        function getCardNumber() {
+			var regStr = /^[0-9]*$/;
+			var account_number = $("#card_number").val();
+			if (regStr.test(account_number)) {
+				if (account_number.length > 0 && account_number.length < 7) {
+					var x = PrefixInteger(account_number, 7);
+				    $("#card_number").val(x);
+				}
+			} else {
+				mui.alert(TextMessage.accountnumberText);
+			}
+		}
+
+		function PrefixInteger(num, n) {
+            return (Array(n).join(0) + num).slice(-n);
+        }
+
+		function finish() {
+			var bank_code = $("#branch_id").val();
+			var account_type = $("#accountSelect").val();
+			var branch_number = $("#branch_number").val();
+			var numberReg = /^[0-9]*$/;
+			var account_number = $("#card_number").val();
+			var surname = $("#name_front").val();
+			var name = $("#name_behind").val();
+			if (bank_code == "") {
+				mui.toast(TextMessage.pleasebank, {
+					duration: 'long',
+					type: 'div'
+				});
+				return;
+			}
+			if (account_type == "") {
+				mui.toast(TextMessage.pleaseAccount, {
+					duration: 'long',
+					type: 'div'
+				});
+				return;
+			}
+			if (branch_number == "") {
+				mui.toast(TextMessage.branchNumberNull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return;
+			}
+			if (numberReg.test(branch_number)) {
+				if (branch_number.length > 0 && branch_number.length < 3) {
+					mui.alert(TextMessage.branchnumberText);
+			        return;
+				}
+			} else {
+				mui.alert(TextMessage.branchnumberText);
+			    return;
+			}
+			
+			if (account_number == "") {
+				mui.toast(TextMessage.accountNumberNull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return;
+			}
+			
+			if (!numberReg.test(account_number)) {
+				mui.alert(TextMessage.accountnumberText);
+				return;
+			}
+
+			if (surname == "" || name == "") {
+				mui.toast(TextMessage.namenotnull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return;
+			}
+			var params = {
+				"bank_code": bank_code,
+				"account_type": account_type,
+				"branch_number": branch_number,
+				"account_number": account_number,
+				"surname": surname,
+				"name": name
+	        };
+	        Repository.User.personal_finish(params, {
+				ok: function(data) {
+					Log.d("success");
+					if($("#froms").val()=="management"){
+						mui.openWindow({
+					        url: 'transfer_application.html',
+					        id: 'transfer_application'
+				       });
+			     	 }else{
+			     	 	mui.openWindow({
+							id: 'useredite',
+							url:"useredite.html"
+						});
+			     	 }
+				},
+				ng: function(data) {
+					Log.d(data);
+				}
+			});
+		}
+	</script>
+</html>

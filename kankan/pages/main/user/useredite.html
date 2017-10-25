@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/kankan_home.css">
+		<link rel="stylesheet" href="../../../css/wu.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="4" class="lang" data-locale="back"></font></a>
+		   <h1 class="mui-center mui-title lang" data-locale="infoeditetitle"></h1>
+		</header>
+		<div id="loading" class="ka_userbox">
+			<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+			</div>
+		</div>
+		<div class="mui-content" style="display: none;">
+			<form method="post" name="userinfosub" id="userinfosub">
+				<div class="ka_editebox">
+					<div class="head-img-box ka_userimagebox editeimg" style="width: 20%;">
+						<img src="../../../images/userPhoto.png" height="50" width="50" class="headimg" />
+					</div>
+					<div class="ka_usernicknamebox">
+					<h6 class="lang" data-locale="uinfousername"></h6>
+					<textarea onkeyup="this.value=this.value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]|\uD83E[\uDC00-\uDFFF]/g,'')" type="text" name="nickname" id="nickname" value="" data-locale="nameplocder"  class="ka_userfontsize lang" rows="1" ></textarea>
+					</div>
+					<h6 class="lang" data-locale="introducetext" style="display: none;"></h6>
+					<textarea name="introduce" id="introduce" rows="5" cols="" class="ka_userfontsize" maxlength="500" style="display: none;"></textarea>
+					<h6 class="lang" data-locale="userlanguage"></h6>
+					<div class="backgroundwhite">
+						<div class="mui-input-row mui-checkbox ">
+						    <label class="lang" data-locale="jpanese_user"></label>
+						    <input name="userlanageval" type="checkbox" value="0">
+						</div>
+						<div class="mui-input-row mui-checkbox ">
+						    <label class="lang" data-locale="chinese_user"></label>
+						    <input name="userlanageval" type="checkbox" value="1">
+						</div>
+						<div class="mui-input-row mui-checkbox ">
+						    <label class="lang" data-locale="english_user"></label>
+						    <input name="userlanageval" type="checkbox" value="2">
+						</div>
+						<div class="mui-input-row mui-checkbox ">
+						    <label class="lang" data-locale="korean_user"></label>
+						    <input name="userlanageval" type="checkbox" value="3">
+						</div>
+	    	        </div>
+					<button type="button" class="mui-btn mui-btn-red ka_usersubmitbtn lang" data-locale="user_buttonsure" onclick="userinfosubmit()"></button>
+				    <!--增加账号确认-->
+				    <h6 class="lang" data-locale="intelligence"></h6>
+				    <button id="changeMail" type="button" class="mui-btn mui-btn-red lang" data-locale="changemail_auth" onclick="test()"></button>
+				    <div id="userEdit" class="mui-popover mui-popover-action mui-popover-bottom">				
+			        	<ul style="margin: 8px 11px 8px 2px;" class="mui-table-view">					
+			        		<li class="mui-table-view-cell">						
+			        			<a id="changeImage" style="color: #9C9C9C" disabled="true"></a >					
+			        		</li>
+			        		<li class="mui-table-view-cell">						
+			        			<a id="takePhoto" onclick="getImage()"></a >					
+			        		</li>					
+			        		<li class="mui-table-view-cell">						
+			        			<a id="chooseFrom" onclick="galleryImg()"></a >					
+			        		</li>				
+			        	</ul>				
+			        	<ul style="margin: 8px 11px 8px 2px;" class="mui-table-view">
+			        		<li class="mui-table-view-cell">						
+			        			<a href="#userEdit"></a >
+			        		</li>				
+			        	</ul>		    
+	                </div>
+				</div>
+			</form>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/common.js"></script>
+		<script src="../../../js/jquery-3.2.0.min.js"></script>
+		<script src="../../../js/language.js"></script>
+		<script src="../../../js/sha256.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				beforeback: function() {
+			        var userPage = plus.webview.getWebviewById('user');
+					mui.fire(userPage, 'headimage');
+			    }
+			});
+			mui.plusReady(function() {
+			//message show
+			var params={};
+			Repository.User.Usershow(params, {
+				ok: function(data) {
+//					if (!Repository.User.isEmptyEmail()) {
+//						 return;
+//					}else{
+						console.log("success");
+						//console.dir(data);
+						showuser(data);
+						$("#loading").hide();
+						$(".mui-content").show();
+					//}
+				},
+				ng: function(data) {
+					if(data == "2002" || data == "2022") {
+						mui.toast(TextMessage.test, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+					}else{
+							mui.back();
+					}
+					console.log("other error code:" + data);
+					
+				},
+				error:function(){
+					$("#reloadpage").show();
+					$(".tran-page").hide();
+					$("#loading").hide();
+				}
+			});
+			
+		});
+		function showuser(results){
+			$(".myfavourateshow").empty();
+			$(".myproductshow").empty();
+			var ucomentnum=results.data.comment_cnt;
+			var unick_name=results.data.nick_name;
+			if(results.data.user_photo==""){
+				var user_photo="../../../images/userPhoto.png";
+			}else{
+				var user_photo=results.data.user_photo;
+			}
+			var user_point=results.data.user_point;
+			var ucomoditynum=results.data.exhibit_cnt;
+			var ugoodnum=results.data.user_opinion_h_count;
+			var unormalnum=results.data.user_opinion_m_count;
+			var badnum=results.data.user_opinion_l_count;
+			var uname=results.data.user_name;
+			if(results.data.address=="" || results.data.address=="undefined"){
+				var uaddress="全国";
+			}else{
+				var uaddress=results.data.address;
+			}
+			var uintroduce=results.data.introduce;
+			var uticknum=results.data.user_ticket;
+			$(".headimg").attr("src",user_photo);
+			$(".commentnum").html(ucomentnum);
+			$(".sellnum").html(ucomoditynum);
+			$(".good").html(ugoodnum);
+			$(".normal").html(unormalnum);
+			$(".bad").html(badnum);
+			$(".address").html(uaddress);
+			$("#nickname").val(HTMLDecode(uname));
+			$(".point").html(user_point);
+			$(".maintitle").html(uname);
+			//$(".maintitle").attr("style","margin-left:-10%;");
+			$("#introduce").val(uintroduce);
+			$(".ticknum").html(uticknum);
+			var language=results.data.talk_flag;
+			var userlanageval=document.getElementsByName('userlanageval');
+			for(var ukey=0;ukey<userlanageval.length;ukey++){
+				var eachvalue=userlanageval[ukey].value;
+				if(language.indexOf(eachvalue) >= 0){    
+					userlanageval[ukey].checked="checked";
+				} else {
+				    userlanageval[0].checked="checked";
+				}
+			}
+		}
+		//submit userinformation form
+		function userinfosubmit(){
+			var nickname=document.userinfosub.nickname.value;
+			var introduce=document.userinfosub.introduce.value;
+			var userlanageval=document.getElementsByName('userlanageval');
+			var talk_flag="";
+			for(var ui=0;ui<userlanageval.length;ui++){
+				if(userlanageval[ui].checked==true){
+					talk_flag+=","+userlanageval[ui].value;
+				}
+			}
+			var talk_flagtru=talk_flag.substr(1);
+			if(nickname.trim()==""){
+				mui.toast(TextMessage.nicknamenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(nickname.trim().length>10){
+				mui.toast(TextMessage.username_error, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(talk_flagtru==""){
+				mui.toast(TextMessage.ulanguagenull, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			mui.plusReady(function() {
+				//compress Image
+				var path=$("#headimgupdate").val();
+				var serverimg=$(".headimg").attr("src");
+				var params4={
+					"flag":"info",
+					"nick_name":nickname.trim(),
+					"talk_flag":talk_flagtru,
+					"introduce":introduce
+				};
+				Repository.User.userinfo(params4, {
+					ok: function(data) {
+						$(".maintitle").html(nickname.trim());
+//						if (!Repository.User.isEmptyEmail()) {
+//								 //alert("没有登录");
+//								 return;
+//						} else {
+							//console.log("success");
+						 	console.log("success");
+							mui.toast(TextMessage.updatesuccessinfo, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.back();
+						//}
+						
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						} 
+						if(data=="2002" || data=="2022"){
+							mui.toast(TextMessage.userng, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url:"../../login/login.html"
+							});
+						}
+						console.log("other error code:" + data);
+						
+					}
+				});
+			});
+		}
+		
+		function test() {
+			mui.openWindow({
+				url: '../../transaction/checkvode.html',
+				id: 'checkvode'
+			});
+		}
+		//change head image
+		mui(".editeimg").on("tap", ".headimg", function(e) {
+			$("#nickname").blur();
+			if(mui.os.plus){
+				mui("#userEdit").popover("toggle");
+				/*var a = [{
+					title: TextMessage.tackpicture
+				}, {
+					title: TextMessage.gallerychoose
+				}];
+				plus.nativeUI.actionSheet({
+					title: TextMessage.edite_headimage,
+					cancel: TextMessage.cancel,
+					buttons: a
+				}, function(b) {
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							getImage();
+							break;
+						case 2:
+							galleryImg();
+							break;
+						default:
+							break
+					}
+				})	*/
+				
+			}
+			
+		});
+		function compressImg(path) {
+			var currenttime = Date.parse(new Date());
+			plus.zip.compressImage({
+					src: path,
+					dst: "_doc/" + currenttime + ".jpg",
+					quality: 20,
+					overwrite: true,
+					format: "jpg",
+					width: "300px",
+					height: "auto"
+				},
+				function(event) {
+					console.log("Compress success!");
+					var target = event.target;
+					var size = event.size; // （Byte）
+					var width = event.width; // px
+					var height = event.height; // px
+					console.log(size);
+					uploadimage(target)
+				},
+				function(error) {
+					alert("Compress error!" + error.message);
+				});
+		}
+		function getImage() {
+			mui("#userEdit").popover("hide");
+			var c = plus.camera.getCamera();
+			c.captureImage(function(e) {
+				plus.io.resolveLocalFileSystemURL(e, function(entry) {
+					var localurl = entry.toLocalURL();
+					$(".headimg").attr("src",localurl);
+					$("#headimgupdate").val(localurl);
+					//uploadimage(localurl);
+					compressImg(localurl);
+				}, function(e) {
+					console.log("Read the picture file error：" + e.message);
+				});
+			}, function(s) {
+				console.log("error" + s);
+			}, {
+				filename: "_doc/camera/"
+			})
+		}
+		
+		function galleryImg() {
+			mui("#userEdit").popover("hide");
+			plus.gallery.pick(function(a) {
+				plus.io.resolveLocalFileSystemURL(a, function(entry) {
+					var localURL2 = entry.toLocalURL();
+					$(".headimg").attr("src",localURL2);
+					$("#headimgupdate").val(localURL2);
+					compressImg(localURL2);
+					//uploadimage(localURL2);
+		
+				}, function(e) {
+					console.log("Read photo file error：" + e.message);
+				});
+			}, function(a) {}, {
+				filter: "image"
+			})
+		};
+		function uploadimage(path){
+		var currenttime = Date.parse(new Date());
+		plus.zip.compressImage({
+				src: path,
+				dst: "_doc/" + currenttime + ".jpg",
+				quality: 20,
+				overwrite: true,
+				format: "jpg",
+				width: "auto",
+				height: "auto"
+			},
+			function(event) {
+				console.log("Compress success!");
+				var target = event.target;
+				var size = event.size; // （Byte）
+				var width = event.width; // px
+				var height = event.height; // px
+				mui.plusReady(function() {
+					submitvalues(target);//upload
+				});
+			},
+			function(error) {
+				console.log("Compress error!" + error.message);
+			});
+			function submitvalues(target){
+				var serverurl=Api.url.User.setImg;
+				var wt = plus.nativeUI.showWaiting();
+				var task = plus.uploader.createUpload(serverurl, {
+					method: "post"
+				}, function(t, status) {
+					if(status == 200) {
+						//console.log("upload success:" + t.responseText);
+						console.log("upload success!");
+						mui.toast(TextMessage.updatesuccessinfo, {
+							duration: 'long',
+							type: 'div'
+						});
+						wt.close();
+						//mui.back();
+					} else {
+						console.log("upload error:" + status);
+						console.log("upload error:" + t.responseText);
+						wt.close();
+					}
+				});
+				//add parameter
+				task.addData("tokencheck", Api.getToken()); //Api.getToken()
+				task.addData("signcheck", Api.createSignInfo());
+				task.addFile(target, { key: "image" });
+				task.start();
+			}
+		}
+		$('#changeImage').text(TextMessage.edite_headimage);
+		$('#takePhoto').text(TextMessage.tackpicture);
+		$('#chooseFrom').text(TextMessage.gallerychoose);
+		$("[href='#userEdit']").html("<b>" + TextMessage.cancel + "</b>");
+		</script>
+	</body>
+
+</html>
