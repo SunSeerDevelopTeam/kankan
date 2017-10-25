@@ -199,6 +199,8 @@
 					pay_url += "?clientip="+clientip+"&money="+money+"&i=on&userid="+userid+"&option="+transid;
 					//console.log(pay_url);
 					plus.runtime.openURL(pay_url);
+					var ws=plus.webview.currentWebview();
+					plus.webview.close(ws);
 				}/*else if(pay_way ==2){
 					pay_url = 'https://secure.telecomcredit.co.jp/banktransfer/settle/transfer_request.pl';
 					//pay_url += "?clientip="+clientip+"&money="+money+"&i=on&sendid="+userid+"&option="+transid+"&redirect_back_url="+redirect_back_url+"&testmode=on";
