@@ -11,7 +11,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"><font size="4" class="lang" data-locale="back"></font></a>
-		    <h1 class="mui-title lang" data-locale="userule"></h1>
+		    <h1 class="mui-title lang" data-locale="">利用規約</h1>
 		</header>
 		<div class="mui-content" style="margin-top: -1em;">
 		        <div style="background-color: #FFFFFF;padding: 2em 1em;">
@@ -34,8 +34,8 @@
 			$(function(){
 			var language=navigator.language;
 			if(language=="zh-CN" || language=="zh-cn" || language=="zh-tw" || language=="zh-hk" || language=="zh-TW" || language=="zh-HK"){
-				$("#rule_jptext").hide();
-				$("#rule_zhtext").show();
+				$("#rule_jptext").show();
+				$("#rule_zhtext").hide();
 			}else{
 				$("#rule_jptext").show();
 				$("#rule_zhtext").hide();
