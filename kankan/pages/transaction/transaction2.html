@@ -63,7 +63,7 @@
 						<div class="tran-name-middle-status mui-center" style="display:none;">
 							<font size="2" color="#ffffff" vertical-align="middle"></font>
 						</div>
-						
+						<div class="transProcess" style="text-align: center;margin-top: 0.1em;"><span class="mui-icon mui-icon-help" style="font-size: 30px;"></span></div>
 						<ul class="mui-table-view mui-grid-view exchange" style="display:none;margin-top:10px;position: inherit;padding:0 10px 10px 10px">
 							<li class="mui-table-view-cell mui-media mui-col-xs-5 cur-user-img" style="padding:0px;">
 
@@ -236,6 +236,11 @@
 				});
 				showRequestDetail(page);
 			})
+			$('.transProcess').on('tap', '.mui-icon-help', function() {
+				mui.openWindow({
+					url:"transferprocess_index.html"
+				});
+			});
 			function reloadpage(){
 				location.reload();
 			}
