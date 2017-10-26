@@ -33,7 +33,8 @@
 			var keyword = "";
 			mui.init({
 				beforeback: function() {
-					var page = plus.webview.getWebviewById("pullrefresh_sub");
+					//var page = plus.webview.getWebviewById("pullrefresh_sub_1.html");
+					var page = plus.webview.getWebviewById("pullrefresh_sub_" + wid + ".html");
 					mui.fire(page, 'search', {
 						keyword: keyword
 					});
@@ -41,6 +42,7 @@
 				}
 			});
 			mui.plusReady(function() {
+				wid = plus.webview.currentWebview().wid;
 				$('.mui-icon-search').click(function() {
 					keyword = HTMLEncode($('#search').val().trim());
 					Log.i("keyword is " + keyword);
