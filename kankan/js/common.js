@@ -1547,7 +1547,7 @@ var TextMessage;
 	TextMessage.evecommenttestnull = language ? "評価のコメントが未入力です。" : "评价内容不能为空!";
 	TextMessage.commenttestlength = language ? "レビューの内容(300字以内)!" : "评论内容不能超过三百字！!";
 	TextMessage.send_code_ok = language ? "認証番号が入力したメールに送りました。ご確認をお願い致します。" : "验证码已发送至邮箱，请查收。";
-	TextMessage.send_code_ng = language ? "認証番号発送が失敗しました、もう一度お試してください。" : "发送验证码失败，请重试。";
+	TextMessage.send_code_ng = language ? "認証番号発送が失敗しました、別のメールアドレスに変更をお願いします。" : "发送验证码失败，请更换邮箱。";
 	TextMessage.wechat_not_install = language ? "Wechatはまだインストールされていません。" : "您尚未安装微信客户端";
 	/*TextMessage.username = language ? "ユーザー名" : "用户名";*/
 	TextMessage.verificationCode = language ? "認証番号" : "验证码";
