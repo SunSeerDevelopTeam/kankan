@@ -155,6 +155,7 @@ var JSLocale = {
 	"speciallow":"特定商取引法",
 	//complaint page
 	"productReportTitle":"不適切な商品報告",
+	"userReportTitle":"不適切なユーザー報告",
 	"productName":"商品名",
 	"productNameInput":"該当商品名",
 	"reporttext":"報告理由",

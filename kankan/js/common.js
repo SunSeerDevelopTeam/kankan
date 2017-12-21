@@ -506,6 +506,7 @@ var Api;
 		},
 		Commodity: {
 			reportCommReason: baseUrl() + '/commodity/Commoditydetail/reportCommReason',
+			reportUserReason: baseUrl() + '/commodity/Commodityusers/reportUserReason/',
 			commodityDetail: baseUrl() + '/commodity/commoditydetail',
 			commodityList: baseUrl() + '/index/index/',
 			category: baseUrl() + '/commodity/catalog/',
@@ -526,6 +527,7 @@ var Api;
 			//getPrice: baseUrl() + '/commodity/release/infobase',
 			getPrice: baseUrl() + '/commodity/Commoditybase/infobase/',
 			reportCommodity: baseUrl() + '/commodity/Commoditydetail/reportCommodity',
+			reportUser: baseUrl() + '/commodity/Commodityusers/userreportshow/',
 			CommodityReportShow: baseUrl() + '/commodity/Commoditydetail/commodityreportshow',
 			//getorganization:baseUrl() + '/commodity/release/getorganization',
 			getorganization:baseUrl() + '/commodity/Commoditybase/getorganization',
@@ -1262,6 +1264,11 @@ var Repository;
         	return Api.call(Api.url.Commodity.reportCommReason, params, callback);
         }
         Commodity.reportCommReason = reportCommReason;
+        
+        function reportUserReason(params, callback) {
+        	return Api.call(Api.url.Commodity.reportUserReason, params, callback);
+        }
+        Commodity.reportUserReason = reportUserReason;
 
 		function commodityDetail(params, callback) {
 			return Api.call(Api.url.Commodity.commodityDetail, params, callback);
@@ -1347,6 +1354,11 @@ var Repository;
 			return Api.call(Api.url.Commodity.reportCommodity, params, callback);
 		}
 		Commodity.reportCommodity = reportCommodity;
+		
+		function reportUser(params, callback) {
+			return Api.call(Api.url.Commodity.reportUser, params, callback);
+		}
+		Commodity.reportUser = reportUser;
 		
 		function shareid(params, callback) {
 			return Api.call(Api.url.Commodity.shareid, params, callback);
@@ -1766,6 +1778,7 @@ var TextMessage;
 	TextMessage.luopin_success= language ? "落品しました。" : "落品成功";
 	TextMessage.delete_success= language ? "削除しました。" : "删除成功";
 	TextMessage.complaintpro = language ? "不適切な商品の報告" : "举报此商品";
+	TextMessage.complaintuser = language ? "不適切なユーザーの報告" : "举报此用户";
 	TextMessage.comodityreport_success= language ? "報告しました。" : "举报成功";
 	TextMessage.comodityrepot_repeat= language ? "この商品はすでに報告済みです" : "请勿重复举报";
 	TextMessage.Compresserror = language ? "圧縮失敗" : "压缩失败";

@@ -7,6 +7,13 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../../css/kankan_home.css" />
+		<link rel="stylesheet" href="../../../css/iconmyfont.css" />
+		<style>
+			.reprot{
+				color:coral;
+				padding:10px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -28,12 +35,17 @@
 					<li class="mui-table-view-cell">
 						<div class="ka_userbox">
 							<img src="" class="ka_touxiangimg" width="50" height="50" />
-							<div><b class="uname"></b></div>
+							<div>
+								<b class="uname"></b>
+								
+							</div>
 							<font color="#808080" size="2"><span class="lang" data-locale="det_coments"></span>:
 								<font color="#007AFF" class="ucomment"></font>&nbsp;&nbsp;&nbsp;
 								<span class="lang" data-locale="det_producednum"></span>:
 								<font color="#007AFF" class="uproducts"></font>
+								
 							</font>
+							<span  class="mui-icon iconfont icon-tousu reprot"></span>
 						</div>
 					</li>
 					<li class="mui-table-view-cell commentlist">
@@ -70,6 +82,21 @@
 				</div>
 			</div>
 			<input type="hidden" name="uids" id="uids" value="" />
+			<div id="report" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a id="see" href="#" style="color: #9C9C9C" disabled="true"></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="reportUser" onclick="complaint()" style="color: #007aff"></a>
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#report" style="color: #007aff"></a>
+					</li>
+				</ul>
+		    </div>
 		</div>
 		<script src="../../../js/mui.min.js"></script>
 		<script src="../../../js/jquery-3.2.0.min.js"></script>
@@ -114,6 +141,13 @@
 				});
 				getmessage(uid);
 			})
+			//function clickwarn(){
+				mui('.ka_userbox').on("tap",".icon-tousu",function(e){
+					if(mui.os.plus){
+						mui('#report').popover('toggle');	
+					}
+				});
+			//}
 			function reloadpage(){
 				location.reload();
 			}
@@ -122,6 +156,66 @@
 				setTimeout(function() {
 					getmessage(usid);
 				}, 1500);
+			}
+			function complaint(){
+				mui("#report").popover('hide');
+				var userid=$("#uids").val();
+				var paramport={
+					"comm_userid":userid,
+				}
+				Repository.Commodity.reportUser(paramport, {
+					ok: function(data) {
+						Log.d("success");
+						var user = data.data;
+						console.log(user);
+						mui.openWindow({
+							id: 'complaintuser',
+							url: "complaintuser.html",
+							extras: {
+						        "report_userid": user.report_userid,
+						        "report_nickname":user.report_nickname,
+						        "report_email":user.report_email,
+						        "whistlebluser_id":user.whistlebluser_id,
+						        "whistleblnickname":user.whistleblnickname,
+						        "whistleblemail":user.whistleblemail
+					        } 
+						});
+					},
+					ng: function(data) {
+						Log.d(data);
+						if(data == "2001") {
+							$("#loading").show();
+							$(".mui-content").hide();
+						}
+						if(data == "1000") {
+							mui.toast(TextMessage.test, {
+								duration: 'long',
+								type: 'div'
+							});
+							mui.openWindow({
+								id: 'login',
+								url: "../../login/login.html"
+							});
+						}
+						if(data == "2004") {
+							mui.toast(TextMessage.operation_error, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+						if(data == "3022") {
+							mui.toast(TextMessage.comodityrepot_repeat, {
+								duration: 'long',
+								type: 'div'
+							});
+						}
+					},
+					error:function(errortypetext){
+						$("#reloadpage").html(errortypetext);
+						$(".mui-content").hide();
+						$("#reloadpage").show();
+					}
+				});
 			}
 			//get message
 			function getmessage(uid) {
@@ -239,6 +333,9 @@
 					}
 				});
 			});
+			$('#see').text(TextMessage.sharetitle);
+			$('#reportUser').text(TextMessage.complaintuser);
+			$("[href='#report']").html("<b>" + TextMessage.cancel + "</b>");
 		</script>
 	</body>
 

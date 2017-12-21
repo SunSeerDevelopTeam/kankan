@@ -155,9 +155,10 @@ var JSLocale = {
 	"speciallow":"特商法",
 	//complaint page
 	"productReportTitle":"举报商品",
+	"userReportTitle":"举报用户",
 	"productName":"商品名",
 	"productNameInput":"该当商品名",
-	"reporttext":"报告理由",
+	"reporttext":"举报理由",
 	//question page
 	"Appeal":"申诉",
 	"musttext":"标记为必填项",
