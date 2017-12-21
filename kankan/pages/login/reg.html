@@ -100,7 +100,7 @@
 			}
 			
 			#regForm {
-				margin-top: 45px;
+				margin-top: 30px;
 			}
 			
 			#regForm label {
@@ -135,9 +135,6 @@
 			<!--<a class="mui-icon mui-icon-closeempty mui-pull-right"></a>-->
 		</header>
 		<div class="mui-content">
-			<div id="avatar">
-				<img src="../../images/userPhoto.png" />
-			</div>
 			<form id="regForm" method="post">
 				<!-- email -->
 				<div class="mui-input-group">
@@ -205,17 +202,18 @@
 					</div>
 				</div>
 				-->
-				<!-- submit button -->
-				<div class="mui-content-padded" style="margin-top: 10px;">
-					<button id='reg' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
-				</div>
+				
 			</form>
 
 			<div class="mui-content-padded">
 				<p class="lang" data-locale="register-tips"></p>
-				<span class="lang" data-locale="register-tips-1"></span>
+				<input type="checkbox" name="agreeCheckbox"/> 
 				<span id="clause" class="lang" style="color:#007AFF;" data-locale="register-tips-2"></span>
-				<span class="lang" data-locale="register-tips-3"></span>
+				<span class="lang" data-locale="register-tips-4"></span>
+				<!-- submit button -->
+				<div class="mui-content-padded" style="margin-top: 10px;">
+					<button id='reg' type="button" class="mui-btn mui-btn-block mui-btn-danger lang" data-locale="register"></button>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -235,6 +233,7 @@
 			(function(mui, doc) {
 				mui.init();
 				mui.plusReady(function() {
+					$("#reg").attr("disabled","true");
 					console.log("reg page plus ready...");
 					var sendVCodeBtn = doc.getElementById('send-verification-code');
 					var canClick = true;
@@ -487,7 +486,15 @@
 //							cityElement.setAttribute('data-val', items[0].value);
 //						});
 //					}
-					
+                    
+					$("input:checkbox[name=agreeCheckbox]").click(function(){
+				        if ($("input:checkbox[name=agreeCheckbox]:checked").length !=0) {
+				        	$("#reg").removeAttr("disabled");
+				        } else {
+				        	$("#reg").attr("disabled","true");
+				        }
+				    });
+
 					doc.getElementById('clause').addEventListener('tap', function(event){
 						mui.openWindow({
 							id: "terms",
@@ -500,6 +507,7 @@
 							}
 						});
 					});
+				    
 				});
 			})(mui, document);
 		</script>
