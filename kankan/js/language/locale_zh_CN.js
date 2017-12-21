@@ -29,6 +29,7 @@ var JSLocale = {
 	"register-tips-1": "点击确认按钮之后默认你已经接受",
 	"register-tips-2": "使用条款",
 	"register-tips-3": "",
+	"register-tips-4": "",
 	"please-input-email": "请输入邮箱",
 	"please-input-username": "请输入用户名",
 	"please-input-nickname": "请输入昵称",

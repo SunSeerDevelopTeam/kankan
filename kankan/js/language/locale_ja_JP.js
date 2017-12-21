@@ -29,6 +29,7 @@ var JSLocale = {
 	"register-tips-1": "上の確認ボタンを押すことになり、",
 	"register-tips-2": "利用規約",
 	"register-tips-3": "に同意したことになります。",
+	"register-tips-4": "に同意する",
 	"please-input-email": "メールアドレス",
 	"please-input-username": "アプリ内に表示されます",
 	"please-input-nickname": "アプリ内に表示されます",
