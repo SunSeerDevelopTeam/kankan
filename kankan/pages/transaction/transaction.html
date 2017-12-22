@@ -345,7 +345,7 @@
 		})(mui);
 
 		function sendMsg() {
-			var msg = document.getElementById('msg').value;
+			var msg = filterText(document.getElementById('msg').value);
 			
 			// insert msg into db
 			

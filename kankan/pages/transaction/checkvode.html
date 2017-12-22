@@ -112,7 +112,7 @@
 					});
 				});
 				mui(".mui-content-padded").on("tap","#register",function(){
-					var code=$("#ver_code").val();
+					var code=filterText($("#ver_code").val());
 					if(code==""){
 						mui.toast(TextMessage.errorCode_1002, {
 							duration: 'long',

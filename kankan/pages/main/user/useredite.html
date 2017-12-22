@@ -177,7 +177,7 @@
 		}
 		//submit userinformation form
 		function userinfosubmit(){
-			var nickname=document.userinfosub.nickname.value;
+			var nickname=filterText(document.userinfosub.nickname.value);
 			var introduce=document.userinfosub.introduce.value;
 			var userlanageval=document.getElementsByName('userlanageval');
 			var talk_flag="";
@@ -187,14 +187,14 @@
 				}
 			}
 			var talk_flagtru=talk_flag.substr(1);
-			if(nickname.trim()==""){
+			if(nickname==""){
 				mui.toast(TextMessage.nicknamenull, {
 					duration: 'long',
 					type: 'div'
 				});
 				return false;
 			}
-			if(nickname.trim().length>10){
+			if(nickname.length>10){
 				mui.toast(TextMessage.username_error, {
 					duration: 'long',
 					type: 'div'

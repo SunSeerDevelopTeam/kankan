@@ -791,8 +791,8 @@ function removeComma(str) {
 //submit form
 function publishs() {
 	var buy_sell_flag = "0";
-	var comm_name = HTMLEncode($("#comm_name").val());
-	var comm_detail = HTMLEncode($("#comm_detail").val());
+	var comm_name = filterText(HTMLEncode($("#comm_name").val()));
+	var comm_detail = filterText(HTMLEncode($("#comm_detail").val()));
 	var classify_id = $("#classify_id").val();
 	var comm_state = $("#comm_state").val();
 	var exchange = $("#exchange").val();
@@ -814,7 +814,7 @@ function publishs() {
 		});
 		return false;
 	}
-	if(comm_name.trim()== "") {
+	if(comm_name == "") {
 		mui.toast(TextMessage.pro_nametest, {
 			duration: 'long',
 			type: 'div'
@@ -838,7 +838,7 @@ function publishs() {
 		});
 		return false;
 	}
-	if(comm_detail.trim()== "") {
+	if(comm_detail == "") {
 		mui.toast(TextMessage.pro_descriptiontest, {
 			duration: 'long',
 			type: 'div'

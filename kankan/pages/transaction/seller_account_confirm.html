@@ -224,13 +224,13 @@
         }
 
 		function finish() {
-			var bank_code = $("#branch_id").val();
-			var account_type = $("#accountSelect").val();
-			var branch_number = $("#branch_number").val();
+			var bank_code = filterText($("#branch_id").val());
+			var account_type = filterText($("#accountSelect").val());
+			var branch_number = filterText($("#branch_number").val());
 			var numberReg = /^[0-9]*$/;
-			var account_number = $("#card_number").val();
-			var surname = $("#name_front").val();
-			var name = $("#name_behind").val();
+			var account_number = filterText($("#card_number").val());
+			var surname = filterText($("#name_front").val());
+			var name = filterText($("#name_behind").val());
 			if (bank_code == "") {
 				mui.toast(TextMessage.pleasebank, {
 					duration: 'long',

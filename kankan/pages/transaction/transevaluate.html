@@ -110,7 +110,7 @@
 			}
 			function evaluate_submit() {
 				var evaluate_flg = $("input[name='evalueate']:checked").val();
-				var evaluate_msg = $("#evaluate_msg").val();
+				var evaluate_msg = filterText($("#evaluate_msg").val());
 				if(!evaluate_flg){
 					var err_msg = TextMessage.evelevel;
 						mui.toast(err_msg, {

@@ -126,10 +126,10 @@
 				document.getElementById('contents').blur();
 			}
 			function submitvals(){
-				var fullname=$("#full_name").val();
+				var fullname=filterText($("#full_name").val());
 				//var comm_name=$("#commodity_name").val();
-				var email=$("#email").val();
-				var contents=$("#contents").val();
+				var email=filterText($("#email").val());
+				var contents=filterText($("#contents").val());
 				if(fullname==""){
 					mui.toast(TextMessage.namenotnull, {
 						duration: 'long',

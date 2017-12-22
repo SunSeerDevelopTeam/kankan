@@ -44,7 +44,7 @@
 			mui.plusReady(function() {
 				wid = plus.webview.currentWebview().wid;
 				$('.mui-icon-search').click(function() {
-					keyword = HTMLEncode($('#search').val().trim());
+					keyword = filterText(HTMLEncode($('#search').val().trim()));
 					Log.i("keyword is " + keyword);
 					setTimeout(function() {
 						mui.back();
