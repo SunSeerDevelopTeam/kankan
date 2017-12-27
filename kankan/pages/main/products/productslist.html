@@ -13,6 +13,15 @@
 				color:coral;
 				padding:10px;
 			}
+			.blacklist {
+				border: 1px solid #000;
+				border-radius: 8px;
+				display: none;
+			}
+			.boxContent {
+				text-align: left;
+				font-size:16px;
+			}
 		</style>
 	</head>
 
@@ -45,7 +54,9 @@
 								<font color="#007AFF" class="uproducts"></font>
 								
 							</font>
-							<span  class="mui-icon iconfont icon-tousu reprot"></span>
+							<span class="mui-icon iconfont icon-tousu reprot"></span>
+							<span class="blacklist addBlackList lang" data-locale="addBlackList"></span>
+							<span class="blacklist removBlackList lang" data-locale="removeBlackList" style="background-color: #ccc;"></span>
 						</div>
 					</li>
 					<li class="mui-table-view-cell commentlist">
@@ -94,6 +105,36 @@
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell">
 						<a href="#report" style="color: #007aff"></a>
+					</li>
+				</ul>
+		    </div>
+		    <div id="addBlackContent" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a id="addBlackContent1" href="#"></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="addBlackContent2" onclick="confirmAddList()" style="color: #007aff"></a>
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#addBlackContent" style="color: #007aff"></a>
+					</li>
+				</ul>
+		    </div>
+		    <div id="removeBlackContent" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a id="removeBlackContent1" href="#"></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="removeBlackContent2" onclick="confirmRemoveList()" style="color: #007aff"></a>
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#removeBlackContent" style="color: #007aff"></a>
 					</li>
 				</ul>
 		    </div>
@@ -148,6 +189,19 @@
 					}
 				});
 			//}
+			mui(".ka_userbox").on("tap",".addBlackList",function() {
+				if (mui.os.plus) {
+					mui('#removeBlackContent').popover('hide');	
+					mui('#addBlackContent').popover('toggle');
+						
+				}
+			});
+			mui(".ka_userbox").on("tap",".removBlackList",function() {
+				if(mui.os.plus){
+					mui('#addBlackContent').popover('hide');
+					mui('#removeBlackContent').popover('toggle');
+				}
+			});
 			function reloadpage(){
 				location.reload();
 			}
@@ -217,6 +271,8 @@
 					}
 				});
 			}
+			
+			
 			//get message
 			function getmessage(uid) {
 				var params = {
@@ -268,6 +324,12 @@
 				var imgwidth=parseInt($(window).width())/3-17;
 				var allcount=commodity.all_comm_num;
 				var allcomiditynum=15*page;
+				var black_user_id = commodity.blacklist[0].black_user_id;
+				if ( black_user_id == "" || black_user_id.indexOf(userid) == -1) {
+					$(".addBlackList").show();
+				} else {
+					$(".removBlackList").show();
+				}
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh((allcount <=allcomiditynum));
 				for(i = 0; i < commoditylength; i++) {
 					var ucommodityobj = JSON.stringify(commodityarr[i]);
@@ -333,9 +395,54 @@
 					}
 				});
 			});
+			function confirmAddList() {
+				mui("#addBlackContent").popover('hide');
+				var ucid = $("#commid").val();
+				var paramAdd={
+					"black_user_id":ucid,
+				}
+				Repository.Commodity.confirmAddList(paramAdd, {
+					ok: function(data) {
+						$(".addBlackList").hide();
+						$(".removBlackList").show();
+					},
+					ng: function(data) {
+						
+					},
+					error:function(data) {
+						
+					}
+				});
+			}
+			
+			function confirmRemoveList() {
+				mui("#removeBlackContent").popover('hide');
+				var ucid = $("#commid").val();
+				var paramRemove={
+					"black_user_id":ucid,
+				}
+				Repository.Commodity.confirmRemoveList(paramRemove, {
+					ok: function(data) {
+						$(".addBlackList").show();
+						$(".removBlackList").hide();
+					},
+					ng: function(data) {
+						
+					},
+					error:function(data) {
+						
+					}
+				});
+			}
 			$('#see').text(TextMessage.sharetitle);
 			$('#reportUser').text(TextMessage.complaintuser);
+			$("#addBlackContent1").html('<div class="boxContent">'+TextMessage.addBlackList1+'</div><div class="boxContent">'+TextMessage.addBlackList2+'</div><div class="boxContent">'+TextMessage.addBlackList3+'</div>');
+			$("#addBlackContent2").text(TextMessage.blackconfirm);
+			$("#removeBlackContent1").text(TextMessage.removeBlackList1);
+			$("#removeBlackContent2").text(TextMessage.blackconfirm);
 			$("[href='#report']").html("<b>" + TextMessage.cancel + "</b>");
+			$("[href='#addBlackContent']").html("<b>" + TextMessage.cancel + "</b>");
+			$("[href='#removeBlackContent']").html("<b>" + TextMessage.cancel + "</b>");
 		</script>
 	</body>
 
