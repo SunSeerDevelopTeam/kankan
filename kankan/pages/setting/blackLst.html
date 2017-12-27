@@ -73,7 +73,7 @@
 		function messageshow(data) {
 			var blackListData = data.data;
 			for(var i=0;i<blackListData.length;i++) {
-				var black_id = blackListData[i].black_id;
+				var black_id = blackListData[i].black_user_id;
 				var nick_name = blackListData[i].nick_name;
 				var html = new Util.StringBuilder();
 				html.appendFormat('<li class="mui-table-view-cell gotoDetail"><a class="mui-navigate-right">'+nick_name+'</a></li>');
