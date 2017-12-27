@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>blackLst.html</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<script src="../../js/jquery-3.2.0.min.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/kankan_home.css">
+		<link href="../../css/wu.css" rel="stylesheet" />
+	</head>
+
+	<body class="mui-fullscreen">
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<div id="setting" class="mui-page">
+			<div style="text-align: -webkit-center;"class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button style="width: 70px;" type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"><font size="4" class="lang" data-locale="back"></font></span>
+				</button>
+				<h1 style="width: 244px;" class="mui-center mui-title title-center lang" data-locale="blackLst"></h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<ul class="mui-table-view blackContents">
+				        
+				    </ul>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/mui.view.js "></script>
+	<script src='../../js/feedback.js'></script>
+	<script type="text/javascript" src="../../js/jquery-3.2.0.min.js" ></script>
+	<script type="text/javascript" src="../../js/language.js" ></script>
+	<script src="../../js/sha256.js"></script>
+	<script src="../../js/common.js"></script>
+	<script>
+		mui.init();
+		var flag=null;
+		mui.plusReady(function(){
+			var param = {};
+			Repository.Commodity.getBlackList(param,{
+				ok: function(data) {
+					messageshow(data);
+				},
+				ng: function() {
+					
+				},
+				error:function() {
+					
+				}
+			});
+		});
+		function messageshow(data) {
+			var blackListData = data.data;
+			for(var i=0;i<blackListData.length;i++) {
+				var black_id = blackListData[i].black_id;
+				var nick_name = blackListData[i].nick_name;
+				var html = new Util.StringBuilder();
+				html.appendFormat('<li class="mui-table-view-cell gotoDetail"><a class="mui-navigate-right">'+nick_name+'</a></li>');
+				$(".blackContents").append(html.toString());
+				mui('.gotoDetail').on('tap','a',function(e) {
+					mui.openWindow({
+						id: 'productslist',
+						url:'../main/products/productslist.html?prolid='+black_id,
+						extras: {
+							"prolid": black_id
+						}
+				    });
+				});
+			}
+		}
+		var viewApi = mui('#app').view({
+			defaultPage: '#setting'
+		});
+	</script>
+</html>

@@ -79,6 +79,9 @@
 				        <li class="mui-table-view-cell logout">
 				            <a class="mui-navigate-right lang" href="#" data-locale="logout"></a>
 				        </li>
+				        <li class="mui-table-view-cell blackLst">
+				            <a class="mui-navigate-right lang" href="#" data-locale="blackLst"></a>
+				        </li>
 				        <li class="mui-table-view-cell">
 				         <div class="mui-pull-left lang" data-locale="version"></div> 
 				         <div class="mui-pull-right" id="version"></div>
@@ -287,6 +290,12 @@
 			mui.openWindow({
 				id: 'question',
 				url:"question.html"
+			});
+		});
+		mui('.blackLst').on('tap','a',function(e) {
+			mui.openWindow({
+				id: 'blackLst',
+				url:"blackLst.html"
 			});
 		});
 		mui('.pointbuy').on('tap','a',function(e) {

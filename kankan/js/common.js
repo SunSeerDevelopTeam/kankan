@@ -531,6 +531,9 @@ var Api;
 			CommodityReportShow: baseUrl() + '/commodity/Commoditydetail/commodityreportshow',
 			//getorganization:baseUrl() + '/commodity/release/getorganization',
 			getorganization:baseUrl() + '/commodity/Commoditybase/getorganization',
+			confirmAddList:baseUrl() + '/commodity/Commodityusers/addBlackUserList',
+			confirmRemoveList:baseUrl() + '/commodity/Commodityusers/removeBlackUser',
+			getBlackList:baseUrl() + '/commodity/Commodityusers/getBlackList',
 		},
 		Trans: {
 			transConversation: baseUrl() + '/transaction/transoperation/trans_conversation/', //请求/订单对话API:
@@ -1360,6 +1363,21 @@ var Repository;
 		}
 		Commodity.reportUser = reportUser;
 		
+		function confirmAddList(params, callback) {
+			return Api.call(Api.url.Commodity.confirmAddList, params, callback);
+		}
+		Commodity.confirmAddList = confirmAddList;
+		
+		function confirmRemoveList(params, callback) {
+			return Api.call(Api.url.Commodity.confirmRemoveList, params, callback);
+		}
+		Commodity.confirmRemoveList = confirmRemoveList;
+		
+		function getBlackList(params, callback) {
+			return Api.call(Api.url.Commodity.getBlackList, params, callback);
+		}
+		Commodity.getBlackList = getBlackList;
+		
 		function shareid(params, callback) {
 			return Api.call(Api.url.Commodity.shareid, params, callback);
 		}
@@ -1809,6 +1827,13 @@ var TextMessage;
     TextMessage.setting= language ? "設定" : "设置";
     TextMessage.imageDiskSpace = language ? "5K～2Mの画像を利用してください" : "请使用5K〜2M图像";
     TextMessage.imageProportions = language ? "画像が長すぎで、幅の3倍以下切ってください" : "图像太长，请切下3倍宽度";
+    /*productList page*/
+    TextMessage.addBlackList1=language ? "ブラックリストに入れると、該当ユーザーの投稿が見られなくなります。": "加入黑名单后，将看不到该用户发布的内容。",
+    TextMessage.addBlackList2=language ? "該当ユーザーと進行中の取引が中止されます。":"与该用户正在进行的交易将被终止。";
+    TextMessage.addBlackList3=language ? "よろしいですか？":"确定吗？";
+    TextMessage.removeBlackList1=language ? "該当ユーザーをブラックリストから外します。":"将该用户移出黑名单。";
+    TextMessage.blackconfirm=language ? "OK":"确定";
+    TextMessage.blackLst=language ? "ブラックリスト": "黑名单";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {
