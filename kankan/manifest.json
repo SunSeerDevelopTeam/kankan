@@ -608,7 +608,8 @@
 					"js/language.js",
 					"css/mui.min.css",
 					"css/kankan_home.css",
-					"js/language/locale_zh_CN.js"
+					"js/language/locale_zh_CN.js",
+					"fonts/iconfont.woff"
 				],
 				"refer": [
 					"pages/main/products/commentlist.html"
@@ -912,7 +913,8 @@
 					"css/icons-extra.css"
 				],
 				"refer": [
-					"pages/setting/question.html"
+					"pages/setting/question.html",
+					"pages/setting/blackLst.html"
 				],
 				"priority": 0
 			},
@@ -1266,6 +1268,13 @@
 					"pages/setting/setting.html"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"pages/setting/blackLst.html": {
+				"resources": [],
+				"refer": [
+					"pages/main/products/productslist.html"
+				],
 				"priority": 0
 			}
 		},

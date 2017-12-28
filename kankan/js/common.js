@@ -1834,6 +1834,7 @@ var TextMessage;
     TextMessage.removeBlackList1=language ? "該当ユーザーをブラックリストから外します。":"将该用户移出黑名单。";
     TextMessage.blackconfirm=language ? "OK":"确定";
     TextMessage.blackLst=language ? "ブラックリスト": "黑名单";
+    TextMessage.cannotzan=language ? "相手の設定によると、この操作はできません。": "根据对方的设定，您不能进行此操作。";
 })(TextMessage || (TextMessage = {}));
 var Entity;
 (function(Entity) {

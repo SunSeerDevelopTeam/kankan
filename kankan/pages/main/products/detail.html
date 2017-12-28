@@ -91,7 +91,7 @@
 						</div>
 					</div>
 					<div class="mui-pull-right kankan_det_comment">
-						<a href="pro_commentslist.html">
+						<a>
 							<span class="mui-icon mui-icon-chatboxes"></span>
 							<p><span class="lang" data-locale="det_comment"></span>&nbsp;&nbsp;
 								<font color="#000000" size="3" id="commentsnum"></font>
@@ -316,6 +316,8 @@
 		    var sImage;
 		    var sName;
 		    var sDetail;
+		    var flag;
+//		    var flag1;
 			function clickshare(shareid,imgurl0,comdname,comdetail){
 				sId = shareid;
 				sImage = imgurl0;
@@ -335,7 +337,12 @@
 					});
 				});	
 				document.getElementById("share").addEventListener('tap', function() {
-					mui('#friendChat').popover('toggle');
+					if ( flag == true) {
+						mui.alert(TextMessage.cannotzan);
+					} else {
+						mui('#friendChat').popover('toggle');
+					}
+					
 				});
 			}
 		    
@@ -466,20 +473,18 @@
 				//commodity comments list
 				var comdcommentpage = null;
 				mui('.kankan_det_comment').on('tap', 'a', function(e) {
-					var cid = $("#comodityid").val();
-//					if(!comdcommentpage) {
-//						comdcommentpage = plus.webview.getWebviewById('pro_commentslist.html');
-//					}
-//					mui.fire(comdcommentpage, 'comid', {
-//						id: cid
-//					});
-					mui.openWindow({
-						id: 'pro_commentslist',
-						url:'pro_commentslist.html?comid='+cid,
-						extras: {
-								"comid": cid
-							}
-					});
+					if (flag == true) {
+						mui.alert(TextMessage.cannotzan);
+					} else {
+						var cid = $("#comodityid").val();
+						mui.openWindow({
+							id: 'pro_commentslist',
+							url:'pro_commentslist.html?comid='+cid,
+							extras: {
+									"comid": cid
+								}
+						});
+					}
 				});
 			}
 			function clickwarn(){
@@ -552,6 +557,8 @@
 				$(".mui-slider-indicator").empty();
 				var screenheight=parseInt($(window).height())*0.5;
 				var commodity = results.data;
+				var userblacklist = results.userblacklist;
+				//var myblacklist = results.myblacklist;
 				var comdbasic = commodity.commodity_basic;
 				var userbasic = commodity.user_basic;
 				var comdname = HTMLDecode(comdbasic[0].comm_name);
@@ -690,6 +697,12 @@
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
 				var concernedtitle=TextMessage.det_concerneds;
+				for (var i=0;i<userblacklist.length;i++) {
+					if (userblacklist[i].user_id.indexOf(userid)!==-1) {
+						flag = true;
+					}
+				}
+				
 				$(".concerned").html(concernedtitle);
 				$("#userid").val(userid);
 				$(".ka_authorname b").html(uname);
@@ -952,48 +965,50 @@
 			}
 			//goods
 			function dianzan(bid) {
-				var codid = $(".kankan_zanbox").attr("id");
-				//ajax post 
-				var params1 = {
-					"commid": codid
-				};
-				Repository.Commodity.praise(params1, {
-					ok: function(data) {
-						Log.d("success");
-						praise(data);
-					},
-					ng: function(data) {
-						Log.d(data);
-						if(data == "1000") {
-							mui.toast(TextMessage.test, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'login',
-								url: "../../login/login.html"
-							});
+				if (flag == true) {
+					mui.alert(TextMessage.cannotzan);
+				} else {
+					var codid = $(".kankan_zanbox").attr("id");
+					var params1 = {
+						"commid": codid
+					};
+				    Repository.Commodity.praise(params1, {
+						ok: function(data) {
+							Log.d("success");
+							praise(data);
+						},
+						ng: function(data) {
+							Log.d(data);
+							if(data == "1000") {
+								mui.toast(TextMessage.test, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.openWindow({
+									id: 'login',
+									url: "../../login/login.html"
+								});
+							}
+							if(data == "2004") {
+								mui.toast(TextMessage.operation_error, {
+									duration: 'long',
+									type: 'div'
+								});
+							}
+							if(data == "3020") {
+								mui.toast(TextMessage.input_email, {
+									duration: 'long',
+									type: 'div'
+								});
+								mui.openWindow({
+									id: 'emai_summate',
+									url: "../../login/emai_summate.html"
+								});
+							}
 						}
-						if(data == "2004") {
-							mui.toast(TextMessage.operation_error, {
-								duration: 'long',
-								type: 'div'
-							});
-						}
-						if(data == "3020") {
-							mui.toast(TextMessage.input_email, {
-								duration: 'long',
-								type: 'div'
-							});
-							mui.openWindow({
-								id: 'emai_summate',
-								url: "../../login/emai_summate.html"
-							});
-						}
-					}
-				});
-
-			}
+				    });
+				}
+            }
 			//praise css controll
 			function praise(data) {
 				var counts=data.data.p_cnt;
@@ -1090,12 +1105,16 @@
 				}
 			}
 			mui("#bottom_price").on('tap', '#gotobuy', function() {
-				var btnArray=[TextMessage.confirm,TextMessage.confirmBtnNo];
-				mui.confirm(TextMessage.buyTitle,'',btnArray,function(e) {
-					if (e.index == 0) {
-						gotoBuy();
-					} else {}
-				})
+				if (flag == true) {
+					mui.alert(TextMessage.cannotzan);
+				} else {
+					var btnArray=[TextMessage.confirm,TextMessage.confirmBtnNo];
+					mui.confirm(TextMessage.buyTitle,'',btnArray,function(e) {
+						if (e.index == 0) {
+							gotoBuy();
+						} else {}
+					})
+				}
 			});
 		    $('#see').text(TextMessage.sharetitle);
 		    $('#reportGoods').text(TextMessage.complaintpro);

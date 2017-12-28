@@ -324,11 +324,15 @@
 				var imgwidth=parseInt($(window).width())/3-17;
 				var allcount=commodity.all_comm_num;
 				var allcomiditynum=15*page;
-				var black_user_id = commodity.blacklist[0].black_user_id;
-				if ( black_user_id == "" || black_user_id.indexOf(userid) == -1) {
-					$(".addBlackList").show();
-				} else {
-					$(".removBlackList").show();
+				var blackLists = commodity.blacklist;
+				for (var i=0;i<blackLists.length;i++) {
+					if (blackLists[i].black_user_id == "" || blackLists[i].black_user_id.indexOf(userid) == -1) {
+						$(".addBlackList").show();
+						$(".removBlackList").hide();
+					} else {
+						$(".removBlackList").show();
+						$(".addBlackList").hide();
+					}
 				}
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh((allcount <=allcomiditynum));
 				for(i = 0; i < commoditylength; i++) {
