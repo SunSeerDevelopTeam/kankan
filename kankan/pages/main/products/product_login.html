@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
+
+	<head>
 		<meta charset="utf-8">
 		<title>product_login</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -12,14 +13,15 @@
 		<!--<link href="../../../css/mui.picker.css" rel="stylesheet" />
 		<link href="../../../css/mui.poppicker.css" rel="stylesheet" />-->
 		<link rel="stylesheet" type="text/css" href="../../../css/public.css">
-	    <link rel="stylesheet" type="text/css" href="../../../css/mobileSelect.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/mobileSelect.css">
 		<style>
-			h5{
+			h5 {
 				margin-left: 0.2em;
 			}
+			
 			.aboutDonate {
-				text-align:left;
-				text-indent:2em;
+				text-align: left;
+				text-indent: 2em;
 			}
 		</style>
 	</head>
@@ -70,7 +72,7 @@
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell" style="width: 100%;">
 							<div class="mui-navigate-right" id="showCityPicker">
-								<span class="ka_proinfo lang" data-locale="commodity_sorts" ></span>
+								<span class="ka_proinfo lang" data-locale="commodity_sorts"></span>
 								<div id='sortResult' class="mui-pull-right ka_bitian lang" data-locale="commodity_must" id="bitian1"></div>
 								<!--<div  class="ui-alert mui-pull-right ka_sortname"></div>-->
 								<input type="hidden" name="classify_id" id="classify_id" value="" />
@@ -116,48 +118,48 @@
 				<div class="priceContent" style="display: none;">
 					<h5 class="ka_proloh5" id="commodityPrice" style="margin: 1.5em 0 1.5em 0.5em"></h5>
 					<div class="inputPrice">
-						<input id="number_price" type="tel" oninput="if(value.length>7)value=value.slice(0,7)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="getNumber()" class="inputNumber"/>
+						<input id="number_price" type="tel" oninput="if(value.length>7)value=value.slice(0,7)" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" onkeyup="getNumber()" class="inputNumber" />
 						<span class="inputSpan">&yen;<span id="input_price"></span></span>
 					</div>
-                </div>
+				</div>
 				<!--商品价格end-->
 				<!--Trading interest start-->
-				<div class="tradeFees">
+				<div class="tradeFees" style="display: none;">
 					<ul class="mui-table-view ka_prologbox">
 						<li class="mui-table-view-cell" style="width: 100%;">
-						    <span class="ka_proinfo mui-col-xs-9" id="transaction_fees"></span>
-						    <span class="fee mui-col-xs-3">&yen;<span id="trans_fees"></span></span>
+							<span class="ka_proinfo mui-col-xs-9" id="transaction_fees"></span>
+							<span class="fee mui-col-xs-3">&yen;<span id="trans_fees"></span></span>
 						</li>
 						<li class="mui-table-view-cell" style="width: 100%;">
-						    <span class="ka_proinfo lang mui-col-xs-9" data-locale="commodity_tradingIncome"></span>
-						    <span class="fee mui-col-xs-3">&yen;<span id="trading_income"></span></span>
+							<span class="ka_proinfo lang mui-col-xs-9" data-locale="commodity_tradingIncome"></span>
+							<span class="fee mui-col-xs-3">&yen;<span id="trading_income"></span></span>
 						</li>
 					</ul>
 				</div>
 				<!--Trading interest end-->
 				<!---寄付机能-->
 				<div style="margin: 1.5em 0 3.5em 0.5em;">
-				    <h5 class="ka_proloh5 mui-pull-left lang" data-locale="commodity_benefitActivity">て</h5>
-				    <div class="mui-icon mui-icon-help mui-pull-right open-window-title" style="padding-right: 2%;"></div>
-				    <!--<div class="mui-row">
+					<h5 class="ka_proloh5 mui-pull-left lang" data-locale="commodity_benefitActivity">て</h5>
+					<div class="mui-icon mui-icon-help mui-pull-right open-window-title" style="padding-right: 2%;"></div>
+					<!--<div class="mui-row">
 				        <div class="mui-col-sm-6"><h5 class="ka_proloh5">寄付について</h5></div>
 				        <div class="mui-col-sm-6">
 				            <div class="mui-icon mui-icon-help"></div>
 				        </div>
 				    </div>-->
-				    <!--<h5 class="ka_proloh5">寄付について</h5>-->
-				    
+					<!--<h5 class="ka_proloh5">寄付について</h5>-->
+
 				</div>
 				<ul class="mui-table-view" style="clear: both;">
-						<li class="mui-table-view-cell" style="width: 100%;">
-							<div class="mui-navigate-right">
-								<span class="ka_proinfo lang" data-locale="commodity_donationList" ></span>
-								<div id='donation_result' class="mui-pull-right ka_sortname lang" data-locale="" id="">寄付しない</div>
-								<!--<div  class="ui-alert mui-pull-right ka_sortname"></div>-->
-								<input type="hidden" name="donation_id" id="donation_id" value="" />
-							</div>
+					<li class="mui-table-view-cell" style="width: 100%;">
+						<div class="mui-navigate-right">
+							<span class="ka_proinfo lang" data-locale="commodity_donationList"></span>
+							<div id='donation_result' class="mui-pull-right ka_sortname lang" data-locale="" id="">寄付しない</div>
+							<!--<div  class="ui-alert mui-pull-right ka_sortname"></div>-->
+							<input type="hidden" name="donation_id" id="donation_id" value="" />
+						</div>
 
-						</li>
+					</li>
 				</ul>
 				<div class="ka_description lang" data-locale="commodity_forbidentext"></div>
 				<div class="ka_userbox">
@@ -184,8 +186,8 @@
 							<a href="#photoLeft" style="color: #007aff"></a>
 						</li>
 					</ul>
-		        </div>
-			    <div id="photoRight" class="mui-popover mui-popover-action mui-popover-bottom">
+				</div>
+				<div id="photoRight" class="mui-popover mui-popover-action mui-popover-bottom">
 					<ul class="mui-table-view tickimgbox">
 						<li style="display: block;" class="mui-table-view-cell">
 							<a id="comdity_takepic" style="color: #9C9C9C" disabled="true"></a>
@@ -199,7 +201,7 @@
 							<a href="#photoRight" style="color: #007aff"></a>
 						</li>
 					</ul>
-		        </div>
+				</div>
 			</form>
 		</div>
 	</body>
@@ -226,393 +228,401 @@
 			$(".ka_noborder").attr("placeholder", TextMessage.commodity_descriptionlength);
 			$(".mui-title").html(TextMessage.commodity_login);
 		});
-	var id;
-	var testarr=[];
-	var orarr=[
-				{
-				id:'',
-				value:'寄付しない'
-				},
-			];
-	var catearrs=[{data:[]}];
-	var organizationarr=[{data:[]}];
-	var positions='0';
-	//getprice
-	var price_max = 0;
-	var price_min = 0;
-	var charge_rate = 0;
-	var mobileSelect4;
-	var stautsSelect;
-	var organizationSelect;
-	var organizationposition='0';
-	var stautesposition='0';
-	var statedate = [{data:[{
-						id: '0',
-						value: TextMessage.prostaute0
-					}, {
-						id: '1',
-						value: TextMessage.prostaute1
-					}, {
-						id: '2',
-						value: TextMessage.prostaute2
-					}, {
-						id: '3',
-						value: TextMessage.prostaute3
-					}]}];
-		
-	mui.plusReady(function() {
-	    plus.key.addEventListener('backbutton',function() {
-	       $(".window-container").hide();
-	       $('.window-masking').removeAttr("style");
-	       $("body").unbind("touchmove");
-	    },false);
-		var params5 = {};
-		Repository.Commodity.getPrice(params5, {
-			ok: function(data) {
-				console.log("success");
-				showPrice(data);
-			},
-			ng: function(data) {
-				console.log("error:"+data);
-				Log.d(data);
-			}
-		});
-		
-		var self = plus.webview.currentWebview();
-		id = self.eid;
-		if(id){
-			$(".z_addImg").remove();
-			$(".mui-action-back").show();
-			document.getElementById('codid').value=id;
-			$("#delete").show();
-			getcomdinfo(id);
-		}else{
-			stautsSelect= new MobileSelect({
-			    trigger: '#stauteResult',
-			    title: '',
-			    wheels: statedate, 
-			    position:'0',
-			    transitionEnd:function(indexArr, data){
-			    	if(indexArr=="NAN"){
-			    		indexArr=stautesposition;
-			    	}
-			        console.log(indexArr);
-			    },
-			    callback:function(indexArr, data){
-			        console.log(data[0].id);
-			        $("#comm_state").val(data[0].id);
-			        $("#stauteResult").text(data[0].value);
-			        $("#stauteResult").removeClass("ka_bitian");
-			        $("#stauteResult").addClass("ka_sortname");					       
-			    }  
-			});
-			//category
-			var param2 = {
-				"flg": "classify"
-			};
-			Repository.Commodity.category(param2, {
+		var id;
+		var testarr = [];
+		var orarr = [{
+			id: '',
+			value: '寄付しない'
+		}, ];
+		var catearrs = [{
+			data: []
+		}];
+		var organizationarr = [{
+			data: []
+		}];
+		var positions = '0';
+		//getprice
+		var price_max = 0;
+		var price_min = 0;
+		var charge_rate = 0;
+		var mobileSelect4;
+		var stautsSelect;
+		var organizationSelect;
+		var organizationposition = '0';
+		var stautesposition = '0';
+		var statedate = [{
+			data: [{
+				id: '0',
+				value: TextMessage.prostaute0
+			}, {
+				id: '1',
+				value: TextMessage.prostaute1
+			}, {
+				id: '2',
+				value: TextMessage.prostaute2
+			}, {
+				id: '3',
+				value: TextMessage.prostaute3
+			}]
+		}];
+
+		mui.plusReady(function() {
+			plus.key.addEventListener('backbutton', function() {
+				$(".window-container").hide();
+				$('.window-masking').removeAttr("style");
+				$("body").unbind("touchmove");
+			}, false);
+			var params5 = {};
+			Repository.Commodity.getPrice(params5, {
 				ok: function(data) {
 					console.log("success");
-					catearrs[0].data =categorypushnew(data);
-					mobileSelect4 = new MobileSelect({
-					    trigger: '#sortResult',
-					    title: '',
-					    wheels: catearrs, 
-					    position:'0,0',
-					    transitionEnd:function(indexArr, data){
-					    	if(indexArr=="NAN"){
-					    		indexArr=positions;
-					    	}
-					        console.log(indexArr);
-					    },
-					    callback:function(indexArr, data){
-					        console.log(data[1].id);
-					       document.getElementById("classify_id").value=data[1].id;
-						   document.getElementById("sortResult").setAttribute("class","ka_sortname mui-pull-right");
-					    }  
-					});
+					showPrice(data);
 				},
 				ng: function(data) {
-					console.log("error" + data);
-					Api.callback_ng(data);
+					console.log("error:" + data);
+					Log.d(data);
 				}
 			});
-			//donation_organization
-			var param4 = {};
-			Repository.Commodity.getorganization(param4, {
-				ok: function(data) {
-					console.log(data);
-					organizationarr[0].data =organizationpush(data);
-					console.log(organizationarr);
-					organizationSelect = new MobileSelect({
-					    trigger: '#donation_result',
-					    title: '',
-					    wheels: organizationarr, 
-					    position:'0',
-					    transitionEnd:function(indexArr, data){
-					    	if(indexArr=="NAN"){
-					    		indexArr=organizationposition;
-					    	}
-					        console.log(indexArr);
-					    },
-					    callback:function(indexArr, data){
-					        console.log(data[0].id);
-					       document.getElementById("donation_id").value=data[0].id;
-						   document.getElementById("donation_result").setAttribute("class","ka_sortname mui-pull-right");
-					    }  
-					});
-				},
-				ng: function(data) {
-					console.log("error" + data);
-					Api.callback_ng(data);
-				}
-			});
-		}
-	});
-	function showPrice(results) {
-		var resultsData = results.data;
-		price_max = resultsData[0].price_max;
-		price_min = resultsData[1].price_min;
-		$("#commodityPrice").text(TextMessage.commodity_price + "(" + parseFloat(price_min).toLocaleString() + "~~" + parseFloat(price_max).toLocaleString() + ")");
-		charge_rate = resultsData[2].charge_rate;
-		$("#transaction_fees").text(TextMessage.commodity_transactionFees + "(" + charge_rate + "%)");
-	}
-	
-	window.addEventListener("refresh", function(event) {
-		location.reload();
-	});
-	window.addEventListener("refreshtop", function(event) {
-		document.body.scrollTop = document.documentElement.scrollTop = 0;
-	});
-	window.addEventListener("hideSheet", function(event) {
-		if (event.detail.isHide != 'yes') {
-			return;
-		}
-		mui("#photoLeft").popover('hide');
-		mui("#photoRight").popover('hide');
-	});
-	function daojishu(){
-		var delength=$("#comm_detail").val().trim().length;
-		var cha=1000-delength;
-		//var texts=TextMessage.inputtext+"<font color='red'>"+cha+"</font>"+TextMessage.inputpoint;
-		var texts="<font color='#ACACB4'>"+delength+"/1000</font>";
-		$(".daojishitext").html(texts);
-	}
-	$('.open-window-title').on('click',function(){
-		setTitle = TextMessage.aboutDonate;
-		setContents = '<div style="clear:both;">'+
-				      '<div class="aboutDonate">'+TextMessage.donate1+'</div>'+
-				      '<div class="aboutDonate">'+TextMessage.donate2+'</div>'+
-				      '<div class="aboutDonate">'+TextMessage.donate3+'</div>'+
-				      '<div class="aboutDonate">'+TextMessage.donate4+'</div>'+
-				      '<div class="aboutDonate">'+TextMessage.donate5+'</div>'+
-				      '<div class="aboutDonate">'+TextMessage.donate6+'</div>'+
-				      '<div class="aboutDonate">'+TextMessage.donate7+'</div>';
-		setButton = TextMessage.confirmBtnYes;
-		$(this).openWindow(setTitle,setContents,[setButton]);
-		$("body").bind("touchmove", function(e) {
-			e.preventDefault();
+
+			var self = plus.webview.currentWebview();
+			id = self.eid;
+			if(id) {
+				$(".z_addImg").remove();
+				$(".mui-action-back").show();
+				document.getElementById('codid').value = id;
+				$("#delete").show();
+				getcomdinfo(id);
+			} else {
+				stautsSelect = new MobileSelect({
+					trigger: '#stauteResult',
+					title: '',
+					wheels: statedate,
+					position: '0',
+					transitionEnd: function(indexArr, data) {
+						if(indexArr == "NAN") {
+							indexArr = stautesposition;
+						}
+						console.log(indexArr);
+					},
+					callback: function(indexArr, data) {
+						console.log(data[0].id);
+						$("#comm_state").val(data[0].id);
+						$("#stauteResult").text(data[0].value);
+						$("#stauteResult").removeClass("ka_bitian");
+						$("#stauteResult").addClass("ka_sortname");
+					}
+				});
+				//category
+				var param2 = {
+					"flg": "classify"
+				};
+				Repository.Commodity.category(param2, {
+					ok: function(data) {
+						console.log("success");
+						catearrs[0].data = categorypushnew(data);
+						mobileSelect4 = new MobileSelect({
+							trigger: '#sortResult',
+							title: '',
+							wheels: catearrs,
+							position: '0,0',
+							transitionEnd: function(indexArr, data) {
+								if(indexArr == "NAN") {
+									indexArr = positions;
+								}
+								console.log(indexArr);
+							},
+							callback: function(indexArr, data) {
+								console.log(data[1].id);
+								document.getElementById("classify_id").value = data[1].id;
+								document.getElementById("sortResult").setAttribute("class", "ka_sortname mui-pull-right");
+							}
+						});
+					},
+					ng: function(data) {
+						console.log("error" + data);
+						Api.callback_ng(data);
+					}
+				});
+				//donation_organization
+				var param4 = {};
+				Repository.Commodity.getorganization(param4, {
+					ok: function(data) {
+						console.log(data);
+						organizationarr[0].data = organizationpush(data);
+						console.log(organizationarr);
+						organizationSelect = new MobileSelect({
+							trigger: '#donation_result',
+							title: '',
+							wheels: organizationarr,
+							position: '0',
+							transitionEnd: function(indexArr, data) {
+								if(indexArr == "NAN") {
+									indexArr = organizationposition;
+								}
+								console.log(indexArr);
+							},
+							callback: function(indexArr, data) {
+								console.log(data[0].id);
+								document.getElementById("donation_id").value = data[0].id;
+								document.getElementById("donation_result").setAttribute("class", "ka_sortname mui-pull-right");
+							}
+						});
+					},
+					ng: function(data) {
+						console.log("error" + data);
+						Api.callback_ng(data);
+					}
+				});
+			}
 		});
-	});
-	//getNumber
-	function getNumber() {
-		var number_price = $("#number_price").val();
-		if (isNaN(number_price)) {
-			$("#input_price").html('0');
-			$("#trans_fees").html('0');
-			$("#trading_income").html('0');
-			return;
+
+		function showPrice(results) {
+			var resultsData = results.data;
+			price_max = resultsData[0].price_max;
+			price_min = resultsData[1].price_min;
+			$("#commodityPrice").text(TextMessage.commodity_price + "(" + parseFloat(price_min).toLocaleString() + "~~" + parseFloat(price_max).toLocaleString() + ")");
+			charge_rate = resultsData[2].charge_rate;
+			$("#transaction_fees").text(TextMessage.commodity_transactionFees + "(" + charge_rate + "%)");
 		}
-		$("#input_price").html(parseFloat(Math.floor(number_price)).toLocaleString());
-	    $("#trans_fees").html(parseFloat(Math.floor(number_price * charge_rate / 100)).toLocaleString());
-	    $("#trading_income").html(parseFloat(Math.floor(number_price) - Math.floor(number_price * charge_rate / 100)).toLocaleString());
-	}
-	function closepicker(){
-		preventKeyBoardSubmit.closekeybord();
-		$(".mui-poppicker").hide();
-	}
-	//input lose focus show picker
-	function pickershow(){
-		$(".mui-poppicker").show();
-	}
-	//make input lose focus
-	function inputblur(){
-		document.getElementById('comm_name').blur();
-		document.getElementById('comm_detail').blur();
-	}
-	//edite image show
-	function imagepull(im,srcval,imgWidth, imgHeight){
-	    var imgwidth = parseInt($(window).width()) / 4 - 33.75;
-	    var hwhpercent = imgHeight / imgWidth;
-	    var top_margin = 0;
-	    var showheight = imgwidth * hwhpercent;
-	    var cha1 = showheight - imgwidth;
-	    if(cha1 > 0) {
-		    top_margin = cha1 / 2;
-	    } else {
-		    top_margin = 0;
-	    }
-	    
-	    if (showheight < imgwidth) {
-            imgdiv="position: relative; top: "+(imgwidth-showheight)/2+"px;";
-		} else {
-			imgdiv="height:"+ imgwidth +"px; overflow: hidden; line-height: "+ imgwidth +"px;";
+
+		window.addEventListener("refresh", function(event) {
+			location.reload();
+		});
+		window.addEventListener("refreshtop", function(event) {
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
+		});
+		window.addEventListener("hideSheet", function(event) {
+			if(event.detail.isHide != 'yes') {
+				return;
+			}
+			mui("#photoLeft").popover('hide');
+			mui("#photoRight").popover('hide');
+		});
+
+		function daojishu() {
+			var delength = $("#comm_detail").val().trim().length;
+			var cha = 1000 - delength;
+			//var texts=TextMessage.inputtext+"<font color='red'>"+cha+"</font>"+TextMessage.inputpoint;
+			var texts = "<font color='#ACACB4'>" + delength + "/1000</font>";
+			$(".daojishitext").html(texts);
 		}
-		var styleimg="height: auto; margin-top:-"+ top_margin +"px;";
-		
-		
-		var img = document.createElement("img");
-		img.setAttribute("src", srcval);
-		img.setAttribute("alt", im);
-		img.setAttribute("onerror", "this.src='../../../images/nopic.jpg'");
-		img.setAttribute("class", "z_images");
-		img.setAttribute("style", styleimg);
-		var imgAdd = document.createElement("div");
-		imgAdd.setAttribute("class", "z_addImg");
-		imgAdd.setAttribute("style", imgdiv);
-		imgAdd.appendChild(img);
-		$(".z_photo").append(imgAdd);
-		imglength();
-		imgRemove();
-	}
-	//edite information show
-	function messages(results){
-		$(".mui-title").html(TextMessage.commodity_edit);
-		$("#0").val("0");
-		$("#1").val("0");
-		$("#2").val("0");
-		$("#3").val("0");
-		var name=HTMLDecode(HTMLDecode(results.data.comm_name));
-		var detail=HTMLDecode(HTMLDecode(results.data.comm_detail));
-		var business=results.data.business;
-		var exchange=results.data.exchange;
-		var gratis=results.data.gratis;
-		var image0=results.data.imges[0];
-		var image1=results.data.imges[1];
-		var image2=results.data.imges[2];
-		var image3=results.data.imges[3];
-		var classify_id=results.data.classify_id;
-		var state=results.data.state;
-		var commstautes=results.data.comm_status;
-	    var price = results.data.price;
-	    var rate = results.data.service_charge;
-	    var profile = results.data.profit;
-	    var org_name=results.data.org_name;
-	    if(org_name!=""){
-	    	$("#donation_result").html(org_name);
-	    }
-		if(commstautes=="0"){
-		//waste product
-			$("#waste").show();
-			$("#waste").text(TextMessage.commodity_luo);
-			$("#commstautes").val("2");
+		$('.open-window-title').on('click', function() {
+			setTitle = TextMessage.aboutDonate;
+			setContents = '<div style="clear:both;">' +
+				'<div class="aboutDonate">' + TextMessage.donate1 + '</div>' +
+				'<div class="aboutDonate">' + TextMessage.donate2 + '</div>' +
+				'<div class="aboutDonate">' + TextMessage.donate3 + '</div>' +
+				'<div class="aboutDonate">' + TextMessage.donate4 + '</div>' +
+				'<div class="aboutDonate">' + TextMessage.donate5 + '</div>' +
+				'<div class="aboutDonate">' + TextMessage.donate6 + '</div>' +
+				'<div class="aboutDonate">' + TextMessage.donate7 + '</div>';
+			setButton = TextMessage.confirmBtnYes;
+			$(this).openWindow(setTitle, setContents, [setButton]);
+			$("body").bind("touchmove", function(e) {
+				e.preventDefault();
+			});
+		});
+		//getNumber
+		function getNumber() {
+			var number_price = $("#number_price").val();
+			if(isNaN(number_price)) {
+				$("#input_price").html('0');
+				$("#trans_fees").html('0');
+				$("#trading_income").html('0');
+				return;
+			}
+			$("#input_price").html(parseFloat(Math.floor(number_price)).toLocaleString());
+			$("#trans_fees").html(parseFloat(Math.floor(number_price * charge_rate / 100)).toLocaleString());
+			$("#trading_income").html(parseFloat(Math.floor(number_price) - Math.floor(number_price * charge_rate / 100)).toLocaleString());
 		}
-		if(commstautes=="4"){
-		//again submit product
-			$("#waste").show();
-			$("#waste").text(TextMessage.commodity_againlogin);
-			$("#commstautes").val("1");
+
+		function closepicker() {
+			preventKeyBoardSubmit.closekeybord();
+			$(".mui-poppicker").hide();
 		}
-		document.getElementById('comm_name').value=name;
-		document.getElementById('comm_detail').value=detail;
-		document.getElementById('business').value=business;
-		document.getElementById('exchange').value=exchange;
-		document.getElementById('gratis').value=gratis;
-		document.getElementById('classify_id').value=classify_id;
-		document.getElementById('comm_state').value=state;
-		$("#number_price").val(price);
-		$("#input_price").html(price ? parseFloat(price).toLocaleString() : '0');
-		$("#trans_fees").html(parseFloat(rate).toLocaleString());
-		$("#trading_income").html(parseFloat(profile).toLocaleString());
-		$("#stauteResult").removeClass("ka_bitian");
-		$("#stauteResult").addClass("ka_sortname");
-		if(state=="0"){
-			$("#stauteResult").html(TextMessage.prostaute0);
-		}else if(state=="1"){
-			$("#stauteResult").html(TextMessage.prostaute1);
-		}else if(state=="2"){
-			$("#stauteResult").html(TextMessage.prostaute2);
-		}else{
-			$("#stauteResult").html(TextMessage.prostaute3);
+		//input lose focus show picker
+		function pickershow() {
+			$(".mui-poppicker").show();
 		}
-		if(image0!=""){
-			document.getElementById('0').value=image0.imgurl;
-			imagepull(0,image0.imgurl,image0.imgwidth, image0.imgheight);
+		//make input lose focus
+		function inputblur() {
+			document.getElementById('comm_name').blur();
+			document.getElementById('comm_detail').blur();
 		}
-		if(image1!=""){
-			document.getElementById('1').value=image1.imgurl;
-			imagepull(1,image1.imgurl,image1.imgwidth, image1.imgheight);
+		//edite image show
+		function imagepull(im, srcval, imgWidth, imgHeight) {
+			var imgwidth = parseInt($(window).width()) / 4 - 33.75;
+			var hwhpercent = imgHeight / imgWidth;
+			var top_margin = 0;
+			var showheight = imgwidth * hwhpercent;
+			var cha1 = showheight - imgwidth;
+			if(cha1 > 0) {
+				top_margin = cha1 / 2;
+			} else {
+				top_margin = 0;
+			}
+
+			if(showheight < imgwidth) {
+				imgdiv = "position: relative; top: " + (imgwidth - showheight) / 2 + "px;";
+			} else {
+				imgdiv = "height:" + imgwidth + "px; overflow: hidden; line-height: " + imgwidth + "px;";
+			}
+			var styleimg = "height: auto; margin-top:-" + top_margin + "px;";
+
+			var img = document.createElement("img");
+			img.setAttribute("src", srcval);
+			img.setAttribute("alt", im);
+			img.setAttribute("onerror", "this.src='../../../images/nopic.jpg'");
+			img.setAttribute("class", "z_images");
+			img.setAttribute("style", styleimg);
+			var imgAdd = document.createElement("div");
+			imgAdd.setAttribute("class", "z_addImg");
+			imgAdd.setAttribute("style", imgdiv);
+			imgAdd.appendChild(img);
+			$(".z_photo").append(imgAdd);
+			imglength();
+			imgRemove();
 		}
-		if(image2!=""){
-			document.getElementById('2').value=image2.imgurl;
-			imagepull(2,image2.imgurl, image2.imgwidth, image2.imgheight);
+		//edite information show
+		function messages(results) {
+			$(".mui-title").html(TextMessage.commodity_edit);
+			$("#0").val("0");
+			$("#1").val("0");
+			$("#2").val("0");
+			$("#3").val("0");
+			var name = HTMLDecode(HTMLDecode(results.data.comm_name));
+			var detail = HTMLDecode(HTMLDecode(results.data.comm_detail));
+			var business = results.data.business;
+			var exchange = results.data.exchange;
+			var gratis = results.data.gratis;
+			var image0 = results.data.imges[0];
+			var image1 = results.data.imges[1];
+			var image2 = results.data.imges[2];
+			var image3 = results.data.imges[3];
+			var classify_id = results.data.classify_id;
+			var state = results.data.state;
+			var commstautes = results.data.comm_status;
+			var price = results.data.price;
+			var rate = results.data.service_charge;
+			var profile = results.data.profit;
+			var org_name = results.data.org_name;
+			if(org_name != "") {
+				$("#donation_result").html(org_name);
+			}
+			if(commstautes == "0") {
+				//waste product
+				$("#waste").show();
+				$("#waste").text(TextMessage.commodity_luo);
+				$("#commstautes").val("2");
+			}
+			if(commstautes == "4") {
+				//again submit product
+				$("#waste").show();
+				$("#waste").text(TextMessage.commodity_againlogin);
+				$("#commstautes").val("1");
+			}
+			document.getElementById('comm_name').value = name;
+			document.getElementById('comm_detail').value = detail;
+			document.getElementById('business').value = business;
+			document.getElementById('exchange').value = exchange;
+			document.getElementById('gratis').value = gratis;
+			document.getElementById('classify_id').value = classify_id;
+			document.getElementById('comm_state').value = state;
+			$("#number_price").val(price);
+			$("#input_price").html(price ? parseFloat(price).toLocaleString() : '0');
+			$("#trans_fees").html(parseFloat(rate).toLocaleString());
+			$("#trading_income").html(parseFloat(profile).toLocaleString());
+			$("#stauteResult").removeClass("ka_bitian");
+			$("#stauteResult").addClass("ka_sortname");
+			if(state == "0") {
+				$("#stauteResult").html(TextMessage.prostaute0);
+			} else if(state == "1") {
+				$("#stauteResult").html(TextMessage.prostaute1);
+			} else if(state == "2") {
+				$("#stauteResult").html(TextMessage.prostaute2);
+			} else {
+				$("#stauteResult").html(TextMessage.prostaute3);
+			}
+			if(image0 != "") {
+				document.getElementById('0').value = image0.imgurl;
+				imagepull(0, image0.imgurl, image0.imgwidth, image0.imgheight);
+			}
+			if(image1 != "") {
+				document.getElementById('1').value = image1.imgurl;
+				imagepull(1, image1.imgurl, image1.imgwidth, image1.imgheight);
+			}
+			if(image2 != "") {
+				document.getElementById('2').value = image2.imgurl;
+				imagepull(2, image2.imgurl, image2.imgwidth, image2.imgheight);
+			}
+			if(image3 != "") {
+				document.getElementById('3').value = image3.imgurl;
+				imagepull(3, image3.imgurl, image3.imgwidth, image3.imgheight);
+			}
+			if(business == "1") {
+				$("#number_price").removeAttr("disabled");
+				$("#pointbuybtn").removeClass("ka_exchangegrey");
+				$("#pointbuybtn").addClass("ka_exchangered");
+				$(".priceContent").show();
+			}
+			if(exchange == "1") {
+				$("#exchbuybtn").removeClass("ka_exchangegrey");
+				$("#exchbuybtn").addClass("ka_exchangered");
+			}
+			if(gratis == "1") {
+				$("#freebuybtn").removeClass("ka_exchangegrey");
+				$("#freebuybtn").addClass("ka_exchangered");
+				//$(".priceContent").hide();
+				//$(".tradeFees").hide();
+			}
 		}
-		if(image3!=""){
-			document.getElementById('3').value=image3.imgurl;
-			imagepull(3,image3.imgurl, image3.imgwidth, image3.imgheight);
-		}
-		if(business=="1"){
-			$("#number_price").removeAttr("disabled");
-			$("#pointbuybtn").removeClass("ka_exchangegrey");
-			$("#pointbuybtn").addClass("ka_exchangered");
-			$(".priceContent").show();
-		}
-		if(exchange=="1"){
-			$("#exchbuybtn").removeClass("ka_exchangegrey");
-			$("#exchbuybtn").addClass("ka_exchangered");
-		}
-		if(gratis=="1"){
-			$("#freebuybtn").removeClass("ka_exchangegrey");
-			$("#freebuybtn").addClass("ka_exchangered");
-		}
-	}
-	//edite show
-	function getcomdinfo(dataid){
-			var param3={
-				"commodity_id":dataid
+		//edite show
+		function getcomdinfo(dataid) {
+			var param3 = {
+				"commodity_id": dataid
 			}
 			Repository.Commodity.Commodityedite(param3, {
-						ok: function(data) {
-							console.log("success");
-							messages(data);
-							var catid = data.data.classify_id; //second category value
-							//var pickcatarr = categorychoose(catearrs, catid); //selected category value
-							var stautid = data.data.state;
-							var donation_id=data.data.donation_id;
-							selectdefault(catid,stautid,donation_id);
-						},
-						ng: function(data) {
-							console.log("error:"+data);
-							if(data == "1000") {
-								mui.toast(TextMessage.test, {
-									duration: 'long',
-									type: 'div'
-								});
-								mui.openWindow({
-									id: 'login',
-									url:"../../login/login.html"
-								});
-							}
-							if(data=="2002"){
-								mui.toast(TextMessage.userng, {
-									duration: 'long',
-									type: 'div'
-								});
-								mui.openWindow({
-									id: 'login',
-									url:"../../login/login.html"
-								});
-							}
-							//Api.callback_ng(data);
-						}
+				ok: function(data) {
+					console.log("success");
+					messages(data);
+					var catid = data.data.classify_id; //second category value
+					//var pickcatarr = categorychoose(catearrs, catid); //selected category value
+					var stautid = data.data.state;
+					var donation_id = data.data.donation_id;
+					selectdefault(catid, stautid, donation_id);
+				},
+				ng: function(data) {
+					console.log("error:" + data);
+					if(data == "1000") {
+						mui.toast(TextMessage.test, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.openWindow({
+							id: 'login',
+							url: "../../login/login.html"
+						});
+					}
+					if(data == "2002") {
+						mui.toast(TextMessage.userng, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.openWindow({
+							id: 'login',
+							url: "../../login/login.html"
+						});
+					}
+					//Api.callback_ng(data);
+				}
 			});
-		
-	}
-	//get classfiy 
-	function categorypushnew(results){
-		var catedata=results.data;
-		for(var c=0;c<catedata.length;c++){
-			var categoryadd={
+
+		}
+		//get classfiy 
+		function categorypushnew(results) {
+			var catedata = results.data;
+			for(var c = 0; c < catedata.length; c++) {
+				var categoryadd = {
 					id: catedata[c].catalog_id,
 					value: catedata[c].catalog_detail,
 					childs: []
@@ -632,38 +642,40 @@
 
 			}
 			return testarr;
-	}
-	function categorychoose(catearr,catid,flag) {
-		var arrs=catearr;
-		for(var ci = 0; ci < arrs.length; ci++) {
-			var childredarr = arrs[ci].childs;
-			for(var di = 0; di < childredarr.length; di++) {
-				if(childredarr[di].id == catid) {
-					//return catearr[ci];
-					if(flag){
-						return arrs[ci].value+" "+childredarr[di].value;
-					}else{
-						return ci+","+di;
+		}
+
+		function categorychoose(catearr, catid, flag) {
+			var arrs = catearr;
+			for(var ci = 0; ci < arrs.length; ci++) {
+				var childredarr = arrs[ci].childs;
+				for(var di = 0; di < childredarr.length; di++) {
+					if(childredarr[di].id == catid) {
+						//return catearr[ci];
+						if(flag) {
+							return arrs[ci].value + " " + childredarr[di].value;
+						} else {
+							return ci + "," + di;
+						}
+						break;
 					}
+				}
+			}
+		}
+
+		function childrentext(stautid) {
+			var childredarr = statedate[0].data;
+			for(var chd = 0; chd < childredarr.length; chd++) {
+				if(childredarr[chd].id == stautid) {
+					//return childredarr[chd].text;
+					return chd;
 					break;
 				}
 			}
 		}
-	}
 
-	function childrentext(stautid) {
-		var childredarr=statedate[0].data;
-		for(var chd = 0; chd < childredarr.length; chd++) {
-			if(childredarr[chd].id == stautid) {
-				//return childredarr[chd].text;
-				return chd;
-				break;
-			}
-		}
-	}
-	function organizationpush(results) {
+		function organizationpush(results) {
 			var ordata = results.data;
-			for (var b=0; b<ordata.length; b++) {
+			for(var b = 0; b < ordata.length; b++) {
 				var orgaAdd = {
 					id: ordata[b].org_id,
 					value: ordata[b].org_name
@@ -671,521 +683,528 @@
 				orarr.push(orgaAdd);
 			}
 			return orarr;
-	}
-	function organizationtext(organizationarr,donation_id){
-		var childredarr=organizationarr[0].data;
-		console.log(organizationarr);
-		for(var chd = 0; chd < childredarr.length; chd++) {
-			if(childredarr[chd].id == donation_id) {
-				//return childredarr[chd].text;
-				return chd;
-				break;
-			}
 		}
-	}
-	function selectdefault(catid,stautid,donation_id){
-		stautesposition=childrentext(stautid)+",";
-		stautsSelect= new MobileSelect({
-				    trigger: '#stauteResult',
-				    title: '',
-				    wheels: statedate, 
-				    position:stautesposition,
-				    transitionEnd:function(indexArr, data){
-				    	if(indexArr=="NAN"){
-				    		indexArr=stautesposition;
-				    	}
-				        console.log(indexArr);
-				    },
-				    callback:function(indexArr, data){
-				        console.log(data[0].id);
-				        $("#comm_state").val(data[0].id);
-				        $("#stauteResult").text(data[0].value);
-				        $("#stauteResult").removeClass("ka_bitian");
-				        $("#stauteResult").addClass("ka_sortname");					       
-				    }  
-				});
-		var param2 = {
-						"flg": "classify"
-					};
-		Repository.Commodity.category(param2, {
-			ok: function(data) {
-				catearrs[0].data =categorypushnew(data);
-				$("#sortResult").addClass("ka_sortname");
-				$("#sortResult").removeClass("ka_bitian");
-				var cateval=categorychoose(catearrs[0].data,catid,"value");
-				$("#sortResult").text(cateval);
-				var category=categorychoose(catearrs[0].data,catid);
-				var categoryarr=category.split(',');
-				positions=category;
-				console.log(category);
-				mobileSelect4 = new MobileSelect({
-				    trigger: '#sortResult',
-				    title: '',
-				    wheels: catearrs, 
-				    position:category,
-				    value2:categoryarr[0],
-				    transitionEnd:function(indexArr, data){
-				    	if(indexArr=="NAN"){
-				    		indexArr=positions;
-				    	}
-				        console.log(indexArr);
-				    },
-				    callback:function(indexArr, data){
-				        console.log(data[1].id);
-				        document.getElementById("classify_id").value=data[1].id;
-						document.getElementById("sortResult").setAttribute("class","ka_sortname mui-pull-right");
-				    }  
-				});
-			},
-			ng: function(data) {
-				console.log("error" + data);
-				Api.callback_ng(data);
-			}
-		});
-		//donation_organization
-		var param4 = {};
-		Repository.Commodity.getorganization(param4, {
-			ok: function(data) {
-				console.log(data);
-				organizationarr[0].data =organizationpush(data);
-				if(donation_id!=""){
-					organizationposition=organizationtext(organizationarr,donation_id)+',';
+
+		function organizationtext(organizationarr, donation_id) {
+			var childredarr = organizationarr[0].data;
+			console.log(organizationarr);
+			for(var chd = 0; chd < childredarr.length; chd++) {
+				if(childredarr[chd].id == donation_id) {
+					//return childredarr[chd].text;
+					return chd;
+					break;
 				}
-				organizationSelect = new MobileSelect({
-				    trigger: '#donation_result',
-				    title: '',
-				    wheels: organizationarr, 
-				    position:organizationposition,
-				    transitionEnd:function(indexArr, data){
-				    	if(indexArr=="NAN"){
-				    		indexArr=organizationposition;
-				    	}
-				        console.log(indexArr);
-				    },
-				    callback:function(indexArr, data){
-				        console.log(data[0].id);
-				       document.getElementById("donation_id").value=data[0].id;
-					   document.getElementById("donation_result").setAttribute("class","ka_sortname mui-pull-right");
-				    }  
-				});
-			},
-			ng: function(data) {
-				console.log("error" + data);
-				Api.callback_ng(data);
 			}
-		});
-	}
-//email check
-function publishscheck(){
-	if (!Repository.User.isEmptyEmail()) {
-		 return;
-	}else{
-		publishs();
-	}
-}
+		}
 
-function removeComma(str) { 
-    str = str.replace(/,/g, "");
-    return str; 
-} 
-//submit form
-function publishs() {
-	var buy_sell_flag = "0";
-	var comm_name = filterText(HTMLEncode($("#comm_name").val()));
-	var comm_detail = filterText(HTMLEncode($("#comm_detail").val()));
-	var classify_id = $("#classify_id").val();
-	var comm_state = $("#comm_state").val();
-	var exchange = $("#exchange").val();
-	var business = $("#business").val();
-	var gratis = $("#gratis").val();
-	var imges0 = $("#0").val();
-	var imges1 = $("#1").val();
-	var imges2 = $("#2").val();
-	var imges3 = $("#3").val();
-	var price = $("#number_price").val();
-	var service_charge = removeComma($("#trans_fees").html());
-	var profit = removeComma($("#trading_income").html());
-	var donation_id=$("#donation_id").val();
-	
-	if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
-		mui.toast(TextMessage.pro_imagetest, {
-			duration: 'long',
-			type: 'div'
-		});
-		return false;
-	}
-	if(comm_name == "") {
-		mui.toast(TextMessage.pro_nametest, {
-			duration: 'long',
-			type: 'div'
-		});
-		document.publishcomodity.comm_name.focus();
-		return false;
-	}
-	var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig;
-	if(regStr.test(comm_name)){
-	　　mui.toast(TextMessage.noemjoy, {
-			duration: 'long',
-			type: 'div'
-		});
-		document.publishcomodity.comm_name.focus();
-		return false;
-	}
-	if(comm_name.trim().length>40){
-		mui.toast(TextMessage.pro_namelength, {
-			duration: 'long',
-			type: 'div'
-		});
-		return false;
-	}
-	if(comm_detail == "") {
-		mui.toast(TextMessage.pro_descriptiontest, {
-			duration: 'long',
-			type: 'div'
-		});
-		document.publishcomodity.comm_detail.focus();
-		return false;
-	}
-
-	if(regStr.test(comm_detail)){
-	　　mui.toast(TextMessage.noemjoy, {
-			duration: 'long',
-			type: 'div'
-		});
-		document.publishcomodity.comm_detail.focus();
-		return false;
-	}
-	if(comm_detail.trim().length >1000) {
-		mui.toast(TextMessage.TextMessage.pro_detaillength, {
-			duration: 'long',
-			type: 'div'
-		});
-	}
-	if(classify_id == "") {
-		mui.toast(TextMessage.pro_sorttest, {
-			duration: 'long',
-			type: 'div'
-		});
-		return false;
-	}
-	if(comm_state == "") {
-		mui.toast(TextMessage.pro_stautetest, {
-			duration: 'long',
-			type: 'div'
-		});
-		return false;
-	}
-	if(business== "1") {
-		if(price==""){
-			mui.toast(TextMessage.pro_pricenulltest, {
-				duration: 'long',
-				type: 'div'
+		function selectdefault(catid, stautid, donation_id) {
+			stautesposition = childrentext(stautid) + ",";
+			stautsSelect = new MobileSelect({
+				trigger: '#stauteResult',
+				title: '',
+				wheels: statedate,
+				position: stautesposition,
+				transitionEnd: function(indexArr, data) {
+					if(indexArr == "NAN") {
+						indexArr = stautesposition;
+					}
+					console.log(indexArr);
+				},
+				callback: function(indexArr, data) {
+					console.log(data[0].id);
+					$("#comm_state").val(data[0].id);
+					$("#stauteResult").text(data[0].value);
+					$("#stauteResult").removeClass("ka_bitian");
+					$("#stauteResult").addClass("ka_sortname");
+				}
 			});
-			document.publishcomodity.price.focus();
-			return false;
-		}
-		if(isNaN(price)) {
-			mui.toast(TextMessage.pro_pricetest, {
-				duration: 'long',
-				type: 'div'
+			var param2 = {
+				"flg": "classify"
+			};
+			Repository.Commodity.category(param2, {
+				ok: function(data) {
+					catearrs[0].data = categorypushnew(data);
+					$("#sortResult").addClass("ka_sortname");
+					$("#sortResult").removeClass("ka_bitian");
+					var cateval = categorychoose(catearrs[0].data, catid, "value");
+					$("#sortResult").text(cateval);
+					var category = categorychoose(catearrs[0].data, catid);
+					var categoryarr = category.split(',');
+					positions = category;
+					console.log(category);
+					mobileSelect4 = new MobileSelect({
+						trigger: '#sortResult',
+						title: '',
+						wheels: catearrs,
+						position: category,
+						value2: categoryarr[0],
+						transitionEnd: function(indexArr, data) {
+							if(indexArr == "NAN") {
+								indexArr = positions;
+							}
+							console.log(indexArr);
+						},
+						callback: function(indexArr, data) {
+							console.log(data[1].id);
+							document.getElementById("classify_id").value = data[1].id;
+							document.getElementById("sortResult").setAttribute("class", "ka_sortname mui-pull-right");
+						}
+					});
+				},
+				ng: function(data) {
+					console.log("error" + data);
+					Api.callback_ng(data);
+				}
 			});
-			document.publishcomodity.price.focus();
-			return false;
-		}
-		if(price < 0) {
-			mui.alert(TextMessage.pro_pricenumbtest);
-			document.publishcomodity.price.focus();
-			return false;
-		}
-		if (price < price_min || price > price_max ) {
-			mui.alert(TextMessage.numberRangeText);
-			document.publishcomodity.price.focus();
-			return false;
-		}
-	}
-	if(exchange == "0" & business == "0" & gratis == "0") {
-		mui.toast(TextMessage.pro_buywaytest, {
-			duration: 'long',
-			type: 'div'
-		});
-		return false;
-	}
-	if(gratis=="1" && donation_id!=""){
-		mui.toast(TextMessage.charitycheck, {
-			duration: 'long',
-			type: 'div'
-		});
-		return false;
-	}
-	if(gratis==1){
-		donation_id="";
-	}
-	/*$("#submit").attr("disabled","disabled");*/
-	var params = {
-		"buy_sell_flag": buy_sell_flag,
-		"comm_name": comm_name,
-		"comm_detail": comm_detail,
-		"classify_id": classify_id,
-		"comm_state": comm_state,
-		"exchange": exchange,
-		"business": business,
-		"gratis": gratis,
-		"donation_id":donation_id,
-		"imges[0]": imges0,
-		"imges[1]": imges1,
-		"imges[2]": imges2,
-		"imges[3]": imges3
-	};
-	if(price!="" && business==1){
-		params.price=price;
-		params.service_charge = service_charge;
-		params.profit = profit;
-		if($("#donation_id").val()!=""){
-			var donation_amount=Math.ceil(service_charge/10);
-			params.donation_amount = donation_amount;
-		}
-	}
-	if(id!=0){
-		var commodity_ids=$("#codid").val();
-		params.commodity_id=commodity_ids;
-	}
-	Repository.Commodity.Commoditypublish(params, {
-		ok: function(data) {
-			Log.d("success");
-			mui.toast(TextMessage.pro_logininfo, {
-				duration: 'long',
-				type: 'div'
+			//donation_organization
+			var param4 = {};
+			Repository.Commodity.getorganization(param4, {
+				ok: function(data) {
+					console.log(data);
+					organizationarr[0].data = organizationpush(data);
+					if(donation_id != "") {
+						organizationposition = organizationtext(organizationarr, donation_id) + ',';
+					}
+					organizationSelect = new MobileSelect({
+						trigger: '#donation_result',
+						title: '',
+						wheels: organizationarr,
+						position: organizationposition,
+						transitionEnd: function(indexArr, data) {
+							if(indexArr == "NAN") {
+								indexArr = organizationposition;
+							}
+							console.log(indexArr);
+						},
+						callback: function(indexArr, data) {
+							console.log(data[0].id);
+							document.getElementById("donation_id").value = data[0].id;
+							document.getElementById("donation_result").setAttribute("class", "ka_sortname mui-pull-right");
+						}
+					});
+				},
+				ng: function(data) {
+					console.log("error" + data);
+					Api.callback_ng(data);
+				}
 			});
-			if(!id){
-				location.reload();
-				mui.plusReady(function() {
-					var mainpage=plus.webview.getLaunchWebview();
-					mui.fire(mainpage,'gohome');
-				});
-				
-			}else{
-				location.reload();
-				mui.back();
+		}
+		//email check
+		function publishscheck() {
+			if(!Repository.User.isEmptyEmail()) {
+				return;
+			} else {
+				publishs();
 			}
-		},
-		ng: function(data) {
-			Log.d(data);
-			if(data == "1000") {
-				mui.toast(TextMessage.test, {
+		}
+
+		function removeComma(str) {
+			str = str.replace(/,/g, "");
+			return str;
+		}
+		//submit form
+		function publishs() {
+			var buy_sell_flag = "0";
+			var comm_name = filterText(HTMLEncode($("#comm_name").val()));
+			var comm_detail = filterText(HTMLEncode($("#comm_detail").val()));
+			var classify_id = $("#classify_id").val();
+			var comm_state = $("#comm_state").val();
+			var exchange = $("#exchange").val();
+			var business = $("#business").val();
+			var gratis = $("#gratis").val();
+			var imges0 = $("#0").val();
+			var imges1 = $("#1").val();
+			var imges2 = $("#2").val();
+			var imges3 = $("#3").val();
+			var price = $("#number_price").val();
+			var service_charge = removeComma($("#trans_fees").html());
+			var profit = removeComma($("#trading_income").html());
+			var donation_id = $("#donation_id").val();
+
+			if(imges0 == "0" & imges1 == "0" & imges2 == "0" & imges3 == "0") {
+				mui.toast(TextMessage.pro_imagetest, {
 					duration: 'long',
 					type: 'div'
 				});
-				mui.openWindow({
-					id: 'login',
-					url:"../../login/login.html"
-				});
-			} 
-			if(data=="2002"){
-				mui.toast(TextMessage.userng, {
+				return false;
+			}
+			if(comm_name == "") {
+				mui.toast(TextMessage.pro_nametest, {
 					duration: 'long',
 					type: 'div'
 				});
-				mui.openWindow({
-					id: 'login',
-					url:"../../login/login.html"
-				});
+				document.publishcomodity.comm_name.focus();
+				return false;
 			}
-			if(data=="2007"){
-				mui.toast(TextMessage.ticketng, {
+			var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig;
+			if(regStr.test(comm_name)) {　　
+				mui.toast(TextMessage.noemjoy, {
 					duration: 'long',
 					type: 'div'
 				});
-				location.reload();
-				mui.openWindow({
-					id: 'point_to_ticket',
-					url:"../sttting/point_to_ticket.html"
+				document.publishcomodity.comm_name.focus();
+				return false;
+			}
+			if(comm_name.trim().length > 40) {
+				mui.toast(TextMessage.pro_namelength, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(comm_detail == "") {
+				mui.toast(TextMessage.pro_descriptiontest, {
+					duration: 'long',
+					type: 'div'
+				});
+				document.publishcomodity.comm_detail.focus();
+				return false;
+			}
+
+			if(regStr.test(comm_detail)) {　　
+				mui.toast(TextMessage.noemjoy, {
+					duration: 'long',
+					type: 'div'
+				});
+				document.publishcomodity.comm_detail.focus();
+				return false;
+			}
+			if(comm_detail.trim().length > 1000) {
+				mui.toast(TextMessage.TextMessage.pro_detaillength, {
+					duration: 'long',
+					type: 'div'
 				});
 			}
-			Api.callback_ng(data);
-			//location.reload();
-			//mui.back();
-			console.log("other error code:" + data);
-			
-		},
-		error:function(){
-			error_tost.message();
-			location.reload();
-		}
-	});
+			if(classify_id == "") {
+				mui.toast(TextMessage.pro_sorttest, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(comm_state == "") {
+				mui.toast(TextMessage.pro_stautetest, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(business == "1") {
+				if(price == "") {
+					mui.toast(TextMessage.pro_pricenulltest, {
+						duration: 'long',
+						type: 'div'
+					});
+					document.publishcomodity.price.focus();
+					return false;
+				}
+				if(isNaN(price)) {
+					mui.toast(TextMessage.pro_pricetest, {
+						duration: 'long',
+						type: 'div'
+					});
+					document.publishcomodity.price.focus();
+					return false;
+				}
+				if(price < 0) {
+					mui.alert(TextMessage.pro_pricenumbtest);
+					document.publishcomodity.price.focus();
+					return false;
+				}
+				if(price < price_min || price > price_max) {
+					mui.alert(TextMessage.numberRangeText);
+					document.publishcomodity.price.focus();
+					return false;
+				}
+			}
+			if(exchange == "0" & business == "0" & gratis == "0") {
+				mui.toast(TextMessage.pro_buywaytest, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(gratis == "1" && donation_id != "") {
+				mui.toast(TextMessage.charitycheck, {
+					duration: 'long',
+					type: 'div'
+				});
+				return false;
+			}
+			if(gratis == 1) {
+				donation_id = "";
+			}
+			/*$("#submit").attr("disabled","disabled");*/
+			var params = {
+				"buy_sell_flag": buy_sell_flag,
+				"comm_name": comm_name,
+				"comm_detail": comm_detail,
+				"classify_id": classify_id,
+				"comm_state": comm_state,
+				"exchange": exchange,
+				"business": business,
+				"gratis": gratis,
+				"donation_id": donation_id,
+				"imges[0]": imges0,
+				"imges[1]": imges1,
+				"imges[2]": imges2,
+				"imges[3]": imges3
+			};
+			if(price != "" && business == 1) {
+				params.price = price;
+				params.service_charge = service_charge;
+				params.profit = profit;
+				if($("#donation_id").val() != "") {
+					var donation_amount = Math.ceil(service_charge / 10);
+					params.donation_amount = donation_amount;
+				}
+			}
+			if(id != 0) {
+				var commodity_ids = $("#codid").val();
+				params.commodity_id = commodity_ids;
+			}
+			Repository.Commodity.Commoditypublish(params, {
+				ok: function(data) {
+					Log.d("success");
+					mui.toast(TextMessage.pro_logininfo, {
+						duration: 'long',
+						type: 'div'
+					});
+					if(!id) {
+						location.reload();
+						mui.plusReady(function() {
+							var mainpage = plus.webview.getLaunchWebview();
+							mui.fire(mainpage, 'gohome');
+						});
 
-}
-
-//************************buy way choose*****************************
-/*exchange*/
-document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
-	inputblur();
-	var exchangeval=$("#exchange").val();
-	if(exchangeval=="0"){
-		$("#exchange").val("1");
-		$("#exchbuybtn").removeClass("ka_exchangegrey");
-		$("#exchbuybtn").addClass("ka_exchangered");
-	}else{
-		$("#exchange").val("0");
-		$("#exchbuybtn").removeClass("ka_exchangered");
-		$("#exchbuybtn").addClass("ka_exchangegrey");
-	}
-	if($("#gratis").val() == "1") {
-		$("#gratis").val("0");
-		$("#freebuybtn").removeClass("ka_exchangered");
-		$("#freebuybtn").addClass("ka_exchangegrey");
-	}
-});
-/*point*/
-document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
-	inputblur();
-	var businessval=$("#business").val();
-	if(businessval=="0"){
-		$("#business").val("1");
-		$(".priceContent").show();
-		$(".tradeFees").show();
-		$("#pointbuybtn").removeClass("ka_exchangegrey");
-		$("#pointbuybtn").addClass("ka_exchangered");
-	}else{
-		$("#business").val("0");
-		$("#number_price").attr("disabled", "true");
-		$("#pointbuybtn").removeClass("ka_exchangered");
-		$("#pointbuybtn").addClass("ka_exchangegrey");
-	}
-	
-	if($("#gratis").val() == "1") {
-		$("#gratis").val("0");
-		$("#freebuybtn").removeClass("ka_exchangered");
-		$("#freebuybtn").addClass("ka_exchangegrey");
-	}
-});
-/*free*/
-document.getElementById('freebuybtn').addEventListener('tap', function(e) {
-	inputblur();
-	var gratisval=$("#gratis").val();
-    $(".priceContent").hide();
-    $(".tradeFees").hide();
-	if(gratisval=="0"){
-		$("#gratis").val("1");
-		$("#freebuybtn").removeClass("ka_exchangegrey");
-		$("#freebuybtn").addClass("ka_exchangered");
-	}else{
-		$("#gratis").val("0");
-		$("#freebuybtn").removeClass("ka_exchangered");
-		$("#freebuybtn").addClass("ka_exchangegrey");
-	}
-	
-	if($("#business").val() == "1") {
-		$("#business").val("0");
-		$("#pointbuybtn").removeClass("ka_exchangered");
-		$("#pointbuybtn").addClass("ka_exchangegrey");
-	}
-	if($("#exchange").val() == "1") {
-		$("#exchange").val("0");
-		$("#exchbuybtn").removeClass("ka_exchangered");
-		$("#exchbuybtn").addClass("ka_exchangegrey");
-	}
-});
-//delete product
-function submitdelete(){
-	var deid=$("#codid").val();
-	var btnArray = [TextMessage.sure, TextMessage.cancel];
-	var paramsde={
-		"commodity_id":deid,
-	};
-	mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
-		if (e.index == 0) {
-			mui.plusReady(function() {
-				Repository.Commodity.delete_pro(paramsde, {
-					ok:function(data){
-						mui.toast(TextMessage.delete_success, {
+					} else {
+						location.reload();
+						mui.back();
+					}
+				},
+				ng: function(data) {
+					Log.d(data);
+					if(data == "1000") {
+						mui.toast(TextMessage.test, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.openWindow({
+							id: 'login',
+							url: "../../login/login.html"
+						});
+					}
+					if(data == "2002") {
+						mui.toast(TextMessage.userng, {
+							duration: 'long',
+							type: 'div'
+						});
+						mui.openWindow({
+							id: 'login',
+							url: "../../login/login.html"
+						});
+					}
+					if(data == "2007") {
+						mui.toast(TextMessage.ticketng, {
 							duration: 'long',
 							type: 'div'
 						});
 						location.reload();
+						mui.openWindow({
+							id: 'point_to_ticket',
+							url: "../sttting/point_to_ticket.html"
+						});
+					}
+					Api.callback_ng(data);
+					//location.reload();
+					//mui.back();
+					console.log("other error code:" + data);
+
+				},
+				error: function() {
+					error_tost.message();
+					location.reload();
+				}
+			});
+
+		}
+
+		//************************buy way choose*****************************
+		/*exchange*/
+		document.getElementById('exchbuybtn').addEventListener('tap', function(e) {
+			inputblur();
+			var exchangeval = $("#exchange").val();
+			if(exchangeval == "0") {
+				$("#exchange").val("1");
+				$("#exchbuybtn").removeClass("ka_exchangegrey");
+				$("#exchbuybtn").addClass("ka_exchangered");
+			} else {
+				$("#exchange").val("0");
+				$("#exchbuybtn").removeClass("ka_exchangered");
+				$("#exchbuybtn").addClass("ka_exchangegrey");
+			}
+			if($("#gratis").val() == "1") {
+				$("#gratis").val("0");
+				$("#freebuybtn").removeClass("ka_exchangered");
+				$("#freebuybtn").addClass("ka_exchangegrey");
+			}
+		});
+		/*point*/
+		document.getElementById('pointbuybtn').addEventListener('tap', function(e) {
+			inputblur();
+			var businessval = $("#business").val();
+			if(businessval == "0") {
+				$("#business").val("1");
+				$(".priceContent").show();
+				$(".tradeFees").show();
+				$("#pointbuybtn").removeClass("ka_exchangegrey");
+				$("#pointbuybtn").addClass("ka_exchangered");
+			} else {
+				$("#business").val("0");
+				$("#number_price").attr("disabled", "true");
+				$("#pointbuybtn").removeClass("ka_exchangered");
+				$("#pointbuybtn").addClass("ka_exchangegrey");
+			}
+
+			if($("#gratis").val() == "1") {
+				$("#gratis").val("0");
+				$("#freebuybtn").removeClass("ka_exchangered");
+				$("#freebuybtn").addClass("ka_exchangegrey");
+			}
+		});
+		/*free*/
+		document.getElementById('freebuybtn').addEventListener('tap', function(e) {
+			inputblur();
+			var gratisval = $("#gratis").val();
+			$(".priceContent").hide();
+			$(".tradeFees").hide();
+			if(gratisval == "0") {
+				$("#gratis").val("1");
+				$("#freebuybtn").removeClass("ka_exchangegrey");
+				$("#freebuybtn").addClass("ka_exchangered");
+			} else {
+				$("#gratis").val("0");
+				$("#freebuybtn").removeClass("ka_exchangered");
+				$("#freebuybtn").addClass("ka_exchangegrey");
+			}
+
+			if($("#business").val() == "1") {
+				$("#business").val("0");
+				$("#pointbuybtn").removeClass("ka_exchangered");
+				$("#pointbuybtn").addClass("ka_exchangegrey");
+			}
+			if($("#exchange").val() == "1") {
+				$("#exchange").val("0");
+				$("#exchbuybtn").removeClass("ka_exchangered");
+				$("#exchbuybtn").addClass("ka_exchangegrey");
+			}
+		});
+		//delete product
+		function submitdelete() {
+			var deid = $("#codid").val();
+			var btnArray = [TextMessage.sure, TextMessage.cancel];
+			var paramsde = {
+				"commodity_id": deid,
+			};
+			mui.confirm(TextMessage.delmessage, TextMessage.sharetitle, btnArray, function(e) {
+				if(e.index == 0) {
+					mui.plusReady(function() {
+						Repository.Commodity.delete_pro(paramsde, {
+							ok: function(data) {
+								mui.toast(TextMessage.delete_success, {
+									duration: 'long',
+									type: 'div'
+								});
+								location.reload();
+								mui.back();
+							},
+							ng: function(data) {
+								Api.callback_ng(data);
+							},
+							error: function() {
+								error_tost.message();
+								location.reload();
+							}
+						});
+					});
+				}
+			});
+
+		}
+		//waste product
+		function wastes() {
+			var deid = $("#codid").val();
+			var comm_status = $("#commstautes").val();
+			var paramsw = {
+				"commodity_id": deid,
+				"sell_off_flg": comm_status
+			};
+
+			if(comm_status == 1) {
+				var buttext = TextMessage.commodity_luo;
+				var mestext = TextMessage.comoditylogin_success;
+				var butval = 4;
+			} else {
+				var buttext = TextMessage.commodity_againlogin;
+				var mestext = TextMessage.luopin_success;
+				var butval = 1;
+			}
+			mui.plusReady(function() {
+				Repository.Commodity.Commoditypublish(paramsw, {
+					ok: function(data) {
+						var business_val = $("#business").val();
+
+						if(isNaN($("#number_price").val())) {
+							$("#input_price").html('0');
+							$("#trans_fees").html('0');
+							$("#trading_income").html('0');
+							mui.toast(TextMessage.pro_pricetest, {
+								duration: 'long',
+								type: 'div'
+							});
+							return false;
+						}
+						if(business_val == 1) {
+							if($("#number_price").val() == "") {
+								mui.toast(TextMessage.pro_pricenulltest, {
+									duration: 'long',
+									type: 'div'
+								});
+								return false;
+							}
+						
+							if($("#number_price").val() < price_min || $("#number_price").val() > price_max) {
+								mui.alert(TextMessage.numberRangeText);
+								return false;
+							}
+						}
+						document.getElementById('number_price').blur();
+						mui.toast(mestext, {
+							duration: 'long',
+							type: 'div'
+						});
+						$("#waste").text(buttext);
+						$("#commstautes").val(butval);
+						//location.reload();
+						//mui.back();
+					},
+					ng: function(data) {
+						Api.callback_ng(data);
 						mui.back();
 					},
-					ng:function(data){
-						Api.callback_ng(data);
-					},
-					error:function(){
+					error: function() {
 						error_tost.message();
 						location.reload();
 					}
 				});
 			});
 		}
-	});
-	
-}
-//waste product
-function wastes(){
-	var deid=$("#codid").val();
-	var comm_status=$("#commstautes").val();
-	var paramsw={
-		"commodity_id":deid,
-		"sell_off_flg":comm_status
-	};
-	if(comm_status==1){
-		var buttext=TextMessage.commodity_luo;
-		var mestext=TextMessage.comoditylogin_success;
-		var butval=4;
-	}else{
-		var buttext=TextMessage.commodity_againlogin;
-		var mestext=TextMessage.luopin_success;
-		var butval=1;
-	}
-	mui.plusReady(function() {
-		Repository.Commodity.Commoditypublish(paramsw, {
-			ok:function(data){
-				if (isNaN($("#number_price").val())) {
-					$("#input_price").html('0');
-					$("#trans_fees").html('0');
-					$("#trading_income").html('0');
-					mui.toast(TextMessage.pro_pricetest, {
-						duration: 'long',
-						type: 'div'
-					});
-					return false;
-				}
-				if($("#number_price").val()=="") {
-					mui.toast(TextMessage.pro_pricenulltest, {
-						duration: 'long',
-						type: 'div'
-					});
-					return false;
-				}
-				if ($("#number_price").val() < price_min || $("#number_price").val() > price_max ) {
-					mui.alert(TextMessage.numberRangeText);
-					return false;
-				}
-				document.getElementById('number_price').blur();
-				mui.toast(mestext, {
-					duration: 'long',
-					type: 'div'
-				});
-				$("#waste").text(buttext);
-				$("#commstautes").val(butval);
-				//location.reload();
-				//mui.back();
-			},
-			ng:function(data){
-				Api.callback_ng(data);
-				mui.back();
-			},
-			error:function(){
-				error_tost.message();
-				location.reload();
-			}
-		});
-	});
-}
-$('#chooseImage').text(TextMessage.chooseimage);
-$('#fromChoose').text(TextMessage.gallerychoose);
-$('#comdity_takepic').text(TextMessage.comdity_takepic);
-$('#tackpicture').text(TextMessage.tackpicture);
-$("[href='#photoLeft']").html("<b>" + TextMessage.cancel + "</b>");
-$("[href='#photoRight']").html("<b>" + TextMessage.cancel + "</b>");
-
-</script>
+		$('#chooseImage').text(TextMessage.chooseimage);
+		$('#fromChoose').text(TextMessage.gallerychoose);
+		$('#comdity_takepic').text(TextMessage.comdity_takepic);
+		$('#tackpicture').text(TextMessage.tackpicture);
+		$("[href='#photoLeft']").html("<b>" + TextMessage.cancel + "</b>");
+		$("[href='#photoRight']").html("<b>" + TextMessage.cancel + "</b>");
+	</script>
 
 </html>

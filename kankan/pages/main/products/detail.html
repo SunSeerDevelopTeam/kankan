@@ -317,6 +317,7 @@
 		    var sName;
 		    var sDetail;
 		    var flag;
+		    var like_flag;
 //		    var flag1;
 			function clickshare(shareid,imgurl0,comdname,comdetail){
 				sId = shareid;
@@ -584,6 +585,8 @@
 				var buy_sell_flag = comdbasic[0].buy_sell_flag;
 				var price = comdbasic[0].price;
 				var myid=results.myid;
+				var comm_user_id = comdbasic[0].user_id;
+				if(myid == comm_user_id) like_flag = true;
 				var tradeablenum = userbasic.user_comm_tradable_count;
 				$("#comd_stauteval").html(comdistateval);//state
 				$("#comd_sortvale").html(comoditsort);//sort
@@ -965,48 +968,55 @@
 			}
 			//goods
 			function dianzan(bid) {
-				if (flag == true) {
-					mui.alert(TextMessage.cannotzan);
-				} else {
-					var codid = $(".kankan_zanbox").attr("id");
-					var params1 = {
-						"commid": codid
-					};
-				    Repository.Commodity.praise(params1, {
-						ok: function(data) {
-							Log.d("success");
-							praise(data);
-						},
-						ng: function(data) {
-							Log.d(data);
-							if(data == "1000") {
-								mui.toast(TextMessage.test, {
-									duration: 'long',
-									type: 'div'
-								});
-								mui.openWindow({
-									id: 'login',
-									url: "../../login/login.html"
-								});
+				if(like_flag){
+					mui.toast(TextMessage.operation_error, {
+						duration: 'long',
+						type: 'div'
+					});
+				}else {
+					if (flag == true) {
+						mui.alert(TextMessage.cannotzan);
+					} else {
+						var codid = $(".kankan_zanbox").attr("id");
+						var params1 = {
+							"commid": codid
+						};
+				    	Repository.Commodity.praise(params1, {
+							ok: function(data) {
+								Log.d("success");
+								praise(data);
+							},
+							ng: function(data) {
+								Log.d(data);
+								if(data == "1000") {
+									mui.toast(TextMessage.test, {
+										duration: 'long',
+										type: 'div'
+									});
+									mui.openWindow({
+										id: 'login',
+										url: "../../login/login.html"
+									});
+								}
+								if(data == "2004") {
+									mui.toast(TextMessage.operation_error, {
+										duration: 'long',
+										type: 'div'
+									});
+								}
+								if(data == "3020") {
+									mui.toast(TextMessage.input_email, {
+										duration: 'long',
+										type: 'div'
+									});
+									mui.openWindow({
+										id: 'emai_summate',
+										url: "../../login/emai_summate.html"
+									});
+								}
 							}
-							if(data == "2004") {
-								mui.toast(TextMessage.operation_error, {
-									duration: 'long',
-									type: 'div'
-								});
-							}
-							if(data == "3020") {
-								mui.toast(TextMessage.input_email, {
-									duration: 'long',
-									type: 'div'
-								});
-								mui.openWindow({
-									id: 'emai_summate',
-									url: "../../login/emai_summate.html"
-								});
-							}
-						}
-				    });
+				    	});
+					}
 				}
             }
 			//praise css controll

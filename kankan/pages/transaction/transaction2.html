@@ -579,6 +579,9 @@
 				if(messginfo == ""){
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
 				}
+				//console.log("============start==============");
+				//console.dir(messginfo);
+				//console.log("============end==============");
 				var buyer_photo, buyer_nickname, buyer_id, seller_photo, seller_nickname, seller_id, chatMsg='';
 				for(var user in usersinfo) {
 					if(usersinfo[user].user_role == "issue") {
@@ -1029,6 +1032,23 @@
 							var commdinfo = data.data.commdinfo;
 							var usersinfo = data.data.usersinfo;
 							var allcount=	data.data.all_cnt[0].cnt;
+							var myblacklist = data.myblacklist;
+							var userblacklist = data.userblacklist;
+							var blackflag = false;
+							if(myblacklist){
+								for(var i in myblacklist){
+									if((myblacklist[i].black_user_id.indexOf(transinfo[0].issue_user_id) !==-1) ||(myblacklist[i].black_user_id.indexOf(transinfo[0].accept_user_id) !==-1)) blackflag = true;
+								}
+							}
+							if(userblacklist){
+								for(var i in userblacklist){
+									if((userblacklist[i].user_id.indexOf(transinfo[0].issue_user_id) !==-1) ||(userblacklist[i].user_id.indexOf(transinfo[0].accept_user_id) !==-1)) blackflag = true;
+								}
+							}
+							if(blackflag){
+								$("#commodity_comments").hide();
+								$(".tran-button").hide();
+							}
 							//console.log(allcount);
 							var allcomiditynum=10*page;
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh(allcount <=allcomiditynum);

@@ -4,6 +4,7 @@ var network = true;
 var isDown = true;
 var detailPage = null;
 var __back__first = null;
+var myid = "";
 mui.init({
 	pullRefresh: {
 		container: '#pullrefresh',
@@ -59,6 +60,7 @@ function pulldownRefresh() {
 			return;
 		}
 		table.innerHTML = "";
+		myid=data.myid;
 		data.data.commd.forEach(function(item) {
 			var li = document.createElement('li');
 			li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
@@ -90,6 +92,7 @@ function pullupRefresh() {
 			return;
 		}
 		$(".mui-pull-caption-refresh").html(TextMessage.loading);
+		myid=data.myid;
 		data.data.commd.forEach(function(item) {
 			var li = document.createElement('li');
 			li.className = 'mui-table-view-cell mui-col-sm-6 mui-col-xs-6';
@@ -246,47 +249,76 @@ function bindEventOnListViewItem() {
 		if(!Repository.User.isLogin()) {
 			return;
 		}
-		var commId = _self.closest("li").find('.item-tap').attr('data-comm-id');
-		var params = {
-			commid: commId
-		};
-		Repository.Commodity.praise(params, {
-			ok: function(result) {
-				var praise_flag = result.data.p_flg;
-				if(praise_flag == "0") {
-					_self.prev().addClass('comm-like-gray');
-					_self.prev().removeClass('comm-like-red');
-					_self.text(result.data.p_cnt);
-				} else if(praise_flag == "1") {
-					_self.prev().addClass('comm-like-red');
-					_self.prev().removeClass('comm-like-gray');
-					_self.text(result.data.p_cnt);
-				} else {
-					if(DEBUG) {
-						alert("praise_flag is error.");
+		var commUserId = _self.closest("li").find('.item-tap').attr('data-user-id');
+		var user_param = {
+			user_id: commUserId
+		}
+		var blackflag = false;
+		var like_flag = false;
+		if(myid == commUserId) like_flag = true;
+		if(like_flag){
+			mui.toast(TextMessage.operation_error, {
+				duration: 'long',
+				type: 'div'
+			});
+		}else{
+			Repository.Commodity.getBlackList(user_param,{
+				ok: function(data) {
+					var blacklist = data.data;
+					for(var i in blacklist){
+						if(blacklist[i].black_user_id == data.myid)
+						blackflag = true;
+					}
+					if(blackflag){
+						mui.alert(TextMessage.cannotzan);
+					}else{
+						var commId = _self.closest("li").find('.item-tap').attr('data-comm-id');
+						var params = {
+							commid: commId
+						};
+		
+						Repository.Commodity.praise(params, {
+							ok: function(result) {
+								var praise_flag = result.data.p_flg;
+								if(praise_flag == "0") {
+									_self.prev().addClass('comm-like-gray');
+									_self.prev().removeClass('comm-like-red');
+									_self.text(result.data.p_cnt);
+								} else if(praise_flag == "1") {
+									_self.prev().addClass('comm-like-red');
+									_self.prev().removeClass('comm-like-gray');
+									_self.text(result.data.p_cnt);
+								} else {
+									if(DEBUG) {
+										alert("praise_flag is error.");
+									}
+								}
+							},
+							ng: function(result) {
+								if(result === "2004") {
+									plus.nativeUI.alert(TextMessage.operation_error);
+								}
+								if(Validator.isObj(result)) {
+									$.each(result, function(key, value) {
+										switch(value) {
+											case "1003":
+												if(key == "commodity_id") {
+													plus.nativeUI.alert("key is " + key + ", value is " + value);
+												}
+												break;
+											default:
+												break;
+										}
+									});
+								}
+							},
+							error: function() {}
+						});
 					}
 				}
-			},
-			ng: function(result) {
-				if(result === "2004") {
-					plus.nativeUI.alert(TextMessage.operation_error);
-				}
-				if(Validator.isObj(result)) {
-					$.each(result, function(key, value) {
-						switch(value) {
-							case "1003":
-								if(key == "commodity_id") {
-									plus.nativeUI.alert("key is " + key + ", value is " + value);
-								}
-								break;
-							default:
-								break;
-						}
-					});
-				}
-			},
-			error: function() {}
-		});
+			});
+		}
+		
 		return false;
 	});
 }
@@ -312,7 +344,7 @@ function createListItem(item, imgwidth) {
 	var listItemHTML = new Util.StringBuilder();
 	listItemHTML.appendFormat('<div class="li-content" id="{0}">', item.commodity_id)
 		.appendFormat('<div class="comm-item" style="height:{0}px;">', itemheight)
-		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}">', item.commodity_id)
+		.appendFormat('<div class="item-tap mui-col-sm-12 mui-col-xs-12" data-comm-id="{0}" data-user-id="{1}">', item.commodity_id,item.user_id)
 		.appendFormat('<div class="item-img-box" style="height:{0}px;"><img class="lazy" src="{1}" onerror="this.src=' + "'../../../images/nopic.jpg'" + '" style="{2}"></div>', imgwidth, item.img_flag.thu_url, stylimg)
 		//.appendFormat('<img src="{0}">', item.img_flag)
 		//.appendFormat('<p>{0}</p>', item.address == "" ? "全国" : item.address)

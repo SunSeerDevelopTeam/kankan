@@ -147,6 +147,8 @@
 		<script type="text/javascript">
 			var uid;
 			var page=0;
+			var userid;
+			var myid;
 			mui.plusReady(function() {
 				if(mui.os.ios){
 					$(".mui-scroll").attr("style","padding-top: 1.1em;");
@@ -190,11 +192,15 @@
 				});
 			//}
 			mui(".ka_userbox").on("tap",".addBlackList",function() {
-				if (mui.os.plus) {
-					mui('#removeBlackContent').popover('hide');	
-					mui('#addBlackContent').popover('toggle');
-						
+				if(userid == myid){
+					mui.alert(TextMessage.operation_error);
+				}else{
+					if (mui.os.plus) {
+						mui('#removeBlackContent').popover('hide');	
+						mui('#addBlackContent').popover('toggle');				
+					}	
 				}
+				
 			});
 			mui(".ka_userbox").on("tap",".removBlackList",function() {
 				if(mui.os.plus){
@@ -305,12 +311,13 @@
 				var commodity = results.data;
 				var uname = commodity.user_name;
 				var uimage = commodity.user_photo;
-				var userid = commodity.user_id;
+				userid = commodity.user_id;
 				var ucomentnum = commodity.user_comment_count;
 				var ucomeditynum = commodity.user_commodity_count;
 				var goodcoment = commodity.user_opinion_h_count;
 				var normalcoment = commodity.user_opinion_m_count;
 				var badcoment = commodity.user_opinion_l_count;
+				myid = results.myid;
 				$("#commid").val(userid);
 				$(".uname").html(uname);
 				$(".ka_touxiangimg").attr("src", uimage);
