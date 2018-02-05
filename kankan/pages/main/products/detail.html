@@ -700,7 +700,8 @@
 				var uadress = commodity.user_basic.pref_detail;
 				var ucomeditynum = commodity.user_basic.user_commodity_count;
 				var concernedtitle=TextMessage.det_concerneds;
-				for (var i=0;i<userblacklist.length;i++) {
+				console.dir(userblacklist);
+				for (var i in userblacklist) {
 					if (userblacklist[i].user_id.indexOf(userid)!==-1) {
 						flag = true;
 					}
