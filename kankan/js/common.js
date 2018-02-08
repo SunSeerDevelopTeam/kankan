@@ -1761,7 +1761,7 @@ var TextMessage;
 	TextMessage.evaluateMsg = language ? "このコメントは取引完了後に評価一覧で公開されます。商品に問題がある場合などは、評価をせずに取引確認画面で伝えましょう。" : "";
 	TextMessage.confirmcodeng = language ? "認証番号エラー" : "验证码错误";
 	TextMessage.det_concerneds = language ? "出品者が気になる商品" : "出品者关注商品";
-	TextMessage.emailsenderror = language ? "メールで失敗を発送する" : "邮件发送失败";
+	TextMessage.emailsenderror = language ? "認証番号が一致していません" : "验证码不一致,请重新输入";
 	TextMessage.password_notnull = language ? "パスワードを入力してください。" : "密码不能为空";
 	TextMessage.exit_app = language ? "もう一度クリックして退出します。" : "再按一次退出应用";
 	TextMessage.password_error = language ? "半角英字・数字(6～16桁)" : "密码长度不正确，请重新输入";
