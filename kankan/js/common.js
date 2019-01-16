@@ -471,8 +471,8 @@ var Api;
 		if(DEVELOPMENT) {
 			return "http://192.168.1.8:7998";
 		} else {
-			//return "http://www.kankann.jp:7998";
-			return "https://www.kankann.jp:442";
+			return "http://www.kankann.jp";
+			//return "https://www.kankann.jp:442";
 		}
 	}
 
@@ -1964,7 +1964,13 @@ var preventKeyBoardSubmit;
     preventKeyBoardSubmit.closekeybord=function(){
     	$("input").keypress(function(e){
 	        if(e.keyCode === 13){
-	            e.preventDefault();
+	            //e.preventDefault();
+	            if (e.cancelable) {
+                // 判断默认行为是否已经被禁用
+        		if (!e.defaultPrevented) {
+            		e.preventDefault();
+        		}
+   				}
 	            document.activeElement.blur();
 	            $('input').blur();
 	        }
