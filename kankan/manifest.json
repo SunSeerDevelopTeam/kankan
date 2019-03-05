@@ -7,8 +7,8 @@
 	"id": "H5B7054BD",
 	"name": "kankan",
 	"version": {
-		"name": "0.0.59",
-		"code": "8"
+		"name": "0.0.63",
+		"code": "60"
 	},
 	"description": "",
 	"icons": {
@@ -88,12 +88,12 @@
 		"Device": {},
 		"Camera": {},
 		
-		"Payment": {},"Push":{}
+		"Payment": {},"Push":{},"Maps":{}
 	},
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,
-			"waiting": true,"delay":"0"
+			"waiting": false,"delay":"0"
 		},
 		"runmode": "liberate",
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",
@@ -132,7 +132,7 @@
 				"keystore": "",
 				"password": "",
 				"aliasname": "",
-				"permissions": ["<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission  android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.USE_FINGERPRINT\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
 			},
 			"orientation": [
 				"portrait-primary",
@@ -152,7 +152,7 @@
 						"settings-normal": "unpackage/res/icons/29x29.png",
 						"settings-retina": "unpackage/res/icons/58x58.png",
 						"retina8": "unpackage/res/icons/180x180.png",
-						"settings-retina8": "unpackage/res/icons/87x87.png"
+						"settings-retina8": "unpackage/res/icons/87x87.png","spotlight@3x":"unpackage/res/icons/120x120.png","notification@2x":"unpackage/res/icons/40x40.png","notification@3x":"unpackage/res/icons/60x60.png"
 					},
 					"ipad": {
 						"normal": "unpackage/res/icons/72x72.png",
@@ -164,7 +164,7 @@
 						"spotlight-normal7": "unpackage/res/icons/40x40.png",
 						"spotlight-retina7": "unpackage/res/icons/80x80.png",
 						"settings-normal": "unpackage/res/icons/29x29.png",
-						"settings-retina": "unpackage/res/icons/58x58.png"
+						"settings-retina": "unpackage/res/icons/58x58.png","proapp@2x":"unpackage/res/icons/167x167.png","notification":"unpackage/res/icons/20x20.png","notification@2x":"unpackage/res/icons/40x40.png"
 					}
 				},
 				"android": {
@@ -180,29 +180,26 @@
 				"ios": {
 					"iphone": {
 						"default": "",
-						"retina35": "C:/Users/xyw/Desktop/splash/640・960.png",
-						"retina40": "C:/Users/xyw/Desktop/splash/640・1136.png","retina47":"C:/Users/xyw/Desktop/splash/750・1334.png","retina55":"C:/Users/xyw/Desktop/splash/1242・2208.png"
+						"retina35": "E:/work/kankan/splash/640・960.png",
+						"retina40": "E:/work/kankan/splash/640・1136.png","retina47":"E:/work/kankan/splash/750・1334.png","retina55":"E:/work/kankan/splash/1242・2208.png"
 					},
 					"ipad": {
 						
 						"portrait-retina": "",
 						"landscape": "",
 						"landscape-retina": "",
-						"portrait7": "C:/Users/xyw/Desktop/splash/768・1024.png",
+						"portrait7": "E:/work/kankan/splash/768・1024.png",
 						"portrait-retina7": "",
 						"landscape7": "",
-						"landscape-retina7": "","portrait":"C:/Users/xyw/Desktop/splash/768・1004.png"
+						"landscape-retina7": "","portrait":"E:/work/kankan/splash/768・1004.png"
 					}
 				},
 				"android": {
 					"mdpi": "",
-					"ldpi": "",
-					"hdpi": "C:/Users/xyw/Desktop/splash/480・762.png",
-					"xhdpi": "C:/Users/xyw/Desktop/splash/720・1242.png",
-					"xxhdpi": "C:/Users/xyw/Desktop/splash/1080・1882.png"
+					"ldpi": "","hdpi":"E:/work/kankan/splash/480・762.png","xhdpi":"E:/work/kankan/splash/720・1242.png","xxhdpi":"E:/work/kankan/splash/1080・1882.png"
 				}
 			},"debug":true
-		}
+		},"adid":"127435160301"
 	},
 	"dependencies": {
 		"pages": {
@@ -499,11 +496,11 @@
 					"fonts/mui-icons-extra.ttf",
 					"css/iconfontwuliu.css",
 					"fonts/iconfont.woff",
-					"css/iconmyfont.css"
+					"css/iconmyfont.css",
+					"pages/main/products/request.html"
 				],
 				"refer": [
 					"pages/main/products/product_login.html",
-					"pages/main/products/request.html",
 					"pages/main/products/product_want_to_buy.html",
 					"pages/main/logisticslist.html",
 					"pages/login/login.html"
@@ -1040,7 +1037,8 @@
 				],
 				"refer": [
 					"pages/setting/setting.html",
-					"pages/login/login.html"
+					"pages/login/login.html",
+					"pages/login/reg.html"
 				],
 				"priority": 0
 			},
